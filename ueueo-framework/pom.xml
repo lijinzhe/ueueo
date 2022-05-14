@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ueueo.framework</groupId>
+    <artifactId>ueueo-framework</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>ueueo-authorization</module>
+        <module>ueueo-caching</module>
+        <module>ueueo-core</module>
+        <module>ueueo-data</module>
+        <module>ueueo-ddd-application</module>
+        <module>ueueo-ddd-application-contracts</module>
+        <module>ueueo-ddd-domain</module>
+        <module>ueueo-guids</module>
+        <module>ueueo-localization</module>
+        <module>ueueo-multi-tenancy</module>
+        <module>ueueo-security</module>
+        <module>ueueo-settings</module>
+    </modules>
+
+</project>
