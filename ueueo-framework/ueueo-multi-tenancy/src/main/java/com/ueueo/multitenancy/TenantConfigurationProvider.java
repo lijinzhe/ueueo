@@ -42,7 +42,7 @@ public class TenantConfigurationProvider implements ITenantConfigurationProvider
 
     protected TenantConfiguration findTenantAsync(String tenantIdOrName) {
         try {
-            Integer tenantId = Integer.valueOf(tenantIdOrName);
+            Long tenantId = Long.valueOf(tenantIdOrName);
             return tenantStore.find(tenantId);
         } catch (NumberFormatException e) {
             return tenantStore.find(tenantIdOrName);

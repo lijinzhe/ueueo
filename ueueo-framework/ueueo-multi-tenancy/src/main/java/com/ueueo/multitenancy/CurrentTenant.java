@@ -21,7 +21,7 @@ public class CurrentTenant implements ICurrentTenant {
     }
 
     @Override
-    public Integer getId() {
+    public Long getId() {
         return Optional.ofNullable(currentTenantAccessor.getCurrent())
                 .map(BasicTenantInfo::getTenantId)
                 .orElse(null);
@@ -35,7 +35,7 @@ public class CurrentTenant implements ICurrentTenant {
     }
 
     @Override
-    public void change(Integer tenantId, String name) {
+    public void change(Long tenantId, String name) {
         currentTenantAccessor.setCurrent(new BasicTenantInfo(tenantId, name));
     }
 }

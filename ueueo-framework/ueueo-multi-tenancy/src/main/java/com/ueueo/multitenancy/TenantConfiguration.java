@@ -12,7 +12,7 @@ import org.springframework.util.Assert;
 @Data
 public class TenantConfiguration {
 
-    private Integer id;
+    private Long id;
     private String name;
     private Boolean isActive;
 
@@ -22,7 +22,7 @@ public class TenantConfiguration {
         isActive = true;
     }
 
-    public TenantConfiguration(Integer id, @NonNull String name) {
+    public TenantConfiguration(Long id, @NonNull String name) {
         Assert.notNull(name, "name 不能为空");
         this.id = id;
         this.name = name;

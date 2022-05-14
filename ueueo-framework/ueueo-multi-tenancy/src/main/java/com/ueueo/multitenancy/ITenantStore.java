@@ -8,6 +8,6 @@ public interface ITenantStore {
 
     TenantConfiguration find(String name);
 
-    TenantConfiguration find(Integer id);
+    TenantConfiguration find(Long id);
 
 }

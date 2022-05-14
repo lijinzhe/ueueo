@@ -14,14 +14,14 @@ public class BasicTenantInfo {
      * Not null value for a tenant.
      */
     @Nullable
-    private Integer tenantId;
+    private Long tenantId;
     /**
      * Name of the tenant if {@link #tenantId} is not null.
      */
     @Nullable
     private String name;
 
-    public BasicTenantInfo(Integer tenantId, String name) {
+    public BasicTenantInfo(Long tenantId, String name) {
         this.tenantId = tenantId;
         this.name = name;
     }

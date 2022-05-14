@@ -6,5 +6,5 @@ package com.ueueo.multitenancy;
  * @date 2022-05-13 20:48
  */
 public interface IMultiTenant {
-    int getTenantId();
+    long getTenantId();
 }

@@ -10,7 +10,7 @@ public interface ITenantResolveContext {
 
     void setTenantIdOrName(String tenantIdOrName);
 
-    Boolean handled();
+    boolean handled();
 
-    void setHandled(Boolean handled);
+    void setHandled(boolean handled);
 }

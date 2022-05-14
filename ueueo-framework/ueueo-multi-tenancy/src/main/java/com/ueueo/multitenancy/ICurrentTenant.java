@@ -19,7 +19,7 @@ public interface ICurrentTenant {
      *
      * @return
      */
-    Integer getId();
+    Long getId();
 
     /**
      * 租户名称
@@ -28,5 +28,9 @@ public interface ICurrentTenant {
      */
     String getName();
 
-    void change(Integer id, String name);
+    void change(Long id, String name);
+
+    default MultiTenancySides getMultiTenancySide() {
+        return getId() != null ? MultiTenancySides.Tenant : MultiTenancySides.Host;
+    }
 }
