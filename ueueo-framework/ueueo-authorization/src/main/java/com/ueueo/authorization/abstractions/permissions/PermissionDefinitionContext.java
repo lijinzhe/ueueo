@@ -2,7 +2,7 @@ package com.ueueo.authorization.abstractions.permissions;
 
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-import com.ueueo.core.AbpException;
+import com.ueueo.AbpException;
 import com.ueueo.multitenancy.MultiTenancySides;
 
 import java.util.HashMap;

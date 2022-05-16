@@ -1,6 +1,6 @@
 package com.ueueo.ddd.application.contracts.services;
 
-import com.ueueo.core.IRemoteService;
+import com.ueueo.IRemoteService;
 
 /**
  * This interface must be implemented by all application services to register and identify them by convention.

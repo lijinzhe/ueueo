@@ -1,7 +1,7 @@
 package com.ueueo.multitenancy;
 
-import com.ueueo.core.BusinessException;
-import com.ueueo.core.logging.LogLevel;
+import com.ueueo.BusinessException;
+import com.ueueo.logging.LogLevel;
 import com.ueueo.multitenancy.threading.MultiTenancyAsyncTaskExecutor;
 
 import java.util.concurrent.Future;

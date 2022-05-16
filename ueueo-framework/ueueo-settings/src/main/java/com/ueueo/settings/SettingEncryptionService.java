@@ -1,6 +1,6 @@
 package com.ueueo.settings;
 
-import com.ueueo.security.security.encryption.IStringEncryptionService;
+import com.ueueo.security.encryption.IStringEncryptionService;
 
 /**
  * TODO ABP代码

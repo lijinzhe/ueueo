@@ -1,5 +1,9 @@
 package com.ueueo.multitenancy;
 
+import com.ueueo.claims.ClaimsIdentity;
+import com.ueueo.principal.ClaimsPrincipal;
+import org.springframework.lang.NonNull;
+
 /**
  * Represents sides in a multi tenancy application.
  *
@@ -22,5 +26,19 @@ public enum MultiTenancySides {
 
     public int getFlag() {
         return flag;
+    }
+
+    public static MultiTenancySides getMultiTenancySide(@NonNull ClaimsIdentity identity) {
+        Long tenantId = identity.findTenantId();
+        return tenantId != null
+                ? MultiTenancySides.Tenant
+                : MultiTenancySides.Host;
+    }
+
+    public static MultiTenancySides getMultiTenancySide(@NonNull ClaimsPrincipal principal) {
+        Long tenantId = principal.findTenantId();
+        return tenantId != null
+                ? MultiTenancySides.Tenant
+                : MultiTenancySides.Host;
     }
 }

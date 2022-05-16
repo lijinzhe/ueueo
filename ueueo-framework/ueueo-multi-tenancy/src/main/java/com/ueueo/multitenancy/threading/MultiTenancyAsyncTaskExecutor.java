@@ -1,6 +1,6 @@
 package com.ueueo.multitenancy.threading;
 
-import com.ueueo.core.threading.AsyncTaskExecutor;
+import com.ueueo.threading.AsyncTaskExecutor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,6 +10,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class MultiTenancyAsyncTaskExecutor {
     public static final AsyncTaskExecutor INSTANCE = new AsyncTaskExecutor(4, 8, 0L,
-            TimeUnit.MILLISECONDS, 1000, "multi-tenancy-pool-%s");
+            TimeUnit.MILLISECONDS, 1000, "ueueo-multi-tenancy-pool-%s");
 
 }

@@ -1,7 +1,7 @@
 package com.ueueo.authorization.abstractions.permissions;
 
-import com.ueueo.core.simplestatechecking.IHasSimpleStateCheckers;
-import com.ueueo.core.simplestatechecking.ISimpleStateChecker;
+import com.ueueo.simplestatechecking.IHasSimpleStateCheckers;
+import com.ueueo.simplestatechecking.ISimpleStateChecker;
 import com.ueueo.multitenancy.MultiTenancySides;
 import org.springframework.lang.NonNull;
 

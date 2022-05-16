@@ -1,6 +1,6 @@
 package com.ueueo.settings;
 
-import com.ueueo.core.NameValue;
+import com.ueueo.NameValue;
 
 /**
  * TODO ABP代码

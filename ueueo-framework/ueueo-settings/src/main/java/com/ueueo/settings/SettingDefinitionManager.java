@@ -1,7 +1,7 @@
 package com.ueueo.settings;
 
 
-import com.ueueo.core.AbpException;
+import com.ueueo.AbpException;
 
 import java.util.ArrayList;
 import java.util.HashMap;

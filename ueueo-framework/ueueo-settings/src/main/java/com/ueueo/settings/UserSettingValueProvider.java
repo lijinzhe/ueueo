@@ -1,7 +1,7 @@
 package com.ueueo.settings;
 
 
-import com.ueueo.security.users.ICurrentUser;
+import com.ueueo.users.ICurrentUser;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

@@ -1,6 +1,6 @@
 package com.ueueo.caching;
 
-import com.ueueo.core.KeyValuePair;
+import com.ueueo.KeyValuePair;
 
 import java.util.List;
 import java.util.function.Consumer;

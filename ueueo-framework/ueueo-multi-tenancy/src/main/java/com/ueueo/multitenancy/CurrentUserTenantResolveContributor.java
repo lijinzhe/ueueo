@@ -1,7 +1,7 @@
 package com.ueueo.multitenancy;
 
 import com.ueueo.multitenancy.threading.MultiTenancyAsyncTaskExecutor;
-import com.ueueo.security.users.ICurrentUser;
+import com.ueueo.users.ICurrentUser;
 
 import java.util.concurrent.Future;
 

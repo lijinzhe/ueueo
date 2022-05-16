@@ -1,6 +1,6 @@
 package com.ueueo.data;
 
-import com.ueueo.core.AbpException;
+import com.ueueo.AbpException;
 
 import java.util.HashMap;
 import java.util.Map;
