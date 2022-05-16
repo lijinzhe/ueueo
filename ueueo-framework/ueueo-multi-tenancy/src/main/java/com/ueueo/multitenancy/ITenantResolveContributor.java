@@ -1,5 +1,7 @@
 package com.ueueo.multitenancy;
 
+import java.util.concurrent.Future;
+
 /**
  * @author Lee
  * @date 2022-05-13 21:29
@@ -7,5 +9,5 @@ package com.ueueo.multitenancy;
 public interface ITenantResolveContributor {
     String getName();
 
-    void resolve(ITenantResolveContext context);
+    Future<?> resolveAsync(ITenantResolveContext context);
 }

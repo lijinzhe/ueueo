@@ -30,4 +30,8 @@ public class TenantResolveContext implements ITenantResolveContext{
     public void setHandled(boolean handled) {
         this.handled = handled;
     }
+
+    public boolean hasResolvedTenantOrHost(){
+        return handled || tenantIdOrName != null;
+    }
 }

@@ -16,6 +16,7 @@
         <module>ueueo-ddd-application</module>
         <module>ueueo-ddd-application-contracts</module>
         <module>ueueo-ddd-domain</module>
+        <module>ueueo-eventbus-abstractions</module>
         <module>ueueo-guids</module>
         <module>ueueo-localization</module>
         <module>ueueo-multi-tenancy</module>

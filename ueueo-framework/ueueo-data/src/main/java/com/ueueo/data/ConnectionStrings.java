@@ -12,7 +12,7 @@ public class ConnectionStrings extends HashMap<String, String> {
     public static final String DefaultConnectionStringName = "Default";
 
     public String getDefault() {
-        return getOrDefault(DefaultConnectionStringName, null);
+        return getOrDefault(DefaultConnectionStringName, "");
     }
 
     public void setDefault(String def) {

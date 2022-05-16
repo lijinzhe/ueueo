@@ -2,6 +2,9 @@ package com.ueueo.multitenancy;
 
 import com.ueueo.core.BusinessException;
 import com.ueueo.core.logging.LogLevel;
+import com.ueueo.multitenancy.threading.MultiTenancyAsyncTaskExecutor;
+
+import java.util.concurrent.Future;
 
 /**
  * TODO Description Of This JAVA Class.
@@ -22,30 +25,32 @@ public class TenantConfigurationProvider implements ITenantConfigurationProvider
     }
 
     @Override
-    public TenantConfiguration get(boolean saveResolveResult) throws BusinessException {
-        TenantResolveResult resolveResult = tenantResolver.resolveTenantIdOrName();
-        if (resolveResult != null) {
-            tenantResolveResultAccessor.setResult(resolveResult);
-        }
-        TenantConfiguration tenant = null;
-        if (resolveResult.getTenantIdOrName() != null) {
-            tenant = findTenantAsync(resolveResult.getTenantIdOrName());
-            if (tenant == null) {
-                throw new BusinessException("Volo.AbpIo.MultiTenancy:010001", "Tenant not found!", "There is no tenant with the tenant id or name: " + resolveResult.getTenantIdOrName(), null, LogLevel.WARN);
+    public Future<TenantConfiguration> getAsync(boolean saveResolveResult) {
+        return MultiTenancyAsyncTaskExecutor.INSTANCE.submit(() -> {
+            TenantResolveResult resolveResult = tenantResolver.resolveTenantIdOrNameAsync().get();
+            if (resolveResult != null) {
+                tenantResolveResultAccessor.setResult(resolveResult);
             }
-            if (tenant.getIsActive() == null || !tenant.getIsActive()) {
-                throw new BusinessException("Volo.AbpIo.MultiTenancy:010002", "Tenant not active!", "The tenant is no active with the tenant id or name: " + resolveResult.getTenantIdOrName(), null, LogLevel.WARN);
+            TenantConfiguration tenant = null;
+            if (resolveResult.getTenantIdOrName() != null) {
+                tenant = findTenantAsync(resolveResult.getTenantIdOrName()).get();
+                if (tenant == null) {
+                    throw new BusinessException("Volo.AbpIo.MultiTenancy:010001", "Tenant not found!", "There is no tenant with the tenant id or name: " + resolveResult.getTenantIdOrName(), null, LogLevel.WARN);
+                }
+                if (tenant.getIsActive() == null || !tenant.getIsActive()) {
+                    throw new BusinessException("Volo.AbpIo.MultiTenancy:010002", "Tenant not active!", "The tenant is no active with the tenant id or name: " + resolveResult.getTenantIdOrName(), null, LogLevel.WARN);
+                }
             }
-        }
-        return tenant;
+            return tenant;
+        });
     }
 
-    protected TenantConfiguration findTenantAsync(String tenantIdOrName) {
+    protected Future<TenantConfiguration> findTenantAsync(String tenantIdOrName) {
         try {
             Long tenantId = Long.valueOf(tenantIdOrName);
-            return tenantStore.find(tenantId);
+            return tenantStore.findAsync(tenantId);
         } catch (NumberFormatException e) {
-            return tenantStore.find(tenantIdOrName);
+            return tenantStore.findAsync(tenantIdOrName);
         }
     }
 }

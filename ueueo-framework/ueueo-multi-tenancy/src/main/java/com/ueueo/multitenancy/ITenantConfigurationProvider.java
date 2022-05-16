@@ -1,9 +1,8 @@
 package com.ueueo.multitenancy;
 
-import com.ueueo.core.BusinessException;
+import java.util.concurrent.Future;
 
 /**
- *
  * @author Lee
  * @date 2022-05-13 21:11
  */
@@ -13,5 +12,5 @@ public interface ITenantConfigurationProvider {
      *
      * @return
      */
-    TenantConfiguration get(boolean saveResolveResult) throws BusinessException;
+    Future<TenantConfiguration> getAsync(boolean saveResolveResult);
 }

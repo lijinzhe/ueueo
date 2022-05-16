@@ -13,7 +13,7 @@ import java.util.Map;
  * @author Lee
  * @date 2022-05-14 09:47
  */
-public class BusinessException extends Exception implements IBusinessException, IHasErrorCode, IHasErrorDetails, IHasLogLevel, Serializable {
+public class BusinessException extends RuntimeException implements IBusinessException, IHasErrorCode, IHasErrorDetails, IHasLogLevel, Serializable {
 
     private String code;
     private String details;
