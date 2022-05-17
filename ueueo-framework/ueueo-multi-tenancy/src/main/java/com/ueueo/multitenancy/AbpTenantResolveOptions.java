@@ -13,11 +13,10 @@ import java.util.List;
  */
 @Getter
 public class AbpTenantResolveOptions {
-    private List<ITenantResolveContributor> tenantResolvers;
+    private final List<ITenantResolveContributor> tenantResolvers;
 
     public AbpTenantResolveOptions() {
-        this.tenantResolvers = new ArrayList(){{
-            add(new CurrentUserTenantResolveContributor());
-        }};
+        this.tenantResolvers = new ArrayList<>();
+        this.tenantResolvers.add(new CurrentUserTenantResolveContributor());
     }
 }

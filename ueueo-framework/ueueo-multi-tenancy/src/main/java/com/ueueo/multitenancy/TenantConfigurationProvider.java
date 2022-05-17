@@ -1,8 +1,8 @@
 package com.ueueo.multitenancy;
 
 import com.ueueo.BusinessException;
-import com.ueueo.logging.LogLevel;
 import com.ueueo.multitenancy.threading.MultiTenancyAsyncTaskExecutor;
+import org.slf4j.event.Level;
 
 import java.util.concurrent.Future;
 
@@ -35,10 +35,10 @@ public class TenantConfigurationProvider implements ITenantConfigurationProvider
             if (resolveResult.getTenantIdOrName() != null) {
                 tenant = findTenantAsync(resolveResult.getTenantIdOrName()).get();
                 if (tenant == null) {
-                    throw new BusinessException("Volo.AbpIo.MultiTenancy:010001", "Tenant not found!", "There is no tenant with the tenant id or name: " + resolveResult.getTenantIdOrName(), null, LogLevel.WARN);
+                    throw new BusinessException("Volo.AbpIo.MultiTenancy:010001", "Tenant not found!", "There is no tenant with the tenant id or name: " + resolveResult.getTenantIdOrName(), null, Level.WARN);
                 }
                 if (tenant.getIsActive() == null || !tenant.getIsActive()) {
-                    throw new BusinessException("Volo.AbpIo.MultiTenancy:010002", "Tenant not active!", "The tenant is no active with the tenant id or name: " + resolveResult.getTenantIdOrName(), null, LogLevel.WARN);
+                    throw new BusinessException("Volo.AbpIo.MultiTenancy:010002", "Tenant not active!", "The tenant is no active with the tenant id or name: " + resolveResult.getTenantIdOrName(), null, Level.WARN);
                 }
             }
             return tenant;

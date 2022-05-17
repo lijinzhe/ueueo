@@ -3,7 +3,7 @@ package com.ueueo.authorization;
 import com.ueueo.AbpException;
 import com.ueueo.exceptionhandling.IHasErrorCode;
 import com.ueueo.logging.IHasLogLevel;
-import com.ueueo.logging.LogLevel;
+import org.slf4j.event.Level;
 
 /**
  * @author Lee
@@ -15,15 +15,15 @@ public class AbpAuthorizationException extends AbpException implements IHasLogLe
      * Severity of the exception.
      * Default: Warn.
      */
-    private LogLevel logLevel;
+    private Level logLevel;
 
     @Override
-    public LogLevel getLogLevel() {
+    public Level getLogLevel() {
         return logLevel;
     }
 
     @Override
-    public void setLogLevel(LogLevel logLevel) {
+    public void setLogLevel(Level logLevel) {
         this.logLevel = logLevel;
     }
 
@@ -37,7 +37,7 @@ public class AbpAuthorizationException extends AbpException implements IHasLogLe
 
     /** Creates a new <see cref="AbpAuthorizationException"/> object. */
     public AbpAuthorizationException() {
-        this.logLevel = LogLevel.WARN;
+        this.logLevel = Level.WARN;
     }
 
     /**
@@ -47,7 +47,7 @@ public class AbpAuthorizationException extends AbpException implements IHasLogLe
      */
     public AbpAuthorizationException(String message) {
         super(message);
-        this.logLevel = LogLevel.WARN;
+        this.logLevel = Level.WARN;
     }
 
     /**
@@ -58,7 +58,7 @@ public class AbpAuthorizationException extends AbpException implements IHasLogLe
      */
     public AbpAuthorizationException(String message, Exception innerException) {
         super(message, innerException);
-        this.logLevel = LogLevel.WARN;
+        this.logLevel = Level.WARN;
     }
 
     /**
@@ -71,7 +71,7 @@ public class AbpAuthorizationException extends AbpException implements IHasLogLe
     public AbpAuthorizationException(String message, String code, Exception innerException) {
         super(message, innerException);
         this.code = code;
-        this.logLevel = LogLevel.WARN;
+        this.logLevel = Level.WARN;
     }
 
 }

@@ -1,5 +1,7 @@
 package com.ueueo.logging;
 
+import org.slf4j.event.Level;
+
 /**
  * Interface to define a <see cref="LogLevel"/> property (see <see cref="LogLevel"/>).
  *
@@ -12,7 +14,7 @@ public interface IHasLogLevel {
      *
      * @return
      */
-    LogLevel getLogLevel();
+    Level getLogLevel();
 
-    void setLogLevel(LogLevel logLevel);
+    void setLogLevel(Level logLevel);
 }

@@ -32,7 +32,7 @@ public class ClaimsIdentity implements IIdentity {
     @Getter
     @Setter
     private String label;
-    @Getter
+
     private boolean isAuthenticated = false;
     @Getter
     private Collection<Claim> claims = new ArrayList<>();
@@ -170,37 +170,37 @@ public class ClaimsIdentity implements IIdentity {
     }
 
     public Long findUserId() {
-        return findLongValueFromClaim(AbpClaimTypes.UserId);
+        return findClaimLongValue(AbpClaimTypes.UserId);
     }
 
     public Long findTenantId() {
-        return findLongValueFromClaim(AbpClaimTypes.TenantId);
+        return findClaimLongValue(AbpClaimTypes.TenantId);
     }
 
     public String findClientId() {
-        return findValueFromClaim(AbpClaimTypes.ClientId);
+        return findClaimValue(AbpClaimTypes.ClientId);
     }
 
     public Long findEditionId() {
-        return findLongValueFromClaim(AbpClaimTypes.EditionId);
+        return findClaimLongValue(AbpClaimTypes.EditionId);
     }
 
     public Long findImpersonatorTenantId() {
-        return findLongValueFromClaim(AbpClaimTypes.ImpersonatorTenantId);
+        return findClaimLongValue(AbpClaimTypes.ImpersonatorTenantId);
     }
 
     public Long findImpersonatorUserId() {
-        return findLongValueFromClaim(AbpClaimTypes.ImpersonatorUserId);
+        return findClaimLongValue(AbpClaimTypes.ImpersonatorUserId);
     }
 
-    private String findValueFromClaim(String claimType) {
+    private String findClaimValue(String claimType) {
         return claims.stream()
                 .filter(claim -> StringUtils.equalsIgnoreCase(claim.getType(), claimType)).findFirst()
                 .map(Claim::getValue)
                 .orElse(null);
     }
 
-    private Long findLongValueFromClaim(String claimType) {
+    private Long findClaimLongValue(String claimType) {
         return claims.stream()
                 .filter(claim -> StringUtils.equalsIgnoreCase(claim.getType(), claimType)).findFirst()
                 .map(claim -> {

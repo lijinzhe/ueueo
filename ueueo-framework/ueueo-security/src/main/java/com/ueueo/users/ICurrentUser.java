@@ -23,6 +23,9 @@ public interface ICurrentUser {
     String getUserName();
 
     @Nullable
+    String getName();
+
+    @Nullable
     String getSurName();
 
     @Nullable

@@ -3,7 +3,7 @@ package com.ueueo;
 import com.ueueo.exceptionhandling.IHasErrorCode;
 import com.ueueo.exceptionhandling.IHasErrorDetails;
 import com.ueueo.logging.IHasLogLevel;
-import com.ueueo.logging.LogLevel;
+import org.slf4j.event.Level;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -17,11 +17,11 @@ public class BusinessException extends RuntimeException implements IBusinessExce
 
     private String code;
     private String details;
-    private LogLevel logLevel;
+    private Level logLevel;
 
     private Map<String, Object> data;
 
-    public BusinessException(String code, String message, String details, Throwable cause, LogLevel logLevel) {
+    public BusinessException(String code, String message, String details, Throwable cause, Level logLevel) {
         super(message, cause);
         this.code = code;
         this.details = details;
@@ -40,12 +40,12 @@ public class BusinessException extends RuntimeException implements IBusinessExce
     }
 
     @Override
-    public LogLevel getLogLevel() {
+    public Level getLogLevel() {
         return logLevel;
     }
 
     @Override
-    public void setLogLevel(LogLevel logLevel) {
+    public void setLogLevel(Level logLevel) {
         this.logLevel = logLevel;
     }
 

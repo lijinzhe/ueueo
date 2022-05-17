@@ -5,8 +5,6 @@ import lombok.Data;
 import java.nio.charset.StandardCharsets;
 
 /**
- * TODO ABP代码
- *
  * Options used by {@link IStringEncryptionService}
  *
  * @author Lee

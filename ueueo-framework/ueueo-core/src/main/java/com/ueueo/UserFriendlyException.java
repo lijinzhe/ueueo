@@ -1,6 +1,6 @@
 package com.ueueo;
 
-import com.ueueo.logging.LogLevel;
+import org.slf4j.event.Level;
 
 /**
  * This exception type is directly shown to the user.
@@ -8,8 +8,8 @@ import com.ueueo.logging.LogLevel;
  * @author Lee
  * @date 2022-05-14 16:17
  */
-public class UserFriendlyException extends BusinessException implements IUserFriendlyException{
-    public UserFriendlyException(String code, String message, String details, Throwable cause, LogLevel logLevel) {
+public class UserFriendlyException extends BusinessException implements IUserFriendlyException {
+    public UserFriendlyException(String code, String message, String details, Throwable cause, Level logLevel) {
         super(code, message, details, cause, logLevel);
     }
 }

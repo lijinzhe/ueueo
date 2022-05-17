@@ -1,5 +1,7 @@
 package com.ueueo.security.claims;
 
+import com.ueueo.claims.ClaimTypes;
+
 /**
  * TODO Instead of directly using static properties, can we just create an AbpClaimOptions and pass these values as defaults?
  *
@@ -9,83 +11,83 @@ package com.ueueo.security.claims;
  * @date 2022-05-14 11:15
  */
 public class AbpClaimTypes {
-    /// <summary>
-    /// Default: <see cref="ClaimTypes.Name"/>
-    /// </summary>
-    public static String UserName  = ClaimTypes.Name;
+    /**
+     * Default: {@link ClaimTypes#Name}
+     */
+    public static String UserName = ClaimTypes.Name;
 
-    /// <summary>
-    /// Default: <see cref="ClaimTypes.GivenName"/>
-    /// </summary>
-    public static String Name  = ClaimTypes.GivenName;
+    /**
+     * Default: {@link ClaimTypes#GivenName}
+     */
+    public static String Name = ClaimTypes.GivenName;
 
-    /// <summary>
-    /// Default: <see cref="ClaimTypes.Surname"/>
-    /// </summary>
-    public static String SurName  = ClaimTypes.Surname;
+    /**
+     * Default: {@link ClaimTypes#Surname}
+     */
+    public static String SurName = ClaimTypes.Surname;
 
-    /// <summary>
-    /// Default: <see cref="ClaimTypes.NameIdentifier"/>
-    /// </summary>
-    public static String UserId  = ClaimTypes.NameIdentifier;
+    /**
+     * Default: {@link ClaimTypes#NameIdentifier}
+     */
+    public static String UserId = ClaimTypes.NameIdentifier;
 
-    /// <summary>
-    /// Default: <see cref="ClaimTypes.Role"/>
-    /// </summary>
-    public static String Role  = ClaimTypes.Role;
+    /**
+     * Default: {@link ClaimTypes#Role}
+     */
+    public static String Role = ClaimTypes.Role;
 
-    /// <summary>
-    /// Default: <see cref="ClaimTypes.Email"/>
-    /// </summary>
-    public static String Email  = ClaimTypes.Email;
+    /**
+     * Default: {@link ClaimTypes#Email}
+     */
+    public static String Email = ClaimTypes.Email;
 
-    /// <summary>
-    /// Default: "email_verified".
-    /// </summary>
+    /**
+     * Default: "email_verified".
+     */
     public static String EmailVerified = "email_verified";
 
-    /// <summary>
-    /// Default: "phone_number".
-    /// </summary>
-    public static String PhoneNumber= "phone_number";
+    /**
+     * Default: "phone_number".
+     */
+    public static String PhoneNumber = "phone_number";
 
-    /// <summary>
-    /// Default: "phone_number_verified".
-    /// </summary>
-    public static String PhoneNumberVerified= "phone_number_verified";
+    /**
+     * Default: "phone_number_verified".
+     */
+    public static String PhoneNumberVerified = "phone_number_verified";
 
-    /// <summary>
-    /// Default: "tenantid".
-    /// </summary>
-    public static String TenantId= "tenantid";
+    /**
+     * Default: "tenantid".
+     */
+    public static String TenantId = "tenantid";
 
-    /// <summary>
-    /// Default: "editionid".
-    /// </summary>
-    public static String EditionId= "editionid";
+    /**
+     * Default: "editionid".
+     */
+    public static String EditionId = "editionid";
 
-    /// <summary>
-    /// Default: "client_id".
-    /// </summary>
-    public static String ClientId= "client_id";
+    /**
+     * Default: "client_id".
+     */
+    public static String ClientId = "client_id";
 
-    /// <summary>
-    /// Default: "impersonator_tenantid".
-    /// </summary>
-    public static String ImpersonatorTenantId= "impersonator_tenantid";
+    /**
+     * Default: "impersonator_tenantid".
+     */
+    public static String ImpersonatorTenantId = "impersonator_tenantid";
 
-    /// <summary>
-    /// Default: "impersonator_userid".
-    /// </summary>
-    public static String ImpersonatorUserId= "impersonator_userid";
+    /**
+     * Default: "impersonator_userid".
+     */
+    public static String ImpersonatorUserId = "impersonator_userid";
 
-    /// <summary>
-    /// Default: "impersonator_tenantname".
-    /// </summary>
-    public static String ImpersonatorTenantName= "impersonator_tenantname";
+    /**
+     * Default: "impersonator_tenantname".
+     */
+    public static String ImpersonatorTenantName = "impersonator_tenantname";
 
-    /// <summary>
-    /// Default: "impersonator_username".
-    /// </summary>
-    public static String ImpersonatorUserName= "impersonator_username";
+    /**
+     * Default: "impersonator_username".
+     */
+    public static String ImpersonatorUserName = "impersonator_username";
 }

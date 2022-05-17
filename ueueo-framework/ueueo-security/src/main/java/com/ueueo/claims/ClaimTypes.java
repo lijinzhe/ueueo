@@ -1,4 +1,4 @@
-package com.ueueo.security.claims;
+package com.ueueo.claims;
 
 /**
  * TODO Description Of This JAVA Class.
