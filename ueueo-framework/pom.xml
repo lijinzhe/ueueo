@@ -23,6 +23,8 @@
         <module>ueueo-security</module>
         <module>ueueo-settings</module>
         <module>ueueo-localization</module>
+        <module>ueueo-features</module>
+        <module>ueueo-validation</module>
     </modules>
 
 </project>

@@ -25,7 +25,8 @@ public class AbpException extends RuntimeException {
         super(message, cause);
     }
 
-    public void withData(String name, Object value) {
+    public AbpException withData(String name, Object value) {
         this.data.put(name, value);
+        return this;
     }
 }
