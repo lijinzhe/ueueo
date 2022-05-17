@@ -9,6 +9,7 @@ import org.springframework.lang.Nullable;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @Data
 public class CurrentUser implements ICurrentUser {
 
-    private static final Collection<Claim> EmptyClaimsArray = Collections.emptyList();
+    private static final List<Claim> EmptyClaimsArray = Collections.emptyList();
 
     private final ICurrentPrincipalAccessor principalAccessor;
 
@@ -84,7 +85,7 @@ public class CurrentUser implements ICurrentUser {
     }
 
     @Override
-    public Collection<String> getRoles() {
+    public List<String> getRoles() {
         return findClaims(AbpClaimTypes.Role).stream()
                 .map(Claim::getValue)
                 .distinct()
@@ -99,14 +100,14 @@ public class CurrentUser implements ICurrentUser {
     }
 
     @Override
-    public Collection<Claim> findClaims(String claimType) {
+    public List<Claim> findClaims(String claimType) {
         return getAllClaims().stream()
                 .filter(claim -> StringUtils.equalsIgnoreCase(claim.getType(), claimType))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Collection<Claim> getAllClaims() {
+    public List<Claim> getAllClaims() {
         if (principalAccessor.getPrincipal() != null) {
             return principalAccessor.getPrincipal().getClaims();
         } else {

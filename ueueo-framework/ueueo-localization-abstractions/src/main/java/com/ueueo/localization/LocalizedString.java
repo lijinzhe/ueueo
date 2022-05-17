@@ -3,7 +3,7 @@ package com.ueueo.localization;
 import lombok.Data;
 
 /**
- * TODO ABP
+ * C#  Microsoft.Extensions.Localization;
  * A locale specific string.
  *
  * @author Lee
@@ -46,4 +46,5 @@ public class LocalizedString {
         this.resourceNotFound = resourceNotFound;
         this.searchedLocation = searchedLocation;
     }
+
 }

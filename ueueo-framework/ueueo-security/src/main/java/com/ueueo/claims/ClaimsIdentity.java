@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -35,7 +36,7 @@ public class ClaimsIdentity implements IIdentity {
 
     private boolean isAuthenticated = false;
     @Getter
-    private Collection<Claim> claims = new ArrayList<>();
+    private List<Claim> claims = new ArrayList<>();
     @Getter
     @Setter
     private Object bootstrapContext;
@@ -61,16 +62,16 @@ public class ClaimsIdentity implements IIdentity {
         this.isAuthenticated = identity.getIsAuthenticated();
     }
 
-    public ClaimsIdentity(@NonNull Collection<Claim> claims) {
+    public ClaimsIdentity(@NonNull List<Claim> claims) {
         this.claims = claims;
     }
 
-    public ClaimsIdentity(@NonNull Collection<Claim> claims, String authenticationType) {
+    public ClaimsIdentity(@NonNull List<Claim> claims, String authenticationType) {
         this.claims = claims;
         this.authenticationType = authenticationType;
     }
 
-    public ClaimsIdentity(IIdentity identity, @NonNull Collection<Claim> claims) {
+    public ClaimsIdentity(IIdentity identity, @NonNull List<Claim> claims) {
         this.name = identity.getName();
         this.authenticationType = identity.getAuthenticationType();
         this.isAuthenticated = identity.getIsAuthenticated();
@@ -83,14 +84,14 @@ public class ClaimsIdentity implements IIdentity {
         this.roleClaimType = roleType;
     }
 
-    public ClaimsIdentity(@NonNull Collection<Claim> claims, String authenticationType, String nameType, String roleType) {
+    public ClaimsIdentity(@NonNull List<Claim> claims, String authenticationType, String nameType, String roleType) {
         this.claims = claims;
         this.authenticationType = authenticationType;
         this.nameClaimType = nameType;
         this.roleClaimType = roleType;
     }
 
-    public ClaimsIdentity(IIdentity identity, @NonNull Collection<Claim> claims, String authenticationType, String nameType, String roleType) {
+    public ClaimsIdentity(IIdentity identity, @NonNull List<Claim> claims, String authenticationType, String nameType, String roleType) {
         this.name = identity.getName();
         this.authenticationType = identity.getAuthenticationType();
         this.isAuthenticated = identity.getIsAuthenticated();
@@ -123,7 +124,7 @@ public class ClaimsIdentity implements IIdentity {
         return this;
     }
 
-    public void addClaims(Collection<Claim> claims) {
+    public void addClaims(List<Claim> claims) {
         this.claims.addAll(claims);
     }
 
@@ -132,11 +133,11 @@ public class ClaimsIdentity implements IIdentity {
         return null;
     }
 
-    public Collection<Claim> findAll(String type) {
+    public List<Claim> findAll(String type) {
         return claims.stream().filter(claim -> claim.getType().equalsIgnoreCase(type)).collect(Collectors.toList());
     }
 
-    public Collection<Claim> findAll(Predicate<Claim> match) {
+    public List<Claim> findAll(Predicate<Claim> match) {
         return claims.stream().filter(match).collect(Collectors.toList());
     }
 

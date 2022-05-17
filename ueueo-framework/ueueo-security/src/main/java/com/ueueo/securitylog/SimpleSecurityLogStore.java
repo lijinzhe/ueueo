@@ -1,10 +1,7 @@
 package com.ueueo.securitylog;
 
-import com.ueueo.threading.CompletedFuture;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.concurrent.Future;
 
 /**
  * @author Lee
@@ -21,10 +18,9 @@ public class SimpleSecurityLogStore implements ISecurityLogStore {
     }
 
     @Override
-    public Future<?> saveAsync(SecurityLogInfo securityLogInfo) {
+    public void save(SecurityLogInfo securityLogInfo) {
         if (securityLogOptions.isEnable()) {
             log.info(securityLogInfo.toString());
         }
-        return new CompletedFuture<>();
     }
 }

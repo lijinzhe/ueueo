@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -38,15 +39,15 @@ public class ClaimsPrincipal implements IPrincipal {
 
     private IPrincipal principal;
     @Getter
-    private Collection<ClaimsIdentity> identities;
+    private List<ClaimsIdentity> identities;
     @Getter
-    private Collection<Claim> claims = new ArrayList<>();
+    private List<Claim> claims = new ArrayList<>();
 
     public ClaimsPrincipal() {
 
     }
 
-    public ClaimsPrincipal(Collection<ClaimsIdentity> identities) {
+    public ClaimsPrincipal(List<ClaimsIdentity> identities) {
         this.identities = identities;
     }
 
@@ -59,7 +60,7 @@ public class ClaimsPrincipal implements IPrincipal {
         this.identity = principal.getIdentity();
     }
 
-    public void addIdentities(Collection<ClaimsIdentity> identities) {
+    public void addIdentities(List<ClaimsIdentity> identities) {
         this.identities.addAll(identities);
     }
 
@@ -81,11 +82,11 @@ public class ClaimsPrincipal implements IPrincipal {
         return null;
     }
 
-    public Collection<Claim> findAll(Predicate<Claim> match) {
+    public List<Claim> findAll(Predicate<Claim> match) {
         return claims.stream().filter(match).collect(Collectors.toList());
     }
 
-    public Collection<Claim> findAll(String type) {
+    public List<Claim> findAll(String type) {
         return claims.stream().filter(claim -> claim.getType().equalsIgnoreCase(type)).collect(Collectors.toList());
     }
 

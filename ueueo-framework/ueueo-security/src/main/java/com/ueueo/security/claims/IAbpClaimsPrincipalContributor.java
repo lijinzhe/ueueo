@@ -1,5 +1,7 @@
 package com.ueueo.security.claims;
 
+import com.ueueo.security.threading.SecurityAsyncTaskExecutor;
+
 import java.util.concurrent.Future;
 
 /**
@@ -8,5 +10,9 @@ import java.util.concurrent.Future;
  */
 public interface IAbpClaimsPrincipalContributor {
 
-    Future<?> contributeAsync(AbpClaimsPrincipalContributorContext context);
+    void contribute(AbpClaimsPrincipalContributorContext context);
+
+    default Future<?> contributeAsync(AbpClaimsPrincipalContributorContext context) {
+        return SecurityAsyncTaskExecutor.INSTANCE.submit(() -> contribute(context));
+    }
 }

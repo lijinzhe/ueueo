@@ -1,9 +1,6 @@
 package com.ueueo.data;
 
-import com.ueueo.data.threading.DataAsyncTaskExecutor;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.concurrent.Future;
 
 /**
  * TODO Description Of This JAVA Class.
@@ -31,8 +28,4 @@ public class DefaultConnectionStringResolver implements IConnectionStringResolve
         return "";
     }
 
-    @Override
-    public Future<String> resolveAsync(String connectionStringName) {
-        return DataAsyncTaskExecutor.INSTANCE.submit(() -> resolve(connectionStringName));
-    }
 }

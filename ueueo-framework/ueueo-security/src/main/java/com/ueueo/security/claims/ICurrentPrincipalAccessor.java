@@ -4,8 +4,8 @@ import com.ueueo.claims.Claim;
 import com.ueueo.claims.ClaimsIdentity;
 import com.ueueo.principal.ClaimsPrincipal;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Lee
@@ -17,10 +17,10 @@ public interface ICurrentPrincipalAccessor {
     void change(ClaimsPrincipal principal);
 
     default void change(Claim claim) {
-        change(Collections.singleton(claim));
+        change(Collections.singletonList(claim));
     }
 
-    default void change(Collection<Claim> claims) {
+    default void change(List<Claim> claims) {
         change(new ClaimsIdentity(claims));
     }
 

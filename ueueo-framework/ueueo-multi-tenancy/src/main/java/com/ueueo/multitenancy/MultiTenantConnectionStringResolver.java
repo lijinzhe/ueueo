@@ -4,11 +4,8 @@ import com.ueueo.data.AbpDatabaseInfo;
 import com.ueueo.data.AbpDbConnectionOptions;
 import com.ueueo.data.ConnectionStrings;
 import com.ueueo.data.DefaultConnectionStringResolver;
-import com.ueueo.multitenancy.threading.MultiTenancyAsyncTaskExecutor;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.concurrent.Future;
 
 /**
  * @author Lee
@@ -76,11 +73,6 @@ public class MultiTenantConnectionStringResolver extends DefaultConnectionString
             return defaultConnectionString;
         }
         return super.resolve(connectionStringName);
-    }
-
-    @Override
-    public Future<String> resolveAsync(String connectionStringName) {
-        return MultiTenancyAsyncTaskExecutor.INSTANCE.submit(() -> this.resolve(connectionStringName));
     }
 
 }

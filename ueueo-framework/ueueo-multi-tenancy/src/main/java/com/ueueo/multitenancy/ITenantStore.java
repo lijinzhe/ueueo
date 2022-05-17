@@ -1,5 +1,7 @@
 package com.ueueo.multitenancy;
 
+import com.ueueo.multitenancy.threading.MultiTenancyAsyncTaskExecutor;
+
 import java.util.concurrent.Future;
 
 /**
@@ -8,12 +10,15 @@ import java.util.concurrent.Future;
  */
 public interface ITenantStore {
 
-    Future<TenantConfiguration> findAsync(String name);
-
-    Future<TenantConfiguration> findAsync(Long id);
-
     TenantConfiguration find(String name);
 
     TenantConfiguration find(Long id);
 
+    default Future<TenantConfiguration> findAsync(String name) {
+        return MultiTenancyAsyncTaskExecutor.INSTANCE.submit(() -> find(name));
+    }
+
+    default Future<TenantConfiguration> findAsync(Long id) {
+        return MultiTenancyAsyncTaskExecutor.INSTANCE.submit(() -> find(id));
+    }
 }

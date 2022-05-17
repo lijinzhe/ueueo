@@ -1,5 +1,7 @@
 package com.ueueo.multitenancy;
 
+import com.ueueo.multitenancy.threading.MultiTenancyAsyncTaskExecutor;
+
 import java.util.concurrent.Future;
 
 /**
@@ -12,5 +14,9 @@ public interface ITenantConfigurationProvider {
      *
      * @return
      */
-    Future<TenantConfiguration> getAsync(boolean saveResolveResult);
+    TenantConfiguration get(boolean saveResolveResult);
+
+    default Future<TenantConfiguration> getAsync(boolean saveResolveResult) {
+        return MultiTenancyAsyncTaskExecutor.INSTANCE.submit(() -> get(saveResolveResult));
+    }
 }

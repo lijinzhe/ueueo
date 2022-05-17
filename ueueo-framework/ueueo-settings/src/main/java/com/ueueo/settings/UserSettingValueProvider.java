@@ -1,14 +1,12 @@
 package com.ueueo.settings;
 
-
 import com.ueueo.users.ICurrentUser;
 
-import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * TODO ABP代码
- *
  * @author Lee
  * @date 2021-08-19 21:42
  */
@@ -24,19 +22,27 @@ public class UserSettingValueProvider extends SettingValueProvider {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return ProviderName;
     }
 
     @Override
     public String getOrNull(SettingDefinition setting) {
-        return settingStore.getOrNull(setting.getName(), name(), currentUser.getId().toString());
+        if (currentUser != null && currentUser.getId() != null) {
+            return settingStore.getOrNull(setting.getName(), getName(), currentUser.getId().toString());
+        } else {
+            return null;
+        }
     }
 
     @Override
-    public Collection<SettingValue> getAll(Collection<SettingDefinition> settings) {
-        return settingStore.getAll(settings.stream().map(SettingDefinition::getName).collect(Collectors.toList()),
-                name(), currentUser.getId().toString());
+    public List<SettingValue> getAll(List<SettingDefinition> settings) {
+        if (currentUser != null && currentUser.getId() != null) {
+            return settingStore.getAll(settings.stream().map(SettingDefinition::getName).collect(Collectors.toList()),
+                    getName(), currentUser.getId().toString());
+        } else {
+            return Collections.emptyList();
+        }
     }
 
 }

@@ -1,13 +1,14 @@
 package com.ueueo.settings;
 
 import com.ueueo.AbpException;
+import com.ueueo.settings.threading.SettingsAsyncTaskExecutor;
+import org.springframework.util.Assert;
 
 import java.util.*;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 /**
- * TODO ABP代码
- *
  * @author Lee
  * @date 2021-08-18 21:37
  */
@@ -26,27 +27,27 @@ public class SettingProvider implements ISettingProvider {
     }
 
     @Override
-    public String getOrNull(String name)  throws AbpException {
+    public String getOrNull(String name) {
         SettingDefinition setting = settingDefinitionManager.get(name);
-        List<ISettingValueProvider> providers = settingValueProviderManager.providers();
+        List<ISettingValueProvider> providers = settingValueProviderManager.getProviders();
 
         if (!setting.getProviders().isEmpty()) {
-            providers = providers.stream().filter(p -> setting.getProviders().contains(p.name())).collect(Collectors.toList());
+            providers = providers.stream().filter(p -> setting.getProviders().contains(p.getName())).collect(Collectors.toList());
         }
 
         //TODO: How to implement setting.IsInherited?
-        String value = getOrNullValueFromProvidersAsync(providers, setting);
-        if (value != null && setting.getIsEncrypted()) {
+        String value = getOrNullValueFromProviders(providers, setting);
+        if (value != null && setting.isEncrypted()) {
             value = settingEncryptionService.decrypt(setting, value);
         }
         return value;
     }
 
     @Override
-    public Collection<SettingValue> getAll(Collection<String> names) {
+    public List<SettingValue> getAll(List<String> names) {
         Set<String> nameSet = new HashSet<>(names);
         Map<String, SettingValue> result = new HashMap<>();
-        Collection<SettingDefinition> settingDefinitions = settingDefinitionManager.getAll()
+        List<SettingDefinition> settingDefinitions = settingDefinitionManager.getAll()
                 .stream().filter(def -> nameSet.contains(def.getName()))
                 .collect(Collectors.toList());
 
@@ -54,16 +55,16 @@ public class SettingProvider implements ISettingProvider {
             result.put(definition.getName(), new SettingValue(definition.getName(), null));
         }
 
-        for (ISettingValueProvider provider : settingValueProviderManager.providers()) {
-            Collection<SettingValue> settingValues = provider.getAll(settingDefinitions.stream()
-                    .filter(def -> def.getProviders().isEmpty() || def.getProviders().contains(provider.name()))
+        for (ISettingValueProvider provider : settingValueProviderManager.getProviders()) {
+            List<SettingValue> settingValues = provider.getAll(settingDefinitions.stream()
+                    .filter(def -> def.getProviders().isEmpty() || def.getProviders().contains(provider.getName()))
                     .collect(Collectors.toList())
             );
-            Collection<SettingValue> NonNullValues = settingValues.stream().filter(val -> val.getValue() != null).collect(Collectors.toList());
-            for (SettingValue settingValue : NonNullValues) {
+            List<SettingValue> notNullValues = settingValues.stream().filter(val -> val.getValue() != null).collect(Collectors.toList());
+            for (SettingValue settingValue : notNullValues) {
                 SettingDefinition settingDefinition = settingDefinitions.stream().filter(def -> def.getName().equals(settingValue.getName())).findFirst().orElse(null);
                 if (settingDefinition != null) {
-                    if (settingDefinition.getIsEncrypted()) {
+                    if (settingDefinition.isEncrypted()) {
                         settingValue.setValue(settingEncryptionService.decrypt(settingDefinition, settingValue.getValue()));
                     }
 
@@ -72,23 +73,23 @@ public class SettingProvider implements ISettingProvider {
                     }
                 }
             }
-            settingDefinitions.removeIf(def -> NonNullValues.stream().anyMatch(val -> val.getName().equals(def.getName())));
+            settingDefinitions.removeIf(def -> notNullValues.stream().anyMatch(val -> val.getName().equals(def.getName())));
         }
-        return result.values();
+        return new ArrayList<>(result.values());
     }
 
     @Override
-    public Collection<SettingValue> getAll()  throws AbpException{
+    public List<SettingValue> getAll() throws AbpException {
         List<SettingValue> settingValues = new ArrayList<>();
-        Collection<SettingDefinition> settingDefinitions = settingDefinitionManager.getAll();
+        List<SettingDefinition> settingDefinitions = settingDefinitionManager.getAll();
         for (SettingDefinition setting : settingDefinitions) {
             settingValues.add(new SettingValue(setting.getName(), getOrNull(setting.getName())));
         }
         return settingValues;
     }
 
-    protected String getOrNullValueFromProvidersAsync(Collection<ISettingValueProvider> providers,
-                                                      SettingDefinition setting) {
+    protected String getOrNullValueFromProviders(List<ISettingValueProvider> providers,
+                                                 SettingDefinition setting) {
         for (ISettingValueProvider provider : providers) {
             String value = provider.getOrNull(setting);
             if (value != null) {
@@ -96,5 +97,24 @@ public class SettingProvider implements ISettingProvider {
             }
         }
         return null;
+    }
+
+    public boolean isTrue(String name) {
+        Assert.notNull(name, "name must not null.");
+        return name.equalsIgnoreCase(getOrNull(name));
+    }
+
+    public Future<Boolean> isTrueAsync(String name) {
+        return SettingsAsyncTaskExecutor.INSTANCE.submit(() -> isTrue(name));
+    }
+
+    public String get(String name, String defaultValue) {
+        Assert.notNull(name, "name must not null.");
+        String value = getOrNull(name);
+        return value != null ? value : defaultValue;
+    }
+
+    public Future<String> getAsync(String name, String defaultValue) {
+        return SettingsAsyncTaskExecutor.INSTANCE.submit(() -> get(name, defaultValue));
     }
 }

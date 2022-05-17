@@ -1,5 +1,7 @@
 package com.ueueo.multitenancy;
 
+import com.ueueo.multitenancy.threading.MultiTenancyAsyncTaskExecutor;
+
 import java.util.concurrent.Future;
 
 /**
@@ -9,5 +11,9 @@ import java.util.concurrent.Future;
 public interface ITenantResolveContributor {
     String getName();
 
-    Future<?> resolveAsync(ITenantResolveContext context);
+    void resolve(ITenantResolveContext context);
+
+    default Future<?> resolveAsync(ITenantResolveContext context) {
+        return MultiTenancyAsyncTaskExecutor.INSTANCE.submit(() -> resolve(context));
+    }
 }

@@ -1,14 +1,11 @@
 package com.ueueo.settings;
 
-
 import com.ueueo.multitenancy.ICurrentTenant;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * TODO ABP代码
- *
  * @author Lee
  * @date 2021-08-19 21:42
  */
@@ -24,19 +21,19 @@ public class TenantSettingValueProvider extends SettingValueProvider {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return ProviderName;
     }
 
     @Override
     public String getOrNull(SettingDefinition setting) {
-        return settingStore.getOrNull(setting.getName(), name(), currentTenant.getId().toString());
+        return settingStore.getOrNull(setting.getName(), getName(), currentTenant.getId().toString());
     }
 
     @Override
-    public Collection<SettingValue> getAll(Collection<SettingDefinition> settings) {
+    public List<SettingValue> getAll(List<SettingDefinition> settings) {
         return settingStore.getAll(settings.stream().map(SettingDefinition::getName).collect(Collectors.toList()),
-                name(), currentTenant.getId().toString());
+                getName(), currentTenant.getId().toString());
     }
 
 }

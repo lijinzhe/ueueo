@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class AbpClaimsPrincipalFactoryOptions {
     @Getter
-    private List<Class<?>> contributors;
+    private List<Class<? extends IAbpClaimsPrincipalContributor>> contributors;
 
     public AbpClaimsPrincipalFactoryOptions() {
         this.contributors = new ArrayList<>();

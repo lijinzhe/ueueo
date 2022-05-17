@@ -1,14 +1,16 @@
 package com.ueueo.settings;
 
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
+
 /**
- * TODO ABP代码
- *
  * @author Lee
  * @date 2021-08-18 20:33
  */
 public interface ISettingEncryptionService {
+    @Nullable
+    String encrypt(@NonNull SettingDefinition settingDefinition, @Nullable String plainValue);
 
-    String encrypt(SettingDefinition settingDefinition, String plainValue);
-
-    String decrypt(SettingDefinition settingDefinition, String encryptedValue);
+    @Nullable
+    String decrypt(@NonNull SettingDefinition settingDefinition, @Nullable String encryptedValue);
 }

@@ -1,8 +1,5 @@
 package com.ueueo.multitenancy;
 
-import com.ueueo.multitenancy.threading.MultiTenancyAsyncTaskExecutor;
-
-import java.util.concurrent.Future;
 import java.util.function.Consumer;
 
 /**
@@ -24,7 +21,7 @@ public class ActionTenantResolveContributor extends TenantResolveContributorBase
     }
 
     @Override
-    public Future<?> resolveAsync(ITenantResolveContext context) {
-        return MultiTenancyAsyncTaskExecutor.INSTANCE.submit(() -> resolveAction.accept(context));
+    public void resolve(ITenantResolveContext context) {
+        resolveAction.accept(context);
     }
 }

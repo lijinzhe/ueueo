@@ -2,10 +2,11 @@ package com.ueueo.security.claims;
 
 import com.ueueo.claims.ClaimsIdentity;
 import com.ueueo.principal.ClaimsPrincipal;
-import com.ueueo.security.threading.SecurityAsyncTaskExecutor;
 import lombok.Getter;
+import org.springframework.beans.factory.BeanFactory;
 
-import java.util.concurrent.Future;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * TODO ABP代码
@@ -16,38 +17,30 @@ import java.util.concurrent.Future;
 public class AbpClaimsPrincipalFactory implements IAbpClaimsPrincipalFactory {
     public static final String AuthenticationType = "Abp.Application";
 
+    private BeanFactory beanFactory;
     @Getter
     private AbpClaimsPrincipalFactoryOptions options;
 
-    public AbpClaimsPrincipalFactory(AbpClaimsPrincipalFactoryOptions options) {
+    public AbpClaimsPrincipalFactory(BeanFactory beanFactory, AbpClaimsPrincipalFactoryOptions options) {
+        this.beanFactory = beanFactory;
         this.options = options;
     }
 
     @Override
-    public Future<ClaimsPrincipal> createAsync(ClaimsPrincipal existsClaimsPrincipal) {
-        return SecurityAsyncTaskExecutor.INSTANCE.submit(() -> {
-            ClaimsPrincipal claimsPrincipal = null;
-            if (existsClaimsPrincipal != null) {
-                claimsPrincipal = existsClaimsPrincipal;
-            } else {
-                claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(AuthenticationType,
-                        AbpClaimTypes.UserName,
-                        AbpClaimTypes.Role));
-                AbpClaimsPrincipalContributorContext context = new AbpClaimsPrincipalContributorContext(claimsPrincipal);
-                for (Class<?> type : options.getContributors()) {
-                    if (type.isAssignableFrom(IAbpClaimsPrincipalContributor.class)) {
-                        IAbpClaimsPrincipalContributor contributor = null;
-                        try {
-                            //TODO 使用类创建对象，这块需要优化，ABP是使用类似BeanFactory的方式创建的
-                            contributor = (IAbpClaimsPrincipalContributor) type.newInstance();
-                            contributor.contributeAsync(context).get();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
+    public ClaimsPrincipal create(ClaimsPrincipal existsClaimsPrincipal) {
+        ClaimsPrincipal claimsPrincipal = null;
+        if (existsClaimsPrincipal != null) {
+            claimsPrincipal = existsClaimsPrincipal;
+        } else {
+            claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(AuthenticationType,
+                    AbpClaimTypes.UserName,
+                    AbpClaimTypes.Role));
+            AbpClaimsPrincipalContributorContext context = new AbpClaimsPrincipalContributorContext(claimsPrincipal);
+            List<IAbpClaimsPrincipalContributor> contributors = options.getContributors().stream().map(cls -> beanFactory.getBean(cls)).collect(Collectors.toList());
+            for (IAbpClaimsPrincipalContributor contributor : contributors) {
+                contributor.contribute(context);
             }
-            return claimsPrincipal;
-        });
+        }
+        return claimsPrincipal;
     }
 }

@@ -1,5 +1,7 @@
 package com.ueueo.securitylog;
 
+import com.ueueo.security.threading.SecurityAsyncTaskExecutor;
+
 import java.util.concurrent.Future;
 
 /**
@@ -7,5 +9,9 @@ import java.util.concurrent.Future;
  * @date 2022-05-17 10:44
  */
 public interface ISecurityLogStore {
-    Future<?> saveAsync(SecurityLogInfo securityLogInfo);
+    void save(SecurityLogInfo securityLogInfo);
+
+    default Future<?> saveAsync(SecurityLogInfo securityLogInfo) {
+        return SecurityAsyncTaskExecutor.INSTANCE.submit(() -> save(securityLogInfo));
+    }
 }

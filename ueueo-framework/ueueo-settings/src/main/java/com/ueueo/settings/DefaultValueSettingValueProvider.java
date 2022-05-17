@@ -1,11 +1,9 @@
 package com.ueueo.settings;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * TODO ABP代码
- *
  * @author Lee
  * @date 2021-08-19 22:02
  */
@@ -17,7 +15,7 @@ public class DefaultValueSettingValueProvider extends SettingValueProvider {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return ProviderName;
     }
 
@@ -27,9 +25,7 @@ public class DefaultValueSettingValueProvider extends SettingValueProvider {
     }
 
     @Override
-    public Collection<SettingValue> getAll(Collection<SettingDefinition> settings) {
-        return settings.stream().map(def -> new SettingValue(def.getName(), def.getDefaultValue()))
-                .collect(Collectors.toList());
+    public List<SettingValue> getAll(List<SettingDefinition> settings) {
+        return settings.stream().map(sd -> new SettingValue(sd.getName(), sd.getDefaultValue())).collect(Collectors.toList());
     }
-
 }

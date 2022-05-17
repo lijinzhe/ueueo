@@ -5,8 +5,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 /**
- * TODO Description Of This JAVA Class.
- *
  * @author Lee
  * @date 2022-05-17 10:55
  */

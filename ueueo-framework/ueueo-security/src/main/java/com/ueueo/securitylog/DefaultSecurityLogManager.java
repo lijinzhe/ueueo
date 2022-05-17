@@ -1,9 +1,7 @@
 package com.ueueo.securitylog;
 
-import com.ueueo.threading.CompletedFuture;
 import lombok.Getter;
 
-import java.util.concurrent.Future;
 import java.util.function.Consumer;
 
 /**
@@ -23,13 +21,12 @@ public class DefaultSecurityLogManager implements ISecurityLogManager {
     }
 
     @Override
-    public Future<?> saveAsync(Consumer<SecurityLogInfo> saveAction) {
-        if (!securityLogOptions.isEnable()) {
-            return new CompletedFuture<>();
+    public void save(Consumer<SecurityLogInfo> saveAction) {
+        if (securityLogOptions.isEnable()) {
+            SecurityLogInfo securityLogInfo = create();
+            saveAction.accept(securityLogInfo);
+            securityLogStore.save(securityLogInfo);
         }
-        SecurityLogInfo securityLogInfo = create();
-        saveAction.accept(securityLogInfo);
-        return securityLogStore.saveAsync(securityLogInfo);
     }
 
     protected SecurityLogInfo create() {

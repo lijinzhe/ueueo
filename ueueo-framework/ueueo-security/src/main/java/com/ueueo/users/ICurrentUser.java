@@ -5,6 +5,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * TODO Description Of This JAVA Class.
@@ -40,16 +41,16 @@ public interface ICurrentUser {
 
     Long getTenantId();
 
-    Collection<String> getRoles();
+    List<String> getRoles();
 
     @Nullable
     Claim findClaim(String claimType);
 
     @NonNull
-    Collection<Claim> findClaims(String claimType);
+    List<Claim> findClaims(String claimType);
 
     @NonNull
-    Collection<Claim> getAllClaims();
+    List<Claim> getAllClaims();
 
     boolean isInRole(String roleName);
 }

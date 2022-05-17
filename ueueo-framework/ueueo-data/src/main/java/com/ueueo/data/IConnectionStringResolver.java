@@ -1,5 +1,6 @@
 package com.ueueo.data;
 
+import com.ueueo.data.threading.DataAsyncTaskExecutor;
 import org.springframework.lang.NonNull;
 
 import java.util.concurrent.Future;
@@ -13,7 +14,8 @@ public interface IConnectionStringResolver {
     @NonNull
     String resolve(String connectionStringName);
 
-    @NonNull
-    Future<String> resolveAsync(String connectionStringName);
+    default Future<String> resolveAsync(String connectionStringName) {
+        return DataAsyncTaskExecutor.INSTANCE.submit(() -> resolve(connectionStringName));
+    }
 
 }
