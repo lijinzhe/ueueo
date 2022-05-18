@@ -1,9 +1,6 @@
 package com.ueueo.settings;
 
-import org.springframework.beans.factory.BeanFactory;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Lee
@@ -11,7 +8,7 @@ import java.util.stream.Collectors;
  */
 public class SettingValueProviderManager implements ISettingValueProviderManager {
 
-    private List<ISettingValueProvider> providers;
+    private final List<ISettingValueProvider> providers;
     protected AbpSettingOptions options;
 
     @Override
@@ -19,8 +16,8 @@ public class SettingValueProviderManager implements ISettingValueProviderManager
         return providers;
     }
 
-    public SettingValueProviderManager(BeanFactory beanFactory, AbpSettingOptions options) {
+    public SettingValueProviderManager(AbpSettingOptions options) {
         this.options = options;
-        this.providers = options.getValueProviders().stream().map(beanFactory::getBean).collect(Collectors.toList());
+        this.providers = options.getValueProviders();
     }
 }

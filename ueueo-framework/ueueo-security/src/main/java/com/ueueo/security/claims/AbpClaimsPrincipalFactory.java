@@ -3,10 +3,6 @@ package com.ueueo.security.claims;
 import com.ueueo.claims.ClaimsIdentity;
 import com.ueueo.principal.ClaimsPrincipal;
 import lombok.Getter;
-import org.springframework.beans.factory.BeanFactory;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * TODO ABP代码
@@ -17,12 +13,10 @@ import java.util.stream.Collectors;
 public class AbpClaimsPrincipalFactory implements IAbpClaimsPrincipalFactory {
     public static final String AuthenticationType = "Abp.Application";
 
-    private BeanFactory beanFactory;
     @Getter
     private AbpClaimsPrincipalFactoryOptions options;
 
-    public AbpClaimsPrincipalFactory(BeanFactory beanFactory, AbpClaimsPrincipalFactoryOptions options) {
-        this.beanFactory = beanFactory;
+    public AbpClaimsPrincipalFactory(AbpClaimsPrincipalFactoryOptions options) {
         this.options = options;
     }
 
@@ -36,8 +30,7 @@ public class AbpClaimsPrincipalFactory implements IAbpClaimsPrincipalFactory {
                     AbpClaimTypes.UserName,
                     AbpClaimTypes.Role));
             AbpClaimsPrincipalContributorContext context = new AbpClaimsPrincipalContributorContext(claimsPrincipal);
-            List<IAbpClaimsPrincipalContributor> contributors = options.getContributors().stream().map(cls -> beanFactory.getBean(cls)).collect(Collectors.toList());
-            for (IAbpClaimsPrincipalContributor contributor : contributors) {
+            for (IAbpClaimsPrincipalContributor contributor : options.getContributors()) {
                 contributor.contribute(context);
             }
         }

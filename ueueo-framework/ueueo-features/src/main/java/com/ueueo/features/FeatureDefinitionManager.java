@@ -2,14 +2,12 @@ package com.ueueo.features;
 
 import com.ueueo.AbpException;
 import lombok.Getter;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author Lee
@@ -23,15 +21,12 @@ public class FeatureDefinitionManager implements IFeatureDefinitionManager {
     @Getter
     protected AbpFeatureOptions options;
 
-    private final BeanFactory beanFactory;
-
-    public FeatureDefinitionManager(AbpFeatureOptions options, BeanFactory beanFactory) {
+    public FeatureDefinitionManager(AbpFeatureOptions options) {
         this.featureDefinitions = new HashMap<>();
         createFeatureDefinitions();
         this.featureGroupDefinitions = new HashMap<>();
         createFeatureGroupDefinitions();
         this.options = options;
-        this.beanFactory = beanFactory;
     }
 
     @Override
@@ -81,8 +76,7 @@ public class FeatureDefinitionManager implements IFeatureDefinitionManager {
 
     protected Map<String, FeatureGroupDefinition> createFeatureGroupDefinitions() {
         FeatureDefinitionContext context = new FeatureDefinitionContext();
-        List<IFeatureDefinitionProvider> providers = options.getDefinitionProviders().stream().map(beanFactory::getBean).collect(Collectors.toList());
-        for (IFeatureDefinitionProvider provider : providers) {
+        for (IFeatureDefinitionProvider provider : options.getDefinitionProviders()) {
             provider.define(context);
         }
         return context.getGroups();

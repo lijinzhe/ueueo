@@ -11,8 +11,9 @@ import java.util.List;
  */
 @Getter
 public class AbpSettingOptions {
-    private List<Class<? extends ISettingDefinitionProvider>> definitionProviders;
-    private List<Class<? extends ISettingValueProvider>> valueProviders;
+
+    private final List<ISettingDefinitionProvider> definitionProviders;
+    private final List<ISettingValueProvider> valueProviders;
 
     public AbpSettingOptions() {
         this.definitionProviders = new ArrayList<>();

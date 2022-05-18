@@ -2,12 +2,9 @@ package com.ueueo.settings;
 
 import com.ueueo.AbpException;
 import lombok.Getter;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.lang.NonNull;
-import org.springframework.util.Assert;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author Lee
@@ -20,11 +17,8 @@ public class SettingDefinitionManager implements ISettingDefinitionManager {
 
     protected AbpSettingOptions options;
 
-    private BeanFactory beanFactory;
-
-    public SettingDefinitionManager(AbpSettingOptions options, BeanFactory beanFactory) {
+    public SettingDefinitionManager(AbpSettingOptions options) {
         this.options = options;
-        this.beanFactory = beanFactory;
         this.settingDefinitions = new HashMap<>(createSettingDefinitions());
     }
 
@@ -50,10 +44,7 @@ public class SettingDefinitionManager implements ISettingDefinitionManager {
 
     protected Map<String, SettingDefinition> createSettingDefinitions() {
         Map<String, SettingDefinition> settings = new HashMap<>();
-        List<ISettingDefinitionProvider> providers = options.getDefinitionProviders().stream()
-                .map(cls -> beanFactory.getBean(cls))
-                .collect(Collectors.toList());
-        for (ISettingDefinitionProvider provider : providers) {
+        for (ISettingDefinitionProvider provider : options.getDefinitionProviders()) {
             provider.define(new SettingDefinitionContext(settings));
         }
         return settings;

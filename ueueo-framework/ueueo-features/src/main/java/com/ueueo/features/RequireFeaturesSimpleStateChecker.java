@@ -10,22 +10,24 @@ import com.ueueo.simplestatechecking.SimpleStateCheckerContext;
  */
 public class RequireFeaturesSimpleStateChecker<TState extends IHasSimpleStateCheckers<TState>> implements ISimpleStateChecker<TState> {
 
+    private IFeatureChecker featureChecker;
     private String[] featureNames;
     private boolean requiresAll;
 
-    public RequireFeaturesSimpleStateChecker(String[] featureNames) {
+    public RequireFeaturesSimpleStateChecker(IFeatureChecker featureChecker, String[] featureNames) {
+        this.featureChecker = featureChecker;
         this.requiresAll = true;
         this.featureNames = featureNames;
     }
 
-    public RequireFeaturesSimpleStateChecker(boolean requiresAll, String[] featureNames) {
+    public RequireFeaturesSimpleStateChecker(IFeatureChecker featureChecker, boolean requiresAll, String[] featureNames) {
+        this.featureChecker = featureChecker;
         this.requiresAll = requiresAll;
         this.featureNames = featureNames;
     }
 
     @Override
     public boolean isEnabled(SimpleStateCheckerContext<TState> context) {
-        IFeatureChecker featureChecker = context.getBeanFactory().getBean(IFeatureChecker.class);
         return featureChecker.isEnabled(requiresAll, featureNames);
     }
 }

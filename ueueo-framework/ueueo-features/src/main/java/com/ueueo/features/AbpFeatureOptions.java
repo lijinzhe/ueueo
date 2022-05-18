@@ -11,8 +11,8 @@ import java.util.List;
  */
 @Getter
 public class AbpFeatureOptions {
-    private List<Class<? extends IFeatureDefinitionProvider>> definitionProviders;
-    private List<Class<? extends IFeatureValueProvider>> valueProviders;
+    private final List<IFeatureDefinitionProvider> definitionProviders;
+    private final List<IFeatureValueProvider> valueProviders;
 
     public AbpFeatureOptions() {
         this.definitionProviders = new ArrayList<>();

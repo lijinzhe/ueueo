@@ -2,7 +2,6 @@ package com.ueueo.features;
 
 import lombok.Getter;
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.beans.factory.BeanFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,20 +15,13 @@ import java.util.stream.Collectors;
 @Getter
 public class FeatureChecker extends FeatureCheckerBase {
     protected AbpFeatureOptions options;
-    protected BeanFactory beanFactory;
     protected IFeatureDefinitionManager featureDefinitionManager;
     protected List<IFeatureValueProvider> providers;
 
-    public FeatureChecker(
-            AbpFeatureOptions options,
-            BeanFactory beanFactory,
-            IFeatureDefinitionManager featureDefinitionManager) {
-        this.beanFactory = beanFactory;
+    public FeatureChecker(AbpFeatureOptions options, IFeatureDefinitionManager featureDefinitionManager) {
         this.featureDefinitionManager = featureDefinitionManager;
         this.options = options;
-        this.providers = options.getValueProviders().stream()
-                .map(beanFactory::getBean)
-                .collect(Collectors.toList());
+        this.providers = options.getValueProviders();
     }
 
     @Override

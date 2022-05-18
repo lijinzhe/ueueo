@@ -1,8 +1,6 @@
 package com.ueueo.features;
 
 import com.ueueo.aspects.AbpCrossCuttingConcerns;
-import com.ueueo.dependencyinjection.system.IServiceScope;
-import com.ueueo.dependencyinjection.system.IServiceScopeFactory;
 import com.ueueo.dynamicproxy.AbpInterceptor;
 import com.ueueo.dynamicproxy.IAbpMethodInvocation;
 
@@ -12,10 +10,10 @@ import com.ueueo.dynamicproxy.IAbpMethodInvocation;
  */
 public class FeatureInterceptor extends AbpInterceptor {
 
-    private final IServiceScopeFactory serviceScopeFactory;
+    private final IMethodInvocationFeatureCheckerService checkerService;
 
-    public FeatureInterceptor(IServiceScopeFactory serviceScopeFactory) {
-        this.serviceScopeFactory = serviceScopeFactory;
+    public FeatureInterceptor(IMethodInvocationFeatureCheckerService checkerService) {
+        this.checkerService = checkerService;
     }
 
     @Override
@@ -28,8 +26,6 @@ public class FeatureInterceptor extends AbpInterceptor {
     }
 
     protected void checkFeatures(IAbpMethodInvocation invocation) {
-        IServiceScope serviceScope = serviceScopeFactory.createScope();
-        IMethodInvocationFeatureCheckerService checker = serviceScope.getServiceProvider().getRequiredService(IMethodInvocationFeatureCheckerService.class);
-        checker.check(new MethodInvocationFeatureCheckerContext(invocation.getMethod()));
+        checkerService.check(new MethodInvocationFeatureCheckerContext(invocation.getMethod()));
     }
 }
