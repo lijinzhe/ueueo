@@ -1,9 +1,6 @@
 package com.ueueo.features;
 
-import com.ueueo.features.threading.FeaturesAsyncTaskExecutor;
 import org.springframework.lang.NonNull;
-
-import java.util.concurrent.Future;
 
 /**
  * @author Lee
@@ -14,7 +11,4 @@ public interface IFeatureValueProvider {
 
     String getOrNull(@NonNull FeatureDefinition feature);
 
-    default Future<String> getOrNullAsync(@NonNull FeatureDefinition feature) {
-        return FeaturesAsyncTaskExecutor.INSTANCE.submit(() -> getOrNull(feature));
-    }
 }

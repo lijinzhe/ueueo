@@ -1,9 +1,6 @@
 package com.ueueo.multitenancy;
 
-import com.ueueo.multitenancy.threading.MultiTenancyAsyncTaskExecutor;
 import org.springframework.lang.NonNull;
-
-import java.util.concurrent.Future;
 
 /**
  * @author Lee
@@ -18,7 +15,4 @@ public interface ITenantResolver {
     @NonNull
     TenantResolveResult resolveTenantIdOrName();
 
-    default Future<TenantResolveResult> resolveTenantIdOrNameAsync() {
-        return MultiTenancyAsyncTaskExecutor.INSTANCE.submit(this::resolveTenantIdOrName);
-    }
 }

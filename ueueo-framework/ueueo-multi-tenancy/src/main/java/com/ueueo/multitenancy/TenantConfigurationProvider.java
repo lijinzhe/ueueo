@@ -1,10 +1,7 @@
 package com.ueueo.multitenancy;
 
 import com.ueueo.BusinessException;
-import com.ueueo.multitenancy.threading.MultiTenancyAsyncTaskExecutor;
 import org.slf4j.event.Level;
-
-import java.util.concurrent.Future;
 
 /**
  * @author Lee
@@ -48,7 +45,4 @@ public class TenantConfigurationProvider implements ITenantConfigurationProvider
         }
     }
 
-    protected Future<TenantConfiguration> findTenantAsync(String tenantIdOrName) {
-        return MultiTenancyAsyncTaskExecutor.INSTANCE.submit(() -> findTenant(tenantIdOrName));
-    }
 }

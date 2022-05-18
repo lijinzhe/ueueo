@@ -1,9 +1,6 @@
 package com.ueueo.security.claims;
 
 import com.ueueo.principal.ClaimsPrincipal;
-import com.ueueo.security.threading.SecurityAsyncTaskExecutor;
-
-import java.util.concurrent.Future;
 
 /**
  * @author Lee
@@ -13,7 +10,4 @@ public interface IAbpClaimsPrincipalFactory {
 
     ClaimsPrincipal create(ClaimsPrincipal existsClaimsPrincipal);
 
-    default Future<ClaimsPrincipal> createAsync(ClaimsPrincipal existsClaimsPrincipal) {
-        return SecurityAsyncTaskExecutor.INSTANCE.submit(() -> create(existsClaimsPrincipal));
-    }
 }

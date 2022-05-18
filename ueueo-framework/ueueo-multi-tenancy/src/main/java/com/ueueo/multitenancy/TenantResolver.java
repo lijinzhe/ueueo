@@ -17,7 +17,7 @@ public class TenantResolver implements ITenantResolver {
         TenantResolveResult result = new TenantResolveResult();
         TenantResolveContext context = new TenantResolveContext();
         for (ITenantResolveContributor tenantResolver : options.getTenantResolvers()) {
-            tenantResolver.resolveAsync(context);
+            tenantResolver.resolve(context);
             result.getAppliedResolvers().add(tenantResolver.getName());
             if (context.hasResolvedTenantOrHost()) {
                 result.setTenantIdOrName(context.getTenantIdOrName());

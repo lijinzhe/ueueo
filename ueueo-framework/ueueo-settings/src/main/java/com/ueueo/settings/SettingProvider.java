@@ -1,11 +1,9 @@
 package com.ueueo.settings;
 
 import com.ueueo.AbpException;
-import com.ueueo.settings.threading.SettingsAsyncTaskExecutor;
 import org.springframework.util.Assert;
 
 import java.util.*;
-import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 /**
@@ -104,17 +102,10 @@ public class SettingProvider implements ISettingProvider {
         return name.equalsIgnoreCase(getOrNull(name));
     }
 
-    public Future<Boolean> isTrueAsync(String name) {
-        return SettingsAsyncTaskExecutor.INSTANCE.submit(() -> isTrue(name));
-    }
-
     public String get(String name, String defaultValue) {
         Assert.notNull(name, "name must not null.");
         String value = getOrNull(name);
         return value != null ? value : defaultValue;
     }
 
-    public Future<String> getAsync(String name, String defaultValue) {
-        return SettingsAsyncTaskExecutor.INSTANCE.submit(() -> get(name, defaultValue));
-    }
 }

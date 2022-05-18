@@ -11,7 +11,7 @@ public interface IFeatureDefinitionContext {
 
     FeatureGroupDefinition addGroup(@NonNull String name, ILocalizableString displayName);
 
-    FeatureGroupDefinition getGroupOrNull(String name);
+    FeatureGroupDefinition getGroupOrNull(@NonNull String name);
 
-    void removeGroup(String name);
+    void removeGroup(@NonNull String name);
 }

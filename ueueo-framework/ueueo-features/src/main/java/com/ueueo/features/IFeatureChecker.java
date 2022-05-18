@@ -1,11 +1,8 @@
 package com.ueueo.features;
 
 import com.ueueo.authorization.AbpAuthorizationException;
-import com.ueueo.features.threading.FeaturesAsyncTaskExecutor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.NonNull;
-
-import java.util.concurrent.Future;
 
 /**
  * @author Lee
@@ -16,14 +13,6 @@ public interface IFeatureChecker {
     String getOrNull(@NonNull String name);
 
     boolean isEnabled(String name);
-
-    default Future<String> getOrNullAsync(@NonNull String name) {
-        return FeaturesAsyncTaskExecutor.INSTANCE.submit(() -> getOrNull(name));
-    }
-
-    default Future<Boolean> isEnabledAsync(String name) {
-        return FeaturesAsyncTaskExecutor.INSTANCE.submit(() -> isEnabled(name));
-    }
 
     default void checkEnabled(boolean requiresAll, String[] featureNames) {
         if (featureNames == null || featureNames.length == 0) {

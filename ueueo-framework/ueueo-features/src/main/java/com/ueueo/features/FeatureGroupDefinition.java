@@ -26,6 +26,7 @@ public class FeatureGroupDefinition {
     @Setter
     private ILocalizableString displayName;
 
+    @Getter
     private final List<FeatureDefinition> features;
 
     /**
