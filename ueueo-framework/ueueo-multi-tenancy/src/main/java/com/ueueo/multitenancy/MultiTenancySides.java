@@ -1,5 +1,6 @@
 package com.ueueo.multitenancy;
 
+import com.ueueo.ID;
 import com.ueueo.claims.ClaimsIdentity;
 import com.ueueo.principal.ClaimsPrincipal;
 import org.springframework.lang.NonNull;
@@ -29,14 +30,14 @@ public enum MultiTenancySides {
     }
 
     public static MultiTenancySides getMultiTenancySide(@NonNull ClaimsIdentity identity) {
-        Long tenantId = identity.findTenantId();
+        ID tenantId = identity.findTenantId();
         return tenantId != null
                 ? MultiTenancySides.Tenant
                 : MultiTenancySides.Host;
     }
 
     public static MultiTenancySides getMultiTenancySide(@NonNull ClaimsPrincipal principal) {
-        Long tenantId = principal.findTenantId();
+        ID tenantId = principal.findTenantId();
         return tenantId != null
                 ? MultiTenancySides.Tenant
                 : MultiTenancySides.Host;

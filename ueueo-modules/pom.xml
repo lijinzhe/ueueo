@@ -7,4 +7,8 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>ueueo-tenant-management</module>
+    </modules>
+
 </project>

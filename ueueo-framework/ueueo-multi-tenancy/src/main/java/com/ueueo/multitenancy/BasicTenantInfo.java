@@ -1,5 +1,6 @@
 package com.ueueo.multitenancy;
 
+import com.ueueo.ID;
 import lombok.Getter;
 import org.springframework.lang.Nullable;
 
@@ -14,14 +15,14 @@ public class BasicTenantInfo {
      * Not null value for a tenant.
      */
     @Nullable
-    private Long tenantId;
+    private ID tenantId;
     /**
      * Name of the tenant if {@link #tenantId} is not null.
      */
     @Nullable
     private String name;
 
-    public BasicTenantInfo(Long tenantId, String name) {
+    public BasicTenantInfo(ID tenantId, String name) {
         this.tenantId = tenantId;
         this.name = name;
     }

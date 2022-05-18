@@ -1,5 +1,6 @@
 package com.ueueo.securitylog;
 
+import com.ueueo.ID;
 import lombok.Data;
 
 import java.util.Date;
@@ -20,11 +21,11 @@ public class SecurityLogInfo {
 
     public Map<String, Object> extraProperties;
 
-    public Long userId;
+    public ID userId;
 
     public String userName;
 
-    public Long tenantId;
+    public ID tenantId;
 
     public String tenantName;
 

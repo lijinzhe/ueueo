@@ -1,5 +1,6 @@
 package com.ueueo.users;
 
+import com.ueueo.ID;
 import com.ueueo.claims.Claim;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -18,7 +19,7 @@ public interface ICurrentUser {
     boolean getIsAuthenticated();
 
     @Nullable
-    Long getId();
+    ID getId();
 
     @Nullable
     String getUserName();
@@ -39,7 +40,7 @@ public interface ICurrentUser {
 
     boolean getEmailVerified();
 
-    Long getTenantId();
+    ID getTenantId();
 
     List<String> getRoles();
 

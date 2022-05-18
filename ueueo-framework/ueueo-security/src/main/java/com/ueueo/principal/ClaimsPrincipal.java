@@ -1,5 +1,6 @@
 package com.ueueo.principal;
 
+import com.ueueo.ID;
 import com.ueueo.claims.Claim;
 import com.ueueo.claims.ClaimsIdentity;
 import com.ueueo.security.claims.AbpClaimTypes;
@@ -10,7 +11,6 @@ import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
@@ -114,28 +114,28 @@ public class ClaimsPrincipal implements IPrincipal {
         return false;
     }
 
-    public Long findUserId() {
-        return findClaimLongValue(AbpClaimTypes.UserId);
+    public ID findUserId() {
+        return findClaimIDValue(AbpClaimTypes.UserId);
     }
 
-    public Long findTenantId() {
-        return findClaimLongValue(AbpClaimTypes.TenantId);
+    public ID findTenantId() {
+        return findClaimIDValue(AbpClaimTypes.TenantId);
     }
 
     public String findClientId() {
         return findClaimValue(AbpClaimTypes.ClientId);
     }
 
-    public Long findEditionId() {
-        return findClaimLongValue(AbpClaimTypes.EditionId);
+    public ID findEditionId() {
+        return findClaimIDValue(AbpClaimTypes.EditionId);
     }
 
-    public Long findImpersonatorTenantId() {
-        return findClaimLongValue(AbpClaimTypes.ImpersonatorTenantId);
+    public ID findImpersonatorTenantId() {
+        return findClaimIDValue(AbpClaimTypes.ImpersonatorTenantId);
     }
 
-    public Long findImpersonatorUserId() {
-        return findClaimLongValue(AbpClaimTypes.ImpersonatorUserId);
+    public ID findImpersonatorUserId() {
+        return findClaimIDValue(AbpClaimTypes.ImpersonatorUserId);
     }
 
     private String findClaimValue(String claimType) {
@@ -145,12 +145,12 @@ public class ClaimsPrincipal implements IPrincipal {
                 .orElse(null);
     }
 
-    private Long findClaimLongValue(String claimType) {
+    private ID findClaimIDValue(String claimType) {
         return claims.stream()
                 .filter(claim -> StringUtils.equalsIgnoreCase(claim.getType(), claimType)).findFirst()
                 .map(claim -> {
                     try {
-                        return Long.parseLong(claim.getValue());
+                        return ID.valueOf(claim.getValue());
                     } catch (NumberFormatException e) {
                         return null;
                     }

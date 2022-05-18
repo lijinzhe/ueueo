@@ -1,5 +1,7 @@
 package com.ueueo.multitenancy;
 
+import com.ueueo.ID;
+
 import java.util.Optional;
 
 /**
@@ -21,7 +23,7 @@ public class CurrentTenant implements ICurrentTenant {
     }
 
     @Override
-    public Long getId() {
+    public ID getId() {
         return Optional.ofNullable(currentTenantAccessor.getCurrent())
                 .map(BasicTenantInfo::getTenantId)
                 .orElse(null);
@@ -35,7 +37,7 @@ public class CurrentTenant implements ICurrentTenant {
     }
 
     @Override
-    public void change(Long tenantId, String name) {
+    public void change(ID tenantId, String name) {
         currentTenantAccessor.setCurrent(new BasicTenantInfo(tenantId, name));
     }
 }

@@ -1,5 +1,6 @@
 package com.ueueo.multitenancy;
 
+import com.ueueo.ID;
 import com.ueueo.data.ConnectionStrings;
 import lombok.Data;
 import org.springframework.lang.NonNull;
@@ -12,7 +13,7 @@ import org.springframework.util.Assert;
 @Data
 public class TenantConfiguration {
 
-    private Long id;
+    private ID id;
     private String name;
     private Boolean isActive;
 
@@ -22,7 +23,7 @@ public class TenantConfiguration {
         isActive = true;
     }
 
-    public TenantConfiguration(Long id, @NonNull String name) {
+    public TenantConfiguration(ID id, @NonNull String name) {
         Assert.notNull(name, "name 不能为空");
         this.id = id;
         this.name = name;

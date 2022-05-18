@@ -6,12 +6,13 @@
 
     <parent>
         <groupId>com.ueueo.boot</groupId>
-        <artifactId>ueueo-boot-dependencies</artifactId>
+        <artifactId>ueueo-boot-starters</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../ueueo-boot-dependencies</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>ueueo-boot-starter</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>

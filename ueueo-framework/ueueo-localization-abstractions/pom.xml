@@ -6,9 +6,9 @@
 
     <parent>
         <groupId>com.ueueo.boot</groupId>
-        <artifactId>ueueo-boot-dependencies</artifactId>
+        <artifactId>ueueo-boot-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../../ueueo-boot/ueueo-boot-dependencies/pom.xml</relativePath>
+        <relativePath>../../ueueo-boot/ueueo-boot-parent/pom.xml</relativePath>
     </parent>
 
     <groupId>com.ueueo.framework</groupId>

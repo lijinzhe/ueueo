@@ -1,6 +1,7 @@
 package com.ueueo.multitenancy;
 
 import com.ueueo.BusinessException;
+import com.ueueo.ID;
 import org.slf4j.event.Level;
 
 /**
@@ -38,7 +39,7 @@ public class TenantConfigurationProvider implements ITenantConfigurationProvider
 
     protected TenantConfiguration findTenant(String tenantIdOrName) {
         try {
-            Long tenantId = Long.valueOf(tenantIdOrName);
+            ID tenantId = ID.valueOf(tenantIdOrName);
             return tenantStore.find(tenantId);
         } catch (NumberFormatException e) {
             return tenantStore.find(tenantIdOrName);

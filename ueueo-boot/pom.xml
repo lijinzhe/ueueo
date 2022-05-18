@@ -6,15 +6,13 @@
 
     <groupId>com.ueueo.boot</groupId>
     <artifactId>ueueo-boot</artifactId>
-    <version>1.0.0</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>ueueo-boot-dependencies</module>
         <module>ueueo-boot-parent</module>
-        <module>ueueo-boot-starter</module>
-        <module>ueueo-boot-autoconfigure-parent</module>
-        <module>ueueo-boot-autoconfigure-starter</module>
+        <module>ueueo-boot-starters</module>
+        <module>ueueo-boot-autoconfigure</module>
     </modules>
 
 </project>

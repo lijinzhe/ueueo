@@ -1,5 +1,7 @@
 package com.ueueo.multitenancy;
 
+import com.ueueo.ID;
+
 /**
  * 当前租户接口
  *
@@ -19,7 +21,7 @@ public interface ICurrentTenant {
      *
      * @return
      */
-    Long getId();
+    ID getId();
 
     /**
      * 租户名称
@@ -28,7 +30,7 @@ public interface ICurrentTenant {
      */
     String getName();
 
-    void change(Long id, String name);
+    void change(ID id, String name);
 
     default MultiTenancySides getMultiTenancySide() {
         return getId() != null ? MultiTenancySides.Tenant : MultiTenancySides.Host;

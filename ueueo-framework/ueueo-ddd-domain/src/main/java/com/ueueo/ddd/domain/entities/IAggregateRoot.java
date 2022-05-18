@@ -6,6 +6,6 @@ package com.ueueo.ddd.domain.entities;
  * @author Lee
  * @date 2021-08-20 16:51
  */
-public interface IAggregateRoot<TKey> extends IEntity<TKey>{
+public interface IAggregateRoot extends IEntity {
 
 }

@@ -1,5 +1,6 @@
 package com.ueueo.users;
 
+import com.ueueo.ID;
 import com.ueueo.claims.Claim;
 import com.ueueo.security.claims.AbpClaimTypes;
 import com.ueueo.security.claims.ICurrentPrincipalAccessor;
@@ -7,7 +8,6 @@ import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.Nullable;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +34,7 @@ public class CurrentUser implements ICurrentUser {
     }
 
     @Override
-    public Long getId() {
+    public ID getId() {
         if (principalAccessor.getPrincipal() != null) {
             return principalAccessor.getPrincipal().findUserId();
         }
@@ -77,7 +77,7 @@ public class CurrentUser implements ICurrentUser {
     }
 
     @Override
-    public Long getTenantId() {
+    public ID getTenantId() {
         if (principalAccessor.getPrincipal() != null) {
             return principalAccessor.getPrincipal().findTenantId();
         }
@@ -120,12 +120,12 @@ public class CurrentUser implements ICurrentUser {
         return findClaims(AbpClaimTypes.Role).stream().anyMatch(claim -> claim.getValue().equals(roleName));
     }
 
-    public Long findImpersonatorTenantId() {
-        return findClaimLongValue(AbpClaimTypes.ImpersonatorTenantId);
+    public ID findImpersonatorTenantId() {
+        return findClaimIDValue(AbpClaimTypes.ImpersonatorTenantId);
     }
 
-    public Long findImpersonatorUserId() {
-        return findClaimLongValue(AbpClaimTypes.ImpersonatorUserId);
+    public ID findImpersonatorUserId() {
+        return findClaimIDValue(AbpClaimTypes.ImpersonatorUserId);
     }
 
     public String findImpersonatorTenantName() {
@@ -142,13 +142,7 @@ public class CurrentUser implements ICurrentUser {
     }
 
     @Nullable
-    public Long findClaimLongValue(String claimType) {
-        return Optional.ofNullable(findClaim(claimType)).map(claim -> {
-            try {
-                return Long.parseLong(claim.getValue());
-            } catch (NumberFormatException e) {
-                return null;
-            }
-        }).orElse(null);
+    public ID findClaimIDValue(String claimType) {
+        return Optional.ofNullable(findClaim(claimType)).map(claim -> ID.valueOf(claim.getValue())).orElse(null);
     }
 }

@@ -1,5 +1,6 @@
 package com.ueueo.multitenancy.store;
 
+import com.ueueo.ID;
 import com.ueueo.multitenancy.ITenantStore;
 import com.ueueo.multitenancy.TenantConfiguration;
 import org.apache.commons.collections4.CollectionUtils;
@@ -30,7 +31,7 @@ public class DefaultTenantStore implements ITenantStore {
     }
 
     @Override
-    public TenantConfiguration find(Long id) {
+    public TenantConfiguration find(ID id) {
         if (CollectionUtils.isNotEmpty(options.getTenants())) {
             return options.getTenants().stream()
                     .filter(tenant -> Objects.equals(tenant.getId(), id))

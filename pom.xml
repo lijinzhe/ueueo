@@ -11,7 +11,6 @@
 
     <modules>
         <module>ueueo-boot</module>
-        <module>ueueo-boot-starters</module>
         <module>ueueo-cloud</module>
         <module>ueueo-framework</module>
         <module>ueueo-modules</module>

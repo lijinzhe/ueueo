@@ -1,5 +1,6 @@
 package com.ueueo.features;
 
+import com.ueueo.ID;
 import com.ueueo.security.claims.ICurrentPrincipalAccessor;
 
 /**
@@ -23,7 +24,7 @@ public class EditionFeatureValueProvider extends FeatureValueProvider {
 
     @Override
     public String getOrNull(FeatureDefinition feature) {
-        Long editionId = principalAccessor.getPrincipal().findEditionId();
+        ID editionId = principalAccessor.getPrincipal().findEditionId();
         if (editionId == null) {
             return null;
         }
