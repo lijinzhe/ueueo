@@ -1,25 +1,84 @@
 package com.ueueo.ddd.domain.repositories;
 
+import com.ueueo.ID;
 import com.ueueo.ddd.domain.entities.IEntity;
+import org.springframework.lang.NonNull;
 
 import java.util.Collection;
 
 /**
- * TODO ABP代码
- *
  * @author Lee
  * @date 2021-08-20 16:33
  */
 public interface IBasicRepository<TEntity extends IEntity> extends IReadOnlyBasicRepository<TEntity> {
-    void insert(TEntity entity);
+    /**
+     * Inserts a new entity.
+     *
+     * @param entity   Inserted entity
+     * @param autoSave Set true to automatically save changes to database.
+     *                 This is useful for ORMs / database APIs those only save changes with an explicit method call,
+     *                 but you need to immediately save changes to the database.
+     *                 Default false.
+     *
+     * @return Inserted entity
+     */
+    TEntity insert(@NonNull TEntity entity, Boolean autoSave);
 
-    void insertMany(Collection<TEntity> entities);
+    /**
+     * Inserts multiple new entities.
+     *
+     * @param entities Entities to be inserted.
+     * @param autoSave Default false.
+     */
+    void insertMany(Collection<TEntity> entities, Boolean autoSave);
 
-    void update(TEntity entity);
+    /**
+     * Updates a new entity.
+     *
+     * @param entity   Update entity
+     * @param autoSave Default false.
+     *
+     * @return entity
+     */
+    TEntity update(TEntity entity, Boolean autoSave);
 
-    void updateMany(Collection<TEntity> entities);
+    /**
+     * Updates multiple new entities.
+     *
+     * @param entities Entities to be updated.
+     * @param autoSave Default false.
+     */
+    void updateMany(Collection<TEntity> entities, Boolean autoSave);
 
-    void delete(TEntity entity);
+    /**
+     * Deletes an entity.
+     *
+     * @param entity
+     * @param autoSave
+     */
+    void delete(TEntity entity, Boolean autoSave);
 
-    void deleteMany(Collection<TEntity> entities);
+    /**
+     * Deletes an entity by primary key.
+     *
+     * @param id
+     * @param autoSave
+     */
+    void deleteById(ID id, Boolean autoSave);
+
+    /**
+     * Deletes multiple entities.
+     *
+     * @param entities
+     * @param autoSave
+     */
+    void deleteMany(Collection<TEntity> entities, Boolean autoSave);
+
+    /**
+     * Deletes multiple entities by primary keys.
+     *
+     * @param ids
+     * @param autoSave
+     */
+    void deleteManyByIds(Collection<ID> ids, Boolean autoSave);
 }

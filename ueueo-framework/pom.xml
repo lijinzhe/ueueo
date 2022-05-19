@@ -28,6 +28,7 @@
         <module>ueueo-features</module>
         <module>ueueo-validation</module>
         <module>ueueo-uow</module>
+        <module>ueueo-sql-dsl</module>
     </modules>
 
 </project>
