@@ -8,7 +8,7 @@ import com.ueueo.ID;
  * @author Lee
  * @date 2022-05-18 15:20
  */
-public interface IDeletionAuditedObject<TUser> {
+public interface IDeletionAuditedObject extends IHasDeletionTime {
     /**
      * Id of the deleter user.
      *
@@ -17,13 +17,4 @@ public interface IDeletionAuditedObject<TUser> {
     ID getDeleterId();
 
     void setDeleterId(ID deleterId);
-
-    /**
-     * Reference to the deleter user.
-     *
-     * @return
-     */
-    TUser getDeleter();
-
-    void setDeleter(TUser user);
 }

@@ -1,7 +1,6 @@
 package com.ueueo.auditing;
 
 import com.ueueo.ID;
-import org.springframework.lang.Nullable;
 
 /**
  * Standard interface for an entity that MUST have a creator.
@@ -9,7 +8,7 @@ import org.springframework.lang.Nullable;
  * @author Lee
  * @date 2022-05-18 15:25
  */
-public interface IMustHaveCreator<TCreator> {
+public interface IMustHaveCreator {
     /**
      * Id of the creator.
      *
@@ -17,12 +16,5 @@ public interface IMustHaveCreator<TCreator> {
      */
     ID getCreatorId();
 
-    /**
-     * Reference to the creator.
-     *
-     * @return
-     */
-    @Nullable
-    TCreator getCreator();
-
+    void setCreatorId(ID creatorId);
 }

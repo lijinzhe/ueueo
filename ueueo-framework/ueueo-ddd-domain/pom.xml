@@ -35,7 +35,15 @@
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-auditing-contracts</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-uow</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
         </dependency>
     </dependencies>
 </project>

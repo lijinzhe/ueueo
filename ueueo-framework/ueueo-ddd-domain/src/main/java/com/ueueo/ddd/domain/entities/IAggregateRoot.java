@@ -1,7 +1,7 @@
 package com.ueueo.ddd.domain.entities;
 
 /**
- * TODO ABP代码
+ * Defines an aggregate root with a single primary key with "Id" property.
  *
  * @author Lee
  * @date 2021-08-20 16:51

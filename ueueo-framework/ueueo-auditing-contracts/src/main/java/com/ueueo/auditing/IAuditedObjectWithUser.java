@@ -6,6 +6,6 @@ package com.ueueo.auditing;
  * @author Lee
  * @date 2022-05-18 15:20
  */
-public interface IAuditedObject extends ICreationAuditedObject, IModificationAuditedObject {
+public interface IAuditedObjectWithUser<TUser> extends IAuditedObject, ICreationAuditedObjectWithUser<TUser>, IModificationAuditedObjectWithUser<TUser> {
 
 }

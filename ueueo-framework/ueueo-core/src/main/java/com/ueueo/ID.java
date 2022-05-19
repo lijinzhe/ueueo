@@ -1,5 +1,7 @@
 package com.ueueo;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.NonNull;
@@ -10,17 +12,13 @@ import org.springframework.util.Assert;
  * @date 2022-05-18 21:07
  */
 @Slf4j
+@EqualsAndHashCode(of = {"stringValue"})
+@Getter
 public class ID {
-    private String stringValue;
-    private Long numberValue;
+    protected String stringValue;
+    protected Long numberValue;
 
-    public String getStringValue() {
-        return stringValue;
-    }
-
-    public Long getNumberValue() {
-        return numberValue;
-    }
+    protected ID() {}
 
     public boolean isStringValue() {
         return stringValue != null;
@@ -65,4 +63,5 @@ public class ID {
     public String toString() {
         return stringValue;
     }
+
 }

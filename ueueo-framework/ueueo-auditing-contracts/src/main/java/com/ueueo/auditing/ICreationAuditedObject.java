@@ -1,11 +1,11 @@
 package com.ueueo.auditing;
 
 /**
- * Adds navigation property (object reference) to <see cref="ICreationAuditedObject"/> interface.
+ * This interface can be implemented to store creation information (who and when created).
  *
  * @author Lee
  * @date 2022-05-18 15:20
  */
-public interface ICreationAuditedObject<TCreator> extends IMayHaveCreator<TCreator> {
+public interface ICreationAuditedObject extends IHasCreationTime, IMayHaveCreator {
 
 }

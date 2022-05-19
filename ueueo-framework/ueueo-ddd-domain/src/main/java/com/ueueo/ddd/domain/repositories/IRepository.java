@@ -1,7 +1,7 @@
 package com.ueueo.ddd.domain.repositories;
 
 /**
- * TODO ABP代码
+ * Just to mark a class as repository.
  *
  * @author Lee
  * @date 2021-08-20 16:34

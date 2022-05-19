@@ -27,6 +27,7 @@
         <module>ueueo-localization</module>
         <module>ueueo-features</module>
         <module>ueueo-validation</module>
+        <module>ueueo-uow</module>
     </modules>
 
 </project>

@@ -8,24 +8,22 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
- * This class can be used to simplify implementing <see cref="IAuditedObject"/> for aggregate roots.
+ * This class can be used to simplify implementing <see cref="IAuditedObject"/>.
  *
  * @author Lee
- * @date 2022-05-18 15:16
+ * @date 2022-05-19 13:56
  */
 @Getter
 @Setter
-public abstract class AuditedAggregateRoot extends CreationAuditedAggregateRoot implements IAuditedObject {
-
+public abstract class AuditedEntity extends CreationAuditedEntity implements IAuditedObject {
     protected Date lastModificationTime;
     protected ID lastModifierId;
 
-    public AuditedAggregateRoot() {
+    public AuditedEntity() {
         super();
     }
 
-    public AuditedAggregateRoot(ID id) {
+    public AuditedEntity(ID id) {
         super(id);
     }
-
 }

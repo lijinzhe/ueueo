@@ -15,7 +15,8 @@ public interface ISoftDelete {
      *
      * @return
      */
-    boolean getIsDeleted();
+    boolean isDeleted();
 
-    void setIsDeleted(boolean isDeleted);
+    void setDeleted(boolean isDeleted);
+
 }

@@ -8,26 +8,25 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
- * Implements <see cref="IFullAuditedObject"/> to be a base class for full-audited aggregate roots.
+ * Implements <see cref="IFullAuditedObject"/> to be a base class for full-audited entities.
  *
  * @author Lee
- * @date 2022-05-18 15:16
+ * @date 2022-05-19 14:06
  */
 @Getter
 @Setter
-public abstract class FullAuditedAggregateRoot extends AuditedAggregateRoot implements IFullAuditedObject {
+public abstract class FullAuditedEntity extends AuditedEntity implements IFullAuditedObject {
     protected boolean isDeleted;
 
     protected ID deleterId;
 
     protected Date deletionTime;
 
-    public FullAuditedAggregateRoot() {
+    public FullAuditedEntity() {
         super();
     }
 
-    public FullAuditedAggregateRoot(ID id) {
+    public FullAuditedEntity(ID id) {
         super(id);
     }
-
 }

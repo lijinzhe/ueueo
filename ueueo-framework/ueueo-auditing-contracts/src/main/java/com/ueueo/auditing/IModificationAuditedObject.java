@@ -1,7 +1,6 @@
 package com.ueueo.auditing;
 
 import com.ueueo.ID;
-import org.springframework.lang.Nullable;
 
 /**
  * This interface can be implemented to store modification information (who and when modified lastly).
@@ -9,7 +8,7 @@ import org.springframework.lang.Nullable;
  * @author Lee
  * @date 2022-05-18 15:20
  */
-public interface IModificationAuditedObject<TUser> {
+public interface IModificationAuditedObject extends IHasModificationTime{
     /**
      * Last modifier user for this entity.
      *
@@ -17,15 +16,6 @@ public interface IModificationAuditedObject<TUser> {
      */
     ID getLastModifierId();
 
-    void setLastModifierId(ID lastModifierIdser);
+    void setLastModifierId(ID lastModifierId);
 
-    /**
-     * Reference to the last modifier user of this entity.
-     *
-     * @return
-     */
-    @Nullable
-    TUser getLastModifier();
-
-    void setLastModifier(TUser user);
 }

@@ -1,5 +1,7 @@
 package com.ueueo.ddd.domain.repositories;
 
+import com.ueueo.ddd.domain.entities.IEntity;
+
 import java.util.Collection;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Collection;
  * @author Lee
  * @date 2021-08-20 16:33
  */
-public interface IBasicRepository<TEntity> extends IReadOnlyBasicRepository<TEntity> {
+public interface IBasicRepository<TEntity extends IEntity> extends IReadOnlyBasicRepository<TEntity> {
     void insert(TEntity entity);
 
     void insertMany(Collection<TEntity> entities);

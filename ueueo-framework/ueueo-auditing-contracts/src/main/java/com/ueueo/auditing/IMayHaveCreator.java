@@ -1,7 +1,6 @@
 package com.ueueo.auditing;
 
 import com.ueueo.ID;
-import org.springframework.lang.Nullable;
 
 /**
  * This interface can be implemented to store modification information (who and when modified lastly).
@@ -9,7 +8,7 @@ import org.springframework.lang.Nullable;
  * @author Lee
  * @date 2022-05-18 15:25
  */
-public interface IMayHaveCreator<TCreator> {
+public interface IMayHaveCreator {
     /**
      * Id of the creator.
      *
@@ -17,11 +16,5 @@ public interface IMayHaveCreator<TCreator> {
      */
     ID getCreatorId();
 
-    /**
-     * Reference to the creator.
-     *
-     * @return
-     */
-    @Nullable
-    TCreator getCreator();
+    void setCreatorId(ID creatorId);
 }
