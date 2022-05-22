@@ -16,5 +16,5 @@ public interface ILocalEventHandler<TEvent> extends IEventHandler {
      *
      * @return
      */
-    Future<?> handleEventAsync(TEvent eventData);
+    void handleEvent(TEvent eventData);
 }

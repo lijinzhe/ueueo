@@ -11,7 +11,7 @@
     <modules>
         <module>ueueo-auditing</module>
         <module>ueueo-auditing-contracts</module>
-        <module>ueueo-authorization</module>
+        <module>ueueo-authorization-abstractions</module>
         <module>ueueo-caching</module>
         <module>ueueo-core</module>
         <module>ueueo-data</module>
@@ -29,6 +29,7 @@
         <module>ueueo-validation</module>
         <module>ueueo-uow</module>
         <module>ueueo-sql-dsl</module>
+        <module>ueueo-eventbus</module>
     </modules>
 
 </project>

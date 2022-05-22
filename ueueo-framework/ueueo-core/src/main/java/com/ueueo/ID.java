@@ -28,6 +28,10 @@ public class ID {
         return numberValue != null;
     }
 
+    public boolean hasValue() {
+        return isStringValue();
+    }
+
     public static ID valueOf(@NonNull String stringValue) {
         Assert.isTrue(StringUtils.isNoneBlank(stringValue), "value must not empty.");
         ID id = new ID();

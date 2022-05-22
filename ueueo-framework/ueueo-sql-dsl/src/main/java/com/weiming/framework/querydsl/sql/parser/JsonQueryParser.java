@@ -26,34 +26,27 @@ public class JsonQueryParser {
     }
 
     public GenericSQLQuery parseSqlQuery(String jsonQueryContent) throws JsonProcessingException {
-
-        GenericSQLQuery jsonQuery = this.getObjectMapper().readValue(jsonQueryContent, GenericSQLQuery.class);
-        return jsonQuery;
+        return this.getObjectMapper().readValue(jsonQueryContent, GenericSQLQuery.class);
     }
 
     public List<SelectItem> parseSelect(String selectJson) throws JsonProcessingException {
-        List<SelectItem> selectItems = this.getObjectMapper().readValue(selectJson, new TypeReference<>() {});
-        return selectItems;
+        return this.getObjectMapper().readValue(selectJson, new TypeReference<List<SelectItem>>() {});
     }
 
     public List<WhereItem> parseWhere(String whereJson) throws JsonProcessingException {
-        List<WhereItem> whereItems = this.getObjectMapper().readValue(whereJson, new TypeReference<>() {});
-        return whereItems;
+        return this.getObjectMapper().readValue(whereJson, new TypeReference<List<WhereItem>>() {});
     }
 
     public List<JoinItem> parseJoin(String joinJson) throws JsonProcessingException {
-        List<JoinItem> joinItems = this.getObjectMapper().readValue(joinJson, new TypeReference<>() {});
-        return joinItems;
+        return this.getObjectMapper().readValue(joinJson, new TypeReference<List<JoinItem>>() {});
     }
 
     public List<GroupItem> parseGroup(String groupJson) throws JsonProcessingException {
-        List<GroupItem> groupItems = this.getObjectMapper().readValue(groupJson, new TypeReference<>() {});
-        return groupItems;
+        return this.getObjectMapper().readValue(groupJson, new TypeReference<List<GroupItem>>() {});
     }
 
     public List<OrderItem> parseOrder(String orderJson) throws JsonProcessingException {
-        List<OrderItem> orderItems = this.getObjectMapper().readValue(orderJson, new TypeReference<>() {});
-        return orderItems;
+        return this.getObjectMapper().readValue(orderJson, new TypeReference<List<OrderItem>>() {});
     }
 
 }

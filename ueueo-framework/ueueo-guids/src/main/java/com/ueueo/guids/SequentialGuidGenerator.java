@@ -1,5 +1,7 @@
 package com.ueueo.guids;
 
+import com.ueueo.ID;
+
 /**
  * TODO ABP代码
  *
@@ -8,7 +10,7 @@ package com.ueueo.guids;
  */
 public class SequentialGuidGenerator implements IGuidGenerator{
     @Override
-    public Guid create() {
+    public ID create() {
         return null;
     }
 }

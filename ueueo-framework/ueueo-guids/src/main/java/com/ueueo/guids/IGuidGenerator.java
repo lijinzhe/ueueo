@@ -1,5 +1,7 @@
 package com.ueueo.guids;
 
+import com.ueueo.ID;
+
 /**
  * TODO ABP代码
  *
@@ -7,5 +9,5 @@ package com.ueueo.guids;
  * @date 2021-08-20 17:15
  */
 public interface IGuidGenerator {
-    Guid create();
+    ID create();
 }

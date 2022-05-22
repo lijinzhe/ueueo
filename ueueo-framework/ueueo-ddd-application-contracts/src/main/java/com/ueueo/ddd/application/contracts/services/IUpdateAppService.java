@@ -6,8 +6,6 @@ package com.ueueo.ddd.application.contracts.services;
  * @author Lee
  * @date 2021-08-24 15:26
  */
-public interface IUpdateAppService<TGetOutputDto, TKey, TUpdateInput> extends IApplicationService {
-
-    TGetOutputDto update(TKey id, TUpdateInput input);
+public interface IUpdateAppService<TEntityDto> extends IUpdateAppServiceWithInputOutput<TEntityDto, TEntityDto> {
 
 }

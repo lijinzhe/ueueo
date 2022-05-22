@@ -11,25 +11,18 @@
         <relativePath>../../ueueo-boot/ueueo-boot-parent/pom.xml</relativePath>
     </parent>
 
-    <groupId>com.ueueo.framework</groupId>
+    <groupId>com.ueueo</groupId>
     <artifactId>ueueo-tenant-management</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-multi-tenancy</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-ddd-domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-caching</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>ueueo-tenant-management-autoconfigure</module>
+        <module>ueueo-tenant-management-common</module>
+        <module>ueueo-tenant-management-core</module>
+        <module>ueueo-tenant-management-http-api</module>
+        <module>ueueo-tenant-management-http-client</module>
+        <module>ueueo-tenant-management-server</module>
+    </modules>
+
 </project>
