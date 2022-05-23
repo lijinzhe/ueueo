@@ -139,7 +139,7 @@ await _dataSeeder.SeedAsync(
 
 [应用程序启动模板](Startup-Templates/Application.md)带有一个*YourProjectName***.DbMigrator** 项目(图中的Acme.BookStore.DbMigrator). 这是一个**控制台应用程序**,负责**迁移**数据库架构(关系数据库)和初始种子数据:
 
-![bookstore-visual-studio-solution-v3](docs/images/bookstore-visual-studio-solution-v3.png)
+![bookstore-visual-studio-solution-v3](images/bookstore-visual-studio-solution-v3.png)
 
 控制台应用程序已经为你正确配置,它甚至支持**多租户**场景,其中每个租户拥有自己的数据库(迁移和必须的数据库).
 

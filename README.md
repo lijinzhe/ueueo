@@ -64,7 +64,7 @@ The [Startup templates](Startup-Templates/Index.md) are pre-built Visual Studio 
 
 ## Free E-Book: Implementing Domain Driven Design
 
-![Implementing Domain Driven Design](images/implementing-domain-driven-design-book.png)
+![Implementing Domain Driven Design](docs/images/implementing-domain-driven-design-book.png)
 
 A **practical guide** for implementing Domain Driven Design (DDD). While the implementation details are **based on the ABP Framework** infrastructure, the basic concepts, principles and models can be applied to any solution, even if it is not a .NET solution.
 

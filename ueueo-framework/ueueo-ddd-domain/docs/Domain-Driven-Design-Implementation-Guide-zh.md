@@ -42,7 +42,7 @@ DDD适用于**复杂领域**或**较大规模**的系统,而不是简单的CRUD�
 
 基于DDD的架构分为四个基础层
 
-![domain-driven-design-layers](docs/images/domain-driven-design-layers.png)
+![domain-driven-design-layers](images/domain-driven-design-layers.png)
 
 **业务逻辑**分为两层,分别为 *领域(Domain)* 层和 *应用(Application)* 层,它们包含不同类型的业务逻辑.
 
@@ -53,7 +53,7 @@ DDD适用于**复杂领域**或**较大规模**的系统,而不是简单的CRUD�
 
 同样的分层架构也可以如下图所示:被称为 **整洁架构**, 又或者称为 **洋葱架构**:
 
-![domain-driven-design-clean-architecture](docs/images/domain-driven-design-clean-architecture.png)
+![domain-driven-design-clean-architecture](images/domain-driven-design-clean-architecture.png)
 
 在整洁架构中,**每层只依赖内部的层**,独立的层在圆圈的最中心,也就是领域层.
 
@@ -87,7 +87,7 @@ DDD的关注点在**领域层**和**应用层**上,而展现层和基础设施�
 
 下图是使用[ABP的启动模板](Startup-Templates/Application.md)创建的解决方案:
 
-![domain-driven-design-vs-solution](docs/images/domain-driven-design-vs-solution.png)
+![domain-driven-design-vs-solution](images/domain-driven-design-vs-solution.png)
 
 解决方案名为 `IssueTracking` ,它包含多个项目.该解决方案出于**DDD原则**及**开发**和**部署**的实践来进行分层.后面会在各小节中介绍解决方案中的项目.
 
@@ -144,7 +144,7 @@ ABP的启动解决方案中包含两个用于集成Entity Framework Core的项�
 
 下图展示了解决方案中项目间的依赖关系(有些项目比较简单就未展示):
 
-![domain-driven-design-project-relations](docs/images/domain-driven-design-project-relations.png)
+![domain-driven-design-project-relations](images/domain-driven-design-project-relations.png)
 
 之前已介绍了这些项目.现在,我们来解释依赖的原因:
 
@@ -172,7 +172,7 @@ ABP的启动解决方案中包含两个用于集成Entity Framework Core的项�
 
 下图展示了基于DDD模式下的Web应用程序执行顺序:
 
-![](docs/images/domain-driven-design-web-request-flow.png)
+![](images/domain-driven-design-web-request-flow.png)
 
 * 通常由UI(用例)发起一个HTTP请求到服务器.
 * 由展现层(或分布式服务层)中的一个*MVC Controller*或*Razor Page Handler*处理请求,在这个阶段可以执行一些AOP逻辑([授权](Authorization.md),[验证](Validation.md),[异常处理](Exception-Handling.md)等),*MVC Controller*或*Razor Page Handler*调用注入的应用服务接口,并返回其调用后的结果(DTO)..
@@ -227,11 +227,11 @@ DDD忽略**领域对象的数据展示**,这并不意味着它们并不重要,�
 
 示例中会使用一些概念,这些概念在Github中被使用,例如, `Issue`(问题), `Repository`(仓库), `Label`(标签) 和`User`(用户).下图中展示了一些聚合,聚合根,实体,值对象以及它们之间的关系:
 
-![domain driven design example schema](docs/images/domain-driven-design-example-domain-schema.png)
+![domain driven design example schema](images/domain-driven-design-example-domain-schema.png)
 
 **问题聚合** 由`Issue` 聚合根,及其包含的 `Comment` 和`IssueLabel` 集合组成.我们将重要讨论 `Issue` 聚合根:
 
-![domain-driven-design-issue-aggregate-diagram](docs/images/domain-driven-design-issue-aggregate-diagram.png)
+![domain-driven-design-issue-aggregate-diagram](images/domain-driven-design-issue-aggregate-diagram.png)
 
 ### Aggregates
 
@@ -324,7 +324,7 @@ public class IssueAppService : ApplicationService, IIssueAppService
 
 下图中,可以看到两个聚合根,`GitRepository` 和`Issue` :
 
-![domain-driven-design-reference-by-id-sample](docs/images/domain-driven-design-reference-by-id-sample.png)
+![domain-driven-design-reference-by-id-sample](images/domain-driven-design-reference-by-id-sample.png)
 
 * `GitRepository` 不应该包含 `Issue`的集合,因为`Issue`属于不同的聚合.
 * `Issue` 不应该包含导航属性至 `GitRepository` .因为 `GitRepository`属于不同的聚合.
@@ -342,7 +342,7 @@ MongoDB中不适合使用导航属性或集合的,原因是:当前源聚合对�
 
 保持聚合简单而小巧是一个比较好的做法.因为聚合的读取与保存是一个整体,当处理较大对象时会出现性能问题,如下所示:
 
-![domain-driven-design-aggregate-keep-small](docs/images/domain-driven-design-aggregate-keep-small.png)
+![domain-driven-design-aggregate-keep-small](images/domain-driven-design-aggregate-keep-small.png)
 
 角色聚合包含`UserRole`值对象集合,方便查询该角色下有哪些用户.注意,`UserRole`不是聚合,并且也遵守了*聚合间只通过ID相互引用*的规则.但是在现实场景中,一个角色可能被给成千上万个用户,当从数据库中加载一个角色时,会关联加载数千个用户对象,这里会有 严重的性能问题.
 
@@ -368,7 +368,7 @@ MongoDB中不适合使用导航属性或集合的,原因是:当前源聚合对�
 
 如图所示:
 
-![domain-driven-design-entity-primary-keys](docs/images/domain-driven-design-entity-primary-keys.png)
+![domain-driven-design-entity-primary-keys](images/domain-driven-design-entity-primary-keys.png)
 
 * `Organization`有一个`Guid`的标识符 (`Id`).
 * `OrganizationUser`是一个子集合,使用 `OrganizationId` 和`UserId`作为联合主键.
@@ -1767,7 +1767,7 @@ public async Task ChangeTitleAsync(Issue issue, string title)
 
 如前所述,领域驱动设计中的*业务逻辑*分为两部分(各层):领域逻辑和应用逻辑
 
-![domain-driven-design-domain-vs-application-logic](docs/images/domain-driven-design-domain-vs-application-logic.png)
+![domain-driven-design-domain-vs-application-logic](images/domain-driven-design-domain-vs-application-logic.png)
 
 领域逻辑是系统的*核心领域规则*组成,而应用逻辑则满足特定的*用例*.
 
@@ -1783,7 +1783,7 @@ public async Task ChangeTitleAsync(Issue issue, string title)
 * 一个**后台管理系统**,UI使用Angular,通过REST API请求数据.内部员工使用这个系统来维护数据(例如,编辑商品说明).
 * 一个**移动端应用程序**,它比公开的网站UI上更加简洁.它通过REST API或其它技术(例如,TCP sockets)请求数据.
 
-![domain-driven-design-multiple-applications](docs/images/domain-driven-design-multiple-applications.png)
+![domain-driven-design-multiple-applications](images/domain-driven-design-multiple-applications.png)
 
 每个应用程序都有不同的**需求**,不同的**用例**(应用服务方法),不同的DTO,不同的**验证**和**授权**规则等.
 

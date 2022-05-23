@@ -207,7 +207,7 @@ public class MyUser : Entity<Guid>
 
 默认为每个**web请求**创建一个**审计日志对象**,审计日志对象可以由以下关系图表示:
 
-![**auditlog-object-diagram**](docs/images/auditlog-object-diagram.png)
+![**auditlog-object-diagram**](images/auditlog-object-diagram.png)
 
 * **AuditLogInfo**: 具有以下属性:
   * `ApplicationName`: 当你保存不同的应用审计日志到同一个数据库,这个属性用来区分应用程序.

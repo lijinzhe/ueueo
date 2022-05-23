@@ -139,7 +139,7 @@ It is important to understand where & how to execute the `IDataSeeder.SeedAsync(
 
 The [application startup template](Startup-Templates/Application.md) comes with a *YourProjectName***.DbMigrator** project (Acme.BookStore.DbMigrator on the picture below), which is a **console application** that is responsible to **migrate** the database schema (for relational databases) and **seed** the initial data:
 
-![bookstore-visual-studio-solution-v3](docs/images/bookstore-visual-studio-solution-v3.png)
+![bookstore-visual-studio-solution-v3](images/bookstore-visual-studio-solution-v3.png)
 
 This console application is properly configured for you. It even supports **multi-tenant** scenarios where each tenant has its own database (migrates & seeds all necessary databases).
 
