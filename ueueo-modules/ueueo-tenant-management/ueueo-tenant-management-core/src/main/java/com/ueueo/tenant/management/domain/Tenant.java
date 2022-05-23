@@ -5,6 +5,7 @@ import com.ueueo.data.ConnectionStrings;
 import com.ueueo.ddd.domain.entities.auditing.FullAuditedAggregateRoot;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.FieldNameConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@FieldNameConstants
 public class Tenant extends FullAuditedAggregateRoot {
 
     private String name;

@@ -6,6 +6,8 @@ import com.ueueo.eventbus.EventName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Map;
+
 /**
  * @author Lee
  * @date 2022-05-14 17:32
@@ -16,4 +18,10 @@ import lombok.EqualsAndHashCode;
 public class TenantCreatedEto extends EtoBase {
     private ID id;
     private String name;
+
+    public TenantCreatedEto(ID id, String name, Map<String, String> properties) {
+        this.id = id;
+        this.name = name;
+        this.properties = properties;
+    }
 }

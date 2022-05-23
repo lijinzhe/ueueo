@@ -12,7 +12,7 @@ import java.util.Map;
  */
 @Data
 public abstract class EtoBase implements Serializable {
-    private Map<String, String> properties;
+    protected Map<String, String> properties;
 
     public EtoBase() {
         this.properties = new HashMap<>();
