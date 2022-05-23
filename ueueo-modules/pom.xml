@@ -9,6 +9,22 @@
 
     <modules>
         <module>ueueo-tenant-management</module>
+        <module>ueueo-account</module>
+        <module>ueueo-audit-logging</module>
+        <module>ueueo-blob-storing-database</module>
+        <module>ueueo-feature-management</module>
+        <module>ueueo-identity</module>
+        <module>ueueo-identity-server</module>
+        <module>ueueo-permission-management</module>
+        <module>ueueo-setting-management</module>
+        <module>ueueo-file-management</module>
+        <module>ueueo-chat</module>
+        <module>ueueo-forms</module>
+        <module>ueueo-language-management</module>
+        <module>ueueo-payment</module>
+        <module>ueueo-saas</module>
+        <module>ueueo-text-template-management</module>
+        <module>ueueo-background-jobs-management</module>
     </modules>
 
 </project>

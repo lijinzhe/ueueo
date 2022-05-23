@@ -12,6 +12,8 @@
         <module>ueueo-auditing</module>
         <module>ueueo-auditing-contracts</module>
         <module>ueueo-authorization-abstractions</module>
+        <module>ueueo-blob-storing</module>
+        <module>ueueo-blob-storing-aliyun</module>
         <module>ueueo-caching</module>
         <module>ueueo-core</module>
         <module>ueueo-data</module>
@@ -32,6 +34,38 @@
         <module>ueueo-eventbus</module>
         <module>ueueo-data-annotations</module>
         <module>ueueo-object-extending</module>
+        <module>ueueo-authorization</module>
+        <module>ueueo-background-jobs</module>
+        <module>ueueo-background-jobs-abstractions</module>
+        <module>ueueo-background-jobs-quartz</module>
+        <module>ueueo-background-workers</module>
+        <module>ueueo-background-workers-quartz</module>
+        <module>ueueo-blob-storing-qiniu</module>
+        <module>ueueo-distributed-locking</module>
+        <module>ueueo-distributed-locking-abstractions</module>
+        <module>ueueo-emailing</module>
+        <module>ueueo-eventbus-rabbitmq</module>
+        <module>ueueo-exception-handing</module>
+        <module>ueueo-global-features</module>
+        <module>ueueo-http-client</module>
+        <module>ueueo-kafka</module>
+        <module>ueueo-ldap</module>
+        <module>ueueo-background-jobs-rabbitmq</module>
+        <module>ueueo-eventbus-kafka</module>
+        <module>ueueo-memory-db</module>
+        <module>ueueo-mongodb</module>
+        <module>ueueo-object-mapping</module>
+        <module>ueueo-quartz</module>
+        <module>ueueo-rabbitmq</module>
+        <module>ueueo-serialization</module>
+        <module>ueueo-sms</module>
+        <module>ueueo-sms-aliyun</module>
+        <module>ueueo-threading</module>
+        <module>ueueo-validation-abstractions</module>
+        <module>ueueo-virtual-file-system</module>
+        <module>ueueo-text-templating</module>
+        <module>ueueo-caching-redis</module>
+        <module>ueueo-specifications</module>
     </modules>
 
 </project>

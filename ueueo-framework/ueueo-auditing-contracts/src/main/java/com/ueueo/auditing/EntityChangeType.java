@@ -5,10 +5,11 @@ package com.ueueo.auditing;
  * @date 2022-05-18 15:22
  */
 public enum EntityChangeType {
+    /** 创建 */
     Created(0),
-
+    /** 修改 */
     Updated(1),
-
+    /** 删除 */
     Deleted(2);
 
     private int value;

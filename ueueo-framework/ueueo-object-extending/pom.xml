@@ -24,7 +24,6 @@
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-localization-abstractions</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
