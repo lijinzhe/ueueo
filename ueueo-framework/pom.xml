@@ -66,6 +66,7 @@
         <module>ueueo-text-templating</module>
         <module>ueueo-caching-redis</module>
         <module>ueueo-specifications</module>
+        <module>ueueo-linq</module>
     </modules>
 
 </project>
