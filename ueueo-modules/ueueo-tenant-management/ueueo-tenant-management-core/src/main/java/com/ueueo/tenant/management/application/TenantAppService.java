@@ -38,7 +38,7 @@ public class TenantAppService extends TenantManagementAppServiceBase implements 
 
     @Override
     public TenantDto get(ID id) {
-        return TenantObjectMapper.INSTANCE.map(tenantRepository.findById(id, true));
+        return TenantObjectMapper.INSTANCE.map(tenantRepository.getById(id, true));
     }
 
     @Override
@@ -74,7 +74,7 @@ public class TenantAppService extends TenantManagementAppServiceBase implements 
 
     @Override
     public void deleteById(ID id) {
-        Tenant tenant = this.tenantRepository.findById(id, false);
+        Tenant tenant = this.tenantRepository.getById(id, false);
         if (tenant != null) {
             this.tenantRepository.delete(tenant, true);
         }
@@ -82,7 +82,7 @@ public class TenantAppService extends TenantManagementAppServiceBase implements 
 
     @Override
     public TenantDto update(ID id, TenantUpdateDto input) {
-        Tenant tenant = this.tenantRepository.findById(id, false);
+        Tenant tenant = this.tenantRepository.getById(id, false);
         if (tenant != null) {
             tenantManager.changeName(tenant, input.getName());
             //            tenant.SetConcurrencyStampIfNotNull(input.ConcurrencyStamp);
@@ -95,7 +95,7 @@ public class TenantAppService extends TenantManagementAppServiceBase implements 
 
     @Override
     public String getDefaultConnectionString(ID id) {
-        Tenant tenant = this.tenantRepository.findById(id, false);
+        Tenant tenant = this.tenantRepository.getById(id, false);
         if (tenant != null) {
             return tenant.findDefaultConnectionString();
         }
@@ -104,7 +104,7 @@ public class TenantAppService extends TenantManagementAppServiceBase implements 
 
     @Override
     public void updateDefaultConnectionString(ID id, String defaultConnectionString) {
-        Tenant tenant = this.tenantRepository.findById(id, false);
+        Tenant tenant = this.tenantRepository.getById(id, false);
         if (tenant != null) {
             tenant.setDefaultConnectionString(defaultConnectionString);
             tenantRepository.update(tenant, true);
@@ -113,7 +113,7 @@ public class TenantAppService extends TenantManagementAppServiceBase implements 
 
     @Override
     public void deleteDefaultConnectionString(ID id) {
-        Tenant tenant = this.tenantRepository.findById(id, false);
+        Tenant tenant = this.tenantRepository.getById(id, false);
         if (tenant != null) {
             tenant.removeDefaultConnectionString();
             tenantRepository.update(tenant, true);

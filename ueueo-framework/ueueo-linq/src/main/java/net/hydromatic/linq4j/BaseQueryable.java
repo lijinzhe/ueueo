@@ -44,22 +44,27 @@ public abstract class BaseQueryable<TSource>
     this.expression = expression;
   }
 
+  @Override
   public QueryProvider getProvider() {
     return provider;
   }
 
+  @Override
   public Type getElementType() {
     return elementType;
   }
 
+  @Override
   public Expression getExpression() {
     return expression;
   }
 
+  @Override
   public Iterator<TSource> iterator() {
     return Linq4j.enumeratorIterator(enumerator());
   }
 
+  @Override
   public Enumerator<TSource> enumerator() {
     return provider.executeQuery(this);
   }

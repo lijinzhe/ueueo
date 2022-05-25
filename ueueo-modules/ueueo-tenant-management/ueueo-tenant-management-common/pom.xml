@@ -30,7 +30,7 @@
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-ddd-application-contracts</artifactId>
+            <artifactId>ueueo-domain-driven-desgin</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

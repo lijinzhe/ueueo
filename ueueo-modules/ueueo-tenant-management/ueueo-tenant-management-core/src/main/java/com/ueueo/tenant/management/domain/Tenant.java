@@ -74,8 +74,8 @@ public class Tenant extends FullAuditedAggregateRoot {
 
     protected void setName(@NonNull String name) {
         Assert.isTrue(StringUtils.isNotBlank(name), "name must not null!");
-        Assert.isTrue(name.length() <= TenantConsts.MaxNameLength,
-                String.format("name length must <= %s!", TenantConsts.MaxNameLength));
+        Assert.isTrue(name.length() <= TenantConsts.MAX_NAME_LENGTH,
+                String.format("name length must <= %s!", TenantConsts.MAX_NAME_LENGTH));
         this.name = name;
     }
 

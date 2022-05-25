@@ -20,11 +20,13 @@ package net.hydromatic.linq4j.test;
 import com.example.Linq4jExample;
 import net.hydromatic.linq4j.*;
 import net.hydromatic.linq4j.expressions.Expressions;
+import net.hydromatic.linq4j.expressions.FunctionExpression;
 import net.hydromatic.linq4j.expressions.ParameterExpression;
 import net.hydromatic.linq4j.function.*;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -109,8 +111,8 @@ public class Linq4jTest {
     List<String> names =
         Linq4j.asEnumerable(emps)
             .where(
-                new Predicate1<Employee>() {
-                  public boolean apply(Employee employee) {
+                new Predicate<Employee>() {
+                  public boolean test(Employee employee) {
                     return employee.deptno < 15;
                   }
                 })
@@ -157,8 +159,8 @@ public class Linq4jTest {
   @Test public void testCountPredicate() {
     final int count =
         Linq4j.asEnumerable(depts).count(
-            new Predicate1<Department>() {
-              public boolean apply(Department v1) {
+            new Predicate<Department>() {
+              public boolean test(Department v1) {
                 return v1.employees.size() > 0;
               }
             });
@@ -173,8 +175,8 @@ public class Linq4jTest {
   @Test public void testLongCountPredicate() {
     final long count =
         Linq4j.asEnumerable(depts).longCount(
-            new Predicate1<Department>() {
-              public boolean apply(Department v1) {
+            new Predicate<Department>() {
+              public boolean test(Department v1) {
                 return v1.employees.size() > 0;
               }
             });
@@ -182,14 +184,14 @@ public class Linq4jTest {
   }
 
   @Test public void testAllPredicate() {
-    Predicate1<Employee> allEmpnoGE100 = new Predicate1<Employee>() {
-      public boolean apply(Employee emp) {
+    Predicate<Employee> allEmpnoGE100 = new Predicate<Employee>() {
+      public boolean test(Employee emp) {
         return emp.empno >= 100;
       }
     };
 
-    Predicate1<Employee> allEmpnoGT100 = new Predicate1<Employee>() {
-      public boolean apply(Employee emp) {
+    Predicate<Employee> allEmpnoGT100 = new Predicate<Employee>() {
+      public boolean test(Employee emp) {
         return emp.empno > 100;
       }
     };
@@ -205,14 +207,14 @@ public class Linq4jTest {
   }
 
   @Test public void testAnyPredicate() {
-    Predicate1<Department> deptoNameIT = new Predicate1<Department>() {
-      public boolean apply(Department v1) {
+    Predicate<Department> deptoNameIT = new Predicate<Department>() {
+      public boolean test(Department v1) {
         return v1.name != null && v1.name.equals("IT");
       }
     };
 
-    Predicate1<Department> deptoNameSales = new Predicate1<Department>() {
-      public boolean apply(Department v1) {
+    Predicate<Department> deptoNameSales = new Predicate<Department>() {
+      public boolean test(Department v1) {
         return v1.name != null && v1.name.equals("Sales");
       }
     };
@@ -453,14 +455,14 @@ public class Linq4jTest {
   }
 
   @Test public void testFirstPredicate1() {
-    Predicate1<String> startWithS = new Predicate1<String>() {
-      public boolean apply(String s) {
+    Predicate<String> startWithS = new Predicate<String>() {
+      public boolean test(String s) {
         return s != null && Character.toString(s.charAt(0)).equals("S");
       }
     };
 
-    Predicate1<Integer> numberGT15 = new Predicate1<Integer>() {
-      public boolean apply(Integer i) {
+    Predicate<Integer> numberGT15 = new Predicate<Integer>() {
+      public boolean test(Integer i) {
         return i > 15;
       }
     };
@@ -1002,21 +1004,18 @@ public class Linq4jTest {
 
     // "where" is a Queryable method
     // first, use a lambda
-    ParameterExpression parameter =
-        Expressions.parameter(Employee.class);
+    ParameterExpression parameter = Expressions.parameter(Employee.class);
     final Queryable<Employee> nh =
         Linq4j.asEnumerable(emps)
             .asQueryable()
             .where(
-                Expressions.lambda(
-                    Predicate1.class,
-                    Expressions.equal(
-                        Expressions.field(
-                            parameter,
-                            Employee.class,
-                            "deptno"),
-                        Expressions.constant(10)),
-                    parameter));
+                    Expressions.lambda(
+                        Predicate.class,
+                        Expressions.equal(
+                            Expressions.field(parameter, Employee.class, "deptno"),
+                            Expressions.constant(10)
+                        ),
+                        parameter));
     assertEquals(3, nh.count());
 
     // second, use an expression
@@ -1025,8 +1024,8 @@ public class Linq4jTest {
             .asQueryable()
             .where(
                 Expressions.lambda(
-                    new Predicate1<Employee>() {
-                      public boolean apply(Employee v1) {
+                    new Predicate<Employee>() {
+                      public boolean test(Employee v1) {
                         return v1.deptno == 10;
                       }
                     }));
@@ -1041,20 +1040,20 @@ public class Linq4jTest {
         Linq4j.asEnumerable(emps)
             .asQueryable()
             .whereN(
-                Expressions.lambda(
-                    Predicate2.class,
-                    Expressions.andAlso(
-                        Expressions.equal(
-                            Expressions.field(
-                                parameterE,
-                                Employee.class,
-                                "deptno"),
-                            Expressions.constant(10)),
-                        Expressions.lessThan(
-                            parameterN,
-                            Expressions.constant(3))),
-                    parameterE,
-                    parameterN));
+                    (FunctionExpression<? extends Predicate2<Employee, Integer>>) Expressions.lambda(
+                        Predicate2.class,
+                        Expressions.andAlso(
+                            Expressions.equal(
+                                Expressions.field(
+                                    parameterE,
+                                    Employee.class,
+                                    "deptno"),
+                                Expressions.constant(10)),
+                            Expressions.lessThan(
+                                parameterN,
+                                Expressions.constant(3))),
+                        parameterE,
+                        parameterN));
     assertEquals(2, nh3.count());
   }
 
@@ -1147,8 +1146,8 @@ public class Linq4jTest {
     final List<Department> deptList =
         EnumerableDefaults.takeWhile(
             enumerableDepts,
-            new Predicate1<Department>() {
-              public boolean apply(Department v1) {
+            new Predicate<Department>() {
+              public boolean test(Department v1) {
                 return v1.name.contains("e");
               }
             }).toList();
@@ -1185,8 +1184,8 @@ public class Linq4jTest {
   @Test public void testTakeWhile_queryable_functionexpression_predicate() {
     final Queryable<Department> queryableDepts =
         Linq4j.asEnumerable(depts).asQueryable();
-    Predicate1<Department> predicate = new Predicate1<Department>() {
-      public boolean apply(Department v1) {
+    Predicate<Department> predicate = new Predicate<Department>() {
+      public boolean test(Department v1) {
         return "HR".equals(v1.name);
       }
     };
@@ -1197,8 +1196,8 @@ public class Linq4jTest {
 
     assertEquals(0, deptList.size());
 
-    predicate = new Predicate1<Department>() {
-      public boolean apply(Department v1) {
+    predicate = new Predicate<Department>() {
+      public boolean test(Department v1) {
         return "Sales".equals(v1.name);
       }
     };
@@ -1253,16 +1252,16 @@ public class Linq4jTest {
     assertEquals(
         2,
         Linq4j.asEnumerable(depts).skipWhile(
-            new Predicate1<Department>() {
-              public boolean apply(Department v1) {
+            new Predicate<Department>() {
+              public boolean test(Department v1) {
                 return v1.name.equals("Sales");
               }
             }).count());
     assertEquals(
         3,
         Linq4j.asEnumerable(depts).skipWhile(
-            new Predicate1<Department>() {
-              public boolean apply(Department v1) {
+            new Predicate<Department>() {
+              public boolean test(Department v1) {
                 return !v1.name.equals("Sales");
               }
             }).count());
@@ -1375,8 +1374,8 @@ public class Linq4jTest {
     final List<Employee> result = new ArrayList<Employee>();
     Linq4j.asEnumerable(employees)
         .where(
-            new Predicate1<Employee>() {
-              public boolean apply(Employee e) {
+            new Predicate<Employee>() {
+              public boolean test(Employee e) {
                 return e.name.contains("e");
               }
             })

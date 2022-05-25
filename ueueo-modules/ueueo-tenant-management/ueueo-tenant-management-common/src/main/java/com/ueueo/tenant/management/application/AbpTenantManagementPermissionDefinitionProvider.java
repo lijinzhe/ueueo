@@ -15,13 +15,13 @@ import com.ueueo.tenant.management.localization.AbpTenantManagementResource;
 public class AbpTenantManagementPermissionDefinitionProvider extends PermissionDefinitionProvider {
     @Override
     public void define(IPermissionDefinitionContext context) {
-        PermissionGroupDefinition tenantManagementGroup = context.addGroup(TenantManagementPermissions.GroupName, L("Permission:TenantManagement"));
-        PermissionDefinition tenantsPermission = tenantManagementGroup.addPermission(TenantManagementPermissions.Tenants.Default, L("Permission:TenantManagement"), MultiTenancySides.Host, null);
-        tenantsPermission.addChild(TenantManagementPermissions.Tenants.Create, L("Permission:Create"), MultiTenancySides.Host, null);
-        tenantsPermission.addChild(TenantManagementPermissions.Tenants.Update, L("Permission:Edit"), MultiTenancySides.Host, null);
-        tenantsPermission.addChild(TenantManagementPermissions.Tenants.Delete, L("Permission:Delete"), MultiTenancySides.Host, null);
-        tenantsPermission.addChild(TenantManagementPermissions.Tenants.ManageFeatures, L("Permission:ManageFeatures"), MultiTenancySides.Host, null);
-        tenantsPermission.addChild(TenantManagementPermissions.Tenants.ManageConnectionStrings, L("Permission:ManageConnectionStrings"), MultiTenancySides.Host, null);
+        PermissionGroupDefinition tenantManagementGroup = context.addGroup(TenantManagementPermissions.GROUP_NAME, L("Permission:TenantManagement"));
+        PermissionDefinition tenantsPermission = tenantManagementGroup.addPermission(TenantManagementPermissions.Tenants.DEFAULT, L("Permission:TenantManagement"), MultiTenancySides.Host, null);
+        tenantsPermission.addChild(TenantManagementPermissions.Tenants.CREATE, L("Permission:Create"), MultiTenancySides.Host, null);
+        tenantsPermission.addChild(TenantManagementPermissions.Tenants.UPDATE, L("Permission:Edit"), MultiTenancySides.Host, null);
+        tenantsPermission.addChild(TenantManagementPermissions.Tenants.DELETE, L("Permission:Delete"), MultiTenancySides.Host, null);
+        tenantsPermission.addChild(TenantManagementPermissions.Tenants.MANAGE_FEATURES, L("Permission:ManageFeatures"), MultiTenancySides.Host, null);
+        tenantsPermission.addChild(TenantManagementPermissions.Tenants.MANAGE_CONNECTION_STRINGS, L("Permission:ManageConnectionStrings"), MultiTenancySides.Host, null);
     }
 
     private LocalizableString L(String name) {

@@ -112,6 +112,7 @@ public abstract class Extensions {
 
   static final Function2<BigDecimal, BigDecimal, BigDecimal> BIG_DECIMAL_SUM =
       new Function2<BigDecimal, BigDecimal, BigDecimal>() {
+        @Override
         public BigDecimal apply(BigDecimal v1, BigDecimal v2) {
           return v1.add(v2);
         }
@@ -119,6 +120,7 @@ public abstract class Extensions {
 
   static final Function2<Float, Float, Float> FLOAT_SUM =
       new Function2<Float, Float, Float>() {
+        @Override
         public Float apply(Float v1, Float v2) {
           return v1 + v2;
         }
@@ -126,6 +128,7 @@ public abstract class Extensions {
 
   static final Function2<Double, Double, Double> DOUBLE_SUM =
       new Function2<Double, Double, Double>() {
+        @Override
         public Double apply(Double v1, Double v2) {
           return v1 + v2;
         }
@@ -133,6 +136,7 @@ public abstract class Extensions {
 
   static final Function2<Integer, Integer, Integer> INTEGER_SUM =
       new Function2<Integer, Integer, Integer>() {
+        @Override
         public Integer apply(Integer v1, Integer v2) {
           return v1 + v2;
         }
@@ -140,6 +144,7 @@ public abstract class Extensions {
 
   static final Function2<Long, Long, Long> LONG_SUM =
       new Function2<Long, Long, Long>() {
+        @Override
         public Long apply(Long v1, Long v2) {
           return v1 + v2;
         }
@@ -147,6 +152,7 @@ public abstract class Extensions {
 
   static final Function2 COMPARABLE_MIN =
       new Function2<Comparable, Comparable, Comparable>() {
+        @Override
         public Comparable apply(Comparable v1, Comparable v2) {
           return v1 == null || v1.compareTo(v2) > 0 ? v2 : v1;
         }
@@ -154,6 +160,7 @@ public abstract class Extensions {
 
   static final Function2 COMPARABLE_MAX =
       new Function2<Comparable, Comparable, Comparable>() {
+        @Override
         public Comparable apply(Comparable v1, Comparable v2) {
           return v1 == null || v1.compareTo(v2) < 0 ? v2 : v1;
         }
@@ -161,6 +168,7 @@ public abstract class Extensions {
 
   static final Function2<Float, Float, Float> FLOAT_MIN =
       new Function2<Float, Float, Float>() {
+        @Override
         public Float apply(Float v1, Float v2) {
           return v1 == null || v1.compareTo(v2) > 0 ? v2 : v1;
         }
@@ -168,6 +176,7 @@ public abstract class Extensions {
 
   static final Function2<Float, Float, Float> FLOAT_MAX =
       new Function2<Float, Float, Float>() {
+        @Override
         public Float apply(Float v1, Float v2) {
           return v1 == null || v1.compareTo(v2) < 0 ? v2 : v1;
         }
@@ -175,6 +184,7 @@ public abstract class Extensions {
 
   static final Function2<Double, Double, Double> DOUBLE_MIN =
       new Function2<Double, Double, Double>() {
+        @Override
         public Double apply(Double v1, Double v2) {
           return v1 == null || v1.compareTo(v2) > 0 ? v2 : v1;
         }
@@ -182,6 +192,7 @@ public abstract class Extensions {
 
   static final Function2<Double, Double, Double> DOUBLE_MAX =
       new Function2<Double, Double, Double>() {
+        @Override
         public Double apply(Double v1, Double v2) {
           return v1 == null || v1.compareTo(v2) < 0 ? v2 : v1;
         }
@@ -189,6 +200,7 @@ public abstract class Extensions {
 
   static final Function2<Integer, Integer, Integer> INTEGER_MIN =
       new Function2<Integer, Integer, Integer>() {
+        @Override
         public Integer apply(Integer v1, Integer v2) {
           return v1 == null || v1.compareTo(v2) > 0 ? v2 : v1;
         }
@@ -196,6 +208,7 @@ public abstract class Extensions {
 
   static final Function2<Integer, Integer, Integer> INTEGER_MAX =
       new Function2<Integer, Integer, Integer>() {
+        @Override
         public Integer apply(Integer v1, Integer v2) {
           return v1 == null || v1.compareTo(v2) < 0 ? v2 : v1;
         }
@@ -203,6 +216,7 @@ public abstract class Extensions {
 
   static final Function2<Long, Long, Long> LONG_MIN =
       new Function2<Long, Long, Long>() {
+        @Override
         public Long apply(Long v1, Long v2) {
           return v1 == null || v1.compareTo(v2) > 0 ? v2 : v1;
         }
@@ -210,6 +224,7 @@ public abstract class Extensions {
 
   static final Function2<Long, Long, Long> LONG_MAX =
       new Function2<Long, Long, Long>() {
+        @Override
         public Long apply(Long v1, Long v2) {
           return v1 == null || v1.compareTo(v2) < 0 ? v2 : v1;
         }
@@ -230,6 +245,7 @@ public abstract class Extensions {
 
   private static final Comparator<Comparable> COMPARABLE_COMPARATOR =
       new Comparator<Comparable>() {
+        @Override
         public int compare(Comparable o1, Comparable o2) {
           //noinspection unchecked
           return o1.compareTo(o2);

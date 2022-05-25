@@ -51,6 +51,7 @@ public class ConstantExpression extends Expression {
     }
   }
 
+  @Override
   public Object evaluate(Evaluator evaluator) {
     return value;
   }

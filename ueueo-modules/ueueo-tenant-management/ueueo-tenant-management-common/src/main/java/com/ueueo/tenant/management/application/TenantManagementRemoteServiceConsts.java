@@ -6,7 +6,7 @@ package com.ueueo.tenant.management.application;
  * @date 2022-05-20 14:10
  */
 public class TenantManagementRemoteServiceConsts {
-    public static final String RemoteServiceName = "AbpTenantManagement";
+    public static final String REMOTE_SERVICE_NAME = "AbpTenantManagement";
 
-    public static final String ModuleName = "multi-tenancy";
+    public static final String MODULE_NAME = "multi-tenancy";
 }

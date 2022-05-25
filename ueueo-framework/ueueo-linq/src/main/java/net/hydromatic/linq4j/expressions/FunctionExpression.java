@@ -31,7 +31,7 @@ import java.util.List;
  *
  * @param <F> Function type
  */
-public final class FunctionExpression<F extends Function<?>>
+public final class FunctionExpression<F>
     extends LambdaExpression {
   public final F function;
   public final BlockStatement body;
@@ -73,6 +73,7 @@ public final class FunctionExpression<F extends Function<?>>
 
   public Invokable compile() {
     return new Invokable() {
+      @Override
       public Object dynamicInvoke(Object... args) {
         final Evaluator evaluator = new Evaluator();
         for (int i = 0; i < args.length; i++) {
@@ -94,6 +95,7 @@ public final class FunctionExpression<F extends Function<?>>
       dynamicFunction = (F) Proxy.newProxyInstance(getClass().getClassLoader(),
           new Class[]{Types.toClass(type)},
           new InvocationHandler() {
+            @Override
             public Object invoke(Object proxy, Method method, Object[] args)
               throws Throwable {
               return x.dynamicInvoke(args);

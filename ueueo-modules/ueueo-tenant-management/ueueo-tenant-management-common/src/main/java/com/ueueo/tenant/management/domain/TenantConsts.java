@@ -6,5 +6,5 @@ package com.ueueo.tenant.management.domain;
  */
 public class TenantConsts {
     /** Default value: 64 */
-    public static final int MaxNameLength = 64;
+    public static final int MAX_NAME_LENGTH = 64;
 }

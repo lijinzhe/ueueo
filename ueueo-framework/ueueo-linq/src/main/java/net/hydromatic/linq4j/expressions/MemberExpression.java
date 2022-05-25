@@ -49,6 +49,7 @@ public class MemberExpression extends Expression {
     return visitor.visit(this, expression1);
   }
 
+  @Override
   public Object evaluate(Evaluator evaluator) {
     final Object o = expression == null
         ? null

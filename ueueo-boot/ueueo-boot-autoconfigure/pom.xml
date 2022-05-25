@@ -49,19 +49,7 @@
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-ddd-application</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-ddd-application-contracts</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-ddd-domain</artifactId>
+            <artifactId>ueueo-domain-driven-desgin</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <optional>true</optional>
         </dependency>

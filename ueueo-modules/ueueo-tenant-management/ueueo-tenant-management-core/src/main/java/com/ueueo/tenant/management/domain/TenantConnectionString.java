@@ -28,16 +28,16 @@ public class TenantConnectionString extends Entity {
     public TenantConnectionString(ID tenantId, @NonNull String name, @NonNull String value) {
         this.tenantId = tenantId;
         Assert.isTrue(StringUtils.isNotBlank(name), "name must not null!");
-        Assert.isTrue(name.length() <= TenantConnectionStringConsts.MaxNameLength,
-                String.format("name length must <= %s!", TenantConnectionStringConsts.MaxNameLength));
+        Assert.isTrue(name.length() <= TenantConnectionStringConsts.MAX_NAME_LENGTH,
+                String.format("name length must <= %s!", TenantConnectionStringConsts.MAX_NAME_LENGTH));
         this.name = name;
         setValue(value);
     }
 
     public void setValue(@NonNull String value) {
         Assert.isTrue(StringUtils.isNotBlank(value), "value must not null!");
-        Assert.isTrue(value.length() <= TenantConnectionStringConsts.MaxValueLength,
-                String.format("value length must <= %s!", TenantConnectionStringConsts.MaxValueLength));
+        Assert.isTrue(value.length() <= TenantConnectionStringConsts.MAX_VALUE_LENGTH,
+                String.format("value length must <= %s!", TenantConnectionStringConsts.MAX_VALUE_LENGTH));
         this.value = value;
     }
 

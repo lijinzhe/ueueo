@@ -41,6 +41,7 @@ public class TypeBinaryExpression extends Expression {
     return visitor.visit(this, expression);
   }
 
+  @Override
   void accept(ExpressionWriter writer, int lprec, int rprec) {
     if (writer.requireParentheses(this, lprec, rprec)) {
       return;

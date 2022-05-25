@@ -10,7 +10,7 @@ import lombok.Data;
  * @date 2021-09-13 21:31
  */
 @Data
-public class LocalizedString {
+public class LocalizedString implements CharSequence {
     /**
      * The name of the string in the resource it was loaded from.
      */
@@ -47,4 +47,18 @@ public class LocalizedString {
         this.searchedLocation = searchedLocation;
     }
 
+    @Override
+    public int length() {
+        return value.length();
+    }
+
+    @Override
+    public char charAt(int index) {
+        return value.charAt(index);
+    }
+
+    @Override
+    public CharSequence subSequence(int start, int end) {
+        return value.subSequence(start, end);
+    }
 }

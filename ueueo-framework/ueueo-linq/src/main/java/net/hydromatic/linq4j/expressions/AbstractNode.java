@@ -53,6 +53,7 @@ public abstract class AbstractNode implements Node {
     return writer.toString();
   }
 
+  @Override
   public void accept(ExpressionWriter writer) {
     accept(writer, 0, 0);
   }
@@ -66,6 +67,7 @@ public abstract class AbstractNode implements Node {
         "un-parse not supported: " + getClass() + ":" + nodeType);
   }
 
+  @Override
   public Node accept(Visitor visitor) {
     throw new RuntimeException(
         "visit not supported: " + getClass() + ":" + nodeType);

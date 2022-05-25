@@ -47,6 +47,7 @@ public class TernaryExpression extends Expression {
     return visitor.visit(this, expression0, expression1, expression2);
   }
 
+  @Override
   void accept(ExpressionWriter writer, int lprec, int rprec) {
     if (writer.requireParentheses(this, lprec, rprec)) {
       return;

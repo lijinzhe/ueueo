@@ -30,6 +30,7 @@ public interface Function1<T0, R> extends Function<R> {
    * @see Functions#identitySelector()
    */
   Function1<Object, Object> IDENTITY = new Function1<Object, Object>() {
+    @Override
     public Object apply(Object v0) {
       return v0;
     }

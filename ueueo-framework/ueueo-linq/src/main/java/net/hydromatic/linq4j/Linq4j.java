@@ -50,6 +50,7 @@ public abstract class Linq4j {
    * enumerator method; does not attempt optimization.
    */
   public static final QueryProvider DEFAULT_PROVIDER = new QueryProviderImpl() {
+    @Override
     public <T> Enumerator<T> executeQuery(Queryable<T> queryable) {
       return queryable.enumerator();
     }
@@ -57,23 +58,28 @@ public abstract class Linq4j {
 
   private static final Enumerator<Object> EMPTY_ENUMERATOR =
       new Enumerator<Object>() {
+        @Override
         public Object current() {
           throw new NoSuchElementException();
         }
 
+        @Override
         public boolean moveNext() {
           return false;
         }
 
+        @Override
         public void reset() {
         }
 
+        @Override
         public void close() {
         }
       };
 
   public static final Enumerable<?> EMPTY_ENUMERABLE =
       new AbstractEnumerable<Object>() {
+        @Override
         public Enumerator<Object> enumerator() {
           return EMPTY_ENUMERATOR;
         }
@@ -96,16 +102,19 @@ public abstract class Linq4j {
     return new Iterator<T>() {
       boolean hasNext = enumerator.moveNext();
 
+      @Override
       public boolean hasNext() {
         return hasNext;
       }
 
+      @Override
       public T next() {
         T t = enumerator.current();
         hasNext = enumerator.moveNext();
         return t;
       }
 
+      @Override
       public void remove() {
         throw new UnsupportedOperationException();
       }
@@ -279,6 +288,7 @@ public abstract class Linq4j {
    */
   public static <T> Enumerable<T> singletonEnumerable(final T element) {
     return new AbstractEnumerable<T>() {
+      @Override
       public Enumerator<T> enumerator() {
         return singletonEnumerator(element);
       }
@@ -405,6 +415,7 @@ public abstract class Linq4j {
       current = (T) DUMMY;
     }
 
+    @Override
     public T current() {
       if (current == DUMMY) {
         throw new NoSuchElementException();
@@ -412,6 +423,7 @@ public abstract class Linq4j {
       return current;
     }
 
+    @Override
     public boolean moveNext() {
       if (iterator.hasNext()) {
         current = iterator.next();
@@ -421,11 +433,13 @@ public abstract class Linq4j {
       return false;
     }
 
+    @Override
     public void reset() {
       iterator = iterable.iterator();
       current = (T) DUMMY;
     }
 
+    @Override
     public void close() {
       final Iterator<T> iterator = this.iterator;
       this.iterator = null;
@@ -474,15 +488,18 @@ public abstract class Linq4j {
       enumerableEnumerator = iterableEnumerator(enumerableList);
     }
 
+    @Override
     public Enumerator<E> enumerator() {
       return new Enumerator<E>() {
         // Never null.
         Enumerator<E> current = emptyEnumerator();
 
+        @Override
         public E current() {
           return current.current();
         }
 
+        @Override
         public boolean moveNext() {
           for (;;) {
             if (current.moveNext()) {
@@ -497,11 +514,13 @@ public abstract class Linq4j {
           }
         }
 
+        @Override
         public void reset() {
           enumerableEnumerator.reset();
           current = emptyEnumerator();
         }
 
+        @Override
         public void close() {
           current.close();
           current = emptyEnumerator();
@@ -517,6 +536,7 @@ public abstract class Linq4j {
       this.iterable = iterable;
     }
 
+    @Override
     public Iterator<T> iterator() {
       return iterable.iterator();
     }
@@ -600,18 +620,22 @@ public abstract class Linq4j {
       this.e = e;
     }
 
+    @Override
     public E current() {
       return e;
     }
 
+    @Override
     public boolean moveNext() {
       return i++ == 0;
     }
 
+    @Override
     public void reset() {
       i = 0;
     }
 
+    @Override
     public void close() {
     }
   }
@@ -620,18 +644,22 @@ public abstract class Linq4j {
   private static class SingletonNullEnumerator<E> implements Enumerator<E> {
     int i = 0;
 
+    @Override
     public E current() {
       return null;
     }
 
+    @Override
     public boolean moveNext() {
       return i++ == 0;
     }
 
+    @Override
     public void reset() {
       i = 0;
     }
 
+    @Override
     public void close() {
     }
   }

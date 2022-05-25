@@ -23,6 +23,7 @@ import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Utilities relating to functions.
@@ -72,6 +73,7 @@ public abstract class Functions {
 
   private static final Function1 CONSTANT_NULL_FUNCTION1 =
       new Function1() {
+        @Override
         public Object apply(Object s) {
           return null;
         }
@@ -98,6 +100,7 @@ public abstract class Functions {
   /** Returns a 1-parameter function that always returns the same value. */
   public static <T, R> Function1<T, R> constant(final R r) {
     return new Function1<T, R>() {
+      @Override
       public R apply(T s) {
         return r;
       }
@@ -117,9 +120,9 @@ public abstract class Functions {
    *
    * @return Predicate that always returns true
    */
-  public static <T> Predicate1<T> truePredicate1() {
+  public static <T> Predicate<T> truePredicate1() {
     //noinspection unchecked
-    return (Predicate1<T>) Predicate1.TRUE;
+    return t -> true;
   }
 
   /**
@@ -129,9 +132,9 @@ public abstract class Functions {
    *
    * @return Predicate that always returns true
    */
-  public static <T> Predicate1<T> falsePredicate1() {
+  public static <T> Predicate<T> falsePredicate1() {
     //noinspection unchecked
-    return (Predicate1<T>) Predicate1.FALSE;
+    return t -> false;
   }
 
   /**
@@ -175,19 +178,16 @@ public abstract class Functions {
    *
    * @return Predicate that tests for desired type
    */
-  public static <T, T2> Predicate1<T> ofTypePredicate(final Class<T2> clazz) {
-    return new Predicate1<T>() {
-      public boolean apply(T v1) {
-        return v1 == null || clazz.isInstance(v1);
-      }
-    };
+  public static <T, T2> Predicate<T> ofTypePredicate(final Class<T2> clazz) {
+    return t -> t == null || clazz.isInstance(t);
   }
 
   public static <T1, T2> Predicate2<T1, T2> toPredicate2(
-      final Predicate1<T1> p1) {
+      final Predicate<T1> p1) {
     return new Predicate2<T1, T2>() {
+      @Override
       public boolean apply(T1 v1, T2 v2) {
-        return p1.apply(v1);
+        return p1.test(v1);
       }
     };
   }
@@ -198,6 +198,7 @@ public abstract class Functions {
   public static <T1, T2> Predicate2<T1, T2> toPredicate(
       final Function2<T1, T2, Boolean> function) {
     return new Predicate2<T1, T2>() {
+      @Override
       public boolean apply(T1 v1, T2 v2) {
         return function.apply(v1, v2);
       }
@@ -207,13 +208,9 @@ public abstract class Functions {
   /**
    * Converts a 1-parameter function to a predicate.
    */
-  private static <T> Predicate1<T> toPredicate(
+  private static <T> Predicate<T> toPredicate(
       final Function1<T, Boolean> function) {
-    return new Predicate1<T>() {
-      public boolean apply(T v1) {
-        return function.apply(v1);
-      }
-    };
+    return function::apply;
   }
 
   /**
@@ -243,6 +240,7 @@ public abstract class Functions {
   public static <T1> Function1<T1, Integer> adapt(
       final IntegerFunction1<T1> f) {
     return new Function1<T1, Integer>() {
+      @Override
       public Integer apply(T1 a0) {
         return f.apply(a0);
       }
@@ -255,6 +253,7 @@ public abstract class Functions {
    */
   public static <T1> Function1<T1, Double> adapt(final DoubleFunction1<T1> f) {
     return new Function1<T1, Double>() {
+      @Override
       public Double apply(T1 a0) {
         return f.apply(a0);
       }
@@ -267,6 +266,7 @@ public abstract class Functions {
    */
   public static <T1> Function1<T1, Long> adapt(final LongFunction1<T1> f) {
     return new Function1<T1, Long>() {
+      @Override
       public Long apply(T1 a0) {
         return f.apply(a0);
       }
@@ -279,6 +279,7 @@ public abstract class Functions {
    */
   public static <T1> Function1<T1, Float> adapt(final FloatFunction1<T1> f) {
     return new Function1<T1, Float>() {
+      @Override
       public Float apply(T1 a0) {
         return f.apply(a0);
       }
@@ -291,10 +292,12 @@ public abstract class Functions {
   public static <T1, R> List<R> adapt(final List<T1> list,
       final Function1<T1, R> f) {
     return new AbstractList<R>() {
+      @Override
       public R get(int index) {
         return f.apply(list.get(index));
       }
 
+      @Override
       public int size() {
         return list.size();
       }
@@ -307,10 +310,12 @@ public abstract class Functions {
   public static <T, R> List<R> adapt(final T[] ts,
       final Function1<T, R> f) {
     return new AbstractList<R>() {
+      @Override
       public R get(int index) {
         return f.apply(ts[index]);
       }
 
+      @Override
       public int size() {
         return ts.length;
       }
@@ -332,13 +337,13 @@ public abstract class Functions {
   /** Returns a list that contains only elements of {@code list} that match
    * {@code predicate}. Avoids allocating a list if all elements match or no
    * elements match. */
-  public static <E> List<E> filter(List<E> list, Predicate1<E> predicate) {
+  public static <E> List<E> filter(List<E> list, Predicate<E> predicate) {
   sniff:
     {
       int hitCount = 0;
       int missCount = 0;
       for (E e : list) {
-        if (predicate.apply(e)) {
+        if (predicate.test(e)) {
           if (missCount > 0) {
             break sniff;
           }
@@ -359,7 +364,7 @@ public abstract class Functions {
     }
     final List<E> list2 = new ArrayList<E>(list.size());
     for (E e : list) {
-      if (predicate.apply(e)) {
+      if (predicate.test(e)) {
         list2.add(e);
       }
     }
@@ -369,9 +374,9 @@ public abstract class Functions {
   /** Returns whether there is an element in {@code list} for which
    * {@code predicate} is true. */
   public static <E> boolean exists(List<? extends E> list,
-      Predicate1<E> predicate) {
+      Predicate<E> predicate) {
     for (E e : list) {
-      if (predicate.apply(e)) {
+      if (predicate.test(e)) {
         return true;
       }
     }
@@ -381,9 +386,9 @@ public abstract class Functions {
   /** Returns whether {@code predicate} is true for all elements of
    * {@code list}. */
   public static <E> boolean all(List<? extends E> list,
-      Predicate1<E> predicate) {
+      Predicate<E> predicate) {
     for (E e : list) {
-      if (!predicate.apply(e)) {
+      if (!predicate.test(e)) {
         return false;
       }
     }
@@ -398,9 +403,11 @@ public abstract class Functions {
       throw new IllegalArgumentException();
     }
     return new AbstractList<E>() {
+      @Override
       public int size() {
         return size;
       }
+      @Override
       public E get(int index) {
         return fn.apply(index);
       }
@@ -490,10 +497,12 @@ public abstract class Functions {
 
   private static class ArrayEqualityComparer
       implements EqualityComparer<Object[]> {
+    @Override
     public boolean equal(Object[] v1, Object[] v2) {
       return Arrays.equals(v1, v2);
     }
 
+    @Override
     public int hashCode(Object[] t) {
       return Arrays.hashCode(t);
     }
@@ -501,10 +510,12 @@ public abstract class Functions {
 
   private static class IdentityEqualityComparer
       implements EqualityComparer<Object> {
+    @Override
     public boolean equal(Object v1, Object v2) {
       return Linq4j.equals(v1, v2);
     }
 
+    @Override
     public int hashCode(Object t) {
       return t == null ? 0x789d : t.hashCode();
     }
@@ -518,6 +529,7 @@ public abstract class Functions {
       this.selector = selector;
     }
 
+    @Override
     public boolean equal(T v1, T v2) {
       return v1 == v2
           || v1 != null
@@ -525,6 +537,7 @@ public abstract class Functions {
           && Linq4j.equals(selector.apply(v1), selector.apply(v2));
     }
 
+    @Override
     public int hashCode(T t) {
       return t == null ? 0x789d : selector.apply(t).hashCode();
     }
@@ -532,6 +545,7 @@ public abstract class Functions {
 
   private static class NullsFirstComparator
       implements Comparator<Comparable>, Serializable {
+    @Override
     public int compare(Comparable o1, Comparable o2) {
       if (o1 == o2) {
         return 0;
@@ -549,6 +563,7 @@ public abstract class Functions {
 
   private static class NullsLastComparator
       implements Comparator<Comparable>, Serializable {
+    @Override
     public int compare(Comparable o1, Comparable o2) {
       if (o1 == o2) {
         return 0;
@@ -566,6 +581,7 @@ public abstract class Functions {
 
   private static class NullsFirstReverseComparator
       implements Comparator<Comparable>, Serializable  {
+    @Override
     public int compare(Comparable o1, Comparable o2) {
       if (o1 == o2) {
         return 0;
@@ -583,6 +599,7 @@ public abstract class Functions {
 
   private static class NullsLastReverseComparator
       implements Comparator<Comparable>, Serializable  {
+    @Override
     public int compare(Comparable o1, Comparable o2) {
       if (o1 == o2) {
         return 0;
@@ -600,14 +617,17 @@ public abstract class Functions {
 
   private static final class Ignore<R, T0, T1>
       implements Function0<R>, Function1<T0, R>, Function2<T0, T1, R> {
+    @Override
     public R apply() {
       return null;
     }
 
+    @Override
     public R apply(T0 p0) {
       return null;
     }
 
+    @Override
     public R apply(T0 p0, T1 p1) {
       return null;
     }

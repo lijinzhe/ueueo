@@ -17,9 +17,6 @@
         <module>ueueo-caching</module>
         <module>ueueo-core</module>
         <module>ueueo-data</module>
-        <module>ueueo-ddd-application</module>
-        <module>ueueo-ddd-application-contracts</module>
-        <module>ueueo-ddd-domain</module>
         <module>ueueo-eventbus-abstractions</module>
         <module>ueueo-guids</module>
         <module>ueueo-localization-abstractions</module>
@@ -67,6 +64,7 @@
         <module>ueueo-caching-redis</module>
         <module>ueueo-specifications</module>
         <module>ueueo-linq</module>
+        <module>ueueo-domain-driven-desgin</module>
     </modules>
 
 </project>

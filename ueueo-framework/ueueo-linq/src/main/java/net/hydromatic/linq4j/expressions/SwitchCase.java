@@ -17,10 +17,23 @@
 */
 package net.hydromatic.linq4j.expressions;
 
+import lombok.Getter;
+
+import java.util.Collection;
+
 /**
  * Represents one case of a {@link SwitchStatement}.
  */
-public class SwitchCase {
+@Getter
+public final class SwitchCase {
+    private Expression body;
+    private Collection<Expression> testValues;
+
+    public SwitchCase update(Collection<Expression> testValues, Expression body) {
+        this.testValues = testValues;
+        this.body = body;
+        return this;
+    }
 }
 
 // End SwitchCase.java

@@ -8,10 +8,10 @@ public class TenantConnectionStringConsts {
     /**
      * Default value: 64
      */
-    public static int MaxNameLength = 64;
+    public static final int MAX_NAME_LENGTH = 64;
 
     /**
      * Default value: 1024
      */
-    public static int MaxValueLength = 1024;
+    public static final int MAX_VALUE_LENGTH = 1024;
 }

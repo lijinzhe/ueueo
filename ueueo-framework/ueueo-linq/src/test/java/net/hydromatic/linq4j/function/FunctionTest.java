@@ -34,7 +34,7 @@ public class FunctionTest {
     // a miss, then a hit
     Assert.assertEquals("[A, C, D]",
         Functions.filter(abc,
-            new Predicate1<String>() {
+            new Predicate<String>() {
               public boolean apply(String v1) {
                 return !v1.equals("B");
               }
@@ -42,7 +42,7 @@ public class FunctionTest {
     // a hit, then all misses
     Assert.assertEquals("[A]",
         Functions.filter(abc,
-            new Predicate1<String>() {
+            new Predicate<String>() {
               public boolean apply(String v1) {
                 return v1.equals("A");
               }
@@ -50,7 +50,7 @@ public class FunctionTest {
     // two hits, then a miss
     Assert.assertEquals("[A, B, D]",
         Functions.filter(abc,
-            new Predicate1<String>() {
+            new Predicate<String>() {
               public boolean apply(String v1) {
                 return !v1.equals("C");
               }
@@ -67,7 +67,7 @@ public class FunctionTest {
     final List<Integer> empty = Collections.emptyList();
     Assert.assertFalse(
         Functions.exists(ints,
-            new Predicate1<Integer>() {
+            new Predicate<Integer>() {
               public boolean apply(Integer v1) {
                 return v1 > 20;
               }
@@ -84,21 +84,21 @@ public class FunctionTest {
     final List<Integer> empty = Collections.emptyList();
     Assert.assertFalse(
         Functions.all(ints,
-            new Predicate1<Integer>() {
+            new Predicate<Integer>() {
               public boolean apply(Integer v1) {
                 return v1 > 20;
               }
             }));
     Assert.assertTrue(
         Functions.all(ints,
-            new Predicate1<Integer>() {
+            new Predicate<Integer>() {
               public boolean apply(Integer v1) {
                 return v1 < 20;
               }
             }));
     Assert.assertFalse(
         Functions.all(ints,
-            new Predicate1<Integer>() {
+            new Predicate<Integer>() {
               public boolean apply(Integer v1) {
                 return v1 < 10;
               }

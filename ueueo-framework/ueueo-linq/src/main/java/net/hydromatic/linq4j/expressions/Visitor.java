@@ -256,6 +256,10 @@ public class Visitor {
     return switchStatement;
   }
 
+  public Expression visit(SwitchExpression switchExpression) {
+    return switchExpression;
+  }
+
   public Statement visit(TryStatement tryStatement) {
     return tryStatement;
   }

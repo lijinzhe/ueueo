@@ -42,6 +42,7 @@ public class ClassDeclaration extends MemberDeclaration {
     this.implemented = implemented;
   }
 
+  @Override
   public void accept(ExpressionWriter writer) {
     String modifiers = Modifier.toString(modifier);
     writer.append(modifiers);
@@ -59,6 +60,7 @@ public class ClassDeclaration extends MemberDeclaration {
     writer.newlineAndIndent();
   }
 
+  @Override
   public ClassDeclaration accept(Visitor visitor) {
     visitor = visitor.preVisit(this);
     final List<MemberDeclaration> members1 =

@@ -21,6 +21,7 @@ import net.hydromatic.linq4j.function.*;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Predicate;
 
 import static net.hydromatic.linq4j.function.Functions.adapt;
 
@@ -96,9 +97,9 @@ public abstract class EnumerableDefaults {
    * satisfy a condition.
    */
   public static <TSource> boolean all(Enumerable<?> enumerable,
-      Predicate1<TSource> predicate) {
+      Predicate<TSource> predicate) {
     for (Object o : enumerable) {
-      if (!predicate.apply((TSource) o)) {
+      if (!predicate.test((TSource) o)) {
         return false;
       }
     }
@@ -118,12 +119,12 @@ public abstract class EnumerableDefaults {
    * satisfies a condition.
    */
   public static <TSource> boolean any(Enumerable<TSource> enumerable,
-      Predicate1<TSource> predicate) {
+      Predicate<TSource> predicate) {
     final Enumerator<TSource> os = enumerable.enumerator();
     try {
       while (os.moveNext()) {
         TSource o = os.current();
-        if (predicate.apply(o)) {
+        if (predicate.test(o)) {
           return true;
         }
       }
@@ -286,6 +287,7 @@ public abstract class EnumerableDefaults {
   public static <TSource, T2> Enumerable<T2> cast(
       final Enumerable<TSource> source, final Class<T2> clazz) {
     return new AbstractEnumerable<T2>() {
+      @Override
       public Enumerator<T2> enumerator() {
         return new CastingEnumerator<T2>(source.enumerator(), clazz);
       }
@@ -351,7 +353,7 @@ public abstract class EnumerableDefaults {
    * in the specified sequence satisfy a condition.
    */
   public static <TSource> int count(Enumerable<TSource> enumerable,
-      Predicate1<TSource> predicate) {
+      Predicate<TSource> predicate) {
     return (int) longCount(enumerable, predicate);
   }
 
@@ -492,9 +494,9 @@ public abstract class EnumerableDefaults {
    * satisfies a specified condition.
    */
   public static <TSource> TSource first(Enumerable<TSource> enumerable,
-      Predicate1<TSource> predicate) {
+      Predicate<TSource> predicate) {
     for (TSource o : enumerable) {
-      if (predicate.apply(o)) {
+      if (predicate.test(o)) {
         return o;
       }
     }
@@ -516,7 +518,7 @@ public abstract class EnumerableDefaults {
    * found.
    */
   public static <TSource> TSource firstOrDefault(Enumerable<TSource> enumerable,
-      Predicate1<TSource> predicate) {
+      Predicate<TSource> predicate) {
     throw Extensions.todo();
   }
 
@@ -679,19 +681,23 @@ public abstract class EnumerableDefaults {
       os.close();
     }
     return new AbstractEnumerable2<TResult>() {
+      @Override
       public Iterator<TResult> iterator() {
         final Iterator<Map.Entry<TKey, TAccumulate>> iterator =
             map.entrySet().iterator();
         return new Iterator<TResult>() {
+          @Override
           public boolean hasNext() {
             return iterator.hasNext();
           }
 
+          @Override
           public TResult next() {
             final Map.Entry<TKey, TAccumulate> entry = iterator.next();
             return resultSelector.apply(entry.getKey(), entry.getValue());
           }
 
+          @Override
           public void remove() {
             throw new UnsupportedOperationException();
           }
@@ -733,8 +739,10 @@ public abstract class EnumerableDefaults {
       final Enumerator<Map.Entry<TKey, TSource>> entries =
           Linq4j.enumerator(outerMap.entrySet());
 
+      @Override
       public Enumerator<TResult> enumerator() {
         return new Enumerator<TResult>() {
+          @Override
           public TResult current() {
             final Map.Entry<TKey, TSource> entry = entries.current();
             final Enumerable<TInner> inners = innerLookup.get(entry.getKey());
@@ -973,7 +981,7 @@ public abstract class EnumerableDefaults {
    * satisfies a specified condition.
    */
   public static <TSource> TSource last(Enumerable<TSource> enumerable,
-      Predicate1<TSource> predicate) {
+      Predicate<TSource> predicate) {
     throw Extensions.todo();
   }
 
@@ -992,7 +1000,7 @@ public abstract class EnumerableDefaults {
    * found.
    */
   public static <TSource> TSource lastOrDefault(Enumerable<TSource> enumerable,
-      Predicate1<TSource> predicate) {
+      Predicate<TSource> predicate) {
     throw Extensions.todo();
   }
 
@@ -1009,9 +1017,9 @@ public abstract class EnumerableDefaults {
    * in a sequence satisfy a condition.
    */
   public static <TSource> long longCount(Enumerable<TSource> enumerable,
-      Predicate1<TSource> predicate) {
+      Predicate<TSource> predicate) {
     // Shortcut if this is a collection and the predicate is always true.
-    if (predicate == Predicate1.TRUE && enumerable instanceof Collection) {
+    if (predicate.test(null) && enumerable instanceof Collection) {
       return ((Collection) enumerable).size();
     }
     int n = 0;
@@ -1019,7 +1027,7 @@ public abstract class EnumerableDefaults {
     try {
       while (os.moveNext()) {
         TSource o = os.current();
-        if (predicate.apply(o)) {
+        if (predicate.test(o)) {
           ++n;
         }
       }
@@ -1558,7 +1566,7 @@ public abstract class EnumerableDefaults {
    * more than one such element exists.
    */
   public static <TSource> TSource single(Enumerable<TSource> source,
-      Predicate1<TSource> predicate) {
+      Predicate<TSource> predicate) {
     throw Extensions.todo();
   }
 
@@ -1579,7 +1587,7 @@ public abstract class EnumerableDefaults {
    * one element satisfies the condition.
    */
   public static <TSource> TSource singleOrDefault(Enumerable<TSource> source,
-      Predicate1<TSource> predicate) {
+      Predicate<TSource> predicate) {
     throw Extensions.todo();
   }
 
@@ -1603,7 +1611,7 @@ public abstract class EnumerableDefaults {
    * elements.
    */
   public static <TSource> Enumerable<TSource> skipWhile(
-      Enumerable<TSource> source, Predicate1<TSource> predicate) {
+      Enumerable<TSource> source, Predicate<TSource> predicate) {
     return skipWhile(source, Functions.<TSource, Integer>toPredicate2(
         predicate));
   }
@@ -1745,7 +1753,7 @@ public abstract class EnumerableDefaults {
    * specified condition is true.
    */
   public static <TSource> Enumerable<TSource> takeWhile(
-      Enumerable<TSource> source, final Predicate1<TSource> predicate) {
+      Enumerable<TSource> source, final Predicate<TSource> predicate) {
     return takeWhile(source, Functions.<TSource, Integer>toPredicate2(
         predicate));
   }
@@ -2019,29 +2027,33 @@ public abstract class EnumerableDefaults {
    * predicate.
    */
   public static <TSource> Enumerable<TSource> where(
-      final Enumerable<TSource> source, final Predicate1<TSource> predicate) {
+      final Enumerable<TSource> source, final Predicate<TSource> predicate) {
     assert predicate != null;
     return new AbstractEnumerable<TSource>() {
       public Enumerator<TSource> enumerator() {
         final Enumerator<TSource> enumerator = source.enumerator();
         return new Enumerator<TSource>() {
+          @Override
           public TSource current() {
             return enumerator.current();
           }
 
+          @Override
           public boolean moveNext() {
             while (enumerator.moveNext()) {
-              if (predicate.apply(enumerator.current())) {
+              if (predicate.test(enumerator.current())) {
                 return true;
               }
             }
             return false;
           }
 
+          @Override
           public void reset() {
             enumerator.reset();
           }
 
+          @Override
           public void close() {
             enumerator.close();
           }
@@ -2059,15 +2071,18 @@ public abstract class EnumerableDefaults {
       final Enumerable<TSource> source,
       final Predicate2<TSource, Integer> predicate) {
     return new AbstractEnumerable<TSource>() {
+      @Override
       public Enumerator<TSource> enumerator() {
         return new Enumerator<TSource>() {
           final Enumerator<TSource> enumerator = source.enumerator();
           int n = -1;
 
+          @Override
           public TSource current() {
             return enumerator.current();
           }
 
+          @Override
           public boolean moveNext() {
             while (enumerator.moveNext()) {
               ++n;
@@ -2078,11 +2093,13 @@ public abstract class EnumerableDefaults {
             return false;
           }
 
+          @Override
           public void reset() {
             enumerator.reset();
             n = -1;
           }
 
+          @Override
           public void close() {
             enumerator.close();
           }
@@ -2138,10 +2155,12 @@ public abstract class EnumerableDefaults {
       this.predicate = predicate;
     }
 
+    @Override
     public TSource current() {
       return enumerator.current();
     }
 
+    @Override
     public boolean moveNext() {
       if (!done) {
         if (enumerator.moveNext() && predicate.apply(enumerator.current(),
@@ -2154,12 +2173,14 @@ public abstract class EnumerableDefaults {
       return false;
     }
 
+    @Override
     public void reset() {
       enumerator.reset();
       done = false;
       n = -1;
     }
 
+    @Override
     public void close() {
       enumerator.close();
     }
@@ -2178,10 +2199,12 @@ public abstract class EnumerableDefaults {
       this.predicate = predicate;
     }
 
+    @Override
     public TSource current() {
       return enumerator.current();
     }
 
+    @Override
     public boolean moveNext() {
       for (;;) {
         if (!enumerator.moveNext()) {
@@ -2197,12 +2220,14 @@ public abstract class EnumerableDefaults {
       }
     }
 
+    @Override
     public void reset() {
       enumerator.reset();
       started = false;
       n = -1;
     }
 
+    @Override
     public void close() {
       enumerator.close();
     }
@@ -2217,18 +2242,22 @@ public abstract class EnumerableDefaults {
       this.clazz = clazz;
     }
 
+    @Override
     public T current() {
       return clazz.cast(enumerator.current());
     }
 
+    @Override
     public boolean moveNext() {
       return enumerator.moveNext();
     }
 
+    @Override
     public void reset() {
       enumerator.reset();
     }
 
+    @Override
     public void close() {
       enumerator.close();
     }
@@ -2281,16 +2310,19 @@ public abstract class EnumerableDefaults {
               map.entrySet().iterator();
 
           return new Iterator<Entry<K, V>>() {
+            @Override
             public boolean hasNext() {
               return iterator.hasNext();
             }
 
+            @Override
             public Entry<K, V> next() {
               Entry<Wrapped<K>, V> next = iterator.next();
               return new SimpleEntry<K, V>(next.getKey().element,
                   next.getValue());
             }
 
+            @Override
             public void remove() {
               iterator.remove();
             }

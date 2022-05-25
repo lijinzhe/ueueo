@@ -6,17 +6,17 @@ import com.ueueo.data.annotations.Required;
 import com.ueueo.data.objectextending.ExtensibleObject;
 import com.ueueo.tenant.management.domain.TenantConsts;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
- * TODO Description Of This JAVA Class.
- *
  * @author Lee
  * @date 2022-05-20 14:10
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class TenantCreateOrUpdateDtoBase extends ExtensibleObject {
     @Required
-    @MaxLength(TenantConsts.MaxNameLength)
+    @MaxLength(TenantConsts.MAX_NAME_LENGTH)
     @Display(name = "TenantName")
     private String name;
 

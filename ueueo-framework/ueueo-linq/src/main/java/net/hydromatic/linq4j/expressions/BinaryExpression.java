@@ -45,6 +45,7 @@ public class BinaryExpression extends Expression {
     return visitor.visit(this, expression0, expression1);
   }
 
+  @Override
   public Object evaluate(Evaluator evaluator) {
     switch (nodeType) {
     case AndAlso:
@@ -152,6 +153,7 @@ public class BinaryExpression extends Expression {
     }
   }
 
+  @Override
   void accept(ExpressionWriter writer, int lprec, int rprec) {
     if (writer.requireParentheses(this, lprec, rprec)) {
       return;

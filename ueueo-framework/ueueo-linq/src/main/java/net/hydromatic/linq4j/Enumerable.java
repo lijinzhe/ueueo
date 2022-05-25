@@ -34,6 +34,7 @@ public interface Enumerable<T>
    *
    * @see EnumerableDefaults#asQueryable(Enumerable)
    */
+  @Override
   Queryable<T> asQueryable();
 
 }

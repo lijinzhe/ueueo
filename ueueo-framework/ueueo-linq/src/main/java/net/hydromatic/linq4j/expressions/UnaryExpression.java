@@ -38,6 +38,7 @@ public class UnaryExpression extends Expression {
     return visitor.visit(this, expression);
   }
 
+  @Override
   void accept(ExpressionWriter writer, int lprec, int rprec) {
     switch (nodeType) {
     case Convert:

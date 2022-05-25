@@ -53,7 +53,7 @@ public class TenantStore implements ITenantStore {
         if (id.hasValue()) {
             //TODO: No need this if we can implement to define host side (or tenant-independent) entities!
             currentTenant.change(null, null);
-            Tenant tenant = tenantRepository.findById(id, false);
+            Tenant tenant = tenantRepository.getById(id, false);
             return setCache(cacheKey, tenant);
         }
         if (StringUtils.isNotBlank(name)) {

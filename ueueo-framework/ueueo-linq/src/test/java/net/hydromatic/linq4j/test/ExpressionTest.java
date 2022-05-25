@@ -825,9 +825,7 @@ public class ExpressionTest {
     // The following statement first creates an expression tree,
     // then compiles it, and then runs it.
     int x =
-        Expressions.<Function1<String, Integer>>lambda(
-            methodCall,
-            new ParameterExpression[] { param })
+        Expressions.<Function1<String, Integer>>lambda(methodCall, new ParameterExpression[] { param })
             .getFunction()
             .apply("1234");
     assertEquals(1234, x);
