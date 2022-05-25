@@ -2,7 +2,7 @@ package com.ueueo.features;
 
 import com.ueueo.localization.FixedLocalizableString;
 import com.ueueo.localization.ILocalizableString;
-import com.ueueo.validation.IStringValueType;
+import com.ueueo.validation.stringvalues.IStringValueType;
 import lombok.Getter;
 import lombok.Setter;
 

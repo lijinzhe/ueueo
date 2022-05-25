@@ -1,4 +1,4 @@
-package com.ueueo.validation;
+package com.ueueo.validation.stringvalues;
 
 /**
  * @author Lee
