@@ -1,6 +1,6 @@
 package com.ueueo.tenant.management.application;
 
-import com.ueueo.auditing.DisableAudited;
+import com.ueueo.auditing.DisableAuditing;
 import com.ueueo.data.annotations.EmailAddress;
 import com.ueueo.data.annotations.MaxLength;
 import com.ueueo.data.annotations.Required;
@@ -22,6 +22,6 @@ public class TenantCreateDto extends TenantCreateOrUpdateDtoBase {
 
     @Required
     @MaxLength(128)
-    @DisableAudited
+    @DisableAuditing
     private String adminPassword;
 }

@@ -5,7 +5,6 @@ import com.ueueo.claims.Claim;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ import java.util.List;
  */
 public interface ICurrentUser {
 
-    boolean getIsAuthenticated();
+    boolean isAuthenticated();
 
     @Nullable
     ID getId();
@@ -54,4 +53,5 @@ public interface ICurrentUser {
     List<Claim> getAllClaims();
 
     boolean isInRole(String roleName);
+
 }

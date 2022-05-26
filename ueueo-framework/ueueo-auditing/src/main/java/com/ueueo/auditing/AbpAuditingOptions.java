@@ -5,7 +5,6 @@ import lombok.Data;
 import java.beans.Expression;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -46,16 +45,16 @@ public class AbpAuditingOptions {
      */
     private boolean alwaysLogOnException = true;
 
-    private List<Function<AuditLogInfo, Future<Boolean>>> alwaysLogSelectors;
+    private List<Function<AuditLogInfo, Boolean>> alwaysLogSelectors;
 
     private List<AuditLogContributor> contributors;
 
     private List<Class<?>> ignoredTypes;
 
-    private IEntityHistorySelectorList entityHistorySelectorList;
+    private IEntityHistorySelectorList entityHistorySelectors;
 
     //TODO: Move this to asp.net core layer or convert it to a more dynamic strategy?
-    public boolean isEnabledForGetRequests = false;
+    private boolean isEnabledForGetRequests = false;
 
     public AbpAuditingOptions() {
         alwaysLogSelectors = new ArrayList<>();
@@ -63,6 +62,6 @@ public class AbpAuditingOptions {
         ignoredTypes = new ArrayList<>();
         ignoredTypes.add(Stream.class);
         ignoredTypes.add(Expression.class);
-        entityHistorySelectorList = new EntityHistorySelectorList();
+        entityHistorySelectors = new EntityHistorySelectorList();
     }
 }

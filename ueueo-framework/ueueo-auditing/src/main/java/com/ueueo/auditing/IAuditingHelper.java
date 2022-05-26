@@ -16,7 +16,7 @@ public interface IAuditingHelper {
      *
      * @return
      */
-    boolean shouldSaveAudit(Method methodInfo, boolean defaultValue);
+    boolean shouldSaveAudit(Method methodInfo, Boolean defaultValue);
 
     /**
      * @param entityType
@@ -24,7 +24,7 @@ public interface IAuditingHelper {
      *
      * @return
      */
-    boolean isEntityHistoryEnabled(Class<?> entityType, boolean defaultValue);
+    boolean isEntityHistoryEnabled(Class<?> entityType, Boolean defaultValue);
 
     AuditLogInfo createAuditLogInfo();
 

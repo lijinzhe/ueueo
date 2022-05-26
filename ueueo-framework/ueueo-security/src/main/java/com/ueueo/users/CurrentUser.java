@@ -6,11 +6,9 @@ import com.ueueo.security.claims.AbpClaimTypes;
 import com.ueueo.security.claims.ICurrentPrincipalAccessor;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.lang.Nullable;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -29,7 +27,7 @@ public class CurrentUser implements ICurrentUser {
     }
 
     @Override
-    public boolean getIsAuthenticated() {
+    public boolean isAuthenticated() {
         return getId() != null;
     }
 
@@ -43,37 +41,37 @@ public class CurrentUser implements ICurrentUser {
 
     @Override
     public String getUserName() {
-        return findClaimValue(AbpClaimTypes.UserName);
+        return CurrentUserExtensions.findClaimValue(this, AbpClaimTypes.UserName);
     }
 
     @Override
     public String getName() {
-        return findClaimValue(AbpClaimTypes.Name);
+        return CurrentUserExtensions.findClaimValue(this, AbpClaimTypes.Name);
     }
 
     @Override
     public String getSurName() {
-        return findClaimValue(AbpClaimTypes.SurName);
+        return CurrentUserExtensions.findClaimValue(this, AbpClaimTypes.SurName);
     }
 
     @Override
     public String getPhoneNumber() {
-        return findClaimValue(AbpClaimTypes.PhoneNumber);
+        return CurrentUserExtensions.findClaimValue(this, AbpClaimTypes.PhoneNumber);
     }
 
     @Override
     public boolean getPhoneNumberVerified() {
-        return "true".equalsIgnoreCase(findClaimValue(AbpClaimTypes.PhoneNumberVerified));
+        return "true".equalsIgnoreCase(CurrentUserExtensions.findClaimValue(this, AbpClaimTypes.PhoneNumberVerified));
     }
 
     @Override
     public String getEmail() {
-        return findClaimValue(AbpClaimTypes.Email);
+        return CurrentUserExtensions.findClaimValue(this, AbpClaimTypes.Email);
     }
 
     @Override
     public boolean getEmailVerified() {
-        return "true".equalsIgnoreCase(findClaimValue(AbpClaimTypes.EmailVerified));
+        return "true".equalsIgnoreCase(CurrentUserExtensions.findClaimValue(this, AbpClaimTypes.EmailVerified));
     }
 
     @Override
@@ -120,29 +118,4 @@ public class CurrentUser implements ICurrentUser {
         return findClaims(AbpClaimTypes.Role).stream().anyMatch(claim -> claim.getValue().equals(roleName));
     }
 
-    public ID findImpersonatorTenantId() {
-        return findClaimIDValue(AbpClaimTypes.ImpersonatorTenantId);
-    }
-
-    public ID findImpersonatorUserId() {
-        return findClaimIDValue(AbpClaimTypes.ImpersonatorUserId);
-    }
-
-    public String findImpersonatorTenantName() {
-        return findClaimValue(AbpClaimTypes.ImpersonatorTenantName);
-    }
-
-    public String findImpersonatorUserName() {
-        return findClaimValue(AbpClaimTypes.ImpersonatorUserName);
-    }
-
-    @Nullable
-    public String findClaimValue(String claimType) {
-        return Optional.ofNullable(findClaim(claimType)).map(Claim::getValue).orElse(null);
-    }
-
-    @Nullable
-    public ID findClaimIDValue(String claimType) {
-        return Optional.ofNullable(findClaim(claimType)).map(claim -> ID.valueOf(claim.getValue())).orElse(null);
-    }
 }

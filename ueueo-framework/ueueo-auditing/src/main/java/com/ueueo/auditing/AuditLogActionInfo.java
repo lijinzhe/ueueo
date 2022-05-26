@@ -20,7 +20,7 @@ public class AuditLogActionInfo implements IHasExtraProperties {
 
     private Date executionTime;
 
-    private int executionDuration;
+    private long executionDuration;
 
     private ExtraPropertyDictionary extraProperties;
 

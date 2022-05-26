@@ -163,7 +163,7 @@ public class PermissionDefinition implements IHasSimpleStateCheckers<PermissionD
     }
 
     @Override
-    public List<ISimpleStateChecker<PermissionDefinition>> stateCheckers() {
+    public List<ISimpleStateChecker<PermissionDefinition>> getStateCheckers() {
         return stateCheckers;
     }
 

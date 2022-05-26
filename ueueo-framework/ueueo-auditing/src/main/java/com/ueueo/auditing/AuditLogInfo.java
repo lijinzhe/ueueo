@@ -30,15 +30,15 @@ public class AuditLogInfo implements IHasExtraProperties, Serializable {
 
     private ID impersonatorUserId;
 
-    private ID impersonatortenantid;
+    private ID impersonatorTenantId;
 
-    private String ImpersonatorUserName;
+    private String impersonatorUserName;
 
     private String impersonatorTenantName;
 
     private Date executionTime;
 
-    private int executionDuration;
+    private long executionDuration;
 
     private String clientId;
 

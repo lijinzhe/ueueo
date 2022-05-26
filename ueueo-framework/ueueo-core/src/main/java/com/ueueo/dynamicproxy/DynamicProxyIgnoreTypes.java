@@ -15,19 +15,25 @@ import java.util.Set;
  * @date 2022-05-18 11:23
  */
 public class DynamicProxyIgnoreTypes {
-    private static final Set<Class<?>> IgnoredTypes = new HashSet<>();
+    private static final Set<Class<?>> IGNORED_TYPES = new HashSet<>();
 
     public static void add(Class<?> t) {
-        synchronized (IgnoredTypes) {
-            IgnoredTypes.add(t);
+        synchronized (IGNORED_TYPES) {
+            IGNORED_TYPES.add(t);
         }
     }
 
+    /**
+     *
+     * @param type
+     * @param includeDerivedTypes default true
+     * @return
+     */
     public static boolean contains(Class<?> type, Boolean includeDerivedTypes) {
-        synchronized (IgnoredTypes) {
+        synchronized (IGNORED_TYPES) {
             return includeDerivedTypes == null || includeDerivedTypes
-                    ? IgnoredTypes.stream().anyMatch(t -> t.isAssignableFrom(type))
-                    : IgnoredTypes.contains(type);
+                    ? IGNORED_TYPES.stream().anyMatch(t -> t.isAssignableFrom(type))
+                    : IGNORED_TYPES.contains(type);
         }
     }
 }

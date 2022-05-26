@@ -1,17 +1,18 @@
 package com.ueueo.simplestatechecking;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 /**
- * TODO ABP代码
- *
  * @author Lee
  * @date 2021-08-26 15:22
  */
 public class SimpleStateCheckerResult<TState extends IHasSimpleStateCheckers<TState>> extends HashMap<TState, Boolean> {
-    public SimpleStateCheckerResult() {
+    public SimpleStateCheckerResult() {}
 
+    public SimpleStateCheckerResult(TState... states) {
+        this(Arrays.asList(states), true);
     }
 
     public SimpleStateCheckerResult(List<TState> states) {

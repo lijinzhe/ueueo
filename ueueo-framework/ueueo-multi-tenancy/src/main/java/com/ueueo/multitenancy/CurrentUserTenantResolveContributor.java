@@ -21,7 +21,7 @@ public class CurrentUserTenantResolveContributor extends TenantResolveContributo
     public void resolve(ITenantResolveContext context) {
         //TODO 获取当前登录用户
         ICurrentUser currentUser = null;
-        if (currentUser != null && currentUser.getIsAuthenticated()) {
+        if (currentUser != null && currentUser.isAuthenticated()) {
             context.setHandled(true);
             context.setTenantIdOrName(currentUser.getTenantId().toString());
         }
