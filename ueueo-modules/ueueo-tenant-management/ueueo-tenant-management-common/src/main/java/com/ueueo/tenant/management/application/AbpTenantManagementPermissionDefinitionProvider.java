@@ -1,9 +1,9 @@
 package com.ueueo.tenant.management.application;
 
-import com.ueueo.authorization.abstractions.permissions.IPermissionDefinitionContext;
-import com.ueueo.authorization.abstractions.permissions.PermissionDefinition;
-import com.ueueo.authorization.abstractions.permissions.PermissionDefinitionProvider;
-import com.ueueo.authorization.abstractions.permissions.PermissionGroupDefinition;
+import com.ueueo.authorization.permissions.IPermissionDefinitionContext;
+import com.ueueo.authorization.permissions.PermissionDefinition;
+import com.ueueo.authorization.permissions.PermissionDefinitionProvider;
+import com.ueueo.authorization.permissions.PermissionGroupDefinition;
 import com.ueueo.localization.LocalizableString;
 import com.ueueo.multitenancy.MultiTenancySides;
 import com.ueueo.tenant.management.localization.AbpTenantManagementResource;

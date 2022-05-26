@@ -65,6 +65,9 @@
         <module>ueueo-domain-driven-desgin</module>
         <module>ueueo-validation-abstractions</module>
         <module>ueueo-virtual-file-system</module>
+        <module>ueueo-multi-lingual-objects</module>
+        <module>ueueo-identity-model</module>
+        <module>ueueo-http-client-identity-model</module>
     </modules>
 
 </project>
