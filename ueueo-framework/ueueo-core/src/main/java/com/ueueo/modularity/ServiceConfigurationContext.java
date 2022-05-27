@@ -1,6 +1,7 @@
 package com.ueueo.modularity;
 
 import lombok.Data;
+import org.springframework.context.ApplicationContext;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Objects;
 @Data
 public class ServiceConfigurationContext {
 
-    private List<Class<?>> services;
+    private ApplicationContext applicationContext;
 
     private Map<String, Object> items;
 
@@ -25,11 +26,11 @@ public class ServiceConfigurationContext {
      * This is a shortcut usage of the <see cref="Items"/> dictionary.
      * Returns null if given key is not found in the <see cref="Items"/> dictionary.
      *
-     * @param services
+     * @param applicationContext
      */
-    public ServiceConfigurationContext(List<Class<?>> services) {
-        Objects.requireNonNull(services);
-        this.services = services;
+    public ServiceConfigurationContext(ApplicationContext applicationContext) {
+        Objects.requireNonNull(applicationContext);
+        this.applicationContext = applicationContext;
         this.items = new HashMap<>();
     }
 }

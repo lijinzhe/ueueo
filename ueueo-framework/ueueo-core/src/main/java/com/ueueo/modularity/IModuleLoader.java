@@ -1,6 +1,7 @@
 package com.ueueo.modularity;
 
 import com.ueueo.modularity.plugins.PlugInSourceList;
+import org.springframework.context.ApplicationContext;
 
 import java.util.List;
 
@@ -9,5 +10,5 @@ import java.util.List;
  * @date 2021-08-24 13:55
  */
 public interface IModuleLoader {
-    List<IAbpModuleDescriptor> loadModules(List<Class<?>> services, Class<?> startupModuleType, PlugInSourceList plugInSources);
+    List<IAbpModuleDescriptor> loadModules(ApplicationContext applicationContext, Class<?> startupModuleType, PlugInSourceList plugInSources);
 }

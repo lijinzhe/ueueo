@@ -1,6 +1,5 @@
 package com.ueueo.simplestatechecking;
 
-import com.ueueo.dependencyinjection.system.IServiceProvider;
 import lombok.Getter;
 
 /**
@@ -10,12 +9,9 @@ import lombok.Getter;
 @Getter
 public class SimpleStateCheckerContext<TState extends IHasSimpleStateCheckers<TState>> {
 
-    private IServiceProvider serviceProvider;
-
     private TState state;
 
-    public SimpleStateCheckerContext(IServiceProvider serviceProvider, TState state) {
-        this.serviceProvider = serviceProvider;
+    public SimpleStateCheckerContext(TState state) {
         this.state = state;
     }
 

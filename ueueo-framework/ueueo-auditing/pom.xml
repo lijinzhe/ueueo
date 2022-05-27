@@ -17,6 +17,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-auditing-contracts</artifactId>
             <version>0.0.1-SNAPSHOT</version>
@@ -34,25 +38,21 @@
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-security</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-multi-tenancy</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-threading</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-uow</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

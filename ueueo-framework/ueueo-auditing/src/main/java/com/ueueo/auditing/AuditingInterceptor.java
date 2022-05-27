@@ -1,12 +1,10 @@
 package com.ueueo.auditing;
 
 import com.ueueo.aspects.AbpCrossCuttingConcerns;
-import com.ueueo.dependencyinjection.system.IServiceScope;
-import com.ueueo.dependencyinjection.system.IServiceScopeFactory;
-import com.ueueo.dynamicproxy.AbpInterceptor;
-import com.ueueo.dynamicproxy.IAbpMethodInvocation;
 import com.ueueo.uow.IUnitOfWorkManager;
 import com.ueueo.users.ICurrentUser;
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.springframework.util.Assert;
@@ -17,52 +15,58 @@ import java.util.function.Function;
  * @author Lee
  * @date 2022-05-26 17:37
  */
-public class AuditingInterceptor extends AbpInterceptor {
+public class AuditingInterceptor implements MethodInterceptor {
 
-    private final IServiceScopeFactory serviceScopeFactory;
+    private final IAuditingHelper auditingHelper;
+    private final IAuditingManager auditingManager;
+    private final AbpAuditingOptions auditingOptions;
+    private final IUnitOfWorkManager unitOfWorkManager;
+    private final ICurrentUser currentUser;
 
-    public AuditingInterceptor(IServiceScopeFactory serviceScopeFactory) {
-        this.serviceScopeFactory = serviceScopeFactory;
+    public AuditingInterceptor(IAuditingHelper auditingHelper,
+                               IAuditingManager auditingManager,
+                               AbpAuditingOptions auditingOptions,
+                               IUnitOfWorkManager unitOfWorkManager,
+                               ICurrentUser currentUser
+    ) {
+        this.auditingHelper = auditingHelper;
+        this.auditingManager = auditingManager;
+        this.auditingOptions = auditingOptions;
+        this.unitOfWorkManager = unitOfWorkManager;
+        this.currentUser = currentUser;
     }
 
     @Override
-    public void intercept(IAbpMethodInvocation invocation) {
-        IServiceScope serviceScope = serviceScopeFactory.createScope();
-        IAuditingHelper auditingHelper = serviceScope.getServiceProvider().getRequiredService(IAuditingHelper.class);
-        AbpAuditingOptions auditingOptions = serviceScope.getServiceProvider().getRequiredService(AbpAuditingOptions.class);
-
+    public Object invoke(MethodInvocation invocation) throws Throwable {
         if (!shouldIntercept(invocation, auditingOptions, auditingHelper)) {
-            invocation.proceed();
-            return;
+            return invocation.proceed();
         }
 
-        IAuditingManager auditingManager = serviceScope.getServiceProvider().getRequiredService(IAuditingManager.class);
         if (auditingManager.getCurrent() != null) {
-            proceedByLogging(invocation, auditingHelper, auditingManager.getCurrent());
+            return proceedByLogging(invocation);
         } else {
-            ICurrentUser currentUser = serviceScope.getServiceProvider().getRequiredService(ICurrentUser.class);
-            IUnitOfWorkManager unitOfWorkManager = serviceScope.getServiceProvider().getRequiredService(IUnitOfWorkManager.class);
-            processWithNewAuditingScope(invocation, auditingOptions, currentUser, auditingManager, auditingHelper, unitOfWorkManager);
+            return processWithNewAuditingScope(invocation);
         }
     }
 
-    protected boolean shouldIntercept(IAbpMethodInvocation invocation, AbpAuditingOptions options, IAuditingHelper auditingHelper) {
+    protected boolean shouldIntercept(MethodInvocation invocation, AbpAuditingOptions options, IAuditingHelper auditingHelper) {
         if (!options.isEnabled()) {
             return false;
         }
-        if (AbpCrossCuttingConcerns.isApplied(invocation.getTargetObject(), AbpCrossCuttingConcerns.Auditing)) {
+        Object targetObject = invocation.getThis();
+        if (targetObject != null && AbpCrossCuttingConcerns.isApplied(targetObject, AbpCrossCuttingConcerns.Auditing)) {
             return false;
         }
         return auditingHelper.shouldSaveAudit(invocation.getMethod(), false);
     }
 
-    private static void proceedByLogging(IAbpMethodInvocation invocation, IAuditingHelper auditingHelper, IAuditLogScope auditLogScope) {
-        AuditLogInfo auditLog = auditLogScope.getLog();
-        AuditLogActionInfo auditLogAction = auditingHelper.createAuditLogAction(auditLog, invocation.getTargetObject().getClass(), invocation.getMethod(), invocation.getArguments());
+    private Object proceedByLogging(MethodInvocation invocation) throws Throwable {
+        AuditLogInfo auditLog = auditingManager.getCurrent().getLog();
+        AuditLogActionInfo auditLogAction = auditingHelper.createAuditLogAction(auditLog, invocation.getMethod().getDeclaringClass(), invocation.getMethod(), invocation.getArguments());
         StopWatch stopwatch = StopWatch.createStarted();
         try {
-            invocation.proceed();
-        } catch (Exception ex) {
+            return invocation.proceed();
+        } catch (Throwable ex) {
             auditLog.getExceptions().add(ex);
             throw ex;
         } finally {
@@ -72,20 +76,21 @@ public class AuditingInterceptor extends AbpInterceptor {
         }
     }
 
-    private void processWithNewAuditingScope(IAbpMethodInvocation invocation, AbpAuditingOptions options, ICurrentUser currentUser, IAuditingManager auditingManager, IAuditingHelper auditingHelper, IUnitOfWorkManager unitOfWorkManager) {
+    private Object processWithNewAuditingScope(MethodInvocation invocation) throws Throwable {
         boolean hasError = false;
         IAuditLogSaveHandle saveHandle = auditingManager.beginScope();
         Assert.notNull(auditingManager.getCurrent(), "Current must not null!");
         try {
-            proceedByLogging(invocation, auditingHelper, auditingManager.getCurrent());
+            Object proceedResult = proceedByLogging(invocation);
             if (!auditingManager.getCurrent().getLog().getExceptions().isEmpty()) {
                 hasError = true;
             }
-        } catch (Exception e) {
+            return proceedResult;
+        } catch (Throwable e) {
             hasError = true;
             throw e;
         } finally {
-            if (shouldWriteAuditLog(invocation, auditingManager.getCurrent().getLog(), options, currentUser, hasError)) {
+            if (shouldWriteAuditLog(invocation, auditingManager.getCurrent().getLog(), auditingOptions, currentUser, hasError)) {
                 if (unitOfWorkManager.getCurrent() != null) {
                     try {
                         unitOfWorkManager.getCurrent().saveChanges();
@@ -102,7 +107,7 @@ public class AuditingInterceptor extends AbpInterceptor {
 
     }
 
-    private boolean shouldWriteAuditLog(IAbpMethodInvocation invocation, AuditLogInfo auditLogInfo, AbpAuditingOptions options, ICurrentUser currentUser, boolean hasError) {
+    private boolean shouldWriteAuditLog(MethodInvocation invocation, AuditLogInfo auditLogInfo, AbpAuditingOptions options, ICurrentUser currentUser, boolean hasError) {
         for (Function<AuditLogInfo, Boolean> selector : options.getAlwaysLogSelectors()) {
             if (selector.apply(auditLogInfo)) {
                 return true;

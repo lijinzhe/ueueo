@@ -1,8 +1,7 @@
 package com.ueueo.simplestatechecking;
 
-import com.ueueo.dependencyinjection.ICachedServiceProvider;
-import com.ueueo.dependencyinjection.system.IServiceProvider;
 import lombok.Getter;
+import org.springframework.beans.factory.BeanFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,12 +13,12 @@ import java.util.stream.Collectors;
 @Getter
 public class SimpleStateCheckerManager<TState extends IHasSimpleStateCheckers<TState>> implements ISimpleStateCheckerManager<TState> {
 
-    protected IServiceProvider serviceProvider;
-    protected AbpSimpleStateCheckerOptions<TState> Options;
+    protected BeanFactory beanFactory;
+    protected AbpSimpleStateCheckerOptions<TState> options;
 
-    public SimpleStateCheckerManager(IServiceProvider serviceProvider, AbpSimpleStateCheckerOptions<TState> options) {
-        this.serviceProvider = serviceProvider;
-        this.Options = options;
+    public SimpleStateCheckerManager(BeanFactory beanFactory, AbpSimpleStateCheckerOptions<TState> options) {
+        this.beanFactory = beanFactory;
+        this.options = options;
     }
 
     @Override
@@ -39,7 +38,6 @@ public class SimpleStateCheckerManager<TState extends IHasSimpleStateCheckers<TS
 
         for (ISimpleBatchStateChecker<TState> stateChecker : batchStateCheckers) {
             SimpleBatchStateCheckerContext<TState> context = new SimpleBatchStateCheckerContext<>(
-                    serviceProvider.getRequiredService(ICachedServiceProvider.class),
                     states.stream().filter(x -> x.getStateCheckers().contains(stateChecker)).collect(Collectors.toList()));
             result.putAll(stateChecker.isEnabled(context));
             if (result.values().stream().noneMatch(x -> x)) {
@@ -47,11 +45,10 @@ public class SimpleStateCheckerManager<TState extends IHasSimpleStateCheckers<TS
             }
         }
 
-        for (ISimpleBatchStateChecker<TState> globalStateChecker : Options.getGlobalStateCheckers()
+        for (ISimpleBatchStateChecker<TState> globalStateChecker : options.getGlobalStateCheckers()
                 .stream().filter(ISimpleBatchStateChecker.class::isAssignableFrom)
-                .map(x -> (ISimpleBatchStateChecker<TState>) serviceProvider.getRequiredService(x)).collect(Collectors.toList())) {
+                .map(x -> (ISimpleBatchStateChecker<TState>) beanFactory.getBean(x)).collect(Collectors.toList())) {
             SimpleBatchStateCheckerContext<TState> context = new SimpleBatchStateCheckerContext<TState>(
-                    serviceProvider.getRequiredService(ICachedServiceProvider.class),
                     states.stream()
                             .filter(x -> {
                                 Boolean v = result.get(x);
@@ -71,15 +68,15 @@ public class SimpleStateCheckerManager<TState extends IHasSimpleStateCheckers<TS
     }
 
     protected boolean internalIsEnabled(TState state, boolean useBatchChecker) {
-        SimpleStateCheckerContext<TState> context = new SimpleStateCheckerContext<>(serviceProvider.getRequiredService(ICachedServiceProvider.class), state);
+        SimpleStateCheckerContext<TState> context = new SimpleStateCheckerContext<>(state);
         if (!useBatchChecker) {
             for (ISimpleStateChecker<TState> provider : state.getStateCheckers()) {
                 if (!provider.isEnabled(context)) {
                     return false;
                 }
             }
-            for (ISimpleStateChecker<TState> provider : Options.getGlobalStateCheckers()
-                    .stream().map(x -> serviceProvider.getRequiredService(x)).collect(Collectors.toList())) {
+            for (ISimpleStateChecker<TState> provider : options.getGlobalStateCheckers()
+                    .stream().map(x -> beanFactory.getBean(x)).collect(Collectors.toList())) {
                 if (!provider.isEnabled(context)) {
                     return false;
                 }
@@ -92,10 +89,10 @@ public class SimpleStateCheckerManager<TState extends IHasSimpleStateCheckers<TS
                     return false;
                 }
             }
-            for (ISimpleStateChecker<TState> provider : Options.getGlobalStateCheckers()
+            for (ISimpleStateChecker<TState> provider : options.getGlobalStateCheckers()
                     .stream()
                     .filter(x -> !ISimpleBatchStateChecker.class.isAssignableFrom(x))
-                    .map(x -> serviceProvider.getRequiredService(x)).collect(Collectors.toList())) {
+                    .map(x -> beanFactory.getBean(x)).collect(Collectors.toList())) {
                 if (!provider.isEnabled(context)) {
                     return false;
                 }

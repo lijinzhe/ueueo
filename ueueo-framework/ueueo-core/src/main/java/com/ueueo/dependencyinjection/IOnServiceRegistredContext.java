@@ -1,6 +1,6 @@
 package com.ueueo.dependencyinjection;
 
-import com.ueueo.dynamicproxy.IAbpInterceptor;
+import org.aopalliance.intercept.MethodInterceptor;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @date 2022-05-18 10:26
  */
 public interface IOnServiceRegistredContext {
-    List<Class<? extends IAbpInterceptor>> getInterceptors();
+    List<Class<? extends MethodInterceptor>> getInterceptors();
 
     Class<?> getImplementationType();
 }

@@ -1,7 +1,10 @@
 package com.ueueo.modularity;
 
-import com.weiming.framework.core.AbpException;
-import com.weiming.framework.core.modularity.plugins.PlugInSourceList;
+import com.ueueo.AbpException;
+import com.ueueo.collections.ListExtensions;
+import com.ueueo.modularity.plugins.PlugInSourceList;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,94 +12,84 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * TODO ABP代码
- *
  * @author Lee
  * @date 2021-08-24 14:17
  */
 public class ModuleLoader implements IModuleLoader {
+
     @Override
-    public List<IAbpModuleDescriptor> loadModules(List<Class<?>> services, Class<?> startupModuleType, PlugInSourceList plugInSources) {
-        Objects.requireNonNull(services);
+    public List<IAbpModuleDescriptor> loadModules(ApplicationContext applicationContext, Class<?> startupModuleType, PlugInSourceList plugInSources) {
+        Objects.requireNonNull(applicationContext);
         Objects.requireNonNull(startupModuleType);
         Objects.requireNonNull(plugInSources);
-        List<IAbpModuleDescriptor> modules = getDescriptors(services, startupModuleType, plugInSources);
+
+        List<IAbpModuleDescriptor> modules = getDescriptors(applicationContext, startupModuleType, plugInSources);
         modules = SortByDependency(modules, startupModuleType);
         return modules;
     }
 
-    private List<IAbpModuleDescriptor> getDescriptors(
-            List<Class<?>> services,
-            Class<?> startupModuleType,
-            PlugInSourceList plugInSources) {
+    private List<IAbpModuleDescriptor> getDescriptors(ApplicationContext applicationContext, Class<?> startupModuleType, PlugInSourceList plugInSources) {
         List<AbpModuleDescriptor> modules = new ArrayList<>();
 
-        fillModules(modules, services, startupModuleType, plugInSources);
+        fillModules(modules, applicationContext, startupModuleType, plugInSources);
         setDependencies(modules);
+
         return modules.stream().map(abpModuleDescriptor -> (IAbpModuleDescriptor) abpModuleDescriptor).collect(Collectors.toList());
     }
 
-    protected void fillModules(
-            List<AbpModuleDescriptor> modules,
-            List<Class<?>> services,
-            Class<?> startupModuleType,
-            PlugInSourceList plugInSources) {
-        //        var logger = services.GetInitLogger < AbpApplicationBase > ();
-
+    protected void fillModules(List<AbpModuleDescriptor> modules, ApplicationContext applicationContext,
+                               Class<?> startupModuleType, PlugInSourceList plugInSources) {
         //All modules starting from the startup module
         for (Class<?> moduleType : AbpModuleHelper.findAllModuleTypes(startupModuleType)) {
-            modules.add(createModuleDescriptor(services, moduleType, false));
+            modules.add(createModuleDescriptor(applicationContext, moduleType, false));
         }
 
         //Plugin modules
         for (Class<?> moduleType : plugInSources.getAllModules()) {
-            if (modules.stream().anyMatch(m -> m.type().equals(moduleType))) {
+            if (modules.stream().anyMatch(m -> m.getType().equals(moduleType))) {
                 continue;
             }
-            modules.add(createModuleDescriptor(services, moduleType, true));
+            modules.add(createModuleDescriptor(applicationContext, moduleType, true));
         }
     }
 
     protected void setDependencies(List<AbpModuleDescriptor> modules) {
         for (AbpModuleDescriptor module : modules) {
-            SetDependencies(modules, module);
+            setDependencies(modules, module);
         }
     }
 
     protected List<IAbpModuleDescriptor> SortByDependency(List<IAbpModuleDescriptor> modules, Class<?> startupModuleType) {
-        List<IAbpModuleDescriptor> sortedModules = null;
-        //TODO by Lee on 2021-08-24 14:41 调整依赖顺序
-        //                sortedModules = modules.SortByDependencies(m = > m.Dependencies);
-        //        sortedModules.MoveItem(m = > m.Type == startupModuleType, modules.Count - 1);
+        List<IAbpModuleDescriptor> sortedModules = ListExtensions.sortByDependencies(modules, IAbpModuleDescriptor::getDependencies);
+        ListExtensions.moveItem(sortedModules, m -> m.getType().equals(startupModuleType), modules.size() - 1);
         return sortedModules;
     }
 
-    protected AbpModuleDescriptor createModuleDescriptor(List<Class<?>> services, Class<?> moduleType, Boolean isLoadedAsPlugIn) {
-        return new AbpModuleDescriptor(moduleType, CreateAndRegisterModule(services, moduleType), isLoadedAsPlugIn);
+    protected AbpModuleDescriptor createModuleDescriptor(ApplicationContext applicationContext, Class<?> moduleType, Boolean isLoadedAsPlugIn) {
+        return new AbpModuleDescriptor(moduleType, createAndRegisterModule(applicationContext, moduleType), isLoadedAsPlugIn);
     }
 
-    protected IAbpModule CreateAndRegisterModule(List<Class<?>> services, Class<?> moduleType) {
+    protected IAbpModule createAndRegisterModule(ApplicationContext applicationContext, Class<?> moduleType) {
         IAbpModule module = null;
         try {
             module = (IAbpModule) moduleType.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+            DefaultListableBeanFactory beanFactory = (DefaultListableBeanFactory) applicationContext.getAutowireCapableBeanFactory();
+            beanFactory.registerSingleton(moduleType.getName(), module);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        //TODO by Lee on 2021-08-24 14:40 注入到Spring Bean 容器中
-        //        var module = (IAbpModule) Activator.CreateInstance(moduleType);
-        //        services.AddSingleton(moduleType, module);
+
         return module;
     }
 
-    protected void SetDependencies(List<AbpModuleDescriptor> modules, AbpModuleDescriptor module) {
-        for (Class<?> dependedModuleType : AbpModuleHelper.findDependedModuleTypes(module.type())) {
-            AbpModuleDescriptor dependedModule = modules.stream().filter(m -> m.type().equals(dependedModuleType)).findFirst().orElse(null);
+    protected void setDependencies(List<AbpModuleDescriptor> modules, AbpModuleDescriptor module) {
+        for (Class<?> dependedModuleType : AbpModuleHelper.findDependedModuleTypes(module.getType())) {
+            AbpModuleDescriptor dependedModule = modules.stream().filter(m -> m.getType().equals(dependedModuleType)).findFirst().orElse(null);
             if (dependedModule == null) {
-                throw new AbpException("Could not find a depended module " + dependedModuleType.getName() + " for " + module.type().getName());
+                throw new AbpException("Could not find a depended module " + dependedModuleType.getName() + " for " + module.getType().getName());
             }
             module.addDependency(dependedModule);
         }
     }
+
 }

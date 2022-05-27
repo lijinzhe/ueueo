@@ -1,14 +1,13 @@
 package com.ueueo.modularity;
 
+import com.ueueo.AbpException;
 import com.ueueo.ApplicationInitializationContext;
 import com.ueueo.ApplicationShutdownContext;
-import com.weiming.framework.core.AbpException;
 
+import java.lang.reflect.Modifier;
 import java.util.function.Consumer;
 
 /**
- * TODO ABP代码
- *
  * @author Lee
  * @date 2021-08-20 09:37
  */
@@ -23,41 +22,6 @@ public abstract class AbpModule implements IAbpModule,
     protected Boolean skipAutoServiceRegistration;
 
     private ServiceConfigurationContext serviceConfigurationContext;
-
-    @Override
-    public void configureServices(ServiceConfigurationContext context) {
-
-    }
-
-    @Override
-    public void onApplicationInitialization(ApplicationInitializationContext context) {
-
-    }
-
-    @Override
-    public void onApplicationShutdown(ApplicationShutdownContext context) {
-
-    }
-
-    @Override
-    public void onPostApplicationInitialization(ApplicationInitializationContext context) {
-
-    }
-
-    @Override
-    public void onPreApplicationInitialization(ApplicationInitializationContext context) {
-
-    }
-
-    @Override
-    public void postConfigureServices(ServiceConfigurationContext context) {
-
-    }
-
-    @Override
-    public void preConfigureServices(ServiceConfigurationContext context) {
-
-    }
 
     public Boolean getSkipAutoServiceRegistration() {
         return skipAutoServiceRegistration;
@@ -78,73 +42,56 @@ public abstract class AbpModule implements IAbpModule,
         this.serviceConfigurationContext = serviceConfigurationContext;
     }
 
+    @Override
+    public void preConfigureServices(ServiceConfigurationContext context) {
+
+    }
+
+    @Override
+    public void configureServices(ServiceConfigurationContext context) {
+
+    }
+
+    @Override
+    public void postConfigureServices(ServiceConfigurationContext context) {
+
+    }
+
+    @Override
+    public void onPreApplicationInitialization(ApplicationInitializationContext context) {
+
+    }
+
+    @Override
+    public void onApplicationInitialization(ApplicationInitializationContext context) {
+
+    }
+
+    @Override
+    public void onPostApplicationInitialization(ApplicationInitializationContext context) {
+
+    }
+
+    @Override
+    public void onApplicationShutdown(ApplicationShutdownContext context) {
+
+    }
+
     public static boolean isAbpModule(Class<?> type) {
-        //        var typeInfo = type.GetTypeInfo();
-        //
-        //        return
-        //                typeInfo.IsClass &&
-        //                        !typeInfo.IsAbstract &&
-        //                        !typeInfo.IsGenericType &&
-        //                        typeof(IAbpModule).GetTypeInfo().IsAssignableFrom(type);
-        //TODO by Lee on 2021-08-20 11:10
-        return true;
+        return IAbpModule.class.isAssignableFrom(type)
+                && !Modifier.isAbstract(type.getModifiers());
     }
 
     protected static void checkAbpModuleType(Class<?> moduleType) {
         if (!isAbpModule(moduleType)) {
             throw new IllegalArgumentException("Given type is not an ABP module: " + moduleType.getTypeName());
         }
+
     }
 
-    protected <TOptions> void configure(Consumer<TOptions> configureOptions) {
-        //        serviceConfigurationContext.services.configure(configureOptions);
+    protected <TOptions> void configure(Class<TOptions> optionType, Consumer<TOptions> configureOptions) {
+        TOptions options = serviceConfigurationContext.getApplicationContext().getBean(optionType);
+        configureOptions.accept(options);
     }
 
-    //    protected void Configure<TOptions>(Action<TOptions> configureOptions)
-    //    where TOptions : class
-    //    {
-    //        ServiceConfigurationContext.Services.Configure(configureOptions);
-    //    }
-    //
-    //    protected void Configure<TOptions>(string name, Action<TOptions> configureOptions)
-    //    where TOptions : class
-    //    {
-    //        ServiceConfigurationContext.Services.Configure(name, configureOptions);
-    //    }
-    //
-    //    protected void Configure<TOptions>(IConfiguration configuration)
-    //    where TOptions : class
-    //    {
-    //        ServiceConfigurationContext.Services.Configure<TOptions>(configuration);
-    //    }
-    //
-    //    protected void Configure<TOptions>(IConfiguration configuration, Action<BinderOptions> configureBinder)
-    //    where TOptions : class
-    //    {
-    //        ServiceConfigurationContext.Services.Configure<TOptions>(configuration, configureBinder);
-    //    }
-    //
-    //    protected void Configure<TOptions>(string name, IConfiguration configuration)
-    //    where TOptions : class
-    //    {
-    //        ServiceConfigurationContext.Services.Configure<TOptions>(name, configuration);
-    //    }
-    //
-    //    protected void PreConfigure<TOptions>(Action<TOptions> configureOptions)
-    //    where TOptions : class
-    //    {
-    //        ServiceConfigurationContext.Services.PreConfigure(configureOptions);
-    //    }
-    //
-    //    protected void PostConfigure<TOptions>(Action<TOptions> configureOptions)
-    //    where TOptions : class
-    //    {
-    //        ServiceConfigurationContext.Services.PostConfigure(configureOptions);
-    //    }
-    //
-    //    protected void PostConfigureAll<TOptions>(Action<TOptions> configureOptions)
-    //    where TOptions : class
-    //    {
-    //        ServiceConfigurationContext.Services.PostConfigureAll(configureOptions);
-    //    }
 }

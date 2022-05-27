@@ -1,7 +1,6 @@
 package com.ueueo.auditing;
 
 import com.ueueo.IDisposable;
-import com.ueueo.dependencyinjection.system.IServiceProvider;
 import com.ueueo.threading.IAmbientScopeProvider;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +26,6 @@ public class AuditingManager implements IAuditingManager {
 
     private final String AmbientContextKey = "Volo.Abp.Auditing.IAuditLogScope";
 
-    protected IServiceProvider serviceProvider;
     protected AbpAuditingOptions options;
 
     private final IAuditingHelper auditingHelper;
@@ -40,16 +38,14 @@ public class AuditingManager implements IAuditingManager {
             IAmbientScopeProvider<IAuditLogScope> ambientScopeProvider,
             IAuditingHelper auditingHelper,
             IAuditingStore auditingStore,
-            IServiceProvider serviceProvider,
             AbpAuditingOptions options) {
-        this.serviceProvider = serviceProvider;
         this.options = options;
 
         this.ambientScopeProvider = ambientScopeProvider;
         this.auditingHelper = auditingHelper;
         this.auditingStore = auditingStore;
 
-        current = ambientScopeProvider.getValue(AmbientContextKey);
+        this.current = ambientScopeProvider.getValue(AmbientContextKey);
     }
 
     @Override
@@ -66,7 +62,7 @@ public class AuditingManager implements IAuditingManager {
 
     protected void executePostContributors(AuditLogInfo auditLogInfo) {
 
-        AuditLogContributionContext context = new AuditLogContributionContext(serviceProvider, auditLogInfo);
+        AuditLogContributionContext context = new AuditLogContributionContext(auditLogInfo);
 
         for (AuditLogContributor contributor : options.getContributors()) {
             try {

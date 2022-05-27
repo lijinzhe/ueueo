@@ -1,7 +1,7 @@
 package com.ueueo;
 
 import com.ueueo.dependencyinjection.IServiceProviderAccessor;
-import com.ueueo.dependencyinjection.system.IServiceProvider;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.lang.NonNull;
 
 import java.util.Objects;
@@ -14,15 +14,15 @@ import java.util.Objects;
  */
 public class ApplicationInitializationContext implements IServiceProviderAccessor {
 
-    public IServiceProvider serviceProvider;
+    public BeanFactory serviceProvider;
 
-    public ApplicationInitializationContext(@NonNull IServiceProvider serviceProvider) {
+    public ApplicationInitializationContext(@NonNull BeanFactory serviceProvider) {
         Objects.requireNonNull(serviceProvider);
         this.serviceProvider = serviceProvider;
     }
 
     @Override
-    public IServiceProvider getServiceProvider() {
+    public BeanFactory getServiceProvider() {
         return serviceProvider;
     }
 }

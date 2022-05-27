@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class FeatureInterceptorRegistrar {
     public static void registerIfNeeded(IOnServiceRegistredContext context) {
         if (shouldIntercept(context.getImplementationType())) {
-            context.getInterceptors().add(FeatureInterceptor.class);
+//            context.getInterceptors().add(FeatureInterceptor.class);
         }
     }
 

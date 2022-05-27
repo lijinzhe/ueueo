@@ -1,7 +1,6 @@
 package com.ueueo.auditing;
 
 import com.ueueo.clients.ICurrentClient;
-import com.ueueo.dependencyinjection.system.IServiceProvider;
 import com.ueueo.multitenancy.ICurrentTenant;
 import com.ueueo.tracing.ICorrelationIdProvider;
 import com.ueueo.users.CurrentUserExtensions;
@@ -30,10 +29,16 @@ public class AuditingHelper implements IAuditingHelper {
     protected ICurrentClient currentClient;
     protected AbpAuditingOptions options;
     protected IAuditSerializer auditSerializer;
-    protected IServiceProvider serviceProvider;
     protected ICorrelationIdProvider correlationIdProvider;
 
-    public AuditingHelper(IAuditSerializer auditSerializer, AbpAuditingOptions options, ICurrentUser currentUser, ICurrentTenant currentTenant, ICurrentClient currentClient, IAuditingStore auditingStore, IServiceProvider serviceProvider, ICorrelationIdProvider correlationIdProvider) {
+    public AuditingHelper(IAuditSerializer auditSerializer,
+                          AbpAuditingOptions options,
+                          ICurrentUser currentUser,
+                          ICurrentTenant currentTenant,
+                          ICurrentClient currentClient,
+                          IAuditingStore auditingStore,
+                          ICorrelationIdProvider correlationIdProvider
+    ) {
         this.options = options;
         this.auditSerializer = auditSerializer;
         this.currentUser = currentUser;
@@ -41,7 +46,6 @@ public class AuditingHelper implements IAuditingHelper {
         this.currentClient = currentClient;
         this.auditingStore = auditingStore;
 
-        this.serviceProvider = serviceProvider;
         this.correlationIdProvider = correlationIdProvider;
     }
 
@@ -56,8 +60,7 @@ public class AuditingHelper implements IAuditingHelper {
         if (methodInfo == null) {
             return false;
         }
-
-        if (methodInfo.getModifiers() != Modifier.PUBLIC) {
+        if (!Modifier.isPublic(methodInfo.getModifiers())) {
             return false;
         }
 
@@ -71,7 +74,7 @@ public class AuditingHelper implements IAuditingHelper {
 
         Class<?> classType = methodInfo.getDeclaringClass();
 
-        Boolean shouldAudit = AuditingInterceptorRegistrar.shouldAuditTypeByDefaultOrNull(classType);
+        Boolean shouldAudit = shouldAuditTypeByDefaultOrNull(classType);
         if (shouldAudit != null) {
             return shouldAudit;
         }
@@ -87,24 +90,20 @@ public class AuditingHelper implements IAuditingHelper {
      */
     @Override
     public boolean isEntityHistoryEnabled(Class<?> entityType, Boolean defaultValue) {
-        if (entityType.getModifiers() != Modifier.PUBLIC) {
+        if (Modifier.isPublic(entityType.getModifiers())) {
             return false;
         }
-
         if (options.getIgnoredTypes().stream().anyMatch(t -> t.isAssignableFrom(entityType))) {
             return false;
         }
-
         if (entityType.isAnnotationPresent(Audited.class)) {
             return true;
         }
-
         for (Field field : entityType.getFields()) {
             if (field.isAnnotationPresent(Audited.class)) {
                 return true;
             }
         }
-
         if (entityType.isAnnotationPresent(DisableAuditing.class)) {
             return false;
         }
@@ -151,7 +150,7 @@ public class AuditingHelper implements IAuditingHelper {
 
     protected void executePreContributors(AuditLogInfo auditLogInfo) {
 
-        AuditLogContributionContext context = new AuditLogContributionContext(serviceProvider, auditLogInfo);
+        AuditLogContributionContext context = new AuditLogContributionContext(auditLogInfo);
 
         for (AuditLogContributor contributor : options.getContributors()) {
             try {
@@ -197,4 +196,17 @@ public class AuditingHelper implements IAuditingHelper {
         return dictionary;
     }
 
+    public Boolean shouldAuditTypeByDefaultOrNull(Class<?> type) {
+        //TODO: In an inheritance chain, it would be better to check the attributes on the top class first.
+        if (type.isAnnotationPresent(Audited.class)) {
+            return true;
+        }
+        if (type.isAnnotationPresent(DisableAuditing.class)) {
+            return false;
+        }
+        if (type.isAssignableFrom(IAuditingEnabled.class)) {
+            return true;
+        }
+        return null;
+    }
 }

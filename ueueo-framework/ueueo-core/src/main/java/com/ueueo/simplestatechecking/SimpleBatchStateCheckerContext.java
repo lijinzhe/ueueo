@@ -1,6 +1,5 @@
 package com.ueueo.simplestatechecking;
 
-import com.ueueo.dependencyinjection.system.IServiceProvider;
 import lombok.Getter;
 
 import java.util.List;
@@ -11,11 +10,9 @@ import java.util.List;
  */
 @Getter
 public class SimpleBatchStateCheckerContext<TState extends IHasSimpleStateCheckers<TState>> {
-    private IServiceProvider serviceProvider;
     private List<TState> states;
 
-    public SimpleBatchStateCheckerContext(IServiceProvider serviceProvider, List<TState> states) {
-        this.serviceProvider = serviceProvider;
+    public SimpleBatchStateCheckerContext(List<TState> states) {
         this.states = states;
     }
 

@@ -58,7 +58,7 @@ public class AuditLogInfo implements IHasExtraProperties, Serializable {
 
     private List<AuditLogActionInfo> actions;
 
-    private List<Exception> exceptions;
+    private List<Throwable> exceptions;
 
     private ExtraPropertyDictionary extraProperties;
 
@@ -96,7 +96,7 @@ public class AuditLogInfo implements IHasExtraProperties, Serializable {
 
         if (CollectionUtils.isNotEmpty(exceptions)) {
             sb.append("- Exceptions:").append(StringUtils.LF);
-            for (Exception exception : exceptions) {
+            for (Throwable exception : exceptions) {
                 sb.append(String.format("  - %s", exception.getMessage())).append(StringUtils.LF);
                 sb.append(String.format("    %s", exception)).append(StringUtils.LF);
             }

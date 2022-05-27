@@ -10,12 +10,13 @@ import java.util.List;
  */
 public interface IAbpModuleDescriptor {
 
-    Class<?> type();
+    Class<?> getType();
 
-    IAbpModule instance();
+    IAbpModule getInstance();
 
     Boolean isLoadedAsPlugIn();
 
-    List<IAbpModuleDescriptor> dependencies();
+    List<IAbpModuleDescriptor> getDependencies();
 
+    ClassLoader getClassLoader();
 }

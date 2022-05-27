@@ -1,7 +1,7 @@
 package com.ueueo;
 
-import com.ueueo.dependencyinjection.system.IServiceProvider;
 import lombok.Getter;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.lang.NonNull;
 
 import java.util.Objects;
@@ -12,10 +12,10 @@ import java.util.Objects;
  */
 public class ApplicationShutdownContext {
     @Getter
-    private IServiceProvider serviceProvider;
+    private BeanFactory beanFactory;
 
-    public ApplicationShutdownContext(@NonNull IServiceProvider serviceProvider) {
-        Objects.requireNonNull(serviceProvider);
-        this.serviceProvider = serviceProvider;
+    public ApplicationShutdownContext(@NonNull BeanFactory beanFactory) {
+        Objects.requireNonNull(beanFactory);
+        this.beanFactory = beanFactory;
     }
 }
