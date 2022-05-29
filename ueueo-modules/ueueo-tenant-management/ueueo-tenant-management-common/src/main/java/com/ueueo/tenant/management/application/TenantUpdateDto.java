@@ -1,6 +1,6 @@
 package com.ueueo.tenant.management.application;
 
-import com.ueueo.ddd.domain.entities.IHasConcurrencyStamp;
+import com.ueueo.ddd.domain.IHasConcurrencyStamp;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

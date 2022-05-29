@@ -10,9 +10,9 @@ import com.ueueo.IDisposable;
  */
 public interface IDataFilter<TFilter> {
 
-    IDisposable enable();
+    IDisposable enable(Class<TFilter> type);
 
-    IDisposable disable();
+    IDisposable disable(Class<TFilter> type);
 
-    boolean isEnabled();
+    boolean isEnabled(Class<TFilter> type);
 }

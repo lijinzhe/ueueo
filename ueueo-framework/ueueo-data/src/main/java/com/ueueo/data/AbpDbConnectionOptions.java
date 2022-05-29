@@ -1,5 +1,6 @@
 package com.ueueo.data;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
@@ -8,12 +9,11 @@ import org.apache.commons.lang3.StringUtils;
  * @author Lee
  * @date 2022-05-16 11:36
  */
+@Data
 public class AbpDbConnectionOptions {
-    @Getter
-    @Setter
+
     private ConnectionStrings connectionStrings;
-    @Getter
-    @Setter
+
     private AbpDatabaseInfoDictionary databases;
 
     public AbpDbConnectionOptions() {
