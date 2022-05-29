@@ -17,7 +17,17 @@
     <dependencies>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-core</artifactId>
+            <artifactId>ueueo-eventbus-abstractions</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-object-extending</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-uow</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

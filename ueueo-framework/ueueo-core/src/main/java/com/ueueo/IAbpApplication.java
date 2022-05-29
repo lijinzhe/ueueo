@@ -1,12 +1,13 @@
 package com.ueueo;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 /**
  * @author Lee
  * @date 2022-05-27 09:59
  */
-public interface IAbpApplication {
+public interface IAbpApplication extends ApplicationContextAware {
     /// <summary>
     /// Type of the startup (entrance) module of the application.
     /// </summary>

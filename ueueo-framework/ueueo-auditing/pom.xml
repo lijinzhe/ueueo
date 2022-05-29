@@ -16,10 +16,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-        </dependency>
+        <!-- UEUEO 框架依赖 -->
         <dependency>
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-auditing-contracts</artifactId>
@@ -27,16 +24,7 @@
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-object-extending</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-security</artifactId>
+            <artifactId>ueueo-data</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -46,13 +34,23 @@
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-security</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-threading</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-uow</artifactId>
+            <artifactId>ueueo-json</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!-- 其它依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
         </dependency>
     </dependencies>
 </project>

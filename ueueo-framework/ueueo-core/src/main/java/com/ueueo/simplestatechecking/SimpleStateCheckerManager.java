@@ -1,7 +1,9 @@
 package com.ueueo.simplestatechecking;
 
 import lombok.Getter;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +13,8 @@ import java.util.stream.Collectors;
  * @date 2021-08-26 15:39
  */
 @Getter
-public class SimpleStateCheckerManager<TState extends IHasSimpleStateCheckers<TState>> implements ISimpleStateCheckerManager<TState> {
+public class SimpleStateCheckerManager<TState extends IHasSimpleStateCheckers<TState>>
+        implements ISimpleStateCheckerManager<TState>, BeanFactoryAware {
 
     protected BeanFactory beanFactory;
     protected AbpSimpleStateCheckerOptions<TState> options;
@@ -19,6 +22,11 @@ public class SimpleStateCheckerManager<TState extends IHasSimpleStateCheckers<TS
     public SimpleStateCheckerManager(BeanFactory beanFactory, AbpSimpleStateCheckerOptions<TState> options) {
         this.beanFactory = beanFactory;
         this.options = options;
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
     }
 
     @Override

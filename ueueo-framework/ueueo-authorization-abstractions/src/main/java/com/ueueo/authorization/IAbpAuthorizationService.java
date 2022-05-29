@@ -1,13 +1,14 @@
 package com.ueueo.authorization;
 
-import java.security.Principal;
+import com.ueueo.principal.ClaimsPrincipal;
 
 /**
- * TODO ABP代码
+ * Checks policy based permissions for a user
  *
  * @author Lee
  * @date 2021-08-26 20:01
  */
 public interface IAbpAuthorizationService {
-    Principal getCurrentPrincipal();
+
+    ClaimsPrincipal getCurrentPrincipal();
 }

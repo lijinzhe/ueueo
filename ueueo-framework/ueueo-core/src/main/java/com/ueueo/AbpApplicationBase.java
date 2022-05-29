@@ -4,6 +4,9 @@ import com.ueueo.internal.InternalServiceCollectionExtensions;
 import com.ueueo.modularity.*;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.lang.NonNull;
@@ -27,7 +30,7 @@ public abstract class AbpApplicationBase implements IAbpApplication {
     @Getter
     private final Class<?> StartupModuleType;
     @Getter
-    private final ApplicationContext applicationContext;
+    private ApplicationContext applicationContext;
 
     private final DefaultListableBeanFactory beanFactory;
     @Getter
@@ -61,6 +64,11 @@ public abstract class AbpApplicationBase implements IAbpApplication {
         if (!options.isSkipConfigureServices()) {
             configureServices();
         }
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
 
     @Override

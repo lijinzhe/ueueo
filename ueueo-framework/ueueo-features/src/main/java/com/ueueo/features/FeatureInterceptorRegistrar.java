@@ -1,6 +1,5 @@
 package com.ueueo.features;
 
-import com.ueueo.dependencyinjection.IOnServiceRegistredContext;
 import com.ueueo.dynamicproxy.DynamicProxyIgnoreTypes;
 
 import java.lang.reflect.Method;
@@ -11,8 +10,8 @@ import java.util.Arrays;
  * @date 2022-05-17 16:54
  */
 public class FeatureInterceptorRegistrar {
-    public static void registerIfNeeded(IOnServiceRegistredContext context) {
-        if (shouldIntercept(context.getImplementationType())) {
+    public static void registerIfNeeded() {
+        if (shouldIntercept(null)) {
 //            context.getInterceptors().add(FeatureInterceptor.class);
         }
     }

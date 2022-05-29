@@ -68,6 +68,7 @@
         <module>ueueo-multi-lingual-objects</module>
         <module>ueueo-identity-model</module>
         <module>ueueo-http-client-identity-model</module>
+        <module>ueueo-json</module>
     </modules>
 
 </project>

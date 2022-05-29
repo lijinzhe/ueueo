@@ -1,9 +1,10 @@
 package com.ueueo.authorization.permissions;
 
+import com.ueueo.principal.ClaimsPrincipal;
+
 import java.util.List;
 
 /**
- * TODO ABP代码
  * Always allows for any permission.
  *
  * Use IServiceCollection.AddAlwaysAllowAuthorization() to replace
@@ -19,7 +20,17 @@ public class AlwaysAllowPermissionChecker implements IPermissionChecker {
     }
 
     @Override
+    public Boolean isGranted(ClaimsPrincipal claimsPrincipal, String name) {
+        return true;
+    }
+
+    @Override
     public MultiplePermissionGrantResult isGranted(List<String> names) {
+        return isGranted(null, names);
+    }
+
+    @Override
+    public MultiplePermissionGrantResult isGranted(ClaimsPrincipal claimsPrincipal, List<String> names) {
         return new MultiplePermissionGrantResult(names, PermissionGrantResult.Granted);
     }
 }

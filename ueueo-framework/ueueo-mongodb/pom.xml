@@ -15,5 +15,11 @@
     <artifactId>ueueo-mongodb</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-domain-driven-desgin</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

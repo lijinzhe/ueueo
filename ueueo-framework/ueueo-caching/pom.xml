@@ -14,10 +14,26 @@
     <groupId>com.ueueo.framework</groupId>
     <artifactId>ueueo-caching</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <dependencies>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-core</artifactId>
+            <artifactId>ueueo-multi-tenancy</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-serialization</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-threading</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-json</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

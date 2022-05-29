@@ -21,4 +21,5 @@ public class NamedTypeSelector {
         this.name = name;
         this.predicate = predicate;
     }
+
 }

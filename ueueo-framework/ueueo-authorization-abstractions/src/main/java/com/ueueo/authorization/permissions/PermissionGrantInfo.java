@@ -1,5 +1,6 @@
 package com.ueueo.authorization.permissions;
 
+import lombok.Getter;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
@@ -9,6 +10,7 @@ import org.springframework.lang.Nullable;
  * @author Lee
  * @date 2021-08-26 19:56
  */
+@Getter
 public class PermissionGrantInfo {
 
     private String name;
@@ -23,19 +25,4 @@ public class PermissionGrantInfo {
         this.providerKey = providerKey;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Boolean getGranted() {
-        return isGranted;
-    }
-
-    public String getProviderName() {
-        return providerName;
-    }
-
-    public String getProviderKey() {
-        return providerKey;
-    }
 }

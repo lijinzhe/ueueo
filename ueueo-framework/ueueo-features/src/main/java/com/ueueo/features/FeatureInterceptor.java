@@ -1,14 +1,14 @@
 package com.ueueo.features;
 
 import com.ueueo.aspects.AbpCrossCuttingConcerns;
-import com.ueueo.dynamicproxy.AbpInterceptor;
-import com.ueueo.dynamicproxy.IAbpMethodInvocation;
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
 
 /**
  * @author Lee
  * @date 2022-05-17 16:54
  */
-public class FeatureInterceptor extends AbpInterceptor {
+public class FeatureInterceptor implements MethodInterceptor {
 
     private final IMethodInvocationFeatureCheckerService checkerService;
 
@@ -17,15 +17,16 @@ public class FeatureInterceptor extends AbpInterceptor {
     }
 
     @Override
-    public void intercept(IAbpMethodInvocation invocation) {
-        if (AbpCrossCuttingConcerns.isApplied(invocation.getTargetObject(), AbpCrossCuttingConcerns.FeatureChecking)) {
-            invocation.proceed();
+    public Object invoke(MethodInvocation invocation) throws Throwable {
+        Object targetObject = invocation.getThis();
+        if (targetObject != null && AbpCrossCuttingConcerns.isApplied(targetObject, AbpCrossCuttingConcerns.FeatureChecking)) {
+           return invocation.proceed();
         }
         checkFeatures(invocation);
-        invocation.proceed();
+        return  invocation.proceed();
     }
 
-    protected void checkFeatures(IAbpMethodInvocation invocation) {
+    protected void checkFeatures(MethodInvocation invocation) {
         checkerService.check(new MethodInvocationFeatureCheckerContext(invocation.getMethod()));
     }
 }

@@ -14,5 +14,11 @@
     <groupId>com.ueueo.framework</groupId>
     <artifactId>ueueo-sms-aliyun</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-
+    <dependencies>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-sms</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
