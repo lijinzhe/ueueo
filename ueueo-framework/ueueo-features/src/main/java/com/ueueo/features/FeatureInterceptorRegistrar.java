@@ -18,7 +18,7 @@ public class FeatureInterceptorRegistrar {
 
     private static boolean shouldIntercept(Class<?> type) {
         return !DynamicProxyIgnoreTypes.contains(type, null) &&
-                (type.isAnnotationPresent(RequiresFeature.class) ||
+                (type.isAnnotationPresent(RequiresFeatureAttribute.class) ||
                         anyMethodHasRequiresFeatureAttribute(type));
     }
 
@@ -28,6 +28,6 @@ public class FeatureInterceptorRegistrar {
     }
 
     private static boolean hasRequiresFeatureAttribute(Method methodInfo) {
-        return methodInfo.isAnnotationPresent(RequiresFeature.class);
+        return methodInfo.isAnnotationPresent(RequiresFeatureAttribute.class);
     }
 }

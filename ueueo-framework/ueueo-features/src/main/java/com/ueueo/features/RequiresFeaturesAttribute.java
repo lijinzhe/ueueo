@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-public @interface RequiresFeatures {
-    RequiresFeature[] requiresFeatures() default {};
+public @interface RequiresFeaturesAttribute {
+    RequiresFeatureAttribute[] requiresFeatures() default {};
 
 }

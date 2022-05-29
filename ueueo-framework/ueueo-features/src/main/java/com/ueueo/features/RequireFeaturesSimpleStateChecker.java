@@ -28,6 +28,6 @@ public class RequireFeaturesSimpleStateChecker<TState extends IHasSimpleStateChe
 
     @Override
     public boolean isEnabled(SimpleStateCheckerContext<TState> context) {
-        return featureChecker.isEnabled(requiresAll, featureNames);
+        return FeatureCheckerExtensions.isEnabled(featureChecker, requiresAll, featureNames);
     }
 }

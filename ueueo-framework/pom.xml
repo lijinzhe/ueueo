@@ -27,7 +27,6 @@
         <module>ueueo-features</module>
         <module>ueueo-validation</module>
         <module>ueueo-uow</module>
-        <module>ueueo-sql-dsl</module>
         <module>ueueo-eventbus</module>
         <module>ueueo-data-annotations</module>
         <module>ueueo-object-extending</module>

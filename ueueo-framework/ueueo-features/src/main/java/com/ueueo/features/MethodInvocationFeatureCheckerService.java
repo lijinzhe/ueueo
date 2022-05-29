@@ -22,23 +22,23 @@ public class MethodInvocationFeatureCheckerService implements IMethodInvocationF
         if (isFeatureCheckDisabled(context)) {
             return;
         }
-        List<RequiresFeature> requiresFeatures = getRequiredFeatureAnnotations(context.getMethod());
-        for (RequiresFeature requiresFeature : requiresFeatures) {
-            this.featureChecker.checkEnabled(requiresFeature.requiresAll(), requiresFeature.features());
+        List<RequiresFeatureAttribute> requiresFeatures = getRequiredFeatureAnnotations(context.getMethod());
+        for (RequiresFeatureAttribute requiresFeature : requiresFeatures) {
+            FeatureCheckerExtensions.checkEnabled(featureChecker, requiresFeature.requiresAll(), requiresFeature.features());
         }
     }
 
     protected boolean isFeatureCheckDisabled(MethodInvocationFeatureCheckerContext context) {
-        return context.getMethod().getAnnotation(DisableFeatureCheck.class) != null;
+        return context.getMethod().getAnnotation(DisableFeatureCheckAttribute.class) != null;
     }
 
-    protected List<RequiresFeature> getRequiredFeatureAnnotations(Method method) {
-        List<RequiresFeature> requiresFeatures = new ArrayList<>();
-        RequiresFeature requiresFeatureAnnotation = method.getAnnotation(RequiresFeature.class);
+    protected List<RequiresFeatureAttribute> getRequiredFeatureAnnotations(Method method) {
+        List<RequiresFeatureAttribute> requiresFeatures = new ArrayList<>();
+        RequiresFeatureAttribute requiresFeatureAnnotation = method.getAnnotation(RequiresFeatureAttribute.class);
         if (requiresFeatureAnnotation != null) {
             requiresFeatures.add(requiresFeatureAnnotation);
         } else {
-            RequiresFeatures requiresFeaturesAnnotation = method.getAnnotation(RequiresFeatures.class);
+            RequiresFeaturesAttribute requiresFeaturesAnnotation = method.getAnnotation(RequiresFeaturesAttribute.class);
             requiresFeatures.addAll(Arrays.asList(requiresFeaturesAnnotation.requiresFeatures()));
         }
         return requiresFeatures;
