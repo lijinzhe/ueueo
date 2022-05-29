@@ -95,20 +95,20 @@ class ValidationAttributeStore {
      */
     private abstract class StoreItem {
 
-        List<Validation> validationAttributes;
+        List<ValidationAttribute> validationAttributes;
 
         Display displayAttribute;
 
         StoreItem(Annotation[] attributes) {
-            validationAttributes = Arrays.stream(attributes).filter(a -> a.annotationType().equals(Validation.class))
-                    .map(annotation -> (Validation) annotation)
+            validationAttributes = Arrays.stream(attributes).filter(a -> a.annotationType().equals(ValidationAttribute.class))
+                    .map(annotation -> (ValidationAttribute) annotation)
                     .collect(Collectors.toList());
             displayAttribute = Arrays.stream(attributes).filter(a -> a.annotationType().equals(Display.class))
                     .map(annotation -> (Display) annotation)
                     .findFirst().orElse(null);
         }
 
-        public List<Validation> getValidationAttributes() {
+        public List<ValidationAttribute> getValidationAttributes() {
             return validationAttributes;
         }
 
