@@ -16,7 +16,7 @@ public class ChannelPool : IChannelPool, ISingletonDependency
 
     protected ConcurrentDictionary<string, ChannelPoolItem> Channels { get; }
 
-    protected bool IsDisposed { get; private set; }
+    protected bool IsDisposed ;// { get; private set; }
 
     protected TimeSpan TotalDisposeWaitDuration;// { get; set; } = TimeSpan.FromSeconds(10);
 

@@ -7,7 +7,7 @@ namespace Volo.Abp;
 
 internal class AbpApplicationWithInternalServiceProvider : AbpApplicationBase, IAbpApplicationWithInternalServiceProvider
 {
-    public IServiceScope ServiceScope { get; private set; }
+    public IServiceScope ServiceScope ;// { get; private set; }
 
     public AbpApplicationWithInternalServiceProvider(
         [NotNull] Type startupModuleType,

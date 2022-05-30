@@ -21,8 +21,8 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
 
     protected BackgroundJobConfiguration JobConfiguration { get; }
     protected JobQueueConfiguration QueueConfiguration { get; }
-    protected IChannelAccessor ChannelAccessor { get; private set; }
-    protected AsyncEventingBasicConsumer Consumer { get; private set; }
+    protected IChannelAccessor ChannelAccessor ;// { get; private set; }
+    protected AsyncEventingBasicConsumer Consumer ;// { get; private set; }
 
     public ILogger<JobQueue<TArgs>> Logger;// { get; set; }
 
@@ -35,7 +35,7 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
     protected IExceptionNotifier ExceptionNotifier { get; }
 
     protected SemaphoreSlim SyncObj = new SemaphoreSlim(1, 1);
-    protected bool IsDiposed { get; private set; }
+    protected bool IsDiposed ;// { get; private set; }
 
     public JobQueue(
         IOptions<AbpBackgroundJobOptions> backgroundJobOptions,

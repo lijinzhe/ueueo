@@ -6,7 +6,7 @@ namespace Volo.Abp.Http.Client.ClientProxying;
 
 public class ClientProxyRequestTypeValue : IEnumerable<KeyValuePair<Type, object>>
 {
-    public List<KeyValuePair<Type, object>> Values { get; private set; }
+    public List<KeyValuePair<Type, object>> Values ;// { get; private set; }
 
     public ClientProxyRequestTypeValue()
     {

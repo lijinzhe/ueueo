@@ -32,7 +32,7 @@ public class RabbitMqDistributedEventBus : DistributedEventBusBase, ISingletonDe
     protected ConcurrentDictionary<Type, List<IEventHandlerFactory>> HandlerFactories { get; }
     protected ConcurrentDictionary<string, Type> EventTypes { get; }
     protected IRabbitMqMessageConsumerFactory MessageConsumerFactory { get; }
-    protected IRabbitMqMessageConsumer Consumer { get; private set; }
+    protected IRabbitMqMessageConsumer Consumer ;// { get; private set; }
 
     private bool _exchangeCreated;
 

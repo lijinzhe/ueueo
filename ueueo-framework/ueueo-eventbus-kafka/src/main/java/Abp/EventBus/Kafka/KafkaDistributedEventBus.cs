@@ -27,7 +27,7 @@ public class KafkaDistributedEventBus : DistributedEventBusBase, ISingletonDepen
     protected IProducerPool ProducerPool { get; }
     protected ConcurrentDictionary<Type, List<IEventHandlerFactory>> HandlerFactories { get; }
     protected ConcurrentDictionary<string, Type> EventTypes { get; }
-    protected IKafkaMessageConsumer Consumer { get; private set; }
+    protected IKafkaMessageConsumer Consumer ;// { get; private set; }
 
     public KafkaDistributedEventBus(
         IServiceScopeFactory serviceScopeFactory,

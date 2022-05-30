@@ -23,15 +23,15 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
 
     protected AbpAsyncTimer Timer { get; }
 
-    protected ExchangeDeclareConfiguration Exchange { get; private set; }
+    protected ExchangeDeclareConfiguration Exchange ;// { get; private set; }
 
-    protected QueueDeclareConfiguration Queue { get; private set; }
+    protected QueueDeclareConfiguration Queue ;// { get; private set; }
 
-    protected string ConnectionName { get; private set; }
+    protected string ConnectionName ;// { get; private set; }
 
     protected ConcurrentBag<Func<IModel, BasicDeliverEventArgs, Task>> Callbacks { get; }
 
-    protected IModel Channel { get; private set; }
+    protected IModel Channel ;// { get; private set; }
 
     protected ConcurrentQueue<QueueBindCommand> QueueBindCommands { get; }
 

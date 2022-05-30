@@ -13,13 +13,13 @@ public class OutgoingEventRecord :
 {
     public static int MaxEventNameLength;// { get; set; } = 256;
 
-    public ExtraPropertyDictionary ExtraProperties { get; private set; }
+    public ExtraPropertyDictionary ExtraProperties ;// { get; private set; }
 
-    public string EventName { get; private set; }
+    public string EventName ;// { get; private set; }
 
-    public byte[] EventData { get; private set; }
+    public byte[] EventData ;// { get; private set; }
 
-    public DateTime CreationTime { get; private set; }
+    public DateTime CreationTime ;// { get; private set; }
 
     protected OutgoingEventRecord()
     {

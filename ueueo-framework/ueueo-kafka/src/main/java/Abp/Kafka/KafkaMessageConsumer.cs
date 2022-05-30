@@ -31,13 +31,13 @@ public class KafkaMessageConsumer : IKafkaMessageConsumer, ITransientDependency,
 
     protected ConcurrentBag<Func<Message<string, byte[]>, Task>> Callbacks { get; }
 
-    protected IConsumer<string, byte[]> Consumer { get; private set; }
+    protected IConsumer<string, byte[]> Consumer ;// { get; private set; }
 
-    protected string ConnectionName { get; private set; }
+    protected string ConnectionName ;// { get; private set; }
 
-    protected string GroupId { get; private set; }
+    protected string GroupId ;// { get; private set; }
 
-    protected string TopicName { get; private set; }
+    protected string TopicName ;// { get; private set; }
 
     public KafkaMessageConsumer(
         IConsumerPool consumerPool,

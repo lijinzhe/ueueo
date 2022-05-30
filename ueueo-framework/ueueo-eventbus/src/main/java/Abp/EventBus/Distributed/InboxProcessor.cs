@@ -22,8 +22,8 @@ public class InboxProcessor : IInboxProcessor, ITransientDependency
     protected IAbpDistributedLock DistributedLock { get; }
     protected IUnitOfWorkManager UnitOfWorkManager { get; }
     protected IClock Clock { get; }
-    protected IEventInbox Inbox { get; private set; }
-    protected InboxConfig InboxConfig { get; private set; }
+    protected IEventInbox Inbox ;// { get; private set; }
+    protected InboxConfig InboxConfig ;// { get; private set; }
     protected AbpEventBusBoxesOptions EventBusBoxesOptions { get; }
 
     protected DateTime? LastCleanTime;// { get; set; }

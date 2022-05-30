@@ -10,11 +10,11 @@ public abstract class AbpMongoDbContext : IAbpMongoDbContext, ITransientDependen
 
     public IMongoModelSource ModelSource;// { get; set; }
 
-    public IMongoClient Client { get; private set; }
+    public IMongoClient Client ;// { get; private set; }
 
-    public IMongoDatabase Database { get; private set; }
+    public IMongoDatabase Database ;// { get; private set; }
 
-    public IClientSessionHandle SessionHandle { get; private set; }
+    public IClientSessionHandle SessionHandle ;// { get; private set; }
 
     protected internal virtual void CreateModel(IMongoModelBuilder modelBuilder)
     {

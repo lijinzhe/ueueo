@@ -118,7 +118,7 @@ public class FormattedStringValueExtracter
         /// <summary>
         /// List of matched dynamic values.
         /// </summary>
-        public List<NameValue> Matches { get; private set; }
+        public List<NameValue> Matches ;// { get; private set; }
 
         internal ExtractionResult(bool isMatch)
         {

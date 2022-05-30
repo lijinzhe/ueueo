@@ -21,15 +21,15 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
 
     public Guid Id { get; } = Guid.NewGuid();
 
-    public IAbpUnitOfWorkOptions Options { get; private set; }
+    public IAbpUnitOfWorkOptions Options ;// { get; private set; }
 
-    public IUnitOfWork Outer { get; private set; }
+    public IUnitOfWork Outer ;// { get; private set; }
 
     public bool IsReserved;// { get; set; }
 
-    public bool IsDisposed { get; private set; }
+    public bool IsDisposed ;// { get; private set; }
 
-    public bool IsCompleted { get; private set; }
+    public bool IsCompleted ;// { get; private set; }
 
     public string ReservationName;// { get; set; }
 

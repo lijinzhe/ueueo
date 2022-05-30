@@ -12,7 +12,7 @@ namespace Volo.Abp.BackgroundWorkers;
 /// </summary>
 public class BackgroundWorkerManager : IBackgroundWorkerManager, ISingletonDependency, IDisposable
 {
-    protected bool IsRunning { get; private set; }
+    protected bool IsRunning ;// { get; private set; }
 
     private bool _isDisposed;
 
