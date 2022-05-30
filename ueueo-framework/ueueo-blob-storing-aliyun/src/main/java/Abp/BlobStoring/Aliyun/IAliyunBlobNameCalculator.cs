@@ -2,5 +2,5 @@
 
 public interface IAliyunBlobNameCalculator
 {
-    string Calculate(BlobProviderArgs args);
+    String Calculate(BlobProviderArgs args);
 }

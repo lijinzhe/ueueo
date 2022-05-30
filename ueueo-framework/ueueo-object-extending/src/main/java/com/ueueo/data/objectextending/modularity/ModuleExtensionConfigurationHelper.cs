@@ -6,16 +6,16 @@ namespace Volo.Abp.ObjectExtending.Modularity;
 
 public static class ModuleExtensionConfigurationHelper
 {
-    private static object SyncLock = new object();
+    private static Object SyncLock = new object();
 
     public static void ApplyEntityConfigurationToEntity(
-        string moduleName,
-        string entityName,
+        String moduleName,
+        String entityName,
         Type entityType)
     {
         lock (SyncLock)
         {
-            foreach (var propertyConfig in GetPropertyConfigurations(moduleName, entityName))
+            for (var propertyConfig in GetPropertyConfigurations(moduleName, entityName))
             {
                 if (propertyConfig.Entity.IsAvailable &&
                     entityType != null)
@@ -27,15 +27,15 @@ public static class ModuleExtensionConfigurationHelper
     }
 
     public static void ApplyEntityConfigurationToApi(
-        string moduleName,
-        string objectName,
+        String moduleName,
+        String objectName,
         Type[] getApiTypes = null,
         Type[] createApiTypes = null,
         Type[] updateApiTypes = null)
     {
         lock (SyncLock)
         {
-            foreach (var propertyConfig in GetPropertyConfigurations(moduleName, objectName))
+            for (var propertyConfig in GetPropertyConfigurations(moduleName, objectName))
             {
                 if (!propertyConfig.IsAvailableToClients)
                 {
@@ -64,14 +64,14 @@ public static class ModuleExtensionConfigurationHelper
     }
 
     public static void ApplyEntityConfigurationToUi(
-        string moduleName,
-        string entityName,
+        String moduleName,
+        String entityName,
         Type[] createFormTypes = null,
         Type[] editFormTypes = null)
     {
         lock (SyncLock)
         {
-            foreach (var propertyConfig in GetPropertyConfigurations(moduleName, entityName))
+            for (var propertyConfig in GetPropertyConfigurations(moduleName, entityName))
             {
                 if (!propertyConfig.IsAvailableToClients)
                 {
@@ -94,8 +94,8 @@ public static class ModuleExtensionConfigurationHelper
     }
 
     public static void ApplyEntityConfigurations(
-        string moduleName,
-        string entityName,
+        String moduleName,
+        String entityName,
         Type entityType = null,
         Type[] createFormTypes = null,
         Type[] editFormTypes = null,
@@ -133,8 +133,8 @@ public static class ModuleExtensionConfigurationHelper
 
     [NotNull]
     public static IEnumerable<ExtensionPropertyConfiguration> GetPropertyConfigurations(
-        string moduleName,
-        string entityName)
+        String moduleName,
+        String entityName)
     {
         lock (SyncLock)
         {

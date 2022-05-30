@@ -10,8 +10,8 @@ namespace Volo.Abp.BackgroundWorkers;
 
 public abstract class AsyncPeriodicBackgroundWorkerBase : BackgroundWorkerBase
 {
-    protected IServiceScopeFactory ServiceScopeFactory { get; }
-    protected AbpAsyncTimer Timer { get; }
+    protected IServiceScopeFactory ServiceScopeFactory;//  { get; }
+    protected AbpAsyncTimer Timer;//  { get; }
 
     protected AsyncPeriodicBackgroundWorkerBase(
         AbpAsyncTimer timer,
@@ -22,21 +22,23 @@ public abstract class AsyncPeriodicBackgroundWorkerBase : BackgroundWorkerBase
         Timer.Elapsed = Timer_Elapsed;
     }
 
-    public override void StartAsync(CancellationToken cancellationToken = default)
+    @Override
+    public void StartAsync(CancellationToken cancellationToken = default)
     {
-        await base.StartAsync(cancellationToken);
+       super.StartAsync(cancellationToken);
         Timer.Start(cancellationToken);
     }
 
-    public override void StopAsync(CancellationToken cancellationToken = default)
+    @Override
+    public void StopAsync(CancellationToken cancellationToken = default)
     {
         Timer.Stop(cancellationToken);
-        await base.StopAsync(cancellationToken);
+       super.StopAsync(cancellationToken);
     }
 
     private void Timer_Elapsed(AbpAsyncTimer timer)
     {
-        await DoWorkAsync();
+        DoWorkAsync();
     }
 
     private void DoWorkAsync()
@@ -45,11 +47,11 @@ public abstract class AsyncPeriodicBackgroundWorkerBase : BackgroundWorkerBase
         {
             try
             {
-                await DoWorkAsync(new PeriodicBackgroundWorkerContext(scope.ServiceProvider));
+                DoWorkAsync(new PeriodicBackgroundWorkerContext(scope.ServiceProvider));
             }
             catch (Exception ex)
             {
-                await scope.ServiceProvider
+                scope.ServiceProvider
                     .GetRequiredService<IExceptionNotifier>()
                     .NotifyAsync(new ExceptionNotificationContext(ex));
 
@@ -58,5 +60,5 @@ public abstract class AsyncPeriodicBackgroundWorkerBase : BackgroundWorkerBase
         }
     }
 
-    protected abstract Task DoWorkAsync(PeriodicBackgroundWorkerContext workerContext);
+    protected abstract void DoWorkAsync(PeriodicBackgroundWorkerContext workerContext);
 }

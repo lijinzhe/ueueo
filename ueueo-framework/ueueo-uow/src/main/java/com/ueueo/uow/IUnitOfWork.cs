@@ -8,38 +8,38 @@ namespace Volo.Abp.Uow;
 
 public interface IUnitOfWork : IDatabaseApiContainer, ITransactionApiContainer, IDisposable
 {
-    Guid Id { get; }
+    ID Id;//  { get; }
 
-    Dictionary<string, object> Items { get; }
+    Dictionary<String, Object> Items;//  { get; }
 
     //TODO: Switch to OnFailed (sync) and OnDisposed (sync) methods to be compatible with OnCompleted
     event EventHandler<UnitOfWorkFailedEventArgs> Failed;
 
     event EventHandler<UnitOfWorkEventArgs> Disposed;
 
-    IAbpUnitOfWorkOptions Options { get; }
+    IAbpUnitOfWorkOptions Options;//  { get; }
 
-    IUnitOfWork Outer { get; }
+    IUnitOfWork Outer;//  { get; }
 
-    bool IsReserved { get; }
+    boolean IsReserved;//  { get; }
 
-    bool IsDisposed { get; }
+    boolean IsDisposed;//  { get; }
 
-    bool IsCompleted { get; }
+    boolean IsCompleted;//  { get; }
 
-    string ReservationName { get; }
+    String ReservationName;//  { get; }
 
-    void SetOuter([CanBeNull] IUnitOfWork outer);
+    void SetOuter(@Nullable IUnitOfWork outer);
 
-    void Initialize([NotNull] AbpUnitOfWorkOptions options);
+    void Initialize(@Nonnull AbpUnitOfWorkOptions options);
 
-    void Reserve([NotNull] string reservationName);
+    void Reserve(@Nonnull String reservationName);
 
-    Task SaveChangesAsync(CancellationToken cancellationToken = default);
+    void SaveChangesAsync(CancellationToken cancellationToken = default);
 
-    Task CompleteAsync(CancellationToken cancellationToken = default);
+    void CompleteAsync(CancellationToken cancellationToken = default);
 
-    Task RollbackAsync(CancellationToken cancellationToken = default);
+    void RollbackAsync(CancellationToken cancellationToken = default);
 
     void OnCompleted(Func<Task> handler);
 

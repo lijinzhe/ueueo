@@ -8,29 +8,29 @@ namespace Volo.Abp.Domain.Repositories.MongoDB;
 
 public interface IMongoDbBulkOperationProvider
 {
-    Task InsertManyAsync<TEntity>(
+    void InsertManyAsync<TEntity>(
        IMongoDbRepository<TEntity> repository,
        IEnumerable<TEntity> entities,
         IClientSessionHandle sessionHandle,
-       bool autoSave,
+       boolean autoSave,
        CancellationToken cancellationToken
    )
        where TEntity : class, IEntity;
 
-    Task UpdateManyAsync<TEntity>(
+    void UpdateManyAsync<TEntity>(
         IMongoDbRepository<TEntity> repository,
         IEnumerable<TEntity> entities,
         IClientSessionHandle sessionHandle,
-        bool autoSave,
+        boolean autoSave,
         CancellationToken cancellationToken
     )
         where TEntity : class, IEntity;
 
-    Task DeleteManyAsync<TEntity>(
+    void DeleteManyAsync<TEntity>(
         IMongoDbRepository<TEntity> repository,
         IEnumerable<TEntity> entities,
         IClientSessionHandle sessionHandle,
-        bool autoSave,
+        boolean autoSave,
         CancellationToken cancellationToken
     )
         where TEntity : class, IEntity;

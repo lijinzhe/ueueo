@@ -15,7 +15,7 @@ public class NullSmsSender : ISmsSender, ISingletonDependency
         Logger = NullLogger<NullSmsSender>.Instance;
     }
 
-    public Task SendAsync(SmsMessage smsMessage)
+    public void SendAsync(SmsMessage smsMessage)
     {
         Logger.LogWarning($"SMS Sending was not implemented! Using {nameof(NullSmsSender)}:");
 

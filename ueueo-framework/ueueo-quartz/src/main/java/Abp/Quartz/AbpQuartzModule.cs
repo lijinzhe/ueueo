@@ -12,7 +12,8 @@ public class AbpQuartzModule : AbpModule
 {
     private IScheduler _scheduler;
 
-    public override void ConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void ConfigureServices(ServiceConfigurationContext context)
     {
         var options = context.Services.ExecutePreConfiguredActions<AbpQuartzOptions>();
 
@@ -62,29 +63,33 @@ public class AbpQuartzModule : AbpModule
         });
     }
 
-    public async override Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
+    @Override
+    public void OnApplicationInitializationAsync(ApplicationInitializationContext context)
     {
         var options = context.ServiceProvider.GetRequiredService<IOptions<AbpQuartzOptions>>().Value;
 
         _scheduler = context.ServiceProvider.GetRequiredService<IScheduler>();
 
-        await options.StartSchedulerFactory.Invoke(_scheduler);
+        options.StartSchedulerFactory.Invoke(_scheduler);
     }
 
-    public async override Task OnApplicationShutdownAsync(ApplicationShutdownContext context)
+    @Override
+    public void OnApplicationShutdownAsync(ApplicationShutdownContext context)
     {
         if (_scheduler.IsStarted)
         {
-            await _scheduler.Shutdown();
+            _scheduler.Shutdown();
         }
     }
 
-    public override void OnApplicationInitialization(ApplicationInitializationContext context)
+    @Override
+    public void OnApplicationInitialization(ApplicationInitializationContext context)
     {
         AsyncHelper.RunSync(() => OnApplicationInitializationAsync(context));
     }
 
-    public override void OnApplicationShutdown(ApplicationShutdownContext context)
+    @Override
+    public void OnApplicationShutdown(ApplicationShutdownContext context)
     {
         AsyncHelper.RunSync(() => OnApplicationShutdownAsync(context));
     }

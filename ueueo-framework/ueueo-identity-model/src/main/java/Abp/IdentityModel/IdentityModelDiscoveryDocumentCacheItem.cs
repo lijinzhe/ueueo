@@ -7,22 +7,22 @@ namespace Volo.Abp.IdentityModel;
 [IgnoreMultiTenancy]
 public class IdentityModelDiscoveryDocumentCacheItem
 {
-    public string TokenEndpoint;// { get; set; }
+    public String TokenEndpoint;// { get; set; }
 
-    public string DeviceAuthorizationEndpoint;// { get; set; }
+    public String DeviceAuthorizationEndpoint;// { get; set; }
 
     public IdentityModelDiscoveryDocumentCacheItem()
     {
 
     }
 
-    public IdentityModelDiscoveryDocumentCacheItem(string tokenEndpoint, string deviceAuthorizationEndpoint)
+    public IdentityModelDiscoveryDocumentCacheItem(String tokenEndpoint, String deviceAuthorizationEndpoint)
     {
         TokenEndpoint = tokenEndpoint;
         DeviceAuthorizationEndpoint = deviceAuthorizationEndpoint;
     }
 
-    public static string CalculateCacheKey(IdentityClientConfiguration configuration)
+    public static String CalculateCacheKey(IdentityClientConfiguration configuration)
     {
         return configuration.Authority.ToLower().ToMd5();
     }

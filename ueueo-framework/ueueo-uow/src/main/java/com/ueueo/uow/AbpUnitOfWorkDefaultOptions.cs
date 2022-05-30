@@ -5,14 +5,14 @@ namespace Volo.Abp.Uow;
 
 //TODO: Implement default options!
 
-/// <summary>
-/// Global (default) unit of work options
-/// </summary>
+/**
+ * Global (default) unit of work options
+*/
 public class AbpUnitOfWorkDefaultOptions
 {
-    /// <summary>
-    /// Default value: <see cref="UnitOfWorkTransactionBehavior.Auto"/>.
-    /// </summary>
+    /**
+     * Default value: <see cref="UnitOfWorkTransactionBehavior.Auto"/>.
+    */
     public UnitOfWorkTransactionBehavior TransactionBehavior;// { get; set; } = UnitOfWorkTransactionBehavior.Auto;
 
     public IsolationLevel? IsolationLevel;// { get; set; }
@@ -34,7 +34,7 @@ public class AbpUnitOfWorkDefaultOptions
         return options;
     }
 
-    public bool CalculateIsTransactional(bool autoValue)
+    public boolean CalculateIsTransactional(boolean autoValue)
     {
         switch (TransactionBehavior)
         {

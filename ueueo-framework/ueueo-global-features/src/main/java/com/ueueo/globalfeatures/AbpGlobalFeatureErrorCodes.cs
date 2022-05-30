@@ -2,5 +2,5 @@
 
 public class AbpGlobalFeatureErrorCodes
 {
-    public const string GlobalFeatureIsNotEnabled = "Volo.GlobalFeature:010001";
+    public const String GlobalFeatureIsNotEnabled = "Volo.GlobalFeature:010001";
 }

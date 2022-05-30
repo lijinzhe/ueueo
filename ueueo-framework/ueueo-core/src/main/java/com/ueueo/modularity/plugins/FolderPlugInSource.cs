@@ -11,17 +11,17 @@ namespace Volo.Abp.Modularity.PlugIns;
 
 public class FolderPlugInSource : IPlugInSource
 {
-    public string Folder { get; }
+    public String Folder;//  { get; }
 
     public SearchOption SearchOption;// { get; set; }
 
-    public Func<string, bool> Filter;// { get; set; }
+    public Func<String, bool> Filter;// { get; set; }
 
     public FolderPlugInSource(
-        [NotNull] string folder,
+        @Nonnull String folder,
         SearchOption searchOption = SearchOption.TopDirectoryOnly)
     {
-        Check.NotNull(folder, nameof(folder));
+        Objects.requireNonNull(folder, nameof(folder));
 
         Folder = folder;
         SearchOption = searchOption;
@@ -31,11 +31,11 @@ public class FolderPlugInSource : IPlugInSource
     {
         var modules = new List<Type>();
 
-        foreach (var assembly in GetAssemblies())
+        for (var assembly in GetAssemblies())
         {
             try
             {
-                foreach (var type in assembly.GetTypes())
+                for (var type in assembly.GetTypes())
                 {
                     if (AbpModule.IsAbpModule(type))
                     {

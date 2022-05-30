@@ -2,9 +2,9 @@
 
 namespace Volo.Abp.IdentityModel;
 
-public class IdentityClientConfigurationDictionary : Dictionary<string, IdentityClientConfiguration>
+public class IdentityClientConfigurationDictionary : Dictionary<String, IdentityClientConfiguration>
 {
-    public const string DefaultName = "Default";
+    public const String DefaultName = "Default";
 
     public IdentityClientConfiguration Default {
         get => this.GetOrDefault(DefaultName);

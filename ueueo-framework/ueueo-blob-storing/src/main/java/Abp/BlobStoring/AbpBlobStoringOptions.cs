@@ -2,7 +2,7 @@
 
 public class AbpBlobStoringOptions
 {
-    public BlobContainerConfigurations Containers { get; }
+    public BlobContainerConfigurations Containers;//  { get; }
 
     public AbpBlobStoringOptions()
     {

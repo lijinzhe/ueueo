@@ -4,7 +4,7 @@ namespace Volo.Abp.Uow.MemoryDb;
 
 public class MemoryDbDatabaseApi : IDatabaseApi
 {
-    public IMemoryDatabase Database { get; }
+    public IMemoryDatabase Database;//  { get; }
 
     public MemoryDbDatabaseApi(IMemoryDatabase database)
     {

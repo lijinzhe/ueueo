@@ -8,7 +8,7 @@ public abstract class MemoryDbContext : ISingletonDependency
 {
     private static readonly Type[] EmptyTypeList = new Type[0];
 
-    public virtual IReadOnlyList<Type> GetEntityTypes()
+    public   IReadOnlyList<Type> GetEntityTypes()
     {
         return EmptyTypeList;
     }

@@ -6,23 +6,23 @@ namespace Volo.Abp.VirtualFileSystem;
 
 public class InMemoryFileInfo : IFileInfo
 {
-    public bool Exists => true;
+    public boolean Exists => true;
 
     public long Length => _fileContent.Length;
 
-    public string PhysicalPath => null;
+    public String PhysicalPath => null;
 
-    public string Name { get; }
+    public String Name;//  { get; }
 
-    public DateTimeOffset LastModified { get; }
+    public DateTimeOffset LastModified;//  { get; }
 
-    public bool IsDirectory => false;
+    public boolean IsDirectory => false;
 
     private readonly byte[] _fileContent;
 
-    public string DynamicPath { get; }
+    public String DynamicPath;//  { get; }
 
-    public InMemoryFileInfo(string dynamicPath, byte[] fileContent, string name)
+    public InMemoryFileInfo(String dynamicPath, byte[] fileContent, String name)
     {
         DynamicPath = dynamicPath;
         Name = name;

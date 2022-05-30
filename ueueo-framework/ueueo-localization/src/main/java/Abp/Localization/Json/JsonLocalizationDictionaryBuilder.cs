@@ -8,11 +8,12 @@ namespace Volo.Abp.Localization.Json;
 
 public static class JsonLocalizationDictionaryBuilder
 {
-    /// <summary>
-    ///     Builds an <see cref="JsonLocalizationDictionaryBuilder" /> from given file.
-    /// </summary>
-    /// <param name="filePath">Path of the file</param>
-    public static ILocalizationDictionary BuildFromFile(string filePath)
+    /**
+     *     Builds an <see cref="JsonLocalizationDictionaryBuilder" /> from given file.
+    *
+     * <param name="filePath">Path of the file</param>
+     */
+    public static ILocalizationDictionary BuildFromFile(String filePath)
     {
         try
         {
@@ -32,11 +33,12 @@ public static class JsonLocalizationDictionaryBuilder
         AllowTrailingCommas = true
     };
 
-    /// <summary>
-    ///     Builds an <see cref="JsonLocalizationDictionaryBuilder" /> from given json string.
-    /// </summary>
-    /// <param name="jsonString">Json string</param>
-    public static ILocalizationDictionary BuildFromJsonString(string jsonString)
+    /**
+     *     Builds an <see cref="JsonLocalizationDictionaryBuilder" /> from given json string.
+    *
+     * <param name="jsonString">Json String</param>
+     */
+    public static ILocalizationDictionary BuildFromJsonString(String jsonString)
     {
         JsonLocalizationFile jsonFile;
         try
@@ -49,16 +51,16 @@ public static class JsonLocalizationDictionaryBuilder
         }
 
         var cultureCode = jsonFile.Culture;
-        if (string.IsNullOrEmpty(cultureCode))
+        if (String.IsNullOrEmpty(cultureCode))
         {
             throw new AbpException("Culture is empty in language json file.");
         }
 
-        var dictionary = new Dictionary<string, LocalizedString>();
-        var dublicateNames = new List<string>();
-        foreach (var item in jsonFile.Texts)
+        var dictionary = new Dictionary<String, LocalizedString>();
+        var dublicateNames = new List<String>();
+        for (var item in jsonFile.Texts)
         {
-            if (string.IsNullOrEmpty(item.Key))
+            if (String.IsNullOrEmpty(item.Key))
             {
                 throw new AbpException("The key is empty in given json string.");
             }

@@ -8,7 +8,7 @@ namespace Volo.Abp.Http.Client.DynamicProxying;
 
 public interface IApiDescriptionFinder
 {
-    Task<ActionApiDescriptionModel> FindActionAsync(HttpClient client, string baseUrl, Type serviceType, MethodInfo invocationMethod);
+    Task<ActionApiDescriptionModel> FindActionAsync(HttpClient client, String baseUrl, Type serviceType, MethodInfo invocationMethod);
 
-    Task<ApplicationApiDescriptionModel> GetApiDescriptionAsync(HttpClient client, string baseUrl);
+    Task<ApplicationApiDescriptionModel> GetApiDescriptionAsync(HttpClient client, String baseUrl);
 }

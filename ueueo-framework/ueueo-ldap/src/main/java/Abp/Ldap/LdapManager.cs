@@ -11,7 +11,7 @@ namespace Volo.Abp.Ldap;
 public class LdapManager : ILdapManager, ITransientDependency
 {
     public ILogger<LdapManager> Logger;// { get; set; }
-    protected ILdapSettingProvider LdapSettingProvider { get; }
+    protected ILdapSettingProvider LdapSettingProvider;//  { get; }
 
     public LdapManager(ILdapSettingProvider ldapSettingProvider)
     {
@@ -19,13 +19,13 @@ public class LdapManager : ILdapManager, ITransientDependency
         Logger = NullLogger<LdapManager>.Instance;
     }
 
-    public virtual async Task<bool> AuthenticateAsync(string username, string password)
+    public    Task<bool> AuthenticateAsync(String username, String password)
     {
         try
         {
-            using (var conn = await CreateLdapConnectionAsync())
+            using (var conn = CreateLdapConnectionAsync())
             {
-                await AuthenticateLdapConnectionAsync(conn, username, password);
+                AuthenticateLdapConnectionAsync(conn, username, password);
                 return true;
             }
         }
@@ -36,11 +36,11 @@ public class LdapManager : ILdapManager, ITransientDependency
         }
     }
 
-    protected virtual async Task<ILdapConnection> CreateLdapConnectionAsync()
+    protected    Task<ILdapConnection> CreateLdapConnectionAsync()
     {
         var ldapConnection = new LdapConnection();
-        await ConfigureLdapConnectionAsync(ldapConnection);
-        await ConnectAsync(ldapConnection);
+        ConfigureLdapConnectionAsync(ldapConnection);
+        ConnectAsync(ldapConnection);
         return ldapConnection;
     }
 
@@ -49,14 +49,14 @@ public class LdapManager : ILdapManager, ITransientDependency
         return Task.CompletedTask;
     }
 
-    protected virtual void ConnectAsync(ILdapConnection ldapConnection)
+    protected   void ConnectAsync(ILdapConnection ldapConnection)
     {
-        ldapConnection.Connect(await LdapSettingProvider.GetServerHostAsync(), await LdapSettingProvider.GetServerPortAsync());
+        ldapConnection.Connect(LdapSettingProvider.GetServerHostAsync(), LdapSettingProvider.GetServerPortAsync());
     }
 
-    protected virtual void AuthenticateLdapConnectionAsync(ILdapConnection connection, string username, string password)
+    protected   void AuthenticateLdapConnectionAsync(ILdapConnection connection, String username, String password)
     {
-        await connection.BindAsync(Native.LdapAuthType.Simple, new LdapCredential()
+        connection.BindAsync(Native.LdapAuthType.Simple, new LdapCredential()
         {
             UserName = username,
             Password = password

@@ -4,19 +4,19 @@ namespace Volo.Abp.EventBus.RabbitMq;
 
 public class AbpRabbitMqEventBusOptions
 {
-    public const string DefaultExchangeType = RabbitMqConsts.ExchangeTypes.Direct;
+    public const String DefaultExchangeType = RabbitMqConsts.ExchangeTypes.Direct;
 
-    public string ConnectionName;// { get; set; }
+    public String ConnectionName;// { get; set; }
 
-    public string ClientName;// { get; set; }
+    public String ClientName;// { get; set; }
 
-    public string ExchangeName;// { get; set; }
+    public String ExchangeName;// { get; set; }
 
-    public string ExchangeType;// { get; set; }
+    public String ExchangeType;// { get; set; }
 
-    public string GetExchangeTypeOrDefault()
+    public String GetExchangeTypeOrDefault()
     {
-        return string.IsNullOrEmpty(ExchangeType)
+        return String.IsNullOrEmpty(ExchangeType)
             ? DefaultExchangeType
             : ExchangeType;
     }

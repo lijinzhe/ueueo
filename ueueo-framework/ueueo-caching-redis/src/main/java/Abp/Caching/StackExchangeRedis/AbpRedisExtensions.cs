@@ -8,8 +8,8 @@ public static class AbpRedisExtensions
 {
     public static RedisValue[][] HashMemberGetMany(
         this IDatabase cache,
-        string[] keys,
-        params string[] members)
+        String[] keys,
+        params String[] members)
     {
         var tasks = new Task<RedisValue[]>[keys.Length];
         var fields = members.Select(member => (RedisValue)member).ToArray();
@@ -28,10 +28,10 @@ public static class AbpRedisExtensions
         return results;
     }
 
-    public static async Task<RedisValue[][]> HashMemberGetManyAsync(
+    public static  Task<RedisValue[][]> HashMemberGetManyAsync(
         this IDatabase cache,
-        string[] keys,
-        params string[] members)
+        String[] keys,
+        params String[] members)
     {
         var tasks = new Task<RedisValue[]>[keys.Length];
         var fields = members.Select(member => (RedisValue)member).ToArray();
@@ -41,6 +41,6 @@ public static class AbpRedisExtensions
             tasks[i] = cache.HashGetAsync((RedisKey)keys[i], fields);
         }
 
-        return await Task.WhenAll(tasks);
+        return Task.WhenAll(tasks);
     }
 }

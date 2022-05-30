@@ -23,9 +23,10 @@ public class AbpAuthorizationPolicyProvider : DefaultAuthorizationPolicyProvider
         _options = options.Value;
     }
 
-    public override async Task<AuthorizationPolicy> GetPolicyAsync(string policyName)
+    @Override
+    public Task<AuthorizationPolicy> GetPolicyAsync(String policyName)
     {
-        var policy = await base.GetPolicyAsync(policyName);
+        var policy =super.GetPolicyAsync(policyName);
         if (policy != null)
         {
             return policy;
@@ -35,7 +36,7 @@ public class AbpAuthorizationPolicyProvider : DefaultAuthorizationPolicyProvider
         if (permission != null)
         {
             //TODO: Optimize & Cache!
-            var policyBuilder = new AuthorizationPolicyBuilder(Array.Empty<string>());
+            var policyBuilder = new AuthorizationPolicyBuilder(Array.Empty<String>());
             policyBuilder.Requirements.Add(new PermissionRequirement(policyName));
             return policyBuilder.Build();
         }
@@ -43,7 +44,7 @@ public class AbpAuthorizationPolicyProvider : DefaultAuthorizationPolicyProvider
         return null;
     }
 
-    public Task<List<string>> GetPoliciesNamesAsync()
+    public Task<List<String>> GetPoliciesNamesAsync()
     {
         return Task.FromResult(
             _options.GetPoliciesNames()

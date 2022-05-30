@@ -2,14 +2,14 @@
 
 namespace Volo.Abp.Guids;
 
-/// <summary>
-/// Implements <see cref="IGuidGenerator"/> by using <see cref="Guid.NewGuid"/>.
-/// </summary>
+/**
+ * Implements <see cref="IGuidGenerator"/> by using <see cref="Guid.NewGuid"/>.
+*/
 public class SimpleGuidGenerator : IGuidGenerator
 {
-    public static SimpleGuidGenerator Instance { get; } = new SimpleGuidGenerator();
+    public static SimpleGuidGenerator Instance;//  { get; } = new SimpleGuidGenerator();
 
-    public virtual Guid Create()
+    public   ID Create()
     {
         return Guid.NewGuid();
     }

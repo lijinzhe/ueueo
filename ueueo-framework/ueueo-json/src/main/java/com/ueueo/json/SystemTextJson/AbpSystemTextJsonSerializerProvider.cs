@@ -8,9 +8,9 @@ namespace Volo.Abp.Json.SystemTextJson;
 
 public class AbpSystemTextJsonSerializerProvider : IJsonSerializerProvider, ITransientDependency
 {
-    protected AbpSystemTextJsonSerializerOptions Options { get; }
+    protected AbpSystemTextJsonSerializerOptions Options;//  { get; }
 
-    protected AbpSystemTextJsonUnsupportedTypeMatcher AbpSystemTextJsonUnsupportedTypeMatcher { get; }
+    protected AbpSystemTextJsonUnsupportedTypeMatcher AbpSystemTextJsonUnsupportedTypeMatcher;//  { get; }
 
     public AbpSystemTextJsonSerializerProvider(
         IOptions<AbpSystemTextJsonSerializerOptions> options,
@@ -20,29 +20,29 @@ public class AbpSystemTextJsonSerializerProvider : IJsonSerializerProvider, ITra
         Options = options.Value;
     }
 
-    public bool CanHandle(Type type)
+    public boolean CanHandle(Type type)
     {
         return !AbpSystemTextJsonUnsupportedTypeMatcher.Match(type);
     }
 
-    public string Serialize(object obj, bool camelCase = true, bool indented = false)
+    public String Serialize(Object obj, boolean camelCase = true, boolean indented = false)
     {
         return JsonSerializer.Serialize(obj, CreateJsonSerializerOptions(camelCase, indented));
     }
 
-    public T Deserialize<T>(string jsonString, bool camelCase = true)
+    public T Deserialize<T>(String jsonString, boolean camelCase = true)
     {
         return JsonSerializer.Deserialize<T>(jsonString, CreateJsonSerializerOptions(camelCase));
     }
 
-    public object Deserialize(Type type, string jsonString, bool camelCase = true)
+    public Object Deserialize(Type type, String jsonString, boolean camelCase = true)
     {
         return JsonSerializer.Deserialize(jsonString, type, CreateJsonSerializerOptions(camelCase));
     }
 
-    private readonly ConcurrentDictionary<string, JsonSerializerOptions> JsonSerializerOptionsCache = new ConcurrentDictionary<string, JsonSerializerOptions>();
+    private readonly ConcurrentDictionary<String, JsonSerializerOptions> JsonSerializerOptionsCache = new ConcurrentDictionary<String, JsonSerializerOptions>();
 
-    protected virtual JsonSerializerOptions CreateJsonSerializerOptions(bool camelCase = true, bool indented = false)
+    protected   JsonSerializerOptions CreateJsonSerializerOptions(boolean camelCase = true, boolean indented = false)
     {
         return JsonSerializerOptionsCache.GetOrAdd($"default{camelCase}{indented}", _ =>
         {

@@ -7,9 +7,9 @@ namespace Volo.Abp.Uow.MongoDB;
 
 public class MongoDbTransactionApi : ITransactionApi, ISupportsRollback
 {
-    public IClientSessionHandle SessionHandle { get; }
+    public IClientSessionHandle SessionHandle;//  { get; }
 
-    protected ICancellationTokenProvider CancellationTokenProvider { get; }
+    protected ICancellationTokenProvider CancellationTokenProvider;//  { get; }
 
     public MongoDbTransactionApi(
         IClientSessionHandle sessionHandle,
@@ -21,7 +21,7 @@ public class MongoDbTransactionApi : ITransactionApi, ISupportsRollback
 
     public void CommitAsync()
     {
-        await SessionHandle.CommitTransactionAsync(CancellationTokenProvider.Token);
+        SessionHandle.CommitTransactionAsync(CancellationTokenProvider.Token);
     }
 
     public void Dispose()
@@ -31,7 +31,7 @@ public class MongoDbTransactionApi : ITransactionApi, ISupportsRollback
 
     public void RollbackAsync(CancellationToken cancellationToken)
     {
-        await SessionHandle.AbortTransactionAsync(
+        SessionHandle.AbortTransactionAsync(
             CancellationTokenProvider.FallbackToProvider(cancellationToken)
         );
     }

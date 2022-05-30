@@ -43,16 +43,16 @@ public interface IDistributedCache<TCacheItem> {
      */
     List<KeyValuePair<String, TCacheItem>> getMany(List<String> keys, Boolean hideErrors, Boolean considerUow);
 
-    /// <summary>
-    /// Gets or Adds a cache item with the given key. If no cache item is found for the given key then adds a cache item
-    /// provided by <paramref name="factory" /> delegate and returns the provided cache item.
-    /// </summary>
-    /// <param name="key">The key of cached item to be retrieved from the cache.</param>
-    /// <param name="factory">The factory delegate is used to provide the cache item when no cache item is found for the given <paramref name="key" />.</param>
-    /// <param name="optionsFactory">The cache options for the factory delegate.</param>
-    /// <param name="hideErrors">Indicates to throw or hide the exceptions for the distributed cache.</param>
-    /// <param name="considerUow">This will store the cache in the current unit of work until the end of the current unit of work does not really affect the cache.</param>
-    /// <returns>The cache item.</returns>
+    /**
+     * Gets or Adds a cache item with the given key. If no cache item is found for the given key then adds a cache item
+     * provided by <paramref name="factory" /> delegate and returns the provided cache item.
+    */
+     * <param name="key">The key of cached item to be retrieved from the cache.</param>
+     * <param name="factory">The factory delegate is used to provide the cache item when no cache item is found for the given <paramref name="key" />.</param>
+     * <param name="optionsFactory">The cache options for the factory delegate.</param>
+     * <param name="hideErrors">Indicates to throw or hide the exceptions for the distributed cache.</param>
+     * <param name="considerUow">This will store the cache in the current unit of work until the end of the current unit of work does not really affect the cache.</param>
+     * <returns>The cache item.</returns>
 
     /**
      * Gets or Adds a cache item with the given key. If no cache item is found for the given key then adds a cache item
@@ -67,16 +67,16 @@ public interface IDistributedCache<TCacheItem> {
      */
     TCacheItem getOrAdd(String key, Consumer<TCacheItem> factory, Boolean hideErrors, Boolean considerUow);
 
-    /// <summary>
-    /// Gets or Adds multiple cache items with the given keys. If any cache items not found for the given keys then adds cache items
-    /// provided by <paramref name="factory" /> delegate and returns the provided cache items.
-    /// </summary>
-    /// <param name="keys">The keys of cached items to be retrieved from the cache.</param>
-    /// <param name="factory">The factory delegate is used to provide the cache items when no cache items are found for the given <paramref name="keys" />.</param>
-    /// <param name="optionsFactory">The cache options for the factory delegate.</param>
-    /// <param name="hideErrors">Indicates to throw or hide the exceptions for the distributed cache.</param>
-    /// <param name="considerUow">This will store the cache in the current unit of work until the end of the current unit of work does not really affect the cache.</param>
-    /// <returns>The cache items.</returns>
+    /**
+     * Gets or Adds multiple cache items with the given keys. If any cache items not found for the given keys then adds cache items
+     * provided by <paramref name="factory" /> delegate and returns the provided cache items.
+    */
+     * <param name="keys">The keys of cached items to be retrieved from the cache.</param>
+     * <param name="factory">The factory delegate is used to provide the cache items when no cache items are found for the given <paramref name="keys" />.</param>
+     * <param name="optionsFactory">The cache options for the factory delegate.</param>
+     * <param name="hideErrors">Indicates to throw or hide the exceptions for the distributed cache.</param>
+     * <param name="considerUow">This will store the cache in the current unit of work until the end of the current unit of work does not really affect the cache.</param>
+     * <returns>The cache items.</returns>
     //    KeyValuePair<String, TCacheItem>[] getOrAddMany(
     //            Collection<String> keys,
     //            Func<IEnumerable<TCacheKey>, List<KeyValuePair<TCacheKey, TCacheItem>>> factory,
@@ -116,12 +116,12 @@ public interface IDistributedCache<TCacheItem> {
      */
     void refresh(String key, Boolean hideErrors);
 
-    /// <summary>
-    /// Refreshes the cache value of the given keys, and resets their sliding expiration timeout.
-    /// Based on the implementation, this can be more efficient than setting multiple items individually.
-    /// </summary>
-    /// <param name="keys">The keys of cached items to be retrieved from the cache.</param>
-    /// <param name="hideErrors">Indicates to throw or hide the exceptions for the distributed cache.</param>
+    /**
+     * Refreshes the cache value of the given keys, and resets their sliding expiration timeout.
+     * Based on the implementation, this can be more efficient than setting multiple items individually.
+    */
+     * <param name="keys">The keys of cached items to be retrieved from the cache.</param>
+     * <param name="hideErrors">Indicates to throw or hide the exceptions for the distributed cache.</param>
     //    void RefreshMany(
     //            Collection<String> keys,
     //            Boolean hideErrors = null);
@@ -139,12 +139,12 @@ public interface IDistributedCache<TCacheItem> {
      */
     void remove(String key, Boolean hideErrors, Boolean considerUow);
 
-    /// <summary>
-    /// Removes the cache items for given keys from cache.
-    /// </summary>
-    /// <param name="keys">The keys of cached items to be retrieved from the cache.</param>
-    /// <param name="hideErrors">Indicates to throw or hide the exceptions for the distributed cache.</param>
-    /// <param name="considerUow">This will store the cache in the current unit of work until the end of the current unit of work does not really affect the cache.</param>
+    /**
+     * Removes the cache items for given keys from cache.
+    */
+     * <param name="keys">The keys of cached items to be retrieved from the cache.</param>
+     * <param name="hideErrors">Indicates to throw or hide the exceptions for the distributed cache.</param>
+     * <param name="considerUow">This will store the cache in the current unit of work until the end of the current unit of work does not really affect the cache.</param>
     //    void RemoveMany(
     //            Collection<String> keys,
     //            Boolean hideErrors =null,

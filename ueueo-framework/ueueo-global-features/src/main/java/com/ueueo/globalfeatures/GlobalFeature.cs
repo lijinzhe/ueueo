@@ -5,37 +5,37 @@ namespace Volo.Abp.GlobalFeatures;
 public abstract class GlobalFeature
 {
     [NotNull]
-    public GlobalModuleFeatures Module { get; }
+    public GlobalModuleFeatures Module;//  { get; }
 
     [NotNull]
-    public GlobalFeatureManager FeatureManager { get; }
+    public GlobalFeatureManager FeatureManager;//  { get; }
 
     [NotNull]
-    public string FeatureName { get; }
+    public String FeatureName;//  { get; }
 
-    public bool IsEnabled {
+    public boolean IsEnabled {
         get => FeatureManager.IsEnabled(FeatureName);
         set => SetEnabled(value);
     }
 
-    protected GlobalFeature([NotNull] GlobalModuleFeatures module)
+    protected GlobalFeature(@Nonnull GlobalModuleFeatures module)
     {
-        Module = Check.NotNull(module, nameof(module));
+        Module = Objects.requireNonNull(module, nameof(module));
         FeatureManager = Module.FeatureManager;
         FeatureName = GlobalFeatureNameAttribute.GetName(GetType());
     }
 
-    public virtual void Enable()
+    public   void Enable()
     {
         FeatureManager.Enable(FeatureName);
     }
 
-    public virtual void Disable()
+    public   void Disable()
     {
         FeatureManager.Disable(FeatureName);
     }
 
-    public void SetEnabled(bool isEnabled)
+    public void SetEnabled(boolean isEnabled)
     {
         if (isEnabled)
         {

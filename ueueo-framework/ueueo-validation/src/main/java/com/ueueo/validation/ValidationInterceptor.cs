@@ -13,15 +13,16 @@ public class ValidationInterceptor : AbpInterceptor, ITransientDependency
         _methodInvocationValidator = methodInvocationValidator;
     }
 
-    public override void InterceptAsync(IAbpMethodInvocation invocation)
+    @Override
+    public void InterceptAsync(IAbpMethodInvocation invocation)
     {
-        await ValidateAsync(invocation);
-        await invocation.ProceedAsync();
+        ValidateAsync(invocation);
+        invocation.ProceedAsync();
     }
 
-    protected virtual void ValidateAsync(IAbpMethodInvocation invocation)
+    protected   void ValidateAsync(IAbpMethodInvocation invocation)
     {
-        await _methodInvocationValidator.ValidateAsync(
+        _methodInvocationValidator.ValidateAsync(
             new MethodInvocationValidationContext(
                 invocation.TargetObject,
                 invocation.Method,

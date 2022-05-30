@@ -9,66 +9,66 @@ namespace Volo.Abp.ObjectExtending.Modularity;
 public class ExtensionPropertyConfiguration : IHasNameWithLocalizableDisplayName, IBasicObjectExtensionPropertyInfo
 {
     [NotNull]
-    public EntityExtensionConfiguration EntityExtensionConfiguration { get; }
+    public EntityExtensionConfiguration EntityExtensionConfiguration;//  { get; }
 
     [NotNull]
-    public string Name { get; }
+    public String Name;//  { get; }
 
     [NotNull]
-    public Type Type { get; }
+    public Type Type;//  { get; }
 
     [NotNull]
-    public List<Attribute> Attributes { get; }
+    public List<Attribute> Attributes;//  { get; }
 
     [NotNull]
-    public List<Action<ObjectExtensionPropertyValidationContext>> Validators { get; }
+    public List<Action<ObjectExtensionPropertyValidationContext>> Validators;//  { get; }
 
     [CanBeNull]
     public ILocalizableString DisplayName;// { get; set; }
 
     [NotNull]
-    public Dictionary<string, object> Configuration { get; }
+    public Dictionary<String, Object> Configuration;//  { get; }
 
-    /// <summary>
-    /// Single point to enable/disable this property for the clients (UI and API).
-    /// If this is false, the configuration made in the <see cref="UI"/> and the <see cref="Api"/>
-    /// properties are not used.
-    /// Default: true.
-    /// </summary>
-    public bool IsAvailableToClients;// { get; set; } = true;
-
-    [NotNull]
-    public ExtensionPropertyEntityConfiguration Entity { get; }
+    /**
+     * Single point to enable/disable this property for the clients (UI and API).
+     * If this is false, the configuration made in the <see cref="UI"/> and the <see cref="Api"/>
+     * properties are not used.
+     * Default: true.
+    */
+    public boolean IsAvailableToClients;// { get; set; } = true;
 
     [NotNull]
-    public ExtensionPropertyUiConfiguration UI { get; }
+    public ExtensionPropertyEntityConfiguration Entity;//  { get; }
 
     [NotNull]
-    public ExtensionPropertyApiConfiguration Api { get; }
+    public ExtensionPropertyUiConfiguration UI;//  { get; }
 
-    /// <summary>
-    /// Uses as the default value if <see cref="DefaultValueFactory"/> was not set.
-    /// </summary>
+    [NotNull]
+    public ExtensionPropertyApiConfiguration Api;//  { get; }
+
+    /**
+     * Uses as the default value if <see cref="DefaultValueFactory"/> was not set.
+    */
     [CanBeNull]
-    public object DefaultValue;// { get; set; }
+    public Object DefaultValue;// { get; set; }
 
-    /// <summary>
-    /// Used with the first priority to create the default value for the property.
-    /// Uses to the <see cref="DefaultValue"/> if this was not set.
-    /// </summary>
+    /**
+     * Used with the first priority to create the default value for the property.
+     * Uses to the <see cref="DefaultValue"/> if this was not set.
+    */
     [CanBeNull]
-    public Func<object> DefaultValueFactory;// { get; set; }
+    public Func<Object> DefaultValueFactory;// { get; set; }
 
     public ExtensionPropertyConfiguration(
-        [NotNull] EntityExtensionConfiguration entityExtensionConfiguration,
-        [NotNull] Type type,
-        [NotNull] string name)
+        @Nonnull EntityExtensionConfiguration entityExtensionConfiguration,
+        @Nonnull Type type,
+        @Nonnull String name)
     {
-        EntityExtensionConfiguration = Check.NotNull(entityExtensionConfiguration, nameof(entityExtensionConfiguration));
-        Type = Check.NotNull(type, nameof(type));
-        Name = Check.NotNull(name, nameof(name));
+        EntityExtensionConfiguration = Objects.requireNonNull(entityExtensionConfiguration, nameof(entityExtensionConfiguration));
+        Type = Objects.requireNonNull(type, nameof(type));
+        Name = Objects.requireNonNull(name, nameof(name));
 
-        Configuration = new Dictionary<string, object>();
+        Configuration = new Dictionary<String, Object>();
         Attributes = new List<Attribute>();
         Validators = new List<Action<ObjectExtensionPropertyValidationContext>>();
 
@@ -80,7 +80,7 @@ public class ExtensionPropertyConfiguration : IHasNameWithLocalizableDisplayName
         DefaultValue = TypeHelper.GetDefaultValue(Type);
     }
 
-    public object GetDefaultValue()
+    public Object GetDefaultValue()
     {
         return ExtensionPropertyHelper.GetDefaultValue(Type, DefaultValueFactory, DefaultValue);
     }

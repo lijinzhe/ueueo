@@ -17,9 +17,9 @@ public class MethodInvocationValidator : IMethodInvocationValidator, ITransientD
         _objectValidator = objectValidator;
     }
 
-    public virtual void ValidateAsync(MethodInvocationValidationContext context)
+    public   void ValidateAsync(MethodInvocationValidationContext context)
     {
-        Check.NotNull(context, nameof(context));
+        Objects.requireNonNull(context, nameof(context));
 
         if (context.Parameters.IsNullOrEmpty())
         {
@@ -47,7 +47,7 @@ public class MethodInvocationValidator : IMethodInvocationValidator, ITransientD
             ThrowValidationError(context);
         }
 
-        await AddMethodParameterValidationErrorsAsync(context);
+        AddMethodParameterValidationErrorsAsync(context);
 
         if (context.Errors.Any())
         {
@@ -55,7 +55,7 @@ public class MethodInvocationValidator : IMethodInvocationValidator, ITransientD
         }
     }
 
-    protected virtual bool IsValidationDisabled(MethodInvocationValidationContext context)
+    protected   boolean IsValidationDisabled(MethodInvocationValidationContext context)
     {
         if (context.Method.IsDefined(typeof(EnableValidationAttribute), true))
         {
@@ -70,12 +70,12 @@ public class MethodInvocationValidator : IMethodInvocationValidator, ITransientD
         return false;
     }
 
-    protected virtual bool HasSingleNullArgument(MethodInvocationValidationContext context)
+    protected   boolean HasSingleNullArgument(MethodInvocationValidationContext context)
     {
         return context.Parameters.Length == 1 && context.ParameterValues[0] == null;
     }
 
-    protected virtual void ThrowValidationError(MethodInvocationValidationContext context)
+    protected   void ThrowValidationError(MethodInvocationValidationContext context)
     {
         throw new AbpValidationException(
             "Method arguments are not valid! See ValidationErrors for details.",
@@ -83,22 +83,22 @@ public class MethodInvocationValidator : IMethodInvocationValidator, ITransientD
         );
     }
 
-    protected virtual void AddMethodParameterValidationErrorsAsync(MethodInvocationValidationContext context)
+    protected   void AddMethodParameterValidationErrorsAsync(MethodInvocationValidationContext context)
     {
         for (var i = 0; i < context.Parameters.Length; i++)
         {
-            await AddMethodParameterValidationErrorsAsync(context, context.Parameters[i], context.ParameterValues[i]);
+            AddMethodParameterValidationErrorsAsync(context, context.Parameters[i], context.ParameterValues[i]);
         }
     }
 
-    protected virtual void AddMethodParameterValidationErrorsAsync(IAbpValidationResult context, ParameterInfo parameterInfo, object parameterValue)
+    protected   void AddMethodParameterValidationErrorsAsync(IAbpValidationResult context, ParameterInfo parameterInfo, Object parameterValue)
     {
         var allowNulls = parameterInfo.IsOptional ||
                          parameterInfo.IsOut ||
                          TypeHelper.IsPrimitiveExtended(parameterInfo.ParameterType, includeEnums: true);
 
         context.Errors.AddRange(
-             await _objectValidator.GetErrorsAsync(
+             _objectValidator.GetErrorsAsync(
                 parameterValue,
                 parameterInfo.Name,
                 allowNulls

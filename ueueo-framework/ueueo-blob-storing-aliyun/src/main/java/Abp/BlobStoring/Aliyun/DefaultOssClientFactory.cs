@@ -14,24 +14,24 @@ using static Aliyun.Acs.Core.Auth.Sts.AssumeRoleResponse;
 
 namespace Volo.Abp.BlobStoring.Aliyun;
 
-/// <summary>
-/// Sub-account access to OSS or STS temporary authorization to access OSS
-/// </summary>
+/**
+ * Sub-account access to OSS or STS temporary authorization to access OSS
+*/
 public class DefaultOssClientFactory : IOssClientFactory, ITransientDependency
 {
-    protected IDistributedCache<AliyunTemporaryCredentialsCacheItem> Cache { get; }
+    protected IDistributedCache<AliyunTemporaryCredentialsCacheItem> Cache;//  { get; }
 
-    protected IStringEncryptionService StringEncryptionService { get; }
+    protected IStringEncryptionService StringEncryptionService;//  { get; }
 
     public DefaultOssClientFactory(
         IDistributedCache<AliyunTemporaryCredentialsCacheItem> cache,
-        IStringEncryptionService stringEncryptionService)
+        IStringEncryptionService StringEncryptionService)
     {
         Cache = cache;
-        StringEncryptionService = stringEncryptionService;
+        StringEncryptionService = StringEncryptionService;
     }
 
-    public virtual IOss Create(AliyunBlobProviderConfiguration configuration)
+    public   IOss Create(AliyunBlobProviderConfiguration configuration)
     {
         Check.NotNullOrWhiteSpace(configuration.AccessKeyId, nameof(configuration.AccessKeyId));
         Check.NotNullOrWhiteSpace(configuration.AccessKeySecret, nameof(configuration.AccessKeySecret));
@@ -45,7 +45,7 @@ public class DefaultOssClientFactory : IOssClientFactory, ITransientDependency
         return new OssClient(configuration.Endpoint, configuration.AccessKeyId, configuration.AccessKeySecret);
     }
 
-    protected virtual IOss GetSecurityTokenClient(AliyunBlobProviderConfiguration configuration)
+    protected   IOss GetSecurityTokenClient(AliyunBlobProviderConfiguration configuration)
     {
         Check.NotNullOrWhiteSpace(configuration.RoleArn, nameof(configuration.RoleArn));
         Check.NotNullOrWhiteSpace(configuration.RoleSessionName, nameof(configuration.RoleSessionName));

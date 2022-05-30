@@ -7,9 +7,9 @@ namespace Volo.Abp.VirtualFileSystem;
 
 public abstract class DictionaryBasedFileProvider : IFileProvider
 {
-    protected abstract IDictionary<string, IFileInfo> Files { get; }
+    protected abstract IDictionary<String, IFileInfo> Files;//  { get; }
 
-    public virtual IFileInfo GetFileInfo(string subpath)
+    public   IFileInfo GetFileInfo(String subpath)
     {
         if (subpath == null)
         {
@@ -26,7 +26,7 @@ public abstract class DictionaryBasedFileProvider : IFileProvider
         return file;
     }
 
-    public virtual IDirectoryContents GetDirectoryContents(string subpath)
+    public   IDirectoryContents GetDirectoryContents(String subpath)
     {
         var directory = GetFileInfo(subpath);
         if (!directory.IsDirectory)
@@ -37,7 +37,7 @@ public abstract class DictionaryBasedFileProvider : IFileProvider
         var fileList = new List<IFileInfo>();
 
         var directoryPath = subpath.EnsureEndsWith('/');
-        foreach (var fileInfo in Files.Values)
+        for (var fileInfo in Files.Values)
         {
             var fullPath = fileInfo.GetVirtualOrPhysicalPathOrNull();
             if (!fullPath.StartsWith(directoryPath))
@@ -45,7 +45,7 @@ public abstract class DictionaryBasedFileProvider : IFileProvider
                 continue;
             }
 
-            var relativePath = fullPath.Substring(directoryPath.Length);
+            var relativePath = fullPath.SubString(directoryPath.Length);
             if (relativePath.Contains("/"))
             {
                 continue;
@@ -57,12 +57,12 @@ public abstract class DictionaryBasedFileProvider : IFileProvider
         return new EnumerableDirectoryContents(fileList);
     }
 
-    public virtual IChangeToken Watch(string filter)
+    public   IChangeToken Watch(String filter)
     {
         return NullChangeToken.Singleton;
     }
 
-    protected virtual string NormalizePath(string subpath)
+    protected   String NormalizePath(String subpath)
     {
         return subpath;
     }

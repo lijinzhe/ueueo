@@ -7,13 +7,13 @@ namespace Volo.Abp.Guids;
 
 /* This code is taken from jhtodd/SequentialGuid https://github.com/jhtodd/SequentialGuid/blob/master/SequentialGuid/Classes/SequentialGuid.cs */
 
-/// <summary>
-/// Implements <see cref="IGuidGenerator"/> by creating sequential Guids.
-/// Use <see cref="AbpSequentialGuidGeneratorOptions"/> to configure.
-/// </summary>
+/**
+ * Implements <see cref="IGuidGenerator"/> by creating sequential Guids.
+ * Use <see cref="AbpSequentialGuidGeneratorOptions"/> to configure.
+*/
 public class SequentialGuidGenerator : IGuidGenerator, ITransientDependency
 {
-    public AbpSequentialGuidGeneratorOptions Options { get; }
+    public AbpSequentialGuidGeneratorOptions Options;//  { get; }
 
     private static readonly RandomNumberGenerator RandomNumberGenerator = RandomNumberGenerator.Create();
 
@@ -22,12 +22,12 @@ public class SequentialGuidGenerator : IGuidGenerator, ITransientDependency
         Options = options.Value;
     }
 
-    public Guid Create()
+    public ID Create()
     {
         return Create(Options.GetDefaultSequentialGuidType());
     }
 
-    public Guid Create(SequentialGuidType guidType)
+    public ID Create(SequentialGuidType guidType)
     {
         // We start with 16 bytes of cryptographically strong random data.
         var randomBytes = new byte[10];

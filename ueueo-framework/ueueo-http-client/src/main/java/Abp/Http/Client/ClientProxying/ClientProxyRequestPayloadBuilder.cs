@@ -21,7 +21,7 @@ namespace Volo.Abp.Http.Client.ClientProxying;
 
 public class ClientProxyRequestPayloadBuilder : ITransientDependency
 {
-    protected static MethodInfo CallObjectToFormDataAsyncMethod { get; }
+    protected static MethodInfo CallObjectToFormDataAsyncMethod;//  { get; }
 
     static ClientProxyRequestPayloadBuilder()
     {
@@ -30,9 +30,9 @@ public class ClientProxyRequestPayloadBuilder : ITransientDependency
             .First(m => m.Name == nameof(ObjectToFormDataAsync) && m.IsGenericMethodDefinition);
     }
 
-    protected IServiceScopeFactory ServiceScopeFactory { get; }
+    protected IServiceScopeFactory ServiceScopeFactory;//  { get; }
 
-    protected AbpHttpClientProxyingOptions HttpClientProxyingOptions { get; }
+    protected AbpHttpClientProxyingOptions HttpClientProxyingOptions;//  { get; }
 
     public ClientProxyRequestPayloadBuilder(IServiceScopeFactory serviceScopeFactory, IOptions<AbpHttpClientProxyingOptions> httpClientProxyingOptions)
     {
@@ -41,20 +41,20 @@ public class ClientProxyRequestPayloadBuilder : ITransientDependency
     }
 
     [CanBeNull]
-    public virtual async Task<HttpContent> BuildContentAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<string, object> methodArguments, IJsonSerializer jsonSerializer, ApiVersionInfo apiVersion)
+    public    Task<HttpContent> BuildContentAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<String, Object> methodArguments, IJsonSerializer jsonSerializer, ApiVersionInfo apiVersion)
     {
-        var body = await GenerateBodyAsync(action, methodArguments, jsonSerializer);
+        var body = GenerateBodyAsync(action, methodArguments, jsonSerializer);
         if (body != null)
         {
             return body;
         }
 
-        body = await GenerateFormPostDataAsync(action, methodArguments);
+        body = GenerateFormPostDataAsync(action, methodArguments);
 
         return body;
     }
 
-    protected virtual Task<HttpContent> GenerateBodyAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<string, object> methodArguments, IJsonSerializer jsonSerializer)
+    protected   Task<HttpContent> GenerateBodyAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<String, Object> methodArguments, IJsonSerializer jsonSerializer)
     {
         var parameters = action
             .Parameters
@@ -82,7 +82,7 @@ public class ClientProxyRequestPayloadBuilder : ITransientDependency
         return Task.FromResult<HttpContent>(new StringContent(jsonSerializer.Serialize(value), Encoding.UTF8, MimeTypes.Application.Json));
     }
 
-    protected virtual async Task<HttpContent> GenerateFormPostDataAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<string, object> methodArguments)
+    protected    Task<HttpContent> GenerateFormPostDataAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<String, Object> methodArguments)
     {
         var parameters = action
             .Parameters
@@ -96,7 +96,7 @@ public class ClientProxyRequestPayloadBuilder : ITransientDependency
 
         var formData = new MultipartFormDataContent();
 
-        foreach (var parameter in parameters)
+        for (var parameter in parameters)
         {
             var value = HttpActionParameterHelper.FindParameterValue(methodArguments, parameter);
             if (value == null)
@@ -108,9 +108,9 @@ public class ClientProxyRequestPayloadBuilder : ITransientDependency
             {
                 using (var scope = ServiceScopeFactory.CreateScope())
                 {
-                    var formDataContents = await (Task<List<KeyValuePair<string, HttpContent>>>)CallObjectToFormDataAsyncMethod
+                    var formDataContents = (Task<List<KeyValuePair<String, HttpContent>>>)CallObjectToFormDataAsyncMethod
                         .MakeGenericMethod(value.GetType())
-                        .Invoke(this, new object[]
+                        .Invoke(this, new Object[]
                         {
                             scope.ServiceProvider.GetRequiredService(HttpClientProxyingOptions.FormDataConverts[value.GetType()]),
                             action,
@@ -120,7 +120,7 @@ public class ClientProxyRequestPayloadBuilder : ITransientDependency
 
                     if (formDataContents != null)
                     {
-                        foreach (var content in formDataContents)
+                        for (var content in formDataContents)
                         {
                             formData.Add(content.Value, content.Key);
                         }
@@ -142,7 +142,7 @@ public class ClientProxyRequestPayloadBuilder : ITransientDependency
             }
             else if (value is IEnumerable<IRemoteStreamContent> remoteStreamContents)
             {
-                foreach (var content in remoteStreamContents)
+                for (var content in remoteStreamContents)
                 {
                     var stream = content.GetStream();
                     var streamContent = new StreamContent(stream);
@@ -156,7 +156,7 @@ public class ClientProxyRequestPayloadBuilder : ITransientDependency
             }
             else if (value.GetType().IsArray || (value.GetType().IsGenericType && value is IEnumerable))
             {
-                foreach (var item in (IEnumerable) value)
+                for (var item in (IEnumerable) value)
                 {
                     formData.Add(new StringContent(item.ToString(), Encoding.UTF8), parameter.Name);
                 }
@@ -170,8 +170,8 @@ public class ClientProxyRequestPayloadBuilder : ITransientDependency
         return formData;
     }
 
-    protected virtual async Task<List<KeyValuePair<string, HttpContent>>> ObjectToFormDataAsync<T>(IObjectToFormData<T> converter, ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, T value)
+    protected    Task<List<KeyValuePair<String, HttpContent>>> ObjectToFormDataAsync<T>(IObjectToFormData<T> converter, ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, T value)
     {
-        return await converter.ConvertAsync(actionApiDescription, parameterApiDescription, value);
+        return converter.ConvertAsync(actionApiDescription, parameterApiDescription, value);
     }
 }

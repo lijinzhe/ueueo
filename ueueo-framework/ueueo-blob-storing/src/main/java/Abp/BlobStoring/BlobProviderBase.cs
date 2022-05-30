@@ -6,7 +6,7 @@ namespace Volo.Abp.BlobStoring;
 
 public abstract class BlobProviderBase : IBlobProvider
 {
-    public abstract Task SaveAsync(BlobProviderSaveArgs args);
+    public abstract void SaveAsync(BlobProviderSaveArgs args);
 
     public abstract Task<bool> DeleteAsync(BlobProviderDeleteArgs args);
 
@@ -14,7 +14,7 @@ public abstract class BlobProviderBase : IBlobProvider
 
     public abstract Task<Stream> GetOrNullAsync(BlobProviderGetArgs args);
 
-    protected virtual async Task<Stream> TryCopyToMemoryStreamAsync(Stream stream, CancellationToken cancellationToken = default)
+    protected    Task<Stream> TryCopyToMemoryStreamAsync(Stream stream, CancellationToken cancellationToken = default)
     {
         if (stream == null)
         {
@@ -22,7 +22,7 @@ public abstract class BlobProviderBase : IBlobProvider
         }
 
         var memoryStream = new MemoryStream();
-        await stream.CopyToAsync(memoryStream, cancellationToken);
+        stream.CopyToAsync(memoryStream, cancellationToken);
         memoryStream.Seek(0, SeekOrigin.Begin);
         return memoryStream;
     }

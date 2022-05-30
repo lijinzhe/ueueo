@@ -9,9 +9,9 @@ public class AbpRemoteCallException : AbpException, IHasErrorCode, IHasErrorDeta
 {
     public int HttpStatusCode;// { get; set; }
 
-    public string Code => Error?.Code;
+    public String Code => Error?.Code;
 
-    public string Details => Error?.Details;
+    public String Details => Error?.Details;
 
     public RemoteServiceErrorInfo Error;// { get; set; }
 
@@ -20,7 +20,7 @@ public class AbpRemoteCallException : AbpException, IHasErrorCode, IHasErrorDeta
 
     }
 
-    public AbpRemoteCallException(string message, Exception innerException = null)
+    public AbpRemoteCallException(String message, Exception innerException = null)
         : base(message, innerException)
     {
 
@@ -39,7 +39,7 @@ public class AbpRemoteCallException : AbpException, IHasErrorCode, IHasErrorDeta
 
         if (error.Data != null)
         {
-            foreach (var dataKey in error.Data.Keys)
+            for (var dataKey in error.Data.Keys)
             {
                 Data[dataKey] = error.Data[dataKey];
             }

@@ -11,12 +11,12 @@ public interface IMongoDbRepository<TEntity> : IRepository<TEntity>
     where TEntity : class, IEntity
 {
     [Obsolete("Use GetDatabaseAsync method.")]
-    IMongoDatabase Database { get; }
+    IMongoDatabase Database;//  { get; }
 
     Task<IMongoDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default);
 
     [Obsolete("Use GetCollectionAsync method.")]
-    IMongoCollection<TEntity> Collection { get; }
+    IMongoCollection<TEntity> Collection;//  { get; }
 
     Task<IMongoCollection<TEntity>> GetCollectionAsync(CancellationToken cancellationToken = default);
 

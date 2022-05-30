@@ -10,15 +10,15 @@ namespace Volo.Abp.Localization;
 
 public class AbpDictionaryBasedStringLocalizer : IStringLocalizer, IStringLocalizerSupportsInheritance
 {
-    public LocalizationResource Resource { get; }
+    public LocalizationResource Resource;//  { get; }
 
-    public List<IStringLocalizer> BaseLocalizers { get; }
+    public List<IStringLocalizer> BaseLocalizers;//  { get; }
 
-    public AbpLocalizationOptions AbpLocalizationOptions { get; }
+    public AbpLocalizationOptions AbpLocalizationOptions;//  { get; }
 
-    public virtual LocalizedString this[string name] => GetLocalizedString(name);
+    public   LocalizedString this[String name] => GetLocalizedString(name);
 
-    public virtual LocalizedString this[string name, params object[] arguments] => GetLocalizedStringFormatted(name, arguments);
+    public   LocalizedString this[String name, params Object[] arguments] => GetLocalizedStringFormatted(name, arguments);
 
     public AbpDictionaryBasedStringLocalizer(LocalizationResource resource, List<IStringLocalizer> baseLocalizers, AbpLocalizationOptions abpLocalizationOptions)
     {
@@ -27,7 +27,7 @@ public class AbpDictionaryBasedStringLocalizer : IStringLocalizer, IStringLocali
         AbpLocalizationOptions = abpLocalizationOptions;
     }
 
-    public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
+    public IEnumerable<LocalizedString> GetAllStrings(boolean includeParentCultures)
     {
         return GetAllStrings(
             CultureInfo.CurrentUICulture.Name,
@@ -35,7 +35,7 @@ public class AbpDictionaryBasedStringLocalizer : IStringLocalizer, IStringLocali
         );
     }
 
-    public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures, bool includeBaseLocalizers)
+    public IEnumerable<LocalizedString> GetAllStrings(boolean includeParentCultures, boolean includeBaseLocalizers)
     {
         return GetAllStrings(
             CultureInfo.CurrentUICulture.Name,
@@ -44,29 +44,29 @@ public class AbpDictionaryBasedStringLocalizer : IStringLocalizer, IStringLocali
         );
     }
 
-    protected virtual LocalizedString GetLocalizedStringFormatted(string name, params object[] arguments)
+    protected   LocalizedString GetLocalizedStringFormatted(String name, params Object[] arguments)
     {
         return GetLocalizedStringFormatted(name, CultureInfo.CurrentUICulture.Name, arguments);
     }
 
-    protected virtual LocalizedString GetLocalizedStringFormatted(string name, string cultureName, params object[] arguments)
+    protected   LocalizedString GetLocalizedStringFormatted(String name, String cultureName, params Object[] arguments)
     {
         var localizedString = GetLocalizedString(name, cultureName);
-        return new LocalizedString(name, string.Format(localizedString.Value, arguments), localizedString.ResourceNotFound, localizedString.SearchedLocation);
+        return new LocalizedString(name, String.Format(localizedString.Value, arguments), localizedString.ResourceNotFound, localizedString.SearchedLocation);
     }
 
-    protected virtual LocalizedString GetLocalizedString(string name)
+    protected   LocalizedString GetLocalizedString(String name)
     {
         return GetLocalizedString(name, CultureInfo.CurrentUICulture.Name);
     }
 
-    protected virtual LocalizedString GetLocalizedString(string name, string cultureName)
+    protected   LocalizedString GetLocalizedString(String name, String cultureName)
     {
         var value = GetLocalizedStringOrNull(name, cultureName);
 
         if (value == null)
         {
-            foreach (var baseLocalizer in BaseLocalizers)
+            for (var baseLocalizer in BaseLocalizers)
             {
                 using (CultureHelper.Use(CultureInfo.GetCultureInfo(cultureName)))
                 {
@@ -84,7 +84,7 @@ public class AbpDictionaryBasedStringLocalizer : IStringLocalizer, IStringLocali
         return value;
     }
 
-    protected virtual LocalizedString GetLocalizedStringOrNull(string name, string cultureName, bool tryDefaults = true)
+    protected   LocalizedString GetLocalizedStringOrNull(String name, String cultureName, boolean tryDefaults = true)
     {
         //Try to get from original dictionary (with country code)
         var strOriginal = Resource.Contributors.GetOrNull(cultureName, name);
@@ -128,18 +128,18 @@ public class AbpDictionaryBasedStringLocalizer : IStringLocalizer, IStringLocali
         return null;
     }
 
-    protected virtual IReadOnlyList<LocalizedString> GetAllStrings(
-        string cultureName,
-        bool includeParentCultures = true,
-        bool includeBaseLocalizers = true)
+    protected   IReadOnlyList<LocalizedString> GetAllStrings(
+        String cultureName,
+        boolean includeParentCultures = true,
+        boolean includeBaseLocalizers = true)
     {
         //TODO: Can be optimized (example: if it's already default dictionary, skip overriding)
 
-        var allStrings = new Dictionary<string, LocalizedString>();
+        var allStrings = new Dictionary<String, LocalizedString>();
 
         if (includeBaseLocalizers)
         {
-            foreach (var baseLocalizer in BaseLocalizers.Select(l => l))
+            for (var baseLocalizer in BaseLocalizers.Select(l => l))
             {
                 using (CultureHelper.Use(CultureInfo.GetCultureInfo(cultureName)))
                 {
@@ -147,7 +147,7 @@ public class AbpDictionaryBasedStringLocalizer : IStringLocalizer, IStringLocali
                     try
                     {
                         var baseLocalizedString = baseLocalizer.GetAllStrings(includeParentCultures);
-                        foreach (var localizedString in baseLocalizedString)
+                        for (var localizedString in baseLocalizedString)
                         {
                             allStrings[localizedString.Name] = localizedString;
                         }
@@ -183,25 +183,25 @@ public class AbpDictionaryBasedStringLocalizer : IStringLocalizer, IStringLocali
 
     public class CultureWrapperStringLocalizer : IStringLocalizer, IStringLocalizerSupportsInheritance
     {
-        private readonly string _cultureName;
+        private readonly String _cultureName;
         private readonly AbpDictionaryBasedStringLocalizer _innerLocalizer;
 
-        LocalizedString IStringLocalizer.this[string name] => _innerLocalizer.GetLocalizedString(name, _cultureName);
+        LocalizedString IStringLocalizer.this[String name] => _innerLocalizer.GetLocalizedString(name, _cultureName);
 
-        LocalizedString IStringLocalizer.this[string name, params object[] arguments] => _innerLocalizer.GetLocalizedStringFormatted(name, _cultureName, arguments);
+        LocalizedString IStringLocalizer.this[String name, params Object[] arguments] => _innerLocalizer.GetLocalizedStringFormatted(name, _cultureName, arguments);
 
-        public CultureWrapperStringLocalizer(string cultureName, AbpDictionaryBasedStringLocalizer innerLocalizer)
+        public CultureWrapperStringLocalizer(String cultureName, AbpDictionaryBasedStringLocalizer innerLocalizer)
         {
             _cultureName = cultureName;
             _innerLocalizer = innerLocalizer;
         }
 
-        public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
+        public IEnumerable<LocalizedString> GetAllStrings(boolean includeParentCultures)
         {
             return _innerLocalizer.GetAllStrings(_cultureName, includeParentCultures);
         }
 
-        public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures, bool includeBaseLocalizers)
+        public IEnumerable<LocalizedString> GetAllStrings(boolean includeParentCultures, boolean includeBaseLocalizers)
         {
             return _innerLocalizer.GetAllStrings(_cultureName, includeParentCultures, includeBaseLocalizers);
         }

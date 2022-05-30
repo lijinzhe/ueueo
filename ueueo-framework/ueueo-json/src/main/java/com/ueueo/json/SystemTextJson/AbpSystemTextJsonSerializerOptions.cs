@@ -5,9 +5,9 @@ namespace Volo.Abp.Json.SystemTextJson;
 
 public class AbpSystemTextJsonSerializerOptions
 {
-    public JsonSerializerOptions JsonSerializerOptions { get; }
+    public JsonSerializerOptions JsonSerializerOptions;//  { get; }
 
-    public ITypeList UnsupportedTypes { get; }
+    public ITypeList UnsupportedTypes;//  { get; }
 
     public AbpSystemTextJsonSerializerOptions()
     {

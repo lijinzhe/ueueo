@@ -2,7 +2,7 @@
 
 public interface IBlobNamingNormalizer
 {
-    string NormalizeContainerName(string containerName);
+    String NormalizeContainerName(String containerName);
 
-    string NormalizeBlobName(string blobName);
+    String NormalizeBlobName(String blobName);
 }

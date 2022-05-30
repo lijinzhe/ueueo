@@ -10,7 +10,7 @@ public interface IQuartzBackgroundWorker : IBackgroundWorker, IJob
 
     IJobDetail JobDetail;// { get; set; }
 
-    bool AutoRegister;// { get; set; }
+    boolean AutoRegister;// { get; set; }
 
     Func<IScheduler, Task> ScheduleJob;// { get; set; }
 }

@@ -8,34 +8,34 @@ using Volo.Abp.ExceptionHandling;
 
 namespace Volo.Abp.Threading;
 
-/// <summary>
-/// A robust timer implementation that ensures no overlapping occurs. It waits exactly specified <see cref="Period"/> between ticks.
-/// </summary>
+/**
+ * A robust timer implementation that ensures no overlapping occurs. It waits exactly specified <see cref="Period"/> between ticks.
+*/
 public class AbpAsyncTimer : ITransientDependency
 {
-    /// <summary>
-    /// This func is raised periodically according to Period of Timer.
-    /// </summary>
+    /**
+     * This func is raised periodically according to Period of Timer.
+    */
     public Func<AbpAsyncTimer, Task> Elapsed = _ => Task.CompletedTask;
 
-    /// <summary>
-    /// Task period of timer (as milliseconds).
-    /// </summary>
+    /**
+     * void period of timer (as milliseconds).
+    */
     public int Period;// { get; set; }
 
-    /// <summary>
-    /// Indicates whether timer raises Elapsed event on Start method of Timer for once.
-    /// Default: False.
-    /// </summary>
-    public bool RunOnStart;// { get; set; }
+    /**
+     * Indicates whether timer raises Elapsed event on Start method of Timer for once.
+     * Default: False.
+    */
+    public boolean RunOnStart;// { get; set; }
 
     public ILogger<AbpAsyncTimer> Logger;// { get; set; }
 
     public IExceptionNotifier ExceptionNotifier;// { get; set; }
 
     private readonly Timer _taskTimer;
-    private volatile bool _performingTasks;
-    private volatile bool _isRunning;
+    private volatile boolean _performingTasks;
+    private volatile boolean _isRunning;
 
     public AbpAsyncTimer()
     {
@@ -78,11 +78,12 @@ public class AbpAsyncTimer : ITransientDependency
         }
     }
 
-    /// <summary>
-    /// This method is called by _taskTimer.
-    /// </summary>
-    /// <param name="state">Not used argument</param>
-    private void TimerCallBack(object state)
+    /**
+     * This method is called by _taskTimer.
+    *
+     * <param name="state">Not used argument</param>
+     */
+    private void TimerCallBack(Object state)
     {
         lock (_taskTimer)
         {
@@ -102,12 +103,12 @@ public class AbpAsyncTimer : ITransientDependency
     {
         try
         {
-            await Elapsed(this);
+            Elapsed(this);
         }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            await ExceptionNotifier.NotifyAsync(ex);
+            ExceptionNotifier.NotifyAsync(ex);
         }
         finally
         {

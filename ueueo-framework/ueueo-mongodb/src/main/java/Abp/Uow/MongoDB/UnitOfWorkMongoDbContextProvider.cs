@@ -17,7 +17,7 @@ namespace Volo.Abp.Uow.MongoDB;
 public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContextProvider<TMongoDbContext>
     where TMongoDbContext : IAbpMongoDbContext
 {
-    private const string TransactionsNotSupportedErrorMessage = "Current database does not support transactions. Your database may remain in an inconsistent state in an error case.";
+    private const String TransactionsNotSupportedErrorMessage = "Current database does not support transactions. Your database may remain in an inconsistent state in an error case.";
     public ILogger<UnitOfWorkMongoDbContextProvider<TMongoDbContext>> Logger;// { get; set; }
 
     private readonly IUnitOfWorkManager _unitOfWorkManager;
@@ -82,7 +82,7 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
         return (TMongoDbContext)((MongoDbDatabaseApi) databaseApi).DbContext;
     }
 
-    public async Task<TMongoDbContext> GetDbContextAsync(CancellationToken cancellationToken = default)
+    public  Task<TMongoDbContext> GetDbContextAsync(CancellationToken cancellationToken = default)
     {
         var unitOfWork = _unitOfWorkManager.Current;
         if (unitOfWork == null)
@@ -92,7 +92,7 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
         }
 
         var targetDbContextType = _options.GetReplacedTypeOrSelf(typeof(TMongoDbContext));
-        var connectionString = await ResolveConnectionStringAsync(targetDbContextType);
+        var connectionString = ResolveConnectionStringAsync(targetDbContextType);
         var dbContextKey = $"{targetDbContextType.FullName}_{connectionString}";
 
         var mongoUrl = new MongoUrl(connectionString);
@@ -107,7 +107,7 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
         if (databaseApi == null)
         {
             databaseApi = new MongoDbDatabaseApi(
-                await CreateDbContextAsync(
+                CreateDbContextAsync(
                     unitOfWork,
                     mongoUrl,
                     databaseName,
@@ -123,7 +123,7 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
 
     [Obsolete("Use CreateDbContextAsync")]
 
-    private TMongoDbContext CreateDbContext(IUnitOfWork unitOfWork, MongoUrl mongoUrl, string databaseName)
+    private TMongoDbContext CreateDbContext(IUnitOfWork unitOfWork, MongoUrl mongoUrl, String databaseName)
     {
         var client = CreateMongoClient(mongoUrl);
         var database = client.GetDatabase(databaseName);
@@ -139,10 +139,10 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
         return dbContext;
     }
 
-    private async Task<TMongoDbContext> CreateDbContextAsync(
+    private  Task<TMongoDbContext> CreateDbContextAsync(
         IUnitOfWork unitOfWork,
         MongoUrl mongoUrl,
-        string databaseName,
+        String databaseName,
         CancellationToken cancellationToken = default)
     {
         var client = CreateMongoClient(mongoUrl);
@@ -150,7 +150,7 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
 
         if (unitOfWork.Options.IsTransactional)
         {
-            return await CreateDbContextWithTransactionAsync(
+            return CreateDbContextWithTransactionAsync(
                 unitOfWork,
                 mongoUrl,
                 client,
@@ -216,7 +216,7 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
         return dbContext;
     }
 
-    private async Task<TMongoDbContext> CreateDbContextWithTransactionAsync(
+    private  Task<TMongoDbContext> CreateDbContextWithTransactionAsync(
         IUnitOfWork unitOfWork,
         MongoUrl url,
         MongoClient client,
@@ -229,7 +229,7 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
 
         if (activeTransaction?.SessionHandle == null)
         {
-            var session = await client.StartSessionAsync(cancellationToken: GetCancellationToken(cancellationToken));
+            var session = client.StartSessionAsync(cancellationToken: GetCancellationToken(cancellationToken));
 
             if (unitOfWork.Options.Timeout.HasValue)
             {
@@ -267,22 +267,22 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
         return dbContext;
     }
 
-    private async Task<string> ResolveConnectionStringAsync(Type dbContextType)
+    private  Task<String> ResolveConnectionStringAsync(Type dbContextType)
     {
         // Multi-tenancy unaware contexts should always use the host connection string
         if (typeof(TMongoDbContext).IsDefined(typeof(IgnoreMultiTenancyAttribute), false))
         {
             using (_currentTenant.Change(null))
             {
-                return await _connectionStringResolver.ResolveAsync(dbContextType);
+                return _connectionStringResolver.ResolveAsync(dbContextType);
             }
         }
 
-        return await _connectionStringResolver.ResolveAsync(dbContextType);
+        return _connectionStringResolver.ResolveAsync(dbContextType);
     }
 
     [Obsolete("Use ResolveConnectionStringAsync method.")]
-    private string ResolveConnectionString(Type dbContextType)
+    private String ResolveConnectionString(Type dbContextType)
     {
         // Multi-tenancy unaware contexts should always use the host connection string
         if (typeof(TMongoDbContext).IsDefined(typeof(IgnoreMultiTenancyAttribute), false))
@@ -304,7 +304,7 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
         return new MongoClient(mongoClientSettings);
     }
 
-    protected virtual CancellationToken GetCancellationToken(CancellationToken preferredValue = default)
+    protected   CancellationToken GetCancellationToken(CancellationToken preferredValue = default)
     {
         return _cancellationTokenProvider.FallbackToProvider(preferredValue);
     }

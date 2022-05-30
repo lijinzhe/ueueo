@@ -5,13 +5,13 @@ namespace Volo.Abp.Domain.Entities.Events;
 [Serializable]
 public class DomainEventEntry
 {
-    public object SourceEntity { get; }
+    public Object SourceEntity;//  { get; }
 
-    public object EventData { get; }
+    public Object EventData;//  { get; }
 
-    public long EventOrder { get; }
+    public long EventOrder;//  { get; }
 
-    public DomainEventEntry(object sourceEntity, object eventData, long eventOrder)
+    public DomainEventEntry(Object sourceEntity, Object eventData, long eventOrder)
     {
         SourceEntity = sourceEntity;
         EventData = eventData;

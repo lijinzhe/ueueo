@@ -9,9 +9,9 @@ namespace Volo.Abp.TextTemplating;
 
 public class AbpTemplateRenderer : ITemplateRenderer, ITransientDependency
 {
-    protected IServiceScopeFactory ServiceScopeFactory { get; }
-    protected ITemplateDefinitionManager TemplateDefinitionManager { get; }
-    protected AbpTextTemplatingOptions Options { get; }
+    protected IServiceScopeFactory ServiceScopeFactory;//  { get; }
+    protected ITemplateDefinitionManager TemplateDefinitionManager;//  { get; }
+    protected AbpTextTemplatingOptions Options;//  { get; }
 
     public AbpTemplateRenderer(
         IServiceScopeFactory serviceScopeFactory,
@@ -23,11 +23,11 @@ public class AbpTemplateRenderer : ITemplateRenderer, ITransientDependency
         Options = options.Value;
     }
 
-    public virtual async Task<string> RenderAsync(
-        string templateName,
-        object model = null,
-        string cultureName = null,
-        Dictionary<string, object> globalContext = null)
+    public    Task<String> RenderAsync(
+        String templateName,
+        Object model = null,
+        String cultureName = null,
+        Dictionary<String, Object> globalContext = null)
     {
         var templateDefinition = TemplateDefinitionManager.Get(templateName);
 
@@ -45,7 +45,7 @@ public class AbpTemplateRenderer : ITemplateRenderer, ITransientDependency
             using (var scope = ServiceScopeFactory.CreateScope())
             {
                 var templateRenderingEngine = (ITemplateRenderingEngine)scope.ServiceProvider.GetRequiredService(providerType);
-                return await templateRenderingEngine.RenderAsync(templateName, model, cultureName, globalContext);
+                return templateRenderingEngine.RenderAsync(templateName, model, cultureName, globalContext);
             }
         }
 

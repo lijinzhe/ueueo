@@ -5,14 +5,14 @@ namespace Volo.Abp.VirtualFileSystem.Embedded;
 
 public class EmbeddedVirtualFileSetInfo : VirtualFileSetInfo
 {
-    public Assembly Assembly { get; }
+    public Assembly Assembly;//  { get; }
 
-    public string BaseFolder { get; }
+    public String BaseFolder;//  { get; }
 
     public EmbeddedVirtualFileSetInfo(
         IFileProvider fileProvider,
         Assembly assembly,
-        string baseFolder = null)
+        String baseFolder = null)
         : base(fileProvider)
     {
         Assembly = assembly;

@@ -6,7 +6,7 @@ namespace Volo.Abp.Text.Formatting;
 
 internal class FormatStringTokenizer
 {
-    public List<FormatStringToken> Tokenize(string format, bool includeBracketsForDynamicValues = false)
+    public List<FormatStringToken> Tokenize(String format, boolean includeBracketsForDynamicValues = false)
     {
         var tokens = new List<FormatStringToken>();
 

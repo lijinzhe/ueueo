@@ -11,13 +11,13 @@ namespace Volo.Abp.BackgroundJobs.RabbitMQ;
 
 public class JobQueueManager : IJobQueueManager, ISingletonDependency
 {
-    protected ConcurrentDictionary<string, IRunnable> JobQueues { get; }
+    protected ConcurrentDictionary<String, IRunnable> JobQueues;//  { get; }
 
-    protected IServiceProvider ServiceProvider { get; }
+    protected IServiceProvider ServiceProvider;//  { get; }
 
-    protected AbpBackgroundJobOptions Options { get; }
+    protected AbpBackgroundJobOptions Options;//  { get; }
 
-    protected SemaphoreSlim SyncSemaphore { get; }
+    protected SemaphoreSlim SyncSemaphore;//  { get; }
 
     public JobQueueManager(
         IOptions<AbpBackgroundJobOptions> options,
@@ -25,7 +25,7 @@ public class JobQueueManager : IJobQueueManager, ISingletonDependency
     {
         ServiceProvider = serviceProvider;
         Options = options.Value;
-        JobQueues = new ConcurrentDictionary<string, IRunnable>();
+        JobQueues = new ConcurrentDictionary<String, IRunnable>();
         SyncSemaphore = new SemaphoreSlim(1, 1);
     }
 
@@ -36,25 +36,25 @@ public class JobQueueManager : IJobQueueManager, ISingletonDependency
             return;
         }
 
-        foreach (var jobConfiguration in Options.GetJobs())
+        for (var jobConfiguration in Options.GetJobs())
         {
             var jobQueue = (IRunnable)ServiceProvider.GetRequiredService(typeof(IJobQueue<>).MakeGenericType(jobConfiguration.ArgsType));
-            await jobQueue.StartAsync(cancellationToken);
+            jobQueue.StartAsync(cancellationToken);
             JobQueues[jobConfiguration.JobName] = jobQueue;
         }
     }
 
     public void StopAsync(CancellationToken cancellationToken = default)
     {
-        foreach (var jobQueue in JobQueues.Values)
+        for (var jobQueue in JobQueues.Values)
         {
-            await jobQueue.StopAsync(cancellationToken);
+            jobQueue.StopAsync(cancellationToken);
         }
 
         JobQueues.Clear();
     }
 
-    public async Task<IJobQueue<TArgs>> GetAsync<TArgs>()
+    public Task<IJobQueue<TArgs>> GetAsync<TArgs>()
     {
         var jobConfiguration = Options.GetJob(typeof(TArgs));
 
@@ -63,7 +63,7 @@ public class JobQueueManager : IJobQueueManager, ISingletonDependency
             return (IJobQueue<TArgs>)jobQueue;
         }
 
-        using (await SyncSemaphore.LockAsync())
+        using (SyncSemaphore.LockAsync())
         {
             if (JobQueues.TryGetValue(jobConfiguration.JobName, out jobQueue))
             {
@@ -73,7 +73,7 @@ public class JobQueueManager : IJobQueueManager, ISingletonDependency
             jobQueue = (IJobQueue<TArgs>)ServiceProvider
                 .GetRequiredService(typeof(IJobQueue<>).MakeGenericType(typeof(TArgs)));
 
-            await jobQueue.StartAsync();
+            jobQueue.StartAsync();
 
             JobQueues.TryAdd(jobConfiguration.JobName, jobQueue);
 

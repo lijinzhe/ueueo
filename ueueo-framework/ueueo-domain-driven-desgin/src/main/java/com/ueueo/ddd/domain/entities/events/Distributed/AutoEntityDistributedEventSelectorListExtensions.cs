@@ -7,11 +7,11 @@ namespace Volo.Abp.Domain.Entities.Events.Distributed;
 
 public static class AutoEntityDistributedEventSelectorListExtensions
 {
-    public const string AllEntitiesSelectorName = "All";
+    public const String AllEntitiesSelectorName = "All";
 
-    public static void AddNamespace([NotNull] this IAutoEntityDistributedEventSelectorList selectors, [NotNull] string namespaceName)
+    public static void AddNamespace(@Nonnull this IAutoEntityDistributedEventSelectorList selectors, @Nonnull String namespaceName)
     {
-        Check.NotNull(selectors, nameof(selectors));
+        Objects.requireNonNull(selectors, nameof(selectors));
 
         var selectorName = "Namespace:" + namespaceName;
         if (selectors.Any(s => s.Name == selectorName))
@@ -27,14 +27,14 @@ public static class AutoEntityDistributedEventSelectorListExtensions
         );
     }
 
-    /// <summary>
-    /// Adds a specific entity type and the types derived from that entity type.
-    /// </summary>
-    /// <typeparam name="TEntity">Type of the entity</typeparam>
-    public static void Add<TEntity>([NotNull] this IAutoEntityDistributedEventSelectorList selectors)
-        where TEntity : IEntity
+    /**
+     * Adds a specific entity type and the types derived from that entity type.
+    */
+     * <typeparam name="TEntity">Type of the entity</typeparam>
+    public static void Add<TEntity>(@Nonnull this IAutoEntityDistributedEventSelectorList selectors)
+        //where TEntity : IEntity
     {
-        Check.NotNull(selectors, nameof(selectors));
+        Objects.requireNonNull(selectors, nameof(selectors));
 
         var selectorName = "Entity:" + typeof(TEntity).FullName;
         if (selectors.Any(s => s.Name == selectorName))
@@ -50,25 +50,25 @@ public static class AutoEntityDistributedEventSelectorListExtensions
         );
     }
 
-    /// <summary>
-    /// Remove a specific entity type and the types derived from that entity type.
-    /// </summary>
-    /// <typeparam name="TEntity">Type of the entity</typeparam>
-    public static void Remove<TEntity>([NotNull] this IAutoEntityDistributedEventSelectorList selectors)
-        where TEntity : IEntity
+    /**
+     * Remove a specific entity type and the types derived from that entity type.
+    */
+     * <typeparam name="TEntity">Type of the entity</typeparam>
+    public static void Remove<TEntity>(@Nonnull this IAutoEntityDistributedEventSelectorList selectors)
+        //where TEntity : IEntity
     {
-        Check.NotNull(selectors, nameof(selectors));
+        Objects.requireNonNull(selectors, nameof(selectors));
 
         var selectorName = "Entity:" + typeof(TEntity).FullName;
         selectors.RemoveAll(s => s.Name == selectorName);
     }
 
-    /// <summary>
-    /// Adds all entity types.
-    /// </summary>
-    public static void AddAll([NotNull] this IAutoEntityDistributedEventSelectorList selectors)
+    /**
+     * Adds all entity types.
+    */
+    public static void AddAll(@Nonnull this IAutoEntityDistributedEventSelectorList selectors)
     {
-        Check.NotNull(selectors, nameof(selectors));
+        Objects.requireNonNull(selectors, nameof(selectors));
 
         if (selectors.Any(s => s.Name == AllEntitiesSelectorName))
         {
@@ -84,11 +84,11 @@ public static class AutoEntityDistributedEventSelectorListExtensions
     }
 
     public static void Add(
-        [NotNull] this IAutoEntityDistributedEventSelectorList selectors,
-        string selectorName,
+        @Nonnull this IAutoEntityDistributedEventSelectorList selectors,
+        String selectorName,
         Func<Type, bool> predicate)
     {
-        Check.NotNull(selectors, nameof(selectors));
+        Objects.requireNonNull(selectors, nameof(selectors));
 
         if (selectors.Any(s => s.Name == selectorName))
         {
@@ -104,26 +104,26 @@ public static class AutoEntityDistributedEventSelectorListExtensions
     }
 
     public static void Add(
-        [NotNull] this IAutoEntityDistributedEventSelectorList selectors,
+        @Nonnull this IAutoEntityDistributedEventSelectorList selectors,
         Func<Type, bool> predicate)
     {
         selectors.Add(Guid.NewGuid().ToString("N"), predicate);
     }
 
-    public static bool RemoveByName(
-        [NotNull] this IAutoEntityDistributedEventSelectorList selectors,
-        [NotNull] string name)
+    public static boolean RemoveByName(
+        @Nonnull this IAutoEntityDistributedEventSelectorList selectors,
+        @Nonnull String name)
     {
-        Check.NotNull(selectors, nameof(selectors));
-        Check.NotNull(name, nameof(name));
+        Objects.requireNonNull(selectors, nameof(selectors));
+        Objects.requireNonNull(name, nameof(name));
 
         return selectors.RemoveAll(s => s.Name == name).Count > 0;
     }
 
 
-    public static bool IsMatch([NotNull] this IAutoEntityDistributedEventSelectorList selectors, Type entityType)
+    public static boolean IsMatch(@Nonnull this IAutoEntityDistributedEventSelectorList selectors, Type entityType)
     {
-        Check.NotNull(selectors, nameof(selectors));
+        Objects.requireNonNull(selectors, nameof(selectors));
         return selectors.Any(s => s.Predicate(entityType));
     }
 }

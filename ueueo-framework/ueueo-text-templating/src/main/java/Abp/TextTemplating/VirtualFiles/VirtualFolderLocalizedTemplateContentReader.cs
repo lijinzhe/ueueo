@@ -8,19 +8,19 @@ namespace Volo.Abp.TextTemplating.VirtualFiles;
 
 public class VirtualFolderLocalizedTemplateContentReader : ILocalizedTemplateContentReader
 {
-    private Dictionary<string, string> _dictionary;
-    private readonly string[] _fileExtension;
+    private Dictionary<String, String> _dictionary;
+    private readonly String[] _fileExtension;
 
-    public VirtualFolderLocalizedTemplateContentReader(string[] fileExtension)
+    public VirtualFolderLocalizedTemplateContentReader(String[] fileExtension)
     {
         _fileExtension = fileExtension;
     }
 
     public void ReadContentsAsync(
         IVirtualFileProvider virtualFileProvider,
-        string virtualPath)
+        String virtualPath)
     {
-        _dictionary = new Dictionary<string, string>();
+        _dictionary = new Dictionary<String, String>();
 
         var directoryContents = virtualFileProvider.GetDirectoryContents(virtualPath);
         if (!directoryContents.Exists)
@@ -28,18 +28,18 @@ public class VirtualFolderLocalizedTemplateContentReader : ILocalizedTemplateCon
             throw new AbpException("Could not find a folder at the location: " + virtualPath);
         }
 
-        foreach (var file in directoryContents)
+        for (var file in directoryContents)
         {
             if (file.IsDirectory)
             {
                 continue;
             }
 
-            _dictionary.Add(file.Name.RemovePostFix(_fileExtension), await file.ReadAsStringAsync());
+            _dictionary.Add(file.Name.RemovePostFix(_fileExtension), file.ReadAsStringAsync());
         }
     }
 
-    public string GetContentOrNull(string cultureName)
+    public String GetContentOrNull(String cultureName)
     {
         if (cultureName == null)
         {

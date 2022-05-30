@@ -6,22 +6,22 @@ namespace Volo.Abp;
 
 public interface IAbpApplicationWithExternalServiceProvider : IAbpApplication
 {
-    /// <summary>
-    /// Sets the service provider, but not initializes the modules.
-    /// </summary>
-    void SetServiceProvider([NotNull] IServiceProvider serviceProvider);
-    
-    /// <summary>
-    /// Sets the service provider and initializes all the modules.
-    /// If <see cref="SetServiceProvider"/> was called before, the same
-    /// <see cref="serviceProvider"/> instance should be passed to this method.
-    /// </summary>
-    Task InitializeAsync([NotNull] IServiceProvider serviceProvider);
+    /**
+     * Sets the service provider, but not initializes the modules.
+    */
+    void SetServiceProvider(@Nonnull IServiceProvider serviceProvider);
 
-    /// <summary>
-    /// Sets the service provider and initializes all the modules.
-    /// If <see cref="SetServiceProvider"/> was called before, the same
-    /// <see cref="serviceProvider"/> instance should be passed to this method.
-    /// </summary>
-    void Initialize([NotNull] IServiceProvider serviceProvider);
+    /**
+     * Sets the service provider and initializes all the modules.
+     * If <see cref="SetServiceProvider"/> was called before, the same
+     * <see cref="serviceProvider"/> instance should be passed to this method.
+    */
+    void InitializeAsync(@Nonnull IServiceProvider serviceProvider);
+
+    /**
+     * Sets the service provider and initializes all the modules.
+     * If <see cref="SetServiceProvider"/> was called before, the same
+     * <see cref="serviceProvider"/> instance should be passed to this method.
+    */
+    void Initialize(@Nonnull IServiceProvider serviceProvider);
 }

@@ -15,17 +15,20 @@ namespace Volo.Abp.BackgroundWorkers.Quartz;
 )]
 public class AbpBackgroundWorkersQuartzModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void PreConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddConventionalRegistrar(new AbpQuartzConventionalRegistrar());
     }
 
-    public override void ConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddSingleton(typeof(QuartzPeriodicBackgroundWorkerAdapter<>));
     }
 
-    public override void OnPreApplicationInitialization(ApplicationInitializationContext context)
+    @Override
+    public void OnPreApplicationInitialization(ApplicationInitializationContext context)
     {
         var options = context.ServiceProvider.GetRequiredService<IOptions<AbpBackgroundWorkerOptions>>().Value;
         if (!options.IsEnabled)
@@ -35,7 +38,8 @@ public class AbpBackgroundWorkersQuartzModule : AbpModule
         }
     }
 
-    public async override Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
+    @Override
+    public void OnApplicationInitializationAsync(ApplicationInitializationContext context)
     {
         var quartzBackgroundWorkerOptions = context.ServiceProvider.GetRequiredService<IOptions<AbpBackgroundWorkerQuartzOptions>>().Value;
         if (quartzBackgroundWorkerOptions.IsAutoRegisterEnabled)
@@ -43,14 +47,15 @@ public class AbpBackgroundWorkersQuartzModule : AbpModule
             var backgroundWorkerManager = context.ServiceProvider.GetRequiredService<IBackgroundWorkerManager>();
             var works = context.ServiceProvider.GetServices<IQuartzBackgroundWorker>().Where(x => x.AutoRegister);
 
-            foreach (var work in works)
+            for (var work in works)
             {
-                await backgroundWorkerManager.AddAsync(work);
+                backgroundWorkerManager.AddAsync(work);
             }
         }
     }
 
-    public override void OnApplicationInitialization(ApplicationInitializationContext context)
+    @Override
+    public void OnApplicationInitialization(ApplicationInitializationContext context)
     {
         AsyncHelper.RunSync(() => OnApplicationInitializationAsync(context));
     }

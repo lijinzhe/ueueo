@@ -6,9 +6,9 @@ namespace Volo.Abp.BackgroundWorkers.Quartz;
 
 public class AbpQuartzConventionalRegistrar : DefaultConventionalRegistrar
 {
-    protected override bool IsConventionalRegistrationDisabled(Type type)
+    protected override boolean IsConventionalRegistrationDisabled(Type type)
     {
-        return !typeof(IQuartzBackgroundWorker).IsAssignableFrom(type) || base.IsConventionalRegistrationDisabled(type);
+        return !typeof(IQuartzBackgroundWorker).IsAssignableFrom(type) ||super.IsConventionalRegistrationDisabled(type);
     }
 
     protected override List<Type> GetExposedServiceTypes(Type type)

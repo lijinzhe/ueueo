@@ -13,7 +13,7 @@ public static class AbpBsonClassMapExtensions
         map.TryConfigureExtraProperties();
     }
 
-    public static bool TryConfigureExtraProperties<TEntity>(this BsonClassMap<TEntity> map)
+    public static boolean TryConfigureExtraProperties<TEntity>(this BsonClassMap<TEntity> map)
         where TEntity : class, IHasExtraProperties
     {
         var property = map.ClassType.GetProperty(
@@ -34,7 +34,7 @@ public static class AbpBsonClassMapExtensions
         return true;
     }
 
-    public static bool TryConfigureExtraProperties(this BsonClassMap map)
+    public static boolean TryConfigureExtraProperties(this BsonClassMap map)
     {
         if (!map.ClassType.IsAssignableTo<IHasExtraProperties>())
         {

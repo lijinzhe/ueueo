@@ -40,17 +40,17 @@ public class ClientProxyBase<TService> : ITransientDependency
     protected ClientProxyUrlBuilder ClientProxyUrlBuilder => LazyServiceProvider.LazyGetRequiredService<ClientProxyUrlBuilder>();
     protected ICurrentApiVersionInfo CurrentApiVersionInfo => LazyServiceProvider.LazyGetRequiredService<ICurrentApiVersionInfo>();
 
-    protected virtual void RequestAsync(string methodName, ClientProxyRequestTypeValue arguments = null)
+    protected   void RequestAsync(String methodName, ClientProxyRequestTypeValue arguments = null)
     {
-        await RequestAsync(BuildHttpProxyClientProxyContext(methodName, arguments));
+        RequestAsync(BuildHttpProxyClientProxyContext(methodName, arguments));
     }
 
-    protected virtual async Task<T> RequestAsync<T>(string methodName, ClientProxyRequestTypeValue arguments = null)
+    protected    Task<T> RequestAsync<T>(String methodName, ClientProxyRequestTypeValue arguments = null)
     {
-        return await RequestAsync<T>(BuildHttpProxyClientProxyContext(methodName, arguments));
+        return RequestAsync<T>(BuildHttpProxyClientProxyContext(methodName, arguments));
     }
 
-    protected virtual ClientProxyRequestContext BuildHttpProxyClientProxyContext(string methodName, ClientProxyRequestTypeValue arguments = null)
+    protected   ClientProxyRequestContext BuildHttpProxyClientProxyContext(String methodName, ClientProxyRequestTypeValue arguments = null)
     {
         if (arguments == null)
         {
@@ -74,14 +74,14 @@ public class ClientProxyBase<TService> : ITransientDependency
         return new ClientProxyRequestContext(
             action,
                 actionArguments
-                .Select((x, i) => new KeyValuePair<string, object>(x.Key, arguments.Values[i].Value))
+                .Select((x, i) => new KeyValuePair<String, Object>(x.Key, arguments.Values[i].Value))
                 .ToDictionary(x => x.Key, x => x.Value),
             typeof(TService));
     }
 
-    protected virtual async Task<T> RequestAsync<T>(ClientProxyRequestContext requestContext)
+    protected    Task<T> RequestAsync<T>(ClientProxyRequestContext requestContext)
     {
-        var responseContent = await RequestAsync(requestContext);
+        var responseContent = RequestAsync(requestContext);
 
         if (typeof(T) == typeof(IRemoteStreamContent) ||
             typeof(T) == typeof(RemoteStreamContent))
@@ -90,47 +90,47 @@ public class ClientProxyBase<TService> : ITransientDependency
              * content just to be sure that GC does not dispose of
              * it before we finish doing our work with the stream */
             return (T)(object)new RemoteStreamContent(
-                await responseContent.ReadAsStreamAsync(),
+                responseContent.ReadAsStreamAsync(),
                 responseContent.Headers?.ContentDisposition?.FileNameStar ??
                 RemoveQuotes(responseContent.Headers?.ContentDisposition?.FileName).ToString(),
                 responseContent.Headers?.ContentType?.ToString(),
                 responseContent.Headers?.ContentLength);
         }
 
-        var stringContent = await responseContent.ReadAsStringAsync();
-        if (typeof(T) == typeof(string))
+        var StringContent = responseContent.ReadAsStringAsync();
+        if (typeof(T) == typeof(String))
         {
-            return (T)(object)stringContent;
+            return (T)(object)StringContent;
         }
 
-        if (stringContent.IsNullOrWhiteSpace())
+        if (StringContent.IsNullOrWhiteSpace())
         {
             return default;
         }
 
-        return JsonSerializer.Deserialize<T>(stringContent);
+        return JsonSerializer.Deserialize<T>(StringContent);
     }
 
-    protected virtual async Task<HttpContent> RequestAsync(ClientProxyRequestContext requestContext)
+    protected    Task<HttpContent> RequestAsync(ClientProxyRequestContext requestContext)
     {
         var clientConfig = ClientOptions.Value.HttpClientProxies.GetOrDefault(requestContext.ServiceType) ?? throw new AbpException($"Could not get HttpClientProxyConfig for {requestContext.ServiceType.FullName}.");
-        var remoteServiceConfig = await RemoteServiceConfigurationProvider.GetConfigurationOrDefaultAsync(clientConfig.RemoteServiceName);
+        var remoteServiceConfig = RemoteServiceConfigurationProvider.GetConfigurationOrDefaultAsync(clientConfig.RemoteServiceName);
 
         var client = HttpClientFactory.Create(clientConfig.RemoteServiceName);
 
-        var apiVersion = await GetApiVersionInfoAsync(requestContext);
-        var url = remoteServiceConfig.BaseUrl.EnsureEndsWith('/') + await GetUrlWithParametersAsync(requestContext, apiVersion);
+        var apiVersion = GetApiVersionInfoAsync(requestContext);
+        var url = remoteServiceConfig.BaseUrl.EnsureEndsWith('/') + GetUrlWithParametersAsync(requestContext, apiVersion);
 
         var requestMessage = new HttpRequestMessage(requestContext.Action.GetHttpMethod(), url)
         {
-            Content = await ClientProxyRequestPayloadBuilder.BuildContentAsync(requestContext.Action, requestContext.Arguments, JsonSerializer, apiVersion)
+            Content = ClientProxyRequestPayloadBuilder.BuildContentAsync(requestContext.Action, requestContext.Arguments, JsonSerializer, apiVersion)
         };
 
         AddHeaders(requestContext.Arguments, requestContext.Action, requestMessage, apiVersion);
 
         if (requestContext.Action.AllowAnonymous != true)
         {
-            await ClientAuthenticator.Authenticate(
+            ClientAuthenticator.Authenticate(
                 new RemoteServiceHttpClientAuthenticateContext(
                     client,
                     requestMessage,
@@ -143,7 +143,7 @@ public class ClientProxyBase<TService> : ITransientDependency
         HttpResponseMessage response;
         try
         {
-            response = await client.SendAsync(
+            response = client.SendAsync(
                 requestMessage,
                 HttpCompletionOption.ResponseHeadersRead /*this will buffer only the headers, the content will be used as a stream*/,
                 GetCancellationToken(requestContext.Arguments)
@@ -156,20 +156,20 @@ public class ClientProxyBase<TService> : ITransientDependency
 
         if (!response.IsSuccessStatusCode)
         {
-            await ThrowExceptionForResponseAsync(response);
+            ThrowExceptionForResponseAsync(response);
         }
 
         return response.Content;
     }
 
-    protected virtual async Task<ApiVersionInfo> GetApiVersionInfoAsync(ClientProxyRequestContext requestContext)
+    protected    Task<ApiVersionInfo> GetApiVersionInfoAsync(ClientProxyRequestContext requestContext)
     {
         if (CurrentApiVersionInfo.ApiVersionInfo != null)
         {
             return CurrentApiVersionInfo.ApiVersionInfo;
         }
 
-        var apiVersion = await FindBestApiVersionAsync(requestContext);
+        var apiVersion = FindBestApiVersionAsync(requestContext);
 
         //TODO: Make names configurable?
         var versionParam = requestContext.Action.Parameters.FirstOrDefault(p => p.Name == "apiVersion" && p.BindingSourceId == ParameterBindingSources.Path) ??
@@ -178,19 +178,19 @@ public class ClientProxyBase<TService> : ITransientDependency
         return new ApiVersionInfo(versionParam?.BindingSourceId, apiVersion);
     }
 
-    protected virtual async Task<string> GetUrlWithParametersAsync(ClientProxyRequestContext requestContext, ApiVersionInfo apiVersion)
+    protected    Task<String> GetUrlWithParametersAsync(ClientProxyRequestContext requestContext, ApiVersionInfo apiVersion)
     {
-        return await ClientProxyUrlBuilder.GenerateUrlWithParametersAsync(requestContext.Action, requestContext.Arguments, apiVersion);
+        return ClientProxyUrlBuilder.GenerateUrlWithParametersAsync(requestContext.Action, requestContext.Arguments, apiVersion);
     }
 
-    protected virtual async Task<HttpContent> GetHttpContentAsync(ClientProxyRequestContext requestContext, ApiVersionInfo apiVersion)
+    protected    Task<HttpContent> GetHttpContentAsync(ClientProxyRequestContext requestContext, ApiVersionInfo apiVersion)
     {
-        return await ClientProxyRequestPayloadBuilder.BuildContentAsync(requestContext.Action, requestContext.Arguments, JsonSerializer, apiVersion);
+        return ClientProxyRequestPayloadBuilder.BuildContentAsync(requestContext.Action, requestContext.Arguments, JsonSerializer, apiVersion);
     }
 
-    protected virtual async Task<string> FindBestApiVersionAsync(ClientProxyRequestContext requestContext)
+    protected    Task<String> FindBestApiVersionAsync(ClientProxyRequestContext requestContext)
     {
-        var configuredVersion = await GetConfiguredApiVersionAsync(requestContext);
+        var configuredVersion = GetConfiguredApiVersionAsync(requestContext);
 
         if (requestContext.Action.SupportedVersions.IsNullOrEmpty())
         {
@@ -205,16 +205,16 @@ public class ClientProxyBase<TService> : ITransientDependency
         return requestContext.Action.SupportedVersions.Last(); //TODO: Ensure to get the latest version!
     }
 
-    protected virtual async Task<string> GetConfiguredApiVersionAsync(ClientProxyRequestContext requestContext)
+    protected    Task<String> GetConfiguredApiVersionAsync(ClientProxyRequestContext requestContext)
     {
         var clientConfig = ClientOptions.Value.HttpClientProxies.GetOrDefault(requestContext.ServiceType)
                            ?? throw new AbpException($"Could not get DynamicHttpClientProxyConfig for {requestContext.ServiceType.FullName}.");
 
-        return (await RemoteServiceConfigurationProvider
+        return (RemoteServiceConfigurationProvider
             .GetConfigurationOrDefaultOrNullAsync(clientConfig.RemoteServiceName))?.Version;
     }
 
-    protected virtual void ThrowExceptionForResponseAsync(HttpResponseMessage response)
+    protected   void ThrowExceptionForResponseAsync(HttpResponseMessage response)
     {
         if (response.Headers.Contains(AbpHttpConsts.AbpErrorFormat))
         {
@@ -222,7 +222,7 @@ public class ClientProxyBase<TService> : ITransientDependency
             try
             {
                 errorResponse = JsonSerializer.Deserialize<RemoteServiceErrorResponse>(
-                    await response.Content.ReadAsStringAsync()
+                    response.Content.ReadAsStringAsync()
                 );
             }
             catch (Exception ex)
@@ -260,8 +260,8 @@ public class ClientProxyBase<TService> : ITransientDependency
         }
     }
 
-    protected virtual void AddHeaders(
-        IReadOnlyDictionary<string, object> argumentsDictionary,
+    protected   void AddHeaders(
+        IReadOnlyDictionary<String, Object> argumentsDictionary,
         ActionApiDescriptionModel action,
         HttpRequestMessage requestMessage,
         ApiVersionInfo apiVersion)
@@ -277,7 +277,7 @@ public class ClientProxyBase<TService> : ITransientDependency
 
         //Header parameters
         var headers = action.Parameters.Where(p => p.BindingSourceId == ParameterBindingSources.Header).ToArray();
-        foreach (var headerParameter in headers)
+        for (var headerParameter in headers)
         {
             var value = HttpActionParameterHelper.FindParameterValue(argumentsDictionary, headerParameter);
             if (value != null)
@@ -308,7 +308,7 @@ public class ClientProxyBase<TService> : ITransientDependency
         requestMessage.Headers.Add("X-Requested-With", "XMLHttpRequest");
     }
 
-    protected virtual StringSegment RemoveQuotes(StringSegment input)
+    protected   StringSegment RemoveQuotes(StringSegment input)
     {
         if (!StringSegment.IsNullOrEmpty(input) && input.Length >= 2 && input[0] == '"' && input[input.Length - 1] == '"')
         {
@@ -318,7 +318,7 @@ public class ClientProxyBase<TService> : ITransientDependency
         return input;
     }
 
-    protected virtual CancellationToken GetCancellationToken(IReadOnlyDictionary<string, object> arguments)
+    protected   CancellationToken GetCancellationToken(IReadOnlyDictionary<String, Object> arguments)
     {
         var cancellationTokenArg = arguments.LastOrDefault();
 

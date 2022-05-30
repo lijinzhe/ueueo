@@ -19,8 +19,8 @@ public class DefaultObjectMapper<TContext> : DefaultObjectMapper, IObjectMapper<
 
 public class DefaultObjectMapper : IObjectMapper, ITransientDependency
 {
-    public IAutoObjectMappingProvider AutoObjectMappingProvider { get; }
-    protected IServiceProvider ServiceProvider { get; }
+    public IAutoObjectMappingProvider AutoObjectMappingProvider;//  { get; }
+    protected IServiceProvider ServiceProvider;//  { get; }
 
     public DefaultObjectMapper(
         IServiceProvider serviceProvider,
@@ -32,7 +32,7 @@ public class DefaultObjectMapper : IObjectMapper, ITransientDependency
 
     //TODO: It can be slow to always check if service is available. Test it and optimize if necessary.
 
-    public virtual TDestination Map<TSource, TDestination>(TSource source)
+    public   TDestination Map<TSource, TDestination>(TSource source)
     {
         if (source == null)
         {
@@ -71,7 +71,7 @@ public class DefaultObjectMapper : IObjectMapper, ITransientDependency
         return AutoMap<TSource, TDestination>(source);
     }
 
-    public virtual TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
+    public   TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
     {
         if (source == null)
         {
@@ -102,12 +102,12 @@ public class DefaultObjectMapper : IObjectMapper, ITransientDependency
         return AutoMap(source, destination);
     }
 
-    protected virtual TDestination AutoMap<TSource, TDestination>(object source)
+    protected   TDestination AutoMap<TSource, TDestination>(Object source)
     {
         return AutoObjectMappingProvider.Map<TSource, TDestination>(source);
     }
 
-    protected virtual TDestination AutoMap<TSource, TDestination>(TSource source, TDestination destination)
+    protected   TDestination AutoMap<TSource, TDestination>(TSource source, TDestination destination)
     {
         return AutoObjectMappingProvider.Map<TSource, TDestination>(source, destination);
     }

@@ -5,7 +5,7 @@ namespace Volo.Abp.BlobStoring;
 
 public interface IBlobProvider
 {
-    Task SaveAsync(BlobProviderSaveArgs args);
+    void SaveAsync(BlobProviderSaveArgs args);
 
     Task<bool> DeleteAsync(BlobProviderDeleteArgs args);
 

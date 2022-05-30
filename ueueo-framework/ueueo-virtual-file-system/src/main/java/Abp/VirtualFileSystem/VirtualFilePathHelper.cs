@@ -6,11 +6,11 @@ namespace Volo.Abp.VirtualFileSystem;
 
 internal static class VirtualFilePathHelper
 {
-    public static string NormalizePath(string fullPath)
+    public static String NormalizePath(String fullPath)
     {
         if (fullPath.Equals("/", StringComparison.Ordinal))
         {
-            return string.Empty;
+            return String.Empty;
         }
 
         var fileName = fullPath;
@@ -18,7 +18,7 @@ internal static class VirtualFilePathHelper
 
         if (fileName.Contains("."))
         {
-            extension = fullPath.Substring(fileName.LastIndexOf(".", StringComparison.Ordinal));
+            extension = fullPath.SubString(fileName.LastIndexOf(".", StringComparison.Ordinal));
             if (extension.Contains("/"))
             {
                 //That means the file does not have extension, but a directory has "." char. So, clear extension.
@@ -26,14 +26,14 @@ internal static class VirtualFilePathHelper
             }
             else
             {
-                fileName = fullPath.Substring(0, fullPath.Length - extension.Length);
+                fileName = fullPath.SubString(0, fullPath.Length - extension.Length);
             }
         }
 
         return NormalizeChars(fileName) + extension;
     }
 
-    private static string NormalizeChars(string fileName)
+    private static String NormalizeChars(String fileName)
     {
         var folderParts = fileName.Replace(".", "/").Split("/");
 

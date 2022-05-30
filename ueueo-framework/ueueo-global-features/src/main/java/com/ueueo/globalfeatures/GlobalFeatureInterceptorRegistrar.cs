@@ -14,7 +14,7 @@ public static class GlobalFeatureInterceptorRegistrar
         }
     }
 
-    private static bool ShouldIntercept(Type type)
+    private static boolean ShouldIntercept(Type type)
     {
         return !DynamicProxyIgnoreTypes.Contains(type) && typeof(IGlobalFeatureCheckingEnabled).IsAssignableFrom(type);
     }

@@ -12,18 +12,18 @@ public class InMemoryBackgroundJobStore : IBackgroundJobStore, ISingletonDepende
 {
     private readonly ConcurrentDictionary<Guid, BackgroundJobInfo> _jobs;
 
-    protected IClock Clock { get; }
+    protected IClock Clock;//  { get; }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="InMemoryBackgroundJobStore"/> class.
-    /// </summary>
+    /**
+     * Initializes a new instance of the <see cref="InMemoryBackgroundJobStore"/> class.
+    */
     public InMemoryBackgroundJobStore(IClock clock)
     {
         Clock = clock;
         _jobs = new ConcurrentDictionary<Guid, BackgroundJobInfo>();
     }
 
-    public virtual Task<BackgroundJobInfo> FindAsync(Guid jobId)
+    public   Task<BackgroundJobInfo> FindAsync(Guid jobId)
     {
         return Task.FromResult(_jobs.GetOrDefault(jobId));
     }
@@ -35,7 +35,7 @@ public class InMemoryBackgroundJobStore : IBackgroundJobStore, ISingletonDepende
         return Task.FromResult(0);
     }
 
-    public virtual Task<List<BackgroundJobInfo>> GetWaitingJobsAsync(int maxResultCount)
+    public   Task<List<BackgroundJobInfo>> GetWaitingJobsAsync(int maxResultCount)
     {
         var waitingJobs = _jobs.Values
             .Where(t => !t.IsAbandoned && t.NextTryTime <= Clock.Now)

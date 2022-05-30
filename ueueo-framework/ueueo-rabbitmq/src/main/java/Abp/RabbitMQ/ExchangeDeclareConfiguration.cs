@@ -4,26 +4,26 @@ namespace Volo.Abp.RabbitMQ;
 
 public class ExchangeDeclareConfiguration
 {
-    public string ExchangeName { get; }
+    public String ExchangeName;//  { get; }
 
-    public string Type { get; }
+    public String Type;//  { get; }
 
-    public bool Durable;// { get; set; }
+    public boolean Durable;// { get; set; }
 
-    public bool AutoDelete;// { get; set; }
+    public boolean AutoDelete;// { get; set; }
 
-    public IDictionary<string, object> Arguments { get; }
+    public IDictionary<String, Object> Arguments;//  { get; }
 
     public ExchangeDeclareConfiguration(
-        string exchangeName,
-        string type,
-        bool durable = false,
-        bool autoDelete = false)
+        String exchangeName,
+        String type,
+        boolean durable = false,
+        boolean autoDelete = false)
     {
         ExchangeName = exchangeName;
         Type = type;
         Durable = durable;
         AutoDelete = autoDelete;
-        Arguments = new Dictionary<string, object>();
+        Arguments = new Dictionary<String, Object>();
     }
 }

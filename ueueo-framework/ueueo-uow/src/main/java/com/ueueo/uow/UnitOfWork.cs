@@ -12,47 +12,47 @@ namespace Volo.Abp.Uow;
 
 public class UnitOfWork : IUnitOfWork, ITransientDependency
 {
-    /// <summary>
-    /// Default: false.
-    /// </summary>
-    public static bool EnableObsoleteDbContextCreationWarning { get; } = false;
+    /**
+     * Default: false.
+    */
+    public static boolean EnableObsoleteDbContextCreationWarning;//  { get; } = false;
 
-    public const string UnitOfWorkReservationName = "_AbpActionUnitOfWork";
+    public const String UnitOfWorkReservationName = "_AbpActionUnitOfWork";
 
-    public Guid Id { get; } = Guid.NewGuid();
+    public ID Id;//  { get; } = Guid.NewGuid();
 
     public IAbpUnitOfWorkOptions Options ;// { get; private set; }
 
     public IUnitOfWork Outer ;// { get; private set; }
 
-    public bool IsReserved;// { get; set; }
+    public boolean IsReserved;// { get; set; }
 
-    public bool IsDisposed ;// { get; private set; }
+    public boolean IsDisposed ;// { get; private set; }
 
-    public bool IsCompleted ;// { get; private set; }
+    public boolean IsCompleted ;// { get; private set; }
 
-    public string ReservationName;// { get; set; }
+    public String ReservationName;// { get; set; }
 
-    protected List<Func<Task>> CompletedHandlers { get; } = new List<Func<Task>>();
-    protected List<UnitOfWorkEventRecord> DistributedEvents { get; } = new List<UnitOfWorkEventRecord>();
-    protected List<UnitOfWorkEventRecord> LocalEvents { get; } = new List<UnitOfWorkEventRecord>();
+    protected List<Func<Task>> CompletedHandlers;//  { get; } = new List<Func<Task>>();
+    protected List<UnitOfWorkEventRecord> DistributedEvents;//  { get; } = new List<UnitOfWorkEventRecord>();
+    protected List<UnitOfWorkEventRecord> LocalEvents;//  { get; } = new List<UnitOfWorkEventRecord>();
 
     public event EventHandler<UnitOfWorkFailedEventArgs> Failed;
     public event EventHandler<UnitOfWorkEventArgs> Disposed;
 
-    public IServiceProvider ServiceProvider { get; }
-    protected IUnitOfWorkEventPublisher UnitOfWorkEventPublisher { get; }
+    public IServiceProvider ServiceProvider;//  { get; }
+    protected IUnitOfWorkEventPublisher UnitOfWorkEventPublisher;//  { get; }
 
     [NotNull]
-    public Dictionary<string, object> Items { get; }
+    public Dictionary<String, Object> Items;//  { get; }
 
-    private readonly Dictionary<string, IDatabaseApi> _databaseApis;
-    private readonly Dictionary<string, ITransactionApi> _transactionApis;
+    private readonly Dictionary<String, IDatabaseApi> _databaseApis;
+    private readonly Dictionary<String, ITransactionApi> _transactionApis;
     private readonly AbpUnitOfWorkDefaultOptions _defaultOptions;
 
     private Exception _exception;
-    private bool _isCompleting;
-    private bool _isRolledback;
+    private boolean _isCompleting;
+    private boolean _isRolledback;
 
     public UnitOfWork(
         IServiceProvider serviceProvider,
@@ -63,15 +63,15 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         UnitOfWorkEventPublisher = unitOfWorkEventPublisher;
         _defaultOptions = options.Value;
 
-        _databaseApis = new Dictionary<string, IDatabaseApi>();
-        _transactionApis = new Dictionary<string, ITransactionApi>();
+        _databaseApis = new Dictionary<String, IDatabaseApi>();
+        _transactionApis = new Dictionary<String, ITransactionApi>();
 
-        Items = new Dictionary<string, object>();
+        Items = new Dictionary<String, Object>();
     }
 
-    public virtual void Initialize(AbpUnitOfWorkOptions options)
+    public   void Initialize(AbpUnitOfWorkOptions options)
     {
-        Check.NotNull(options, nameof(options));
+        Objects.requireNonNull(options, nameof(options));
 
         if (Options != null)
         {
@@ -82,46 +82,46 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         IsReserved = false;
     }
 
-    public virtual void Reserve(string reservationName)
+    public   void Reserve(String reservationName)
     {
-        Check.NotNull(reservationName, nameof(reservationName));
+        Objects.requireNonNull(reservationName, nameof(reservationName));
 
         ReservationName = reservationName;
         IsReserved = true;
     }
 
-    public virtual void SetOuter(IUnitOfWork outer)
+    public   void SetOuter(IUnitOfWork outer)
     {
         Outer = outer;
     }
 
-    public virtual void SaveChangesAsync(CancellationToken cancellationToken = default)
+    public   void SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         if (_isRolledback)
         {
             return;
         }
 
-        foreach (var databaseApi in GetAllActiveDatabaseApis())
+        for (var databaseApi in GetAllActiveDatabaseApis())
         {
             if (databaseApi is ISupportsSavingChanges)
             {
-                await (databaseApi as ISupportsSavingChanges).SaveChangesAsync(cancellationToken);
+                (databaseApi as ISupportsSavingChanges).SaveChangesAsync(cancellationToken);
             }
         }
     }
 
-    public virtual IReadOnlyList<IDatabaseApi> GetAllActiveDatabaseApis()
+    public   IReadOnlyList<IDatabaseApi> GetAllActiveDatabaseApis()
     {
         return _databaseApis.Values.ToImmutableList();
     }
 
-    public virtual IReadOnlyList<ITransactionApi> GetAllActiveTransactionApis()
+    public   IReadOnlyList<ITransactionApi> GetAllActiveTransactionApis()
     {
         return _transactionApis.Values.ToImmutableList();
     }
 
-    public virtual void CompleteAsync(CancellationToken cancellationToken = default)
+    public   void CompleteAsync(CancellationToken cancellationToken = default)
     {
         if (_isRolledback)
         {
@@ -133,7 +133,7 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         try
         {
             _isCompleting = true;
-            await SaveChangesAsync(cancellationToken);
+            SaveChangesAsync(cancellationToken);
 
             while (LocalEvents.Any() || DistributedEvents.Any())
             {
@@ -141,7 +141,7 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
                 {
                     var localEventsToBePublished = LocalEvents.OrderBy(e => e.EventOrder).ToArray();
                     LocalEvents.Clear();
-                    await UnitOfWorkEventPublisher.PublishLocalEventsAsync(
+                    UnitOfWorkEventPublisher.PublishLocalEventsAsync(
                         localEventsToBePublished
                     );
                 }
@@ -150,17 +150,17 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
                 {
                     var distributedEventsToBePublished = DistributedEvents.OrderBy(e => e.EventOrder).ToArray();
                     DistributedEvents.Clear();
-                    await UnitOfWorkEventPublisher.PublishDistributedEventsAsync(
+                    UnitOfWorkEventPublisher.PublishDistributedEventsAsync(
                         distributedEventsToBePublished
                     );
                 }
 
-                await SaveChangesAsync(cancellationToken);
+                SaveChangesAsync(cancellationToken);
             }
 
-            await CommitTransactionsAsync();
+            CommitTransactionsAsync();
             IsCompleted = true;
-            await OnCompletedAsync();
+            OnCompletedAsync();
         }
         catch (Exception ex)
         {
@@ -169,7 +169,7 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         }
     }
 
-    public virtual void RollbackAsync(CancellationToken cancellationToken = default)
+    public   void RollbackAsync(CancellationToken cancellationToken = default)
     {
         if (_isRolledback)
         {
@@ -178,18 +178,18 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
 
         _isRolledback = true;
 
-        await RollbackAllAsync(cancellationToken);
+        RollbackAllAsync(cancellationToken);
     }
 
-    public virtual IDatabaseApi FindDatabaseApi(string key)
+    public   IDatabaseApi FindDatabaseApi(String key)
     {
         return _databaseApis.GetOrDefault(key);
     }
 
-    public virtual void AddDatabaseApi(string key, IDatabaseApi api)
+    public   void AddDatabaseApi(String key, IDatabaseApi api)
     {
-        Check.NotNull(key, nameof(key));
-        Check.NotNull(api, nameof(api));
+        Objects.requireNonNull(key, nameof(key));
+        Objects.requireNonNull(api, nameof(api));
 
         if (_databaseApis.ContainsKey(key))
         {
@@ -199,25 +199,25 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         _databaseApis.Add(key, api);
     }
 
-    public virtual IDatabaseApi GetOrAddDatabaseApi(string key, Func<IDatabaseApi> factory)
+    public   IDatabaseApi GetOrAddDatabaseApi(String key, Func<IDatabaseApi> factory)
     {
-        Check.NotNull(key, nameof(key));
-        Check.NotNull(factory, nameof(factory));
+        Objects.requireNonNull(key, nameof(key));
+        Objects.requireNonNull(factory, nameof(factory));
 
         return _databaseApis.GetOrAdd(key, factory);
     }
 
-    public virtual ITransactionApi FindTransactionApi(string key)
+    public   ITransactionApi FindTransactionApi(String key)
     {
-        Check.NotNull(key, nameof(key));
+        Objects.requireNonNull(key, nameof(key));
 
         return _transactionApis.GetOrDefault(key);
     }
 
-    public virtual void AddTransactionApi(string key, ITransactionApi api)
+    public   void AddTransactionApi(String key, ITransactionApi api)
     {
-        Check.NotNull(key, nameof(key));
-        Check.NotNull(api, nameof(api));
+        Objects.requireNonNull(key, nameof(key));
+        Objects.requireNonNull(api, nameof(api));
 
         if (_transactionApis.ContainsKey(key))
         {
@@ -227,34 +227,34 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         _transactionApis.Add(key, api);
     }
 
-    public virtual ITransactionApi GetOrAddTransactionApi(string key, Func<ITransactionApi> factory)
+    public   ITransactionApi GetOrAddTransactionApi(String key, Func<ITransactionApi> factory)
     {
-        Check.NotNull(key, nameof(key));
-        Check.NotNull(factory, nameof(factory));
+        Objects.requireNonNull(key, nameof(key));
+        Objects.requireNonNull(factory, nameof(factory));
 
         return _transactionApis.GetOrAdd(key, factory);
     }
 
-    public virtual void OnCompleted(Func<Task> handler)
+    public   void OnCompleted(Func<Task> handler)
     {
         CompletedHandlers.Add(handler);
     }
 
-    public virtual void AddOrReplaceLocalEvent(
+    public   void AddOrReplaceLocalEvent(
         UnitOfWorkEventRecord eventRecord,
         Predicate<UnitOfWorkEventRecord> replacementSelector = null)
     {
         AddOrReplaceEvent(LocalEvents, eventRecord, replacementSelector);
     }
 
-    public virtual void AddOrReplaceDistributedEvent(
+    public   void AddOrReplaceDistributedEvent(
         UnitOfWorkEventRecord eventRecord,
         Predicate<UnitOfWorkEventRecord> replacementSelector = null)
     {
         AddOrReplaceEvent(DistributedEvents, eventRecord, replacementSelector);
     }
 
-    public virtual void AddOrReplaceEvent(
+    public   void AddOrReplaceEvent(
         List<UnitOfWorkEventRecord> eventRecords,
         UnitOfWorkEventRecord eventRecord,
         Predicate<UnitOfWorkEventRecord> replacementSelector = null)
@@ -277,25 +277,25 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         }
     }
 
-    protected virtual void OnCompletedAsync()
+    protected   void OnCompletedAsync()
     {
-        foreach (var handler in CompletedHandlers)
+        for (var handler in CompletedHandlers)
         {
-            await handler.Invoke();
+            handler.Invoke();
         }
     }
 
-    protected virtual void OnFailed()
+    protected   void OnFailed()
     {
         Failed.InvokeSafely(this, new UnitOfWorkFailedEventArgs(this, _exception, _isRolledback));
     }
 
-    protected virtual void OnDisposed()
+    protected   void OnDisposed()
     {
         Disposed.InvokeSafely(this, new UnitOfWorkEventArgs(this));
     }
 
-    public virtual void Dispose()
+    public   void Dispose()
     {
         if (IsDisposed)
         {
@@ -316,7 +316,7 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
 
     private void DisposeTransactions()
     {
-        foreach (var transactionApi in GetAllActiveTransactionApis())
+        for (var transactionApi in GetAllActiveTransactionApis())
         {
             try
             {
@@ -336,42 +336,42 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         }
     }
 
-    protected virtual void RollbackAllAsync(CancellationToken cancellationToken)
+    protected   void RollbackAllAsync(CancellationToken cancellationToken)
     {
-        foreach (var databaseApi in GetAllActiveDatabaseApis())
+        for (var databaseApi in GetAllActiveDatabaseApis())
         {
             if (databaseApi is ISupportsRollback)
             {
                 try
                 {
-                    await (databaseApi as ISupportsRollback).RollbackAsync(cancellationToken);
+                    (databaseApi as ISupportsRollback).RollbackAsync(cancellationToken);
                 }
                 catch { }
             }
         }
 
-        foreach (var transactionApi in GetAllActiveTransactionApis())
+        for (var transactionApi in GetAllActiveTransactionApis())
         {
             if (transactionApi is ISupportsRollback)
             {
                 try
                 {
-                    await (transactionApi as ISupportsRollback).RollbackAsync(cancellationToken);
+                    (transactionApi as ISupportsRollback).RollbackAsync(cancellationToken);
                 }
                 catch { }
             }
         }
     }
 
-    protected virtual void CommitTransactionsAsync()
+    protected   void CommitTransactionsAsync()
     {
-        foreach (var transaction in GetAllActiveTransactionApis())
+        for (var transaction in GetAllActiveTransactionApis())
         {
-            await transaction.CommitAsync();
+            transaction.CommitAsync();
         }
     }
 
-    @Override public string toString()
+    @Override public String toString()
     {
         return $"[UnitOfWork {Id}]";
     }

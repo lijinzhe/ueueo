@@ -7,20 +7,20 @@ namespace Volo.Abp.BackgroundJobs.RabbitMQ;
 
 public class JobQueueConfiguration : QueueDeclareConfiguration
 {
-    public Type JobArgsType { get; }
+    public Type JobArgsType;//  { get; }
 
-    public string ConnectionName;// { get; set; }
+    public String ConnectionName;// { get; set; }
 
-    public string DelayedQueueName;// { get; set; }
+    public String DelayedQueueName;// { get; set; }
 
     public JobQueueConfiguration(
         Type jobArgsType,
-        string queueName,
-        string delayedQueueName,
-        string connectionName = null,
-        bool durable = true,
-        bool exclusive = false,
-        bool autoDelete = false)
+        String queueName,
+        String delayedQueueName,
+        String connectionName = null,
+        boolean durable = true,
+        boolean exclusive = false,
+        boolean autoDelete = false)
         : base(
             queueName,
             durable,
@@ -32,12 +32,12 @@ public class JobQueueConfiguration : QueueDeclareConfiguration
         DelayedQueueName = delayedQueueName;
     }
 
-    public virtual QueueDeclareOk DeclareDelayed(IModel channel)
+    public   QueueDeclareOk DeclareDelayed(IModel channel)
     {
-        var delayedArguments = new Dictionary<string, object>(Arguments)
+        var delayedArguments = new Dictionary<String, Object>(Arguments)
         {
             ["x-dead-letter-routing-key"] = QueueName,
-            ["x-dead-letter-exchange"] = string.Empty
+            ["x-dead-letter-exchange"] = String.Empty
         };
 
         return channel.QueueDeclare(

@@ -8,7 +8,7 @@ namespace Volo.Abp.Domain.Repositories.MemoryDb;
 public class MemoryDatabaseCollection<TEntity> : IMemoryDatabaseCollection<TEntity>
     where TEntity : class, IEntity
 {
-    private readonly Dictionary<string, byte[]> _dictionary = new Dictionary<string, byte[]>();
+    private readonly Dictionary<String, byte[]> _dictionary = new Dictionary<String, byte[]>();
 
     private readonly IMemoryDbSerializer _memoryDbSerializer;
 
@@ -19,7 +19,7 @@ public class MemoryDatabaseCollection<TEntity> : IMemoryDatabaseCollection<TEnti
 
     public IEnumerator<TEntity> GetEnumerator()
     {
-        foreach (var entity in _dictionary.Values)
+        for (var entity in _dictionary.Values)
         {
             yield return _memoryDbSerializer.Deserialize(entity, typeof(TEntity)).As<TEntity>();
         }
@@ -48,7 +48,7 @@ public class MemoryDatabaseCollection<TEntity> : IMemoryDatabaseCollection<TEnti
         _dictionary.Remove(GetEntityKey(entity));
     }
 
-    private string GetEntityKey(TEntity entity)
+    private String GetEntityKey(TEntity entity)
     {
         return entity.GetKeys().JoinAsString(",");
     }

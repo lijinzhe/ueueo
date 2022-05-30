@@ -5,5 +5,5 @@ namespace Volo.Abp.Localization;
 
 public interface IStringLocalizerSupportsInheritance
 {
-    IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures, bool includeBaseLocalizers);
+    IEnumerable<LocalizedString> GetAllStrings(boolean includeParentCultures, boolean includeBaseLocalizers);
 }

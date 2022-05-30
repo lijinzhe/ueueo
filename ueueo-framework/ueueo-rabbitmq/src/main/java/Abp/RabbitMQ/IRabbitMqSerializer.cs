@@ -4,9 +4,9 @@ namespace Volo.Abp.RabbitMQ;
 
 public interface IRabbitMqSerializer
 {
-    byte[] Serialize(object obj);
+    byte[] Serialize(Object obj);
 
-    object Deserialize(byte[] value, Type type);
+    Object Deserialize(byte[] value, Type type);
 
     T Deserialize<T>(byte[] value);
 }

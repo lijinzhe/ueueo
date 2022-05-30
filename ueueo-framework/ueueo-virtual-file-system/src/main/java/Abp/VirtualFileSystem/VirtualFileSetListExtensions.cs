@@ -12,11 +12,11 @@ namespace Volo.Abp.VirtualFileSystem;
 public static class VirtualFileSetListExtensions
 {
     public static void AddEmbedded<T>(
-        [NotNull] this VirtualFileSetList list,
-        [CanBeNull] string baseNamespace = null,
-        [CanBeNull] string baseFolder = null)
+        @Nonnull this VirtualFileSetList list,
+        @Nullable String baseNamespace = null,
+        @Nullable String baseFolder = null)
     {
-        Check.NotNull(list, nameof(list));
+        Objects.requireNonNull(list, nameof(list));
 
         var assembly = typeof(T).Assembly;
         var fileProvider = CreateFileProvider(
@@ -29,11 +29,11 @@ public static class VirtualFileSetListExtensions
     }
 
     public static void AddPhysical(
-        [NotNull] this VirtualFileSetList list,
-        [NotNull] string root,
+        @Nonnull this VirtualFileSetList list,
+        @Nonnull String root,
         ExclusionFilters exclusionFilters = ExclusionFilters.Sensitive)
     {
-        Check.NotNull(list, nameof(list));
+        Objects.requireNonNull(list, nameof(list));
         Check.NotNullOrWhiteSpace(root, nameof(root));
 
         var fileProvider = new PhysicalFileProvider(root, exclusionFilters);
@@ -41,11 +41,11 @@ public static class VirtualFileSetListExtensions
     }
 
     private static IFileProvider CreateFileProvider(
-        [NotNull] Assembly assembly,
-        [CanBeNull] string baseNamespace = null,
-        [CanBeNull] string baseFolder = null)
+        @Nonnull Assembly assembly,
+        @Nullable String baseNamespace = null,
+        @Nullable String baseFolder = null)
     {
-        Check.NotNull(assembly, nameof(assembly));
+        Objects.requireNonNull(assembly, nameof(assembly));
 
         var info = assembly.GetManifestResourceInfo("Microsoft.Extensions.FileProviders.Embedded.Manifest.xml");
 
@@ -63,10 +63,10 @@ public static class VirtualFileSetListExtensions
     }
 
     public static void ReplaceEmbeddedByPhysical<T>(
-        [NotNull] this VirtualFileSetList fileSets,
-        [NotNull] string physicalPath)
+        @Nonnull this VirtualFileSetList fileSets,
+        @Nonnull String physicalPath)
     {
-        Check.NotNull(fileSets, nameof(fileSets));
+        Objects.requireNonNull(fileSets, nameof(fileSets));
         Check.NotNullOrWhiteSpace(physicalPath, nameof(physicalPath));
 
         var assembly = typeof(T).Assembly;

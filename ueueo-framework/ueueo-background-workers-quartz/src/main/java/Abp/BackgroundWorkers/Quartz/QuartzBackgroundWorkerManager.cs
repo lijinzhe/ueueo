@@ -18,41 +18,41 @@ public class QuartzBackgroundWorkerManager : IBackgroundWorkerManager, ISingleto
         _scheduler = scheduler;
     }
 
-    public virtual void StartAsync(CancellationToken cancellationToken = default)
+    public   void StartAsync(CancellationToken cancellationToken = default)
     {
         if (_scheduler.IsStarted && _scheduler.InStandbyMode)
         {
-            await _scheduler.Start(cancellationToken);
+            _scheduler.Start(cancellationToken);
         }
     }
 
-    public virtual void StopAsync(CancellationToken cancellationToken = default)
+    public   void StopAsync(CancellationToken cancellationToken = default)
     {
         if (_scheduler.IsStarted && !_scheduler.InStandbyMode)
         {
-            await _scheduler.Standby(cancellationToken);
+            _scheduler.Standby(cancellationToken);
         }
     }
 
-    public virtual void AddAsync(IBackgroundWorker worker)
+    public   void AddAsync(IBackgroundWorker worker)
     {
-        await ReScheduleJobAsync(worker);
+        ReScheduleJobAsync(worker);
     }
 
-    protected virtual void ReScheduleJobAsync(IBackgroundWorker worker)
+    protected   void ReScheduleJobAsync(IBackgroundWorker worker)
     {
         if (worker is IQuartzBackgroundWorker quartzWork)
         {
-            Check.NotNull(quartzWork.Trigger, nameof(quartzWork.Trigger));
-            Check.NotNull(quartzWork.JobDetail, nameof(quartzWork.JobDetail));
+            Objects.requireNonNull(quartzWork.Trigger, nameof(quartzWork.Trigger));
+            Objects.requireNonNull(quartzWork.JobDetail, nameof(quartzWork.JobDetail));
 
             if (quartzWork.ScheduleJob != null)
             {
-                await quartzWork.ScheduleJob.Invoke(_scheduler);
+                quartzWork.ScheduleJob.Invoke(_scheduler);
             }
             else
             {
-                await DefaultScheduleJobAsync(quartzWork);
+                DefaultScheduleJobAsync(quartzWork);
             }
         }
         else
@@ -65,22 +65,22 @@ public class QuartzBackgroundWorkerManager : IBackgroundWorkerManager, ISingleto
 
             if (workerAdapter?.Trigger != null)
             {
-                await DefaultScheduleJobAsync(workerAdapter);
+                DefaultScheduleJobAsync(workerAdapter);
             }
         }
     }
 
-    protected virtual void DefaultScheduleJobAsync(IQuartzBackgroundWorker quartzWork)
+    protected   void DefaultScheduleJobAsync(IQuartzBackgroundWorker quartzWork)
     {
-        if (await _scheduler.CheckExists(quartzWork.JobDetail.Key))
+        if (_scheduler.CheckExists(quartzWork.JobDetail.Key))
         {
-            await _scheduler.AddJob(quartzWork.JobDetail, true, true);
-            await _scheduler.ResumeJob(quartzWork.JobDetail.Key);
-            await _scheduler.RescheduleJob(quartzWork.Trigger.Key, quartzWork.Trigger);
+            _scheduler.AddJob(quartzWork.JobDetail, true, true);
+            _scheduler.ResumeJob(quartzWork.JobDetail.Key);
+            _scheduler.RescheduleJob(quartzWork.Trigger.Key, quartzWork.Trigger);
         }
         else
         {
-            await _scheduler.ScheduleJob(quartzWork.JobDetail, quartzWork.Trigger);
+            _scheduler.ScheduleJob(quartzWork.JobDetail, quartzWork.Trigger);
         }
     }
 }

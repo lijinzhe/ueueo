@@ -5,14 +5,14 @@ namespace Volo.Abp.Uow;
 
 public class UnitOfWorkEventArgs : EventArgs
 {
-    /// <summary>
-    /// Reference to the unit of work related to this event.
-    /// </summary>
-    public IUnitOfWork UnitOfWork { get; }
+    /**
+     * Reference to the unit of work related to this event.
+    */
+    public IUnitOfWork UnitOfWork;//  { get; }
 
-    public UnitOfWorkEventArgs([NotNull] IUnitOfWork unitOfWork)
+    public UnitOfWorkEventArgs(@Nonnull IUnitOfWork unitOfWork)
     {
-        Check.NotNull(unitOfWork, nameof(unitOfWork));
+        Objects.requireNonNull(unitOfWork, nameof(unitOfWork));
 
         UnitOfWork = unitOfWork;
     }

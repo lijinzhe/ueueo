@@ -6,14 +6,14 @@ using RabbitMQ.Client;
 namespace Volo.Abp.RabbitMQ;
 
 [Serializable]
-public class RabbitMqConnections : Dictionary<string, ConnectionFactory>
+public class RabbitMqConnections : Dictionary<String, ConnectionFactory>
 {
-    public const string DefaultConnectionName = "Default";
+    public const String DefaultConnectionName = "Default";
 
     [NotNull]
     public ConnectionFactory Default {
         get => this[DefaultConnectionName];
-        set => this[DefaultConnectionName] = Check.NotNull(value, nameof(value));
+        set => this[DefaultConnectionName] = Objects.requireNonNull(value, nameof(value));
     }
 
     public RabbitMqConnections()
@@ -21,7 +21,7 @@ public class RabbitMqConnections : Dictionary<string, ConnectionFactory>
         Default = new ConnectionFactory();
     }
 
-    public ConnectionFactory GetOrDefault(string connectionName)
+    public ConnectionFactory GetOrDefault(String connectionName)
     {
         if (TryGetValue(connectionName, out var connectionFactory))
         {

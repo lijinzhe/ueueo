@@ -9,24 +9,24 @@ namespace Volo.Abp.ObjectExtending.Modularity;
 public class EntityExtensionConfiguration
 {
     [NotNull]
-    protected ExtensionPropertyConfigurationDictionary Properties { get; }
+    protected ExtensionPropertyConfigurationDictionary Properties;//  { get; }
 
     [NotNull]
-    public List<Action<ObjectExtensionValidationContext>> Validators { get; }
+    public List<Action<ObjectExtensionValidationContext>> Validators;//  { get; }
 
-    public Dictionary<string, object> Configuration { get; }
+    public Dictionary<String, Object> Configuration;//  { get; }
 
     public EntityExtensionConfiguration()
     {
         Properties = new ExtensionPropertyConfigurationDictionary();
         Validators = new List<Action<ObjectExtensionValidationContext>>();
-        Configuration = new Dictionary<string, object>();
+        Configuration = new Dictionary<String, Object>();
     }
 
     [NotNull]
-    public virtual EntityExtensionConfiguration AddOrUpdateProperty<TProperty>(
-        [NotNull] string propertyName,
-        [CanBeNull] Action<ExtensionPropertyConfiguration> configureAction = null)
+    public   EntityExtensionConfiguration AddOrUpdateProperty<TProperty>(
+        @Nonnull String propertyName,
+        @Nullable Action<ExtensionPropertyConfiguration> configureAction = null)
     {
         return AddOrUpdateProperty(
             typeof(TProperty),
@@ -36,13 +36,13 @@ public class EntityExtensionConfiguration
     }
 
     [NotNull]
-    public virtual EntityExtensionConfiguration AddOrUpdateProperty(
-        [NotNull] Type propertyType,
-        [NotNull] string propertyName,
-        [CanBeNull] Action<ExtensionPropertyConfiguration> configureAction = null)
+    public   EntityExtensionConfiguration AddOrUpdateProperty(
+        @Nonnull Type propertyType,
+        @Nonnull String propertyName,
+        @Nullable Action<ExtensionPropertyConfiguration> configureAction = null)
     {
-        Check.NotNull(propertyType, nameof(propertyType));
-        Check.NotNull(propertyName, nameof(propertyName));
+        Objects.requireNonNull(propertyType, nameof(propertyType));
+        Objects.requireNonNull(propertyName, nameof(propertyName));
 
         var propertyInfo = Properties.GetOrAdd(
             propertyName,
@@ -65,14 +65,14 @@ public class EntityExtensionConfiguration
         var lookupTextPropertyName = $"{propertyInfo.Name}_Text";
         var lookupTextPropertyInfo = Properties.GetOrAdd(
            lookupTextPropertyName,
-           () => new ExtensionPropertyConfiguration(this, typeof(string), lookupTextPropertyName)
+           () => new ExtensionPropertyConfiguration(this, typeof(String), lookupTextPropertyName)
        );
 
         lookupTextPropertyInfo.DisplayName = propertyInfo.DisplayName;
     }
 
     [NotNull]
-    public virtual ImmutableList<ExtensionPropertyConfiguration> GetProperties()
+    public   ImmutableList<ExtensionPropertyConfiguration> GetProperties()
     {
         return Properties.Values.ToImmutableList();
     }

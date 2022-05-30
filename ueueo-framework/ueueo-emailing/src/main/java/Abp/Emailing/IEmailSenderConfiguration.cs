@@ -2,12 +2,12 @@
 
 namespace Volo.Abp.Emailing;
 
-/// <summary>
-/// Defines configurations used while sending emails.
-/// </summary>
+/**
+ * Defines configurations used while sending emails.
+*/
 public interface IEmailSenderConfiguration
 {
-    Task<string> GetDefaultFromAddressAsync();
+    Task<String> GetDefaultFromAddressAsync();
 
-    Task<string> GetDefaultFromDisplayNameAsync();
+    Task<String> GetDefaultFromDisplayNameAsync();
 }

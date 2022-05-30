@@ -8,7 +8,7 @@ namespace Volo.Abp.Http.Client.IdentityModel;
 [Dependency(ReplaceServices = true)]
 public class IdentityModelRemoteServiceHttpClientAuthenticator : IRemoteServiceHttpClientAuthenticator, ITransientDependency
 {
-    protected IIdentityModelAuthenticationService IdentityModelAuthenticationService { get; }
+    protected IIdentityModelAuthenticationService IdentityModelAuthenticationService;//  { get; }
 
     public IdentityModelRemoteServiceHttpClientAuthenticator(
         IIdentityModelAuthenticationService identityModelAuthenticationService)
@@ -16,9 +16,9 @@ public class IdentityModelRemoteServiceHttpClientAuthenticator : IRemoteServiceH
         IdentityModelAuthenticationService = identityModelAuthenticationService;
     }
 
-    public virtual void Authenticate(RemoteServiceHttpClientAuthenticateContext context)
+    public   void Authenticate(RemoteServiceHttpClientAuthenticateContext context)
     {
-        await IdentityModelAuthenticationService.TryAuthenticateAsync(
+        IdentityModelAuthenticationService.TryAuthenticateAsync(
             context.Client,
             context.RemoteService.GetIdentityClient() ?? context.RemoteServiceName
         );

@@ -9,9 +9,9 @@ namespace Volo.Abp.BlobStoring;
 
 public class DefaultBlobProviderSelector : IBlobProviderSelector, ITransientDependency
 {
-    protected IEnumerable<IBlobProvider> BlobProviders { get; }
+    protected IEnumerable<IBlobProvider> BlobProviders;//  { get; }
 
-    protected IBlobContainerConfigurationProvider ConfigurationProvider { get; }
+    protected IBlobContainerConfigurationProvider ConfigurationProvider;//  { get; }
 
     public DefaultBlobProviderSelector(
         IBlobContainerConfigurationProvider configurationProvider,
@@ -22,9 +22,9 @@ public class DefaultBlobProviderSelector : IBlobProviderSelector, ITransientDepe
     }
 
     [NotNull]
-    public virtual IBlobProvider Get([NotNull] string containerName)
+    public   IBlobProvider Get(@Nonnull String containerName)
     {
-        Check.NotNull(containerName, nameof(containerName));
+        Objects.requireNonNull(containerName, nameof(containerName));
 
         var configuration = ConfigurationProvider.Get(containerName);
 
@@ -38,7 +38,7 @@ public class DefaultBlobProviderSelector : IBlobProviderSelector, ITransientDepe
             throw new AbpException("No BLOB Storage provider was used! At least one provider must be configured to be able to use the BLOB Storing System.");
         }
 
-        foreach (var provider in BlobProviders)
+        for (var provider in BlobProviders)
         {
             if (ProxyHelper.GetUnProxiedType(provider).IsAssignableTo(configuration.ProviderType))
             {

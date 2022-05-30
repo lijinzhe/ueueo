@@ -9,9 +9,9 @@ namespace Volo.Abp.Domain.Entities.Events.Distributed;
 
 public class EntityToEtoMapper : IEntityToEtoMapper, ITransientDependency
 {
-    protected IServiceScopeFactory HybridServiceScopeFactory { get; }
+    protected IServiceScopeFactory HybridServiceScopeFactory;//  { get; }
 
-    protected AbpDistributedEntityEventOptions Options { get; }
+    protected AbpDistributedEntityEventOptions Options;//  { get; }
 
     public EntityToEtoMapper(
         IOptions<AbpDistributedEntityEventOptions> options,
@@ -21,9 +21,9 @@ public class EntityToEtoMapper : IEntityToEtoMapper, ITransientDependency
         Options = options.Value;
     }
 
-    public object Map(object entityObj)
+    public Object Map(Object entityObj)
     {
-        Check.NotNull(entityObj, nameof(entityObj));
+        Objects.requireNonNull(entityObj, nameof(entityObj));
 
         var entity = entityObj as IEntity;
         if (entity == null)

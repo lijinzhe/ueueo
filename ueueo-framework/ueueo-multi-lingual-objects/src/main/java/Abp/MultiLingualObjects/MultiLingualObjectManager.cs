@@ -11,7 +11,7 @@ namespace Volo.Abp.MultiLingualObjects;
 
 public class MultiLingualObjectManager : IMultiLingualObjectManager, ITransientDependency
 {
-    protected ISettingProvider SettingProvider { get; }
+    protected ISettingProvider SettingProvider;//  { get; }
 
     protected const int MaxCultureFallbackDepth = 5;
 
@@ -20,10 +20,10 @@ public class MultiLingualObjectManager : IMultiLingualObjectManager, ITransientD
         SettingProvider = settingProvider;
     }
 
-    public virtual async Task<TTranslation> GetTranslationAsync<TMultiLingual, TTranslation>(
+    public    Task<TTranslation> GetTranslationAsync<TMultiLingual, TTranslation>(
         TMultiLingual multiLingual,
-        string culture = null,
-        bool fallbackToParentCultures = true)
+        String culture = null,
+        boolean fallbackToParentCultures = true)
         where TMultiLingual : IMultiLingualObject<TTranslation>
         where TTranslation : class, IObjectTranslation
     {
@@ -54,7 +54,7 @@ public class MultiLingualObjectManager : IMultiLingualObjectManager, ITransientD
             }
         }
 
-        var defaultLanguage = await SettingProvider.GetOrNullAsync(LocalizationSettingNames.DefaultLanguage);
+        var defaultLanguage = SettingProvider.GetOrNullAsync(LocalizationSettingNames.DefaultLanguage);
 
         translation = multiLingual.Translations.FirstOrDefault(pt => pt.Language == defaultLanguage);
         if (translation != null)
@@ -66,7 +66,7 @@ public class MultiLingualObjectManager : IMultiLingualObjectManager, ITransientD
         return translation;
     }
 
-    protected virtual TTranslation GetTranslationBasedOnCulturalRecursive<TTranslation>(
+    protected   TTranslation GetTranslationBasedOnCulturalRecursive<TTranslation>(
         CultureInfo culture, ICollection<TTranslation> translations, int currentDepth)
         where TTranslation : class, IObjectTranslation
     {

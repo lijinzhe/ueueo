@@ -5,11 +5,11 @@ namespace Volo.Abp.Threading;
 
 public abstract class CancellationTokenProviderBase : ICancellationTokenProvider
 {
-    public const string CancellationTokenOverrideContextKey = "Volo.Abp.Threading.CancellationToken.Override";
+    public const String CancellationTokenOverrideContextKey = "Volo.Abp.Threading.CancellationToken.Override";
 
-    public abstract CancellationToken Token { get; }
+    public abstract CancellationToken Token;//  { get; }
 
-    protected IAmbientScopeProvider<CancellationTokenOverride> CancellationTokenOverrideScopeProvider { get; }
+    protected IAmbientScopeProvider<CancellationTokenOverride> CancellationTokenOverrideScopeProvider;//  { get; }
 
     protected CancellationTokenOverride OverrideValue => CancellationTokenOverrideScopeProvider.GetValue(CancellationTokenOverrideContextKey);
 

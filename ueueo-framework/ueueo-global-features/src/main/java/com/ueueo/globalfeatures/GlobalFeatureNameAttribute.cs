@@ -9,22 +9,22 @@ namespace Volo.Abp.GlobalFeatures;
 public class GlobalFeatureNameAttribute : Attribute
 {
     [NotNull]
-    public string Name { get; }
+    public String Name;//  { get; }
 
-    public GlobalFeatureNameAttribute([NotNull] string name)
+    public GlobalFeatureNameAttribute(@Nonnull String name)
     {
         Name = Check.NotNullOrWhiteSpace(name, nameof(name));
     }
 
-    public static string GetName<TFeature>()
+    public static String GetName<TFeature>()
     {
         return GetName(typeof(TFeature));
     }
 
     [NotNull]
-    public static string GetName([NotNull] Type type)
+    public static String GetName(@Nonnull Type type)
     {
-        Check.NotNull(type, nameof(type));
+        Objects.requireNonNull(type, nameof(type));
 
         var attribute = type
             .GetCustomAttributes<GlobalFeatureNameAttribute>()

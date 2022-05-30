@@ -51,8 +51,8 @@ class ValidationAttributeStore {
 
     /**
      * Determines whether or not a given <see cref="ValidationContext" />'s
-     * ///     <see cref="ValidationContext.MemberName" /> references a property on
-     * ///     the <see cref="ValidationContext.ObjectType" />.
+     *  *     <see cref="ValidationContext.MemberName" /> references a property on
+     *  *     the <see cref="ValidationContext.ObjectType" />.
      *
      * @param validationContext The <see cref="ValidationContext" /> to check.
      *

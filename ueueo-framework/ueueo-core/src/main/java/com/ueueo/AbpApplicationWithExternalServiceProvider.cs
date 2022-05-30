@@ -8,9 +8,9 @@ namespace Volo.Abp;
 internal class AbpApplicationWithExternalServiceProvider : AbpApplicationBase, IAbpApplicationWithExternalServiceProvider
 {
     public AbpApplicationWithExternalServiceProvider(
-        [NotNull] Type startupModuleType,
-        [NotNull] IServiceCollection services,
-        [CanBeNull] Action<AbpApplicationCreationOptions> optionsAction
+        @Nonnull Type startupModuleType,
+        @Nonnull IServiceCollection services,
+        @Nullable Action<AbpApplicationCreationOptions> optionsAction
         ) : base(
             startupModuleType,
             services,
@@ -19,9 +19,9 @@ internal class AbpApplicationWithExternalServiceProvider : AbpApplicationBase, I
         services.AddSingleton<IAbpApplicationWithExternalServiceProvider>(this);
     }
 
-    void IAbpApplicationWithExternalServiceProvider.SetServiceProvider([NotNull] IServiceProvider serviceProvider)
+    void IAbpApplicationWithExternalServiceProvider.SetServiceProvider(@Nonnull IServiceProvider serviceProvider)
     {
-        Check.NotNull(serviceProvider, nameof(serviceProvider));
+        Objects.requireNonNull(serviceProvider, nameof(serviceProvider));
 
         if (ServiceProvider != null)
         {
@@ -38,25 +38,26 @@ internal class AbpApplicationWithExternalServiceProvider : AbpApplicationBase, I
 
     public void InitializeAsync(IServiceProvider serviceProvider)
     {
-        Check.NotNull(serviceProvider, nameof(serviceProvider));
+        Objects.requireNonNull(serviceProvider, nameof(serviceProvider));
 
         SetServiceProvider(serviceProvider);
 
-        await InitializeModulesAsync();
+        InitializeModulesAsync();
     }
 
-    public void Initialize([NotNull] IServiceProvider serviceProvider)
+    public void Initialize(@Nonnull IServiceProvider serviceProvider)
     {
-        Check.NotNull(serviceProvider, nameof(serviceProvider));
+        Objects.requireNonNull(serviceProvider, nameof(serviceProvider));
 
         SetServiceProvider(serviceProvider);
 
         InitializeModules();
     }
 
-    public override void Dispose()
+    @Override
+    public void Dispose()
     {
-        base.Dispose();
+       super.Dispose();
 
         if (ServiceProvider is IDisposable disposableServiceProvider)
         {

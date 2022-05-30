@@ -9,7 +9,8 @@ namespace Volo.Abp.MemoryDb;
 [DependsOn(typeof(AbpDddDomainModule))]
 public class AbpMemoryDbModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.TryAddTransient(typeof(IMemoryDatabaseProvider<>), typeof(UnitOfWorkMemoryDatabaseProvider<>));
         context.Services.TryAddTransient(typeof(IMemoryDatabaseCollection<>), typeof(MemoryDatabaseCollection<>));

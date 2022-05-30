@@ -7,16 +7,16 @@ using Volo.Abp.DependencyInjection;
 
 namespace Volo.Abp.Emailing.Smtp;
 
-/// <summary>
-/// Used to send emails over SMTP.
-/// </summary>
+/**
+ * Used to send emails over SMTP.
+*/
 public class SmtpEmailSender : EmailSenderBase, ISmtpEmailSender, ITransientDependency
 {
-    protected ISmtpEmailSenderConfiguration SmtpConfiguration { get; }
+    protected ISmtpEmailSenderConfiguration SmtpConfiguration;//  { get; }
 
-    /// <summary>
-    /// Creates a new <see cref="SmtpEmailSender"/>.
-    /// </summary>
+    /**
+     * Creates a new <see cref="SmtpEmailSender"/>.
+    */
     public SmtpEmailSender(
         ISmtpEmailSenderConfiguration smtpConfiguration,
         IBackgroundJobManager backgroundJobManager)
@@ -25,21 +25,21 @@ public class SmtpEmailSender : EmailSenderBase, ISmtpEmailSender, ITransientDepe
         SmtpConfiguration = smtpConfiguration;
     }
 
-    public async Task<SmtpClient> BuildClientAsync()
+    public  Task<SmtpClient> BuildClientAsync()
     {
-        var host = await SmtpConfiguration.GetHostAsync();
-        var port = await SmtpConfiguration.GetPortAsync();
+        var host = SmtpConfiguration.GetHostAsync();
+        var port = SmtpConfiguration.GetPortAsync();
 
         var smtpClient = new SmtpClient(host, port);
 
         try
         {
-            if (await SmtpConfiguration.GetEnableSslAsync())
+            if (SmtpConfiguration.GetEnableSslAsync())
             {
                 smtpClient.EnableSsl = true;
             }
 
-            if (await SmtpConfiguration.GetUseDefaultCredentialsAsync())
+            if (SmtpConfiguration.GetUseDefaultCredentialsAsync())
             {
                 smtpClient.UseDefaultCredentials = true;
             }
@@ -47,11 +47,11 @@ public class SmtpEmailSender : EmailSenderBase, ISmtpEmailSender, ITransientDepe
             {
                 smtpClient.UseDefaultCredentials = false;
 
-                var userName = await SmtpConfiguration.GetUserNameAsync();
+                var userName = SmtpConfiguration.GetUserNameAsync();
                 if (!userName.IsNullOrEmpty())
                 {
-                    var password = await SmtpConfiguration.GetPasswordAsync();
-                    var domain = await SmtpConfiguration.GetDomainAsync();
+                    var password = SmtpConfiguration.GetPasswordAsync();
+                    var domain = SmtpConfiguration.GetDomainAsync();
                     smtpClient.Credentials = !domain.IsNullOrEmpty()
                         ? new NetworkCredential(userName, password, domain)
                         : new NetworkCredential(userName, password);
@@ -69,9 +69,9 @@ public class SmtpEmailSender : EmailSenderBase, ISmtpEmailSender, ITransientDepe
 
     protected override void SendEmailAsync(MailMessage mail)
     {
-        using (var smtpClient = await BuildClientAsync())
+        using (var smtpClient = BuildClientAsync())
         {
-            await smtpClient.SendMailAsync(mail);
+            smtpClient.SendMailAsync(mail);
         }
     }
 }

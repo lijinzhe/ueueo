@@ -7,9 +7,9 @@ namespace Volo.Abp.Localization;
 public static class AbpLocalizationOptionsExtensions
 {
     public static AbpLocalizationOptions AddLanguagesMapOrUpdate(this AbpLocalizationOptions localizationOptions,
-        string packageName, params NameValue[] maps)
+        String packageName, params NameValue[] maps)
     {
-        foreach (var map in maps)
+        for (var map in maps)
         {
             AddOrUpdate(localizationOptions.LanguagesMap, packageName, map);
         }
@@ -17,23 +17,23 @@ public static class AbpLocalizationOptionsExtensions
         return localizationOptions;
     }
 
-    public static string GetLanguagesMap(this AbpLocalizationOptions localizationOptions, string packageName,
-        string language)
+    public static String GetLanguagesMap(this AbpLocalizationOptions localizationOptions, String packageName,
+        String language)
     {
         return localizationOptions.LanguagesMap.TryGetValue(packageName, out var maps)
             ? maps.FirstOrDefault(x => x.Name == language)?.Value ?? language
             : language;
     }
 
-    public static string GetCurrentUICultureLanguagesMap(this AbpLocalizationOptions localizationOptions, string packageName)
+    public static String GetCurrentUICultureLanguagesMap(this AbpLocalizationOptions localizationOptions, String packageName)
     {
         return GetLanguagesMap(localizationOptions, packageName, CultureInfo.CurrentUICulture.Name);
     }
 
     public static AbpLocalizationOptions AddLanguageFilesMapOrUpdate(this AbpLocalizationOptions localizationOptions,
-        string packageName, params NameValue[] maps)
+        String packageName, params NameValue[] maps)
     {
-        foreach (var map in maps)
+        for (var map in maps)
         {
             AddOrUpdate(localizationOptions.LanguageFilesMap, packageName, map);
         }
@@ -41,20 +41,20 @@ public static class AbpLocalizationOptionsExtensions
         return localizationOptions;
     }
 
-    public static string GetLanguageFilesMap(this AbpLocalizationOptions localizationOptions, string packageName,
-        string language)
+    public static String GetLanguageFilesMap(this AbpLocalizationOptions localizationOptions, String packageName,
+        String language)
     {
         return localizationOptions.LanguageFilesMap.TryGetValue(packageName, out var maps)
             ? maps.FirstOrDefault(x => x.Name == language)?.Value ?? language
             : language;
     }
 
-    public static string GetCurrentUICultureLanguageFilesMap(this AbpLocalizationOptions localizationOptions, string packageName)
+    public static String GetCurrentUICultureLanguageFilesMap(this AbpLocalizationOptions localizationOptions, String packageName)
     {
         return GetLanguageFilesMap(localizationOptions, packageName, CultureInfo.CurrentUICulture.Name);
     }
 
-    private static void AddOrUpdate(IDictionary<string, List<NameValue>> maps, string packageName, NameValue value)
+    private static void AddOrUpdate(IDictionary<String, List<NameValue>> maps, String packageName, NameValue value)
     {
         if (maps.TryGetValue(packageName, out var existMaps))
         {

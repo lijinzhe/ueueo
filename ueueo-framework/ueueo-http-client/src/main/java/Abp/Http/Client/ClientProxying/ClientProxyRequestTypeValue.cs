@@ -4,21 +4,21 @@ using System.Collections.Generic;
 
 namespace Volo.Abp.Http.Client.ClientProxying;
 
-public class ClientProxyRequestTypeValue : IEnumerable<KeyValuePair<Type, object>>
+public class ClientProxyRequestTypeValue : IEnumerable<KeyValuePair<Type, Object>>
 {
-    public List<KeyValuePair<Type, object>> Values ;// { get; private set; }
+    public List<KeyValuePair<Type, Object>> Values ;// { get; private set; }
 
     public ClientProxyRequestTypeValue()
     {
-        Values = new List<KeyValuePair<Type, object>>();
+        Values = new List<KeyValuePair<Type, Object>>();
     }
 
-    public void Add(Type type, object value)
+    public void Add(Type type, Object value)
     {
-        Values.Add(new KeyValuePair<Type, object>(type, value));
+        Values.Add(new KeyValuePair<Type, Object>(type, value));
     }
 
-    public IEnumerator<KeyValuePair<Type, object>> GetEnumerator()
+    public IEnumerator<KeyValuePair<Type, Object>> GetEnumerator()
     {
         return Values.GetEnumerator();
     }

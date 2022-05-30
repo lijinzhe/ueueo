@@ -5,18 +5,18 @@ namespace Volo.Abp.MongoDB;
 public class AbpMongoModelBuilderConfigurationOptions
 {
     [NotNull]
-    public string CollectionPrefix {
+    public String CollectionPrefix {
         get => _collectionPrefix;
         set {
-            Check.NotNull(value, nameof(value), $"{nameof(CollectionPrefix)} can not be null! Set to empty string if you don't want a collection prefix.");
+            Objects.requireNonNull(value, nameof(value), $"{nameof(CollectionPrefix)} can not be null! Set to empty string if you don't want a collection prefix.");
             _collectionPrefix = value;
         }
     }
-    private string _collectionPrefix;
+    private String _collectionPrefix;
 
-    public AbpMongoModelBuilderConfigurationOptions([NotNull] string collectionPrefix = "")
+    public AbpMongoModelBuilderConfigurationOptions(@Nonnull String collectionPrefix = "")
     {
-        Check.NotNull(collectionPrefix, nameof(collectionPrefix));
+        Objects.requireNonNull(collectionPrefix, nameof(collectionPrefix));
 
         CollectionPrefix = collectionPrefix;
     }

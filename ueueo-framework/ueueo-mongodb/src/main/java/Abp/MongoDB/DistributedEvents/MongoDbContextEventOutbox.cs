@@ -13,7 +13,7 @@ namespace Volo.Abp.MongoDB.DistributedEvents;
 public class MongoDbContextEventOutbox<TMongoDbContext> : IMongoDbContextEventOutbox<TMongoDbContext>
     where TMongoDbContext : IHasEventOutbox
 {
-    protected IMongoDbContextProvider<TMongoDbContext> MongoDbContextProvider { get; }
+    protected IMongoDbContextProvider<TMongoDbContext> MongoDbContextProvider;//  { get; }
 
     public MongoDbContextEventOutbox(IMongoDbContextProvider<TMongoDbContext> mongoDbContextProvider)
     {
@@ -21,30 +21,30 @@ public class MongoDbContextEventOutbox<TMongoDbContext> : IMongoDbContextEventOu
     }
 
     [UnitOfWork]
-    public virtual void EnqueueAsync(OutgoingEventInfo outgoingEvent)
+    public   void EnqueueAsync(OutgoingEventInfo outgoingEvent)
     {
-        var dbContext = (IHasEventOutbox)await MongoDbContextProvider.GetDbContextAsync();
+        var dbContext = (IHasEventOutbox)MongoDbContextProvider.GetDbContextAsync();
         if (dbContext.SessionHandle != null)
         {
-            await dbContext.OutgoingEvents.InsertOneAsync(
+            dbContext.OutgoingEvents.InsertOneAsync(
                 dbContext.SessionHandle,
                 new OutgoingEventRecord(outgoingEvent)
             );
         }
         else
         {
-            await dbContext.OutgoingEvents.InsertOneAsync(
+            dbContext.OutgoingEvents.InsertOneAsync(
                 new OutgoingEventRecord(outgoingEvent)
             );
         }
     }
 
     [UnitOfWork]
-    public virtual async Task<List<OutgoingEventInfo>> GetWaitingEventsAsync(int maxCount, CancellationToken cancellationToken = default)
+    public    Task<List<OutgoingEventInfo>> GetWaitingEventsAsync(int maxCount, CancellationToken cancellationToken = default)
     {
-        var dbContext = (IHasEventOutbox)await MongoDbContextProvider.GetDbContextAsync(cancellationToken);
+        var dbContext = (IHasEventOutbox)MongoDbContextProvider.GetDbContextAsync(cancellationToken);
 
-        var outgoingEventRecords = await dbContext
+        var outgoingEventRecords = dbContext
             .OutgoingEvents.AsQueryable()
             .OrderBy(x => x.CreationTime)
             .Take(maxCount)
@@ -56,30 +56,30 @@ public class MongoDbContextEventOutbox<TMongoDbContext> : IMongoDbContextEventOu
     }
 
     [UnitOfWork]
-    public virtual void DeleteAsync(Guid id)
+    public   void DeleteAsync(Guid id)
     {
-        var dbContext = (IHasEventOutbox)await MongoDbContextProvider.GetDbContextAsync();
+        var dbContext = (IHasEventOutbox)MongoDbContextProvider.GetDbContextAsync();
         if (dbContext.SessionHandle != null)
         {
-            await dbContext.OutgoingEvents.DeleteOneAsync(dbContext.SessionHandle, x => x.Id.Equals(id));
+            dbContext.OutgoingEvents.DeleteOneAsync(dbContext.SessionHandle, x => x.Id.Equals(id));
         }
         else
         {
-            await dbContext.OutgoingEvents.DeleteOneAsync(x => x.Id.Equals(id));
+            dbContext.OutgoingEvents.DeleteOneAsync(x => x.Id.Equals(id));
         }
     }
 
     [UnitOfWork]
-    public virtual void DeleteManyAsync(IEnumerable<Guid> ids)
+    public   void DeleteManyAsync(IEnumerable<Guid> ids)
     {
-        var dbContext = (IHasEventOutbox)await MongoDbContextProvider.GetDbContextAsync();
+        var dbContext = (IHasEventOutbox)MongoDbContextProvider.GetDbContextAsync();
         if (dbContext.SessionHandle != null)
         {
-            await dbContext.OutgoingEvents.DeleteManyAsync(dbContext.SessionHandle, x => ids.Contains(x.Id));
+            dbContext.OutgoingEvents.DeleteManyAsync(dbContext.SessionHandle, x => ids.Contains(x.Id));
         }
         else
         {
-            await dbContext.OutgoingEvents.DeleteManyAsync(x => ids.Contains(x.Id));
+            dbContext.OutgoingEvents.DeleteManyAsync(x => ids.Contains(x.Id));
         }
     }
 }

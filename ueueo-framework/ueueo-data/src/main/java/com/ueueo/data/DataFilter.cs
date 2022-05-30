@@ -11,36 +11,36 @@ namespace Volo.Abp.Data;
 //TODO: Create a Volo.Abp.Data.Filtering namespace?
 public class DataFilter : IDataFilter, ISingletonDependency
 {
-    private readonly ConcurrentDictionary<Type, object> _filters;
+    private readonly ConcurrentDictionary<Type, Object> _filters;
 
     private readonly IServiceProvider _serviceProvider;
 
     public DataFilter(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
-        _filters = new ConcurrentDictionary<Type, object>();
+        _filters = new ConcurrentDictionary<Type, Object>();
     }
 
     public IDisposable Enable<TFilter>()
-        where TFilter : class
+        //where TFilter : class
     {
         return GetFilter<TFilter>().Enable();
     }
 
     public IDisposable Disable<TFilter>()
-        where TFilter : class
+        //where TFilter : class
     {
         return GetFilter<TFilter>().Disable();
     }
 
-    public bool IsEnabled<TFilter>()
-        where TFilter : class
+    public boolean IsEnabled<TFilter>()
+        //where TFilter : class
     {
         return GetFilter<TFilter>().IsEnabled;
     }
 
     private IDataFilter<TFilter> GetFilter<TFilter>()
-        where TFilter : class
+        //where TFilter : class
     {
         return _filters.GetOrAdd(
             typeof(TFilter),
@@ -50,9 +50,9 @@ public class DataFilter : IDataFilter, ISingletonDependency
 }
 
 public class DataFilter<TFilter> : IDataFilter<TFilter>
-    where TFilter : class
+    //where TFilter : class
 {
-    public bool IsEnabled {
+    public boolean IsEnabled {
         get {
             EnsureInitialized();
             return _filter.Value.IsEnabled;

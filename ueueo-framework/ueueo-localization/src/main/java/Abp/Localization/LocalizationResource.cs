@@ -8,26 +8,26 @@ namespace Volo.Abp.Localization;
 public class LocalizationResource
 {
     [NotNull]
-    public Type ResourceType { get; }
+    public Type ResourceType;//  { get; }
 
     [NotNull]
-    public string ResourceName => LocalizationResourceNameAttribute.GetName(ResourceType);
+    public String ResourceName => LocalizationResourceNameAttribute.GetName(ResourceType);
 
     [CanBeNull]
-    public string DefaultCultureName;// { get; set; }
+    public String DefaultCultureName;// { get; set; }
 
     [NotNull]
-    public LocalizationResourceContributorList Contributors { get; }
+    public LocalizationResourceContributorList Contributors;//  { get; }
 
     [NotNull]
-    public List<Type> BaseResourceTypes { get; }
+    public List<Type> BaseResourceTypes;//  { get; }
 
     public LocalizationResource(
-        [NotNull] Type resourceType,
-        [CanBeNull] string defaultCultureName = null,
-        [CanBeNull] ILocalizationResourceContributor initialContributor = null)
+        @Nonnull Type resourceType,
+        @Nullable String defaultCultureName = null,
+        @Nullable ILocalizationResourceContributor initialContributor = null)
     {
-        ResourceType = Check.NotNull(resourceType, nameof(resourceType));
+        ResourceType = Objects.requireNonNull(resourceType, nameof(resourceType));
         DefaultCultureName = defaultCultureName;
 
         BaseResourceTypes = new List<Type>();
@@ -41,15 +41,15 @@ public class LocalizationResource
         AddBaseResourceTypes();
     }
 
-    protected virtual void AddBaseResourceTypes()
+    protected   void AddBaseResourceTypes()
     {
         var descriptors = ResourceType
             .GetCustomAttributes(true)
             .OfType<IInheritedResourceTypesProvider>();
 
-        foreach (var descriptor in descriptors)
+        for (var descriptor in descriptors)
         {
-            foreach (var baseResourceType in descriptor.GetInheritedResourceTypes())
+            for (var baseResourceType in descriptor.GetInheritedResourceTypes())
             {
                 BaseResourceTypes.AddIfNotContains(baseResourceType);
             }

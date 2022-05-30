@@ -9,14 +9,16 @@ namespace Volo.Abp.EventBus.Kafka;
     typeof(AbpKafkaModule))]
 public class AbpEventBusKafkaModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void ConfigureServices(ServiceConfigurationContext context)
     {
         var configuration = context.Services.GetConfiguration();
 
         Configure<AbpKafkaEventBusOptions>(configuration.GetSection("Kafka:EventBus"));
     }
 
-    public override void OnApplicationInitialization(ApplicationInitializationContext context)
+    @Override
+    public void OnApplicationInitialization(ApplicationInitializationContext context)
     {
         context
             .ServiceProvider

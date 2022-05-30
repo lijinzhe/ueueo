@@ -5,7 +5,7 @@ namespace Volo.Abp.Validation;
 
 public class DefaultAttributeValidationResultProvider : IAttributeValidationResultProvider, ITransientDependency
 {
-    public virtual ValidationResult GetOrDefault(ValidationAttribute validationAttribute, object validatingObject, ValidationContext validationContext)
+    public   ValidationResult GetOrDefault(ValidationAttribute validationAttribute, Object validatingObject, ValidationContext validationContext)
     {
         return validationAttribute.GetValidationResult(validatingObject, validationContext);
     }

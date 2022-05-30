@@ -8,10 +8,10 @@ public interface IMemoryDbRepository<TEntity> : IRepository<TEntity>
     where TEntity : class, IEntity
 {
     [Obsolete("Use GetDatabaseAsync() method.")]
-    IMemoryDatabase Database { get; }
+    IMemoryDatabase Database;//  { get; }
 
     [Obsolete("Use GetCollectionAsync() method.")]
-    IMemoryDatabaseCollection<TEntity> Collection { get; }
+    IMemoryDatabaseCollection<TEntity> Collection;//  { get; }
 
     Task<IMemoryDatabase> GetDatabaseAsync();
 

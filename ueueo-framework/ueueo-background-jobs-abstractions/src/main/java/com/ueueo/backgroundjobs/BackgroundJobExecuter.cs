@@ -13,7 +13,7 @@ public class BackgroundJobExecuter : IBackgroundJobExecuter, ITransientDependenc
 {
     public ILogger<BackgroundJobExecuter> Logger { protected get; set; }
 
-    protected AbpBackgroundJobOptions Options { get; }
+    protected AbpBackgroundJobOptions Options;//  { get; }
 
     public BackgroundJobExecuter(IOptions<AbpBackgroundJobOptions> options)
     {
@@ -22,7 +22,7 @@ public class BackgroundJobExecuter : IBackgroundJobExecuter, ITransientDependenc
         Logger = NullLogger<BackgroundJobExecuter>.Instance;
     }
 
-    public virtual void ExecuteAsync(JobExecutionContext context)
+    public   void ExecuteAsync(JobExecutionContext context)
     {
         var job = context.ServiceProvider.GetService(context.JobType);
         if (job == null)
@@ -30,8 +30,8 @@ public class BackgroundJobExecuter : IBackgroundJobExecuter, ITransientDependenc
             throw new AbpException("The job type is not registered to DI: " + context.JobType);
         }
 
-        var jobExecuteMethod = context.JobType.GetMethod(nameof(IBackgroundJob<object>.Execute)) ??
-                               context.JobType.GetMethod(nameof(IAsyncBackgroundJob<object>.ExecuteAsync));
+        var jobExecuteMethod = context.JobType.GetMethod(nameof(IBackgroundJob<Object>.Execute)) ??
+                               context.JobType.GetMethod(nameof(IAsyncBackgroundJob<Object>.ExecuteAsync));
         if (jobExecuteMethod == null)
         {
             throw new AbpException($"Given job type does not implement {typeof(IBackgroundJob<>).Name} or {typeof(IAsyncBackgroundJob<>).Name}. " +
@@ -40,9 +40,9 @@ public class BackgroundJobExecuter : IBackgroundJobExecuter, ITransientDependenc
 
         try
         {
-            if (jobExecuteMethod.Name == nameof(IAsyncBackgroundJob<object>.ExecuteAsync))
+            if (jobExecuteMethod.Name == nameof(IAsyncBackgroundJob<Object>.ExecuteAsync))
             {
-                await ((Task)jobExecuteMethod.Invoke(job, new[] { context.JobArgs }));
+                ((Task)jobExecuteMethod.Invoke(job, new[] { context.JobArgs }));
             }
             else
             {
@@ -53,7 +53,7 @@ public class BackgroundJobExecuter : IBackgroundJobExecuter, ITransientDependenc
         {
             Logger.LogException(ex);
 
-            await context.ServiceProvider
+            context.ServiceProvider
                 .GetRequiredService<IExceptionNotifier>()
                 .NotifyAsync(new ExceptionNotificationContext(ex));
 

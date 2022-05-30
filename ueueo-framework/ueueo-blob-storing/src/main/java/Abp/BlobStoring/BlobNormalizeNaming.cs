@@ -2,11 +2,11 @@
 
 public class BlobNormalizeNaming
 {
-    public string ContainerName { get; }
+    public String ContainerName;//  { get; }
 
-    public string BlobName { get; }
+    public String BlobName;//  { get; }
 
-    public BlobNormalizeNaming(string containerName, string blobName)
+    public BlobNormalizeNaming(String containerName, String blobName)
     {
         ContainerName = containerName;
         BlobName = blobName;

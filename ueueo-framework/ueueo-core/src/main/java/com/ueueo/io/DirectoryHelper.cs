@@ -4,12 +4,12 @@ using JetBrains.Annotations;
 
 namespace Volo.Abp.IO;
 
-/// <summary>
-/// A helper class for Directory operations.
-/// </summary>
+/**
+ * A helper class for Directory operations.
+*/
 public static class DirectoryHelper
 {
-    public static void CreateIfNotExists(string directory)
+    public static void CreateIfNotExists(String directory)
     {
         if (!Directory.Exists(directory))
         {
@@ -17,7 +17,7 @@ public static class DirectoryHelper
         }
     }
 
-    public static void DeleteIfExists(string directory)
+    public static void DeleteIfExists(String directory)
     {
         if (Directory.Exists(directory))
         {
@@ -25,7 +25,7 @@ public static class DirectoryHelper
         }
     }
 
-    public static void DeleteIfExists(string directory, bool recursive)
+    public static void DeleteIfExists(String directory, boolean recursive)
     {
         if (Directory.Exists(directory))
         {
@@ -41,10 +41,10 @@ public static class DirectoryHelper
         }
     }
 
-    public static bool IsSubDirectoryOf([NotNull] string parentDirectoryPath, [NotNull] string childDirectoryPath)
+    public static boolean IsSubDirectoryOf(@Nonnull String parentDirectoryPath, @Nonnull String childDirectoryPath)
     {
-        Check.NotNull(parentDirectoryPath, nameof(parentDirectoryPath));
-        Check.NotNull(childDirectoryPath, nameof(childDirectoryPath));
+        Objects.requireNonNull(parentDirectoryPath, nameof(parentDirectoryPath));
+        Objects.requireNonNull(childDirectoryPath, nameof(childDirectoryPath));
 
         return IsSubDirectoryOf(
             new DirectoryInfo(parentDirectoryPath),
@@ -52,11 +52,11 @@ public static class DirectoryHelper
         );
     }
 
-    public static bool IsSubDirectoryOf([NotNull] DirectoryInfo parentDirectory,
-        [NotNull] DirectoryInfo childDirectory)
+    public static boolean IsSubDirectoryOf(@Nonnull DirectoryInfo parentDirectory,
+        @Nonnull DirectoryInfo childDirectory)
     {
-        Check.NotNull(parentDirectory, nameof(parentDirectory));
-        Check.NotNull(childDirectory, nameof(childDirectory));
+        Objects.requireNonNull(parentDirectory, nameof(parentDirectory));
+        Objects.requireNonNull(childDirectory, nameof(childDirectory));
 
         if (parentDirectory.FullName == childDirectory.FullName)
         {
@@ -72,7 +72,7 @@ public static class DirectoryHelper
         return IsSubDirectoryOf(parentDirectory, parentOfChild);
     }
 
-    public static IDisposable ChangeCurrentDirectory(string targetDirectory)
+    public static IDisposable ChangeCurrentDirectory(String targetDirectory)
     {
         var currentDirectory = Directory.GetCurrentDirectory();
 

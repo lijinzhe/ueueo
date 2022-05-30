@@ -6,7 +6,8 @@ namespace Volo.Abp.Emailing.Templates;
 
 public class StandardEmailTemplateDefinitionProvider : TemplateDefinitionProvider
 {
-    public override void Define(ITemplateDefinitionContext context)
+    @Override
+    public void Define(ITemplateDefinitionContext context)
     {
         context.Add(
             new TemplateDefinition(

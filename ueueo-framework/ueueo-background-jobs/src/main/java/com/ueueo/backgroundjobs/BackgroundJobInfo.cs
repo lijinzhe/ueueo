@@ -2,57 +2,57 @@
 
 namespace Volo.Abp.BackgroundJobs;
 
-/// <summary>
-/// Represents a background job info that is used to persist jobs.
-/// </summary>
+/**
+ * Represents a background job info that is used to persist jobs.
+*/
 public class BackgroundJobInfo
 {
-    public Guid Id;// { get; set; }
+    public ID Id;// { get; set; }
 
-    /// <summary>
-    /// Name of the job.
-    /// </summary>
-    public virtual string JobName;// { get; set; }
+    /**
+     * Name of the job.
+    */
+    public   String JobName;// { get; set; }
 
-    /// <summary>
-    /// Job arguments as serialized to string.
-    /// </summary>
-    public virtual string JobArgs;// { get; set; }
+    /**
+     * Job arguments as serialized to string.
+    */
+    public   String JobArgs;// { get; set; }
 
-    /// <summary>
-    /// Try count of this job.
-    /// A job is re-tried if it fails.
-    /// </summary>
-    public virtual short TryCount;// { get; set; }
+    /**
+     * Try count of this job.
+     * A job is re-tried if it fails.
+    */
+    public   short TryCount;// { get; set; }
 
-    /// <summary>
-    /// Creation time of this job.
-    /// </summary>
-    public virtual DateTime CreationTime;// { get; set; }
+    /**
+     * Creation time of this job.
+    */
+    public   DateTime CreationTime;// { get; set; }
 
-    /// <summary>
-    /// Next try time of this job.
-    /// </summary>
-    public virtual DateTime NextTryTime;// { get; set; }
+    /**
+     * Next try time of this job.
+    */
+    public   DateTime NextTryTime;// { get; set; }
 
-    /// <summary>
-    /// Last try time of this job.
-    /// </summary>
-    public virtual DateTime? LastTryTime;// { get; set; }
+    /**
+     * Last try time of this job.
+    */
+    public   DateTime? LastTryTime;// { get; set; }
 
-    /// <summary>
-    /// This is true if this job is continuously failed and will not be executed again.
-    /// </summary>
-    public virtual bool IsAbandoned;// { get; set; }
+    /**
+     * This is true if this job is continuously failed and will not be executed again.
+    */
+    public   boolean IsAbandoned;// { get; set; }
 
-    /// <summary>
-    /// Priority of this job.
-    /// </summary>
-    public virtual BackgroundJobPriority Priority;// { get; set; }
+    /**
+     * Priority of this job.
+    */
+    public   BackgroundJobPriority Priority;// { get; set; }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="BackgroundJobInfo"/> class.
-    /// </summary>
+    /**
+     * Initializes a new instance of the <see cref="BackgroundJobInfo"/> class.
+    */
     public BackgroundJobInfo()
     {
         Priority = BackgroundJobPriority.Normal;

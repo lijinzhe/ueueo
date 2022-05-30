@@ -6,32 +6,32 @@ namespace Volo.Abp.Localization;
 
 public class AbpLocalizationOptions
 {
-    public LocalizationResourceDictionary Resources { get; }
+    public LocalizationResourceDictionary Resources;//  { get; }
 
-    /// <summary>
-    /// Used as the default resource when resource was not specified on a localization operation.
-    /// </summary>
+    /**
+     * Used as the default resource when resource was not specified on a localization operation.
+    */
     public Type DefaultResourceType;// { get; set; }
 
-    public ITypeList<ILocalizationResourceContributor> GlobalContributors { get; }
+    public ITypeList<ILocalizationResourceContributor> GlobalContributors;//  { get; }
 
-    public List<LanguageInfo> Languages { get; }
+    public List<LanguageInfo> Languages;//  { get; }
 
-    public Dictionary<string, List<NameValue>> LanguagesMap { get; }
+    public Dictionary<String, List<NameValue>> LanguagesMap;//  { get; }
 
-    public Dictionary<string, List<NameValue>> LanguageFilesMap { get; }
+    public Dictionary<String, List<NameValue>> LanguageFilesMap;//  { get; }
 
-    public bool TryToGetFromBaseCulture;// { get; set; }
+    public boolean TryToGetFromBaseCulture;// { get; set; }
 
-    public bool TryToGetFromDefaultCulture;// { get; set; }
+    public boolean TryToGetFromDefaultCulture;// { get; set; }
 
     public AbpLocalizationOptions()
     {
         Resources = new LocalizationResourceDictionary();
         GlobalContributors = new TypeList<ILocalizationResourceContributor>();
         Languages = new List<LanguageInfo>();
-        LanguagesMap = new Dictionary<string, List<NameValue>>();
-        LanguageFilesMap = new Dictionary<string, List<NameValue>>();
+        LanguagesMap = new Dictionary<String, List<NameValue>>();
+        LanguageFilesMap = new Dictionary<String, List<NameValue>>();
         TryToGetFromBaseCulture = true;
         TryToGetFromDefaultCulture = true;
     }

@@ -6,24 +6,24 @@ namespace Volo.Abp.BlobStoring;
 public abstract class BlobProviderArgs
 {
     [NotNull]
-    public string ContainerName { get; }
+    public String ContainerName;//  { get; }
 
     [NotNull]
-    public BlobContainerConfiguration Configuration { get; }
+    public BlobContainerConfiguration Configuration;//  { get; }
 
     [NotNull]
-    public string BlobName { get; }
+    public String BlobName;//  { get; }
 
-    public CancellationToken CancellationToken { get; }
+    public CancellationToken CancellationToken;//  { get; }
 
     protected BlobProviderArgs(
-        [NotNull] string containerName,
-        [NotNull] BlobContainerConfiguration configuration,
-        [NotNull] string blobName,
+        @Nonnull String containerName,
+        @Nonnull BlobContainerConfiguration configuration,
+        @Nonnull String blobName,
         CancellationToken cancellationToken = default)
     {
         ContainerName = Check.NotNullOrWhiteSpace(containerName, nameof(containerName));
-        Configuration = Check.NotNull(configuration, nameof(configuration));
+        Configuration = Objects.requireNonNull(configuration, nameof(configuration));
         BlobName = Check.NotNullOrWhiteSpace(blobName, nameof(blobName));
         CancellationToken = cancellationToken;
     }

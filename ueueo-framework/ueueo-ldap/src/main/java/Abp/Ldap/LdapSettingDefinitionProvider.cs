@@ -6,7 +6,8 @@ namespace Volo.Abp.Ldap;
 
 public class LdapSettingDefinitionProvider : SettingDefinitionProvider
 {
-    public override void Define(ISettingDefinitionContext context)
+    @Override
+    public void Define(ISettingDefinitionContext context)
     {
         context.Add(
             new SettingDefinition(
@@ -48,7 +49,7 @@ public class LdapSettingDefinitionProvider : SettingDefinitionProvider
         );
     }
 
-    private static LocalizableString L(string name)
+    private static LocalizableString L(String name)
     {
         return LocalizableString.Create<LdapResource>(name);
     }

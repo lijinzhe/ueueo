@@ -10,7 +10,7 @@ namespace Volo.Abp.Uow.MemoryDb;
 public class UnitOfWorkMemoryDatabaseProvider<TMemoryDbContext> : IMemoryDatabaseProvider<TMemoryDbContext>
     where TMemoryDbContext : MemoryDbContext
 {
-    public TMemoryDbContext DbContext { get; }
+    public TMemoryDbContext DbContext;//  { get; }
 
     private readonly IUnitOfWorkManager _unitOfWorkManager;
     private readonly IConnectionStringResolver _connectionStringResolver;
@@ -57,7 +57,7 @@ public class UnitOfWorkMemoryDatabaseProvider<TMemoryDbContext> : IMemoryDatabas
         return ((MemoryDbDatabaseApi)databaseApi).Database;
     }
 
-    public async Task<IMemoryDatabase> GetDatabaseAsync()
+    public  Task<IMemoryDatabase> GetDatabaseAsync()
     {
         var unitOfWork = _unitOfWorkManager.Current;
         if (unitOfWork == null)
@@ -65,7 +65,7 @@ public class UnitOfWorkMemoryDatabaseProvider<TMemoryDbContext> : IMemoryDatabas
             throw new AbpException($"A {nameof(IMemoryDatabase)} instance can only be created inside a unit of work!");
         }
 
-        var connectionString = await _connectionStringResolver.ResolveAsync<TMemoryDbContext>();
+        var connectionString = _connectionStringResolver.ResolveAsync<TMemoryDbContext>();
         var dbContextKey = $"{typeof(TMemoryDbContext).FullName}_{connectionString}";
 
         var databaseApi = unitOfWork.GetOrAddDatabaseApi(
@@ -77,22 +77,22 @@ public class UnitOfWorkMemoryDatabaseProvider<TMemoryDbContext> : IMemoryDatabas
         return ((MemoryDbDatabaseApi)databaseApi).Database;
     }
 
-    private async Task<string> ResolveConnectionStringAsync()
+    private  Task<String> ResolveConnectionStringAsync()
     {
         // Multi-tenancy unaware contexts should always use the host connection string
         if (typeof(TMemoryDbContext).IsDefined(typeof(IgnoreMultiTenancyAttribute), false))
         {
             using (_currentTenant.Change(null))
             {
-                return await _connectionStringResolver.ResolveAsync<TMemoryDbContext>();
+                return _connectionStringResolver.ResolveAsync<TMemoryDbContext>();
             }
         }
 
-        return await _connectionStringResolver.ResolveAsync<TMemoryDbContext>();
+        return _connectionStringResolver.ResolveAsync<TMemoryDbContext>();
     }
 
     [Obsolete("Use ResolveConnectionStringAsync method.")]
-    private string ResolveConnectionString()
+    private String ResolveConnectionString()
     {
         // Multi-tenancy unaware contexts should always use the host connection string
         if (typeof(TMemoryDbContext).IsDefined(typeof(IgnoreMultiTenancyAttribute), false))

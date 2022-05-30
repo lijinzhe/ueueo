@@ -5,7 +5,7 @@ namespace Volo.Abp.ObjectExtending.Modularity;
 
 public static class ExtensionPropertyConfigurationExtensions
 {
-    public static string GetLocalizationResourceNameOrNull(
+    public static String GetLocalizationResourceNameOrNull(
         this ExtensionPropertyConfiguration property)
     {
         var resourceType = property.GetLocalizationResourceTypeOrNull();

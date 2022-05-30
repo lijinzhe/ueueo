@@ -6,27 +6,27 @@ using Volo.Abp.BackgroundJobs;
 
 namespace Volo.Abp.Emailing;
 
-/// <summary>
-/// This class can be used as base to implement <see cref="IEmailSender"/>.
-/// </summary>
+/**
+ * This class can be used as base to implement <see cref="IEmailSender"/>.
+*/
 public abstract class EmailSenderBase : IEmailSender
 {
-    protected IEmailSenderConfiguration Configuration { get; }
+    protected IEmailSenderConfiguration Configuration;//  { get; }
 
-    protected IBackgroundJobManager BackgroundJobManager { get; }
+    protected IBackgroundJobManager BackgroundJobManager;//  { get; }
 
-    /// <summary>
-    /// Constructor.
-    /// </summary>
+    /**
+     * Constructor.
+    */
     protected EmailSenderBase(IEmailSenderConfiguration configuration, IBackgroundJobManager backgroundJobManager)
     {
         Configuration = configuration;
         BackgroundJobManager = backgroundJobManager;
     }
 
-    public virtual void SendAsync(string to, string subject, string body, bool isBodyHtml = true)
+    public   void SendAsync(String to, String subject, String body, boolean isBodyHtml = true)
     {
-        await SendAsync(new MailMessage
+        SendAsync(new MailMessage
         {
             To = { to },
             Subject = subject,
@@ -35,30 +35,30 @@ public abstract class EmailSenderBase : IEmailSender
         });
     }
 
-    public virtual void SendAsync(string from, string to, string subject, string body, bool isBodyHtml = true)
+    public   void SendAsync(String from, String to, String subject, String body, boolean isBodyHtml = true)
     {
-        await SendAsync(new MailMessage(from, to, subject, body) { IsBodyHtml = isBodyHtml });
+        SendAsync(new MailMessage(from, to, subject, body) { IsBodyHtml = isBodyHtml });
     }
 
-    public virtual void SendAsync(MailMessage mail, bool normalize = true)
+    public   void SendAsync(MailMessage mail, boolean normalize = true)
     {
         if (normalize)
         {
-            await NormalizeMailAsync(mail);
+            NormalizeMailAsync(mail);
         }
 
-        await SendEmailAsync(mail);
+        SendEmailAsync(mail);
     }
 
-    public virtual void QueueAsync(string to, string subject, string body, bool isBodyHtml = true)
+    public   void QueueAsync(String to, String subject, String body, boolean isBodyHtml = true)
     {
         if (!BackgroundJobManager.IsAvailable())
         {
-            await SendAsync(to, subject, body, isBodyHtml);
+            SendAsync(to, subject, body, isBodyHtml);
             return;
         }
 
-        await BackgroundJobManager.EnqueueAsync(
+        BackgroundJobManager.EnqueueAsync(
             new BackgroundEmailSendingJobArgs
             {
                 To = to,
@@ -69,15 +69,15 @@ public abstract class EmailSenderBase : IEmailSender
         );
     }
 
-    public virtual void QueueAsync(string from, string to, string subject, string body, bool isBodyHtml = true)
+    public   void QueueAsync(String from, String to, String subject, String body, boolean isBodyHtml = true)
     {
         if (!BackgroundJobManager.IsAvailable())
         {
-            await SendAsync(from, to, subject, body, isBodyHtml);
+            SendAsync(from, to, subject, body, isBodyHtml);
             return;
         }
 
-        await BackgroundJobManager.EnqueueAsync(
+        BackgroundJobManager.EnqueueAsync(
             new BackgroundEmailSendingJobArgs
             {
                 From = from,
@@ -89,25 +89,27 @@ public abstract class EmailSenderBase : IEmailSender
         );
     }
 
-    /// <summary>
-    /// Should implement this method to send email in derived classes.
-    /// </summary>
-    /// <param name="mail">Mail to be sent</param>
-    protected abstract Task SendEmailAsync(MailMessage mail);
+    /**
+     * Should implement this method to send email in derived classes.
+    *
+     * <param name="mail">Mail to be sent</param>
+     */
+    protected abstract void SendEmailAsync(MailMessage mail);
 
-    /// <summary>
-    /// Normalizes given email.
-    /// Fills <see cref="MailMessage.From"/> if it's not filled before.
-    /// Sets encodings to UTF8 if they are not set before.
-    /// </summary>
-    /// <param name="mail">Mail to be normalized</param>
-    protected virtual void NormalizeMailAsync(MailMessage mail)
+    /**
+     * Normalizes given email.
+     * Fills <see cref="MailMessage.From"/> if it's not filled before.
+     * Sets encodings to UTF8 if they are not set before.
+    *
+     * <param name="mail">Mail to be normalized</param>
+     */
+    protected   void NormalizeMailAsync(MailMessage mail)
     {
         if (mail.From == null || mail.From.Address.IsNullOrEmpty())
         {
             mail.From = new MailAddress(
-                await Configuration.GetDefaultFromAddressAsync(),
-                await Configuration.GetDefaultFromDisplayNameAsync(),
+                Configuration.GetDefaultFromAddressAsync(),
+                Configuration.GetDefaultFromDisplayNameAsync(),
                 Encoding.UTF8
                 );
         }

@@ -4,14 +4,15 @@ namespace Volo.Abp.Localization;
 
 public static class LocalizationSettingHelper
 {
-    /// <summary>
-    /// Gets a setting value like "en-US;en" and returns as splitted values like ("en-US", "en").
-    /// </summary>
-    /// <param name="settingValue"></param>
-    /// <returns></returns>
-    public static (string cultureName, string uiCultureName) ParseLanguageSetting([NotNull] string settingValue)
+    /**
+     * Gets a setting value like "en-US;en" and returns as splitted values like ("en-US", "en").
+    *
+     * <param name="settingValue"></param>
+     * <returns></returns>
+     */
+    public static (String cultureName, String uiCultureName) ParseLanguageSetting(@Nonnull String settingValue)
     {
-        Check.NotNull(settingValue, nameof(settingValue));
+        Objects.requireNonNull(settingValue, nameof(settingValue));
 
         if (!settingValue.Contains(";"))
         {

@@ -10,13 +10,13 @@ namespace Volo.Abp.Authorization.Permissions;
 
 public class PermissionDefinitionManager : IPermissionDefinitionManager, ISingletonDependency
 {
-    protected IDictionary<string, PermissionGroupDefinition> PermissionGroupDefinitions => _lazyPermissionGroupDefinitions.Value;
-    private readonly Lazy<Dictionary<string, PermissionGroupDefinition>> _lazyPermissionGroupDefinitions;
+    protected IDictionary<String, PermissionGroupDefinition> PermissionGroupDefinitions => _lazyPermissionGroupDefinitions.Value;
+    private readonly Lazy<Dictionary<String, PermissionGroupDefinition>> _lazyPermissionGroupDefinitions;
 
-    protected IDictionary<string, PermissionDefinition> PermissionDefinitions => _lazyPermissionDefinitions.Value;
-    private readonly Lazy<Dictionary<string, PermissionDefinition>> _lazyPermissionDefinitions;
+    protected IDictionary<String, PermissionDefinition> PermissionDefinitions => _lazyPermissionDefinitions.Value;
+    private readonly Lazy<Dictionary<String, PermissionDefinition>> _lazyPermissionDefinitions;
 
-    protected AbpPermissionOptions Options { get; }
+    protected AbpPermissionOptions Options;//  { get; }
 
     private readonly IServiceProvider _serviceProvider;
 
@@ -27,18 +27,18 @@ public class PermissionDefinitionManager : IPermissionDefinitionManager, ISingle
         _serviceProvider = serviceProvider;
         Options = options.Value;
 
-        _lazyPermissionDefinitions = new Lazy<Dictionary<string, PermissionDefinition>>(
+        _lazyPermissionDefinitions = new Lazy<Dictionary<String, PermissionDefinition>>(
             CreatePermissionDefinitions,
             isThreadSafe: true
         );
 
-        _lazyPermissionGroupDefinitions = new Lazy<Dictionary<string, PermissionGroupDefinition>>(
+        _lazyPermissionGroupDefinitions = new Lazy<Dictionary<String, PermissionGroupDefinition>>(
             CreatePermissionGroupDefinitions,
             isThreadSafe: true
         );
     }
 
-    public virtual PermissionDefinition Get(string name)
+    public   PermissionDefinition Get(String name)
     {
         var permission = GetOrNull(name);
 
@@ -50,14 +50,14 @@ public class PermissionDefinitionManager : IPermissionDefinitionManager, ISingle
         return permission;
     }
 
-    public virtual PermissionDefinition GetOrNull(string name)
+    public   PermissionDefinition GetOrNull(String name)
     {
-        Check.NotNull(name, nameof(name));
+        Objects.requireNonNull(name, nameof(name));
 
         return PermissionDefinitions.GetOrDefault(name);
     }
 
-    public virtual IReadOnlyList<PermissionDefinition> GetPermissions()
+    public   IReadOnlyList<PermissionDefinition> GetPermissions()
     {
         return PermissionDefinitions.Values.ToImmutableList();
     }
@@ -67,13 +67,13 @@ public class PermissionDefinitionManager : IPermissionDefinitionManager, ISingle
         return PermissionGroupDefinitions.Values.ToImmutableList();
     }
 
-    protected virtual Dictionary<string, PermissionDefinition> CreatePermissionDefinitions()
+    protected   Dictionary<String, PermissionDefinition> CreatePermissionDefinitions()
     {
-        var permissions = new Dictionary<string, PermissionDefinition>();
+        var permissions = new Dictionary<String, PermissionDefinition>();
 
-        foreach (var groupDefinition in PermissionGroupDefinitions.Values)
+        for (var groupDefinition in PermissionGroupDefinitions.Values)
         {
-            foreach (var permission in groupDefinition.Permissions)
+            for (var permission in groupDefinition.Permissions)
             {
                 AddPermissionToDictionaryRecursively(permissions, permission);
             }
@@ -82,8 +82,8 @@ public class PermissionDefinitionManager : IPermissionDefinitionManager, ISingle
         return permissions;
     }
 
-    protected virtual void AddPermissionToDictionaryRecursively(
-        Dictionary<string, PermissionDefinition> permissions,
+    protected   void AddPermissionToDictionaryRecursively(
+        Dictionary<String, PermissionDefinition> permissions,
         PermissionDefinition permission)
     {
         if (permissions.ContainsKey(permission.Name))
@@ -93,13 +93,13 @@ public class PermissionDefinitionManager : IPermissionDefinitionManager, ISingle
 
         permissions[permission.Name] = permission;
 
-        foreach (var child in permission.Children)
+        for (var child in permission.Children)
         {
             AddPermissionToDictionaryRecursively(permissions, child);
         }
     }
 
-    protected virtual Dictionary<string, PermissionGroupDefinition> CreatePermissionGroupDefinitions()
+    protected   Dictionary<String, PermissionGroupDefinition> CreatePermissionGroupDefinitions()
     {
         using (var scope = _serviceProvider.CreateScope())
         {
@@ -110,17 +110,17 @@ public class PermissionDefinitionManager : IPermissionDefinitionManager, ISingle
                     .Select(p => scope.ServiceProvider.GetRequiredService(p) as IPermissionDefinitionProvider)
                     .ToList();
 
-            foreach (var provider in providers)
+            for (var provider in providers)
             {
                 provider.PreDefine(context);
             }
 
-            foreach (var provider in providers)
+            for (var provider in providers)
             {
                 provider.Define(context);
             }
 
-            foreach (var provider in providers)
+            for (var provider in providers)
             {
                 provider.PostDefine(context);
             }

@@ -5,20 +5,20 @@ namespace Volo.Abp.BackgroundJobs.RabbitMQ;
 
 public class AbpRabbitMqBackgroundJobOptions
 {
-    /// <summary>
-    /// Key: Job Args Type
-    /// </summary>
-    public Dictionary<Type, JobQueueConfiguration> JobQueues { get; }
+    /**
+     * Key: Job Args Type
+    */
+    public Dictionary<Type, JobQueueConfiguration> JobQueues;//  { get; }
 
-    /// <summary>
-    /// Default value: "AbpBackgroundJobs.".
-    /// </summary>
-    public string DefaultQueueNamePrefix;// { get; set; }
+    /**
+     * Default value: "AbpBackgroundJobs.".
+    */
+    public String DefaultQueueNamePrefix;// { get; set; }
 
-    /// <summary>
-    /// Default value: "AbpBackgroundJobsDelayed."
-    /// </summary>
-    public string DefaultDelayedQueueNamePrefix;// { get; set; }
+    /**
+     * Default value: "AbpBackgroundJobsDelayed."
+    */
+    public String DefaultDelayedQueueNamePrefix;// { get; set; }
 
     public AbpRabbitMqBackgroundJobOptions()
     {

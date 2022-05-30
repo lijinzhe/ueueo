@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 namespace Volo.Abp.Options;
 
 public abstract class AbpDynamicOptionsManager<T> : OptionsManager<T>
-    where T : class
+    //where T : class
 {
     protected AbpDynamicOptionsManager(IOptionsFactory<T> factory)
         : base(factory)
@@ -12,12 +12,12 @@ public abstract class AbpDynamicOptionsManager<T> : OptionsManager<T>
 
     }
 
-    public Task SetAsync() => SetAsync(Microsoft.Extensions.Options.Options.DefaultName);
+    public void SetAsync() => SetAsync(Microsoft.Extensions.Options.Options.DefaultName);
 
-    public void SetAsync(string name)
+    public void SetAsync(String name)
     {
-        return OverrideOptionsAsync(name, base.Get(name));
+        return OverrideOptionsAsync(name,super.Get(name));
     }
 
-    protected abstract Task OverrideOptionsAsync(string name, T options);
+    protected abstract void OverrideOptionsAsync(String name, T options);
 }

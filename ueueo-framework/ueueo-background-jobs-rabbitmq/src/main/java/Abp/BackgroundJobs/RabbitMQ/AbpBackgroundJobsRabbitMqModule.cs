@@ -13,41 +13,46 @@ namespace Volo.Abp.BackgroundJobs.RabbitMQ;
 )]
 public class AbpBackgroundJobsRabbitMqModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddSingleton(typeof(IJobQueue<>), typeof(JobQueue<>));
     }
 
-    public async override Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
+    @Override
+    public void OnApplicationInitializationAsync(ApplicationInitializationContext context)
     {
-        await StartJobQueueManagerAsync(context);
+        StartJobQueueManagerAsync(context);
     }
 
-    public async override Task OnApplicationShutdownAsync(ApplicationShutdownContext context)
+    @Override
+    public void OnApplicationShutdownAsync(ApplicationShutdownContext context)
     {
-        await StopJobQueueManagerAsync(context);
+        StopJobQueueManagerAsync(context);
     }
 
-    public override void OnApplicationInitialization(ApplicationInitializationContext context)
+    @Override
+    public void OnApplicationInitialization(ApplicationInitializationContext context)
     {
         AsyncHelper.RunSync(() => OnApplicationInitializationAsync(context));
     }
 
-    public override void OnApplicationShutdown(ApplicationShutdownContext context)
+    @Override
+    public void OnApplicationShutdown(ApplicationShutdownContext context)
     {
         AsyncHelper.RunSync(() => OnApplicationShutdownAsync(context));
     }
 
-    private async static Task StartJobQueueManagerAsync(ApplicationInitializationContext context)
+    private static void StartJobQueueManagerAsync(ApplicationInitializationContext context)
     {
-        await context.ServiceProvider
+        context.ServiceProvider
             .GetRequiredService<IJobQueueManager>()
             .StartAsync();
     }
 
-    private async static Task StopJobQueueManagerAsync(ApplicationShutdownContext context)
+    private static void StopJobQueueManagerAsync(ApplicationShutdownContext context)
     {
-        await context.ServiceProvider
+        context.ServiceProvider
             .GetRequiredService<IJobQueueManager>()
             .StopAsync();
     }

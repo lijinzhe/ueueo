@@ -5,11 +5,11 @@ namespace Volo.Abp.VirtualFileSystem.Physical;
 
 public class PhysicalVirtualFileSetInfo : VirtualFileSetInfo
 {
-    public string Root { get; }
+    public String Root;//  { get; }
 
     public PhysicalVirtualFileSetInfo(
-        [NotNull] IFileProvider fileProvider,
-        [NotNull] string root
+        @Nonnull IFileProvider fileProvider,
+        @Nonnull String root
         )
         : base(fileProvider)
     {

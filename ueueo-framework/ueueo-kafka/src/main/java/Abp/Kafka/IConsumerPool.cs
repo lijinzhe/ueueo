@@ -5,5 +5,5 @@ namespace Volo.Abp.Kafka;
 
 public interface IConsumerPool : IDisposable
 {
-    IConsumer<string, byte[]> Get(string groupId, string connectionName = null);
+    IConsumer<String, byte[]> Get(String groupId, String connectionName = null);
 }

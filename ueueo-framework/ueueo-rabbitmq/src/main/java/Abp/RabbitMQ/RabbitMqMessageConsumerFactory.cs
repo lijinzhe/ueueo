@@ -6,7 +6,7 @@ namespace Volo.Abp.RabbitMQ;
 
 public class RabbitMqMessageConsumerFactory : IRabbitMqMessageConsumerFactory, ISingletonDependency, IDisposable
 {
-    protected IServiceScope ServiceScope { get; }
+    protected IServiceScope ServiceScope;//  { get; }
 
     public RabbitMqMessageConsumerFactory(IServiceScopeFactory serviceScopeFactory)
     {
@@ -16,7 +16,7 @@ public class RabbitMqMessageConsumerFactory : IRabbitMqMessageConsumerFactory, I
     public IRabbitMqMessageConsumer Create(
         ExchangeDeclareConfiguration exchange,
         QueueDeclareConfiguration queue,
-        string connectionName = null)
+        String connectionName = null)
     {
         var consumer = ServiceScope.ServiceProvider.GetRequiredService<RabbitMqMessageConsumer>();
         consumer.Initialize(exchange, queue, connectionName);

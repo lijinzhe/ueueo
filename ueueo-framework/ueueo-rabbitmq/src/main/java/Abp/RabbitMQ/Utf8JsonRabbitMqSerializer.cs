@@ -14,12 +14,12 @@ public class Utf8JsonRabbitMqSerializer : IRabbitMqSerializer, ITransientDepende
         _jsonSerializer = jsonSerializer;
     }
 
-    public byte[] Serialize(object obj)
+    public byte[] Serialize(Object obj)
     {
         return Encoding.UTF8.GetBytes(_jsonSerializer.Serialize(obj));
     }
 
-    public object Deserialize(byte[] value, Type type)
+    public Object Deserialize(byte[] value, Type type)
     {
         return _jsonSerializer.Deserialize(type, Encoding.UTF8.GetString(value));
     }

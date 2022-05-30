@@ -4,21 +4,21 @@ using Volo.Abp.Data;
 
 namespace Volo.Abp.Application.Dtos;
 
-/// <summary>
-/// This class can be inherited by DTO classes to implement <see cref="IFullAuditedObject"/> interface.
-/// It also implements the <see cref="IHasExtraProperties"/> interface.
-/// </summary>
-/// <typeparam name="TPrimaryKey">Type of primary key</typeparam>
+/**
+ * This class can be inherited by DTO classes to implement <see cref="IFullAuditedObject"/> interface.
+ * It also implements the <see cref="IHasExtraProperties"/> interface.
+*/
+ * <typeparam name="TPrimaryKey">Type of primary key</typeparam>
 [Serializable]
 public abstract class ExtensibleFullAuditedEntityDto<TPrimaryKey> : ExtensibleAuditedEntityDto<TPrimaryKey>, IFullAuditedObject
 {
-    /// <inheritdoc />
-    public bool IsDeleted;// { get; set; }
+     * <inheritdoc />
+    public boolean IsDeleted;// { get; set; }
 
-    /// <inheritdoc />
-    public Guid? DeleterId;// { get; set; }
+     * <inheritdoc />
+    public ID DeleterId;// { get; set; }
 
-    /// <inheritdoc />
+     * <inheritdoc />
     public DateTime? DeletionTime;// { get; set; }
 
     protected ExtensibleFullAuditedEntityDto()
@@ -27,27 +27,27 @@ public abstract class ExtensibleFullAuditedEntityDto<TPrimaryKey> : ExtensibleAu
 
     }
 
-    protected ExtensibleFullAuditedEntityDto(bool setDefaultsForExtraProperties)
+    protected ExtensibleFullAuditedEntityDto(boolean setDefaultsForExtraProperties)
         : base(setDefaultsForExtraProperties)
     {
 
     }
 }
 
-/// <summary>
-/// This class can be inherited by DTO classes to implement <see cref="IFullAuditedObject"/> interface.
-/// It also implements the <see cref="IHasExtraProperties"/> interface.
-/// </summary>
+/**
+ * This class can be inherited by DTO classes to implement <see cref="IFullAuditedObject"/> interface.
+ * It also implements the <see cref="IHasExtraProperties"/> interface.
+*/
 [Serializable]
 public abstract class ExtensibleFullAuditedEntityDto : ExtensibleAuditedEntityDto, IFullAuditedObject
 {
-    /// <inheritdoc />
-    public bool IsDeleted;// { get; set; }
+     * <inheritdoc />
+    public boolean IsDeleted;// { get; set; }
 
-    /// <inheritdoc />
-    public Guid? DeleterId;// { get; set; }
+     * <inheritdoc />
+    public ID DeleterId;// { get; set; }
 
-    /// <inheritdoc />
+     * <inheritdoc />
     public DateTime? DeletionTime;// { get; set; }
 
     protected ExtensibleFullAuditedEntityDto()
@@ -56,7 +56,7 @@ public abstract class ExtensibleFullAuditedEntityDto : ExtensibleAuditedEntityDt
 
     }
 
-    protected ExtensibleFullAuditedEntityDto(bool setDefaultsForExtraProperties)
+    protected ExtensibleFullAuditedEntityDto(boolean setDefaultsForExtraProperties)
         : base(setDefaultsForExtraProperties)
     {
 

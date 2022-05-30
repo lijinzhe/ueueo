@@ -24,7 +24,7 @@ public class TypeFinder : ITypeFinder
     {
         var allTypes = new List<Type>();
 
-        foreach (var assembly in _assemblyFinder.Assemblies)
+        for (var assembly in _assemblyFinder.Assemblies)
         {
             try
             {

@@ -19,25 +19,25 @@ public class KafkaMessageConsumer : IKafkaMessageConsumer, ITransientDependency,
 {
     public ILogger<KafkaMessageConsumer> Logger;// { get; set; }
 
-    protected IConsumerPool ConsumerPool { get; }
+    protected IConsumerPool ConsumerPool;//  { get; }
 
-    protected IProducerPool ProducerPool { get; }
+    protected IProducerPool ProducerPool;//  { get; }
 
-    protected IExceptionNotifier ExceptionNotifier { get; }
+    protected IExceptionNotifier ExceptionNotifier;//  { get; }
 
-    protected AbpKafkaOptions Options { get; }
+    protected AbpKafkaOptions Options;//  { get; }
 
-    protected AbpAsyncTimer Timer { get; }
+    protected AbpAsyncTimer Timer;//  { get; }
 
-    protected ConcurrentBag<Func<Message<string, byte[]>, Task>> Callbacks { get; }
+    protected ConcurrentBag<Func<Message<String, byte[]>, Task>> Callbacks;//  { get; }
 
-    protected IConsumer<string, byte[]> Consumer ;// { get; private set; }
+    protected IConsumer<String, byte[]> Consumer ;// { get; private set; }
 
-    protected string ConnectionName ;// { get; private set; }
+    protected String ConnectionName ;// { get; private set; }
 
-    protected string GroupId ;// { get; private set; }
+    protected String GroupId ;// { get; private set; }
 
-    protected string TopicName ;// { get; private set; }
+    protected String TopicName ;// { get; private set; }
 
     public KafkaMessageConsumer(
         IConsumerPool consumerPool,
@@ -53,41 +53,41 @@ public class KafkaMessageConsumer : IKafkaMessageConsumer, ITransientDependency,
         Options = options.Value;
         Logger = NullLogger<KafkaMessageConsumer>.Instance;
 
-        Callbacks = new ConcurrentBag<Func<Message<string, byte[]>, Task>>();
+        Callbacks = new ConcurrentBag<Func<Message<String, byte[]>, Task>>();
 
         Timer.Period = 5000; //5 sec.
         Timer.Elapsed = Timer_Elapsed;
         Timer.RunOnStart = true;
     }
 
-    public virtual void Initialize(
-        [NotNull] string topicName,
-        [NotNull] string groupId,
-        string connectionName = null)
+    public   void Initialize(
+        @Nonnull String topicName,
+        @Nonnull String groupId,
+        String connectionName = null)
     {
-        Check.NotNull(topicName, nameof(topicName));
-        Check.NotNull(groupId, nameof(groupId));
+        Objects.requireNonNull(topicName, nameof(topicName));
+        Objects.requireNonNull(groupId, nameof(groupId));
         TopicName = topicName;
         ConnectionName = connectionName ?? KafkaConnections.DefaultConnectionName;
         GroupId = groupId;
         Timer.Start();
     }
 
-    public virtual void OnMessageReceived(Func<Message<string, byte[]>, Task> callback)
+    public   void OnMessageReceived(Func<Message<String, byte[]>, Task> callback)
     {
         Callbacks.Add(callback);
     }
 
-    protected virtual void Timer_Elapsed(AbpAsyncTimer timer)
+    protected   void Timer_Elapsed(AbpAsyncTimer timer)
     {
         if (Consumer == null)
         {
-            await CreateTopicAsync();
+            CreateTopicAsync();
             Consume();
         }
     }
 
-    protected virtual void CreateTopicAsync()
+    protected   void CreateTopicAsync()
     {
         using (var adminClient = new AdminClientBuilder(Options.Connections.GetOrDefault(ConnectionName)).Build())
         {
@@ -102,7 +102,7 @@ public class KafkaMessageConsumer : IKafkaMessageConsumer, ITransientDependency,
 
             try
             {
-                await adminClient.CreateTopicsAsync(new[] { topic });
+                adminClient.CreateTopicsAsync(new[] { topic });
             }
             catch (CreateTopicsException e)
             {
@@ -114,7 +114,7 @@ public class KafkaMessageConsumer : IKafkaMessageConsumer, ITransientDependency,
         }
     }
 
-    protected virtual void Consume()
+    protected   void Consume()
     {
         Consumer = ConsumerPool.Get(GroupId, ConnectionName);
 
@@ -133,30 +133,30 @@ public class KafkaMessageConsumer : IKafkaMessageConsumer, ITransientDependency,
                         continue;
                     }
 
-                    await HandleIncomingMessage(consumeResult);
+                    HandleIncomingMessage(consumeResult);
                 }
                 catch (ConsumeException ex)
                 {
                     Logger.LogException(ex, LogLevel.Warning);
-                    await ExceptionNotifier.NotifyAsync(ex, logLevel: LogLevel.Warning);
+                    ExceptionNotifier.NotifyAsync(ex, logLevel: LogLevel.Warning);
                 }
             }
         }, TaskCreationOptions.LongRunning);
     }
 
-    protected virtual void HandleIncomingMessage(ConsumeResult<string, byte[]> consumeResult)
+    protected   void HandleIncomingMessage(ConsumeResult<String, byte[]> consumeResult)
     {
         try
         {
-            foreach (var callback in Callbacks)
+            for (var callback in Callbacks)
             {
-                await callback(consumeResult.Message);
+                callback(consumeResult.Message);
             }
         }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            await ExceptionNotifier.NotifyAsync(ex);
+            ExceptionNotifier.NotifyAsync(ex);
         }
         finally
         {
@@ -164,7 +164,7 @@ public class KafkaMessageConsumer : IKafkaMessageConsumer, ITransientDependency,
         }
     }
 
-    public virtual void Dispose()
+    public   void Dispose()
     {
         Timer.Stop();
         if (Consumer == null)

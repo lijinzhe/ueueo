@@ -7,17 +7,17 @@ namespace Volo.Abp.BackgroundJobs;
 public class AbpBackgroundJobOptions
 {
     private readonly Dictionary<Type, BackgroundJobConfiguration> _jobConfigurationsByArgsType;
-    private readonly Dictionary<string, BackgroundJobConfiguration> _jobConfigurationsByName;
+    private readonly Dictionary<String, BackgroundJobConfiguration> _jobConfigurationsByName;
 
-    /// <summary>
-    /// Default: true.
-    /// </summary>
-    public bool IsJobExecutionEnabled;// { get; set; } = true;
+    /**
+     * Default: true.
+    */
+    public boolean IsJobExecutionEnabled;// { get; set; } = true;
 
     public AbpBackgroundJobOptions()
     {
         _jobConfigurationsByArgsType = new Dictionary<Type, BackgroundJobConfiguration>();
-        _jobConfigurationsByName = new Dictionary<string, BackgroundJobConfiguration>();
+        _jobConfigurationsByName = new Dictionary<String, BackgroundJobConfiguration>();
     }
 
     public BackgroundJobConfiguration GetJob<TArgs>()
@@ -37,7 +37,7 @@ public class AbpBackgroundJobOptions
         return jobConfiguration;
     }
 
-    public BackgroundJobConfiguration GetJob(string name)
+    public BackgroundJobConfiguration GetJob(String name)
     {
         var jobConfiguration = _jobConfigurationsByName.GetOrDefault(name);
 

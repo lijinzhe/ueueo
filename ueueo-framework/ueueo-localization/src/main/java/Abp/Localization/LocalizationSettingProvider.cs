@@ -5,7 +5,8 @@ namespace Volo.Abp.Localization;
 
 public class LocalizationSettingProvider : SettingDefinitionProvider
 {
-    public override void Define(ISettingDefinitionContext context)
+    @Override
+    public void Define(ISettingDefinitionContext context)
     {
         context.Add(
             new SettingDefinition(LocalizationSettingNames.DefaultLanguage,
@@ -16,7 +17,7 @@ public class LocalizationSettingProvider : SettingDefinitionProvider
         );
     }
 
-    private static LocalizableString L(string name)
+    private static LocalizableString L(String name)
     {
         return LocalizableString.Create<AbpLocalizationResource>(name);
     }

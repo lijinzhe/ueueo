@@ -41,9 +41,9 @@ public abstract class ApplicationService :
     [Obsolete("Use LazyServiceProvider instead.")]
     public IServiceProvider ServiceProvider;// { get; set; }
 
-    public static string[] CommonPostfixes;// { get; set; } = { "AppService", "ApplicationService", "Service" };
+    public static String[] CommonPostfixes;// { get; set; } = { "AppService", "ApplicationService", "Service" };
 
-    public List<string> AppliedCrossCuttingConcerns { get; } = new List<string>();
+    public List<String> AppliedCrossCuttingConcerns;//  { get; } = new List<String>();
 
     protected IUnitOfWorkManager UnitOfWorkManager => LazyServiceProvider.LazyGetRequiredService<IUnitOfWorkManager>();
 
@@ -100,22 +100,23 @@ public abstract class ApplicationService :
 
     protected ILogger Logger => LazyServiceProvider.LazyGetService<ILogger>(provider => LoggerFactory?.CreateLogger(GetType().FullName) ?? NullLogger.Instance);
 
-    /// <summary>
-    /// Checks for given <paramref name="policyName"/>.
-    /// Throws <see cref="AbpAuthorizationException"/> if given policy has not been granted.
-    /// </summary>
-    /// <param name="policyName">The policy name. This method does nothing if given <paramref name="policyName"/> is null or empty.</param>
-    protected virtual void CheckPolicyAsync([CanBeNull] string policyName)
+    /**
+     * Checks for given <paramref name="policyName"/>.
+     * Throws <see cref="AbpAuthorizationException"/> if given policy has not been granted.
+    *
+     * <param name="policyName">The policy name. This method does nothing if given <paramref name="policyName"/> is null or empty.</param>
+     */
+    protected   void CheckPolicyAsync(@Nullable String policyName)
     {
-        if (string.IsNullOrEmpty(policyName))
+        if (String.IsNullOrEmpty(policyName))
         {
             return;
         }
 
-        await AuthorizationService.CheckAsync(policyName);
+        AuthorizationService.CheckAsync(policyName);
     }
 
-    protected virtual IStringLocalizer CreateLocalizer()
+    protected   IStringLocalizer CreateLocalizer()
     {
         if (LocalizationResource != null)
         {

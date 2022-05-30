@@ -6,7 +6,7 @@ namespace Volo.Abp.TextTemplating;
 
 public abstract class TemplateRenderingEngineBase : ITemplateRenderingEngine
 {
-    public abstract string Name { get; }
+    public abstract String Name;//  { get; }
 
     protected readonly ITemplateDefinitionManager TemplateDefinitionManager;
     protected readonly ITemplateContentProvider TemplateContentProvider;
@@ -15,21 +15,21 @@ public abstract class TemplateRenderingEngineBase : ITemplateRenderingEngine
     public TemplateRenderingEngineBase(
         ITemplateDefinitionManager templateDefinitionManager,
         ITemplateContentProvider templateContentProvider,
-        IStringLocalizerFactory stringLocalizerFactory)
+        IStringLocalizerFactory StringLocalizerFactory)
     {
         TemplateDefinitionManager = templateDefinitionManager;
         TemplateContentProvider = templateContentProvider;
-        StringLocalizerFactory = stringLocalizerFactory;
+        StringLocalizerFactory = StringLocalizerFactory;
     }
 
-    public abstract Task<string> RenderAsync(string templateName, object model = null, string cultureName = null, Dictionary<string, object> globalContext = null);
+    public abstract Task<String> RenderAsync(String templateName, Object model = null, String cultureName = null, Dictionary<String, Object> globalContext = null);
 
-    protected virtual async Task<string> GetContentOrNullAsync(TemplateDefinition templateDefinition)
+    protected    Task<String> GetContentOrNullAsync(TemplateDefinition templateDefinition)
     {
-        return await TemplateContentProvider.GetContentOrNullAsync(templateDefinition);
+        return TemplateContentProvider.GetContentOrNullAsync(templateDefinition);
     }
 
-    protected virtual IStringLocalizer GetLocalizerOrNull(TemplateDefinition templateDefinition)
+    protected   IStringLocalizer GetLocalizerOrNull(TemplateDefinition templateDefinition)
     {
         if (templateDefinition.LocalizationResource != null)
         {

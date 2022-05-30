@@ -11,12 +11,12 @@ public static class RabbitMqConsts
 
     public static class ExchangeTypes
     {
-        public const string Direct = "direct";
+        public const String Direct = "direct";
 
-        public const string Topic = "topic";
+        public const String Topic = "topic";
 
-        public const string Fanout = "fanout";
+        public const String Fanout = "fanout";
 
-        public const string Headers = "headers";
+        public const String Headers = "headers";
     }
 }

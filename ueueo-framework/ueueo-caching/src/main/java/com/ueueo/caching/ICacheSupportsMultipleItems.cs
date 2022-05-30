@@ -8,40 +8,40 @@ namespace Volo.Abp.Caching;
 public interface ICacheSupportsMultipleItems
 {
     byte[][] GetMany(
-        IEnumerable<string> keys
+        IEnumerable<String> keys
     );
 
     Task<byte[][]> GetManyAsync(
-        IEnumerable<string> keys,
+        IEnumerable<String> keys,
         CancellationToken token = default
     );
 
     void SetMany(
-        IEnumerable<KeyValuePair<string, byte[]>> items,
+        IEnumerable<KeyValuePair<String, byte[]>> items,
         DistributedCacheEntryOptions options
     );
 
-    Task SetManyAsync(
-        IEnumerable<KeyValuePair<string, byte[]>> items,
+    void SetManyAsync(
+        IEnumerable<KeyValuePair<String, byte[]>> items,
         DistributedCacheEntryOptions options,
         CancellationToken token = default
     );
 
     void RefreshMany(
-        IEnumerable<string> keys
+        IEnumerable<String> keys
     );
 
-    Task RefreshManyAsync(
-        IEnumerable<string> keys,
+    void RefreshManyAsync(
+        IEnumerable<String> keys,
         CancellationToken token = default
     );
 
     void RemoveMany(
-        IEnumerable<string> keys
+        IEnumerable<String> keys
     );
 
-    Task RemoveManyAsync(
-        IEnumerable<string> keys,
+    void RemoveManyAsync(
+        IEnumerable<String> keys,
         CancellationToken token = default
     );
 }

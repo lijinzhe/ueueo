@@ -5,12 +5,12 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Volo.Abp.VirtualFileSystem.Embedded;
 
-/// <summary>
-/// Represents a file embedded in an assembly.
-/// </summary>
+/**
+ * Represents a file embedded in an assembly.
+*/
 public class EmbeddedResourceFileInfo : IFileInfo
 {
-    public bool Exists => true;
+    public boolean Exists => true;
 
     public long Length {
         get {
@@ -27,27 +27,27 @@ public class EmbeddedResourceFileInfo : IFileInfo
     }
     private long? _length;
 
-    public string PhysicalPath => null;
+    public String PhysicalPath => null;
 
-    public string VirtualPath { get; }
+    public String VirtualPath;//  { get; }
 
-    public string Name { get; }
+    public String Name;//  { get; }
 
-    /// <summary>
-    /// The time, in UTC.
-    /// </summary>
-    public DateTimeOffset LastModified { get; }
+    /**
+     * The time, in UTC.
+    */
+    public DateTimeOffset LastModified;//  { get; }
 
-    public bool IsDirectory => false;
+    public boolean IsDirectory => false;
 
     private readonly Assembly _assembly;
-    private readonly string _resourcePath;
+    private readonly String _resourcePath;
 
     public EmbeddedResourceFileInfo(
         Assembly assembly,
-        string resourcePath,
-        string virtualPath,
-        string name,
+        String resourcePath,
+        String virtualPath,
+        String name,
         DateTimeOffset lastModified)
     {
         _assembly = assembly;
@@ -58,7 +58,7 @@ public class EmbeddedResourceFileInfo : IFileInfo
         LastModified = lastModified;
     }
 
-    /// <inheritdoc />
+     * <inheritdoc />
     public Stream CreateReadStream()
     {
         var stream = _assembly.GetManifestResourceStream(_resourcePath);
@@ -71,7 +71,7 @@ public class EmbeddedResourceFileInfo : IFileInfo
         return stream;
     }
 
-    @Override public string toString()
+    @Override public String toString()
     {
         return $"[EmbeddedResourceFileInfo] {Name} ({this.VirtualPath})";
     }

@@ -6,21 +6,21 @@ namespace Volo.Abp.BackgroundJobs;
 
 public class BackgroundJobNameAttribute : Attribute, IBackgroundJobNameProvider
 {
-    public string Name { get; }
+    public String Name;//  { get; }
 
-    public BackgroundJobNameAttribute([NotNull] string name)
+    public BackgroundJobNameAttribute(@Nonnull String name)
     {
         Name = Check.NotNullOrWhiteSpace(name, nameof(name));
     }
 
-    public static string GetName<TJobArgs>()
+    public static String GetName<TJobArgs>()
     {
         return GetName(typeof(TJobArgs));
     }
 
-    public static string GetName([NotNull] Type jobArgsType)
+    public static String GetName(@Nonnull Type jobArgsType)
     {
-        Check.NotNull(jobArgsType, nameof(jobArgsType));
+        Objects.requireNonNull(jobArgsType, nameof(jobArgsType));
 
         return jobArgsType
                    .GetCustomAttributes(true)

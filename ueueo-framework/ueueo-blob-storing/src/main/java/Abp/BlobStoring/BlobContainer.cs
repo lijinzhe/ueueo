@@ -8,7 +8,7 @@ using Volo.Abp.Threading;
 namespace Volo.Abp.BlobStoring;
 
 public class BlobContainer<TContainer> : IBlobContainer<TContainer>
-    where TContainer : class
+    //where TContainer : class
 {
     private readonly IBlobContainer _container;
 
@@ -17,10 +17,10 @@ public class BlobContainer<TContainer> : IBlobContainer<TContainer>
         _container = blobContainerFactory.Create<TContainer>();
     }
 
-    public Task SaveAsync(
-        string name,
+    public void SaveAsync(
+        String name,
         Stream stream,
-        bool overrideExisting = false,
+        boolean overrideExisting = false,
         CancellationToken cancellationToken = default)
     {
         return _container.SaveAsync(
@@ -32,7 +32,7 @@ public class BlobContainer<TContainer> : IBlobContainer<TContainer>
     }
 
     public Task<bool> DeleteAsync(
-        string name,
+        String name,
         CancellationToken cancellationToken = default)
     {
         return _container.DeleteAsync(
@@ -42,7 +42,7 @@ public class BlobContainer<TContainer> : IBlobContainer<TContainer>
     }
 
     public Task<bool> ExistsAsync(
-        string name,
+        String name,
         CancellationToken cancellationToken = default)
     {
         return _container.ExistsAsync(
@@ -52,7 +52,7 @@ public class BlobContainer<TContainer> : IBlobContainer<TContainer>
     }
 
     public Task<Stream> GetAsync(
-        string name,
+        String name,
         CancellationToken cancellationToken = default)
     {
         return _container.GetAsync(
@@ -62,7 +62,7 @@ public class BlobContainer<TContainer> : IBlobContainer<TContainer>
     }
 
     public Task<Stream> GetOrNullAsync(
-        string name,
+        String name,
         CancellationToken cancellationToken = default)
     {
         return _container.GetOrNullAsync(
@@ -74,22 +74,22 @@ public class BlobContainer<TContainer> : IBlobContainer<TContainer>
 
 public class BlobContainer : IBlobContainer
 {
-    protected string ContainerName { get; }
+    protected String ContainerName;//  { get; }
 
-    protected BlobContainerConfiguration Configuration { get; }
+    protected BlobContainerConfiguration Configuration;//  { get; }
 
-    protected IBlobProvider Provider { get; }
+    protected IBlobProvider Provider;//  { get; }
 
-    protected ICurrentTenant CurrentTenant { get; }
+    protected ICurrentTenant CurrentTenant;//  { get; }
 
-    protected ICancellationTokenProvider CancellationTokenProvider { get; }
+    protected ICancellationTokenProvider CancellationTokenProvider;//  { get; }
 
-    protected IServiceProvider ServiceProvider { get; }
+    protected IServiceProvider ServiceProvider;//  { get; }
 
-    protected IBlobNormalizeNamingService BlobNormalizeNamingService { get; }
+    protected IBlobNormalizeNamingService BlobNormalizeNamingService;//  { get; }
 
     public BlobContainer(
-        string containerName,
+        String containerName,
         BlobContainerConfiguration configuration,
         IBlobProvider provider,
         ICurrentTenant currentTenant,
@@ -106,17 +106,17 @@ public class BlobContainer : IBlobContainer
         ServiceProvider = serviceProvider;
     }
 
-    public virtual void SaveAsync(
-        string name,
+    public   void SaveAsync(
+        String name,
         Stream stream,
-        bool overrideExisting = false,
+        boolean overrideExisting = false,
         CancellationToken cancellationToken = default)
     {
         using (CurrentTenant.Change(GetTenantIdOrNull()))
         {
             var blobNormalizeNaming = BlobNormalizeNamingService.NormalizeNaming(Configuration, ContainerName, name);
 
-            await Provider.SaveAsync(
+            Provider.SaveAsync(
                 new BlobProviderSaveArgs(
                     blobNormalizeNaming.ContainerName,
                     Configuration,
@@ -129,8 +129,8 @@ public class BlobContainer : IBlobContainer
         }
     }
 
-    public virtual async Task<bool> DeleteAsync(
-        string name,
+    public    Task<bool> DeleteAsync(
+        String name,
         CancellationToken cancellationToken = default)
     {
         using (CurrentTenant.Change(GetTenantIdOrNull()))
@@ -138,7 +138,7 @@ public class BlobContainer : IBlobContainer
             var blobNormalizeNaming =
                 BlobNormalizeNamingService.NormalizeNaming(Configuration, ContainerName, name);
 
-            return await Provider.DeleteAsync(
+            return Provider.DeleteAsync(
                 new BlobProviderDeleteArgs(
                     blobNormalizeNaming.ContainerName,
                     Configuration,
@@ -149,8 +149,8 @@ public class BlobContainer : IBlobContainer
         }
     }
 
-    public virtual async Task<bool> ExistsAsync(
-        string name,
+    public    Task<bool> ExistsAsync(
+        String name,
         CancellationToken cancellationToken = default)
     {
         using (CurrentTenant.Change(GetTenantIdOrNull()))
@@ -158,7 +158,7 @@ public class BlobContainer : IBlobContainer
             var blobNormalizeNaming =
                 BlobNormalizeNamingService.NormalizeNaming(Configuration, ContainerName, name);
 
-            return await Provider.ExistsAsync(
+            return Provider.ExistsAsync(
                 new BlobProviderExistsArgs(
                     blobNormalizeNaming.ContainerName,
                     Configuration,
@@ -169,11 +169,11 @@ public class BlobContainer : IBlobContainer
         }
     }
 
-    public virtual async Task<Stream> GetAsync(
-        string name,
+    public    Task<Stream> GetAsync(
+        String name,
         CancellationToken cancellationToken = default)
     {
-        var stream = await GetOrNullAsync(name, cancellationToken);
+        var stream = GetOrNullAsync(name, cancellationToken);
 
         if (stream == null)
         {
@@ -185,8 +185,8 @@ public class BlobContainer : IBlobContainer
         return stream;
     }
 
-    public virtual async Task<Stream> GetOrNullAsync(
-        string name,
+    public    Task<Stream> GetOrNullAsync(
+        String name,
         CancellationToken cancellationToken = default)
     {
         using (CurrentTenant.Change(GetTenantIdOrNull()))
@@ -194,7 +194,7 @@ public class BlobContainer : IBlobContainer
             var blobNormalizeNaming =
                 BlobNormalizeNamingService.NormalizeNaming(Configuration, ContainerName, name);
 
-            return await Provider.GetOrNullAsync(
+            return Provider.GetOrNullAsync(
                 new BlobProviderGetArgs(
                     blobNormalizeNaming.ContainerName,
                     Configuration,
@@ -205,7 +205,7 @@ public class BlobContainer : IBlobContainer
         }
     }
 
-    protected virtual Guid? GetTenantIdOrNull()
+    protected   ID GetTenantIdOrNull()
     {
         if (!Configuration.IsMultiTenant)
         {

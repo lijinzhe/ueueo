@@ -6,9 +6,9 @@ namespace Volo.Abp.Application.Dtos;
 [Serializable]
 public abstract class ExtensibleEntityDto<TKey> : ExtensibleObject, IEntityDto<TKey>
 {
-    /// <summary>
-    /// Id of the entity.
-    /// </summary>
+    /**
+     * Id of the entity.
+    */
     public TKey Id;// { get; set; }
 
     protected ExtensibleEntityDto()
@@ -17,13 +17,13 @@ public abstract class ExtensibleEntityDto<TKey> : ExtensibleObject, IEntityDto<T
 
     }
 
-    protected ExtensibleEntityDto(bool setDefaultsForExtraProperties)
+    protected ExtensibleEntityDto(boolean setDefaultsForExtraProperties)
         : base(setDefaultsForExtraProperties)
     {
 
     }
 
-    @Override public string toString()
+    @Override public String toString()
     {
         return $"[DTO: {GetType().Name}] Id = {Id}";
     }
@@ -38,13 +38,13 @@ public abstract class ExtensibleEntityDto : ExtensibleObject, IEntityDto
 
     }
 
-    protected ExtensibleEntityDto(bool setDefaultsForExtraProperties)
+    protected ExtensibleEntityDto(boolean setDefaultsForExtraProperties)
         : base(setDefaultsForExtraProperties)
     {
 
     }
 
-    @Override public string toString()
+    @Override public String toString()
     {
         return $"[DTO: {GetType().Name}]";
     }

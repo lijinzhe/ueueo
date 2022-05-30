@@ -5,19 +5,19 @@ namespace Volo.Abp.Authorization;
 
 public class PermissionsRequirement : IAuthorizationRequirement
 {
-    public string[] PermissionNames { get; }
+    public String[] PermissionNames;//  { get; }
 
-    public bool RequiresAll { get; }
+    public boolean RequiresAll;//  { get; }
 
-    public PermissionsRequirement([NotNull] string[] permissionNames, bool requiresAll)
+    public PermissionsRequirement(@Nonnull String[] permissionNames, boolean requiresAll)
     {
-        Check.NotNull(permissionNames, nameof(permissionNames));
+        Objects.requireNonNull(permissionNames, nameof(permissionNames));
 
         PermissionNames = permissionNames;
         RequiresAll = requiresAll;
     }
 
-    @Override public string toString()
+    @Override public String toString()
     {
         return $"PermissionsRequirement: {string.Join(", ", PermissionNames)}";
     }

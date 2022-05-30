@@ -5,16 +5,16 @@ namespace Volo.Abp.Domain.Entities.Events.Distributed;
 [Serializable]
 public class EntityEto : EtoBase
 {
-    public string EntityType;// { get; set; }
+    public String EntityType;// { get; set; }
 
-    public string KeysAsString;// { get; set; }
+    public String KeysAsString;// { get; set; }
 
     public EntityEto()
     {
 
     }
 
-    public EntityEto(string entityType, string keysAsString)
+    public EntityEto(String entityType, String keysAsString)
     {
         EntityType = entityType;
         KeysAsString = keysAsString;

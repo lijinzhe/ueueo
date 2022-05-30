@@ -10,9 +10,9 @@ public abstract class QuartzBackgroundWorkerBase : BackgroundWorkerBase, IQuartz
 
     public IJobDetail JobDetail;// { get; set; }
 
-    public bool AutoRegister;// { get; set; } = true;
+    public boolean AutoRegister;// { get; set; } = true;
 
     public Func<IScheduler, Task> ScheduleJob;// { get; set; } = null;
 
-    public abstract Task Execute(IJobExecutionContext context);
+    public abstract void Execute(IJobExecutionContext context);
 }

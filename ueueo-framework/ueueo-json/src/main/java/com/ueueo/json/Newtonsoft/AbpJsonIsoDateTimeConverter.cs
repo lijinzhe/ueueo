@@ -21,7 +21,8 @@ public class AbpJsonIsoDateTimeConverter : IsoDateTimeConverter, ITransientDepen
         }
     }
 
-    public override bool CanConvert(Type objectType)
+    @Override
+    public boolean CanConvert(Type objectType)
     {
         if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
         {
@@ -31,9 +32,10 @@ public class AbpJsonIsoDateTimeConverter : IsoDateTimeConverter, ITransientDepen
         return false;
     }
 
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    @Override
+    public Object ReadJson(JsonReader reader, Type objectType, Object existingValue, JsonSerializer serializer)
     {
-        var date = base.ReadJson(reader, objectType, existingValue, serializer) as DateTime?;
+        var date =super.ReadJson(reader, objectType, existingValue, serializer) as DateTime?;
 
         if (date.HasValue)
         {
@@ -43,9 +45,10 @@ public class AbpJsonIsoDateTimeConverter : IsoDateTimeConverter, ITransientDepen
         return null;
     }
 
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    @Override
+    public void WriteJson(JsonWriter writer, Object value, JsonSerializer serializer)
     {
         var date = value as DateTime?;
-        base.WriteJson(writer, date.HasValue ? _clock.Normalize(date.Value) : value, serializer);
+       super.WriteJson(writer, date.HasValue ? _clock.Normalize(date.Value) : value, serializer);
     }
 }

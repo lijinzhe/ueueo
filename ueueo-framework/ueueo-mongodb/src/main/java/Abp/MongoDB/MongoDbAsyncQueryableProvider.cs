@@ -14,12 +14,12 @@ namespace Volo.Abp.MongoDB;
 
 public class MongoDbAsyncQueryableProvider : IAsyncQueryableProvider, ISingletonDependency
 {
-    public bool CanExecute<T>(IQueryable<T> queryable)
+    public boolean CanExecute<T>(IQueryable<T> queryable)
     {
         return ProxyHelper.UnProxy(queryable) is IMongoQueryable<T>;
     }
 
-    protected virtual IMongoQueryable<T> GetMongoQueryable<T>(IQueryable<T> queryable)
+    protected   IMongoQueryable<T> GetMongoQueryable<T>(IQueryable<T> queryable)
     {
         return ProxyHelper.UnProxy(queryable).As<IMongoQueryable<T>>();
     }
@@ -352,8 +352,8 @@ public class MongoDbAsyncQueryableProvider : IAsyncQueryableProvider, ISingleton
         return GetMongoQueryable(queryable).ToListAsync(cancellationToken);
     }
 
-    public async Task<T[]> ToArrayAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken = default)
+    public  Task<T[]> ToArrayAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken = default)
     {
-        return (await GetMongoQueryable(queryable).ToListAsync(cancellationToken)).ToArray();
+        return (GetMongoQueryable(queryable).ToListAsync(cancellationToken)).ToArray();
     }
 }

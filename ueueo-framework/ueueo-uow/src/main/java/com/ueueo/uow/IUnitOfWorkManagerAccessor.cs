@@ -2,5 +2,5 @@
 
 public interface IUnitOfWorkManagerAccessor
 {
-    IUnitOfWorkManager UnitOfWorkManager { get; }
+    IUnitOfWorkManager UnitOfWorkManager;//  { get; }
 }

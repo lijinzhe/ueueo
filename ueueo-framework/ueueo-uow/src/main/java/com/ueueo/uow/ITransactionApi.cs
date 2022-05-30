@@ -5,5 +5,5 @@ namespace Volo.Abp.Uow;
 
 public interface ITransactionApi : IDisposable
 {
-    Task CommitAsync();
+    void CommitAsync();
 }

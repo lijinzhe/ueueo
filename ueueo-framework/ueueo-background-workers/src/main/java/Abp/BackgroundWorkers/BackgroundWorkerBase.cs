@@ -7,9 +7,9 @@ using Volo.Abp.DependencyInjection;
 
 namespace Volo.Abp.BackgroundWorkers;
 
-/// <summary>
-/// Base class that can be used to implement <see cref="IBackgroundWorker"/>.
-/// </summary>
+/**
+ * Base class that can be used to implement <see cref="IBackgroundWorker"/>.
+*/
 public abstract class BackgroundWorkerBase : IBackgroundWorker
 {
     //TODO: Add UOW, Localization and other useful properties..?
@@ -22,8 +22,8 @@ public abstract class BackgroundWorkerBase : IBackgroundWorker
 
     protected ILogger Logger => LazyServiceProvider.LazyGetService<ILogger>(provider => LoggerFactory?.CreateLogger(GetType().FullName) ?? NullLogger.Instance);
 
-    protected CancellationTokenSource StoppingTokenSource { get; }
-    protected CancellationToken StoppingToken { get; }
+    protected CancellationTokenSource StoppingTokenSource;//  { get; }
+    protected CancellationToken StoppingToken;//  { get; }
 
     public BackgroundWorkerBase()
     {
@@ -45,7 +45,7 @@ public abstract class BackgroundWorkerBase : IBackgroundWorker
         return Task.CompletedTask;
     }
 
-    @Override public string toString()
+    @Override public String toString()
     {
         return GetType().FullName;
     }

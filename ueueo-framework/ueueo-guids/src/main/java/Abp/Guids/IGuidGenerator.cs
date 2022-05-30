@@ -2,13 +2,13 @@
 
 namespace Volo.Abp.Guids;
 
-/// <summary>
-/// Used to generate Ids.
-/// </summary>
+/**
+ * Used to generate Ids.
+*/
 public interface IGuidGenerator
 {
-    /// <summary>
-    /// Creates a new <see cref="Guid"/>.
-    /// </summary>
-    Guid Create();
+    /**
+     * Creates a new <see cref="Guid"/>.
+    */
+    ID Create();
 }

@@ -10,38 +10,38 @@ namespace Volo.Abp.TextTemplating.VirtualFiles;
 
 public class LocalizedTemplateContentReaderFactory : ILocalizedTemplateContentReaderFactory, ISingletonDependency
 {
-    protected IVirtualFileProvider VirtualFileProvider { get; }
-    protected ConcurrentDictionary<string, ILocalizedTemplateContentReader> ReaderCache { get; }
+    protected IVirtualFileProvider VirtualFileProvider;//  { get; }
+    protected ConcurrentDictionary<String, ILocalizedTemplateContentReader> ReaderCache;//  { get; }
     protected SemaphoreSlim SyncObj;
 
     public LocalizedTemplateContentReaderFactory(IVirtualFileProvider virtualFileProvider)
     {
         VirtualFileProvider = virtualFileProvider;
-        ReaderCache = new ConcurrentDictionary<string, ILocalizedTemplateContentReader>();
+        ReaderCache = new ConcurrentDictionary<String, ILocalizedTemplateContentReader>();
         SyncObj = new SemaphoreSlim(1, 1);
     }
 
-    public virtual async Task<ILocalizedTemplateContentReader> CreateAsync(TemplateDefinition templateDefinition)
+    public    Task<ILocalizedTemplateContentReader> CreateAsync(TemplateDefinition templateDefinition)
     {
         if (ReaderCache.TryGetValue(templateDefinition.Name, out var reader))
         {
             return reader;
         }
 
-        using (await SyncObj.LockAsync())
+        using (SyncObj.LockAsync())
         {
             if (ReaderCache.TryGetValue(templateDefinition.Name, out reader))
             {
                 return reader;
             }
 
-            reader = await CreateInternalAsync(templateDefinition);
+            reader = CreateInternalAsync(templateDefinition);
             ReaderCache[templateDefinition.Name] = reader;
             return reader;
         }
     }
 
-    protected virtual async Task<ILocalizedTemplateContentReader> CreateInternalAsync(
+    protected    Task<ILocalizedTemplateContentReader> CreateInternalAsync(
         TemplateDefinition templateDefinition)
     {
         var virtualPath = templateDefinition.GetVirtualFilePathOrNull();
@@ -66,13 +66,13 @@ public class LocalizedTemplateContentReaderFactory : ILocalizedTemplateContentRe
         {
             //TODO: Configure file extensions.
             var folderReader = new VirtualFolderLocalizedTemplateContentReader(new[] { ".tpl", ".cshtml" });
-            await folderReader.ReadContentsAsync(VirtualFileProvider, virtualPath);
+            folderReader.ReadContentsAsync(VirtualFileProvider, virtualPath);
             return folderReader;
         }
         else //File
         {
             var singleFileReader = new FileInfoLocalizedTemplateContentReader();
-            await singleFileReader.ReadContentsAsync(fileInfo);
+            singleFileReader.ReadContentsAsync(fileInfo);
             return singleFileReader;
         }
     }

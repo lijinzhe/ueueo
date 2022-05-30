@@ -2,5 +2,5 @@
 
 public interface IUnitOfWorkTransactionBehaviourProvider
 {
-    bool? IsTransactional { get; }
+    boolean IsTransactional;//  { get; }
 }

@@ -11,9 +11,9 @@ namespace Volo.Abp.Domain.Repositories.MongoDB;
 public class MongoDbRepositoryFilterer<TEntity> : IMongoDbRepositoryFilterer<TEntity>
     where TEntity : class, IEntity
 {
-    protected IDataFilter DataFilter { get; }
+    protected IDataFilter DataFilter;//  { get; }
 
-    protected ICurrentTenant CurrentTenant { get; }
+    protected ICurrentTenant CurrentTenant;//  { get; }
 
     public MongoDbRepositoryFilterer(IDataFilter dataFilter, ICurrentTenant currentTenant)
     {
@@ -47,7 +47,7 @@ public class MongoDbRepositoryFilterer<TEntity, TKey> : MongoDbRepositoryFiltere
     {
     }
 
-    public virtual async Task<FilterDefinition<TEntity>> CreateEntityFilterAsync(TKey id, bool applyFilters = false)
+    public    Task<FilterDefinition<TEntity>> CreateEntityFilterAsync(TKey id, boolean applyFilters = false)
     {
         var filters = new List<FilterDefinition<TEntity>>
             {
@@ -56,13 +56,13 @@ public class MongoDbRepositoryFilterer<TEntity, TKey> : MongoDbRepositoryFiltere
 
         if (applyFilters)
         {
-            await AddGlobalFiltersAsync(filters);
+            AddGlobalFiltersAsync(filters);
         }
 
         return Builders<TEntity>.Filter.And(filters);
     }
 
-    public virtual Task<FilterDefinition<TEntity>> CreateEntityFilterAsync(TEntity entity, bool withConcurrencyStamp = false, string concurrencyStamp = null)
+    public   Task<FilterDefinition<TEntity>> CreateEntityFilterAsync(TEntity entity, boolean withConcurrencyStamp = false, String concurrencyStamp = null)
     {
         if (!withConcurrencyStamp || !(entity is IHasConcurrencyStamp entityWithConcurrencyStamp))
         {
@@ -80,12 +80,12 @@ public class MongoDbRepositoryFilterer<TEntity, TKey> : MongoDbRepositoryFiltere
         ));
     }
 
-    public virtual async Task<FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TEntity> entities, bool applyFilters = false)
+    public    Task<FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TEntity> entities, boolean applyFilters = false)
     {
-        return await CreateEntitiesFilterAsync(entities.Select(s => s.Id), applyFilters);
+        return CreateEntitiesFilterAsync(entities.Select(s => s.Id), applyFilters);
     }
 
-    public virtual async Task<FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TKey> ids, bool applyFilters = false)
+    public    Task<FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TKey> ids, boolean applyFilters = false)
     {
         var filters = new List<FilterDefinition<TEntity>>()
             {
@@ -94,7 +94,7 @@ public class MongoDbRepositoryFilterer<TEntity, TKey> : MongoDbRepositoryFiltere
 
         if (applyFilters)
         {
-            await AddGlobalFiltersAsync(filters);
+            AddGlobalFiltersAsync(filters);
         }
 
         return Builders<TEntity>.Filter.And(filters);

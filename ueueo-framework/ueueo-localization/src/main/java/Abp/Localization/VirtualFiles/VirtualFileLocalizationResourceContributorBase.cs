@@ -11,33 +11,33 @@ namespace Volo.Abp.Localization.VirtualFiles;
 
 public abstract class VirtualFileLocalizationResourceContributorBase : ILocalizationResourceContributor
 {
-    private readonly string _virtualPath;
+    private readonly String _virtualPath;
     private IVirtualFileProvider _virtualFileProvider;
-    private Dictionary<string, ILocalizationDictionary> _dictionaries;
-    private bool _subscribedForChanges;
-    private readonly object _syncObj = new object();
+    private Dictionary<String, ILocalizationDictionary> _dictionaries;
+    private boolean _subscribedForChanges;
+    private readonly Object _syncObj = new object();
 
-    protected VirtualFileLocalizationResourceContributorBase(string virtualPath)
+    protected VirtualFileLocalizationResourceContributorBase(String virtualPath)
     {
         _virtualPath = virtualPath;
     }
 
-    public virtual void Initialize(LocalizationResourceInitializationContext context)
+    public   void Initialize(LocalizationResourceInitializationContext context)
     {
         _virtualFileProvider = context.ServiceProvider.GetRequiredService<IVirtualFileProvider>();
     }
 
-    public virtual LocalizedString GetOrNull(string cultureName, string name)
+    public   LocalizedString GetOrNull(String cultureName, String name)
     {
         return GetDictionaries().GetOrDefault(cultureName)?.GetOrNull(name);
     }
 
-    public virtual void Fill(string cultureName, Dictionary<string, LocalizedString> dictionary)
+    public   void Fill(String cultureName, Dictionary<String, LocalizedString> dictionary)
     {
         GetDictionaries().GetOrDefault(cultureName)?.Fill(dictionary);
     }
 
-    private Dictionary<string, ILocalizationDictionary> GetDictionaries()
+    private Dictionary<String, ILocalizationDictionary> GetDictionaries()
     {
         var dictionaries = _dictionaries;
         if (dictionaries != null)
@@ -70,11 +70,11 @@ public abstract class VirtualFileLocalizationResourceContributorBase : ILocaliza
         return dictionaries;
     }
 
-    private Dictionary<string, ILocalizationDictionary> CreateDictionaries()
+    private Dictionary<String, ILocalizationDictionary> CreateDictionaries()
     {
-        var dictionaries = new Dictionary<string, ILocalizationDictionary>();
+        var dictionaries = new Dictionary<String, ILocalizationDictionary>();
 
-        foreach (var file in _virtualFileProvider.GetDirectoryContents(_virtualPath))
+        for (var file in _virtualFileProvider.GetDirectoryContents(_virtualPath))
         {
             if (file.IsDirectory || !CanParseFile(file))
             {
@@ -93,9 +93,9 @@ public abstract class VirtualFileLocalizationResourceContributorBase : ILocaliza
         return dictionaries;
     }
 
-    protected abstract bool CanParseFile(IFileInfo file);
+    protected abstract boolean CanParseFile(IFileInfo file);
 
-    protected virtual ILocalizationDictionary CreateDictionaryFromFile(IFileInfo file)
+    protected   ILocalizationDictionary CreateDictionaryFromFile(IFileInfo file)
     {
         using (var stream = file.CreateReadStream())
         {
@@ -103,5 +103,5 @@ public abstract class VirtualFileLocalizationResourceContributorBase : ILocaliza
         }
     }
 
-    protected abstract ILocalizationDictionary CreateDictionaryFromFileContent(string fileContent);
+    protected abstract ILocalizationDictionary CreateDictionaryFromFileContent(String fileContent);
 }

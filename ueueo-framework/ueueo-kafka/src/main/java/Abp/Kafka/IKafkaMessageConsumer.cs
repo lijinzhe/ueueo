@@ -6,5 +6,5 @@ namespace Volo.Abp.Kafka;
 
 public interface IKafkaMessageConsumer
 {
-    void OnMessageReceived(Func<Message<string, byte[]>, Task> callback);
+    void OnMessageReceived(Func<Message<String, byte[]>, Task> callback);
 }

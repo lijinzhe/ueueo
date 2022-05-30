@@ -13,11 +13,11 @@ public class QuartzJobExecutionAdapter<TArgs> : IJob
 {
     public ILogger<QuartzJobExecutionAdapter<TArgs>> Logger;// { get; set; }
 
-    protected AbpBackgroundJobOptions Options { get; }
-    protected AbpBackgroundJobQuartzOptions BackgroundJobQuartzOptions { get; }
-    protected IServiceScopeFactory ServiceScopeFactory { get; }
-    protected IBackgroundJobExecuter JobExecuter { get; }
-    protected IJsonSerializer JsonSerializer { get; }
+    protected AbpBackgroundJobOptions Options;//  { get; }
+    protected AbpBackgroundJobQuartzOptions BackgroundJobQuartzOptions;//  { get; }
+    protected IServiceScopeFactory ServiceScopeFactory;//  { get; }
+    protected IBackgroundJobExecuter JobExecuter;//  { get; }
+    protected IJsonSerializer JsonSerializer;//  { get; }
 
     public QuartzJobExecutionAdapter(
         IOptions<AbpBackgroundJobOptions> options,
@@ -43,7 +43,7 @@ public class QuartzJobExecutionAdapter<TArgs> : IJob
             var jobContext = new JobExecutionContext(scope.ServiceProvider, jobType, args);
             try
             {
-                await JobExecuter.ExecuteAsync(jobContext);
+                JobExecuter.ExecuteAsync(jobContext);
             }
             catch (Exception exception)
             {
@@ -53,7 +53,7 @@ public class QuartzJobExecutionAdapter<TArgs> : IJob
                 retryIndex++;
                 context.JobDetail.JobDataMap.Put(QuartzBackgroundJobManager.JobDataPrefix + QuartzBackgroundJobManager.RetryIndex, retryIndex.ToString());
 
-                await BackgroundJobQuartzOptions.RetryStrategy.Invoke(retryIndex, context, jobExecutionException);
+                BackgroundJobQuartzOptions.RetryStrategy.Invoke(retryIndex, context, jobExecutionException);
 
                 throw jobExecutionException;
             }

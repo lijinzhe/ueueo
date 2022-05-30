@@ -7,16 +7,16 @@ namespace Volo.Abp.Localization;
 public class LanguageInfo : ILanguageInfo
 {
     [NotNull]
-    public virtual string CultureName { get; protected set; }
+    public   String CultureName { get; protected set; }
 
     [NotNull]
-    public virtual string UiCultureName { get; protected set; }
+    public   String UiCultureName { get; protected set; }
 
     [NotNull]
-    public virtual string DisplayName { get; protected set; }
+    public   String DisplayName { get; protected set; }
 
     [CanBeNull]
-    public virtual string FlagIcon;// { get; set; }
+    public   String FlagIcon;// { get; set; }
 
     protected LanguageInfo()
     {
@@ -24,21 +24,21 @@ public class LanguageInfo : ILanguageInfo
     }
 
     public LanguageInfo(
-        string cultureName,
-        string uiCultureName = null,
-        string displayName = null,
-        string flagIcon = null)
+        String cultureName,
+        String uiCultureName = null,
+        String displayName = null,
+        String flagIcon = null)
     {
         ChangeCultureInternal(cultureName, uiCultureName, displayName);
         FlagIcon = flagIcon;
     }
 
-    public virtual void ChangeCulture(string cultureName, string uiCultureName = null, string displayName = null)
+    public   void ChangeCulture(String cultureName, String uiCultureName = null, String displayName = null)
     {
         ChangeCultureInternal(cultureName, uiCultureName, displayName);
     }
 
-    private void ChangeCultureInternal(string cultureName, string uiCultureName, string displayName)
+    private void ChangeCultureInternal(String cultureName, String uiCultureName, String displayName)
     {
         CultureName = Check.NotNullOrWhiteSpace(cultureName, nameof(cultureName));
 

@@ -3,16 +3,17 @@ using System.Threading.Tasks;
 
 namespace Volo.Abp.Emailing.Smtp;
 
-/// <summary>
-/// Used to send emails over SMTP.
-/// </summary>
+/**
+ * Used to send emails over SMTP.
+*/
 public interface ISmtpEmailSender : IEmailSender
 {
-    /// <summary>
-    /// Creates and configures new <see cref="SmtpClient"/> object to send emails.
-    /// </summary>
-    /// <returns>
-    /// An <see cref="SmtpClient"/> object that is ready to send emails.
-    /// </returns>
+    /**
+     * Creates and configures new <see cref="SmtpClient"/> object to send emails.
+    *
+     * <returns>
+     * An <see cref="SmtpClient"/> object that is ready to send emails.
+     * </returns>
+     */
     Task<SmtpClient> BuildClientAsync();
 }

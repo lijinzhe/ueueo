@@ -7,7 +7,7 @@ namespace Volo.Abp.Localization;
 
 public class DefaultLanguageProvider : ILanguageProvider, ITransientDependency
 {
-    protected AbpLocalizationOptions Options { get; }
+    protected AbpLocalizationOptions Options;//  { get; }
 
     public DefaultLanguageProvider(IOptions<AbpLocalizationOptions> options)
     {

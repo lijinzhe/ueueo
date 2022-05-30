@@ -5,7 +5,7 @@ namespace Volo.Abp.MongoDB;
 
 public class MongoDbContextModel
 {
-    public IReadOnlyDictionary<Type, IMongoEntityModel> Entities { get; }
+    public IReadOnlyDictionary<Type, IMongoEntityModel> Entities;//  { get; }
 
     public MongoDbContextModel(IReadOnlyDictionary<Type, IMongoEntityModel> entities)
     {

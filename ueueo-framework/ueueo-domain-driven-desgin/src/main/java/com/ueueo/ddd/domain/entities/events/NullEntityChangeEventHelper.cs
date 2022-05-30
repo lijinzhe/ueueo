@@ -1,40 +1,40 @@
 namespace Volo.Abp.Domain.Entities.Events;
 
-/// <summary>
-/// Null-object implementation of <see cref="IEntityChangeEventHelper"/>.
-/// </summary>
+/**
+ * Null-object implementation of <see cref="IEntityChangeEventHelper"/>.
+*/
 public class NullEntityChangeEventHelper : IEntityChangeEventHelper
 {
-    /// <summary>
-    /// Gets single instance of <see cref="NullEntityChangeEventHelper"/> class.
-    /// </summary>
-    public static NullEntityChangeEventHelper Instance { get; } = new NullEntityChangeEventHelper();
+    /**
+     * Gets single instance of <see cref="NullEntityChangeEventHelper"/> class.
+    */
+    public static NullEntityChangeEventHelper Instance;//  { get; } = new NullEntityChangeEventHelper();
 
     private NullEntityChangeEventHelper()
     {
     }
 
-    public void PublishEntityCreatingEvent(object entity)
+    public void PublishEntityCreatingEvent(Object entity)
     {
     }
 
-    public void PublishEntityCreatedEvent(object entity)
+    public void PublishEntityCreatedEvent(Object entity)
     {
     }
 
-    public void PublishEntityUpdatingEvent(object entity)
+    public void PublishEntityUpdatingEvent(Object entity)
     {
     }
 
-    public void PublishEntityUpdatedEvent(object entity)
+    public void PublishEntityUpdatedEvent(Object entity)
     {
     }
 
-    public void PublishEntityDeletingEvent(object entity)
+    public void PublishEntityDeletingEvent(Object entity)
     {
     }
 
-    public void PublishEntityDeletedEvent(object entity)
+    public void PublishEntityDeletedEvent(Object entity)
     {
     }
 }

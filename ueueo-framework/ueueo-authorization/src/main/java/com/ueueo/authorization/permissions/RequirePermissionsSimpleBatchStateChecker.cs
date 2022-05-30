@@ -9,7 +9,7 @@ using Volo.Abp.SimpleStateChecking;
 namespace Volo.Abp.Authorization.Permissions;
 
 public class RequirePermissionsSimpleBatchStateChecker<TState> : SimpleBatchStateCheckerBase<TState>
-    where TState : IHasSimpleStateCheckers<TState>
+    //where TState : IHasSimpleStateCheckers<TState>
 {
     public static RequirePermissionsSimpleBatchStateChecker<TState> Current => _current.Value;
     private static readonly AsyncLocal<RequirePermissionsSimpleBatchStateChecker<TState>> _current = new AsyncLocal<RequirePermissionsSimpleBatchStateChecker<TState>>();
@@ -41,16 +41,17 @@ public class RequirePermissionsSimpleBatchStateChecker<TState> : SimpleBatchStat
         return new DisposeAction(() => _current.Value = previousValue);
     }
 
-    public override async Task<SimpleStateCheckerResult<TState>> IsEnabledAsync(SimpleBatchStateCheckerContext<TState> context)
+    @Override
+    public Task<SimpleStateCheckerResult<TState>> IsEnabledAsync(SimpleBatchStateCheckerContext<TState> context)
     {
         var permissionChecker = context.ServiceProvider.GetRequiredService<IPermissionChecker>();
 
         var result = new SimpleStateCheckerResult<TState>(context.States);
 
         var permissions = _models.Where(x => context.States.Any(s => s.Equals(x.State))).SelectMany(x => x.Permissions).Distinct().ToArray();
-        var grantResult = await permissionChecker.IsGrantedAsync(permissions);
+        var grantResult = permissionChecker.IsGrantedAsync(permissions);
 
-        foreach (var state in context.States)
+        for (var state in context.States)
         {
             var model = _models.FirstOrDefault(x => x.State.Equals(state));
             if (model != null)

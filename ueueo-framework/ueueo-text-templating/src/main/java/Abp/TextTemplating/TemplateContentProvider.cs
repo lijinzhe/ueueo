@@ -12,8 +12,8 @@ namespace Volo.Abp.TextTemplating;
 
 public class TemplateContentProvider : ITemplateContentProvider, ITransientDependency
 {
-    public IServiceScopeFactory ServiceScopeFactory { get; }
-    public AbpTextTemplatingOptions Options { get; }
+    public IServiceScopeFactory ServiceScopeFactory;//  { get; }
+    public AbpTextTemplatingOptions Options;//  { get; }
     private readonly ITemplateDefinitionManager _templateDefinitionManager;
 
     public TemplateContentProvider(
@@ -26,23 +26,23 @@ public class TemplateContentProvider : ITemplateContentProvider, ITransientDepen
         _templateDefinitionManager = templateDefinitionManager;
     }
 
-    public virtual Task<string> GetContentOrNullAsync(
-        [NotNull] string templateName,
-        [CanBeNull] string cultureName = null,
-        bool tryDefaults = true,
-        bool useCurrentCultureIfCultureNameIsNull = true)
+    public   Task<String> GetContentOrNullAsync(
+        @Nonnull String templateName,
+        @Nullable String cultureName = null,
+        boolean tryDefaults = true,
+        boolean useCurrentCultureIfCultureNameIsNull = true)
     {
         var template = _templateDefinitionManager.Get(templateName);
         return GetContentOrNullAsync(template, cultureName);
     }
 
-    public virtual async Task<string> GetContentOrNullAsync(
-        [NotNull] TemplateDefinition templateDefinition,
-        [CanBeNull] string cultureName = null,
-        bool tryDefaults = true,
-        bool useCurrentCultureIfCultureNameIsNull = true)
+    public    Task<String> GetContentOrNullAsync(
+        @Nonnull TemplateDefinition templateDefinition,
+        @Nullable String cultureName = null,
+        boolean tryDefaults = true,
+        boolean useCurrentCultureIfCultureNameIsNull = true)
     {
-        Check.NotNull(templateDefinition, nameof(templateDefinition));
+        Objects.requireNonNull(templateDefinition, nameof(templateDefinition));
 
         if (!Options.ContentContributors.Any())
         {
@@ -53,7 +53,7 @@ public class TemplateContentProvider : ITemplateContentProvider, ITransientDepen
 
         using (var scope = ServiceScopeFactory.CreateScope())
         {
-            string templateString = null;
+            String templateString = null;
 
             if (cultureName == null && useCurrentCultureIfCultureNameIsNull)
             {
@@ -63,7 +63,7 @@ public class TemplateContentProvider : ITemplateContentProvider, ITransientDepen
             var contributors = CreateTemplateContentContributors(scope.ServiceProvider);
 
             //Try to get from the requested culture
-            templateString = await GetContentOrNullAsync(
+            templateString = GetContentOrNullAsync(
                 contributors,
                 new TemplateContentContributorContext(
                     templateDefinition,
@@ -85,7 +85,7 @@ public class TemplateContentProvider : ITemplateContentProvider, ITransientDepen
             //Try to get from same culture without country code
             if (cultureName != null && cultureName.Contains("-")) //Example: "tr-TR"
             {
-                templateString = await GetContentOrNullAsync(
+                templateString = GetContentOrNullAsync(
                     contributors,
                     new TemplateContentContributorContext(
                         templateDefinition,
@@ -103,7 +103,7 @@ public class TemplateContentProvider : ITemplateContentProvider, ITransientDepen
             if (templateDefinition.IsInlineLocalized)
             {
                 //Try to get culture independent content
-                templateString = await GetContentOrNullAsync(
+                templateString = GetContentOrNullAsync(
                     contributors,
                     new TemplateContentContributorContext(
                         templateDefinition,
@@ -122,7 +122,7 @@ public class TemplateContentProvider : ITemplateContentProvider, ITransientDepen
                 //Try to get from default culture
                 if (templateDefinition.DefaultCultureName != null)
                 {
-                    templateString = await GetContentOrNullAsync(
+                    templateString = GetContentOrNullAsync(
                         contributors,
                         new TemplateContentContributorContext(
                             templateDefinition,
@@ -143,7 +143,7 @@ public class TemplateContentProvider : ITemplateContentProvider, ITransientDepen
         return null;
     }
 
-    protected virtual ITemplateContentContributor[] CreateTemplateContentContributors(IServiceProvider serviceProvider)
+    protected   ITemplateContentContributor[] CreateTemplateContentContributors(IServiceProvider serviceProvider)
     {
         return Options.ContentContributors
             .Select(type => (ITemplateContentContributor)serviceProvider.GetRequiredService(type))
@@ -151,13 +151,13 @@ public class TemplateContentProvider : ITemplateContentProvider, ITransientDepen
             .ToArray();
     }
 
-    protected virtual async Task<string> GetContentOrNullAsync(
+    protected    Task<String> GetContentOrNullAsync(
         ITemplateContentContributor[] contributors,
         TemplateContentContributorContext context)
     {
-        foreach (var contributor in contributors)
+        for (var contributor in contributors)
         {
-            var templateString = await contributor.GetOrNullAsync(context);
+            var templateString = contributor.GetOrNullAsync(context);
             if (templateString != null)
             {
                 return templateString;

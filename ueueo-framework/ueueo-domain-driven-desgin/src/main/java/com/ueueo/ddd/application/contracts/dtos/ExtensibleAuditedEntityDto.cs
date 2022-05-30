@@ -4,19 +4,19 @@ using Volo.Abp.Data;
 
 namespace Volo.Abp.Application.Dtos;
 
-/// <summary>
-/// This class can be inherited by DTO classes to implement <see cref="IAuditedObject"/> interface.
-/// It also implements the <see cref="IHasExtraProperties"/> interface.
-/// </summary>
-/// <typeparam name="TPrimaryKey">Type of primary key</typeparam>
+/**
+ * This class can be inherited by DTO classes to implement <see cref="IAuditedObject"/> interface.
+ * It also implements the <see cref="IHasExtraProperties"/> interface.
+*/
+ * <typeparam name="TPrimaryKey">Type of primary key</typeparam>
 [Serializable]
 public abstract class ExtensibleAuditedEntityDto<TPrimaryKey> : ExtensibleCreationAuditedEntityDto<TPrimaryKey>, IAuditedObject
 {
-    /// <inheritdoc />
+     * <inheritdoc />
     public DateTime? LastModificationTime;// { get; set; }
 
-    /// <inheritdoc />
-    public Guid? LastModifierId;// { get; set; }
+     * <inheritdoc />
+    public ID LastModifierId;// { get; set; }
 
     protected ExtensibleAuditedEntityDto()
         : this(true)
@@ -24,25 +24,25 @@ public abstract class ExtensibleAuditedEntityDto<TPrimaryKey> : ExtensibleCreati
 
     }
 
-    protected ExtensibleAuditedEntityDto(bool setDefaultsForExtraProperties)
+    protected ExtensibleAuditedEntityDto(boolean setDefaultsForExtraProperties)
         : base(setDefaultsForExtraProperties)
     {
 
     }
 }
 
-/// <summary>
-/// This class can be inherited by DTO classes to implement <see cref="IAuditedObject"/> interface.
-/// It also implements the <see cref="IHasExtraProperties"/> interface.
-/// </summary>
+/**
+ * This class can be inherited by DTO classes to implement <see cref="IAuditedObject"/> interface.
+ * It also implements the <see cref="IHasExtraProperties"/> interface.
+*/
 [Serializable]
 public abstract class ExtensibleAuditedEntityDto : ExtensibleCreationAuditedEntityDto, IAuditedObject
 {
-    /// <inheritdoc />
+     * <inheritdoc />
     public DateTime? LastModificationTime;// { get; set; }
 
-    /// <inheritdoc />
-    public Guid? LastModifierId;// { get; set; }
+     * <inheritdoc />
+    public ID LastModifierId;// { get; set; }
 
     protected ExtensibleAuditedEntityDto()
         : this(true)
@@ -50,7 +50,7 @@ public abstract class ExtensibleAuditedEntityDto : ExtensibleCreationAuditedEnti
 
     }
 
-    protected ExtensibleAuditedEntityDto(bool setDefaultsForExtraProperties)
+    protected ExtensibleAuditedEntityDto(boolean setDefaultsForExtraProperties)
         : base(setDefaultsForExtraProperties)
     {
 

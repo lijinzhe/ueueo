@@ -27,7 +27,7 @@ public class AssemblyFinder : IAssemblyFinder
     {
         var assemblies = new List<Assembly>();
 
-        foreach (var module in _moduleContainer.Modules)
+        for (var module in _moduleContainer.Modules)
         {
             assemblies.Add(module.Type.Assembly);
         }

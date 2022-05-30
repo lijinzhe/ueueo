@@ -2,7 +2,7 @@
 
 public class AbpVirtualFileSystemOptions
 {
-    public VirtualFileSetList FileSets { get; }
+    public VirtualFileSetList FileSets;//  { get; }
 
     public AbpVirtualFileSystemOptions()
     {

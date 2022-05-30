@@ -6,7 +6,7 @@ namespace Volo.Abp.Uow;
 
 public static class UnitOfWorkHelper
 {
-    public static bool IsUnitOfWorkType(TypeInfo implementationType)
+    public static boolean IsUnitOfWorkType(TypeInfo implementationType)
     {
         //Explicitly defined UnitOfWorkAttribute
         if (HasUnitOfWorkAttribute(implementationType) || AnyMethodHasUnitOfWorkAttribute(implementationType))
@@ -23,9 +23,9 @@ public static class UnitOfWorkHelper
         return false;
     }
 
-    public static bool IsUnitOfWorkMethod([NotNull] MethodInfo methodInfo, [CanBeNull] out UnitOfWorkAttribute unitOfWorkAttribute)
+    public static boolean IsUnitOfWorkMethod(@Nonnull MethodInfo methodInfo, @Nullable out UnitOfWorkAttribute unitOfWorkAttribute)
     {
-        Check.NotNull(methodInfo, nameof(methodInfo));
+        Objects.requireNonNull(methodInfo, nameof(methodInfo));
 
         //Method declaration
         var attrs = methodInfo.GetCustomAttributes(true).OfType<UnitOfWorkAttribute>().ToArray();
@@ -74,14 +74,14 @@ public static class UnitOfWorkHelper
         return null;
     }
 
-    private static bool AnyMethodHasUnitOfWorkAttribute(TypeInfo implementationType)
+    private static boolean AnyMethodHasUnitOfWorkAttribute(TypeInfo implementationType)
     {
         return implementationType
             .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
             .Any(HasUnitOfWorkAttribute);
     }
 
-    private static bool HasUnitOfWorkAttribute(MemberInfo methodInfo)
+    private static boolean HasUnitOfWorkAttribute(MemberInfo methodInfo)
     {
         return methodInfo.IsDefined(typeof(UnitOfWorkAttribute), true);
     }

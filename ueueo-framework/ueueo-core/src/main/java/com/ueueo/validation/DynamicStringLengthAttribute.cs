@@ -6,10 +6,10 @@ using JetBrains.Annotations;
 
 namespace Volo.Abp.Validation;
 
-/// <summary>
-/// Used to determine <see cref="StringLengthAttribute.MaximumLength"/> and <see cref="StringLengthAttribute.MinimumLength"/>
-/// properties on the runtime. 
-/// </summary>
+/**
+ * Used to determine <see cref="StringLengthAttribute.MaximumLength"/> and <see cref="StringLengthAttribute.MinimumLength"/>
+ * properties on the runtime.
+*/
 public class DynamicStringLengthAttribute : StringLengthAttribute
 {
     private static readonly FieldInfo MaximumLengthField;
@@ -22,17 +22,18 @@ public class DynamicStringLengthAttribute : StringLengthAttribute
         );
         Debug.Assert(MaximumLengthField != null, nameof(MaximumLengthField) + " != null");
     }
-
-    /// <param name="sourceType">A type to get the values of the properties</param>
-    /// <param name="maximumLengthPropertyName">The name of the public static property for the <see cref="StringLengthAttribute.MaximumLength"/></param>
-    /// <param name="minimumLengthPropertyName">The name of the public static property for the <see cref="StringLengthAttribute.MinimumLength"/></param>
+    /**
+     * <param name="sourceType">A type to get the values of the properties</param>
+     * <param name="maximumLengthPropertyName">The name of the public static property for the <see cref="StringLengthAttribute.MaximumLength"/></param>
+     * <param name="minimumLengthPropertyName">The name of the public static property for the <see cref="StringLengthAttribute.MinimumLength"/></param>
+     */
     public DynamicStringLengthAttribute(
-        [NotNull] Type sourceType,
-        [CanBeNull] string maximumLengthPropertyName,
-        [CanBeNull] string minimumLengthPropertyName = null)
+        @Nonnull Type sourceType,
+        @Nullable String maximumLengthPropertyName,
+        @Nullable String minimumLengthPropertyName = null)
         : base(0)
     {
-        Check.NotNull(sourceType, nameof(sourceType));
+        Objects.requireNonNull(sourceType, nameof(sourceType));
 
         if (maximumLengthPropertyName != null)
         {

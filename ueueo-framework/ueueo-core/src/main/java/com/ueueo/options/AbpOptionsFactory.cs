@@ -5,7 +5,7 @@ namespace Volo.Abp.Options;
 
 //TODO: Derive from OptionsFactory when this is released: https://github.com/aspnet/Options/pull/258 (or completely remove this!)
 // https://github.com/dotnet/runtime/blob/master/src/libraries/Microsoft.Extensions.Options/src/OptionsFactory.cs
-public class AbpOptionsFactory<TOptions> : IOptionsFactory<TOptions> where TOptions : class, new()
+public class AbpOptionsFactory<TOptions> : IOptionsFactory<TOptions> //where TOptions : class, new()
 {
     private readonly IEnumerable<IConfigureOptions<TOptions>> _setups;
     private readonly IEnumerable<IPostConfigureOptions<TOptions>> _postConfigures;
@@ -29,7 +29,7 @@ public class AbpOptionsFactory<TOptions> : IOptionsFactory<TOptions> where TOpti
         _validations = validations;
     }
 
-    public virtual TOptions Create(string name)
+    public   TOptions Create(String name)
     {
         var options = new TOptions();
 
@@ -40,9 +40,9 @@ public class AbpOptionsFactory<TOptions> : IOptionsFactory<TOptions> where TOpti
         return options;
     }
 
-    protected virtual void ConfigureOptions(string name, TOptions options)
+    protected   void ConfigureOptions(String name, TOptions options)
     {
-        foreach (var setup in _setups)
+        for (var setup in _setups)
         {
             if (setup is IConfigureNamedOptions<TOptions> namedSetup)
             {
@@ -55,20 +55,20 @@ public class AbpOptionsFactory<TOptions> : IOptionsFactory<TOptions> where TOpti
         }
     }
 
-    protected virtual void PostConfigureOptions(string name, TOptions options)
+    protected   void PostConfigureOptions(String name, TOptions options)
     {
-        foreach (var post in _postConfigures)
+        for (var post in _postConfigures)
         {
             post.PostConfigure(name, options);
         }
     }
 
-    protected virtual void ValidateOptions(string name, TOptions options)
+    protected   void ValidateOptions(String name, TOptions options)
     {
         if (_validations != null)
         {
-            var failures = new List<string>();
-            foreach (var validate in _validations)
+            var failures = new List<String>();
+            for (var validate in _validations)
             {
                 var result = validate.Validate(name, options);
                 if (result.Failed)

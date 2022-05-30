@@ -5,7 +5,7 @@ namespace Volo.Abp.Json.Newtonsoft;
 
 public class AbpNewtonsoftJsonSerializerOptions
 {
-    public ITypeList<JsonConverter> Converters { get; }
+    public ITypeList<JsonConverter> Converters;//  { get; }
 
     public AbpNewtonsoftJsonSerializerOptions()
     {

@@ -7,7 +7,7 @@ namespace Volo.Abp.MongoDB;
 
 public class AbpMongoDbContextOptions
 {
-    internal Dictionary<Type, Type> DbContextReplacements { get; }
+    internal Dictionary<Type, Type> DbContextReplacements;//  { get; }
 
     public Action<MongoClientSettings> MongoClientSettingsConfigurer;// { get; set; }
 

@@ -8,18 +8,18 @@ namespace Volo.Abp.Localization.VirtualFiles.Json;
 
 public class JsonVirtualFileLocalizationResourceContributor : VirtualFileLocalizationResourceContributorBase
 {
-    public JsonVirtualFileLocalizationResourceContributor(string virtualPath)
+    public JsonVirtualFileLocalizationResourceContributor(String virtualPath)
         : base(virtualPath)
     {
 
     }
 
-    protected override bool CanParseFile(IFileInfo file)
+    protected override boolean CanParseFile(IFileInfo file)
     {
         return file.Name.EndsWith(".json", StringComparison.OrdinalIgnoreCase);
     }
 
-    protected override ILocalizationDictionary CreateDictionaryFromFileContent(string jsonString)
+    protected override ILocalizationDictionary CreateDictionaryFromFileContent(String jsonString)
     {
         return JsonLocalizationDictionaryBuilder.BuildFromJsonString(jsonString);
     }

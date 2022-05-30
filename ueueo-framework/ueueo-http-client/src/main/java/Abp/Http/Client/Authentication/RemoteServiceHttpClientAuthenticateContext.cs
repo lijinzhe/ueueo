@@ -4,19 +4,19 @@ namespace Volo.Abp.Http.Client.Authentication;
 
 public class RemoteServiceHttpClientAuthenticateContext
 {
-    public HttpClient Client { get; }
+    public HttpClient Client;//  { get; }
 
-    public HttpRequestMessage Request { get; }
+    public HttpRequestMessage Request;//  { get; }
 
-    public RemoteServiceConfiguration RemoteService { get; }
+    public RemoteServiceConfiguration RemoteService;//  { get; }
 
-    public string RemoteServiceName { get; }
+    public String RemoteServiceName;//  { get; }
 
     public RemoteServiceHttpClientAuthenticateContext(
         HttpClient client,
         HttpRequestMessage request,
         RemoteServiceConfiguration remoteService,
-        string remoteServiceName)
+        String remoteServiceName)
     {
         Client = client;
         Request = request;

@@ -2,7 +2,7 @@
 
 public class AbpRabbitMqOptions
 {
-    public RabbitMqConnections Connections { get; }
+    public RabbitMqConnections Connections;//  { get; }
 
     public AbpRabbitMqOptions()
     {

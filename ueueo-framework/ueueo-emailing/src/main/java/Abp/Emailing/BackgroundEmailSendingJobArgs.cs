@@ -5,18 +5,18 @@ namespace Volo.Abp.Emailing;
 [Serializable]
 public class BackgroundEmailSendingJobArgs
 {
-    public string From;// { get; set; }
+    public String From;// { get; set; }
 
-    public string To;// { get; set; }
+    public String To;// { get; set; }
 
-    public string Subject;// { get; set; }
+    public String Subject;// { get; set; }
 
-    public string Body;// { get; set; }
+    public String Body;// { get; set; }
 
-    /// <summary>
-    /// Default: true.
-    /// </summary>
-    public bool IsBodyHtml;// { get; set; } = true;
+    /**
+     * Default: true.
+    */
+    public boolean IsBodyHtml;// { get; set; } = true;
 
     //TODO: Add other properties and attachments
 }

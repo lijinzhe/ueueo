@@ -7,7 +7,7 @@ public static class ModuleExtensionConfigurationExtensions
 {
     public static T ConfigureEntity<T>(
         this T objectConfiguration,
-        string objectName,
+        String objectName,
         Action<EntityExtensionConfiguration> configureAction)
         where T : ModuleExtensionConfiguration
     {

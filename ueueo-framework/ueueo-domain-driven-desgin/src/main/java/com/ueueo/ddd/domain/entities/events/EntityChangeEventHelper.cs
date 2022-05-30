@@ -13,20 +13,20 @@ using Volo.Abp.Uow;
 
 namespace Volo.Abp.Domain.Entities.Events;
 
-/// <summary>
-/// Used to trigger entity change events.
-/// </summary>
+/**
+ * Used to trigger entity change events.
+*/
 public class EntityChangeEventHelper : IEntityChangeEventHelper, ITransientDependency
 {
-    private const string UnitOfWorkEventRecordEntityPropName = "_Abp_Entity";
+    private const String UnitOfWorkEventRecordEntityPropName = "_Abp_Entity";
 
     public ILogger<EntityChangeEventHelper> Logger;// { get; set; }
     public ILocalEventBus LocalEventBus;// { get; set; }
     public IDistributedEventBus DistributedEventBus;// { get; set; }
 
-    protected IUnitOfWorkManager UnitOfWorkManager { get; }
-    protected IEntityToEtoMapper EntityToEtoMapper { get; }
-    protected AbpDistributedEntityEventOptions DistributedEntityEventOptions { get; }
+    protected IUnitOfWorkManager UnitOfWorkManager;//  { get; }
+    protected IEntityToEtoMapper EntityToEtoMapper;//  { get; }
+    protected AbpDistributedEntityEventOptions DistributedEntityEventOptions;//  { get; }
 
     public EntityChangeEventHelper(
         IUnitOfWorkManager unitOfWorkManager,
@@ -42,7 +42,7 @@ public class EntityChangeEventHelper : IEntityChangeEventHelper, ITransientDepen
         Logger = NullLogger<EntityChangeEventHelper>.Instance;
     }
 
-    public virtual void PublishEntityCreatingEvent(object entity)
+    public   void PublishEntityCreatingEvent(Object entity)
     {
         TriggerEventWithEntity(
             LocalEventBus,
@@ -54,7 +54,7 @@ public class EntityChangeEventHelper : IEntityChangeEventHelper, ITransientDepen
         );
     }
 
-    public virtual void PublishEntityCreatedEvent(object entity)
+    public   void PublishEntityCreatedEvent(Object entity)
     {
         TriggerEventWithEntity(
             LocalEventBus,
@@ -78,7 +78,7 @@ public class EntityChangeEventHelper : IEntityChangeEventHelper, ITransientDepen
         }
     }
 
-    private bool ShouldPublishDistributedEventForEntity(object entity)
+    private boolean ShouldPublishDistributedEventForEntity(Object entity)
     {
         return DistributedEntityEventOptions
             .AutoEventSelectors
@@ -89,7 +89,7 @@ public class EntityChangeEventHelper : IEntityChangeEventHelper, ITransientDepen
             );
     }
 
-    public virtual void PublishEntityUpdatingEvent(object entity)
+    public   void PublishEntityUpdatingEvent(Object entity)
     {
         TriggerEventWithEntity(
             LocalEventBus,
@@ -101,7 +101,7 @@ public class EntityChangeEventHelper : IEntityChangeEventHelper, ITransientDepen
         );
     }
 
-    public virtual void PublishEntityUpdatedEvent(object entity)
+    public   void PublishEntityUpdatedEvent(Object entity)
     {
         TriggerEventWithEntity(
             LocalEventBus,
@@ -125,7 +125,7 @@ public class EntityChangeEventHelper : IEntityChangeEventHelper, ITransientDepen
         }
     }
 
-    public virtual void PublishEntityDeletingEvent(object entity)
+    public   void PublishEntityDeletingEvent(Object entity)
     {
         TriggerEventWithEntity(
             LocalEventBus,
@@ -137,7 +137,7 @@ public class EntityChangeEventHelper : IEntityChangeEventHelper, ITransientDepen
         );
     }
 
-    public virtual void PublishEntityDeletedEvent(object entity)
+    public   void PublishEntityDeletedEvent(Object entity)
     {
         TriggerEventWithEntity(
             LocalEventBus,
@@ -161,11 +161,11 @@ public class EntityChangeEventHelper : IEntityChangeEventHelper, ITransientDepen
         }
     }
 
-    protected virtual void TriggerEventWithEntity(
+    protected   void TriggerEventWithEntity(
         IEventBus eventPublisher,
         Type genericEventType,
-        object entityOrEto,
-        object originalEntity)
+        Object entityOrEto,
+        Object originalEntity)
     {
         var entityType = ProxyHelper.UnProxy(entityOrEto).GetType();
         var eventType = genericEventType.MakeGenericType(entityType);
@@ -207,7 +207,7 @@ public class EntityChangeEventHelper : IEntityChangeEventHelper, ITransientDepen
         }
     }
 
-    public bool IsSameEntityEventRecord(UnitOfWorkEventRecord record1, UnitOfWorkEventRecord record2)
+    public boolean IsSameEntityEventRecord(UnitOfWorkEventRecord record1, UnitOfWorkEventRecord record2)
     {
         if (record1.EventType != record2.EventType)
         {

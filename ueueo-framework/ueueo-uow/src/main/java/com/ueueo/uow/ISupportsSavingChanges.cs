@@ -5,5 +5,5 @@ namespace Volo.Abp.Uow;
 
 public interface ISupportsSavingChanges
 {
-    Task SaveChangesAsync(CancellationToken cancellationToken = default);
+    void SaveChangesAsync(CancellationToken cancellationToken = default);
 }

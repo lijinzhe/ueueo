@@ -14,7 +14,7 @@ public class AbpNewtonsoftJsonSerializerProvider : IJsonSerializerProvider, ITra
     private static readonly CamelCaseExceptDictionaryKeysResolver SharedCamelCaseExceptDictionaryKeysResolver =
         new CamelCaseExceptDictionaryKeysResolver();
 
-    protected List<JsonConverter> Converters { get; }
+    protected List<JsonConverter> Converters;//  { get; }
 
     public AbpNewtonsoftJsonSerializerProvider(
         IOptions<AbpNewtonsoftJsonSerializerOptions> options,
@@ -26,27 +26,27 @@ public class AbpNewtonsoftJsonSerializerProvider : IJsonSerializerProvider, ITra
             .ToList();
     }
 
-    public bool CanHandle(Type type)
+    public boolean CanHandle(Type type)
     {
         return true;
     }
 
-    public string Serialize(object obj, bool camelCase = true, bool indented = false)
+    public String Serialize(Object obj, boolean camelCase = true, boolean indented = false)
     {
         return JsonConvert.SerializeObject(obj, CreateSerializerSettings(camelCase, indented));
     }
 
-    public T Deserialize<T>(string jsonString, bool camelCase = true)
+    public T Deserialize<T>(String jsonString, boolean camelCase = true)
     {
         return JsonConvert.DeserializeObject<T>(jsonString, CreateSerializerSettings(camelCase));
     }
 
-    public object Deserialize(Type type, string jsonString, bool camelCase = true)
+    public Object Deserialize(Type type, String jsonString, boolean camelCase = true)
     {
         return JsonConvert.DeserializeObject(jsonString, type, CreateSerializerSettings(camelCase));
     }
 
-    protected virtual JsonSerializerSettings CreateSerializerSettings(bool camelCase = true, bool indented = false)
+    protected   JsonSerializerSettings CreateSerializerSettings(boolean camelCase = true, boolean indented = false)
     {
         var settings = new JsonSerializerSettings();
 
@@ -69,7 +69,7 @@ public class AbpNewtonsoftJsonSerializerProvider : IJsonSerializerProvider, ITra
     {
         protected override JsonDictionaryContract CreateDictionaryContract(Type objectType)
         {
-            var contract = base.CreateDictionaryContract(objectType);
+            var contract =super.CreateDictionaryContract(objectType);
 
             contract.DictionaryKeyResolver = propertyName => propertyName;
 

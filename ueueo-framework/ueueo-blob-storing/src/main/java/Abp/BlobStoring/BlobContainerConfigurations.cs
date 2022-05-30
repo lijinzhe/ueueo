@@ -8,11 +8,11 @@ public class BlobContainerConfigurations
 {
     private BlobContainerConfiguration Default => GetConfiguration<DefaultContainer>();
 
-    private readonly Dictionary<string, BlobContainerConfiguration> _containers;
+    private readonly Dictionary<String, BlobContainerConfiguration> _containers;
 
     public BlobContainerConfigurations()
     {
-        _containers = new Dictionary<string, BlobContainerConfiguration>
+        _containers = new Dictionary<String, BlobContainerConfiguration>
         {
             //Add default container
             [BlobContainerNameAttribute.GetContainerName<DefaultContainer>()] = new BlobContainerConfiguration()
@@ -29,11 +29,11 @@ public class BlobContainerConfigurations
     }
 
     public BlobContainerConfigurations Configure(
-        [NotNull] string name,
-        [NotNull] Action<BlobContainerConfiguration> configureAction)
+        @Nonnull String name,
+        @Nonnull Action<BlobContainerConfiguration> configureAction)
     {
         Check.NotNullOrWhiteSpace(name, nameof(name));
-        Check.NotNull(configureAction, nameof(configureAction));
+        Objects.requireNonNull(configureAction, nameof(configureAction));
 
         configureAction(
             _containers.GetOrAdd(
@@ -51,9 +51,9 @@ public class BlobContainerConfigurations
         return this;
     }
 
-    public BlobContainerConfigurations ConfigureAll(Action<string, BlobContainerConfiguration> configureAction)
+    public BlobContainerConfigurations ConfigureAll(Action<String, BlobContainerConfiguration> configureAction)
     {
-        foreach (var container in _containers)
+        for (var container in _containers)
         {
             configureAction(container.Key, container.Value);
         }
@@ -68,7 +68,7 @@ public class BlobContainerConfigurations
     }
 
     [NotNull]
-    public BlobContainerConfiguration GetConfiguration([NotNull] string name)
+    public BlobContainerConfiguration GetConfiguration(@Nonnull String name)
     {
         Check.NotNullOrWhiteSpace(name, nameof(name));
 

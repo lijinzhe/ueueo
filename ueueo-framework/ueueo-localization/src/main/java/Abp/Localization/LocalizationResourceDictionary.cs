@@ -6,12 +6,12 @@ namespace Volo.Abp.Localization;
 
 public class LocalizationResourceDictionary : Dictionary<Type, LocalizationResource>
 {
-    public LocalizationResource Add<TResouce>([CanBeNull] string defaultCultureName = null)
+    public LocalizationResource Add<TResouce>(@Nullable String defaultCultureName = null)
     {
         return Add(typeof(TResouce), defaultCultureName);
     }
 
-    public LocalizationResource Add(Type resourceType, [CanBeNull] string defaultCultureName = null)
+    public LocalizationResource Add(Type resourceType, @Nullable String defaultCultureName = null)
     {
         if (ContainsKey(resourceType))
         {

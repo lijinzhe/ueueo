@@ -2,5 +2,5 @@
 
 public interface IHttpClientProxy<out TRemoteService>
 {
-    TRemoteService Service { get; }
+    TRemoteService Service;//  { get; }
 }

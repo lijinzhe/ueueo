@@ -12,12 +12,14 @@ namespace Volo.Abp.MongoDB;
 [DependsOn(typeof(AbpDddDomainModule))]
 public class AbpMongoDbModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void PreConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddConventionalRegistrar(new AbpMongoDbConventionalRegistrar());
     }
 
-    public override void ConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.TryAddTransient(
             typeof(IMongoDbContextProvider<>),

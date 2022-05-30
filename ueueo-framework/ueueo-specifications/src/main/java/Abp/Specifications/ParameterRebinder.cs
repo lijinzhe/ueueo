@@ -3,12 +3,12 @@ using System.Linq.Expressions;
 
 namespace Volo.Abp.Specifications;
 
-/// <summary>
-/// Represents the parameter rebinder used for rebinding the parameters
-/// for the given expressions. This is part of the solution which solves
-/// the expression parameter problem when going to Entity Framework.
-/// For more information about this solution please refer to http://blogs.msdn.com/b/meek/archive/2008/05/02/linq-to-entities-combining-predicates.aspx.
-/// </summary>
+/**
+ * Represents the parameter rebinder used for rebinding the parameters
+ * for the given expressions. This is part of the solution which solves
+ * the expression parameter problem when going to Entity Framework.
+ * For more information about this solution please refer to http://blogs.msdn.com/b/meek/archive/2008/05/02/linq-to-entities-combining-predicates.aspx.
+*/
 internal class ParameterRebinder : ExpressionVisitor
 {
     private readonly Dictionary<ParameterExpression, ParameterExpression> _map;
@@ -31,6 +31,6 @@ internal class ParameterRebinder : ExpressionVisitor
             p = replacement;
         }
 
-        return base.VisitParameter(p);
+        returnsuper.VisitParameter(p);
     }
 }

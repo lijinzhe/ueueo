@@ -7,26 +7,26 @@ namespace Volo.Abp.BlobStoring;
 public class BlobContainerNameAttribute : Attribute
 {
     [NotNull]
-    public string Name { get; }
+    public String Name;//  { get; }
 
-    public BlobContainerNameAttribute([NotNull] string name)
+    public BlobContainerNameAttribute(@Nonnull String name)
     {
         Check.NotNullOrWhiteSpace(name, nameof(name));
 
         Name = name;
     }
 
-    public virtual string GetName(Type type)
+    public   String GetName(Type type)
     {
         return Name;
     }
 
-    public static string GetContainerName<T>()
+    public static String GetContainerName<T>()
     {
         return GetContainerName(typeof(T));
     }
 
-    public static string GetContainerName(Type type)
+    public static String GetContainerName(Type type)
     {
         var nameAttribute = type.GetCustomAttribute<BlobContainerNameAttribute>();
 

@@ -10,13 +10,13 @@ public class BlobAlreadyExistsException : AbpException
 
     }
 
-    public BlobAlreadyExistsException(string message)
+    public BlobAlreadyExistsException(String message)
         : base(message)
     {
 
     }
 
-    public BlobAlreadyExistsException(string message, Exception innerException)
+    public BlobAlreadyExistsException(String message, Exception innerException)
         : base(message, innerException)
     {
 

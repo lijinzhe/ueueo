@@ -5,15 +5,15 @@ namespace Volo.Abp.Uow;
 public interface IUnitOfWorkManager
 {
     [CanBeNull]
-    IUnitOfWork Current { get; }
+    IUnitOfWork Current;//  { get; }
 
     [NotNull]
-    IUnitOfWork Begin([NotNull] AbpUnitOfWorkOptions options, bool requiresNew = false);
+    IUnitOfWork Begin(@Nonnull AbpUnitOfWorkOptions options, boolean requiresNew = false);
 
     [NotNull]
-    IUnitOfWork Reserve([NotNull] string reservationName, bool requiresNew = false);
+    IUnitOfWork Reserve(@Nonnull String reservationName, boolean requiresNew = false);
 
-    void BeginReserved([NotNull] string reservationName, [NotNull] AbpUnitOfWorkOptions options);
+    void BeginReserved(@Nonnull String reservationName, @Nonnull AbpUnitOfWorkOptions options);
 
-    bool TryBeginReserved([NotNull] string reservationName, [NotNull] AbpUnitOfWorkOptions options);
+    boolean TryBeginReserved(@Nonnull String reservationName, @Nonnull AbpUnitOfWorkOptions options);
 }

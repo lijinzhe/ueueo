@@ -19,16 +19,18 @@ namespace Volo.Abp.BackgroundJobs;
     )]
 public class AbpBackgroundJobsModule : AbpModule
 {
-    public async override Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
+    @Override
+    public void OnApplicationInitializationAsync(ApplicationInitializationContext context)
     {
         var options = context.ServiceProvider.GetRequiredService<IOptions<AbpBackgroundJobOptions>>().Value;
         if (options.IsJobExecutionEnabled)
         {
-            await context.AddBackgroundWorkerAsync<IBackgroundJobWorker>();
+            context.AddBackgroundWorkerAsync<IBackgroundJobWorker>();
         }
     }
 
-    public override void OnApplicationInitialization(ApplicationInitializationContext context)
+    @Override
+    public void OnApplicationInitialization(ApplicationInitializationContext context)
     {
         AsyncHelper.RunSync(() => OnApplicationInitializationAsync(context));
     }

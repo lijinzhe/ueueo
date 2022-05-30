@@ -17,11 +17,12 @@ public class UnitOfWorkInterceptor : AbpInterceptor, ITransientDependency
         _serviceScopeFactory = serviceScopeFactory;
     }
 
-    public override void InterceptAsync(IAbpMethodInvocation invocation)
+    @Override
+    public void InterceptAsync(IAbpMethodInvocation invocation)
     {
         if (!UnitOfWorkHelper.IsUnitOfWorkMethod(invocation.Method, out var unitOfWorkAttribute))
         {
-            await invocation.ProceedAsync();
+            invocation.ProceedAsync();
             return;
         }
 
@@ -34,11 +35,11 @@ public class UnitOfWorkInterceptor : AbpInterceptor, ITransientDependency
             //Trying to begin a reserved UOW by AbpUnitOfWorkMiddleware
             if (unitOfWorkManager.TryBeginReserved(UnitOfWork.UnitOfWorkReservationName, options))
             {
-                await invocation.ProceedAsync();
+                invocation.ProceedAsync();
 
                 if (unitOfWorkManager.Current != null)
                 {
-                    await unitOfWorkManager.Current.SaveChangesAsync();
+                    unitOfWorkManager.Current.SaveChangesAsync();
                 }
 
                 return;
@@ -46,13 +47,13 @@ public class UnitOfWorkInterceptor : AbpInterceptor, ITransientDependency
 
             using (var uow = unitOfWorkManager.Begin(options))
             {
-                await invocation.ProceedAsync();
-                await uow.CompleteAsync();
+                invocation.ProceedAsync();
+                uow.CompleteAsync();
             }
         }
     }
 
-    private AbpUnitOfWorkOptions CreateOptions(IServiceProvider serviceProvider, IAbpMethodInvocation invocation, [CanBeNull] UnitOfWorkAttribute unitOfWorkAttribute)
+    private AbpUnitOfWorkOptions CreateOptions(IServiceProvider serviceProvider, IAbpMethodInvocation invocation, @Nullable UnitOfWorkAttribute unitOfWorkAttribute)
     {
         var options = new AbpUnitOfWorkOptions();
 

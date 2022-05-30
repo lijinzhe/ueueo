@@ -2,8 +2,8 @@
 
 public class AbpBackgroundWorkerQuartzOptions
 {
-    /// <summary>
-    /// Default : true.
-    /// </summary>
-    public bool IsAutoRegisterEnabled;// { get; set; } = true;
+    /**
+     * Default : true.
+    */
+    public boolean IsAutoRegisterEnabled;// { get; set; } = true;
 }

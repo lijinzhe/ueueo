@@ -6,17 +6,17 @@ namespace Volo.Abp.Threading;
 
 public class AsyncLocalAmbientDataContext : IAmbientDataContext, ISingletonDependency
 {
-    private static readonly ConcurrentDictionary<string, AsyncLocal<object>> AsyncLocalDictionary = new ConcurrentDictionary<string, AsyncLocal<object>>();
+    private static readonly ConcurrentDictionary<String, AsyncLocal<Object>> AsyncLocalDictionary = new ConcurrentDictionary<String, AsyncLocal<Object>>();
 
-    public void SetData(string key, object value)
+    public void SetData(String key, Object value)
     {
-        var asyncLocal = AsyncLocalDictionary.GetOrAdd(key, (k) => new AsyncLocal<object>());
+        var asyncLocal = AsyncLocalDictionary.GetOrAdd(key, (k) => new AsyncLocal<Object>());
         asyncLocal.Value = value;
     }
 
-    public object GetData(string key)
+    public Object GetData(String key)
     {
-        var asyncLocal = AsyncLocalDictionary.GetOrAdd(key, (k) => new AsyncLocal<object>());
+        var asyncLocal = AsyncLocalDictionary.GetOrAdd(key, (k) => new AsyncLocal<Object>());
         return asyncLocal.Value;
     }
 }

@@ -8,39 +8,39 @@ import org.springframework.context.ApplicationContextAware;
  * @date 2022-05-27 09:59
  */
 public interface IAbpApplication extends ApplicationContextAware {
-    /// <summary>
-    /// Type of the startup (entrance) module of the application.
-    /// </summary>
+    /**
+     * Type of the startup (entrance) module of the application.
+    */
     Class<?> getStartupModuleType();
 
     ApplicationContext getApplicationContext();
 
-    /// <summary>
-    /// List of services registered to this application.
-    /// Can not add new services to this collection after application initialize.
-    /// </summary>
+    /**
+     * List of services registered to this application.
+     * Can not add new services to this collection after application initialize.
+    */
     //    IServiceCollection Services { get; }
 
-    /// <summary>
-    /// Reference to the root service provider used by the application.
-    /// This can not be used before initialize the application.
-    /// </summary>
+    /**
+     * Reference to the root service provider used by the application.
+     * This can not be used before initialize the application.
+    */
     //    IServiceProvider ServiceProvider { get; }
 
-    /// <summary>
-    /// Calls the Pre/Post/ConfigureServicesAsync methods of the modules.
-    /// If you use this method, you must have set the <see cref="AbpApplicationCreationOptions.SkipConfigureServices"/>
-    /// option to true before.
-    /// </summary>
+    /**
+     * Calls the Pre/Post/ConfigureServicesAsync methods of the modules.
+     * If you use this method, you must have set the <see cref="AbpApplicationCreationOptions.SkipConfigureServices"/>
+     * option to true before.
+    */
     //    Task ConfigureServicesAsync();
 
-    /// <summary>
-    /// Used to gracefully shutdown the application and all modules.
-    /// </summary>
+    /**
+     * Used to gracefully shutdown the application and all modules.
+    */
     //    Task ShutdownAsync();
 
-    /// <summary>
-    /// Used to gracefully shutdown the application and all modules.
-    /// </summary>
+    /**
+     * Used to gracefully shutdown the application and all modules.
+    */
     void shutdown();
 }

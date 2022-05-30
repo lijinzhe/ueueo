@@ -8,15 +8,15 @@ namespace Volo.Abp.GlobalFeatures;
 public class RequireGlobalFeaturesSimpleStateChecker<TState> : ISimpleStateChecker<TState>
     where TState : IHasSimpleStateCheckers<TState>
 {
-    private readonly string[] _globalFeatureNames;
-    private readonly bool _requiresAll;
+    private readonly String[] _globalFeatureNames;
+    private readonly boolean _requiresAll;
 
-    public RequireGlobalFeaturesSimpleStateChecker(params string[] globalFeatureNames)
+    public RequireGlobalFeaturesSimpleStateChecker(params String[] globalFeatureNames)
         : this(true, globalFeatureNames)
     {
     }
 
-    public RequireGlobalFeaturesSimpleStateChecker(bool requiresAll, params string[] globalFeatureNames)
+    public RequireGlobalFeaturesSimpleStateChecker(boolean requiresAll, params String[] globalFeatureNames)
     {
         Check.NotNullOrEmpty(globalFeatureNames, nameof(globalFeatureNames));
 
@@ -24,7 +24,7 @@ public class RequireGlobalFeaturesSimpleStateChecker<TState> : ISimpleStateCheck
         _globalFeatureNames = globalFeatureNames;
     }
 
-    public RequireGlobalFeaturesSimpleStateChecker(bool requiresAll, params Type[] globalFeatureNames)
+    public RequireGlobalFeaturesSimpleStateChecker(boolean requiresAll, params Type[] globalFeatureNames)
     {
         Check.NotNullOrEmpty(globalFeatureNames, nameof(globalFeatureNames));
 

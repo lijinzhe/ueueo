@@ -7,9 +7,9 @@ namespace Volo.Abp.Localization;
 public static class LanguageInfoExtensions
 {
     public static T FindByCulture<T>(
-        [NotNull] this IEnumerable<T> languages,
-        [NotNull] string cultureName,
-        [CanBeNull] string uiCultureName = null)
+        @Nonnull this IEnumerable<T> languages,
+        @Nonnull String cultureName,
+        @Nullable String uiCultureName = null)
     where T : class, ILanguageInfo
     {
         if (uiCultureName == null)

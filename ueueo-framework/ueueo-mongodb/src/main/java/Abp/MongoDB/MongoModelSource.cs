@@ -13,7 +13,7 @@ public class MongoModelSource : IMongoModelSource, ISingletonDependency
 {
     protected readonly ConcurrentDictionary<Type, MongoDbContextModel> ModelCache = new ConcurrentDictionary<Type, MongoDbContextModel>();
 
-    public virtual MongoDbContextModel GetModel(AbpMongoDbContext dbContext)
+    public   MongoDbContextModel GetModel(AbpMongoDbContext dbContext)
     {
         return ModelCache.GetOrAdd(
             dbContext.GetType(),
@@ -21,7 +21,7 @@ public class MongoModelSource : IMongoModelSource, ISingletonDependency
         );
     }
 
-    protected virtual MongoDbContextModel CreateModel(AbpMongoDbContext dbContext)
+    protected   MongoDbContextModel CreateModel(AbpMongoDbContext dbContext)
     {
         var modelBuilder = CreateModelBuilder();
         BuildModelFromDbContextType(modelBuilder, dbContext.GetType());
@@ -29,12 +29,12 @@ public class MongoModelSource : IMongoModelSource, ISingletonDependency
         return modelBuilder.Build(dbContext);
     }
 
-    protected virtual MongoModelBuilder CreateModelBuilder()
+    protected   MongoModelBuilder CreateModelBuilder()
     {
         return new MongoModelBuilder();
     }
 
-    protected virtual void BuildModelFromDbContextType(IMongoModelBuilder modelBuilder, Type dbContextType)
+    protected   void BuildModelFromDbContextType(IMongoModelBuilder modelBuilder, Type dbContextType)
     {
         var collectionProperties =
             from property in dbContextType.GetTypeInfo().GetProperties(BindingFlags.Public | BindingFlags.Instance)
@@ -43,13 +43,13 @@ public class MongoModelSource : IMongoModelSource, ISingletonDependency
                 typeof(IEntity).IsAssignableFrom(property.PropertyType.GenericTypeArguments[0])
             select property;
 
-        foreach (var collectionProperty in collectionProperties)
+        for (var collectionProperty in collectionProperties)
         {
             BuildModelFromDbContextCollectionProperty(modelBuilder, collectionProperty);
         }
     }
 
-    protected virtual void BuildModelFromDbContextCollectionProperty(IMongoModelBuilder modelBuilder, PropertyInfo collectionProperty)
+    protected   void BuildModelFromDbContextCollectionProperty(IMongoModelBuilder modelBuilder, PropertyInfo collectionProperty)
     {
         var entityType = collectionProperty.PropertyType.GenericTypeArguments[0];
         var collectionAttribute = collectionProperty.GetCustomAttributes().OfType<MongoCollectionAttribute>().FirstOrDefault();
@@ -60,7 +60,7 @@ public class MongoModelSource : IMongoModelSource, ISingletonDependency
         });
     }
 
-    protected virtual void BuildModelFromDbContextInstance(IMongoModelBuilder modelBuilder, AbpMongoDbContext dbContext)
+    protected   void BuildModelFromDbContextInstance(IMongoModelBuilder modelBuilder, AbpMongoDbContext dbContext)
     {
         dbContext.CreateModel(modelBuilder);
     }

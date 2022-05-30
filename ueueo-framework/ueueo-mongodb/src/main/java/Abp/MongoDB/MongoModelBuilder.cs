@@ -15,16 +15,16 @@ namespace Volo.Abp.MongoDB;
 
 public class MongoModelBuilder : IMongoModelBuilder
 {
-    private readonly Dictionary<Type, object> _entityModelBuilders;
+    private readonly Dictionary<Type, Object> _entityModelBuilders;
 
-    private static readonly object SyncObj = new object();
+    private static readonly Object SyncObj = new object();
 
     public MongoModelBuilder()
     {
-        _entityModelBuilders = new Dictionary<Type, object>();
+        _entityModelBuilders = new Dictionary<Type, Object>();
     }
 
-    public virtual MongoDbContextModel Build(AbpMongoDbContext dbContext)
+    public   MongoDbContextModel Build(AbpMongoDbContext dbContext)
     {
         lock (SyncObj)
         {
@@ -37,7 +37,7 @@ public class MongoModelBuilder : IMongoModelBuilder
 
             var baseClasses = new List<Type>();
 
-            foreach (var entityModel in entityModels.Values)
+            for (var entityModel in entityModels.Values)
             {
                 var map = entityModel.As<IHasBsonClassMap>().GetMap();
 
@@ -79,7 +79,7 @@ public class MongoModelBuilder : IMongoModelBuilder
 
             baseClasses = baseClasses.Distinct().ToList();
 
-            foreach (var baseClass in baseClasses)
+            for (var baseClass in baseClasses)
             {
                 if (!BsonClassMap.IsClassMapRegistered(baseClass))
                 {
@@ -121,7 +121,7 @@ public class MongoModelBuilder : IMongoModelBuilder
         return dbContext.LazyServiceProvider.LazyGetRequiredService<IOptions<AbpClockOptions>>().Value.Kind;
     }
 
-    public virtual void Entity<TEntity>(Action<IMongoEntityModelBuilder<TEntity>> buildAction = null)
+    public   void Entity<TEntity>(Action<IMongoEntityModelBuilder<TEntity>> buildAction = null)
     {
         var model = (IMongoEntityModelBuilder<TEntity>)_entityModelBuilders.GetOrAdd(
             typeof(TEntity),
@@ -131,9 +131,9 @@ public class MongoModelBuilder : IMongoModelBuilder
         buildAction?.Invoke(model);
     }
 
-    public virtual void Entity(Type entityType, Action<IMongoEntityModelBuilder> buildAction = null)
+    public   void Entity(Type entityType, Action<IMongoEntityModelBuilder> buildAction = null)
     {
-        Check.NotNull(entityType, nameof(entityType));
+        Objects.requireNonNull(entityType, nameof(entityType));
 
         var model = (IMongoEntityModelBuilder)_entityModelBuilders.GetOrAdd(
             entityType,
@@ -145,12 +145,12 @@ public class MongoModelBuilder : IMongoModelBuilder
         buildAction?.Invoke(model);
     }
 
-    public virtual IReadOnlyList<IMongoEntityModel> GetEntities()
+    public   IReadOnlyList<IMongoEntityModel> GetEntities()
     {
         return _entityModelBuilders.Values.Cast<IMongoEntityModel>().ToImmutableList();
     }
 
-    protected virtual void CreateCollectionIfNotExists(AbpMongoDbContext dbContext, string collectionName)
+    protected   void CreateCollectionIfNotExists(AbpMongoDbContext dbContext, String collectionName)
     {
         var filter = new BsonDocument("name", collectionName);
         var options = new ListCollectionNamesOptions { Filter = filter };

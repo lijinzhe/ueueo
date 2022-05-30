@@ -6,9 +6,9 @@ namespace Volo.Abp.BlobStoring;
 public class BlobProviderGetArgs : BlobProviderArgs
 {
     public BlobProviderGetArgs(
-        [NotNull] string containerName,
-        [NotNull] BlobContainerConfiguration configuration,
-        [NotNull] string blobName,
+        @Nonnull String containerName,
+        @Nonnull BlobContainerConfiguration configuration,
+        @Nonnull String blobName,
         CancellationToken cancellationToken = default)
         : base(
             containerName,

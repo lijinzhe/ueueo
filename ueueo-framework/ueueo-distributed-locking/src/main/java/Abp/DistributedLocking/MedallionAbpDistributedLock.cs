@@ -9,21 +9,21 @@ namespace Volo.Abp.DistributedLocking;
 [Dependency(ReplaceServices = true)]
 public class MedallionAbpDistributedLock : IAbpDistributedLock, ITransientDependency
 {
-    protected IDistributedLockProvider DistributedLockProvider { get; }
+    protected IDistributedLockProvider DistributedLockProvider;//  { get; }
 
     public MedallionAbpDistributedLock(IDistributedLockProvider distributedLockProvider)
     {
         DistributedLockProvider = distributedLockProvider;
     }
 
-    public async Task<IAbpDistributedLockHandle> TryAcquireAsync(
-        string name,
+    public  Task<IAbpDistributedLockHandle> TryAcquireAsync(
+        String name,
         TimeSpan timeout = default,
         CancellationToken cancellationToken = default)
     {
         Check.NotNullOrWhiteSpace(name, nameof(name));
 
-        var handle = await DistributedLockProvider.TryAcquireLockAsync(name, timeout, cancellationToken);
+        var handle = DistributedLockProvider.TryAcquireLockAsync(name, timeout, cancellationToken);
         if (handle == null)
         {
             return null;

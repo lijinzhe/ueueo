@@ -4,40 +4,41 @@ using Volo.Abp.Settings;
 
 namespace Volo.Abp.Emailing;
 
-/// <summary>
-/// Base implementation of <see cref="IEmailSenderConfiguration"/> that reads settings
-/// from <see cref="ISettingProvider"/>.
-/// </summary>
+/**
+ * Base implementation of <see cref="IEmailSenderConfiguration"/> that reads settings
+ * from <see cref="ISettingProvider"/>.
+*/
 public abstract class EmailSenderConfiguration : IEmailSenderConfiguration
 {
-    protected ISettingProvider SettingProvider { get; }
+    protected ISettingProvider SettingProvider;//  { get; }
 
-    /// <summary>
-    /// Creates a new <see cref="EmailSenderConfiguration"/>.
-    /// </summary>
+    /**
+     * Creates a new <see cref="EmailSenderConfiguration"/>.
+    */
     protected EmailSenderConfiguration(ISettingProvider settingProvider)
     {
         SettingProvider = settingProvider;
     }
 
-    public Task<string> GetDefaultFromAddressAsync()
+    public Task<String> GetDefaultFromAddressAsync()
     {
         return GetNotEmptySettingValueAsync(EmailSettingNames.DefaultFromAddress);
     }
 
-    public Task<string> GetDefaultFromDisplayNameAsync()
+    public Task<String> GetDefaultFromDisplayNameAsync()
     {
         return GetNotEmptySettingValueAsync(EmailSettingNames.DefaultFromDisplayName);
     }
 
-    /// <summary>
-    /// Gets a setting value by checking. Throws <see cref="AbpException"/> if it's null or empty.
-    /// </summary>
-    /// <param name="name">Name of the setting</param>
-    /// <returns>Value of the setting</returns>
-    protected async Task<string> GetNotEmptySettingValueAsync(string name)
+    /**
+     * Gets a setting value by checking. Throws <see cref="AbpException"/> if it's null or empty.
+    *
+     * <param name="name">Name of the setting</param>
+     * <returns>Value of the setting</returns>
+     */
+    protected  Task<String> GetNotEmptySettingValueAsync(String name)
     {
-        var value = await SettingProvider.GetOrNullAsync(name);
+        var value = SettingProvider.GetOrNullAsync(name);
 
         if (value.IsNullOrEmpty())
         {

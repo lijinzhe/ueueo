@@ -9,15 +9,15 @@ public static class BlobContainerExtensions
 {
     public static void SaveAsync(
         this IBlobContainer container,
-        string name,
+        String name,
         byte[] bytes,
-        bool overrideExisting = false,
+        boolean overrideExisting = false,
         CancellationToken cancellationToken = default
     )
     {
         using (var memoryStream = new MemoryStream(bytes))
         {
-            await container.SaveAsync(
+            container.SaveAsync(
                 name,
                 memoryStream,
                 overrideExisting,
@@ -26,23 +26,23 @@ public static class BlobContainerExtensions
         }
     }
 
-    public static async Task<byte[]> GetAllBytesAsync(
+    public static  Task<byte[]> GetAllBytesAsync(
         this IBlobContainer container,
-        string name,
+        String name,
         CancellationToken cancellationToken = default)
     {
-        using (var stream = await container.GetAsync(name, cancellationToken))
+        using (var stream = container.GetAsync(name, cancellationToken))
         {
-            return await stream.GetAllBytesAsync(cancellationToken);
+            return stream.GetAllBytesAsync(cancellationToken);
         }
     }
 
-    public static async Task<byte[]> GetAllBytesOrNullAsync(
+    public static  Task<byte[]> GetAllBytesOrNullAsync(
         this IBlobContainer container,
-        string name,
+        String name,
         CancellationToken cancellationToken = default)
     {
-        var stream = await container.GetOrNullAsync(name, cancellationToken);
+        var stream = container.GetOrNullAsync(name, cancellationToken);
         if (stream == null)
         {
             return null;
@@ -50,7 +50,7 @@ public static class BlobContainerExtensions
 
         using (stream)
         {
-            return await stream.GetAllBytesAsync(cancellationToken);
+            return stream.GetAllBytesAsync(cancellationToken);
         }
     }
 }

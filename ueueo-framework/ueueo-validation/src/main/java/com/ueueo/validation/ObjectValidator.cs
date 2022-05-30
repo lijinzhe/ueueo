@@ -10,8 +10,8 @@ namespace Volo.Abp.Validation;
 
 public class ObjectValidator : IObjectValidator, ITransientDependency
 {
-    protected IServiceScopeFactory ServiceScopeFactory { get; }
-    protected AbpValidationOptions Options { get; }
+    protected IServiceScopeFactory ServiceScopeFactory;//  { get; }
+    protected AbpValidationOptions Options;//  { get; }
 
     public ObjectValidator(IOptions<AbpValidationOptions> options, IServiceScopeFactory serviceScopeFactory)
     {
@@ -19,9 +19,9 @@ public class ObjectValidator : IObjectValidator, ITransientDependency
         Options = options.Value;
     }
 
-    public virtual void ValidateAsync(object validatingObject, string name = null, bool allowNull = false)
+    public   void ValidateAsync(Object validatingObject, String name = null, boolean allowNull = false)
     {
-        var errors = await GetErrorsAsync(validatingObject, name, allowNull);
+        var errors = GetErrorsAsync(validatingObject, name, allowNull);
 
         if (errors.Any())
         {
@@ -32,7 +32,7 @@ public class ObjectValidator : IObjectValidator, ITransientDependency
         }
     }
 
-    public virtual async Task<List<ValidationResult>> GetErrorsAsync(object validatingObject, string name = null, bool allowNull = false)
+    public    Task<List<ValidationResult>> GetErrorsAsync(Object validatingObject, String name = null, boolean allowNull = false)
     {
         if (validatingObject == null)
         {
@@ -55,11 +55,11 @@ public class ObjectValidator : IObjectValidator, ITransientDependency
 
         using (var scope = ServiceScopeFactory.CreateScope())
         {
-            foreach (var contributorType in Options.ObjectValidationContributors)
+            for (var contributorType in Options.ObjectValidationContributors)
             {
                 var contributor = (IObjectValidationContributor)
                     scope.ServiceProvider.GetRequiredService(contributorType);
-                await contributor.AddErrorsAsync(context);
+                contributor.AddErrorsAsync(context);
             }
         }
 

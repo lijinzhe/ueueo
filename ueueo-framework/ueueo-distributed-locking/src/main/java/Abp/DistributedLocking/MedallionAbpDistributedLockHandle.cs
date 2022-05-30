@@ -5,7 +5,7 @@ namespace Volo.Abp.DistributedLocking;
 
 public class MedallionAbpDistributedLockHandle : IAbpDistributedLockHandle
 {
-    public IDistributedSynchronizationHandle Handle { get; }
+    public IDistributedSynchronizationHandle Handle;//  { get; }
 
     public MedallionAbpDistributedLockHandle(IDistributedSynchronizationHandle handle)
     {

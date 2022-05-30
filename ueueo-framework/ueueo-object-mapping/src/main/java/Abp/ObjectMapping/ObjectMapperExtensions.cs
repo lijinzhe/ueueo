@@ -11,7 +11,7 @@ public static class ObjectMapperExtensions
     static ObjectMapperExtensions()
     {
         var methods = typeof(IObjectMapper).GetMethods();
-        foreach (var method in methods)
+        for (var method in methods)
         {
             if (method.Name == nameof(IObjectMapper.Map) && method.IsGenericMethodDefinition)
             {
@@ -28,14 +28,14 @@ public static class ObjectMapperExtensions
         }
     }
 
-    public static object Map(this IObjectMapper objectMapper, Type sourceType, Type destinationType, object source)
+    public static Object Map(this IObjectMapper objectMapper, Type sourceType, Type destinationType, Object source)
     {
         return MapToNewObjectMethod
             .MakeGenericMethod(sourceType, destinationType)
             .Invoke(objectMapper, new[] { source });
     }
 
-    public static object Map(this IObjectMapper objectMapper, Type sourceType, Type destinationType, object source, object destination)
+    public static Object Map(this IObjectMapper objectMapper, Type sourceType, Type destinationType, Object source, Object destination)
     {
         return MapToExistingObjectMethod
             .MakeGenericMethod(sourceType, destinationType)

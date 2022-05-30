@@ -8,7 +8,7 @@ namespace Volo.Abp.Uow;
 public class UnitOfWorkManager : IUnitOfWorkManager, ISingletonDependency
 {
     [Obsolete("This will be removed in next versions.")]
-    public static AsyncLocal<bool> DisableObsoleteDbContextCreationWarning { get; } = new AsyncLocal<bool>();
+    public static AsyncLocal<bool> DisableObsoleteDbContextCreationWarning;//  { get; } = new AsyncLocal<bool>();
 
     public IUnitOfWork Current => _ambientUnitOfWork.GetCurrentByChecking();
 
@@ -23,9 +23,9 @@ public class UnitOfWorkManager : IUnitOfWorkManager, ISingletonDependency
         _serviceScopeFactory = serviceScopeFactory;
     }
 
-    public IUnitOfWork Begin(AbpUnitOfWorkOptions options, bool requiresNew = false)
+    public IUnitOfWork Begin(AbpUnitOfWorkOptions options, boolean requiresNew = false)
     {
-        Check.NotNull(options, nameof(options));
+        Objects.requireNonNull(options, nameof(options));
 
         var currentUow = Current;
         if (currentUow != null && !requiresNew)
@@ -39,9 +39,9 @@ public class UnitOfWorkManager : IUnitOfWorkManager, ISingletonDependency
         return unitOfWork;
     }
 
-    public IUnitOfWork Reserve(string reservationName, bool requiresNew = false)
+    public IUnitOfWork Reserve(String reservationName, boolean requiresNew = false)
     {
-        Check.NotNull(reservationName, nameof(reservationName));
+        Objects.requireNonNull(reservationName, nameof(reservationName));
 
         if (!requiresNew &&
             _ambientUnitOfWork.UnitOfWork != null &&
@@ -56,7 +56,7 @@ public class UnitOfWorkManager : IUnitOfWorkManager, ISingletonDependency
         return unitOfWork;
     }
 
-    public void BeginReserved(string reservationName, AbpUnitOfWorkOptions options)
+    public void BeginReserved(String reservationName, AbpUnitOfWorkOptions options)
     {
         if (!TryBeginReserved(reservationName, options))
         {
@@ -64,9 +64,9 @@ public class UnitOfWorkManager : IUnitOfWorkManager, ISingletonDependency
         }
     }
 
-    public bool TryBeginReserved(string reservationName, AbpUnitOfWorkOptions options)
+    public boolean TryBeginReserved(String reservationName, AbpUnitOfWorkOptions options)
     {
-        Check.NotNull(reservationName, nameof(reservationName));
+        Objects.requireNonNull(reservationName, nameof(reservationName));
 
         var uow = _ambientUnitOfWork.UnitOfWork;
 

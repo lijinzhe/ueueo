@@ -11,22 +11,22 @@ namespace Volo.Abp.VirtualFileSystem;
 //TODO: Work with directory & wildcard watches!
 //TODO: Work with dictionaries!
 
-/// <remarks>
-/// Current implementation only supports file watch.
-/// Does not support directory or wildcard watches.
-/// </remarks>
+ * <remarks>
+ * Current implementation only supports file watch.
+ * Does not support directory or wildcard watches.
+ * </remarks>
 public class DynamicFileProvider : DictionaryBasedFileProvider, IDynamicFileProvider, ISingletonDependency
 {
-    protected override IDictionary<string, IFileInfo> Files => DynamicFiles;
+    protected override IDictionary<String, IFileInfo> Files => DynamicFiles;
 
-    protected ConcurrentDictionary<string, IFileInfo> DynamicFiles { get; }
+    protected ConcurrentDictionary<String, IFileInfo> DynamicFiles;//  { get; }
 
-    protected ConcurrentDictionary<string, ChangeTokenInfo> FilePathTokenLookup { get; }
+    protected ConcurrentDictionary<String, ChangeTokenInfo> FilePathTokenLookup;//  { get; }
 
     public DynamicFileProvider()
     {
-        FilePathTokenLookup = new ConcurrentDictionary<string, ChangeTokenInfo>(StringComparer.OrdinalIgnoreCase); ;
-        DynamicFiles = new ConcurrentDictionary<string, IFileInfo>();
+        FilePathTokenLookup = new ConcurrentDictionary<String, ChangeTokenInfo>(StringComparer.OrdinalIgnoreCase); ;
+        DynamicFiles = new ConcurrentDictionary<String, IFileInfo>();
     }
 
     public void AddOrUpdate(IFileInfo fileInfo)
@@ -36,7 +36,7 @@ public class DynamicFileProvider : DictionaryBasedFileProvider, IDynamicFileProv
         ReportChange(filePath);
     }
 
-    public bool Delete(string filePath)
+    public boolean Delete(String filePath)
     {
         if (!DynamicFiles.TryRemove(filePath, out _))
         {
@@ -47,12 +47,13 @@ public class DynamicFileProvider : DictionaryBasedFileProvider, IDynamicFileProv
         return true;
     }
 
-    public override IChangeToken Watch(string filter)
+    @Override
+    public IChangeToken Watch(String filter)
     {
         return GetOrAddChangeToken(filter);
     }
 
-    private IChangeToken GetOrAddChangeToken(string filePath)
+    private IChangeToken GetOrAddChangeToken(String filePath)
     {
         if (!FilePathTokenLookup.TryGetValue(filePath, out var tokenInfo))
         {
@@ -65,7 +66,7 @@ public class DynamicFileProvider : DictionaryBasedFileProvider, IDynamicFileProv
         return tokenInfo.ChangeToken;
     }
 
-    private void ReportChange(string filePath)
+    private void ReportChange(String filePath)
     {
         if (FilePathTokenLookup.TryRemove(filePath, out var tokenInfo))
         {
@@ -83,8 +84,8 @@ public class DynamicFileProvider : DictionaryBasedFileProvider, IDynamicFileProv
             ChangeToken = changeToken;
         }
 
-        public CancellationTokenSource TokenSource { get; }
+        public CancellationTokenSource TokenSource;//  { get; }
 
-        public CancellationChangeToken ChangeToken { get; }
+        public CancellationChangeToken ChangeToken;//  { get; }
     }
 }

@@ -5,24 +5,24 @@ namespace Volo.Abp.Uow;
 
 public class UnitOfWorkEventRecord
 {
-    public object EventData { get; }
+    public Object EventData;//  { get; }
 
-    public Type EventType { get; }
+    public Type EventType;//  { get; }
 
-    public long EventOrder { get; }
+    public long EventOrder;//  { get; }
 
-    public bool UseOutbox { get; }
+    public boolean UseOutbox;//  { get; }
 
-    /// <summary>
-    /// Extra properties can be used if needed.
-    /// </summary>
-    public Dictionary<string, object> Properties { get; } = new Dictionary<string, object>();
+    /**
+     * Extra properties can be used if needed.
+    */
+    public Dictionary<String, Object> Properties;//  { get; } = new Dictionary<string, object>();
 
     public UnitOfWorkEventRecord(
         Type eventType,
-        object eventData,
+        Object eventData,
         long eventOrder,
-        bool useOutbox = true)
+        boolean useOutbox = true)
     {
         EventType = eventType;
         EventData = eventData;

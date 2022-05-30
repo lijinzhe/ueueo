@@ -10,7 +10,7 @@ namespace Volo.Abp.BackgroundWorkers.Quartz;
 [DisallowConcurrentExecution]
 public class QuartzPeriodicBackgroundWorkerAdapter<TWorker> : QuartzBackgroundWorkerBase,
     IQuartzBackgroundWorkerAdapter
-    where TWorker : IBackgroundWorker
+    //where TWorker : IBackgroundWorker
 {
     private readonly MethodInfo _doWorkAsyncMethod;
     private readonly MethodInfo _doWorkMethod;
@@ -67,7 +67,8 @@ public class QuartzPeriodicBackgroundWorkerAdapter<TWorker> : QuartzBackgroundWo
             .Build();
     }
 
-    public override void Execute(IJobExecutionContext context)
+    @Override
+    public void Execute(IJobExecutionContext context)
     {
         var worker = (IBackgroundWorker) ServiceProvider.GetService(typeof(TWorker));
         var workerContext = new PeriodicBackgroundWorkerContext(ServiceProvider);
@@ -78,14 +79,14 @@ public class QuartzPeriodicBackgroundWorkerAdapter<TWorker> : QuartzBackgroundWo
             {
                 if (_doWorkAsyncMethod != null)
                 {
-                    await (Task) _doWorkAsyncMethod.Invoke(asyncWorker, new object[] {workerContext});
+                    (Task) _doWorkAsyncMethod.Invoke(asyncWorker, new Object[] {workerContext});
                 }
 
                 break;
             }
             case PeriodicBackgroundWorkerBase syncWorker:
             {
-                _doWorkMethod?.Invoke(syncWorker, new object[] {workerContext});
+                _doWorkMethod?.Invoke(syncWorker, new Object[] {workerContext});
 
                 break;
             }

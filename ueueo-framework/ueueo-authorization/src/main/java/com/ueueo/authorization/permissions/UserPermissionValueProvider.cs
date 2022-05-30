@@ -6,9 +6,10 @@ namespace Volo.Abp.Authorization.Permissions;
 
 public class UserPermissionValueProvider : PermissionValueProvider
 {
-    public const string ProviderName = "U";
+    public const String ProviderName = "U";
 
-    public override string Name => ProviderName;
+    @Override
+    public String Name => ProviderName;
 
     public UserPermissionValueProvider(IPermissionStore permissionStore)
         : base(permissionStore)
@@ -16,7 +17,8 @@ public class UserPermissionValueProvider : PermissionValueProvider
 
     }
 
-    public override async Task<PermissionGrantResult> CheckAsync(PermissionValueCheckContext context)
+    @Override
+    public Task<PermissionGrantResult> CheckAsync(PermissionValueCheckContext context)
     {
         var userId = context.Principal?.FindFirst(AbpClaimTypes.UserId)?.Value;
 
@@ -25,12 +27,13 @@ public class UserPermissionValueProvider : PermissionValueProvider
             return PermissionGrantResult.Undefined;
         }
 
-        return await PermissionStore.IsGrantedAsync(context.Permission.Name, Name, userId)
+        return PermissionStore.IsGrantedAsync(context.Permission.Name, Name, userId)
             ? PermissionGrantResult.Granted
             : PermissionGrantResult.Undefined;
     }
 
-    public override async Task<MultiplePermissionGrantResult> CheckAsync(PermissionValuesCheckContext context)
+    @Override
+    public Task<MultiplePermissionGrantResult> CheckAsync(PermissionValuesCheckContext context)
     {
         var permissionNames = context.Permissions.Select(x => x.Name).Distinct().ToArray();
         Check.NotNullOrEmpty(permissionNames, nameof(permissionNames));
@@ -41,6 +44,6 @@ public class UserPermissionValueProvider : PermissionValueProvider
             return new MultiplePermissionGrantResult(permissionNames);
         }
 
-        return await PermissionStore.IsGrantedAsync(permissionNames, Name, userId);
+        return PermissionStore.IsGrantedAsync(permissionNames, Name, userId);
     }
 }

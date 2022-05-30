@@ -8,22 +8,24 @@ namespace Volo.Abp.MongoDB;
 public class AbpMongoDbDateTimeSerializer : DateTimeSerializer
 {
     protected DateTimeKind DateTimeKind;// { get; set; }
-    protected bool DisableDateTimeNormalization;// { get; set; }
+    protected boolean DisableDateTimeNormalization;// { get; set; }
 
-    public AbpMongoDbDateTimeSerializer(DateTimeKind dateTimeKind, bool disableDateTimeNormalization)
+    public AbpMongoDbDateTimeSerializer(DateTimeKind dateTimeKind, boolean disableDateTimeNormalization)
     {
         DateTimeKind = dateTimeKind;
         DisableDateTimeNormalization = disableDateTimeNormalization;
     }
 
-    public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, DateTime value)
+    @Override
+    public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, DateTime value)
     {
         context.Writer.WriteDateTime(DisableDateTimeNormalization
             ? ToMillisecondsSinceEpoch(value)
             : ToMillisecondsSinceEpoch(DateTime.SpecifyKind(value, DateTimeKind)));
     }
 
-    public override DateTime Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
+    @Override
+    public DateTime Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
     {
         var dateTime = new BsonDateTime(context.Reader.ReadDateTime()).ToUniversalTime();
         return DateTime.SpecifyKind(dateTime, DisableDateTimeNormalization ? DateTimeKind.Unspecified : DateTimeKind);

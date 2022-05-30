@@ -38,12 +38,12 @@ public static class TypeHelper
             typeof(Guid)
         };
 
-    public static bool IsNonNullablePrimitiveType(Type type)
+    public static boolean IsNonNullablePrimitiveType(Type type)
     {
         return NonNullablePrimitiveTypes.Contains(type);
     }
 
-    public static bool IsFunc(object obj)
+    public static boolean IsFunc(Object obj)
     {
         if (obj == null)
         {
@@ -59,12 +59,12 @@ public static class TypeHelper
         return type.GetGenericTypeDefinition() == typeof(Func<>);
     }
 
-    public static bool IsFunc<TReturn>(object obj)
+    public static boolean IsFunc<TReturn>(Object obj)
     {
         return obj != null && obj.GetType() == typeof(Func<TReturn>);
     }
 
-    public static bool IsPrimitiveExtended(Type type, bool includeNullables = true, bool includeEnums = false)
+    public static boolean IsPrimitiveExtended(Type type, boolean includeNullables = true, boolean includeEnums = false)
     {
         if (IsPrimitiveExtendedInternal(type, includeEnums))
         {
@@ -79,7 +79,7 @@ public static class TypeHelper
         return false;
     }
 
-    public static bool IsNullable(Type type)
+    public static boolean IsNullable(Type type)
     {
         return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
     }
@@ -94,7 +94,7 @@ public static class TypeHelper
         return t;
     }
 
-    public static bool IsEnumerable(Type type, out Type itemType, bool includePrimitives = true)
+    public static boolean IsEnumerable(Type type, out Type itemType, boolean includePrimitives = true)
     {
         if (!includePrimitives && IsPrimitiveExtended(type))
         {
@@ -119,7 +119,7 @@ public static class TypeHelper
         return false;
     }
 
-    public static bool IsDictionary(Type type, out Type keyType, out Type valueType)
+    public static boolean IsDictionary(Type type, out Type keyType, out Type valueType)
     {
         var dictionaryTypes = ReflectionHelper
             .GetImplementedGenericTypes(
@@ -147,7 +147,7 @@ public static class TypeHelper
         return false;
     }
 
-    private static bool IsPrimitiveExtendedInternal(Type type, bool includeEnums)
+    private static boolean IsPrimitiveExtendedInternal(Type type, boolean includeEnums)
     {
         if (type.IsPrimitive)
         {
@@ -159,7 +159,7 @@ public static class TypeHelper
             return true;
         }
 
-        return type == typeof(string) ||
+        return type == typeof(String) ||
                type == typeof(decimal) ||
                type == typeof(DateTime) ||
                type == typeof(DateTimeOffset) ||
@@ -172,7 +172,7 @@ public static class TypeHelper
         return default;
     }
 
-    public static object GetDefaultValue(Type type)
+    public static Object GetDefaultValue(Type type)
     {
         if (type.IsValueType)
         {
@@ -182,9 +182,9 @@ public static class TypeHelper
         return null;
     }
 
-    public static string GetFullNameHandlingNullableAndGenerics([NotNull] Type type)
+    public static String GetFullNameHandlingNullableAndGenerics(@Nonnull Type type)
     {
-        Check.NotNull(type, nameof(type));
+        Objects.requireNonNull(type, nameof(type));
 
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
         {
@@ -200,9 +200,9 @@ public static class TypeHelper
         return type.FullName ?? type.Name;
     }
 
-    public static string GetSimplifiedName([NotNull] Type type)
+    public static String GetSimplifiedName(@Nonnull Type type)
     {
-        Check.NotNull(type, nameof(type));
+        Objects.requireNonNull(type, nameof(type));
 
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
         {
@@ -215,7 +215,7 @@ public static class TypeHelper
             return $"{genericType.FullName.Left(genericType.FullName.IndexOf('`'))}<{type.GenericTypeArguments.Select(GetSimplifiedName).JoinAsString(",")}>";
         }
 
-        if (type == typeof(string))
+        if (type == typeof(String))
         {
             return "string";
         }
@@ -303,12 +303,12 @@ public static class TypeHelper
         return type.FullName ?? type.Name;
     }
 
-    public static object ConvertFromString<TTargetType>(string value)
+    public static Object ConvertFromString<TTargetType>(String value)
     {
         return ConvertFromString(typeof(TTargetType), value);
     }
 
-    public static object ConvertFromString(Type targetType, string value)
+    public static Object ConvertFromString(Type targetType, String value)
     {
         if (value == null)
         {
@@ -328,7 +328,7 @@ public static class TypeHelper
         return converter.ConvertFromString(value);
     }
 
-    public static bool IsFloatingType(Type type, bool includeNullable = true)
+    public static boolean IsFloatingType(Type type, boolean includeNullable = true)
     {
         if (FloatingTypes.Contains(type))
         {
@@ -345,12 +345,12 @@ public static class TypeHelper
         return false;
     }
 
-    public static object ConvertFrom<TTargetType>(object value)
+    public static Object ConvertFrom<TTargetType>(Object value)
     {
         return ConvertFrom(typeof(TTargetType), value);
     }
 
-    public static object ConvertFrom(Type targetType, object value)
+    public static Object ConvertFrom(Type targetType, Object value)
     {
         return TypeDescriptor
             .GetConverter(targetType)
@@ -364,7 +364,7 @@ public static class TypeHelper
             : type;
     }
 
-    public static bool IsDefaultValue([CanBeNull] object obj)
+    public static boolean IsDefaultValue(@Nullable Object obj)
     {
         if (obj == null)
         {

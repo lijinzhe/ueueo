@@ -10,8 +10,8 @@ namespace Volo.Abp.Application.Services;
 
 public abstract class CrudAppService<TEntity, TEntityDto, TKey>
     : CrudAppService<TEntity, TEntityDto, TKey, PagedAndSortedResultRequestDto>
-    where TEntity : class, IEntity<TKey>
-    where TEntityDto : IEntityDto<TKey>
+    //where TEntity : class, IEntity<TKey>
+    //where TEntityDto : IEntityDto<TKey>
 {
     protected CrudAppService(IRepository<TEntity, TKey> repository)
         : base(repository)
@@ -22,8 +22,8 @@ public abstract class CrudAppService<TEntity, TEntityDto, TKey>
 
 public abstract class CrudAppService<TEntity, TEntityDto, TKey, TGetListInput>
     : CrudAppService<TEntity, TEntityDto, TKey, TGetListInput, TEntityDto>
-    where TEntity : class, IEntity<TKey>
-    where TEntityDto : IEntityDto<TKey>
+    //where TEntity : class, IEntity<TKey>
+    //where TEntityDto : IEntityDto<TKey>
 {
     protected CrudAppService(IRepository<TEntity, TKey> repository)
         : base(repository)
@@ -34,8 +34,8 @@ public abstract class CrudAppService<TEntity, TEntityDto, TKey, TGetListInput>
 
 public abstract class CrudAppService<TEntity, TEntityDto, TKey, TGetListInput, TCreateInput>
     : CrudAppService<TEntity, TEntityDto, TKey, TGetListInput, TCreateInput, TCreateInput>
-    where TEntity : class, IEntity<TKey>
-    where TEntityDto : IEntityDto<TKey>
+    //where TEntity : class, IEntity<TKey>
+    //where TEntityDto : IEntityDto<TKey>
 {
     protected CrudAppService(IRepository<TEntity, TKey> repository)
         : base(repository)
@@ -46,8 +46,8 @@ public abstract class CrudAppService<TEntity, TEntityDto, TKey, TGetListInput, T
 
 public abstract class CrudAppService<TEntity, TEntityDto, TKey, TGetListInput, TCreateInput, TUpdateInput>
     : CrudAppService<TEntity, TEntityDto, TEntityDto, TKey, TGetListInput, TCreateInput, TUpdateInput>
-    where TEntity : class, IEntity<TKey>
-    where TEntityDto : IEntityDto<TKey>
+    //where TEntity : class, IEntity<TKey>
+    //where TEntityDto : IEntityDto<TKey>
 {
     protected CrudAppService(IRepository<TEntity, TKey> repository)
         : base(repository)
@@ -68,11 +68,11 @@ public abstract class CrudAppService<TEntity, TEntityDto, TKey, TGetListInput, T
 
 public abstract class CrudAppService<TEntity, TGetOutputDto, TGetListOutputDto, TKey, TGetListInput, TCreateInput, TUpdateInput>
     : AbstractKeyCrudAppService<TEntity, TGetOutputDto, TGetListOutputDto, TKey, TGetListInput, TCreateInput, TUpdateInput>
-    where TEntity : class, IEntity<TKey>
-    where TGetOutputDto : IEntityDto<TKey>
-    where TGetListOutputDto : IEntityDto<TKey>
+    //where TEntity : class, IEntity<TKey>
+    //where TGetOutputDto : IEntityDto<TKey>
+    //where TGetListOutputDto : IEntityDto<TKey>
 {
-    protected new IRepository<TEntity, TKey> Repository { get; }
+    protected new IRepository<TEntity, TKey> Repository;//  { get; }
 
     protected CrudAppService(IRepository<TEntity, TKey> repository)
         : base(repository)
@@ -82,12 +82,12 @@ public abstract class CrudAppService<TEntity, TGetOutputDto, TGetListOutputDto, 
 
     protected override void DeleteByIdAsync(TKey id)
     {
-        await Repository.DeleteAsync(id);
+        Repository.DeleteAsync(id);
     }
 
-    protected override async Task<TEntity> GetEntityByIdAsync(TKey id)
+    protected override  Task<TEntity> GetEntityByIdAsync(TKey id)
     {
-        return await Repository.GetAsync(id);
+        return Repository.GetAsync(id);
     }
 
     protected override void MapToEntity(TUpdateInput updateInput, TEntity entity)
@@ -97,7 +97,7 @@ public abstract class CrudAppService<TEntity, TGetOutputDto, TGetListOutputDto, 
             entityDto.Id = entity.Id;
         }
 
-        base.MapToEntity(updateInput, entity);
+       super.MapToEntity(updateInput, entity);
     }
 
     protected override IQueryable<TEntity> ApplyDefaultSorting(IQueryable<TEntity> query)

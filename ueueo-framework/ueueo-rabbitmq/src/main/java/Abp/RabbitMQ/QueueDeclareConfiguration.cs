@@ -6,30 +6,30 @@ namespace Volo.Abp.RabbitMQ;
 
 public class QueueDeclareConfiguration
 {
-    [NotNull] public string QueueName { get; }
+    @Nonnull public String QueueName;//  { get; }
 
-    public bool Durable;// { get; set; }
+    public boolean Durable;// { get; set; }
 
-    public bool Exclusive;// { get; set; }
+    public boolean Exclusive;// { get; set; }
 
-    public bool AutoDelete;// { get; set; }
+    public boolean AutoDelete;// { get; set; }
 
-    public IDictionary<string, object> Arguments { get; }
+    public IDictionary<String, Object> Arguments;//  { get; }
 
     public QueueDeclareConfiguration(
-        [NotNull] string queueName,
-        bool durable = true,
-        bool exclusive = false,
-        bool autoDelete = false)
+        @Nonnull String queueName,
+        boolean durable = true,
+        boolean exclusive = false,
+        boolean autoDelete = false)
     {
         QueueName = queueName;
         Durable = durable;
         Exclusive = exclusive;
         AutoDelete = autoDelete;
-        Arguments = new Dictionary<string, object>();
+        Arguments = new Dictionary<String, Object>();
     }
 
-    public virtual QueueDeclareOk Declare(IModel channel)
+    public   QueueDeclareOk Declare(IModel channel)
     {
         return channel.QueueDeclare(
             queue: QueueName,

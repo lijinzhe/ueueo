@@ -5,18 +5,18 @@ namespace Volo.Abp.MongoDB;
 
 public interface IMongoEntityModelBuilder<TEntity>
 {
-    Type EntityType { get; }
+    Type EntityType;//  { get; }
 
-    string CollectionName;// { get; set; }
+    String CollectionName;// { get; set; }
 
-    BsonClassMap<TEntity> BsonMap { get; }
+    BsonClassMap<TEntity> BsonMap;//  { get; }
 }
 
 public interface IMongoEntityModelBuilder
 {
-    Type EntityType { get; }
+    Type EntityType;//  { get; }
 
-    string CollectionName;// { get; set; }
+    String CollectionName;// { get; set; }
 
-    BsonClassMap BsonMap { get; }
+    BsonClassMap BsonMap;//  { get; }
 }

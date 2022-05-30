@@ -4,13 +4,13 @@ using Volo.Abp.Data;
 
 namespace Volo.Abp.Application.Dtos;
 
-/// <summary>
-/// This class can be inherited by DTO classes to implement <see cref="ICreationAuditedObject{TCreator}"/> interface.
-/// It has the <see cref="Creator"/> object as a DTO represents the user.
-/// It also implements the <see cref="IHasExtraProperties"/> interface.
-/// </summary>
-/// <typeparam name="TPrimaryKey">Type of primary key</typeparam>
-/// <typeparam name="TUserDto">Type of the User DTO</typeparam>
+/**
+ * This class can be inherited by DTO classes to implement <see cref="ICreationAuditedObject{TCreator}"/> interface.
+ * It has the <see cref="Creator"/> object as a DTO represents the user.
+ * It also implements the <see cref="IHasExtraProperties"/> interface.
+*/
+ * <typeparam name="TPrimaryKey">Type of primary key</typeparam>
+ * <typeparam name="TUserDto">Type of the User DTO</typeparam>
 [Serializable]
 public abstract class ExtensibleCreationAuditedEntityWithUserDto<TPrimaryKey, TUserDto> : ExtensibleCreationAuditedEntityDto<TPrimaryKey>, ICreationAuditedObject<TUserDto>
 {
@@ -22,19 +22,19 @@ public abstract class ExtensibleCreationAuditedEntityWithUserDto<TPrimaryKey, TU
 
     }
 
-    protected ExtensibleCreationAuditedEntityWithUserDto(bool setDefaultsForExtraProperties)
+    protected ExtensibleCreationAuditedEntityWithUserDto(boolean setDefaultsForExtraProperties)
         : base(setDefaultsForExtraProperties)
     {
 
     }
 }
 
-/// <summary>
-/// This class can be inherited by DTO classes to implement <see cref="ICreationAuditedObject{TCreator}"/> interface.
-/// It has the <see cref="Creator"/> object as a DTO represents the user.
-/// It also implements the <see cref="IHasExtraProperties"/> interface.
-/// </summary>
-/// <typeparam name="TUserDto">Type of the User DTO</typeparam>
+/**
+ * This class can be inherited by DTO classes to implement <see cref="ICreationAuditedObject{TCreator}"/> interface.
+ * It has the <see cref="Creator"/> object as a DTO represents the user.
+ * It also implements the <see cref="IHasExtraProperties"/> interface.
+*/
+ * <typeparam name="TUserDto">Type of the User DTO</typeparam>
 [Serializable]
 public abstract class ExtensibleCreationAuditedEntityWithUserDto<TUserDto> : ExtensibleCreationAuditedEntityDto,
     ICreationAuditedObject<TUserDto>
@@ -47,7 +47,7 @@ public abstract class ExtensibleCreationAuditedEntityWithUserDto<TUserDto> : Ext
 
     }
 
-    protected ExtensibleCreationAuditedEntityWithUserDto(bool setDefaultsForExtraProperties)
+    protected ExtensibleCreationAuditedEntityWithUserDto(boolean setDefaultsForExtraProperties)
         : base(setDefaultsForExtraProperties)
     {
 

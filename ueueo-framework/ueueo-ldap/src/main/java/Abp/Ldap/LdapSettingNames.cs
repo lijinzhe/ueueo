@@ -2,15 +2,15 @@
 
 public static class LdapSettingNames
 {
-    public const string ServerHost = "Abp.Ldap.ServerHost";
+    public const String ServerHost = "Abp.Ldap.ServerHost";
 
-    public const string ServerPort = "Abp.Ldap.ServerPort";
+    public const String ServerPort = "Abp.Ldap.ServerPort";
 
-    public const string BaseDc = "Abp.Ldap.BaseDc";
+    public const String BaseDc = "Abp.Ldap.BaseDc";
 
-    public const string Domain = "Abp.Ldap.Domain";
+    public const String Domain = "Abp.Ldap.Domain";
 
-    public const string UserName = "Abp.Ldap.UserName";
+    public const String UserName = "Abp.Ldap.UserName";
 
-    public const string Password = "Abp.Ldap.Password";
+    public const String Password = "Abp.Ldap.Password";
 }

@@ -6,7 +6,7 @@ namespace Volo.Abp.Kafka;
 
 public class AbpKafkaOptions
 {
-    public KafkaConnections Connections { get; }
+    public KafkaConnections Connections;//  { get; }
 
     public Action<ProducerConfig> ConfigureProducer;// { get; set; }
 

@@ -3,36 +3,37 @@ using Microsoft.Extensions.Localization;
 
 namespace Volo.Abp.Localization;
 
-/// <summary>
-/// Represents a simple implementation of <see cref="ILocalizationDictionary"/> interface.
-/// </summary>
+/**
+ * Represents a simple implementation of <see cref="ILocalizationDictionary"/> interface.
+*/
 public class StaticLocalizationDictionary : ILocalizationDictionary
 {
-    /// <inheritdoc/>
-    public string CultureName { get; }
 
-    protected Dictionary<string, LocalizedString> Dictionary { get; }
+    public String CultureName;//  { get; }
 
-    /// <summary>
-    /// Creates a new <see cref="StaticLocalizationDictionary"/> object.
-    /// </summary>
-    /// <param name="cultureName">Culture of the dictionary</param>
-    /// <param name="dictionary">The dictionary</param>
-    public StaticLocalizationDictionary(string cultureName, Dictionary<string, LocalizedString> dictionary)
+    protected Dictionary<String, LocalizedString> Dictionary;//  { get; }
+
+    /**
+     * Creates a new <see cref="StaticLocalizationDictionary"/> object.
+    *
+     * <param name="cultureName">Culture of the dictionary</param>
+     * <param name="dictionary">The dictionary</param>
+     */
+    public StaticLocalizationDictionary(String cultureName, Dictionary<String, LocalizedString> dictionary)
     {
         CultureName = cultureName;
         Dictionary = dictionary;
     }
 
-    /// <inheritdoc/>
-    public virtual LocalizedString GetOrNull(string name)
+
+    public   LocalizedString GetOrNull(String name)
     {
         return Dictionary.GetOrDefault(name);
     }
 
-    public void Fill(Dictionary<string, LocalizedString> dictionary)
+    public void Fill(Dictionary<String, LocalizedString> dictionary)
     {
-        foreach (var item in Dictionary)
+        for (var item in Dictionary)
         {
             dictionary[item.Key] = item.Value;
         }

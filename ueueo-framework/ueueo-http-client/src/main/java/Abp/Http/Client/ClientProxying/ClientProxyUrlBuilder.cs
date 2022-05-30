@@ -19,9 +19,9 @@ namespace Volo.Abp.Http.Client.ClientProxying;
 
 public class ClientProxyUrlBuilder : ITransientDependency
 {
-    protected static MethodInfo CallObjectToQueryStringAsyncMethod { get; }
+    protected static MethodInfo CallObjectToQueryStringAsyncMethod;//  { get; }
 
-    protected static MethodInfo CallObjectToPathAsyncMethod { get; }
+    protected static MethodInfo CallObjectToPathAsyncMethod;//  { get; }
 
     static ClientProxyUrlBuilder()
     {
@@ -34,8 +34,8 @@ public class ClientProxyUrlBuilder : ITransientDependency
             .First(m => m.Name == nameof(ObjectToPathAsync) && m.IsGenericMethodDefinition);
     }
 
-    protected IServiceScopeFactory ServiceScopeFactory { get; }
-    protected AbpHttpClientProxyingOptions HttpClientProxyingOptions { get; }
+    protected IServiceScopeFactory ServiceScopeFactory;//  { get; }
+    protected AbpHttpClientProxyingOptions HttpClientProxyingOptions;//  { get; }
 
     public ClientProxyUrlBuilder(IServiceScopeFactory serviceScopeFactory, IOptions<AbpHttpClientProxyingOptions> httpClientProxyingOptions)
     {
@@ -43,7 +43,7 @@ public class ClientProxyUrlBuilder : ITransientDependency
         HttpClientProxyingOptions = httpClientProxyingOptions.Value;
     }
 
-    public async Task<string> GenerateUrlWithParametersAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<string, object> methodArguments, ApiVersionInfo apiVersion)
+    public  Task<String> GenerateUrlWithParametersAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<String, Object> methodArguments, ApiVersionInfo apiVersion)
     {
         // The ASP.NET Core route value provider and query string value provider:
         //  Treat values as invariant culture.
@@ -52,14 +52,14 @@ public class ClientProxyUrlBuilder : ITransientDependency
         {
             var urlBuilder = new StringBuilder(action.Url);
 
-            await ReplacePathVariablesAsync(urlBuilder, action, methodArguments, apiVersion);
-            await AddQueryStringParametersAsync(urlBuilder, action, methodArguments, apiVersion);
+            ReplacePathVariablesAsync(urlBuilder, action, methodArguments, apiVersion);
+            AddQueryStringParametersAsync(urlBuilder, action, methodArguments, apiVersion);
 
             return urlBuilder.ToString();
         }
     }
 
-    protected virtual void ReplacePathVariablesAsync(StringBuilder urlBuilder, ActionApiDescriptionModel action, IReadOnlyDictionary<string, object> methodArguments, ApiVersionInfo apiVersion)
+    protected   void ReplacePathVariablesAsync(StringBuilder urlBuilder, ActionApiDescriptionModel action, IReadOnlyDictionary<String, Object> methodArguments, ApiVersionInfo apiVersion)
     {
         var pathParameters = action.Parameters
             .Where(p => p.BindingSourceId == ParameterBindingSources.Path)
@@ -75,7 +75,7 @@ public class ClientProxyUrlBuilder : ITransientDependency
             urlBuilder = urlBuilder.Replace("{apiVersion}", apiVersion.Version);
         }
 
-        foreach (var pathParameter in pathParameters.Where(p => p.Name != "apiVersion")) //TODO: Constant!
+        for (var pathParameter in pathParameters.Where(p => p.Name != "apiVersion")) //TODO: Constant!
         {
             var value = HttpActionParameterHelper.FindParameterValue(methodArguments, pathParameter);
 
@@ -87,7 +87,7 @@ public class ClientProxyUrlBuilder : ITransientDependency
                 }
                 else if (pathParameter.DefaultValue != null)
                 {
-                    urlBuilder = urlBuilder.Replace($"{{{pathParameter.Name}}}", await ConvertValueToStringAsync(pathParameter.DefaultValue));
+                    urlBuilder = urlBuilder.Replace($"{{{pathParameter.Name}}}", ConvertValueToStringAsync(pathParameter.DefaultValue));
                 }
                 else
                 {
@@ -100,9 +100,9 @@ public class ClientProxyUrlBuilder : ITransientDependency
                 {
                     using (var scope = ServiceScopeFactory.CreateScope())
                     {
-                        var path = await (Task<string>)CallObjectToPathAsyncMethod
+                        var path = (Task<String>)CallObjectToPathAsyncMethod
                             .MakeGenericMethod(value.GetType())
-                            .Invoke(this, new object[]
+                            .Invoke(this, new Object[]
                             {
                                 scope.ServiceProvider.GetRequiredService(HttpClientProxyingOptions.PathConverts[value.GetType()]),
                                 action,
@@ -118,12 +118,12 @@ public class ClientProxyUrlBuilder : ITransientDependency
                     }
                 }
 
-                urlBuilder = urlBuilder.Replace($"{{{pathParameter.Name}}}", await ConvertValueToStringAsync(value));
+                urlBuilder = urlBuilder.Replace($"{{{pathParameter.Name}}}", ConvertValueToStringAsync(value));
             }
         }
     }
 
-    protected virtual void AddQueryStringParametersAsync(StringBuilder urlBuilder, ActionApiDescriptionModel action, IReadOnlyDictionary<string, object> methodArguments, ApiVersionInfo apiVersion)
+    protected   void AddQueryStringParametersAsync(StringBuilder urlBuilder, ActionApiDescriptionModel action, IReadOnlyDictionary<String, Object> methodArguments, ApiVersionInfo apiVersion)
     {
         var queryStringParameters = action.Parameters
             .Where(p => p.BindingSourceId.IsIn(ParameterBindingSources.ModelBinding, ParameterBindingSources.Query))
@@ -131,7 +131,7 @@ public class ClientProxyUrlBuilder : ITransientDependency
 
         var isFirstParam = true;
 
-        foreach (var queryStringParameter in queryStringParameters)
+        for (var queryStringParameter in queryStringParameters)
         {
             var value = HttpActionParameterHelper.FindParameterValue(methodArguments, queryStringParameter);
             if (value == null)
@@ -143,9 +143,9 @@ public class ClientProxyUrlBuilder : ITransientDependency
             {
                 using (var scope = ServiceScopeFactory.CreateScope())
                 {
-                    var queryString = await (Task<string>)CallObjectToQueryStringAsyncMethod
+                    var queryString = (Task<String>)CallObjectToQueryStringAsyncMethod
                         .MakeGenericMethod(value.GetType())
-                        .Invoke(this, new object[]
+                        .Invoke(this, new Object[]
                         {
                             scope.ServiceProvider.GetRequiredService(HttpClientProxyingOptions.QueryStringConverts[value.GetType()]),
                             action,
@@ -163,7 +163,7 @@ public class ClientProxyUrlBuilder : ITransientDependency
                 }
             }
 
-            if (await AddQueryStringParameterAsync(urlBuilder, isFirstParam, queryStringParameter.Name, value))
+            if (AddQueryStringParameterAsync(urlBuilder, isFirstParam, queryStringParameter.Name, value))
             {
                 isFirstParam = false;
             }
@@ -171,36 +171,36 @@ public class ClientProxyUrlBuilder : ITransientDependency
 
         if (apiVersion.ShouldSendInQueryString())
         {
-            await AddQueryStringParameterAsync(urlBuilder, isFirstParam, "api-version", apiVersion.Version);  //TODO: Constant!
+            AddQueryStringParameterAsync(urlBuilder, isFirstParam, "api-version", apiVersion.Version);  //TODO: Constant!
         }
     }
 
-    protected virtual async Task<string> ObjectToQueryStringAsync<T>(IObjectToQueryString<T> converter, ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, T value)
+    protected    Task<String> ObjectToQueryStringAsync<T>(IObjectToQueryString<T> converter, ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, T value)
     {
-        return await converter.ConvertAsync(actionApiDescription, parameterApiDescription, value);
+        return converter.ConvertAsync(actionApiDescription, parameterApiDescription, value);
     }
 
-    protected virtual async Task<string> ObjectToPathAsync<T>(IObjectToPath<T> converter, ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, T value)
+    protected    Task<String> ObjectToPathAsync<T>(IObjectToPath<T> converter, ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, T value)
     {
-        return await converter.ConvertAsync(actionApiDescription, parameterApiDescription, value);
+        return converter.ConvertAsync(actionApiDescription, parameterApiDescription, value);
     }
 
-    protected virtual async Task<bool> AddQueryStringParameterAsync(
+    protected    Task<bool> AddQueryStringParameterAsync(
         StringBuilder urlBuilder,
-        bool isFirstParam,
-        string name,
-        [NotNull] object value)
+        boolean isFirstParam,
+        String name,
+        @Nonnull Object value)
     {
         if (value.GetType().IsArray || (value.GetType().IsGenericType && value is IEnumerable))
         {
             var index = 0;
-            foreach (var item in (IEnumerable) value)
+            for (var item in (IEnumerable) value)
             {
                 if (index == 0)
                 {
                     urlBuilder.Append(isFirstParam ? "?" : "&");
                 }
-                urlBuilder.Append(name + $"[{index++}]=" + System.Net.WebUtility.UrlEncode(await ConvertValueToStringAsync(item)) + "&");
+                urlBuilder.Append(name + $"[{index++}]=" + System.Net.WebUtility.UrlEncode(ConvertValueToStringAsync(item)) + "&");
             }
 
             if (index > 0)
@@ -214,11 +214,11 @@ public class ClientProxyUrlBuilder : ITransientDependency
         }
 
         urlBuilder.Append(isFirstParam ? "?" : "&");
-        urlBuilder.Append(name + "=" + System.Net.WebUtility.UrlEncode(await ConvertValueToStringAsync(value)));
+        urlBuilder.Append(name + "=" + System.Net.WebUtility.UrlEncode(ConvertValueToStringAsync(value)));
         return true;
     }
 
-    protected virtual Task<string> ConvertValueToStringAsync([CanBeNull] object value)
+    protected   Task<String> ConvertValueToStringAsync(@Nullable Object value)
     {
         if (value is DateTime dateTimeValue)
         {

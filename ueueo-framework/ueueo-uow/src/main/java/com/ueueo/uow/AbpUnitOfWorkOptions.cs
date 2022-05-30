@@ -5,16 +5,16 @@ namespace Volo.Abp.Uow;
 
 public class AbpUnitOfWorkOptions : IAbpUnitOfWorkOptions
 {
-    /// <summary>
-    /// Default: false.
-    /// </summary>
-    public bool IsTransactional;// { get; set; }
+    /**
+     * Default: false.
+    */
+    public boolean IsTransactional;// { get; set; }
 
     public IsolationLevel? IsolationLevel;// { get; set; }
 
-    /// <summary>
-    /// Milliseconds
-    /// </summary>
+    /**
+     * Milliseconds
+    */
     public int? Timeout;// { get; set; }
 
     public AbpUnitOfWorkOptions()
@@ -22,7 +22,7 @@ public class AbpUnitOfWorkOptions : IAbpUnitOfWorkOptions
 
     }
 
-    public AbpUnitOfWorkOptions(bool isTransactional = false, IsolationLevel? isolationLevel = null, int? timeout = null)
+    public AbpUnitOfWorkOptions(boolean isTransactional = false, IsolationLevel? isolationLevel = null, int? timeout = null)
     {
         IsTransactional = isTransactional;
         IsolationLevel = isolationLevel;

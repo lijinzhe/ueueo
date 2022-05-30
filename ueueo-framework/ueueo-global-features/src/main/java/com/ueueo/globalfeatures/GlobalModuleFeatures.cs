@@ -7,68 +7,68 @@ namespace Volo.Abp.GlobalFeatures;
 public abstract class GlobalModuleFeatures
 {
     [NotNull]
-    public GlobalFeatureManager FeatureManager { get; }
+    public GlobalFeatureManager FeatureManager;//  { get; }
 
     [NotNull]
-    protected GlobalFeatureDictionary AllFeatures { get; }
+    protected GlobalFeatureDictionary AllFeatures;//  { get; }
 
     protected GlobalModuleFeatures(
-        [NotNull] GlobalFeatureManager featureManager)
+        @Nonnull GlobalFeatureManager featureManager)
     {
-        FeatureManager = Check.NotNull(featureManager, nameof(featureManager));
+        FeatureManager = Objects.requireNonNull(featureManager, nameof(featureManager));
         AllFeatures = new GlobalFeatureDictionary();
     }
 
-    public virtual void Enable<TFeature>()
+    public   void Enable<TFeature>()
         where TFeature : GlobalFeature
     {
         GetFeature<TFeature>().Enable();
     }
 
-    public virtual void Disable<TFeature>()
+    public   void Disable<TFeature>()
         where TFeature : GlobalFeature
     {
         GetFeature<TFeature>().Disable();
     }
 
-    public virtual void SetEnabled<TFeature>(bool isEnabled)
+    public   void SetEnabled<TFeature>(boolean isEnabled)
         where TFeature : GlobalFeature
     {
         GetFeature<TFeature>().SetEnabled(isEnabled);
     }
 
-    public virtual void Enable(string featureName)
+    public   void Enable(String featureName)
     {
         GetFeature(featureName).Enable();
     }
 
-    public virtual void Disable(string featureName)
+    public   void Disable(String featureName)
     {
         GetFeature(featureName).Disable();
     }
 
-    public virtual void SetEnabled(string featureName, bool isEnabled)
+    public   void SetEnabled(String featureName, boolean isEnabled)
     {
         GetFeature(featureName).SetEnabled(isEnabled);
     }
 
-    public virtual void EnableAll()
+    public   void EnableAll()
     {
-        foreach (var feature in AllFeatures.Values)
+        for (var feature in AllFeatures.Values)
         {
             feature.Enable();
         }
     }
 
-    public virtual void DisableAll()
+    public   void DisableAll()
     {
-        foreach (var feature in AllFeatures.Values)
+        for (var feature in AllFeatures.Values)
         {
             feature.Disable();
         }
     }
 
-    public virtual GlobalFeature GetFeature(string featureName)
+    public   GlobalFeature GetFeature(String featureName)
     {
         var feature = AllFeatures.GetOrDefault(featureName);
         if (feature == null)
@@ -79,13 +79,13 @@ public abstract class GlobalModuleFeatures
         return feature;
     }
 
-    public virtual TFeature GetFeature<TFeature>()
+    public   TFeature GetFeature<TFeature>()
         where TFeature : GlobalFeature
     {
         return (TFeature)GetFeature(GlobalFeatureNameAttribute.GetName<TFeature>());
     }
 
-    public virtual IReadOnlyList<GlobalFeature> GetFeatures()
+    public   IReadOnlyList<GlobalFeature> GetFeatures()
     {
         return AllFeatures.Values.ToImmutableList();
     }

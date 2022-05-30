@@ -12,11 +12,11 @@ namespace Volo.Abp.Authorization.Permissions;
 
 public class PermissionChecker : IPermissionChecker, ITransientDependency
 {
-    protected IPermissionDefinitionManager PermissionDefinitionManager { get; }
-    protected ICurrentPrincipalAccessor PrincipalAccessor { get; }
-    protected ICurrentTenant CurrentTenant { get; }
-    protected IPermissionValueProviderManager PermissionValueProviderManager { get; }
-    protected ISimpleStateCheckerManager<PermissionDefinition> StateCheckerManager { get; }
+    protected IPermissionDefinitionManager PermissionDefinitionManager;//  { get; }
+    protected ICurrentPrincipalAccessor PrincipalAccessor;//  { get; }
+    protected ICurrentTenant CurrentTenant;//  { get; }
+    protected IPermissionValueProviderManager PermissionValueProviderManager;//  { get; }
+    protected ISimpleStateCheckerManager<PermissionDefinition> StateCheckerManager;//  { get; }
 
     public PermissionChecker(
         ICurrentPrincipalAccessor principalAccessor,
@@ -32,16 +32,16 @@ public class PermissionChecker : IPermissionChecker, ITransientDependency
         StateCheckerManager = stateCheckerManager;
     }
 
-    public virtual async Task<bool> IsGrantedAsync(string name)
+    public virtualTask<bool> IsGrantedAsync(String name)
     {
-        return await IsGrantedAsync(PrincipalAccessor.Principal, name);
+        return IsGrantedAsync(PrincipalAccessor.Principal, name);
     }
 
-    public virtual async Task<bool> IsGrantedAsync(
+    public virtualTask<bool> IsGrantedAsync(
         ClaimsPrincipal claimsPrincipal,
-        string name)
+        String name)
     {
-        Check.NotNull(name, nameof(name));
+        Objects.requireNonNull(name, nameof(name));
 
         var permission = PermissionDefinitionManager.Get(name);
 
@@ -50,7 +50,7 @@ public class PermissionChecker : IPermissionChecker, ITransientDependency
             return false;
         }
 
-        if (!await StateCheckerManager.IsEnabledAsync(permission))
+        if (!StateCheckerManager.IsEnabledAsync(permission))
         {
             return false;
         }
@@ -65,7 +65,7 @@ public class PermissionChecker : IPermissionChecker, ITransientDependency
 
         var isGranted = false;
         var context = new PermissionValueCheckContext(permission, claimsPrincipal);
-        foreach (var provider in PermissionValueProviderManager.ValueProviders)
+        for (var provider in PermissionValueProviderManager.ValueProviders)
         {
             if (context.Permission.Providers.Any() &&
                 !context.Permission.Providers.Contains(provider.Name))
@@ -73,7 +73,7 @@ public class PermissionChecker : IPermissionChecker, ITransientDependency
                 continue;
             }
 
-            var result = await provider.CheckAsync(context);
+            var result = provider.CheckAsync(context);
 
             if (result == PermissionGrantResult.Granted)
             {
@@ -88,14 +88,14 @@ public class PermissionChecker : IPermissionChecker, ITransientDependency
         return isGranted;
     }
 
-    public async Task<MultiplePermissionGrantResult> IsGrantedAsync(string[] names)
+    public Task<MultiplePermissionGrantResult> IsGrantedAsync(String[] names)
     {
-        return await IsGrantedAsync(PrincipalAccessor.Principal, names);
+        return IsGrantedAsync(PrincipalAccessor.Principal, names);
     }
 
-    public async Task<MultiplePermissionGrantResult> IsGrantedAsync(ClaimsPrincipal claimsPrincipal, string[] names)
+    public Task<MultiplePermissionGrantResult> IsGrantedAsync(ClaimsPrincipal claimsPrincipal, String[] names)
     {
-        Check.NotNull(names, nameof(names));
+        Objects.requireNonNull(names, nameof(names));
 
         var multiTenancySide = claimsPrincipal?.GetMultiTenancySide() ?? CurrentTenant.GetMultiTenancySide();
 
@@ -106,21 +106,21 @@ public class PermissionChecker : IPermissionChecker, ITransientDependency
         }
 
         var permissionDefinitions = new List<PermissionDefinition>();
-        foreach (var name in names)
+        for (var name in names)
         {
             var permission = PermissionDefinitionManager.Get(name);
 
             result.Result.Add(name, PermissionGrantResult.Undefined);
 
             if (permission.IsEnabled &&
-                await StateCheckerManager.IsEnabledAsync(permission) &&
+                StateCheckerManager.IsEnabledAsync(permission) &&
                 permission.MultiTenancySide.HasFlag(multiTenancySide))
             {
                 permissionDefinitions.Add(permission);
             }
         }
 
-        foreach (var provider in PermissionValueProviderManager.ValueProviders)
+        for (var provider in PermissionValueProviderManager.ValueProviders)
         {
             var permissions = permissionDefinitions
                 .Where(x => !x.Providers.Any() || x.Providers.Contains(provider.Name))
@@ -135,8 +135,8 @@ public class PermissionChecker : IPermissionChecker, ITransientDependency
                 permissions,
                 claimsPrincipal);
 
-            var multipleResult = await provider.CheckAsync(context);
-            foreach (var grantResult in multipleResult.Result.Where(grantResult =>
+            var multipleResult = provider.CheckAsync(context);
+            for (var grantResult in multipleResult.Result.Where(grantResult =>
                 result.Result.ContainsKey(grantResult.Key) &&
                 result.Result[grantResult.Key] == PermissionGrantResult.Undefined &&
                 grantResult.Value != PermissionGrantResult.Undefined))

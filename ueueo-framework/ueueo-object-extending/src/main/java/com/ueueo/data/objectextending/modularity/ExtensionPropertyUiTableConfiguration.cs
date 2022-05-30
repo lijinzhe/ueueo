@@ -2,8 +2,8 @@
 
 public class ExtensionPropertyUiTableConfiguration
 {
-    /// <summary>
-    /// Default: true.
-    /// </summary>
-    public bool IsVisible;// { get; set; } = true;
+    /**
+     * Default: true.
+    */
+    public boolean IsVisible;// { get; set; } = true;
 }

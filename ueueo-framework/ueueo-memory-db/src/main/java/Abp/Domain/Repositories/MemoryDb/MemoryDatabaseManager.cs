@@ -7,8 +7,8 @@ namespace Volo.Abp.Domain.Repositories.MemoryDb;
 
 public class MemoryDatabaseManager : ISingletonDependency
 {
-    private readonly ConcurrentDictionary<string, IMemoryDatabase> _databases =
-        new ConcurrentDictionary<string, IMemoryDatabase>();
+    private readonly ConcurrentDictionary<String, IMemoryDatabase> _databases =
+        new ConcurrentDictionary<String, IMemoryDatabase>();
 
     private readonly IServiceProvider _serviceProvider;
 
@@ -17,7 +17,7 @@ public class MemoryDatabaseManager : ISingletonDependency
         _serviceProvider = serviceProvider;
     }
 
-    public IMemoryDatabase Get(string databaseName)
+    public IMemoryDatabase Get(String databaseName)
     {
         return _databases.GetOrAdd(databaseName, _ => _serviceProvider.GetRequiredService<IMemoryDatabase>());
     }

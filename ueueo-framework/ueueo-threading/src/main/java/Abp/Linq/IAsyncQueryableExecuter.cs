@@ -13,8 +13,8 @@ public interface IAsyncQueryableExecuter
     #region Contains
 
     Task<bool> ContainsAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] T item,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull T item,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -22,17 +22,17 @@ public interface IAsyncQueryableExecuter
     #region Any/All
 
     Task<bool> AnyAsync<T>(
-        [NotNull] IQueryable<T> queryable,
+        @Nonnull IQueryable<T> queryable,
         CancellationToken cancellationToken = default);
 
     Task<bool> AnyAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, bool>> predicate,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, bool>> predicate,
         CancellationToken cancellationToken = default);
 
     Task<bool> AllAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, bool>> predicate,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, bool>> predicate,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -40,24 +40,24 @@ public interface IAsyncQueryableExecuter
     #region Count/LongCount
 
     Task<int> CountAsync<T>(
-        [NotNull] IQueryable<T> queryable,
+        @Nonnull IQueryable<T> queryable,
         CancellationToken cancellationToken = default);
 
 
     Task<int> CountAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, bool>> predicate,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, bool>> predicate,
         CancellationToken cancellationToken = default);
 
 
     Task<long> LongCountAsync<T>(
-        [NotNull] IQueryable<T> queryable,
+        @Nonnull IQueryable<T> queryable,
         CancellationToken cancellationToken = default);
 
 
     Task<long> LongCountAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, bool>> predicate,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, bool>> predicate,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -65,24 +65,24 @@ public interface IAsyncQueryableExecuter
     #region First/FirstOrDefault
 
     Task<T> FirstAsync<T>(
-        [NotNull] IQueryable<T> queryable,
+        @Nonnull IQueryable<T> queryable,
         CancellationToken cancellationToken = default);
 
 
     Task<T> FirstAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, bool>> predicate,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, bool>> predicate,
         CancellationToken cancellationToken = default);
 
 
     Task<T> FirstOrDefaultAsync<T>(
-        [NotNull] IQueryable<T> queryable,
+        @Nonnull IQueryable<T> queryable,
         CancellationToken cancellationToken = default);
 
 
     Task<T> FirstOrDefaultAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, bool>> predicate,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, bool>> predicate,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -90,24 +90,24 @@ public interface IAsyncQueryableExecuter
     #region Last/LastOrDefault
 
     Task<T> LastAsync<T>(
-        [NotNull] IQueryable<T> queryable,
+        @Nonnull IQueryable<T> queryable,
         CancellationToken cancellationToken = default);
 
 
     Task<T> LastAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, bool>> predicate,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, bool>> predicate,
         CancellationToken cancellationToken = default);
 
 
     Task<T> LastOrDefaultAsync<T>(
-        [NotNull] IQueryable<T> queryable,
+        @Nonnull IQueryable<T> queryable,
         CancellationToken cancellationToken = default);
 
 
     Task<T> LastOrDefaultAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, bool>> predicate,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, bool>> predicate,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -115,22 +115,22 @@ public interface IAsyncQueryableExecuter
     #region Single/SingleOrDefault
 
     Task<T> SingleAsync<T>(
-        [NotNull] IQueryable<T> queryable,
+        @Nonnull IQueryable<T> queryable,
         CancellationToken cancellationToken = default);
 
 
     Task<T> SingleAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, bool>> predicate,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, bool>> predicate,
         CancellationToken cancellationToken = default);
 
     Task<T> SingleOrDefaultAsync<T>(
-        [NotNull] IQueryable<T> queryable,
+        @Nonnull IQueryable<T> queryable,
         CancellationToken cancellationToken = default);
 
     Task<T> SingleOrDefaultAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, bool>> predicate,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, bool>> predicate,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -138,13 +138,13 @@ public interface IAsyncQueryableExecuter
     #region Min
 
     Task<T> MinAsync<T>(
-        [NotNull] IQueryable<T> queryable,
+        @Nonnull IQueryable<T> queryable,
         CancellationToken cancellationToken = default);
 
 
     Task<TResult> MinAsync<T, TResult>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, TResult>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, TResult>> selector,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -152,13 +152,13 @@ public interface IAsyncQueryableExecuter
     #region Max
 
     Task<T> MaxAsync<T>(
-        [NotNull] IQueryable<T> queryable,
+        @Nonnull IQueryable<T> queryable,
         CancellationToken cancellationToken = default);
 
 
     Task<TResult> MaxAsync<T, TResult>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, TResult>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, TResult>> selector,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -166,112 +166,112 @@ public interface IAsyncQueryableExecuter
     #region Sum
 
     Task<decimal> SumAsync(
-        [NotNull] IQueryable<decimal> source,
+        @Nonnull IQueryable<decimal> source,
         CancellationToken cancellationToken = default);
 
 
     Task<decimal?> SumAsync(
-        [NotNull] IQueryable<decimal?> source,
+        @Nonnull IQueryable<decimal?> source,
         CancellationToken cancellationToken = default);
 
 
     Task<decimal> SumAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, decimal>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, decimal>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<decimal?> SumAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, decimal?>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, decimal?>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<int> SumAsync(
-        [NotNull] IQueryable<int> source,
+        @Nonnull IQueryable<int> source,
         CancellationToken cancellationToken = default);
 
 
     Task<int?> SumAsync(
-        [NotNull] IQueryable<int?> source,
+        @Nonnull IQueryable<int?> source,
         CancellationToken cancellationToken = default);
 
 
     Task<int> SumAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, int>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, int>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<int?> SumAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, int?>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, int?>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<long> SumAsync(
-        [NotNull] IQueryable<long> source,
+        @Nonnull IQueryable<long> source,
         CancellationToken cancellationToken = default);
 
 
     Task<long?> SumAsync(
-        [NotNull] IQueryable<long?> source,
+        @Nonnull IQueryable<long?> source,
         CancellationToken cancellationToken = default);
 
 
     Task<long> SumAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, long>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, long>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<long?> SumAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, long?>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, long?>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<double> SumAsync(
-        [NotNull] IQueryable<double> source,
+        @Nonnull IQueryable<double> source,
         CancellationToken cancellationToken = default);
 
 
     Task<double?> SumAsync(
-        [NotNull] IQueryable<double?> source,
+        @Nonnull IQueryable<double?> source,
         CancellationToken cancellationToken = default);
 
 
     Task<double> SumAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, double>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, double>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<double?> SumAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, double?>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, double?>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<float> SumAsync(
-        [NotNull] IQueryable<float> source,
+        @Nonnull IQueryable<float> source,
         CancellationToken cancellationToken = default);
 
 
     Task<float?> SumAsync(
-        [NotNull] IQueryable<float?> source,
+        @Nonnull IQueryable<float?> source,
         CancellationToken cancellationToken = default);
 
 
     Task<float> SumAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, float>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, float>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<float?> SumAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, float?>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, float?>> selector,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -279,109 +279,109 @@ public interface IAsyncQueryableExecuter
     #region Average
 
     Task<decimal> AverageAsync(
-        [NotNull] IQueryable<decimal> source,
+        @Nonnull IQueryable<decimal> source,
         CancellationToken cancellationToken = default);
 
 
     Task<decimal?> AverageAsync(
-        [NotNull] IQueryable<decimal?> source,
+        @Nonnull IQueryable<decimal?> source,
         CancellationToken cancellationToken = default);
 
 
     Task<decimal> AverageAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, decimal>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, decimal>> selector,
         CancellationToken cancellationToken = default);
 
     Task<decimal?> AverageAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, decimal?>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, decimal?>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<double> AverageAsync(
-        [NotNull] IQueryable<int> source,
+        @Nonnull IQueryable<int> source,
         CancellationToken cancellationToken = default);
 
 
     Task<double?> AverageAsync(
-        [NotNull] IQueryable<int?> source,
+        @Nonnull IQueryable<int?> source,
         CancellationToken cancellationToken = default);
 
 
     Task<double> AverageAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, int>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, int>> selector,
         CancellationToken cancellationToken = default);
 
     Task<double?> AverageAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, int?>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, int?>> selector,
         CancellationToken cancellationToken = default);
 
     Task<double> AverageAsync(
-        [NotNull] IQueryable<long> source,
+        @Nonnull IQueryable<long> source,
         CancellationToken cancellationToken = default);
 
 
     Task<double?> AverageAsync(
-        [NotNull] IQueryable<long?> source,
+        @Nonnull IQueryable<long?> source,
         CancellationToken cancellationToken = default);
 
 
     Task<double> AverageAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, long>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, long>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<double?> AverageAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, long?>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, long?>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<double> AverageAsync(
-        [NotNull] IQueryable<double> source,
+        @Nonnull IQueryable<double> source,
         CancellationToken cancellationToken = default);
 
 
     Task<double?> AverageAsync(
-        [NotNull] IQueryable<double?> source,
+        @Nonnull IQueryable<double?> source,
         CancellationToken cancellationToken = default);
 
 
     Task<double> AverageAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, double>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, double>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<double?> AverageAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, double?>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, double?>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<float> AverageAsync(
-        [NotNull] IQueryable<float> source,
+        @Nonnull IQueryable<float> source,
         CancellationToken cancellationToken = default);
 
 
     Task<float?> AverageAsync(
-        [NotNull] IQueryable<float?> source,
+        @Nonnull IQueryable<float?> source,
         CancellationToken cancellationToken = default);
 
 
     Task<float> AverageAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, float>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, float>> selector,
         CancellationToken cancellationToken = default);
 
 
     Task<float?> AverageAsync<T>(
-        [NotNull] IQueryable<T> queryable,
-        [NotNull] Expression<Func<T, float?>> selector,
+        @Nonnull IQueryable<T> queryable,
+        @Nonnull Expression<Func<T, float?>> selector,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -389,12 +389,12 @@ public interface IAsyncQueryableExecuter
     #region ToList/Array
 
     Task<List<T>> ToListAsync<T>(
-        [NotNull] IQueryable<T> queryable,
+        @Nonnull IQueryable<T> queryable,
         CancellationToken cancellationToken = default);
 
 
     Task<T[]> ToArrayAsync<T>(
-        [NotNull] IQueryable<T> queryable,
+        @Nonnull IQueryable<T> queryable,
         CancellationToken cancellationToken = default);
 
     #endregion

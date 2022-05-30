@@ -15,7 +15,7 @@ public class AbpBackgroundJobQuartzOptions
     [NotNull]
     public Func<int, IJobExecutionContext, JobExecutionException, Task> RetryStrategy {
         get => _retryStrategy;
-        set => _retryStrategy = Check.NotNull(value, nameof(value));
+        set => _retryStrategy = Objects.requireNonNull(value, nameof(value));
     }
     private Func<int, IJobExecutionContext, JobExecutionException, Task> _retryStrategy;
 
@@ -39,6 +39,6 @@ public class AbpBackgroundJobQuartzOptions
         }
 
         var retryInterval = executionContext.JobDetail.JobDataMap.GetString(QuartzBackgroundJobManager.JobDataPrefix + nameof(RetryIntervalMillisecond)).To<int>();
-        await Task.Delay(retryInterval);
+        Task.Delay(retryInterval);
     }
 }

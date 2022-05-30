@@ -25,20 +25,21 @@ public class DynamicRangeAttribute : RangeAttribute
         );
         Debug.Assert(MinimumField != null, nameof(MinimumField) + " != null");
     }
-
-    /// <param name="sourceType">A type to get the values of the properties</param>
-    /// <param name="operandType">The type of the range parameters. Must implement IComparable. <see cref="RangeAttribute.OperandType"/></param>
-    /// <param name="minimumPropertyName">The name of the public static property for the <see cref="RangeAttribute.Minimum"/></param>
-    /// <param name="maximumPropertyName">The name of the public static property for the <see cref="RangeAttribute.Maximum"/></param>
+    /**
+     * <param name="sourceType">A type to get the values of the properties</param>
+     * <param name="operandType">The type of the range parameters. Must implement IComparable. <see cref="RangeAttribute.OperandType"/></param>
+     * <param name="minimumPropertyName">The name of the public static property for the <see cref="RangeAttribute.Minimum"/></param>
+     * <param name="maximumPropertyName">The name of the public static property for the <see cref="RangeAttribute.Maximum"/></param>
+     */
     public DynamicRangeAttribute(
-        [NotNull] Type sourceType,
-        [NotNull] Type operandType,
-        [CanBeNull] string minimumPropertyName,
-        [CanBeNull] string maximumPropertyName
+        @Nonnull Type sourceType,
+        @Nonnull Type operandType,
+        @Nullable String minimumPropertyName,
+        @Nullable String maximumPropertyName
     )
-        : base(operandType, string.Empty, string.Empty)
+        : base(operandType, String.Empty, String.Empty)
     {
-        Check.NotNull(sourceType, nameof(sourceType));
+        Objects.requireNonNull(sourceType, nameof(sourceType));
 
         if (minimumPropertyName != null)
         {

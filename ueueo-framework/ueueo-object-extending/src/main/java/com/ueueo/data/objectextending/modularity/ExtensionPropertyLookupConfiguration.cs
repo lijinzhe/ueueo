@@ -4,25 +4,25 @@ namespace Volo.Abp.ObjectExtending.Modularity;
 
 public class ExtensionPropertyLookupConfiguration
 {
-    public string Url;// { get; set; }
+    public String Url;// { get; set; }
 
-    /// <summary>
-    /// Default value: "items".
-    /// </summary>
-    public string ResultListPropertyName;// { get; set; } = "items";
+    /**
+     * Default value: "items".
+    */
+    public String ResultListPropertyName;// { get; set; } = "items";
 
-    /// <summary>
-    /// Default value: "text".
-    /// </summary>
-    public string DisplayPropertyName;// { get; set; } = "text";
+    /**
+     * Default value: "text".
+    */
+    public String DisplayPropertyName;// { get; set; } = "text";
 
-    /// <summary>
-    /// Default value: "id".
-    /// </summary>
-    public string ValuePropertyName;// { get; set; } = "id";
+    /**
+     * Default value: "id".
+    */
+    public String ValuePropertyName;// { get; set; } = "id";
 
-    /// <summary>
-    /// Default value: "filter".
-    /// </summary>
-    public string FilterParamName;// { get; set; } = "filter";
+    /**
+     * Default value: "filter".
+    */
+    public String FilterParamName;// { get; set; } = "filter";
 }

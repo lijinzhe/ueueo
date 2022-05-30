@@ -7,34 +7,34 @@ using Volo.Abp.ExceptionHandling;
 
 namespace Volo.Abp.Threading;
 
-/// <summary>
-/// A robust timer implementation that ensures no overlapping occurs. It waits exactly specified <see cref="Period"/> between ticks.
-/// </summary>
+/**
+ * A robust timer implementation that ensures no overlapping occurs. It waits exactly specified <see cref="Period"/> between ticks.
+*/
 public class AbpTimer : ITransientDependency
 {
-    /// <summary>
-    /// This event is raised periodically according to Period of Timer.
-    /// </summary>
+    /**
+     * This event is raised periodically according to Period of Timer.
+    */
     public event EventHandler Elapsed;
 
-    /// <summary>
-    /// Task period of timer (as milliseconds).
-    /// </summary>
+    /**
+     * void period of timer (as milliseconds).
+    */
     public int Period;// { get; set; }
 
-    /// <summary>
-    /// Indicates whether timer raises Elapsed event on Start method of Timer for once.
-    /// Default: False.
-    /// </summary>
-    public bool RunOnStart;// { get; set; }
+    /**
+     * Indicates whether timer raises Elapsed event on Start method of Timer for once.
+     * Default: False.
+    */
+    public boolean RunOnStart;// { get; set; }
 
     public ILogger<AbpTimer> Logger;// { get; set; }
 
     public IExceptionNotifier ExceptionNotifier;// { get; set; }
 
     private readonly Timer _taskTimer;
-    private volatile bool _performingTasks;
-    private volatile bool _isRunning;
+    private volatile boolean _performingTasks;
+    private volatile boolean _isRunning;
 
     public AbpTimer()
     {
@@ -77,11 +77,12 @@ public class AbpTimer : ITransientDependency
         }
     }
 
-    /// <summary>
-    /// This method is called by _taskTimer.
-    /// </summary>
-    /// <param name="state">Not used argument</param>
-    private void TimerCallBack(object state)
+    /**
+     * This method is called by _taskTimer.
+    *
+     * <param name="state">Not used argument</param>
+     */
+    private void TimerCallBack(Object state)
     {
         lock (_taskTimer)
         {

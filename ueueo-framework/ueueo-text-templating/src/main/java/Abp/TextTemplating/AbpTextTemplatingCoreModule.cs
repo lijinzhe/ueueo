@@ -13,7 +13,8 @@ namespace Volo.Abp.TextTemplating;
     )]
 public class AbpTextTemplatingCoreModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void PreConfigureServices(ServiceConfigurationContext context)
     {
         AutoAddProvidersAndContributors(context.Services);
     }

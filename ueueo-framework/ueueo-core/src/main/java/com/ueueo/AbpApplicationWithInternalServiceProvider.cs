@@ -10,8 +10,8 @@ internal class AbpApplicationWithInternalServiceProvider : AbpApplicationBase, I
     public IServiceScope ServiceScope ;// { get; private set; }
 
     public AbpApplicationWithInternalServiceProvider(
-        [NotNull] Type startupModuleType,
-        [CanBeNull] Action<AbpApplicationCreationOptions> optionsAction
+        @Nonnull Type startupModuleType,
+        @Nullable Action<AbpApplicationCreationOptions> optionsAction
         ) : this(
         startupModuleType,
         new ServiceCollection(),
@@ -21,9 +21,9 @@ internal class AbpApplicationWithInternalServiceProvider : AbpApplicationBase, I
     }
 
     private AbpApplicationWithInternalServiceProvider(
-        [NotNull] Type startupModuleType,
-        [NotNull] IServiceCollection services,
-        [CanBeNull] Action<AbpApplicationCreationOptions> optionsAction
+        @Nonnull Type startupModuleType,
+        @Nonnull IServiceCollection services,
+        @Nullable Action<AbpApplicationCreationOptions> optionsAction
         ) : base(
             startupModuleType,
             services,
@@ -48,7 +48,7 @@ internal class AbpApplicationWithInternalServiceProvider : AbpApplicationBase, I
     public void InitializeAsync()
     {
         CreateServiceProvider();
-        await InitializeModulesAsync();
+        InitializeModulesAsync();
     }
 
     public void Initialize()
@@ -57,9 +57,10 @@ internal class AbpApplicationWithInternalServiceProvider : AbpApplicationBase, I
         InitializeModules();
     }
 
-    public override void Dispose()
+    @Override
+    public void Dispose()
     {
-        base.Dispose();
+       super.Dispose();
         ServiceScope.Dispose();
     }
 }

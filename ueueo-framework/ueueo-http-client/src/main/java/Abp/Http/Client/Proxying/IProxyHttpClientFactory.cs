@@ -6,5 +6,5 @@ public interface IProxyHttpClientFactory
 {
     HttpClient Create();
 
-    HttpClient Create(string name);
+    HttpClient Create(String name);
 }

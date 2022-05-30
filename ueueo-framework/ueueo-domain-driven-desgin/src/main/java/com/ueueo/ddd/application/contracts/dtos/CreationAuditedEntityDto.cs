@@ -3,29 +3,29 @@ using Volo.Abp.Auditing;
 
 namespace Volo.Abp.Application.Dtos;
 
-/// <summary>
-/// This class can be inherited by DTO classes to implement <see cref="ICreationAuditedObject"/> interface.
-/// </summary>
+/**
+ * This class can be inherited by DTO classes to implement <see cref="ICreationAuditedObject"/> interface.
+*/
 [Serializable]
 public abstract class CreationAuditedEntityDto : EntityDto, ICreationAuditedObject
 {
-    /// <inheritdoc />
+     * <inheritdoc />
     public DateTime CreationTime;// { get; set; }
 
-    /// <inheritdoc />
-    public Guid? CreatorId;// { get; set; }
+     * <inheritdoc />
+    public ID CreatorId;// { get; set; }
 }
 
-/// <summary>
-/// This class can be inherited by DTO classes to implement <see cref="ICreationAuditedObject"/> interface.
-/// </summary>
-/// <typeparam name="TPrimaryKey">Type of primary key</typeparam>
+/**
+ * This class can be inherited by DTO classes to implement <see cref="ICreationAuditedObject"/> interface.
+*/
+ * <typeparam name="TPrimaryKey">Type of primary key</typeparam>
 [Serializable]
 public abstract class CreationAuditedEntityDto<TPrimaryKey> : EntityDto<TPrimaryKey>, ICreationAuditedObject
 {
-    /// <inheritdoc />
+     * <inheritdoc />
     public DateTime CreationTime;// { get; set; }
 
-    /// <inheritdoc />
-    public Guid? CreatorId;// { get; set; }
+     * <inheritdoc />
+    public ID CreatorId;// { get; set; }
 }

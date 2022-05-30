@@ -11,7 +11,8 @@ namespace Volo.Abp.Caching.StackExchangeRedis;
     )]
 public class AbpCachingStackExchangeRedisModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void ConfigureServices(ServiceConfigurationContext context)
     {
         var configuration = context.Services.GetConfiguration();
 

@@ -10,7 +10,7 @@ public class CurrentApiVersionInfo : ICurrentApiVersionInfo, ISingletonDependenc
 
     private readonly AsyncLocal<ApiVersionInfo> _currentApiVersionInfo = new AsyncLocal<ApiVersionInfo>();
 
-    public virtual IDisposable Change(ApiVersionInfo apiVersionInfo)
+    public   IDisposable Change(ApiVersionInfo apiVersionInfo)
     {
         var parent = ApiVersionInfo;
         _currentApiVersionInfo.Value = apiVersionInfo;

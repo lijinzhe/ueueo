@@ -7,16 +7,16 @@ namespace Volo.Abp.BlobStoring;
 public class BlobProviderSaveArgs : BlobProviderArgs
 {
     [NotNull]
-    public Stream BlobStream { get; }
+    public Stream BlobStream;//  { get; }
 
-    public bool OverrideExisting { get; }
+    public boolean OverrideExisting;//  { get; }
 
     public BlobProviderSaveArgs(
-        [NotNull] string containerName,
-        [NotNull] BlobContainerConfiguration configuration,
-        [NotNull] string blobName,
-        [NotNull] Stream blobStream,
-        bool overrideExisting = false,
+        @Nonnull String containerName,
+        @Nonnull BlobContainerConfiguration configuration,
+        @Nonnull String blobName,
+        @Nonnull Stream blobStream,
+        boolean overrideExisting = false,
         CancellationToken cancellationToken = default)
         : base(
             containerName,
@@ -24,7 +24,7 @@ public class BlobProviderSaveArgs : BlobProviderArgs
             blobName,
             cancellationToken)
     {
-        BlobStream = Check.NotNull(blobStream, nameof(blobStream));
+        BlobStream = Objects.requireNonNull(blobStream, nameof(blobStream));
         OverrideExisting = overrideExisting;
     }
 }

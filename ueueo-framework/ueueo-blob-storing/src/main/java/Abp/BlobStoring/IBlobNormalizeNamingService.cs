@@ -2,9 +2,9 @@
 
 public interface IBlobNormalizeNamingService
 {
-    BlobNormalizeNaming NormalizeNaming(BlobContainerConfiguration configuration, string containerName, string blobName);
+    BlobNormalizeNaming NormalizeNaming(BlobContainerConfiguration configuration, String containerName, String blobName);
 
-    string NormalizeContainerName(BlobContainerConfiguration configuration, string containerName);
+    String NormalizeContainerName(BlobContainerConfiguration configuration, String containerName);
 
-    string NormalizeBlobName(BlobContainerConfiguration configuration, string blobName);
+    String NormalizeBlobName(BlobContainerConfiguration configuration, String blobName);
 }

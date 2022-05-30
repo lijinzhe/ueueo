@@ -20,10 +20,10 @@ public class DynamicMaxLengthAttribute : MaxLengthAttribute
     }
 
     public DynamicMaxLengthAttribute(
-        [NotNull] Type sourceType,
-        [CanBeNull] string maximumLengthPropertyName)
+        @Nonnull Type sourceType,
+        @Nullable String maximumLengthPropertyName)
     {
-        Check.NotNull(sourceType, nameof(sourceType));
+        Objects.requireNonNull(sourceType, nameof(sourceType));
 
         if (maximumLengthPropertyName != null)
         {

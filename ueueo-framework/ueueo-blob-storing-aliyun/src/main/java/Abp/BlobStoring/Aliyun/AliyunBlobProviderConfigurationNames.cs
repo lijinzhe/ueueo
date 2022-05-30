@@ -2,16 +2,16 @@
 
 public class AliyunBlobProviderConfigurationNames
 {
-    public const string AccessKeyId = "Aliyun.AccessKeyId";
-    public const string AccessKeySecret = "Aliyun.AccessKeySecret";
-    public const string Endpoint = "Aliyun.Endpoint";
-    public const string UseSecurityTokenService = "Aliyun.UseSecurityTokenService";
-    public const string RegionId = "Aliyun.RegionId";
-    public const string RoleArn = "Aliyun.RoleArn";
-    public const string RoleSessionName = "Aliyun.RoleSessionName";
-    public const string DurationSeconds = "Aliyun.DurationSeconds";
-    public const string Policy = "Aliyun.Policy";
-    public const string ContainerName = "Aliyun.ContainerName";
-    public const string CreateContainerIfNotExists = "Aliyun.CreateContainerIfNotExists";
-    public const string TemporaryCredentialsCacheKey = "Aliyun.TemporaryCredentialsCacheKey";
+    public const String AccessKeyId = "Aliyun.AccessKeyId";
+    public const String AccessKeySecret = "Aliyun.AccessKeySecret";
+    public const String Endpoint = "Aliyun.Endpoint";
+    public const String UseSecurityTokenService = "Aliyun.UseSecurityTokenService";
+    public const String RegionId = "Aliyun.RegionId";
+    public const String RoleArn = "Aliyun.RoleArn";
+    public const String RoleSessionName = "Aliyun.RoleSessionName";
+    public const String DurationSeconds = "Aliyun.DurationSeconds";
+    public const String Policy = "Aliyun.Policy";
+    public const String ContainerName = "Aliyun.ContainerName";
+    public const String CreateContainerIfNotExists = "Aliyun.CreateContainerIfNotExists";
+    public const String TemporaryCredentialsCacheKey = "Aliyun.TemporaryCredentialsCacheKey";
 }

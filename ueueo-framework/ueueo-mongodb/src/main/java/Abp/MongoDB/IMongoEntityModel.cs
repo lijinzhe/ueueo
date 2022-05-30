@@ -4,7 +4,7 @@ namespace Volo.Abp.MongoDB;
 
 public interface IMongoEntityModel
 {
-    Type EntityType { get; }
+    Type EntityType;//  { get; }
 
-    string CollectionName { get; }
+    String CollectionName;//  { get; }
 }

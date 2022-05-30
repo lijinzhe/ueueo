@@ -7,5 +7,5 @@ namespace Volo.Abp.Http.Client.ClientProxying;
 
 public interface IObjectToFormData<in TValue>
 {
-    Task<List<KeyValuePair<string, HttpContent>>> ConvertAsync(ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, TValue value);
+    Task<List<KeyValuePair<String, HttpContent>>> ConvertAsync(ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, TValue value);
 }

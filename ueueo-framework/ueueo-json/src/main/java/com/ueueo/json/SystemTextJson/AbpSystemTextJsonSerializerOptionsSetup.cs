@@ -9,7 +9,7 @@ namespace Volo.Abp.Json.SystemTextJson;
 
 public class AbpSystemTextJsonSerializerOptionsSetup : IConfigureOptions<AbpSystemTextJsonSerializerOptions>
 {
-    protected IServiceProvider ServiceProvider { get; }
+    protected IServiceProvider ServiceProvider;//  { get; }
 
     public AbpSystemTextJsonSerializerOptionsSetup(IServiceProvider serviceProvider)
     {

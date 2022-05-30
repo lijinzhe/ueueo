@@ -6,19 +6,19 @@ namespace Volo.Abp.Validation;
 
 public static class HasValidationErrorsExtensions
 {
-    public static TException WithValidationError<TException>([NotNull] this TException exception, [NotNull] ValidationResult validationError)
-        where TException : IHasValidationErrors
+    public static TException WithValidationError<TException>(@Nonnull this TException exception, @Nonnull ValidationResult validationError)
+        //where TException : IHasValidationErrors
     {
-        Check.NotNull(exception, nameof(exception));
-        Check.NotNull(validationError, nameof(validationError));
+        Objects.requireNonNull(exception, nameof(exception));
+        Objects.requireNonNull(validationError, nameof(validationError));
 
         exception.ValidationErrors.Add(validationError);
 
         return exception;
     }
 
-    public static TException WithValidationError<TException>([NotNull] this TException exception, string errorMessage, params string[] memberNames)
-        where TException : IHasValidationErrors
+    public static TException WithValidationError<TException>(@Nonnull this TException exception, String errorMessage, params String[] memberNames)
+        //where TException : IHasValidationErrors
     {
         var validationResult = memberNames.IsNullOrEmpty()
             ? new ValidationResult(errorMessage)

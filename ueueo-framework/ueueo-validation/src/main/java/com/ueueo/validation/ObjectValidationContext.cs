@@ -7,13 +7,13 @@ namespace Volo.Abp.Validation;
 public class ObjectValidationContext
 {
     [NotNull]
-    public object ValidatingObject { get; }
+    public Object ValidatingObject;//  { get; }
 
-    public List<ValidationResult> Errors { get; }
+    public List<ValidationResult> Errors;//  { get; }
 
-    public ObjectValidationContext([NotNull] object validatingObject)
+    public ObjectValidationContext(@Nonnull Object validatingObject)
     {
-        ValidatingObject = Check.NotNull(validatingObject, nameof(validatingObject));
+        ValidatingObject = Objects.requireNonNull(validatingObject, nameof(validatingObject));
         Errors = new List<ValidationResult>();
     }
 }

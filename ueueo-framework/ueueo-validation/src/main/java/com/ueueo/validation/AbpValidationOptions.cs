@@ -6,7 +6,7 @@ namespace Volo.Abp.Validation;
 
 public class AbpValidationOptions
 {
-    public List<Type> IgnoredTypes { get; }
+    public List<Type> IgnoredTypes;//  { get; }
 
     public ITypeList<IObjectValidationContributor> ObjectValidationContributors;// { get; set; }
 

@@ -9,8 +9,8 @@ namespace Volo.Abp;
 
 public static class ObjectHelper
 {
-    private static readonly ConcurrentDictionary<string, PropertyInfo> CachedObjectProperties =
-        new ConcurrentDictionary<string, PropertyInfo>();
+    private static readonly ConcurrentDictionary<String, PropertyInfo> CachedObjectProperties =
+        new ConcurrentDictionary<String, PropertyInfo>();
 
     public static void TrySetProperty<TObject, TValue>(
         TObject obj,

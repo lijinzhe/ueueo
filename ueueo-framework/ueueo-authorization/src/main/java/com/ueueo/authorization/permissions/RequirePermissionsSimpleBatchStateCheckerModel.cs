@@ -3,17 +3,17 @@
 namespace Volo.Abp.Authorization.Permissions;
 
 public class RequirePermissionsSimpleBatchStateCheckerModel<TState>
-    where TState : IHasSimpleStateCheckers<TState>
+    //where TState : IHasSimpleStateCheckers<TState>
 {
-    public TState State { get; }
+    public TState State;//  { get; }
 
-    public string[] Permissions { get; }
+    public String[] Permissions;//  { get; }
 
-    public bool RequiresAll { get; }
+    public boolean RequiresAll;//  { get; }
 
-    public RequirePermissionsSimpleBatchStateCheckerModel(TState state, string[] permissions, bool requiresAll = true)
+    public RequirePermissionsSimpleBatchStateCheckerModel(TState state, String[] permissions, boolean requiresAll = true)
     {
-        Check.NotNull(state, nameof(state));
+        Objects.requireNonNull(state, nameof(state));
         Check.NotNullOrEmpty(permissions, nameof(permissions));
 
         State = state;

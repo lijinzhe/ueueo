@@ -6,13 +6,13 @@ namespace Volo.Abp.Http.Client.DynamicProxying;
 
 public class DynamicHttpProxyInterceptorClientProxy<TService> : ClientProxyBase<TService>
 {
-    public virtual async Task<T> CallRequestAsync<T>(ClientProxyRequestContext requestContext)
+    public    Task<T> CallRequestAsync<T>(ClientProxyRequestContext requestContext)
     {
-        return await base.RequestAsync<T>(requestContext);
+        returnsuper.RequestAsync<T>(requestContext);
     }
 
-    public virtual async Task<HttpContent> CallRequestAsync(ClientProxyRequestContext requestContext)
+    public    Task<HttpContent> CallRequestAsync(ClientProxyRequestContext requestContext)
     {
-        return await base.RequestAsync(requestContext);
+        returnsuper.RequestAsync(requestContext);
     }
 }

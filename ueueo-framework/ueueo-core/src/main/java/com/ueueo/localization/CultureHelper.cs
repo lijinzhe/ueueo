@@ -6,9 +6,9 @@ namespace Volo.Abp.Localization;
 
 public static class CultureHelper
 {
-    public static IDisposable Use([NotNull] string culture, string uiCulture = null)
+    public static IDisposable Use(@Nonnull String culture, String uiCulture = null)
     {
-        Check.NotNull(culture, nameof(culture));
+        Objects.requireNonNull(culture, nameof(culture));
 
         return Use(
             new CultureInfo(culture),
@@ -18,9 +18,9 @@ public static class CultureHelper
         );
     }
 
-    public static IDisposable Use([NotNull] CultureInfo culture, CultureInfo uiCulture = null)
+    public static IDisposable Use(@Nonnull CultureInfo culture, CultureInfo uiCulture = null)
     {
-        Check.NotNull(culture, nameof(culture));
+        Objects.requireNonNull(culture, nameof(culture));
 
         var currentCulture = CultureInfo.CurrentCulture;
         var currentUiCulture = CultureInfo.CurrentUICulture;
@@ -35,9 +35,9 @@ public static class CultureHelper
         });
     }
 
-    public static bool IsRtl => CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
+    public static boolean IsRtl => CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
 
-    public static bool IsValidCultureCode(string cultureCode)
+    public static boolean IsValidCultureCode(String cultureCode)
     {
         if (cultureCode.IsNullOrWhiteSpace())
         {
@@ -55,7 +55,7 @@ public static class CultureHelper
         }
     }
 
-    public static string GetBaseCultureName(string cultureName)
+    public static String GetBaseCultureName(String cultureName)
     {
         return new CultureInfo(cultureName).Parent.Name;
     }

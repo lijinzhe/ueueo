@@ -7,9 +7,9 @@ namespace Volo.Abp.MongoDB.DependencyInjection;
 
 public class AbpMongoDbConventionalRegistrar : DefaultConventionalRegistrar
 {
-    protected override bool IsConventionalRegistrationDisabled(Type type)
+    protected override boolean IsConventionalRegistrationDisabled(Type type)
     {
-        return !typeof(IAbpMongoDbContext).IsAssignableFrom(type) || type == typeof(AbpMongoDbContext) || base.IsConventionalRegistrationDisabled(type);
+        return !typeof(IAbpMongoDbContext).IsAssignableFrom(type) || type == typeof(AbpMongoDbContext) ||super.IsConventionalRegistrationDisabled(type);
     }
 
     protected override List<Type> GetExposedServiceTypes(Type type)

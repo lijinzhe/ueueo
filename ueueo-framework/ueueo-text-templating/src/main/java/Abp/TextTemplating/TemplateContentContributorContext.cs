@@ -6,21 +6,21 @@ namespace Volo.Abp.TextTemplating;
 public class TemplateContentContributorContext
 {
     [NotNull]
-    public TemplateDefinition TemplateDefinition { get; }
+    public TemplateDefinition TemplateDefinition;//  { get; }
 
     [NotNull]
-    public IServiceProvider ServiceProvider { get; }
+    public IServiceProvider ServiceProvider;//  { get; }
 
     [CanBeNull]
-    public string Culture { get; }
+    public String Culture;//  { get; }
 
     public TemplateContentContributorContext(
-        [NotNull] TemplateDefinition templateDefinition,
-        [NotNull] IServiceProvider serviceProvider,
-        [CanBeNull] string culture)
+        @Nonnull TemplateDefinition templateDefinition,
+        @Nonnull IServiceProvider serviceProvider,
+        @Nullable String culture)
     {
-        TemplateDefinition = Check.NotNull(templateDefinition, nameof(templateDefinition));
-        ServiceProvider = Check.NotNull(serviceProvider, nameof(serviceProvider));
+        TemplateDefinition = Objects.requireNonNull(templateDefinition, nameof(templateDefinition));
+        ServiceProvider = Objects.requireNonNull(serviceProvider, nameof(serviceProvider));
         Culture = culture;
     }
 }

@@ -7,20 +7,20 @@ namespace Volo.Abp.GlobalFeatures;
 public static class GlobalFeatureSimpleStateCheckerExtensions
 {
     public static TState RequireGlobalFeatures<TState>(
-        [NotNull] this TState state,
-        params string[] globalFeatures)
+        @Nonnull this TState state,
+        params String[] globalFeatures)
         where TState : IHasSimpleStateCheckers<TState>
     {
         return state.RequireGlobalFeatures(true, globalFeatures);
     }
 
     public static TState RequireGlobalFeatures<TState>(
-        [NotNull] this TState state,
-        bool requiresAll,
-        params string[] globalFeatures)
+        @Nonnull this TState state,
+        boolean requiresAll,
+        params String[] globalFeatures)
         where TState : IHasSimpleStateCheckers<TState>
     {
-        Check.NotNull(state, nameof(state));
+        Objects.requireNonNull(state, nameof(state));
         Check.NotNullOrEmpty(globalFeatures, nameof(globalFeatures));
 
         state.StateCheckers.Add(new RequireGlobalFeaturesSimpleStateChecker<TState>(requiresAll, globalFeatures));
@@ -28,7 +28,7 @@ public static class GlobalFeatureSimpleStateCheckerExtensions
     }
 
     public static TState RequireGlobalFeatures<TState>(
-        [NotNull] this TState state,
+        @Nonnull this TState state,
         params Type[] globalFeatures)
         where TState : IHasSimpleStateCheckers<TState>
     {
@@ -36,12 +36,12 @@ public static class GlobalFeatureSimpleStateCheckerExtensions
     }
 
     public static TState RequireGlobalFeatures<TState>(
-        [NotNull] this TState state,
-        bool requiresAll,
+        @Nonnull this TState state,
+        boolean requiresAll,
         params Type[] globalFeatures)
         where TState : IHasSimpleStateCheckers<TState>
     {
-        Check.NotNull(state, nameof(state));
+        Objects.requireNonNull(state, nameof(state));
         Check.NotNullOrEmpty(globalFeatures, nameof(globalFeatures));
 
         state.StateCheckers.Add(new RequireGlobalFeaturesSimpleStateChecker<TState>(requiresAll, globalFeatures));

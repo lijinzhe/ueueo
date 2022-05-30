@@ -6,9 +6,9 @@ namespace Volo.Abp.Localization;
 
 public class LocalizationResourceContributorList : List<ILocalizationResourceContributor>
 {
-    public LocalizedString GetOrNull(string cultureName, string name)
+    public LocalizedString GetOrNull(String cultureName, String name)
     {
-        foreach (var contributor in this.Select(x => x).Reverse())
+        for (var contributor in this.Select(x => x).Reverse())
         {
             var localString = contributor.GetOrNull(cultureName, name);
             if (localString != null)
@@ -20,9 +20,9 @@ public class LocalizationResourceContributorList : List<ILocalizationResourceCon
         return null;
     }
 
-    public void Fill(string cultureName, Dictionary<string, LocalizedString> dictionary)
+    public void Fill(String cultureName, Dictionary<String, LocalizedString> dictionary)
     {
-        foreach (var contributor in this)
+        for (var contributor in this)
         {
             contributor.Fill(cultureName, dictionary);
         }

@@ -9,9 +9,9 @@ namespace Volo.Abp.Json;
 
 public class AbpHybridJsonSerializer : IJsonSerializer, ITransientDependency
 {
-    protected AbpJsonOptions Options { get; }
+    protected AbpJsonOptions Options;//  { get; }
 
-    protected IServiceScopeFactory ServiceScopeFactory { get; }
+    protected IServiceScopeFactory ServiceScopeFactory;//  { get; }
 
     public AbpHybridJsonSerializer(IOptions<AbpJsonOptions> options, IServiceScopeFactory serviceScopeFactory)
     {
@@ -19,7 +19,7 @@ public class AbpHybridJsonSerializer : IJsonSerializer, ITransientDependency
         ServiceScopeFactory = serviceScopeFactory;
     }
 
-    public string Serialize([CanBeNull] object obj, bool camelCase = true, bool indented = false)
+    public String Serialize(@Nullable Object obj, boolean camelCase = true, boolean indented = false)
     {
         using (var scope = ServiceScopeFactory.CreateScope())
         {
@@ -28,9 +28,9 @@ public class AbpHybridJsonSerializer : IJsonSerializer, ITransientDependency
         }
     }
 
-    public T Deserialize<T>([NotNull] string jsonString, bool camelCase = true)
+    public T Deserialize<T>(@Nonnull String jsonString, boolean camelCase = true)
     {
-        Check.NotNull(jsonString, nameof(jsonString));
+        Objects.requireNonNull(jsonString, nameof(jsonString));
 
         using (var scope = ServiceScopeFactory.CreateScope())
         {
@@ -39,9 +39,9 @@ public class AbpHybridJsonSerializer : IJsonSerializer, ITransientDependency
         }
     }
 
-    public object Deserialize(Type type, [NotNull] string jsonString, bool camelCase = true)
+    public Object Deserialize(Type type, @Nonnull String jsonString, boolean camelCase = true)
     {
-        Check.NotNull(jsonString, nameof(jsonString));
+        Objects.requireNonNull(jsonString, nameof(jsonString));
 
         using (var scope = ServiceScopeFactory.CreateScope())
         {
@@ -50,9 +50,9 @@ public class AbpHybridJsonSerializer : IJsonSerializer, ITransientDependency
         }
     }
 
-    protected virtual IJsonSerializerProvider GetSerializerProvider(IServiceProvider serviceProvider, [CanBeNull] Type type)
+    protected   IJsonSerializerProvider GetSerializerProvider(IServiceProvider serviceProvider, @Nullable Type type)
     {
-        foreach (var providerType in Options.Providers.Reverse())
+        for (var providerType in Options.Providers.Reverse())
         {
             var provider = serviceProvider.GetRequiredService(providerType) as IJsonSerializerProvider;
             if (provider.CanHandle(type))

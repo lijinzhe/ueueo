@@ -6,8 +6,8 @@ namespace Volo.Abp.Http.Client;
 public interface IRemoteServiceConfigurationProvider
 {
     [ItemNotNull]
-    Task<RemoteServiceConfiguration> GetConfigurationOrDefaultAsync(string name);
+    Task<RemoteServiceConfiguration> GetConfigurationOrDefaultAsync(String name);
 
     [ItemCanBeNull]
-    Task<RemoteServiceConfiguration> GetConfigurationOrDefaultOrNullAsync(string name);
+    Task<RemoteServiceConfiguration> GetConfigurationOrDefaultOrNullAsync(String name);
 }

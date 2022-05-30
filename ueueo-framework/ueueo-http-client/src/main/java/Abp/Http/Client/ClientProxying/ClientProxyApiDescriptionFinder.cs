@@ -12,9 +12,9 @@ namespace Volo.Abp.Http.Client.ClientProxying;
 
 public class ClientProxyApiDescriptionFinder : IClientProxyApiDescriptionFinder, ISingletonDependency
 {
-    protected IVirtualFileProvider VirtualFileProvider { get; }
-    protected IJsonSerializer JsonSerializer { get; }
-    protected Dictionary<string, ActionApiDescriptionModel> ActionApiDescriptionModels { get; }
+    protected IVirtualFileProvider VirtualFileProvider;//  { get; }
+    protected IJsonSerializer JsonSerializer;//  { get; }
+    protected Dictionary<String, ActionApiDescriptionModel> ActionApiDescriptionModels;//  { get; }
     protected ApplicationApiDescriptionModel ApplicationApiDescriptionModel;// { get; set; }
 
     public ClientProxyApiDescriptionFinder(
@@ -23,12 +23,12 @@ public class ClientProxyApiDescriptionFinder : IClientProxyApiDescriptionFinder,
     {
         VirtualFileProvider = virtualFileProvider;
         JsonSerializer = jsonSerializer;
-        ActionApiDescriptionModels = new Dictionary<string, ActionApiDescriptionModel>();
+        ActionApiDescriptionModels = new Dictionary<String, ActionApiDescriptionModel>();
 
         Initialize();
     }
 
-    public ActionApiDescriptionModel FindAction(string methodName)
+    public ActionApiDescriptionModel FindAction(String methodName)
     {
         return ActionApiDescriptionModels.ContainsKey(methodName) ? ActionApiDescriptionModels[methodName] : null;
     }
@@ -43,11 +43,11 @@ public class ClientProxyApiDescriptionFinder : IClientProxyApiDescriptionFinder,
         ApplicationApiDescriptionModel = GetApplicationApiDescriptionModel();
         var controllers = ApplicationApiDescriptionModel.Modules.Select(x => x.Value).SelectMany(x => x.Controllers.Values).ToList();
 
-        foreach (var controller in controllers.Where(x => x.Interfaces.Any()))
+        for (var controller in controllers.Where(x => x.Interfaces.Any()))
         {
             var appServiceType = controller.Interfaces.Last().Type;
 
-            foreach (var actionItem in controller.Actions.Values)
+            for (var actionItem in controller.Actions.Values)
             {
                 var actionKey = $"{appServiceType}.{actionItem.Name}.{string.Join("-", actionItem.ParametersOnMethod.Select(x => x.Type))}";
 
@@ -65,7 +65,7 @@ public class ClientProxyApiDescriptionFinder : IClientProxyApiDescriptionFinder,
         var fileInfoList = new List<IFileInfo>();
         GetGenerateProxyFileInfos(fileInfoList);
 
-        foreach (var fileInfo in fileInfoList)
+        for (var fileInfo in fileInfoList)
         {
             using (var streamReader = new StreamReader(fileInfo.CreateReadStream()))
             {
@@ -73,7 +73,7 @@ public class ClientProxyApiDescriptionFinder : IClientProxyApiDescriptionFinder,
 
                 var subApplicationApiDescription = JsonSerializer.Deserialize<ApplicationApiDescriptionModel>(content);
 
-                foreach (var module in subApplicationApiDescription.Modules)
+                for (var module in subApplicationApiDescription.Modules)
                 {
                     if (!applicationApiDescription.Modules.ContainsKey(module.Key))
                     {
@@ -86,9 +86,9 @@ public class ClientProxyApiDescriptionFinder : IClientProxyApiDescriptionFinder,
         return applicationApiDescription;
     }
 
-    private void GetGenerateProxyFileInfos(List<IFileInfo> fileInfoList, string path = "")
+    private void GetGenerateProxyFileInfos(List<IFileInfo> fileInfoList, String path = "")
     {
-        foreach (var directoryContent in VirtualFileProvider.GetDirectoryContents(path))
+        for (var directoryContent in VirtualFileProvider.GetDirectoryContents(path))
         {
             if (directoryContent.IsDirectory)
             {

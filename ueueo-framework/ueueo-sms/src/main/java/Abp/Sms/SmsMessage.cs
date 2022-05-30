@@ -5,17 +5,17 @@ namespace Volo.Abp.Sms;
 
 public class SmsMessage
 {
-    public string PhoneNumber { get; }
+    public String PhoneNumber;//  { get; }
 
-    public string Text { get; }
+    public String Text;//  { get; }
 
-    public IDictionary<string, object> Properties { get; }
+    public IDictionary<String, Object> Properties;//  { get; }
 
-    public SmsMessage([NotNull] string phoneNumber, [NotNull] string text)
+    public SmsMessage(@Nonnull String phoneNumber, @Nonnull String text)
     {
         PhoneNumber = Check.NotNullOrWhiteSpace(phoneNumber, nameof(phoneNumber));
         Text = Check.NotNullOrWhiteSpace(text, nameof(text));
 
-        Properties = new Dictionary<string, object>();
+        Properties = new Dictionary<String, Object>();
     }
 }

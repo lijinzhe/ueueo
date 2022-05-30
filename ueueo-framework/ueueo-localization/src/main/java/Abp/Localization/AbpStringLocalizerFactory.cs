@@ -11,10 +11,10 @@ namespace Volo.Abp.Localization;
 
 public class AbpStringLocalizerFactory : IStringLocalizerFactory, IAbpStringLocalizerFactoryWithDefaultResourceSupport
 {
-    protected internal AbpLocalizationOptions AbpLocalizationOptions { get; }
-    protected ResourceManagerStringLocalizerFactory InnerFactory { get; }
-    protected IServiceProvider ServiceProvider { get; }
-    protected ConcurrentDictionary<Type, StringLocalizerCacheItem> LocalizerCache { get; }
+    protected internal AbpLocalizationOptions AbpLocalizationOptions;//  { get; }
+    protected ResourceManagerStringLocalizerFactory InnerFactory;//  { get; }
+    protected IServiceProvider ServiceProvider;//  { get; }
+    protected ConcurrentDictionary<Type, StringLocalizerCacheItem> LocalizerCache;//  { get; }
 
     //TODO: It's better to use decorator pattern for IStringLocalizerFactory instead of getting ResourceManagerStringLocalizerFactory as a dependency.
     public AbpStringLocalizerFactory(
@@ -29,7 +29,7 @@ public class AbpStringLocalizerFactory : IStringLocalizerFactory, IAbpStringLoca
         LocalizerCache = new ConcurrentDictionary<Type, StringLocalizerCacheItem>();
     }
 
-    public virtual IStringLocalizer Create(Type resourceType)
+    public   IStringLocalizer Create(Type resourceType)
     {
         var resource = AbpLocalizationOptions.Resources.GetOrDefault(resourceType);
         if (resource == null)
@@ -53,14 +53,14 @@ public class AbpStringLocalizerFactory : IStringLocalizerFactory, IAbpStringLoca
 
     private StringLocalizerCacheItem CreateStringLocalizerCacheItem(LocalizationResource resource)
     {
-        foreach (var globalContributor in AbpLocalizationOptions.GlobalContributors)
+        for (var globalContributor in AbpLocalizationOptions.GlobalContributors)
         {
             resource.Contributors.Add((ILocalizationResourceContributor)Activator.CreateInstance(globalContributor));
         }
 
         var context = new LocalizationResourceInitializationContext(resource, ServiceProvider);
 
-        foreach (var contributor in resource.Contributors)
+        for (var contributor in resource.Contributors)
         {
             contributor.Initialize(context);
         }
@@ -74,7 +74,7 @@ public class AbpStringLocalizerFactory : IStringLocalizerFactory, IAbpStringLoca
         );
     }
 
-    public virtual IStringLocalizer Create(string baseName, string location)
+    public   IStringLocalizer Create(String baseName, String location)
     {
         //TODO: Investigate when this is called?
 
@@ -89,7 +89,7 @@ public class AbpStringLocalizerFactory : IStringLocalizerFactory, IAbpStringLoca
 
     protected class StringLocalizerCacheItem
     {
-        public AbpDictionaryBasedStringLocalizer Localizer { get; }
+        public AbpDictionaryBasedStringLocalizer Localizer;//  { get; }
 
         public StringLocalizerCacheItem(AbpDictionaryBasedStringLocalizer localizer)
         {

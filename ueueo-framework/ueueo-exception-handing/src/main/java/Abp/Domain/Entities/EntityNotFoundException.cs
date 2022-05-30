@@ -2,51 +2,51 @@
 
 namespace Volo.Abp.Domain.Entities;
 
-/// <summary>
-/// This exception is thrown if an entity excepted to be found but not found.
-/// </summary>
+/**
+ * This exception is thrown if an entity excepted to be found but not found.
+*/
 public class EntityNotFoundException : AbpException
 {
-    /// <summary>
-    /// Type of the entity.
-    /// </summary>
+    /**
+     * Type of the entity.
+    */
     public Type EntityType;// { get; set; }
 
-    /// <summary>
-    /// Id of the Entity.
-    /// </summary>
-    public object Id;// { get; set; }
+    /**
+     * Id of the Entity.
+    */
+    public Object Id;// { get; set; }
 
-    /// <summary>
-    /// Creates a new <see cref="EntityNotFoundException"/> object.
-    /// </summary>
+    /**
+     * Creates a new <see cref="EntityNotFoundException"/> object.
+    */
     public EntityNotFoundException()
     {
 
     }
 
-    /// <summary>
-    /// Creates a new <see cref="EntityNotFoundException"/> object.
-    /// </summary>
+    /**
+     * Creates a new <see cref="EntityNotFoundException"/> object.
+    */
     public EntityNotFoundException(Type entityType)
         : this(entityType, null, null)
     {
 
     }
 
-    /// <summary>
-    /// Creates a new <see cref="EntityNotFoundException"/> object.
-    /// </summary>
-    public EntityNotFoundException(Type entityType, object id)
+    /**
+     * Creates a new <see cref="EntityNotFoundException"/> object.
+    */
+    public EntityNotFoundException(Type entityType, Object id)
         : this(entityType, id, null)
     {
 
     }
 
-    /// <summary>
-    /// Creates a new <see cref="EntityNotFoundException"/> object.
-    /// </summary>
-    public EntityNotFoundException(Type entityType, object id, Exception innerException)
+    /**
+     * Creates a new <see cref="EntityNotFoundException"/> object.
+    */
+    public EntityNotFoundException(Type entityType, Object id, Exception innerException)
         : base(
             id == null
                 ? $"There is no such an entity given id. Entity type: {entityType.FullName}"
@@ -57,22 +57,24 @@ public class EntityNotFoundException : AbpException
         Id = id;
     }
 
-    /// <summary>
-    /// Creates a new <see cref="EntityNotFoundException"/> object.
-    /// </summary>
-    /// <param name="message">Exception message</param>
-    public EntityNotFoundException(string message)
+    /**
+     * Creates a new <see cref="EntityNotFoundException"/> object.
+    *
+     * <param name="message">Exception message</param>
+     */
+    public EntityNotFoundException(String message)
         : base(message)
     {
 
     }
 
-    /// <summary>
-    /// Creates a new <see cref="EntityNotFoundException"/> object.
-    /// </summary>
-    /// <param name="message">Exception message</param>
-    /// <param name="innerException">Inner exception</param>
-    public EntityNotFoundException(string message, Exception innerException)
+    /**
+     * Creates a new <see cref="EntityNotFoundException"/> object.
+    *
+     * <param name="message">Exception message</param>
+     * <param name="innerException">Inner exception</param>
+     */
+    public EntityNotFoundException(String message, Exception innerException)
         : base(message, innerException)
     {
 

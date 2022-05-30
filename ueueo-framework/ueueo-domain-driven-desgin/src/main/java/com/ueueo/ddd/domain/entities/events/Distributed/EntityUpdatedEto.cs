@@ -15,7 +15,7 @@ public class EntityUpdatedEto<TEntityEto> : IEventDataMayHaveTenantId
         Entity = entity;
     }
 
-    public virtual bool IsMultiTenant(out Guid? tenantId)
+    public   boolean IsMultiTenant(out ID tenantId)
     {
         if (Entity is IMultiTenant multiTenantEntity)
         {

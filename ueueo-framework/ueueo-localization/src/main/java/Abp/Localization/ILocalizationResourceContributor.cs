@@ -7,7 +7,7 @@ public interface ILocalizationResourceContributor
 {
     void Initialize(LocalizationResourceInitializationContext context);
 
-    LocalizedString GetOrNull(string cultureName, string name);
+    LocalizedString GetOrNull(String cultureName, String name);
 
-    void Fill(string cultureName, Dictionary<string, LocalizedString> dictionary);
+    void Fill(String cultureName, Dictionary<String, LocalizedString> dictionary);
 }

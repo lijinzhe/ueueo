@@ -7,17 +7,17 @@ namespace Volo.Abp.BlobStoring;
 
 public class BlobContainerFactory : IBlobContainerFactory, ITransientDependency
 {
-    protected IBlobProviderSelector ProviderSelector { get; }
+    protected IBlobProviderSelector ProviderSelector;//  { get; }
 
-    protected IBlobContainerConfigurationProvider ConfigurationProvider { get; }
+    protected IBlobContainerConfigurationProvider ConfigurationProvider;//  { get; }
 
-    protected ICurrentTenant CurrentTenant { get; }
+    protected ICurrentTenant CurrentTenant;//  { get; }
 
-    protected ICancellationTokenProvider CancellationTokenProvider { get; }
+    protected ICancellationTokenProvider CancellationTokenProvider;//  { get; }
 
-    protected IServiceProvider ServiceProvider { get; }
+    protected IServiceProvider ServiceProvider;//  { get; }
 
-    protected IBlobNormalizeNamingService BlobNormalizeNamingService { get; }
+    protected IBlobNormalizeNamingService BlobNormalizeNamingService;//  { get; }
 
     public BlobContainerFactory(
         IBlobContainerConfigurationProvider configurationProvider,
@@ -35,7 +35,7 @@ public class BlobContainerFactory : IBlobContainerFactory, ITransientDependency
         BlobNormalizeNamingService = blobNormalizeNamingService;
     }
 
-    public virtual IBlobContainer Create(string name)
+    public   IBlobContainer Create(String name)
     {
         var configuration = ConfigurationProvider.Get(name);
 

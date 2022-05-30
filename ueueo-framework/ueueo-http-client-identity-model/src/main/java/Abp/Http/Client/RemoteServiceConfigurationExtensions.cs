@@ -5,25 +5,25 @@ namespace Volo.Abp.Http.Client;
 
 public static class RemoteServiceConfigurationExtensions
 {
-    public const string IdentityClientName = "IdentityClient";
-    public const string UseCurrentAccessTokenName = "UseCurrentAccessToken";
+    public const String IdentityClientName = "IdentityClient";
+    public const String UseCurrentAccessTokenName = "UseCurrentAccessToken";
 
     [CanBeNull]
-    public static string GetIdentityClient([NotNull] this RemoteServiceConfiguration configuration)
+    public static String GetIdentityClient(@Nonnull this RemoteServiceConfiguration configuration)
     {
         Check.NotNullOrEmpty(configuration, nameof(configuration));
 
         return configuration.GetOrDefault(IdentityClientName);
     }
 
-    public static RemoteServiceConfiguration SetIdentityClient([NotNull] this RemoteServiceConfiguration configuration, [CanBeNull] string value)
+    public static RemoteServiceConfiguration SetIdentityClient(@Nonnull this RemoteServiceConfiguration configuration, @Nullable String value)
     {
         configuration[IdentityClientName] = value;
         return configuration;
     }
 
     [CanBeNull]
-    public static bool? GetUseCurrentAccessToken([NotNull] this RemoteServiceConfiguration configuration)
+    public static boolean GetUseCurrentAccessToken(@Nonnull this RemoteServiceConfiguration configuration)
     {
         Check.NotNullOrEmpty(configuration, nameof(configuration));
 
@@ -36,7 +36,7 @@ public static class RemoteServiceConfigurationExtensions
         return bool.Parse(value);
     }
 
-    public static RemoteServiceConfiguration SetUseCurrentAccessToken([NotNull] this RemoteServiceConfiguration configuration, [CanBeNull] bool? value)
+    public static RemoteServiceConfiguration SetUseCurrentAccessToken(@Nonnull this RemoteServiceConfiguration configuration, @Nullable boolean value)
     {
         if (value == null)
         {

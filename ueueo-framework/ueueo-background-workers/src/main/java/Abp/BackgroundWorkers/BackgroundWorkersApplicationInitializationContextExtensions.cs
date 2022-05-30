@@ -7,27 +7,27 @@ namespace Volo.Abp.BackgroundWorkers;
 
 public static class BackgroundWorkersApplicationInitializationContextExtensions
 {
-    public async static Task<ApplicationInitializationContext> AddBackgroundWorkerAsync<TWorker>([NotNull] this ApplicationInitializationContext context)
-        where TWorker : IBackgroundWorker
+    public  static Task<ApplicationInitializationContext> AddBackgroundWorkerAsync<TWorker>(@Nonnull this ApplicationInitializationContext context)
+        //where TWorker : IBackgroundWorker
     {
-        Check.NotNull(context, nameof(context));
+        Objects.requireNonNull(context, nameof(context));
 
-        await context.AddBackgroundWorkerAsync(typeof(TWorker));
+        context.AddBackgroundWorkerAsync(typeof(TWorker));
 
         return context;
     }
 
-    public async static Task<ApplicationInitializationContext> AddBackgroundWorkerAsync([NotNull] this ApplicationInitializationContext context, [NotNull] Type workerType)
+    public  static Task<ApplicationInitializationContext> AddBackgroundWorkerAsync(@Nonnull this ApplicationInitializationContext context, @Nonnull Type workerType)
     {
-        Check.NotNull(context, nameof(context));
-        Check.NotNull(workerType, nameof(workerType));
+        Objects.requireNonNull(context, nameof(context));
+        Objects.requireNonNull(workerType, nameof(workerType));
 
         if (!workerType.IsAssignableTo<IBackgroundWorker>())
         {
             throw new AbpException($"Given type ({workerType.AssemblyQualifiedName}) must implement the {typeof(IBackgroundWorker).AssemblyQualifiedName} interface, but it doesn't!");
         }
 
-        await context.ServiceProvider
+        context.ServiceProvider
             .GetRequiredService<IBackgroundWorkerManager>()
             .AddAsync(
                 (IBackgroundWorker)context.ServiceProvider.GetRequiredService(workerType)

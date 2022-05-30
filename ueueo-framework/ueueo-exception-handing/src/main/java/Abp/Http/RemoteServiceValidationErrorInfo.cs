@@ -2,56 +2,59 @@
 
 namespace Volo.Abp.Http;
 
-/// <summary>
-/// Used to store information about a validation error.
-/// </summary>
+/**
+ * Used to store information about a validation error.
+*/
 [Serializable]
 public class RemoteServiceValidationErrorInfo
 {
-    /// <summary>
-    /// Validation error message.
-    /// </summary>
-    public string Message;// { get; set; }
+    /**
+     * Validation error message.
+    */
+    public String Message;// { get; set; }
 
-    /// <summary>
-    /// Relate invalid members (fields/properties).
-    /// </summary>
-    public string[] Members;// { get; set; }
+    /**
+     * Relate invalid members (fields/properties).
+    */
+    public String[] Members;// { get; set; }
 
-    /// <summary>
-    /// Creates a new instance of <see cref="RemoteServiceValidationErrorInfo"/>.
-    /// </summary>
+    /**
+     * Creates a new instance of <see cref="RemoteServiceValidationErrorInfo"/>.
+    */
     public RemoteServiceValidationErrorInfo()
     {
 
     }
 
-    /// <summary>
-    /// Creates a new instance of <see cref="RemoteServiceValidationErrorInfo"/>.
-    /// </summary>
-    /// <param name="message">Validation error message</param>
-    public RemoteServiceValidationErrorInfo(string message)
+    /**
+     * Creates a new instance of <see cref="RemoteServiceValidationErrorInfo"/>.
+    *
+     * <param name="message">Validation error message</param>
+     */
+    public RemoteServiceValidationErrorInfo(String message)
     {
         Message = message;
     }
 
-    /// <summary>
-    /// Creates a new instance of <see cref="RemoteServiceValidationErrorInfo"/>.
-    /// </summary>
-    /// <param name="message">Validation error message</param>
-    /// <param name="members">Related invalid members</param>
-    public RemoteServiceValidationErrorInfo(string message, string[] members)
+    /**
+     * Creates a new instance of <see cref="RemoteServiceValidationErrorInfo"/>.
+    *
+     * <param name="message">Validation error message</param>
+     * <param name="members">Related invalid members</param>
+     */
+    public RemoteServiceValidationErrorInfo(String message, String[] members)
         : this(message)
     {
         Members = members;
     }
 
-    /// <summary>
-    /// Creates a new instance of <see cref="RemoteServiceValidationErrorInfo"/>.
-    /// </summary>
-    /// <param name="message">Validation error message</param>
-    /// <param name="member">Related invalid member</param>
-    public RemoteServiceValidationErrorInfo(string message, string member)
+    /**
+     * Creates a new instance of <see cref="RemoteServiceValidationErrorInfo"/>.
+    *
+     * <param name="message">Validation error message</param>
+     * <param name="member">Related invalid member</param>
+     */
+    public RemoteServiceValidationErrorInfo(String message, String member)
         : this(message, new[] { member })
     {
 

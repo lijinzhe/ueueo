@@ -14,7 +14,7 @@ public static class ValidationInterceptorRegistrar
         }
     }
 
-    private static bool ShouldIntercept(Type type)
+    private static boolean ShouldIntercept(Type type)
     {
         return !DynamicProxyIgnoreTypes.Contains(type) && typeof(IValidationEnabled).IsAssignableFrom(type);
     }

@@ -10,11 +10,11 @@ namespace Volo.Abp.TextTemplating;
 
 public class TemplateDefinitionManager : ITemplateDefinitionManager, ISingletonDependency
 {
-    protected Lazy<IDictionary<string, TemplateDefinition>> TemplateDefinitions { get; }
+    protected Lazy<IDictionary<String, TemplateDefinition>> TemplateDefinitions;//  { get; }
 
-    protected AbpTextTemplatingOptions Options { get; }
+    protected AbpTextTemplatingOptions Options;//  { get; }
 
-    protected IServiceProvider ServiceProvider { get; }
+    protected IServiceProvider ServiceProvider;//  { get; }
 
     public TemplateDefinitionManager(
         IOptions<AbpTextTemplatingOptions> options,
@@ -24,12 +24,12 @@ public class TemplateDefinitionManager : ITemplateDefinitionManager, ISingletonD
         Options = options.Value;
 
         TemplateDefinitions =
-            new Lazy<IDictionary<string, TemplateDefinition>>(CreateTextTemplateDefinitions, true);
+            new Lazy<IDictionary<String, TemplateDefinition>>(CreateTextTemplateDefinitions, true);
     }
 
-    public virtual TemplateDefinition Get(string name)
+    public   TemplateDefinition Get(String name)
     {
-        Check.NotNull(name, nameof(name));
+        Objects.requireNonNull(name, nameof(name));
 
         var template = GetOrNull(name);
 
@@ -41,19 +41,19 @@ public class TemplateDefinitionManager : ITemplateDefinitionManager, ISingletonD
         return template;
     }
 
-    public virtual IReadOnlyList<TemplateDefinition> GetAll()
+    public   IReadOnlyList<TemplateDefinition> GetAll()
     {
         return TemplateDefinitions.Value.Values.ToImmutableList();
     }
 
-    public virtual TemplateDefinition GetOrNull(string name)
+    public   TemplateDefinition GetOrNull(String name)
     {
         return TemplateDefinitions.Value.GetOrDefault(name);
     }
 
-    protected virtual IDictionary<string, TemplateDefinition> CreateTextTemplateDefinitions()
+    protected   IDictionary<String, TemplateDefinition> CreateTextTemplateDefinitions()
     {
-        var templates = new Dictionary<string, TemplateDefinition>();
+        var templates = new Dictionary<String, TemplateDefinition>();
 
         using (var scope = ServiceProvider.CreateScope())
         {
@@ -64,17 +64,17 @@ public class TemplateDefinitionManager : ITemplateDefinitionManager, ISingletonD
 
             var context = new TemplateDefinitionContext(templates);
 
-            foreach (var provider in providers)
+            for (var provider in providers)
             {
                 provider.PreDefine(context);
             }
 
-            foreach (var provider in providers)
+            for (var provider in providers)
             {
                 provider.Define(context);
             }
 
-            foreach (var provider in providers)
+            for (var provider in providers)
             {
                 provider.PostDefine(context);
             }

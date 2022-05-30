@@ -23,22 +23,22 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
     //TODO: Add dbcontext just like mongodb implementation!
 
     [Obsolete("Use GetCollectionAsync method.")]
-    public virtual IMemoryDatabaseCollection<TEntity> Collection => Database.Collection<TEntity>();
+    public   IMemoryDatabaseCollection<TEntity> Collection => Database.Collection<TEntity>();
 
-    public async Task<IMemoryDatabaseCollection<TEntity>> GetCollectionAsync()
+    public  Task<IMemoryDatabaseCollection<TEntity>> GetCollectionAsync()
     {
-        return (await GetDatabaseAsync()).Collection<TEntity>();
+        return (GetDatabaseAsync()).Collection<TEntity>();
     }
 
     [Obsolete("Use GetDatabaseAsync method.")]
-    public virtual IMemoryDatabase Database => DatabaseProvider.GetDatabase();
+    public   IMemoryDatabase Database => DatabaseProvider.GetDatabase();
 
     public Task<IMemoryDatabase> GetDatabaseAsync()
     {
         return DatabaseProvider.GetDatabaseAsync();
     }
 
-    protected IMemoryDatabaseProvider<TMemoryDbContext> DatabaseProvider { get; }
+    protected IMemoryDatabaseProvider<TMemoryDbContext> DatabaseProvider;//  { get; }
 
     public ILocalEventBus LocalEventBus => LazyServiceProvider.LazyGetService<ILocalEventBus>(NullLocalEventBus.Instance);
 
@@ -61,12 +61,13 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
         return ApplyDataFilters(Collection.AsQueryable());
     }
 
-    public override async Task<IQueryable<TEntity>> GetQueryableAsync()
+    @Override
+    public  Task<IQueryable<TEntity>> GetQueryableAsync()
     {
-        return ApplyDataFilters((await GetCollectionAsync()).AsQueryable());
+        return ApplyDataFilters((GetCollectionAsync()).AsQueryable());
     }
 
-    protected virtual void TriggerDomainEvents(object entity)
+    protected   void TriggerDomainEvents(Object entity)
     {
         var generatesDomainEventsEntity = entity as IGeneratesDomainEvents;
         if (generatesDomainEventsEntity == null)
@@ -77,7 +78,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
         var localEvents = generatesDomainEventsEntity.GetLocalEvents()?.ToArray();
         if (localEvents != null && localEvents.Any())
         {
-            foreach (var localEvent in localEvents)
+            for (var localEvent in localEvents)
             {
                 UnitOfWorkManager.Current?.AddOrReplaceLocalEvent(
                     new UnitOfWorkEventRecord(
@@ -94,7 +95,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
         var distributedEvents = generatesDomainEventsEntity.GetDistributedEvents()?.ToArray();
         if (distributedEvents != null && distributedEvents.Any())
         {
-            foreach (var distributedEvent in distributedEvents)
+            for (var distributedEvent in distributedEvents)
             {
                 UnitOfWorkManager.Current?.AddOrReplaceDistributedEvent(
                     new UnitOfWorkEventRecord(
@@ -110,7 +111,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
         }
     }
 
-    protected virtual bool IsHardDeleted(TEntity entity)
+    protected   boolean IsHardDeleted(TEntity entity)
     {
         if (!(UnitOfWorkManager?.Current?.Items.GetOrDefault(UnitOfWorkItemNames.HardDeletedEntities) is HashSet<IEntity> hardDeletedEntities))
         {
@@ -120,7 +121,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
         return hardDeletedEntities.Contains(entity);
     }
 
-    protected virtual void CheckAndSetId(TEntity entity)
+    protected   void CheckAndSetId(TEntity entity)
     {
         if (entity is IEntity<Guid> entityWithGuidId)
         {
@@ -128,7 +129,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
         }
     }
 
-    protected virtual void TrySetGuidId(IEntity<Guid> entity)
+    protected   void TrySetGuidId(IEntity<Guid> entity)
     {
         if (entity.Id != default)
         {
@@ -142,40 +143,40 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
         );
     }
 
-    protected virtual void SetCreationAuditProperties(TEntity entity)
+    protected   void SetCreationAuditProperties(TEntity entity)
     {
         AuditPropertySetter.SetCreationProperties(entity);
     }
 
-    protected virtual void SetModificationAuditProperties(TEntity entity)
+    protected   void SetModificationAuditProperties(TEntity entity)
     {
         AuditPropertySetter.SetModificationProperties(entity);
     }
 
-    protected virtual void SetDeletionAuditProperties(TEntity entity)
+    protected   void SetDeletionAuditProperties(TEntity entity)
     {
         AuditPropertySetter.SetDeletionProperties(entity);
     }
 
-    protected virtual void TriggerEntityCreateEvents(TEntity entity)
+    protected   void TriggerEntityCreateEvents(TEntity entity)
     {
         EntityChangeEventHelper.PublishEntityCreatingEvent(entity);
         EntityChangeEventHelper.PublishEntityCreatedEvent(entity);
     }
 
-    protected virtual void TriggerEntityUpdateEvents(TEntity entity)
+    protected   void TriggerEntityUpdateEvents(TEntity entity)
     {
         EntityChangeEventHelper.PublishEntityUpdatingEvent(entity);
         EntityChangeEventHelper.PublishEntityUpdatedEvent(entity);
     }
 
-    protected virtual void TriggerEntityDeleteEvents(TEntity entity)
+    protected   void TriggerEntityDeleteEvents(TEntity entity)
     {
         EntityChangeEventHelper.PublishEntityDeletingEvent(entity);
         EntityChangeEventHelper.PublishEntityDeletedEvent(entity);
     }
 
-    protected virtual void ApplyAbpConceptsForAddedEntity(TEntity entity)
+    protected   void ApplyAbpConceptsForAddedEntity(TEntity entity)
     {
         CheckAndSetId(entity);
         SetCreationAuditProperties(entity);
@@ -183,46 +184,50 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
         TriggerDomainEvents(entity);
     }
 
-    protected virtual void ApplyAbpConceptsForDeletedEntity(TEntity entity)
+    protected   void ApplyAbpConceptsForDeletedEntity(TEntity entity)
     {
         SetDeletionAuditProperties(entity);
         TriggerEntityDeleteEvents(entity);
         TriggerDomainEvents(entity);
     }
 
-    public override async Task<TEntity> FindAsync(
+    @Override
+    public  Task<TEntity> FindAsync(
         Expression<Func<TEntity, bool>> predicate,
-        bool includeDetails = true,
+        boolean includeDetails = true,
         CancellationToken cancellationToken = default)
     {
-        return (await GetQueryableAsync()).Where(predicate).SingleOrDefault();
+        return (GetQueryableAsync()).Where(predicate).SingleOrDefault();
     }
 
-    public override void DeleteAsync(
+    @Override
+    public void DeleteAsync(
         Expression<Func<TEntity, bool>> predicate,
-        bool autoSave = false,
+        boolean autoSave = false,
         CancellationToken cancellationToken = default)
     {
-        var entities = (await GetQueryableAsync()).Where(predicate).ToList();
+        var entities = (GetQueryableAsync()).Where(predicate).ToList();
 
-        await DeleteManyAsync(entities, autoSave, cancellationToken);
+        DeleteManyAsync(entities, autoSave, cancellationToken);
     }
 
-    public override async Task<TEntity> InsertAsync(
+    @Override
+    public  Task<TEntity> InsertAsync(
         TEntity entity,
-        bool autoSave = false,
+        boolean autoSave = false,
         CancellationToken cancellationToken = default)
     {
         ApplyAbpConceptsForAddedEntity(entity);
 
-        (await GetCollectionAsync()).Add(entity);
+        (GetCollectionAsync()).Add(entity);
 
         return entity;
     }
 
-    public override async Task<TEntity> UpdateAsync(
+    @Override
+    public  Task<TEntity> UpdateAsync(
         TEntity entity,
-        bool autoSave = false,
+        boolean autoSave = false,
         CancellationToken cancellationToken = default)
     {
         SetModificationAuditProperties(entity);
@@ -239,14 +244,15 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
 
         TriggerDomainEvents(entity);
 
-        (await GetCollectionAsync()).Update(entity);
+        (GetCollectionAsync()).Update(entity);
 
         return entity;
     }
 
-    public override void DeleteAsync(
+    @Override
+    public void DeleteAsync(
         TEntity entity,
-        bool autoSave = false,
+        boolean autoSave = false,
         CancellationToken cancellationToken = default)
     {
         ApplyAbpConceptsForDeletedEntity(entity);
@@ -254,37 +260,41 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
         if (entity is ISoftDelete softDeleteEntity && !IsHardDeleted(entity))
         {
             softDeleteEntity.IsDeleted = true;
-            (await GetCollectionAsync()).Update(entity);
+            (GetCollectionAsync()).Update(entity);
         }
         else
         {
-            (await GetCollectionAsync()).Remove(entity);
+            (GetCollectionAsync()).Remove(entity);
         }
     }
 
-    public override async Task<List<TEntity>> GetListAsync(bool includeDetails = false, CancellationToken cancellationToken = default)
+    @Override
+    public  Task<List<TEntity>> GetListAsync(boolean includeDetails = false, CancellationToken cancellationToken = default)
     {
-        return (await GetQueryableAsync()).ToList();
+        return (GetQueryableAsync()).ToList();
     }
 
-    public override async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate, bool includeDetails = false, CancellationToken cancellationToken = default)
+    @Override
+    public  Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate, boolean includeDetails = false, CancellationToken cancellationToken = default)
     {
-        return (await GetQueryableAsync()).Where(predicate).ToList();
+        return (GetQueryableAsync()).Where(predicate).ToList();
     }
 
-    public override async Task<long> GetCountAsync(CancellationToken cancellationToken = default)
+    @Override
+    public  Task<long> GetCountAsync(CancellationToken cancellationToken = default)
     {
-        return (await GetQueryableAsync()).LongCount();
+        return (GetQueryableAsync()).LongCount();
     }
 
-    public override async Task<List<TEntity>> GetPagedListAsync(
+    @Override
+    public  Task<List<TEntity>> GetPagedListAsync(
         int skipCount,
         int maxResultCount,
-        string sorting,
-        bool includeDetails = false,
+        String sorting,
+        boolean includeDetails = false,
         CancellationToken cancellationToken = default)
     {
-        return (await GetQueryableAsync())
+        return (GetQueryableAsync())
             .OrderBy(sorting)
             .PageBy(skipCount, maxResultCount)
             .ToList();
@@ -300,13 +310,14 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity, TKey> : MemoryDbRepos
     {
     }
 
-    public override async Task<TEntity> InsertAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default)
+    @Override
+    public  Task<TEntity> InsertAsync(TEntity entity, boolean autoSave = false, CancellationToken cancellationToken = default)
     {
-        await SetIdIfNeededAsync(entity);
-        return await base.InsertAsync(entity, autoSave, cancellationToken);
+        SetIdIfNeededAsync(entity);
+        returnsuper.InsertAsync(entity, autoSave, cancellationToken);
     }
 
-    protected virtual void SetIdIfNeededAsync(TEntity entity)
+    protected   void SetIdIfNeededAsync(TEntity entity)
     {
         if (typeof(TKey) == typeof(int) ||
             typeof(TKey) == typeof(long) ||
@@ -314,15 +325,15 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity, TKey> : MemoryDbRepos
         {
             if (EntityHelper.HasDefaultId(entity))
             {
-                var nextId = (await GetDatabaseAsync()).GenerateNextId<TEntity, TKey>();
+                var nextId = (GetDatabaseAsync()).GenerateNextId<TEntity, TKey>();
                 EntityHelper.TrySetId(entity, () => nextId);
             }
         }
     }
 
-    public virtual async Task<TEntity> GetAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default)
+    public    Task<TEntity> GetAsync(TKey id, boolean includeDetails = true, CancellationToken cancellationToken = default)
     {
-        var entity = await FindAsync(id, includeDetails, cancellationToken);
+        var entity = FindAsync(id, includeDetails, cancellationToken);
 
         if (entity == null)
         {
@@ -332,19 +343,19 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity, TKey> : MemoryDbRepos
         return entity;
     }
 
-    public virtual async Task<TEntity> FindAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default)
+    public    Task<TEntity> FindAsync(TKey id, boolean includeDetails = true, CancellationToken cancellationToken = default)
     {
-        return (await GetQueryableAsync()).FirstOrDefault(e => e.Id.Equals(id));
+        return (GetQueryableAsync()).FirstOrDefault(e => e.Id.Equals(id));
     }
 
-    public virtual void DeleteAsync(TKey id, bool autoSave = false, CancellationToken cancellationToken = default)
+    public   void DeleteAsync(TKey id, boolean autoSave = false, CancellationToken cancellationToken = default)
     {
-        await DeleteAsync(x => x.Id.Equals(id), autoSave, cancellationToken);
+        DeleteAsync(x => x.Id.Equals(id), autoSave, cancellationToken);
     }
 
-    public virtual void DeleteManyAsync(IEnumerable<TKey> ids, bool autoSave = false, CancellationToken cancellationToken = default)
+    public   void DeleteManyAsync(IEnumerable<TKey> ids, boolean autoSave = false, CancellationToken cancellationToken = default)
     {
-        var entities = await AsyncExecuter.ToListAsync((await GetQueryableAsync()).Where(x => ids.Contains(x.Id)), cancellationToken);
-        await DeleteManyAsync(entities, autoSave, cancellationToken);
+        var entities = AsyncExecuter.ToListAsync((GetQueryableAsync()).Where(x => ids.Contains(x.Id)), cancellationToken);
+        DeleteManyAsync(entities, autoSave, cancellationToken);
     }
 }

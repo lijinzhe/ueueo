@@ -16,35 +16,35 @@ public abstract class AbpMongoDbContext : IAbpMongoDbContext, ITransientDependen
 
     public IClientSessionHandle SessionHandle ;// { get; private set; }
 
-    protected internal virtual void CreateModel(IMongoModelBuilder modelBuilder)
+    protected internal   void CreateModel(IMongoModelBuilder modelBuilder)
     {
 
     }
 
-    public virtual void InitializeDatabase(IMongoDatabase database, IMongoClient client, IClientSessionHandle sessionHandle)
+    public   void InitializeDatabase(IMongoDatabase database, IMongoClient client, IClientSessionHandle sessionHandle)
     {
         Database = database;
         Client = client;
         SessionHandle = sessionHandle;
     }
 
-    public virtual IMongoCollection<T> Collection<T>()
+    public   IMongoCollection<T> Collection<T>()
     {
         return Database.GetCollection<T>(GetCollectionName<T>());
     }
 
-    public virtual void InitializeCollections(IMongoDatabase database)
+    public   void InitializeCollections(IMongoDatabase database)
     {
         Database = database;
         ModelSource.GetModel(this);
     }
 
-    protected virtual string GetCollectionName<T>()
+    protected   String GetCollectionName<T>()
     {
         return GetEntityModel<T>().CollectionName;
     }
 
-    protected virtual IMongoEntityModel GetEntityModel<TEntity>()
+    protected   IMongoEntityModel GetEntityModel<TEntity>()
     {
         var model = ModelSource.GetModel(this).Entities.GetOrDefault(typeof(TEntity));
 

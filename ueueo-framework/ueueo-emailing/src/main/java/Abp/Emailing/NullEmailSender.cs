@@ -6,24 +6,24 @@ using Volo.Abp.BackgroundJobs;
 
 namespace Volo.Abp.Emailing;
 
-/// <summary>
-/// This class is an implementation of <see cref="IEmailSender"/> as similar to null pattern.
-/// It does not send emails but logs them.
-/// </summary>
+/**
+ * This class is an implementation of <see cref="IEmailSender"/> as similar to null pattern.
+ * It does not send emails but logs them.
+*/
 public class NullEmailSender : EmailSenderBase
 {
     public ILogger<NullEmailSender> Logger;// { get; set; }
 
-    /// <summary>
-    /// Creates a new <see cref="NullEmailSender"/> object.
-    /// </summary>
+    /**
+     * Creates a new <see cref="NullEmailSender"/> object.
+    */
     public NullEmailSender(IEmailSenderConfiguration configuration, IBackgroundJobManager backgroundJobManager)
         : base(configuration, backgroundJobManager)
     {
         Logger = NullLogger<NullEmailSender>.Instance;
     }
 
-    protected override Task SendEmailAsync(MailMessage mail)
+    protected override void SendEmailAsync(MailMessage mail)
     {
         Logger.LogWarning("USING NullEmailSender!");
         Logger.LogDebug("SendEmailAsync:");

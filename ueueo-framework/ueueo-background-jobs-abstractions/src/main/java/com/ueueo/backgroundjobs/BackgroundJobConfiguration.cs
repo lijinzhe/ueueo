@@ -4,11 +4,11 @@ namespace Volo.Abp.BackgroundJobs;
 
 public class BackgroundJobConfiguration
 {
-    public Type ArgsType { get; }
+    public Type ArgsType;//  { get; }
 
-    public Type JobType { get; }
+    public Type JobType;//  { get; }
 
-    public string JobName { get; }
+    public String JobName;//  { get; }
 
     public BackgroundJobConfiguration(Type jobType)
     {

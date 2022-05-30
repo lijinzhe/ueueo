@@ -1,58 +1,58 @@
 ﻿namespace Volo.Abp.Emailing;
 
-/// <summary>
-/// Declares names of the settings defined by <see cref="EmailSettingProvider"/>.
-/// </summary>
+/**
+ * Declares names of the settings defined by <see cref="EmailSettingProvider"/>.
+*/
 public static class EmailSettingNames
 {
-    /// <summary>
-    /// Abp.Net.Mail.DefaultFromAddress
-    /// </summary>
-    public const string DefaultFromAddress = "Abp.Mailing.DefaultFromAddress";
+    /**
+     * Abp.Net.Mail.DefaultFromAddress
+    */
+    public const String DefaultFromAddress = "Abp.Mailing.DefaultFromAddress";
 
-    /// <summary>
-    /// Abp.Net.Mail.DefaultFromDisplayName
-    /// </summary>
-    public const string DefaultFromDisplayName = "Abp.Mailing.DefaultFromDisplayName";
+    /**
+     * Abp.Net.Mail.DefaultFromDisplayName
+    */
+    public const String DefaultFromDisplayName = "Abp.Mailing.DefaultFromDisplayName";
 
-    /// <summary>
-    /// SMTP related email settings.
-    /// </summary>
+    /**
+     * SMTP related email settings.
+    */
     public static class Smtp
     {
-        /// <summary>
-        /// Abp.Net.Mail.Smtp.Host
-        /// </summary>
-        public const string Host = "Abp.Mailing.Smtp.Host";
+        /**
+         * Abp.Net.Mail.Smtp.Host
+        */
+        public const String Host = "Abp.Mailing.Smtp.Host";
 
-        /// <summary>
-        /// Abp.Net.Mail.Smtp.Port
-        /// </summary>
-        public const string Port = "Abp.Mailing.Smtp.Port";
+        /**
+         * Abp.Net.Mail.Smtp.Port
+        */
+        public const String Port = "Abp.Mailing.Smtp.Port";
 
-        /// <summary>
-        /// Abp.Net.Mail.Smtp.UserName
-        /// </summary>
-        public const string UserName = "Abp.Mailing.Smtp.UserName";
+        /**
+         * Abp.Net.Mail.Smtp.UserName
+        */
+        public const String UserName = "Abp.Mailing.Smtp.UserName";
 
-        /// <summary>
-        /// Abp.Net.Mail.Smtp.Password
-        /// </summary>
-        public const string Password = "Abp.Mailing.Smtp.Password";
+        /**
+         * Abp.Net.Mail.Smtp.Password
+        */
+        public const String Password = "Abp.Mailing.Smtp.Password";
 
-        /// <summary>
-        /// Abp.Net.Mail.Smtp.Domain
-        /// </summary>
-        public const string Domain = "Abp.Mailing.Smtp.Domain";
+        /**
+         * Abp.Net.Mail.Smtp.Domain
+        */
+        public const String Domain = "Abp.Mailing.Smtp.Domain";
 
-        /// <summary>
-        /// Abp.Net.Mail.Smtp.EnableSsl
-        /// </summary>
-        public const string EnableSsl = "Abp.Mailing.Smtp.EnableSsl";
+        /**
+         * Abp.Net.Mail.Smtp.EnableSsl
+        */
+        public const String EnableSsl = "Abp.Mailing.Smtp.EnableSsl";
 
-        /// <summary>
-        /// Abp.Net.Mail.Smtp.UseDefaultCredentials
-        /// </summary>
-        public const string UseDefaultCredentials = "Abp.Mailing.Smtp.UseDefaultCredentials";
+        /**
+         * Abp.Net.Mail.Smtp.UseDefaultCredentials
+        */
+        public const String UseDefaultCredentials = "Abp.Mailing.Smtp.UseDefaultCredentials";
     }
 }

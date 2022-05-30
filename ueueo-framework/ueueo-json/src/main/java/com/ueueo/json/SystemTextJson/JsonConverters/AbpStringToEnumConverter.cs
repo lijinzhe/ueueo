@@ -20,17 +20,19 @@ public class AbpStringToEnumConverter<T> : JsonConverter<T>
 
     }
 
-    public AbpStringToEnumConverter(JsonNamingPolicy namingPolicy = null, bool allowIntegerValues = true)
+    public AbpStringToEnumConverter(JsonNamingPolicy namingPolicy = null, boolean allowIntegerValues = true)
     {
         _innerJsonStringEnumConverter = new JsonStringEnumConverter(namingPolicy, allowIntegerValues);
     }
 
-    public override bool CanConvert(Type typeToConvert)
+    @Override
+    public boolean CanConvert(Type typeToConvert)
     {
         return typeToConvert.IsEnum;
     }
 
-    public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    @Override
+    public T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         _readJsonSerializerOptions ??= JsonSerializerOptionsHelper.Create(options, x =>
                 x == this ||
@@ -40,7 +42,8 @@ public class AbpStringToEnumConverter<T> : JsonConverter<T>
         return JsonSerializer.Deserialize<T>(ref reader, _readJsonSerializerOptions);
     }
 
-    public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+    @Override
+    public void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
     {
         _writeJsonSerializerOptions ??= JsonSerializerOptionsHelper.Create(options, x =>
             x == this ||

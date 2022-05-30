@@ -7,9 +7,9 @@ namespace Volo.Abp.RabbitMQ;
 
 public interface IRabbitMqMessageConsumer
 {
-    Task BindAsync(string routingKey);
+    void BindAsync(String routingKey);
 
-    Task UnbindAsync(string routingKey);
+    void UnbindAsync(String routingKey);
 
     void OnMessageReceived(Func<IModel, BasicDeliverEventArgs, Task> callback);
 }

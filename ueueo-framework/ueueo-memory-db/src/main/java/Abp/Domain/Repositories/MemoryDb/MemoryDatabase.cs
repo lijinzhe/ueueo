@@ -9,7 +9,7 @@ namespace Volo.Abp.Domain.Repositories.MemoryDb;
 
 public class MemoryDatabase : IMemoryDatabase, ITransientDependency
 {
-    private readonly ConcurrentDictionary<Type, object> _sets;
+    private readonly ConcurrentDictionary<Type, Object> _sets;
 
     private readonly ConcurrentDictionary<Type, InMemoryIdGenerator> _entityIdGenerators;
 
@@ -18,7 +18,7 @@ public class MemoryDatabase : IMemoryDatabase, ITransientDependency
     public MemoryDatabase(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
-        _sets = new ConcurrentDictionary<Type, object>();
+        _sets = new ConcurrentDictionary<Type, Object>();
         _entityIdGenerators = new ConcurrentDictionary<Type, InMemoryIdGenerator>();
     }
 

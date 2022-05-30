@@ -17,25 +17,25 @@ namespace Volo.Abp.BackgroundJobs.RabbitMQ;
 
 public class JobQueue<TArgs> : IJobQueue<TArgs>
 {
-    private const string ChannelPrefix = "JobQueue.";
+    private const String ChannelPrefix = "JobQueue.";
 
-    protected BackgroundJobConfiguration JobConfiguration { get; }
-    protected JobQueueConfiguration QueueConfiguration { get; }
+    protected BackgroundJobConfiguration JobConfiguration;//  { get; }
+    protected JobQueueConfiguration QueueConfiguration;//  { get; }
     protected IChannelAccessor ChannelAccessor ;// { get; private set; }
     protected AsyncEventingBasicConsumer Consumer ;// { get; private set; }
 
     public ILogger<JobQueue<TArgs>> Logger;// { get; set; }
 
-    protected AbpBackgroundJobOptions AbpBackgroundJobOptions { get; }
-    protected AbpRabbitMqBackgroundJobOptions AbpRabbitMqBackgroundJobOptions { get; }
-    protected IChannelPool ChannelPool { get; }
-    protected IRabbitMqSerializer Serializer { get; }
-    protected IBackgroundJobExecuter JobExecuter { get; }
-    protected IServiceScopeFactory ServiceScopeFactory { get; }
-    protected IExceptionNotifier ExceptionNotifier { get; }
+    protected AbpBackgroundJobOptions AbpBackgroundJobOptions;//  { get; }
+    protected AbpRabbitMqBackgroundJobOptions AbpRabbitMqBackgroundJobOptions;//  { get; }
+    protected IChannelPool ChannelPool;//  { get; }
+    protected IRabbitMqSerializer Serializer;//  { get; }
+    protected IBackgroundJobExecuter JobExecuter;//  { get; }
+    protected IServiceScopeFactory ServiceScopeFactory;//  { get; }
+    protected IExceptionNotifier ExceptionNotifier;//  { get; }
 
     protected SemaphoreSlim SyncObj = new SemaphoreSlim(1, 1);
-    protected bool IsDiposed ;// { get; private set; }
+    protected boolean IsDiposed ;// { get; private set; }
 
     public JobQueue(
         IOptions<AbpBackgroundJobOptions> backgroundJobOptions,
@@ -60,7 +60,7 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
         Logger = NullLogger<JobQueue<TArgs>>.Instance;
     }
 
-    protected virtual JobQueueConfiguration GetOrCreateJobQueueConfiguration()
+    protected   JobQueueConfiguration GetOrCreateJobQueueConfiguration()
     {
         return AbpRabbitMqBackgroundJobOptions.JobQueues.GetOrDefault(typeof(TArgs)) ??
                new JobQueueConfiguration(
@@ -70,24 +70,24 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
                );
     }
 
-    public virtual async Task<string> EnqueueAsync(
+    public virtualTask<String> EnqueueAsync(
         TArgs args,
         BackgroundJobPriority priority = BackgroundJobPriority.Normal,
         TimeSpan? delay = null)
     {
         CheckDisposed();
 
-        using (await SyncObj.LockAsync())
+        using (SyncObj.LockAsync())
         {
-            await EnsureInitializedAsync();
+            EnsureInitializedAsync();
 
-            await PublishAsync(args, priority, delay);
+            PublishAsync(args, priority, delay);
 
             return null;
         }
     }
 
-    public virtual void StartAsync(CancellationToken cancellationToken = default)
+    public   void StartAsync(CancellationToken cancellationToken = default)
     {
         CheckDisposed();
 
@@ -96,9 +96,9 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
             return;
         }
 
-        using (await SyncObj.LockAsync(cancellationToken))
+        using (SyncObj.LockAsync(cancellationToken))
         {
-            await EnsureInitializedAsync();
+            EnsureInitializedAsync();
         }
     }
 
@@ -108,7 +108,7 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
         return Task.CompletedTask;
     }
 
-    public virtual void Dispose()
+    public   void Dispose()
     {
         if (IsDiposed)
         {
@@ -180,14 +180,14 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
         return Task.CompletedTask;
     }
 
-    protected virtual IBasicProperties CreateBasicPropertiesToPublish()
+    protected   IBasicProperties CreateBasicPropertiesToPublish()
     {
         var properties = ChannelAccessor.Channel.CreateBasicProperties();
         properties.Persistent = true;
         return properties;
     }
 
-    protected virtual void MessageReceived(object sender, BasicDeliverEventArgs ea)
+    protected   void MessageReceived(Object sender, BasicDeliverEventArgs ea)
     {
         using (var scope = ServiceScopeFactory.CreateScope())
         {
@@ -199,7 +199,7 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
 
             try
             {
-                await JobExecuter.ExecuteAsync(context);
+                JobExecuter.ExecuteAsync(context);
                 ChannelAccessor.Channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
             }
             catch (BackgroundJobExecutionException)

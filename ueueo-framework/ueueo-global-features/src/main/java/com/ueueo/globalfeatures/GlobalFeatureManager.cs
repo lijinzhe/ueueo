@@ -8,69 +8,69 @@ public class GlobalFeatureManager
 {
     public static GlobalFeatureManager Instance { get; protected set; } = new GlobalFeatureManager();
 
-    /// <summary>
-    /// A common dictionary to store arbitrary configurations.
-    /// </summary>
+    /**
+     * A common dictionary to store arbitrary configurations.
+    */
     [NotNull]
-    public Dictionary<object, object> Configuration { get; }
+    public Dictionary<Object, Object> Configuration;//  { get; }
 
-    public GlobalModuleFeaturesDictionary Modules { get; }
+    public GlobalModuleFeaturesDictionary Modules;//  { get; }
 
-    protected HashSet<string> EnabledFeatures { get; }
+    protected HashSet<String> EnabledFeatures;//  { get; }
 
     protected internal GlobalFeatureManager()
     {
-        EnabledFeatures = new HashSet<string>();
-        Configuration = new Dictionary<object, object>();
+        EnabledFeatures = new HashSet<String>();
+        Configuration = new Dictionary<Object, Object>();
         Modules = new GlobalModuleFeaturesDictionary(this);
     }
 
-    public virtual bool IsEnabled<TFeature>()
+    public   boolean IsEnabled<TFeature>()
     {
         return IsEnabled(typeof(TFeature));
     }
 
-    public virtual bool IsEnabled([NotNull] Type featureType)
+    public   boolean IsEnabled(@Nonnull Type featureType)
     {
         return IsEnabled(GlobalFeatureNameAttribute.GetName(featureType));
     }
 
-    public virtual bool IsEnabled(string featureName)
+    public   boolean IsEnabled(String featureName)
     {
         return EnabledFeatures.Contains(featureName);
     }
 
-    public virtual void Enable<TFeature>()
+    public   void Enable<TFeature>()
     {
         Enable(typeof(TFeature));
     }
 
-    public virtual void Enable([NotNull] Type featureType)
+    public   void Enable(@Nonnull Type featureType)
     {
         Enable(GlobalFeatureNameAttribute.GetName(featureType));
     }
 
-    public virtual void Enable(string featureName)
+    public   void Enable(String featureName)
     {
         EnabledFeatures.AddIfNotContains(featureName);
     }
 
-    public virtual void Disable<TFeature>()
+    public   void Disable<TFeature>()
     {
         Disable(typeof(TFeature));
     }
 
-    public virtual void Disable([NotNull] Type featureType)
+    public   void Disable(@Nonnull Type featureType)
     {
         Disable(GlobalFeatureNameAttribute.GetName(featureType));
     }
 
-    public virtual void Disable(string featureName)
+    public   void Disable(String featureName)
     {
         EnabledFeatures.Remove(featureName);
     }
 
-    public virtual IEnumerable<string> GetEnabledFeatureNames()
+    public   IEnumerable<String> GetEnabledFeatureNames()
     {
         return EnabledFeatures;
     }

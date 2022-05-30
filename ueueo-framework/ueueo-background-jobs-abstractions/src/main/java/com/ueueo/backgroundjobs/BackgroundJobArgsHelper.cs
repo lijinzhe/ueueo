@@ -6,7 +6,7 @@ public static class BackgroundJobArgsHelper
 {
     public static Type GetJobArgsType(Type jobType)
     {
-        foreach (var @interface in jobType.GetInterfaces())
+        for (var @interface in jobType.GetInterfaces())
         {
             if (!@interface.IsGenericType)
             {

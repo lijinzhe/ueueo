@@ -6,14 +6,14 @@ using JetBrains.Annotations;
 namespace Volo.Abp.Kafka;
 
 [Serializable]
-public class KafkaConnections : Dictionary<string, ClientConfig>
+public class KafkaConnections : Dictionary<String, ClientConfig>
 {
-    public const string DefaultConnectionName = "Default";
+    public const String DefaultConnectionName = "Default";
 
     [NotNull]
     public ClientConfig Default {
         get => this[DefaultConnectionName];
-        set => this[DefaultConnectionName] = Check.NotNull(value, nameof(value));
+        set => this[DefaultConnectionName] = Objects.requireNonNull(value, nameof(value));
     }
 
     public KafkaConnections()
@@ -21,7 +21,7 @@ public class KafkaConnections : Dictionary<string, ClientConfig>
         Default = new ClientConfig();
     }
 
-    public ClientConfig GetOrDefault(string connectionName)
+    public ClientConfig GetOrDefault(String connectionName)
     {
         if (TryGetValue(connectionName, out var connectionFactory))
         {

@@ -7,40 +7,40 @@ namespace Volo.Abp.Ldap;
 
 public class LdapSettingProvider : ILdapSettingProvider, ITransientDependency
 {
-    protected ISettingProvider SettingProvider { get; }
+    protected ISettingProvider SettingProvider;//  { get; }
 
     public LdapSettingProvider(ISettingProvider settingProvider)
     {
         SettingProvider = settingProvider;
     }
 
-    public async Task<string> GetServerHostAsync()
+    public  Task<String> GetServerHostAsync()
     {
-        return await SettingProvider.GetOrNullAsync(LdapSettingNames.ServerHost);
+        return SettingProvider.GetOrNullAsync(LdapSettingNames.ServerHost);
     }
 
-    public async Task<int> GetServerPortAsync()
+    public  Task<int> GetServerPortAsync()
     {
-        return (await SettingProvider.GetOrNullAsync(LdapSettingNames.ServerPort))?.To<int>() ?? default;
+        return (SettingProvider.GetOrNullAsync(LdapSettingNames.ServerPort))?.To<int>() ?? default;
     }
 
-    public async Task<string> GetBaseDcAsync()
+    public  Task<String> GetBaseDcAsync()
     {
-        return await SettingProvider.GetOrNullAsync(LdapSettingNames.BaseDc);
+        return SettingProvider.GetOrNullAsync(LdapSettingNames.BaseDc);
     }
 
-    public async Task<string> GetDomainAsync()
+    public  Task<String> GetDomainAsync()
     {
-        return await SettingProvider.GetOrNullAsync(LdapSettingNames.Domain);
+        return SettingProvider.GetOrNullAsync(LdapSettingNames.Domain);
     }
 
-    public async Task<string> GetUserNameAsync()
+    public  Task<String> GetUserNameAsync()
     {
-        return await SettingProvider.GetOrNullAsync(LdapSettingNames.UserName);
+        return SettingProvider.GetOrNullAsync(LdapSettingNames.UserName);
     }
 
-    public async Task<string> GetPasswordAsync()
+    public  Task<String> GetPasswordAsync()
     {
-        return await SettingProvider.GetOrNullAsync(LdapSettingNames.Password);
+        return SettingProvider.GetOrNullAsync(LdapSettingNames.Password);
     }
 }

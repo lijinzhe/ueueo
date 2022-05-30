@@ -4,12 +4,13 @@ using System.Text.Json.Serialization;
 
 namespace Volo.Abp.Json.SystemTextJson.JsonConverters;
 
-/// <summary>
-/// https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-converters-how-to#deserialize-inferred-types-to-object-properties
-/// </summary>
-public class ObjectToInferredTypesConverter : JsonConverter<object>
+/**
+ * https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-converters-how-to#deserialize-inferred-types-to-object-properties
+*/
+public class ObjectToInferredTypesConverter : JsonConverter<Object>
 {
-    public override object Read(
+    @Override
+    public Object Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options) => reader.TokenType switch
@@ -23,9 +24,10 @@ public class ObjectToInferredTypesConverter : JsonConverter<object>
             _ => JsonDocument.ParseValue(ref reader).RootElement.Clone()
         };
 
-    public override void Write(
+    @Override
+    public void Write(
         Utf8JsonWriter writer,
-        object objectToWrite,
+        Object objectToWrite,
         JsonSerializerOptions options) =>
         JsonSerializer.Serialize(writer, objectToWrite, objectToWrite.GetType(), options);
 }

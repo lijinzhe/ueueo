@@ -5,14 +5,14 @@ namespace Volo.Abp.Localization.ExceptionHandling;
 
 public class AbpExceptionLocalizationOptions
 {
-    public Dictionary<string, Type> ErrorCodeNamespaceMappings { get; }
+    public Dictionary<String, Type> ErrorCodeNamespaceMappings;//  { get; }
 
     public AbpExceptionLocalizationOptions()
     {
-        ErrorCodeNamespaceMappings = new Dictionary<string, Type>();
+        ErrorCodeNamespaceMappings = new Dictionary<String, Type>();
     }
 
-    public void MapCodeNamespace(string errorCodeNamespace, Type type)
+    public void MapCodeNamespace(String errorCodeNamespace, Type type)
     {
         ErrorCodeNamespaceMappings[errorCodeNamespace] = type;
     }

@@ -8,10 +8,10 @@ namespace Volo.Abp.DistributedLocking;
 
 public class LocalAbpDistributedLock : IAbpDistributedLock, ISingletonDependency
 {
-    private readonly ConcurrentDictionary<string, SemaphoreSlim> _localSyncObjects = new();
+    private readonly ConcurrentDictionary<String, SemaphoreSlim> _localSyncObjects = new();
 
-    public async Task<IAbpDistributedLockHandle> TryAcquireAsync(
-        string name,
+    public  Task<IAbpDistributedLockHandle> TryAcquireAsync(
+        String name,
         TimeSpan timeout = default,
         CancellationToken cancellationToken = default)
     {
@@ -19,7 +19,7 @@ public class LocalAbpDistributedLock : IAbpDistributedLock, ISingletonDependency
 
         var semaphore = _localSyncObjects.GetOrAdd(name, _ => new SemaphoreSlim(1, 1));
 
-        if (!await semaphore.WaitAsync(timeout, cancellationToken))
+        if (!semaphore.WaitAsync(timeout, cancellationToken))
         {
             return null;
         }

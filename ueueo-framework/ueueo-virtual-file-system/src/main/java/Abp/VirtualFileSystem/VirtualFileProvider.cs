@@ -20,12 +20,12 @@ public class VirtualFileProvider : IVirtualFileProvider, ISingletonDependency
         _hybridFileProvider = CreateHybridProvider(dynamicFileProvider);
     }
 
-    public virtual IFileInfo GetFileInfo(string subpath)
+    public   IFileInfo GetFileInfo(String subpath)
     {
         return _hybridFileProvider.GetFileInfo(subpath);
     }
 
-    public virtual IDirectoryContents GetDirectoryContents(string subpath)
+    public   IDirectoryContents GetDirectoryContents(String subpath)
     {
         if (subpath == "")
         {
@@ -35,18 +35,18 @@ public class VirtualFileProvider : IVirtualFileProvider, ISingletonDependency
         return _hybridFileProvider.GetDirectoryContents(subpath);
     }
 
-    public virtual IChangeToken Watch(string filter)
+    public   IChangeToken Watch(String filter)
     {
         return _hybridFileProvider.Watch(filter);
     }
 
-    protected virtual IFileProvider CreateHybridProvider(IDynamicFileProvider dynamicFileProvider)
+    protected   IFileProvider CreateHybridProvider(IDynamicFileProvider dynamicFileProvider)
     {
         var fileProviders = new List<IFileProvider>();
 
         fileProviders.Add(dynamicFileProvider);
 
-        foreach (var fileSet in _options.FileSets.AsEnumerable().Reverse())
+        for (var fileSet in _options.FileSets.AsEnumerable().Reverse())
         {
             fileProviders.Add(fileSet.FileProvider);
         }

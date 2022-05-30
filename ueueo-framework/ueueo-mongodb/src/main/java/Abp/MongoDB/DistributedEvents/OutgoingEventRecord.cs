@@ -15,7 +15,7 @@ public class OutgoingEventRecord :
 
     public ExtraPropertyDictionary ExtraProperties ;// { get; private set; }
 
-    public string EventName ;// { get; private set; }
+    public String EventName ;// { get; private set; }
 
     public byte[] EventData ;// { get; private set; }
 

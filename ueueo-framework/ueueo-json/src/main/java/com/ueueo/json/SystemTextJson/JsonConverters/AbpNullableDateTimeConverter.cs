@@ -19,7 +19,8 @@ public class AbpNullableDateTimeConverter : JsonConverter<DateTime?>, ITransient
         _options = abpJsonOptions.Value;
     }
 
-    public override DateTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    @Override
+    public DateTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (!_options.DefaultDateTimeFormat.IsNullOrWhiteSpace())
         {
@@ -45,7 +46,8 @@ public class AbpNullableDateTimeConverter : JsonConverter<DateTime?>, ITransient
         return null;
     }
 
-    public override void Write(Utf8JsonWriter writer, DateTime? value, JsonSerializerOptions options)
+    @Override
+    public void Write(Utf8JsonWriter writer, DateTime? value, JsonSerializerOptions options)
     {
         if (value == null)
         {

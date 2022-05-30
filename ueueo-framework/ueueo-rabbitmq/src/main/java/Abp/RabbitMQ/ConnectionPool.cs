@@ -9,19 +9,19 @@ namespace Volo.Abp.RabbitMQ;
 
 public class ConnectionPool : IConnectionPool, ISingletonDependency
 {
-    protected AbpRabbitMqOptions Options { get; }
+    protected AbpRabbitMqOptions Options;//  { get; }
 
-    protected ConcurrentDictionary<string, Lazy<IConnection>> Connections { get; }
+    protected ConcurrentDictionary<String, Lazy<IConnection>> Connections;//  { get; }
 
-    private bool _isDisposed;
+    private boolean _isDisposed;
 
     public ConnectionPool(IOptions<AbpRabbitMqOptions> options)
     {
         Options = options.Value;
-        Connections = new ConcurrentDictionary<string, Lazy<IConnection>>();
+        Connections = new ConcurrentDictionary<String, Lazy<IConnection>>();
     }
 
-    public virtual IConnection Get(string connectionName = null)
+    public   IConnection Get(String connectionName = null)
     {
         connectionName ??= RabbitMqConnections.DefaultConnectionName;
 
@@ -56,7 +56,7 @@ public class ConnectionPool : IConnectionPool, ISingletonDependency
 
         _isDisposed = true;
 
-        foreach (var connection in Connections.Values)
+        for (var connection in Connections.Values)
         {
             try
             {

@@ -7,19 +7,19 @@ namespace Volo.Abp.Domain.Repositories.MemoryDb;
 
 public class Utf8JsonMemoryDbSerializer : IMemoryDbSerializer, ITransientDependency
 {
-    protected Utf8JsonMemoryDbSerializerOptions Options { get; }
+    protected Utf8JsonMemoryDbSerializerOptions Options;//  { get; }
 
     public Utf8JsonMemoryDbSerializer(IOptions<Utf8JsonMemoryDbSerializerOptions> options)
     {
         Options = options.Value;
     }
 
-    byte[] IMemoryDbSerializer.Serialize(object obj)
+    byte[] IMemoryDbSerializer.Serialize(Object obj)
     {
         return JsonSerializer.SerializeToUtf8Bytes(obj, Options.JsonSerializerOptions);
     }
 
-    public object Deserialize(byte[] value, Type type)
+    public Object Deserialize(byte[] value, Type type)
     {
         return JsonSerializer.Deserialize(value, type, Options.JsonSerializerOptions);
     }

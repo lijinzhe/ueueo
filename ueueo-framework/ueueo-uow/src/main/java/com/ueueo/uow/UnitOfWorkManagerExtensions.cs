@@ -8,13 +8,13 @@ public static class UnitOfWorkManagerExtensions
 {
     [NotNull]
     public static IUnitOfWork Begin(
-        [NotNull] this IUnitOfWorkManager unitOfWorkManager,
-        bool requiresNew = false,
-        bool isTransactional = false,
+        @Nonnull this IUnitOfWorkManager unitOfWorkManager,
+        boolean requiresNew = false,
+        boolean isTransactional = false,
         IsolationLevel? isolationLevel = null,
         int? timeout = null)
     {
-        Check.NotNull(unitOfWorkManager, nameof(unitOfWorkManager));
+        Objects.requireNonNull(unitOfWorkManager, nameof(unitOfWorkManager));
 
         return unitOfWorkManager.Begin(new AbpUnitOfWorkOptions
         {
@@ -24,18 +24,18 @@ public static class UnitOfWorkManagerExtensions
         }, requiresNew);
     }
 
-    public static void BeginReserved([NotNull] this IUnitOfWorkManager unitOfWorkManager, [NotNull] string reservationName)
+    public static void BeginReserved(@Nonnull this IUnitOfWorkManager unitOfWorkManager, @Nonnull String reservationName)
     {
-        Check.NotNull(unitOfWorkManager, nameof(unitOfWorkManager));
-        Check.NotNull(reservationName, nameof(reservationName));
+        Objects.requireNonNull(unitOfWorkManager, nameof(unitOfWorkManager));
+        Objects.requireNonNull(reservationName, nameof(reservationName));
 
         unitOfWorkManager.BeginReserved(reservationName, new AbpUnitOfWorkOptions());
     }
 
-    public static void TryBeginReserved([NotNull] this IUnitOfWorkManager unitOfWorkManager, [NotNull] string reservationName)
+    public static void TryBeginReserved(@Nonnull this IUnitOfWorkManager unitOfWorkManager, @Nonnull String reservationName)
     {
-        Check.NotNull(unitOfWorkManager, nameof(unitOfWorkManager));
-        Check.NotNull(reservationName, nameof(reservationName));
+        Objects.requireNonNull(unitOfWorkManager, nameof(unitOfWorkManager));
+        Objects.requireNonNull(reservationName, nameof(reservationName));
 
         unitOfWorkManager.TryBeginReserved(reservationName, new AbpUnitOfWorkOptions());
     }

@@ -8,9 +8,9 @@ namespace Volo.Abp.IdentityModel;
 public interface IIdentityModelAuthenticationService
 {
     Task<bool> TryAuthenticateAsync(
-        [NotNull] HttpClient client,
-        string identityClientName = null);
+        @Nonnull HttpClient client,
+        String identityClientName = null);
 
-    Task<string> GetAccessTokenAsync(
+    Task<String> GetAccessTokenAsync(
         IdentityClientConfiguration configuration);
 }

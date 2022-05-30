@@ -8,22 +8,22 @@ namespace Volo.Abp.Quartz;
 
 public class AbpQuartzOptions
 {
-    /// <summary>
-    /// The quartz configuration. Available properties can be found within Quartz.Impl.StdSchedulerFactory.
-    /// </summary>
+    /**
+     * The quartz configuration. Available properties can be found within Quartz.Impl.StdSchedulerFactory.
+    */
     public NameValueCollection Properties;// { get; set; }
 
     public Action<IServiceCollectionQuartzConfigurator> Configurator;// { get; set; }
 
-    /// <summary>
-    /// How long Quartz should wait before starting. Default: 0.
-    /// </summary>
+    /**
+     * How long Quartz should wait before starting. Default: 0.
+    */
     public TimeSpan StartDelay;// { get; set; }
 
     [NotNull]
     public Func<IScheduler, Task> StartSchedulerFactory {
         get => _startSchedulerFactory;
-        set => _startSchedulerFactory = Check.NotNull(value, nameof(value));
+        set => _startSchedulerFactory = Objects.requireNonNull(value, nameof(value));
     }
     private Func<IScheduler, Task> _startSchedulerFactory;
 
@@ -38,11 +38,11 @@ public class AbpQuartzOptions
     {
         if (StartDelay.Ticks > 0)
         {
-            await scheduler.StartDelayed(StartDelay);
+            scheduler.StartDelayed(StartDelay);
         }
         else
         {
-            await scheduler.Start();
+            scheduler.Start();
         }
     }
 }

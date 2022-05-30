@@ -4,7 +4,7 @@ namespace Volo.Abp.Domain.Repositories.MemoryDb;
 
 public interface IMemoryDbSerializer
 {
-    byte[] Serialize(object obj);
+    byte[] Serialize(Object obj);
 
-    object Deserialize(byte[] value, Type type);
+    Object Deserialize(byte[] value, Type type);
 }

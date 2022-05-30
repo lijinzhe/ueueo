@@ -5,7 +5,7 @@ namespace Volo.Abp.Application.Dtos;
 [Serializable]
 public abstract class EntityDto : IEntityDto //TODO: Consider to delete this class
 {
-    @Override public string toString()
+    @Override public String toString()
     {
         return $"[DTO: {GetType().Name}]";
     }
@@ -14,12 +14,12 @@ public abstract class EntityDto : IEntityDto //TODO: Consider to delete this cla
 [Serializable]
 public abstract class EntityDto<TKey> : EntityDto, IEntityDto<TKey>
 {
-    /// <summary>
-    /// Id of the entity.
-    /// </summary>
+    /**
+     * Id of the entity.
+    */
     public TKey Id;// { get; set; }
 
-    @Override public string toString()
+    @Override public String toString()
     {
         return $"[DTO: {GetType().Name}] Id = {Id}";
     }

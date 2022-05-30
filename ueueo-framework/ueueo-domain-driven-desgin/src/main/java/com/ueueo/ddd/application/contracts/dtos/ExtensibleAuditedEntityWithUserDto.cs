@@ -4,20 +4,20 @@ using Volo.Abp.Data;
 
 namespace Volo.Abp.Application.Dtos;
 
-/// <summary>
-/// This class can be inherited by DTO classes to implement <see cref="IAuditedObject"/> interface.
-/// It has the <see cref="Creator"/> and <see cref="LastModifier"/> objects as a DTOs represent the related user.
-/// It also implements the <see cref="IHasExtraProperties"/> interface.
-/// </summary>
-/// <typeparam name="TPrimaryKey">Type of primary key</typeparam>
-/// <typeparam name="TUserDto">Type of the User DTO</typeparam>
+/**
+ * This class can be inherited by DTO classes to implement <see cref="IAuditedObject"/> interface.
+ * It has the <see cref="Creator"/> and <see cref="LastModifier"/> objects as a DTOs represent the related user.
+ * It also implements the <see cref="IHasExtraProperties"/> interface.
+*/
+ * <typeparam name="TPrimaryKey">Type of primary key</typeparam>
+ * <typeparam name="TUserDto">Type of the User DTO</typeparam>
 [Serializable]
 public abstract class ExtensibleAuditedEntityWithUserDto<TPrimaryKey, TUserDto> : ExtensibleAuditedEntityDto<TPrimaryKey>, IAuditedObject<TUserDto>
 {
-    /// <inheritdoc />
+     * <inheritdoc />
     public TUserDto Creator;// { get; set; }
 
-    /// <inheritdoc />
+     * <inheritdoc />
     public TUserDto LastModifier;// { get; set; }
 
     protected ExtensibleAuditedEntityWithUserDto()
@@ -26,27 +26,27 @@ public abstract class ExtensibleAuditedEntityWithUserDto<TPrimaryKey, TUserDto> 
 
     }
 
-    protected ExtensibleAuditedEntityWithUserDto(bool setDefaultsForExtraProperties)
+    protected ExtensibleAuditedEntityWithUserDto(boolean setDefaultsForExtraProperties)
         : base(setDefaultsForExtraProperties)
     {
 
     }
 }
 
-/// <summary>
-/// This class can be inherited by DTO classes to implement <see cref="IAuditedObject"/> interface.
-/// It has the <see cref="Creator"/> and <see cref="LastModifier"/> objects as a DTOs represent the related user.
-/// It also implements the <see cref="IHasExtraProperties"/> interface.
-/// </summary>
-/// <typeparam name="TUserDto">Type of the User DTO</typeparam>
+/**
+ * This class can be inherited by DTO classes to implement <see cref="IAuditedObject"/> interface.
+ * It has the <see cref="Creator"/> and <see cref="LastModifier"/> objects as a DTOs represent the related user.
+ * It also implements the <see cref="IHasExtraProperties"/> interface.
+*/
+ * <typeparam name="TUserDto">Type of the User DTO</typeparam>
 [Serializable]
 public abstract class ExtensibleAuditedEntityWithUserDto<TUserDto> : ExtensibleAuditedEntityDto,
     IAuditedObject<TUserDto>
 {
-    /// <inheritdoc />
+     * <inheritdoc />
     public TUserDto Creator;// { get; set; }
 
-    /// <inheritdoc />
+     * <inheritdoc />
     public TUserDto LastModifier;// { get; set; }
 
     protected ExtensibleAuditedEntityWithUserDto()
@@ -55,7 +55,7 @@ public abstract class ExtensibleAuditedEntityWithUserDto<TUserDto> : ExtensibleA
 
     }
 
-    protected ExtensibleAuditedEntityWithUserDto(bool setDefaultsForExtraProperties)
+    protected ExtensibleAuditedEntityWithUserDto(boolean setDefaultsForExtraProperties)
         : base(setDefaultsForExtraProperties)
     {
 

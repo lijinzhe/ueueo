@@ -15,12 +15,14 @@ namespace Volo.Abp.GlobalFeatures;
 )]
 public class AbpGlobalFeaturesModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void PreConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.OnRegistred(GlobalFeatureInterceptorRegistrar.RegisterIfNeeded);
     }
 
-    public override void ConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void ConfigureServices(ServiceConfigurationContext context)
     {
 
         Configure<AbpVirtualFileSystemOptions>(options =>

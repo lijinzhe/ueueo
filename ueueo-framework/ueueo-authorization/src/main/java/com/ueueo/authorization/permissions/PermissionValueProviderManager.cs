@@ -12,7 +12,7 @@ public class PermissionValueProviderManager : IPermissionValueProviderManager, I
     public IReadOnlyList<IPermissionValueProvider> ValueProviders => _lazyProviders.Value;
     private readonly Lazy<List<IPermissionValueProvider>> _lazyProviders;
 
-    protected AbpPermissionOptions Options { get; }
+    protected AbpPermissionOptions Options;//  { get; }
 
     public PermissionValueProviderManager(
         IServiceProvider serviceProvider,

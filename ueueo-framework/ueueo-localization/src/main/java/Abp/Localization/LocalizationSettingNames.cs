@@ -2,5 +2,5 @@
 
 public static class LocalizationSettingNames
 {
-    public const string DefaultLanguage = "Abp.Localization.DefaultLanguage";
+    public const String DefaultLanguage = "Abp.Localization.DefaultLanguage";
 }

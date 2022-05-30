@@ -10,14 +10,14 @@ namespace Volo.Abp.Linq;
 
 public class AsyncQueryableExecuter : IAsyncQueryableExecuter, ISingletonDependency
 {
-    protected IEnumerable<IAsyncQueryableProvider> Providers { get; }
+    protected IEnumerable<IAsyncQueryableProvider> Providers;//  { get; }
 
     public AsyncQueryableExecuter(IEnumerable<IAsyncQueryableProvider> providers)
     {
         Providers = providers;
     }
 
-    protected virtual IAsyncQueryableProvider FindProvider<T>(IQueryable<T> queryable)
+    protected   IAsyncQueryableProvider FindProvider<T>(IQueryable<T> queryable)
     {
         return Providers.FirstOrDefault(p => p.CanExecute(queryable));
     }

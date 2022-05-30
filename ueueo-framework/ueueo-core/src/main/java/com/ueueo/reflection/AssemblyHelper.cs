@@ -9,14 +9,14 @@ namespace Volo.Abp.Reflection;
 
 internal static class AssemblyHelper
 {
-    public static List<Assembly> LoadAssemblies(string folderPath, SearchOption searchOption)
+    public static List<Assembly> LoadAssemblies(String folderPath, SearchOption searchOption)
     {
         return GetAssemblyFiles(folderPath, searchOption)
             .Select(AssemblyLoadContext.Default.LoadFromAssemblyPath)
             .ToList();
     }
 
-    public static IEnumerable<string> GetAssemblyFiles(string folderPath, SearchOption searchOption)
+    public static IEnumerable<String> GetAssemblyFiles(String folderPath, SearchOption searchOption)
     {
         return Directory
             .EnumerateFiles(folderPath, "*.*", searchOption)

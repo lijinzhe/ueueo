@@ -17,25 +17,25 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
 {
     public ILogger<RabbitMqMessageConsumer> Logger;// { get; set; }
 
-    protected IConnectionPool ConnectionPool { get; }
+    protected IConnectionPool ConnectionPool;//  { get; }
 
-    protected IExceptionNotifier ExceptionNotifier { get; }
+    protected IExceptionNotifier ExceptionNotifier;//  { get; }
 
-    protected AbpAsyncTimer Timer { get; }
+    protected AbpAsyncTimer Timer;//  { get; }
 
     protected ExchangeDeclareConfiguration Exchange ;// { get; private set; }
 
     protected QueueDeclareConfiguration Queue ;// { get; private set; }
 
-    protected string ConnectionName ;// { get; private set; }
+    protected String ConnectionName ;// { get; private set; }
 
-    protected ConcurrentBag<Func<IModel, BasicDeliverEventArgs, Task>> Callbacks { get; }
+    protected ConcurrentBag<Func<IModel, BasicDeliverEventArgs, Task>> Callbacks;//  { get; }
 
     protected IModel Channel ;// { get; private set; }
 
-    protected ConcurrentQueue<QueueBindCommand> QueueBindCommands { get; }
+    protected ConcurrentQueue<QueueBindCommand> QueueBindCommands;//  { get; }
 
-    protected object ChannelSendSyncLock { get; } = new object();
+    protected Object ChannelSendSyncLock;//  { get; } = new object();
 
     public RabbitMqMessageConsumer(
         IConnectionPool connectionPool,
@@ -56,29 +56,29 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
     }
 
     public void Initialize(
-        [NotNull] ExchangeDeclareConfiguration exchange,
-        [NotNull] QueueDeclareConfiguration queue,
-        string connectionName = null)
+        @Nonnull ExchangeDeclareConfiguration exchange,
+        @Nonnull QueueDeclareConfiguration queue,
+        String connectionName = null)
     {
-        Exchange = Check.NotNull(exchange, nameof(exchange));
-        Queue = Check.NotNull(queue, nameof(queue));
+        Exchange = Objects.requireNonNull(exchange, nameof(exchange));
+        Queue = Objects.requireNonNull(queue, nameof(queue));
         ConnectionName = connectionName;
         Timer.Start();
     }
 
-    public virtual void BindAsync(string routingKey)
+    public   void BindAsync(String routingKey)
     {
         QueueBindCommands.Enqueue(new QueueBindCommand(QueueBindType.Bind, routingKey));
-        await TrySendQueueBindCommandsAsync();
+        TrySendQueueBindCommandsAsync();
     }
 
-    public virtual void UnbindAsync(string routingKey)
+    public   void UnbindAsync(String routingKey)
     {
         QueueBindCommands.Enqueue(new QueueBindCommand(QueueBindType.Unbind, routingKey));
-        await TrySendQueueBindCommandsAsync();
+        TrySendQueueBindCommandsAsync();
     }
 
-    protected virtual void TrySendQueueBindCommandsAsync()
+    protected   void TrySendQueueBindCommandsAsync()
     {
         try
         {
@@ -121,27 +121,27 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
         catch (Exception ex)
         {
             Logger.LogException(ex, LogLevel.Warning);
-            await ExceptionNotifier.NotifyAsync(ex, logLevel: LogLevel.Warning);
+            ExceptionNotifier.NotifyAsync(ex, logLevel: LogLevel.Warning);
         }
     }
 
-    public virtual void OnMessageReceived(Func<IModel, BasicDeliverEventArgs, Task> callback)
+    public   void OnMessageReceived(Func<IModel, BasicDeliverEventArgs, Task> callback)
     {
         Callbacks.Add(callback);
     }
 
-    protected virtual void Timer_Elapsed(AbpAsyncTimer timer)
+    protected   void Timer_Elapsed(AbpAsyncTimer timer)
     {
         if (Channel == null || Channel.IsOpen == false)
         {
-            await TryCreateChannelAsync();
-            await TrySendQueueBindCommandsAsync();
+            TryCreateChannelAsync();
+            TrySendQueueBindCommandsAsync();
         }
     }
 
-    protected virtual void TryCreateChannelAsync()
+    protected   void TryCreateChannelAsync()
     {
-        await DisposeChannelAsync();
+        DisposeChannelAsync();
 
         try
         {
@@ -177,17 +177,17 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
         catch (Exception ex)
         {
             Logger.LogException(ex, LogLevel.Warning);
-            await ExceptionNotifier.NotifyAsync(ex, logLevel: LogLevel.Warning);
+            ExceptionNotifier.NotifyAsync(ex, logLevel: LogLevel.Warning);
         }
     }
 
-    protected virtual void HandleIncomingMessageAsync(object sender, BasicDeliverEventArgs basicDeliverEventArgs)
+    protected   void HandleIncomingMessageAsync(Object sender, BasicDeliverEventArgs basicDeliverEventArgs)
     {
         try
         {
-            foreach (var callback in Callbacks)
+            for (var callback in Callbacks)
             {
-                await callback(Channel, basicDeliverEventArgs);
+                callback(Channel, basicDeliverEventArgs);
             }
 
             Channel.BasicAck(basicDeliverEventArgs.DeliveryTag, multiple: false);
@@ -206,11 +206,11 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
             catch { }
 
             Logger.LogException(ex);
-            await ExceptionNotifier.NotifyAsync(ex);
+            ExceptionNotifier.NotifyAsync(ex);
         }
     }
 
-    protected virtual void DisposeChannelAsync()
+    protected   void DisposeChannelAsync()
     {
         if (Channel == null)
         {
@@ -224,11 +224,11 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
         catch (Exception ex)
         {
             Logger.LogException(ex, LogLevel.Warning);
-            await ExceptionNotifier.NotifyAsync(ex, logLevel: LogLevel.Warning);
+            ExceptionNotifier.NotifyAsync(ex, logLevel: LogLevel.Warning);
         }
     }
 
-    protected virtual void DisposeChannel()
+    protected   void DisposeChannel()
     {
         if (Channel == null)
         {
@@ -246,7 +246,7 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
         }
     }
 
-    public virtual void Dispose()
+    public   void Dispose()
     {
         Timer.Stop();
         DisposeChannel();
@@ -254,11 +254,11 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
 
     protected class QueueBindCommand
     {
-        public QueueBindType Type { get; }
+        public QueueBindType Type;//  { get; }
 
-        public string RoutingKey { get; }
+        public String RoutingKey;//  { get; }
 
-        public QueueBindCommand(QueueBindType type, string routingKey)
+        public QueueBindCommand(QueueBindType type, String routingKey)
         {
             Type = type;
             RoutingKey = routingKey;

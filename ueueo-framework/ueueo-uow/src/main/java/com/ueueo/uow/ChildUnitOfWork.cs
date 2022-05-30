@@ -8,32 +8,32 @@ namespace Volo.Abp.Uow;
 
 internal class ChildUnitOfWork : IUnitOfWork
 {
-    public Guid Id => _parent.Id;
+    public ID Id => _parent.Id;
 
     public IAbpUnitOfWorkOptions Options => _parent.Options;
 
     public IUnitOfWork Outer => _parent.Outer;
 
-    public bool IsReserved => _parent.IsReserved;
+    public boolean IsReserved => _parent.IsReserved;
 
-    public bool IsDisposed => _parent.IsDisposed;
+    public boolean IsDisposed => _parent.IsDisposed;
 
-    public bool IsCompleted => _parent.IsCompleted;
+    public boolean IsCompleted => _parent.IsCompleted;
 
-    public string ReservationName => _parent.ReservationName;
+    public String ReservationName => _parent.ReservationName;
 
     public event EventHandler<UnitOfWorkFailedEventArgs> Failed;
     public event EventHandler<UnitOfWorkEventArgs> Disposed;
 
     public IServiceProvider ServiceProvider => _parent.ServiceProvider;
 
-    public Dictionary<string, object> Items => _parent.Items;
+    public Dictionary<String, Object> Items => _parent.Items;
 
     private readonly IUnitOfWork _parent;
 
-    public ChildUnitOfWork([NotNull] IUnitOfWork parent)
+    public ChildUnitOfWork(@Nonnull IUnitOfWork parent)
     {
-        Check.NotNull(parent, nameof(parent));
+        Objects.requireNonNull(parent, nameof(parent));
 
         _parent = parent;
 
@@ -51,22 +51,22 @@ internal class ChildUnitOfWork : IUnitOfWork
         _parent.Initialize(options);
     }
 
-    public void Reserve(string reservationName)
+    public void Reserve(String reservationName)
     {
         _parent.Reserve(reservationName);
     }
 
-    public Task SaveChangesAsync(CancellationToken cancellationToken = default)
+    public void SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         return _parent.SaveChangesAsync(cancellationToken);
     }
 
-    public Task CompleteAsync(CancellationToken cancellationToken = default)
+    public void CompleteAsync(CancellationToken cancellationToken = default)
     {
         return Task.CompletedTask;
     }
 
-    public Task RollbackAsync(CancellationToken cancellationToken = default)
+    public void RollbackAsync(CancellationToken cancellationToken = default)
     {
         return _parent.RollbackAsync(cancellationToken);
     }
@@ -90,32 +90,32 @@ internal class ChildUnitOfWork : IUnitOfWork
         _parent.AddOrReplaceDistributedEvent(eventRecord, replacementSelector);
     }
 
-    public IDatabaseApi FindDatabaseApi(string key)
+    public IDatabaseApi FindDatabaseApi(String key)
     {
         return _parent.FindDatabaseApi(key);
     }
 
-    public void AddDatabaseApi(string key, IDatabaseApi api)
+    public void AddDatabaseApi(String key, IDatabaseApi api)
     {
         _parent.AddDatabaseApi(key, api);
     }
 
-    public IDatabaseApi GetOrAddDatabaseApi(string key, Func<IDatabaseApi> factory)
+    public IDatabaseApi GetOrAddDatabaseApi(String key, Func<IDatabaseApi> factory)
     {
         return _parent.GetOrAddDatabaseApi(key, factory);
     }
 
-    public ITransactionApi FindTransactionApi(string key)
+    public ITransactionApi FindTransactionApi(String key)
     {
         return _parent.FindTransactionApi(key);
     }
 
-    public void AddTransactionApi(string key, ITransactionApi api)
+    public void AddTransactionApi(String key, ITransactionApi api)
     {
         _parent.AddTransactionApi(key, api);
     }
 
-    public ITransactionApi GetOrAddTransactionApi(string key, Func<ITransactionApi> factory)
+    public ITransactionApi GetOrAddTransactionApi(String key, Func<ITransactionApi> factory)
     {
         return _parent.GetOrAddTransactionApi(key, factory);
     }
@@ -125,7 +125,7 @@ internal class ChildUnitOfWork : IUnitOfWork
 
     }
 
-    @Override public string toString()
+    @Override public String toString()
     {
         return $"[UnitOfWork {Id}]";
     }

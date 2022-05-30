@@ -3,9 +3,9 @@ using JetBrains.Annotations;
 
 namespace Volo.Abp.Http.Client;
 
-public class RemoteServiceConfigurationDictionary : Dictionary<string, RemoteServiceConfiguration>
+public class RemoteServiceConfigurationDictionary : Dictionary<String, RemoteServiceConfiguration>
 {
-    public const string DefaultName = "Default";
+    public const String DefaultName = "Default";
 
     public RemoteServiceConfiguration Default {
         get => this.GetOrDefault(DefaultName);
@@ -13,7 +13,7 @@ public class RemoteServiceConfigurationDictionary : Dictionary<string, RemoteSer
     }
 
     [NotNull]
-    public RemoteServiceConfiguration GetConfigurationOrDefault(string name)
+    public RemoteServiceConfiguration GetConfigurationOrDefault(String name)
     {
         return this.GetOrDefault(name)
                ?? Default
@@ -21,7 +21,7 @@ public class RemoteServiceConfigurationDictionary : Dictionary<string, RemoteSer
     }
 
     [CanBeNull]
-    public RemoteServiceConfiguration GetConfigurationOrDefaultOrNull(string name)
+    public RemoteServiceConfiguration GetConfigurationOrDefaultOrNull(String name)
     {
         return this.GetOrDefault(name)
                ?? Default;

@@ -6,7 +6,8 @@ namespace Volo.Abp.Serialization;
 
 public class AbpSerializationModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void PreConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.OnExposing(onServiceExposingContext =>
         {

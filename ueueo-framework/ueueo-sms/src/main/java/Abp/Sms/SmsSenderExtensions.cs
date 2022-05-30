@@ -5,9 +5,9 @@ namespace Volo.Abp.Sms;
 
 public static class SmsSenderExtensions
 {
-    public static Task SendAsync([NotNull] this ISmsSender smsSender, [NotNull] string phoneNumber, [NotNull] string text)
+    public static void SendAsync(@Nonnull this ISmsSender smsSender, @Nonnull String phoneNumber, @Nonnull String text)
     {
-        Check.NotNull(smsSender, nameof(smsSender));
+        Objects.requireNonNull(smsSender, nameof(smsSender));
         return smsSender.SendAsync(new SmsMessage(phoneNumber, text));
     }
 }

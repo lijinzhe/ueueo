@@ -12,9 +12,9 @@ namespace Volo.Abp.Kafka;
 
 public class ProducerPool : IProducerPool, ISingletonDependency
 {
-    protected AbpKafkaOptions Options { get; }
+    protected AbpKafkaOptions Options;//  { get; }
 
-    protected ConcurrentDictionary<string, Lazy<IProducer<string, byte[]>>> Producers { get; }
+    protected ConcurrentDictionary<String, Lazy<IProducer<String, byte[]>>> Producers;//  { get; }
 
     protected TimeSpan TotalDisposeWaitDuration;// { get; set; } = TimeSpan.FromSeconds(10);
 
@@ -22,22 +22,22 @@ public class ProducerPool : IProducerPool, ISingletonDependency
 
     public ILogger<ProducerPool> Logger;// { get; set; }
 
-    private bool _isDisposed;
+    private boolean _isDisposed;
 
     public ProducerPool(IOptions<AbpKafkaOptions> options)
     {
         Options = options.Value;
 
-        Producers = new ConcurrentDictionary<string, Lazy<IProducer<string, byte[]>>>();
+        Producers = new ConcurrentDictionary<String, Lazy<IProducer<String, byte[]>>>();
         Logger = new NullLogger<ProducerPool>();
     }
 
-    public virtual IProducer<string, byte[]> Get(string connectionName = null)
+    public   IProducer<String, byte[]> Get(String connectionName = null)
     {
         connectionName ??= KafkaConnections.DefaultConnectionName;
 
         return Producers.GetOrAdd(
-            connectionName, connection => new Lazy<IProducer<string, byte[]>>(() =>
+            connectionName, connection => new Lazy<IProducer<String, byte[]>>(() =>
             {
                 var producerConfig = new ProducerConfig(Options.Connections.GetOrDefault(connection));
                 Options.ConfigureProducer?.Invoke(producerConfig);
@@ -47,7 +47,7 @@ public class ProducerPool : IProducerPool, ISingletonDependency
                     producerConfig.TransactionalId = Guid.NewGuid().ToString();
                 }
 
-                var producer = new ProducerBuilder<string, byte[]>(producerConfig).Build();
+                var producer = new ProducerBuilder<String, byte[]>(producerConfig).Build();
                 producer.InitTransactions(DefaultTransactionsWaitDuration);
 
                 return producer;
@@ -75,7 +75,7 @@ public class ProducerPool : IProducerPool, ISingletonDependency
 
         var remainingWaitDuration = TotalDisposeWaitDuration;
 
-        foreach (var producer in Producers.Values)
+        for (var producer in Producers.Values)
         {
             var poolItemDisposeStopwatch = Stopwatch.StartNew();
 

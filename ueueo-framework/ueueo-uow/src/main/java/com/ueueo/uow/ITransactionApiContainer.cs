@@ -6,10 +6,10 @@ namespace Volo.Abp.Uow;
 public interface ITransactionApiContainer
 {
     [CanBeNull]
-    ITransactionApi FindTransactionApi([NotNull] string key);
+    ITransactionApi FindTransactionApi(@Nonnull String key);
 
-    void AddTransactionApi([NotNull] string key, [NotNull] ITransactionApi api);
+    void AddTransactionApi(@Nonnull String key, @Nonnull ITransactionApi api);
 
     [NotNull]
-    ITransactionApi GetOrAddTransactionApi([NotNull] string key, [NotNull] Func<ITransactionApi> factory);
+    ITransactionApi GetOrAddTransactionApi(@Nonnull String key, @Nonnull Func<ITransactionApi> factory);
 }

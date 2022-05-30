@@ -16,9 +16,9 @@ namespace Volo.Abp.MongoDB.DistributedEvents;
 public class MongoDbContextEventInbox<TMongoDbContext> : IMongoDbContextEventInbox<TMongoDbContext>
     where TMongoDbContext : IHasEventInbox
 {
-    protected IMongoDbContextProvider<TMongoDbContext> DbContextProvider { get; }
-    protected AbpEventBusBoxesOptions EventBusBoxesOptions { get; }
-    protected IClock Clock { get; }
+    protected IMongoDbContextProvider<TMongoDbContext> DbContextProvider;//  { get; }
+    protected AbpEventBusBoxesOptions EventBusBoxesOptions;//  { get; }
+    protected IClock Clock;//  { get; }
 
     public MongoDbContextEventInbox(
         IMongoDbContextProvider<TMongoDbContext> dbContextProvider,
@@ -32,30 +32,30 @@ public class MongoDbContextEventInbox<TMongoDbContext> : IMongoDbContextEventInb
 
 
     [UnitOfWork]
-    public virtual void EnqueueAsync(IncomingEventInfo incomingEvent)
+    public   void EnqueueAsync(IncomingEventInfo incomingEvent)
     {
-        var dbContext = await DbContextProvider.GetDbContextAsync();
+        var dbContext = DbContextProvider.GetDbContextAsync();
         if (dbContext.SessionHandle != null)
         {
-            await dbContext.IncomingEvents.InsertOneAsync(
+            dbContext.IncomingEvents.InsertOneAsync(
                 dbContext.SessionHandle,
                 new IncomingEventRecord(incomingEvent)
             );
         }
         else
         {
-            await dbContext.IncomingEvents.InsertOneAsync(
+            dbContext.IncomingEvents.InsertOneAsync(
                 new IncomingEventRecord(incomingEvent)
             );
         }
     }
 
     [UnitOfWork]
-    public virtual async Task<List<IncomingEventInfo>> GetWaitingEventsAsync(int maxCount, CancellationToken cancellationToken = default)
+    public    Task<List<IncomingEventInfo>> GetWaitingEventsAsync(int maxCount, CancellationToken cancellationToken = default)
     {
-        var dbContext = await DbContextProvider.GetDbContextAsync(cancellationToken);
+        var dbContext = DbContextProvider.GetDbContextAsync(cancellationToken);
 
-        var outgoingEventRecords = await dbContext
+        var outgoingEventRecords = dbContext
             .IncomingEvents
             .AsQueryable()
             .Where(x => !x.Processed)
@@ -69,43 +69,43 @@ public class MongoDbContextEventInbox<TMongoDbContext> : IMongoDbContextEventInb
     }
 
     [UnitOfWork]
-    public virtual void MarkAsProcessedAsync(Guid id)
+    public   void MarkAsProcessedAsync(Guid id)
     {
-        var dbContext = await DbContextProvider.GetDbContextAsync();
+        var dbContext = DbContextProvider.GetDbContextAsync();
 
         var filter = Builders<IncomingEventRecord>.Filter.Eq(x => x.Id, id);
         var update = Builders<IncomingEventRecord>.Update.Set(x => x.Processed, true).Set(x => x.ProcessedTime, Clock.Now);
 
         if (dbContext.SessionHandle != null)
         {
-            await dbContext.IncomingEvents.UpdateOneAsync(dbContext.SessionHandle, filter, update);
+            dbContext.IncomingEvents.UpdateOneAsync(dbContext.SessionHandle, filter, update);
         }
         else
         {
-            await dbContext.IncomingEvents.UpdateOneAsync(filter, update);
+            dbContext.IncomingEvents.UpdateOneAsync(filter, update);
         }
     }
 
     [UnitOfWork]
-    public virtual async Task<bool> ExistsByMessageIdAsync(string messageId)
+    public    Task<bool> ExistsByMessageIdAsync(String messageId)
     {
-        var dbContext = await DbContextProvider.GetDbContextAsync();
-        return await dbContext.IncomingEvents.AsQueryable().AnyAsync(x => x.MessageId == messageId);
+        var dbContext = DbContextProvider.GetDbContextAsync();
+        return dbContext.IncomingEvents.AsQueryable().AnyAsync(x => x.MessageId == messageId);
     }
 
     [UnitOfWork]
-    public virtual void DeleteOldEventsAsync()
+    public   void DeleteOldEventsAsync()
     {
-        var dbContext = await DbContextProvider.GetDbContextAsync();
+        var dbContext = DbContextProvider.GetDbContextAsync();
         var timeToKeepEvents = Clock.Now - EventBusBoxesOptions.WaitTimeToDeleteProcessedInboxEvents;
 
         if (dbContext.SessionHandle != null)
         {
-            await dbContext.IncomingEvents.DeleteManyAsync(dbContext.SessionHandle, x => x.Processed && x.CreationTime < timeToKeepEvents);
+            dbContext.IncomingEvents.DeleteManyAsync(dbContext.SessionHandle, x => x.Processed && x.CreationTime < timeToKeepEvents);
         }
         else
         {
-            await dbContext.IncomingEvents.DeleteManyAsync(x => x.Processed && x.CreationTime < timeToKeepEvents);
+            dbContext.IncomingEvents.DeleteManyAsync(x => x.Processed && x.CreationTime < timeToKeepEvents);
         }
     }
 }

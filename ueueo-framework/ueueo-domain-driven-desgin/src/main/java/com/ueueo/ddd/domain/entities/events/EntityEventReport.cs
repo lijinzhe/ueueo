@@ -4,9 +4,9 @@ namespace Volo.Abp.Domain.Entities.Events;
 
 public class EntityEventReport
 {
-    public List<DomainEventEntry> DomainEvents { get; }
+    public List<DomainEventEntry> DomainEvents;//  { get; }
 
-    public List<DomainEventEntry> DistributedEvents { get; }
+    public List<DomainEventEntry> DistributedEvents;//  { get; }
 
     public EntityEventReport()
     {
@@ -14,7 +14,7 @@ public class EntityEventReport
         DistributedEvents = new List<DomainEventEntry>();
     }
 
-    @Override public string toString()
+    @Override public String toString()
     {
         return $"[{nameof(EntityEventReport)}] DomainEvents: {DomainEvents.Count}, DistributedEvents: {DistributedEvents.Count}";
     }

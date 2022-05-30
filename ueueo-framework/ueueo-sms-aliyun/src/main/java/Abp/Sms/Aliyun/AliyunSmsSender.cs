@@ -10,7 +10,7 @@ namespace Volo.Abp.Sms.Aliyun;
 
 public class AliyunSmsSender : ISmsSender, ITransientDependency
 {
-    protected AbpAliyunSmsOptions Options { get; }
+    protected AbpAliyunSmsOptions Options;//  { get; }
 
     public AliyunSmsSender(IOptionsMonitor<AbpAliyunSmsOptions> options)
     {
@@ -21,16 +21,16 @@ public class AliyunSmsSender : ISmsSender, ITransientDependency
     {
         var client = CreateClient();
 
-        await client.SendSmsAsync(new AliyunSendSmsRequest
+        client.SendSmsAsync(new AliyunSendSmsRequest
         {
             PhoneNumbers = smsMessage.PhoneNumber,
-            SignName = smsMessage.Properties.GetOrDefault("SignName") as string,
-            TemplateCode = smsMessage.Properties.GetOrDefault("TemplateCode") as string,
+            SignName = smsMessage.Properties.GetOrDefault("SignName") as String,
+            TemplateCode = smsMessage.Properties.GetOrDefault("TemplateCode") as String,
             TemplateParam = smsMessage.Text
         });
     }
 
-    protected virtual AliyunClient CreateClient()
+    protected   AliyunClient CreateClient()
     {
         return new(new AliyunConfig
         {

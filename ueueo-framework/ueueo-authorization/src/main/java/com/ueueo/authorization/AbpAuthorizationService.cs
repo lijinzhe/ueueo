@@ -11,7 +11,7 @@ namespace Volo.Abp.Authorization;
 [Dependency(ReplaceServices = true)]
 public class AbpAuthorizationService : DefaultAuthorizationService, IAbpAuthorizationService, ITransientDependency
 {
-    public IServiceProvider ServiceProvider { get; }
+    public IServiceProvider ServiceProvider;//  { get; }
 
     public ClaimsPrincipal CurrentPrincipal => _currentPrincipalAccessor.Principal;
 

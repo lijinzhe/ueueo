@@ -9,12 +9,13 @@ namespace Volo.Abp.Reflection;
 public static class ReflectionHelper
 {
     //TODO: Ehhance summary
-    /// <summary>
-    /// Checks whether <paramref name="givenType"/> implements/inherits <paramref name="genericType"/>.
-    /// </summary>
-    /// <param name="givenType">Type to check</param>
-    /// <param name="genericType">Generic type</param>
-    public static bool IsAssignableToGenericType(Type givenType, Type genericType)
+    /**
+     * Checks whether <paramref name="givenType"/> implements/inherits <paramref name="genericType"/>.
+    *
+     * <param name="givenType">Type to check</param>
+     * <param name="genericType">Generic type</param>
+     */
+    public static boolean IsAssignableToGenericType(Type givenType, Type genericType)
     {
         var givenTypeInfo = givenType.GetTypeInfo();
 
@@ -23,7 +24,7 @@ public static class ReflectionHelper
             return true;
         }
 
-        foreach (var interfaceType in givenTypeInfo.GetInterfaces())
+        for (var interfaceType in givenTypeInfo.GetInterfaces())
         {
             if (interfaceType.GetTypeInfo().IsGenericType && interfaceType.GetGenericTypeDefinition() == genericType)
             {
@@ -56,7 +57,7 @@ public static class ReflectionHelper
             result.AddIfNotContains(givenType);
         }
 
-        foreach (var interfaceType in givenTypeInfo.GetInterfaces())
+        for (var interfaceType in givenTypeInfo.GetInterfaces())
         {
             if (interfaceType.GetTypeInfo().IsGenericType && interfaceType.GetGenericTypeDefinition() == genericType)
             {
@@ -72,16 +73,17 @@ public static class ReflectionHelper
         AddImplementedGenericTypes(result, givenTypeInfo.BaseType, genericType);
     }
 
-    /// <summary>
-    /// Tries to gets an of attribute defined for a class member and it's declaring type including inherited attributes.
-    /// Returns default value if it's not declared at all.
-    /// </summary>
-    /// <typeparam name="TAttribute">Type of the attribute</typeparam>
-    /// <param name="memberInfo">MemberInfo</param>
-    /// <param name="defaultValue">Default value (null as default)</param>
-    /// <param name="inherit">Inherit attribute from base classes</param>
-    public static TAttribute GetSingleAttributeOrDefault<TAttribute>(MemberInfo memberInfo, TAttribute defaultValue = default, bool inherit = true)
-        where TAttribute : Attribute
+    /**
+     * Tries to gets an of attribute defined for a class member and it's declaring type including inherited attributes.
+     * Returns default value if it's not declared at all.
+    *
+     * <typeparam name="TAttribute">Type of the attribute</typeparam>
+     * <param name="memberInfo">MemberInfo</param>
+     * <param name="defaultValue">Default value (null as default)</param>
+     * <param name="inherit">Inherit attribute from base classes</param>
+     */
+    public static TAttribute GetSingleAttributeOrDefault<TAttribute>(MemberInfo memberInfo, TAttribute defaultValue = default, boolean inherit = true)
+        //where TAttribute : Attribute
     {
         //Get attribute on the member
         if (memberInfo.IsDefined(typeof(TAttribute), inherit))
@@ -92,30 +94,32 @@ public static class ReflectionHelper
         return defaultValue;
     }
 
-    /// <summary>
-    /// Tries to gets an of attribute defined for a class member and it's declaring type including inherited attributes.
-    /// Returns default value if it's not declared at all.
-    /// </summary>
-    /// <typeparam name="TAttribute">Type of the attribute</typeparam>
-    /// <param name="memberInfo">MemberInfo</param>
-    /// <param name="defaultValue">Default value (null as default)</param>
-    /// <param name="inherit">Inherit attribute from base classes</param>
-    public static TAttribute GetSingleAttributeOfMemberOrDeclaringTypeOrDefault<TAttribute>(MemberInfo memberInfo, TAttribute defaultValue = default, bool inherit = true)
-        where TAttribute : class
+    /**
+     * Tries to gets an of attribute defined for a class member and it's declaring type including inherited attributes.
+     * Returns default value if it's not declared at all.
+    *
+     * <typeparam name="TAttribute">Type of the attribute</typeparam>
+     * <param name="memberInfo">MemberInfo</param>
+     * <param name="defaultValue">Default value (null as default)</param>
+     * <param name="inherit">Inherit attribute from base classes</param>
+     */
+    public static TAttribute GetSingleAttributeOfMemberOrDeclaringTypeOrDefault<TAttribute>(MemberInfo memberInfo, TAttribute defaultValue = default, boolean inherit = true)
+        //where TAttribute : class
     {
         return memberInfo.GetCustomAttributes(true).OfType<TAttribute>().FirstOrDefault()
                ?? memberInfo.DeclaringType?.GetTypeInfo().GetCustomAttributes(true).OfType<TAttribute>().FirstOrDefault()
                ?? defaultValue;
     }
 
-    /// <summary>
-    /// Tries to gets attributes defined for a class member and it's declaring type including inherited attributes.
-    /// </summary>
-    /// <typeparam name="TAttribute">Type of the attribute</typeparam>
-    /// <param name="memberInfo">MemberInfo</param>
-    /// <param name="inherit">Inherit attribute from base classes</param>
-    public static IEnumerable<TAttribute> GetAttributesOfMemberOrDeclaringType<TAttribute>(MemberInfo memberInfo, bool inherit = true)
-        where TAttribute : class
+    /**
+     * Tries to gets attributes defined for a class member and it's declaring type including inherited attributes.
+    *
+     * <typeparam name="TAttribute">Type of the attribute</typeparam>
+     * <param name="memberInfo">MemberInfo</param>
+     * <param name="inherit">Inherit attribute from base classes</param>
+     */
+    public static IEnumerable<TAttribute> GetAttributesOfMemberOrDeclaringType<TAttribute>(MemberInfo memberInfo, boolean inherit = true)
+        //where TAttribute : class
     {
         var customAttributes = memberInfo.GetCustomAttributes(true).OfType<TAttribute>();
         var declaringTypeCustomAttributes =
@@ -125,10 +129,10 @@ public static class ReflectionHelper
             : customAttributes;
     }
 
-    /// <summary>
-    /// Gets value of a property by it's full path from given object
-    /// </summary>
-    public static object GetValueByPath(object obj, Type objectType, string propertyPath)
+    /**
+     * Gets value of a property by it's full path from given object
+    */
+    public static Object GetValueByPath(Object obj, Type objectType, String propertyPath)
     {
         var value = obj;
         var currentType = objectType;
@@ -139,7 +143,7 @@ public static class ReflectionHelper
             absolutePropertyPath = absolutePropertyPath.Replace(objectPath + ".", "");
         }
 
-        foreach (var propertyName in absolutePropertyPath.Split('.'))
+        for (var propertyName in absolutePropertyPath.Split('.'))
         {
             var property = currentType.GetProperty(propertyName);
             if (property != null)
@@ -160,10 +164,10 @@ public static class ReflectionHelper
         return value;
     }
 
-    /// <summary>
-    /// Sets value of a property by it's full path on given object
-    /// </summary>
-    internal static void SetValueByPath(object obj, Type objectType, string propertyPath, object value)
+    /**
+     * Sets value of a property by it's full path on given object
+    */
+    internal static void SetValueByPath(Object obj, Type objectType, String propertyPath, Object value)
     {
         var currentType = objectType;
         PropertyInfo property;
@@ -195,18 +199,19 @@ public static class ReflectionHelper
     }
 
 
-    /// <summary>
-    /// Get all the constant values in the specified type (including the base type).
-    /// </summary>
-    /// <param name="type"></param>
-    /// <returns></returns>
-    public static string[] GetPublicConstantsRecursively(Type type)
+    /**
+     * Get all the constant values in the specified type (including the base type).
+     *
+     * <param name="type"></param>
+     * <returns></returns>
+     */
+    public static String[] GetPublicConstantsRecursively(Type type)
     {
         const int maxRecursiveParameterValidationDepth = 8;
 
-        var publicConstants = new List<string>();
+        var publicConstants = new List<String>();
 
-        void Recursively(List<string> constants, Type targetType, int currentDepth)
+        void Recursively(List<String> constants, Type targetType, int currentDepth)
         {
             if (currentDepth > maxRecursiveParameterValidationDepth)
             {
@@ -219,7 +224,7 @@ public static class ReflectionHelper
 
             var nestedTypes = targetType.GetNestedTypes(BindingFlags.Public);
 
-            foreach (var nestedType in nestedTypes)
+            for (var nestedType in nestedTypes)
             {
                 Recursively(constants, nestedType, currentDepth + 1);
             }

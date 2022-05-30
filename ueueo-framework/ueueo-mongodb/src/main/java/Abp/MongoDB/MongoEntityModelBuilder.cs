@@ -9,9 +9,9 @@ public class MongoEntityModelBuilder<TEntity> :
     IMongoEntityModelBuilder,
     IMongoEntityModelBuilder<TEntity>
 {
-    public Type EntityType { get; }
+    public Type EntityType;//  { get; }
 
-    public string CollectionName;// { get; set; }
+    public String CollectionName;// { get; set; }
 
     BsonClassMap IMongoEntityModelBuilder.BsonMap => _bsonClassMap;
     BsonClassMap<TEntity> IMongoEntityModelBuilder<TEntity>.BsonMap => _bsonClassMap;

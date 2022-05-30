@@ -2,8 +2,8 @@
 
 public class ExtensionPropertyEntityConfiguration
 {
-    /// <summary>
-    /// Default: true.
-    /// </summary>
-    public bool IsAvailable;// { get; set; } = true;
+    /**
+     * Default: true.
+    */
+    public boolean IsAvailable;// { get; set; } = true;
 }

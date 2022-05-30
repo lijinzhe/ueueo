@@ -7,16 +7,16 @@ namespace Volo.Abp.Http.Client;
 
 public class AbpHttpClientBuilderOptions
 {
-    public List<Action<string, IHttpClientBuilder>> ProxyClientBuildActions { get; }
+    public List<Action<String, IHttpClientBuilder>> ProxyClientBuildActions;//  { get; }
 
-    internal HashSet<string> ConfiguredProxyClients { get; }
+    internal HashSet<String> ConfiguredProxyClients;//  { get; }
 
-    public List<Action<string, IServiceProvider, HttpClient>> ProxyClientActions { get; }
+    public List<Action<String, IServiceProvider, HttpClient>> ProxyClientActions;//  { get; }
 
     public AbpHttpClientBuilderOptions()
     {
-        ProxyClientBuildActions = new List<Action<string, IHttpClientBuilder>>();
-        ConfiguredProxyClients = new HashSet<string>();
-        ProxyClientActions = new List<Action<string, IServiceProvider, HttpClient>>();
+        ProxyClientBuildActions = new List<Action<String, IHttpClientBuilder>>();
+        ConfiguredProxyClients = new HashSet<String>();
+        ProxyClientActions = new List<Action<String, IServiceProvider, HttpClient>>();
     }
 }

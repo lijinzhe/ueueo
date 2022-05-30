@@ -7,11 +7,11 @@ namespace Volo.Abp.TextTemplating;
 public static class TemplateDefinitionExtensions
 {
     public static TemplateDefinition WithVirtualFilePath(
-        [NotNull] this TemplateDefinition templateDefinition,
-        [NotNull] string virtualPath,
-        bool isInlineLocalized)
+        @Nonnull this TemplateDefinition templateDefinition,
+        @Nonnull String virtualPath,
+        boolean isInlineLocalized)
     {
-        Check.NotNull(templateDefinition, nameof(templateDefinition));
+        Objects.requireNonNull(templateDefinition, nameof(templateDefinition));
 
         templateDefinition.IsInlineLocalized = isInlineLocalized;
 
@@ -21,13 +21,13 @@ public static class TemplateDefinitionExtensions
         );
     }
 
-    public static string GetVirtualFilePathOrNull(
-        [NotNull] this TemplateDefinition templateDefinition)
+    public static String GetVirtualFilePathOrNull(
+        @Nonnull this TemplateDefinition templateDefinition)
     {
-        Check.NotNull(templateDefinition, nameof(templateDefinition));
+        Objects.requireNonNull(templateDefinition, nameof(templateDefinition));
 
         return templateDefinition
             .Properties
-            .GetOrDefault(VirtualFileTemplateContentContributor.VirtualPathPropertyName) as string;
+            .GetOrDefault(VirtualFileTemplateContentContributor.VirtualPathPropertyName) as String;
     }
 }

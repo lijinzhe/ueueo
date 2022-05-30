@@ -6,7 +6,7 @@ namespace Volo.Abp.Kafka;
 
 public class KafkaMessageConsumerFactory : IKafkaMessageConsumerFactory, ISingletonDependency, IDisposable
 {
-    protected IServiceScope ServiceScope { get; }
+    protected IServiceScope ServiceScope;//  { get; }
 
     public KafkaMessageConsumerFactory(IServiceScopeFactory serviceScopeFactory)
     {
@@ -14,9 +14,9 @@ public class KafkaMessageConsumerFactory : IKafkaMessageConsumerFactory, ISingle
     }
 
     public IKafkaMessageConsumer Create(
-        string topicName,
-        string groupId,
-        string connectionName = null)
+        String topicName,
+        String groupId,
+        String connectionName = null)
     {
         var consumer = ServiceScope.ServiceProvider.GetRequiredService<KafkaMessageConsumer>();
         consumer.Initialize(topicName, groupId, connectionName);

@@ -2,11 +2,11 @@
 
 public interface ILanguageInfo
 {
-    string CultureName { get; }
+    String CultureName;//  { get; }
 
-    string UiCultureName { get; }
+    String UiCultureName;//  { get; }
 
-    string DisplayName { get; }
+    String DisplayName;//  { get; }
 
-    string FlagIcon { get; }
+    String FlagIcon;//  { get; }
 }

@@ -15,7 +15,7 @@ public static class InternalAsyncHelper
 
         try
         {
-            await actualReturnValue;
+            actualReturnValue;
         }
         catch (Exception ex)
         {
@@ -34,8 +34,8 @@ public static class InternalAsyncHelper
 
         try
         {
-            await actualReturnValue;
-            await postAction();
+            actualReturnValue;
+            postAction();
         }
         catch (Exception ex)
         {
@@ -56,14 +56,14 @@ public static class InternalAsyncHelper
         {
             if (preAction != null)
             {
-                await preAction();
+                preAction();
             }
 
-            await actualReturnValue();
+            actualReturnValue();
 
             if (postAction != null)
             {
-                await postAction();
+                postAction();
             }
         }
         catch (Exception ex)
@@ -80,13 +80,13 @@ public static class InternalAsyncHelper
         }
     }
 
-    public static async Task<T> AwaitTaskWithFinallyAndGetResult<T>(Task<T> actualReturnValue, Action<Exception> finalAction)
+    public static  Task<T> AwaitTaskWithFinallyAndGetResult<T>(Task<T> actualReturnValue, Action<Exception> finalAction)
     {
         Exception exception = null;
 
         try
         {
-            return await actualReturnValue;
+            return actualReturnValue;
         }
         catch (Exception ex)
         {
@@ -99,23 +99,23 @@ public static class InternalAsyncHelper
         }
     }
 
-    public static object CallAwaitTaskWithFinallyAndGetResult(Type taskReturnType, object actualReturnValue, Action<Exception> finalAction)
+    public static Object CallAwaitTaskWithFinallyAndGetResult(Type taskReturnType, Object actualReturnValue, Action<Exception> finalAction)
     {
         return typeof(InternalAsyncHelper)
             .GetTypeInfo()
             .GetMethod("AwaitTaskWithFinallyAndGetResult", BindingFlags.Public | BindingFlags.Static)
             .MakeGenericMethod(taskReturnType)
-            .Invoke(null, new object[] { actualReturnValue, finalAction });
+            .Invoke(null, new Object[] { actualReturnValue, finalAction });
     }
 
-    public static async Task<T> AwaitTaskWithPostActionAndFinallyAndGetResult<T>(Task<T> actualReturnValue, Func<Task> postAction, Action<Exception> finalAction)
+    public static  Task<T> AwaitTaskWithPostActionAndFinallyAndGetResult<T>(Task<T> actualReturnValue, Func<Task> postAction, Action<Exception> finalAction)
     {
         Exception exception = null;
 
         try
         {
-            var result = await actualReturnValue;
-            await postAction();
+            var result = actualReturnValue;
+            postAction();
             return result;
         }
         catch (Exception ex)
@@ -129,16 +129,16 @@ public static class InternalAsyncHelper
         }
     }
 
-    public static object CallAwaitTaskWithPostActionAndFinallyAndGetResult(Type taskReturnType, object actualReturnValue, Func<Task> action, Action<Exception> finalAction)
+    public static Object CallAwaitTaskWithPostActionAndFinallyAndGetResult(Type taskReturnType, Object actualReturnValue, Func<Task> action, Action<Exception> finalAction)
     {
         return typeof(InternalAsyncHelper)
             .GetTypeInfo()
             .GetMethod("AwaitTaskWithPostActionAndFinallyAndGetResult", BindingFlags.Public | BindingFlags.Static)
             .MakeGenericMethod(taskReturnType)
-            .Invoke(null, new object[] { actualReturnValue, action, finalAction });
+            .Invoke(null, new Object[] { actualReturnValue, action, finalAction });
     }
 
-    public static async Task<T> AwaitTaskWithPreActionAndPostActionAndFinallyAndGetResult<T>(Func<Task<T>> actualReturnValue, Func<Task> preAction = null, Func<Task> postAction = null, Action<Exception> finalAction = null)
+    public static  Task<T> AwaitTaskWithPreActionAndPostActionAndFinallyAndGetResult<T>(Func<Task<T>> actualReturnValue, Func<Task> preAction = null, Func<Task> postAction = null, Action<Exception> finalAction = null)
     {
         Exception exception = null;
 
@@ -146,14 +146,14 @@ public static class InternalAsyncHelper
         {
             if (preAction != null)
             {
-                await preAction();
+                preAction();
             }
 
-            var result = await actualReturnValue();
+            var result = actualReturnValue();
 
             if (postAction != null)
             {
-                await postAction();
+                postAction();
             }
 
             return result;
@@ -169,23 +169,23 @@ public static class InternalAsyncHelper
         }
     }
 
-    public static object CallAwaitTaskWithPreActionAndPostActionAndFinallyAndGetResult(Type taskReturnType, Func<object> actualReturnValue, Func<Task> preAction = null, Func<Task> postAction = null, Action<Exception> finalAction = null)
+    public static Object CallAwaitTaskWithPreActionAndPostActionAndFinallyAndGetResult(Type taskReturnType, Func<Object> actualReturnValue, Func<Task> preAction = null, Func<Task> postAction = null, Action<Exception> finalAction = null)
     {
         var returnFunc = typeof(InternalAsyncHelper)
             .GetTypeInfo()
             .GetMethod("ConvertFuncOfObjectToFuncOfTask", BindingFlags.NonPublic | BindingFlags.Static)
             .MakeGenericMethod(taskReturnType)
-            .Invoke(null, new object[] { actualReturnValue });
+            .Invoke(null, new Object[] { actualReturnValue });
 
         return typeof(InternalAsyncHelper)
             .GetTypeInfo()
             .GetMethod("AwaitTaskWithPreActionAndPostActionAndFinallyAndGetResult", BindingFlags.Public | BindingFlags.Static)
             .MakeGenericMethod(taskReturnType)
-            .Invoke(null, new object[] { returnFunc, preAction, postAction, finalAction });
+            .Invoke(null, new Object[] { returnFunc, preAction, postAction, finalAction });
     }
 
     [UsedImplicitly]
-    private static Func<Task<T>> ConvertFuncOfObjectToFuncOfTask<T>(Func<object> actualReturnValue)
+    private static Func<Task<T>> ConvertFuncOfObjectToFuncOfTask<T>(Func<Object> actualReturnValue)
     {
         return () => (Task<T>)actualReturnValue();
     }

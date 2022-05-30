@@ -8,13 +8,13 @@ using Volo.Abp.Threading;
 
 namespace Volo.Abp.BackgroundWorkers;
 
-/// <summary>
-/// Extends <see cref="BackgroundWorkerBase"/> to add a periodic running Timer.
-/// </summary>
+/**
+ * Extends <see cref="BackgroundWorkerBase"/> to add a periodic running Timer.
+*/
 public abstract class PeriodicBackgroundWorkerBase : BackgroundWorkerBase
 {
-    protected IServiceScopeFactory ServiceScopeFactory { get; }
-    protected AbpTimer Timer { get; }
+    protected IServiceScopeFactory ServiceScopeFactory;//  { get; }
+    protected AbpTimer Timer;//  { get; }
 
     protected PeriodicBackgroundWorkerBase(
         AbpTimer timer,
@@ -25,19 +25,21 @@ public abstract class PeriodicBackgroundWorkerBase : BackgroundWorkerBase
         Timer.Elapsed += Timer_Elapsed;
     }
 
-    public override void StartAsync(CancellationToken cancellationToken = default)
+    @Override
+    public void StartAsync(CancellationToken cancellationToken = default)
     {
-        await base.StartAsync(cancellationToken);
+       super.StartAsync(cancellationToken);
         Timer.Start(cancellationToken);
     }
 
-    public override void StopAsync(CancellationToken cancellationToken = default)
+    @Override
+    public void StopAsync(CancellationToken cancellationToken = default)
     {
         Timer.Stop(cancellationToken);
-        await base.StopAsync(cancellationToken);
+       super.StopAsync(cancellationToken);
     }
 
-    private void Timer_Elapsed(object sender, System.EventArgs e)
+    private void Timer_Elapsed(Object sender, System.EventArgs e)
     {
         using (var scope = ServiceScopeFactory.CreateScope())
         {
@@ -55,8 +57,8 @@ public abstract class PeriodicBackgroundWorkerBase : BackgroundWorkerBase
         }
     }
 
-    /// <summary>
-    /// Periodic works should be done by implementing this method.
-    /// </summary>
+    /**
+     * Periodic works should be done by implementing this method.
+    */
     protected abstract void DoWork(PeriodicBackgroundWorkerContext workerContext);
 }

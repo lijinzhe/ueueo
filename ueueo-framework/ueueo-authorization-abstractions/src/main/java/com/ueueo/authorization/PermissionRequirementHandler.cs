@@ -17,7 +17,7 @@ public class PermissionRequirementHandler : AuthorizationHandler<PermissionRequi
         AuthorizationHandlerContext context,
         PermissionRequirement requirement)
     {
-        if (await _permissionChecker.IsGrantedAsync(context.User, requirement.PermissionName))
+        if (_permissionChecker.IsGrantedAsync(context.User, requirement.PermissionName))
         {
             context.Succeed(requirement);
         }

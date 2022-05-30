@@ -11,20 +11,20 @@ public class AmbientDataContextAmbientScopeProvider<T> : IAmbientScopeProvider<T
 {
     public ILogger<AmbientDataContextAmbientScopeProvider<T>> Logger;// { get; set; }
 
-    private static readonly ConcurrentDictionary<string, ScopeItem> ScopeDictionary = new ConcurrentDictionary<string, ScopeItem>();
+    private static readonly ConcurrentDictionary<String, ScopeItem> ScopeDictionary = new ConcurrentDictionary<String, ScopeItem>();
 
     private readonly IAmbientDataContext _dataContext;
 
-    public AmbientDataContextAmbientScopeProvider([NotNull] IAmbientDataContext dataContext)
+    public AmbientDataContextAmbientScopeProvider(@Nonnull IAmbientDataContext dataContext)
     {
-        Check.NotNull(dataContext, nameof(dataContext));
+        Objects.requireNonNull(dataContext, nameof(dataContext));
 
         _dataContext = dataContext;
 
         Logger = NullLogger<AmbientDataContextAmbientScopeProvider<T>>.Instance;
     }
 
-    public T GetValue(string contextKey)
+    public T GetValue(String contextKey)
     {
         var item = GetCurrentItem(contextKey);
         if (item == null)
@@ -35,7 +35,7 @@ public class AmbientDataContextAmbientScopeProvider<T> : IAmbientScopeProvider<T
         return item.Value;
     }
 
-    public IDisposable BeginScope(string contextKey, T value)
+    public IDisposable BeginScope(String contextKey, T value)
     {
         var item = new ScopeItem(value, GetCurrentItem(contextKey));
 
@@ -60,18 +60,18 @@ public class AmbientDataContextAmbientScopeProvider<T> : IAmbientScopeProvider<T
         });
     }
 
-    private ScopeItem GetCurrentItem(string contextKey)
+    private ScopeItem GetCurrentItem(String contextKey)
     {
-        return _dataContext.GetData(contextKey) is string objKey ? ScopeDictionary.GetOrDefault(objKey) : null;
+        return _dataContext.GetData(contextKey) is String objKey ? ScopeDictionary.GetOrDefault(objKey) : null;
     }
 
     private class ScopeItem
     {
-        public string Id { get; }
+        public String Id;//  { get; }
 
-        public ScopeItem Outer { get; }
+        public ScopeItem Outer;//  { get; }
 
-        public T Value { get; }
+        public T Value;//  { get; }
 
         public ScopeItem(T value, ScopeItem outer = null)
         {

@@ -4,14 +4,14 @@ namespace Volo.Abp.MongoDB;
 
 public class MongoCollectionAttribute : Attribute
 {
-    public string CollectionName;// { get; set; }
+    public String CollectionName;// { get; set; }
 
     public MongoCollectionAttribute()
     {
 
     }
 
-    public MongoCollectionAttribute(string collectionName)
+    public MongoCollectionAttribute(String collectionName)
     {
         CollectionName = collectionName;
     }

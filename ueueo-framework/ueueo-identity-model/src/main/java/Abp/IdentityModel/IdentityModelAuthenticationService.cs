@@ -20,15 +20,15 @@ namespace Volo.Abp.IdentityModel;
 [Dependency(ReplaceServices = true)]
 public class IdentityModelAuthenticationService : IIdentityModelAuthenticationService, ITransientDependency
 {
-    public const string HttpClientName = "IdentityModelAuthenticationServiceHttpClientName";
+    public const String HttpClientName = "IdentityModelAuthenticationServiceHttpClientName";
     public ILogger<IdentityModelAuthenticationService> Logger;// { get; set; }
-    protected AbpIdentityClientOptions ClientOptions { get; }
-    protected ICancellationTokenProvider CancellationTokenProvider { get; }
-    protected IHttpClientFactory HttpClientFactory { get; }
-    protected ICurrentTenant CurrentTenant { get; }
-    protected IdentityModelHttpRequestMessageOptions IdentityModelHttpRequestMessageOptions { get; }
-    protected IDistributedCache<IdentityModelTokenCacheItem> TokenCache { get; }
-    protected IDistributedCache<IdentityModelDiscoveryDocumentCacheItem> DiscoveryDocumentCache { get; }
+    protected AbpIdentityClientOptions ClientOptions;//  { get; }
+    protected ICancellationTokenProvider CancellationTokenProvider;//  { get; }
+    protected IHttpClientFactory HttpClientFactory;//  { get; }
+    protected ICurrentTenant CurrentTenant;//  { get; }
+    protected IdentityModelHttpRequestMessageOptions IdentityModelHttpRequestMessageOptions;//  { get; }
+    protected IDistributedCache<IdentityModelTokenCacheItem> TokenCache;//  { get; }
+    protected IDistributedCache<IdentityModelDiscoveryDocumentCacheItem> DiscoveryDocumentCache;//  { get; }
 
     public IdentityModelAuthenticationService(
         IOptions<AbpIdentityClientOptions> options,
@@ -49,11 +49,11 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         Logger = NullLogger<IdentityModelAuthenticationService>.Instance;
     }
 
-    public async Task<bool> TryAuthenticateAsync(
-        [NotNull] HttpClient client,
-        string identityClientName = null)
+    public  Task<bool> TryAuthenticateAsync(
+        @Nonnull HttpClient client,
+        String identityClientName = null)
     {
-        var accessToken = await GetAccessTokenOrNullAsync(identityClientName);
+        var accessToken = GetAccessTokenOrNullAsync(identityClientName);
         if (accessToken == null)
         {
             return false;
@@ -63,7 +63,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         return true;
     }
 
-    protected virtual async Task<string> GetAccessTokenOrNullAsync(string identityClientName)
+    protected    Task<String> GetAccessTokenOrNullAsync(String identityClientName)
     {
         var configuration = ClientOptions.GetClientConfiguration(CurrentTenant, identityClientName);
         if (configuration == null)
@@ -72,16 +72,16 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
             return null;
         }
 
-        return await GetAccessTokenAsync(configuration);
+        return GetAccessTokenAsync(configuration);
     }
 
-    public virtual async Task<string> GetAccessTokenAsync(IdentityClientConfiguration configuration)
+    public    Task<String> GetAccessTokenAsync(IdentityClientConfiguration configuration)
     {
         var cacheKey = CalculateTokenCacheKey(configuration);
-        var tokenCacheItem = await TokenCache.GetAsync(cacheKey);
+        var tokenCacheItem = TokenCache.GetAsync(cacheKey);
         if (tokenCacheItem == null)
         {
-            var tokenResponse = await GetTokenResponse(configuration);
+            var tokenResponse = GetTokenResponse(configuration);
 
             if (tokenResponse.IsError)
             {
@@ -92,12 +92,12 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
                 }
 
                 var rawError = tokenResponse.Raw;
-                var withoutInnerException = rawError.Split(new string[] { "<eof/>" }, StringSplitOptions.RemoveEmptyEntries);
+                var withoutInnerException = rawError.Split(new String[] { "<eof/>" }, StringSplitOptions.RemoveEmptyEntries);
                 throw new AbpException(withoutInnerException[0]);
             }
 
             tokenCacheItem = new IdentityModelTokenCacheItem(tokenResponse.AccessToken);
-            await TokenCache.SetAsync(cacheKey, tokenCacheItem,
+            TokenCache.SetAsync(cacheKey, tokenCacheItem,
                 new DistributedCacheEntryOptions
                 {
                     AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(configuration.CacheAbsoluteExpiration)
@@ -107,16 +107,16 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         return tokenCacheItem.AccessToken;
     }
 
-    protected virtual void SetAccessToken(HttpClient client, string accessToken)
+    protected   void SetAccessToken(HttpClient client, String accessToken)
     {
         //TODO: "Bearer" should be configurable
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
     }
 
-    protected virtual async Task<IdentityModelDiscoveryDocumentCacheItem> GetDiscoveryResponse(IdentityClientConfiguration configuration)
+    protected    Task<IdentityModelDiscoveryDocumentCacheItem> GetDiscoveryResponse(IdentityClientConfiguration configuration)
     {
         var tokenEndpointUrlCacheKey = CalculateDiscoveryDocumentCacheKey(configuration);
-        var discoveryDocumentCacheItem = await DiscoveryDocumentCache.GetAsync(tokenEndpointUrlCacheKey);
+        var discoveryDocumentCacheItem = DiscoveryDocumentCache.GetAsync(tokenEndpointUrlCacheKey);
         if (discoveryDocumentCacheItem == null)
         {
             DiscoveryDocumentResponse discoveryResponse;
@@ -131,7 +131,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
                     }
                 };
                 IdentityModelHttpRequestMessageOptions.ConfigureHttpRequestMessage?.Invoke(request);
-                discoveryResponse = await httpClient.GetDiscoveryDocumentAsync(request);
+                discoveryResponse = httpClient.GetDiscoveryDocumentAsync(request);
             }
 
             if (discoveryResponse.IsError)
@@ -141,7 +141,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
             }
 
             discoveryDocumentCacheItem = new IdentityModelDiscoveryDocumentCacheItem(discoveryResponse.TokenEndpoint, discoveryResponse.DeviceAuthorizationEndpoint);
-            await DiscoveryDocumentCache.SetAsync(tokenEndpointUrlCacheKey, discoveryDocumentCacheItem,
+            DiscoveryDocumentCache.SetAsync(tokenEndpointUrlCacheKey, discoveryDocumentCacheItem,
                 new DistributedCacheEntryOptions
                 {
                     AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(configuration.CacheAbsoluteExpiration)
@@ -151,7 +151,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         return discoveryDocumentCacheItem;
     }
 
-    protected virtual async Task<TokenResponse> GetTokenResponse(IdentityClientConfiguration configuration)
+    protected    Task<TokenResponse> GetTokenResponse(IdentityClientConfiguration configuration)
     {
         using (var httpClient = HttpClientFactory.CreateClient(HttpClientName))
         {
@@ -160,18 +160,18 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
             switch (configuration.GrantType)
             {
                 case OidcConstants.GrantTypes.ClientCredentials:
-                    return await httpClient.RequestClientCredentialsTokenAsync(
-                        await CreateClientCredentialsTokenRequestAsync(configuration),
+                    return httpClient.RequestClientCredentialsTokenAsync(
+                        CreateClientCredentialsTokenRequestAsync(configuration),
                         CancellationTokenProvider.Token
                     );
                 case OidcConstants.GrantTypes.Password:
-                    return await httpClient.RequestPasswordTokenAsync(
-                        await CreatePasswordTokenRequestAsync(configuration),
+                    return httpClient.RequestPasswordTokenAsync(
+                        CreatePasswordTokenRequestAsync(configuration),
                         CancellationTokenProvider.Token
                     );
 
                 case OidcConstants.GrantTypes.DeviceCode:
-                    return await RequestDeviceAuthorizationAsync(httpClient, configuration);
+                    return RequestDeviceAuthorizationAsync(httpClient, configuration);
 
                 default:
                     throw new AbpException("Grant type was not implemented: " + configuration.GrantType);
@@ -179,9 +179,9 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         }
     }
 
-    protected virtual async Task<PasswordTokenRequest> CreatePasswordTokenRequestAsync(IdentityClientConfiguration configuration)
+    protected    Task<PasswordTokenRequest> CreatePasswordTokenRequestAsync(IdentityClientConfiguration configuration)
     {
-        var discoveryResponse = await GetDiscoveryResponse(configuration);
+        var discoveryResponse = GetDiscoveryResponse(configuration);
         var request = new PasswordTokenRequest
         {
             Address = discoveryResponse.TokenEndpoint,
@@ -194,14 +194,14 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
 
         IdentityModelHttpRequestMessageOptions.ConfigureHttpRequestMessage?.Invoke(request);
 
-        await AddParametersToRequestAsync(configuration, request);
+        AddParametersToRequestAsync(configuration, request);
 
         return request;
     }
 
-    protected virtual async Task<ClientCredentialsTokenRequest> CreateClientCredentialsTokenRequestAsync(IdentityClientConfiguration configuration)
+    protected    Task<ClientCredentialsTokenRequest> CreateClientCredentialsTokenRequestAsync(IdentityClientConfiguration configuration)
     {
-        var discoveryResponse = await GetDiscoveryResponse(configuration);
+        var discoveryResponse = GetDiscoveryResponse(configuration);
         var request = new ClientCredentialsTokenRequest
         {
             Address = discoveryResponse.TokenEndpoint,
@@ -211,14 +211,14 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         };
         IdentityModelHttpRequestMessageOptions.ConfigureHttpRequestMessage?.Invoke(request);
 
-        await AddParametersToRequestAsync(configuration, request);
+        AddParametersToRequestAsync(configuration, request);
 
         return request;
     }
 
-    protected virtual async Task<TokenResponse> RequestDeviceAuthorizationAsync(HttpClient httpClient, IdentityClientConfiguration configuration)
+    protected    Task<TokenResponse> RequestDeviceAuthorizationAsync(HttpClient httpClient, IdentityClientConfiguration configuration)
     {
-        var discoveryResponse = await GetDiscoveryResponse(configuration);
+        var discoveryResponse = GetDiscoveryResponse(configuration);
         var request = new DeviceAuthorizationRequest()
         {
             Address = discoveryResponse.DeviceAuthorizationEndpoint,
@@ -229,9 +229,9 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
 
         IdentityModelHttpRequestMessageOptions.ConfigureHttpRequestMessage?.Invoke(request);
 
-        await AddParametersToRequestAsync(configuration, request);
+        AddParametersToRequestAsync(configuration, request);
 
-        var response = await httpClient.RequestDeviceAuthorizationAsync(request);
+        var response = httpClient.RequestDeviceAuthorizationAsync(request);
         if (response.IsError)
         {
             throw new AbpException(response.ErrorDescription);
@@ -242,9 +242,9 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
 
         for (var i = 0; i < ((response.ExpiresIn ?? 300) / response.Interval + 1); i++)
         {
-            await Task.Delay(response.Interval * 1000);
+            Task.Delay(response.Interval * 1000);
 
-            var tokenResponse = await httpClient.RequestDeviceTokenAsync(new DeviceTokenRequest
+            var tokenResponse = httpClient.RequestDeviceTokenAsync(new DeviceTokenRequest
             {
                 Address = discoveryResponse.TokenEndpoint,
                 ClientId = configuration.ClientId,
@@ -280,7 +280,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
 
     protected void AddParametersToRequestAsync(IdentityClientConfiguration configuration, ProtocolRequest request)
     {
-        foreach (var pair in configuration.Where(p => p.Key.StartsWith("[o]", StringComparison.OrdinalIgnoreCase)))
+        for (var pair in configuration.Where(p => p.Key.StartsWith("[o]", StringComparison.OrdinalIgnoreCase)))
         {
             request.Parameters.Add(pair);
         }
@@ -288,7 +288,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         return Task.CompletedTask;
     }
 
-    protected virtual void AddHeaders(HttpClient client)
+    protected   void AddHeaders(HttpClient client)
     {
         //tenantId
         if (CurrentTenant.Id.HasValue)
@@ -298,12 +298,12 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         }
     }
 
-    protected virtual string CalculateDiscoveryDocumentCacheKey(IdentityClientConfiguration configuration)
+    protected   String CalculateDiscoveryDocumentCacheKey(IdentityClientConfiguration configuration)
     {
         return IdentityModelDiscoveryDocumentCacheItem.CalculateCacheKey(configuration);
     }
 
-    protected virtual string CalculateTokenCacheKey(IdentityClientConfiguration configuration)
+    protected   String CalculateTokenCacheKey(IdentityClientConfiguration configuration)
     {
         return IdentityModelTokenCacheItem.CalculateCacheKey(configuration);
     }

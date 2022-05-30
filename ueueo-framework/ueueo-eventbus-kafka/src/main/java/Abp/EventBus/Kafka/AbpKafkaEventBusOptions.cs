@@ -3,9 +3,9 @@
 public class AbpKafkaEventBusOptions
 {
 
-    public string ConnectionName;// { get; set; }
+    public String ConnectionName;// { get; set; }
 
-    public string TopicName;// { get; set; }
+    public String TopicName;// { get; set; }
 
-    public string GroupId;// { get; set; }
+    public String GroupId;// { get; set; }
 }

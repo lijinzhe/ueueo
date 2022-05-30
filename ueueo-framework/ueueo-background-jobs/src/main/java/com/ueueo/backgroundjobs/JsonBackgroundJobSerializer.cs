@@ -13,17 +13,17 @@ public class JsonBackgroundJobSerializer : IBackgroundJobSerializer, ITransientD
         _jsonSerializer = jsonSerializer;
     }
 
-    public string Serialize(object obj)
+    public String Serialize(Object obj)
     {
         return _jsonSerializer.Serialize(obj);
     }
 
-    public object Deserialize(string value, Type type)
+    public Object Deserialize(String value, Type type)
     {
         return _jsonSerializer.Deserialize(type, value);
     }
 
-    public T Deserialize<T>(string value)
+    public T Deserialize<T>(String value)
     {
         return _jsonSerializer.Deserialize<T>(value);
     }

@@ -2,43 +2,43 @@
 
 namespace Volo.Abp.Emailing.Smtp;
 
-/// <summary>
-/// Defines configurations to used by SmtpClient object.
-/// </summary>
+/**
+ * Defines configurations to used by SmtpClient object.
+*/
 public interface ISmtpEmailSenderConfiguration : IEmailSenderConfiguration
 {
-    /// <summary>
-    /// SMTP Host name/IP.
-    /// </summary>
-    Task<string> GetHostAsync();
+    /**
+     * SMTP Host name/IP.
+    */
+    Task<String> GetHostAsync();
 
-    /// <summary>
-    /// SMTP Port.
-    /// </summary>
+    /**
+     * SMTP Port.
+    */
     Task<int> GetPortAsync();
 
-    /// <summary>
-    /// User name to login to SMTP server.
-    /// </summary>
-    Task<string> GetUserNameAsync();
+    /**
+     * User name to login to SMTP server.
+    */
+    Task<String> GetUserNameAsync();
 
-    /// <summary>
-    /// Password to login to SMTP server.
-    /// </summary>
-    Task<string> GetPasswordAsync();
+    /**
+     * Password to login to SMTP server.
+    */
+    Task<String> GetPasswordAsync();
 
-    /// <summary>
-    /// Domain name to login to SMTP server.
-    /// </summary>
-    Task<string> GetDomainAsync();
+    /**
+     * Domain name to login to SMTP server.
+    */
+    Task<String> GetDomainAsync();
 
-    /// <summary>
-    /// Is SSL enabled?
-    /// </summary>
+    /**
+     * Is SSL enabled?
+    */
     Task<bool> GetEnableSslAsync();
 
-    /// <summary>
-    /// Use default credentials?
-    /// </summary>
+    /**
+     * Use default credentials?
+    */
     Task<bool> GetUseDefaultCredentialsAsync();
 }

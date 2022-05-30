@@ -19,10 +19,10 @@ namespace Volo.Abp.Http.Client.DynamicProxying;
 public class ApiDescriptionFinder : IApiDescriptionFinder, ITransientDependency
 {
     public ICancellationTokenProvider CancellationTokenProvider;// { get; set; }
-    protected IApiDescriptionCache Cache { get; }
-    protected AbpCorrelationIdOptions AbpCorrelationIdOptions { get; }
-    protected ICorrelationIdProvider CorrelationIdProvider { get; }
-    protected ICurrentTenant CurrentTenant { get; }
+    protected IApiDescriptionCache Cache;//  { get; }
+    protected AbpCorrelationIdOptions AbpCorrelationIdOptions;//  { get; }
+    protected ICorrelationIdProvider CorrelationIdProvider;//  { get; }
+    protected ICurrentTenant CurrentTenant;//  { get; }
 
     public ApiDescriptionFinder(
         IApiDescriptionCache cache,
@@ -37,28 +37,28 @@ public class ApiDescriptionFinder : IApiDescriptionFinder, ITransientDependency
         CancellationTokenProvider = NullCancellationTokenProvider.Instance;
     }
 
-    public async Task<ActionApiDescriptionModel> FindActionAsync(
+    public  Task<ActionApiDescriptionModel> FindActionAsync(
         HttpClient client,
-        string baseUrl,
+        String baseUrl,
         Type serviceType,
         MethodInfo method)
     {
-        var apiDescription = await GetApiDescriptionAsync(client, baseUrl);
+        var apiDescription = GetApiDescriptionAsync(client, baseUrl);
 
         //TODO: Cache finding?
 
         var methodParameters = method.GetParameters().ToArray();
 
-        foreach (var module in apiDescription.Modules.Values)
+        for (var module in apiDescription.Modules.Values)
         {
-            foreach (var controller in module.Controllers.Values)
+            for (var controller in module.Controllers.Values)
             {
                 if (!controller.Implements(serviceType))
                 {
                     continue;
                 }
 
-                foreach (var action in controller.Actions.Values)
+                for (var action in controller.Actions.Values)
                 {
                     if (action.Name == method.Name && action.ParametersOnMethod.Count == methodParameters.Length)
                     {
@@ -85,9 +85,9 @@ public class ApiDescriptionFinder : IApiDescriptionFinder, ITransientDependency
         throw new AbpException($"Could not found remote action for method: {method} on the URL: {baseUrl}");
     }
 
-    public virtual async Task<ApplicationApiDescriptionModel> GetApiDescriptionAsync(HttpClient client, string baseUrl)
+    public    Task<ApplicationApiDescriptionModel> GetApiDescriptionAsync(HttpClient client, String baseUrl)
     {
-        return await Cache.GetAsync(baseUrl, () => GetApiDescriptionFromServerAsync(client, baseUrl));
+        return Cache.GetAsync(baseUrl, () => GetApiDescriptionFromServerAsync(client, baseUrl));
     }
 
     public static JsonSerializerOptions DeserializeOptions = new JsonSerializerOptions
@@ -95,9 +95,9 @@ public class ApiDescriptionFinder : IApiDescriptionFinder, ITransientDependency
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
     };
 
-    protected virtual async Task<ApplicationApiDescriptionModel> GetApiDescriptionFromServerAsync(
+    protected    Task<ApplicationApiDescriptionModel> GetApiDescriptionFromServerAsync(
         HttpClient client,
-        string baseUrl)
+        String baseUrl)
     {
         var requestMessage = new HttpRequestMessage(
             HttpMethod.Get,
@@ -106,7 +106,7 @@ public class ApiDescriptionFinder : IApiDescriptionFinder, ITransientDependency
 
         AddHeaders(requestMessage);
 
-        var response = await client.SendAsync(
+        var response = client.SendAsync(
             requestMessage,
             CancellationTokenProvider.Token
         );
@@ -116,14 +116,14 @@ public class ApiDescriptionFinder : IApiDescriptionFinder, ITransientDependency
             throw new AbpException("Remote service returns error! StatusCode = " + response.StatusCode);
         }
 
-        var content = await response.Content.ReadAsStringAsync();
+        var content = response.Content.ReadAsStringAsync();
 
         var result = JsonSerializer.Deserialize<ApplicationApiDescriptionModel>(content, DeserializeOptions);
 
         return result;
     }
 
-    protected virtual void AddHeaders(HttpRequestMessage requestMessage)
+    protected   void AddHeaders(HttpRequestMessage requestMessage)
     {
         //CorrelationId
         requestMessage.Headers.Add(AbpCorrelationIdOptions.HttpHeaderName, CorrelationIdProvider.Get());
@@ -147,7 +147,7 @@ public class ApiDescriptionFinder : IApiDescriptionFinder, ITransientDependency
         requestMessage.Headers.Add("X-Requested-With", "XMLHttpRequest");
     }
 
-    protected virtual bool TypeMatches(MethodParameterApiDescriptionModel actionParameter, ParameterInfo methodParameter)
+    protected   boolean TypeMatches(MethodParameterApiDescriptionModel actionParameter, ParameterInfo methodParameter)
     {
         return actionParameter.Type.ToUpper() == TypeHelper.GetFullNameHandlingNullableAndGenerics(methodParameter.ParameterType).ToUpper();
     }

@@ -7,7 +7,7 @@ namespace Volo.Abp.BlobStoring;
 
 public class BlobNormalizeNamingService : IBlobNormalizeNamingService, ITransientDependency
 {
-    protected IServiceProvider ServiceProvider { get; }
+    protected IServiceProvider ServiceProvider;//  { get; }
 
     public BlobNormalizeNamingService(IServiceProvider serviceProvider)
     {
@@ -16,8 +16,8 @@ public class BlobNormalizeNamingService : IBlobNormalizeNamingService, ITransien
 
     public BlobNormalizeNaming NormalizeNaming(
         BlobContainerConfiguration configuration,
-        string containerName,
-        string blobName)
+        String containerName,
+        String blobName)
     {
 
         if (!configuration.NamingNormalizers.Any())
@@ -27,7 +27,7 @@ public class BlobNormalizeNamingService : IBlobNormalizeNamingService, ITransien
 
         using (var scope = ServiceProvider.CreateScope())
         {
-            foreach (var normalizerType in configuration.NamingNormalizers)
+            for (var normalizerType in configuration.NamingNormalizers)
             {
                 var normalizer = scope.ServiceProvider
                     .GetRequiredService(normalizerType)
@@ -41,7 +41,7 @@ public class BlobNormalizeNamingService : IBlobNormalizeNamingService, ITransien
         }
     }
 
-    public string NormalizeContainerName(BlobContainerConfiguration configuration, string containerName)
+    public String NormalizeContainerName(BlobContainerConfiguration configuration, String containerName)
     {
         if (!configuration.NamingNormalizers.Any())
         {
@@ -51,7 +51,7 @@ public class BlobNormalizeNamingService : IBlobNormalizeNamingService, ITransien
         return NormalizeNaming(configuration, containerName, null).ContainerName;
     }
 
-    public string NormalizeBlobName(BlobContainerConfiguration configuration, string blobName)
+    public String NormalizeBlobName(BlobContainerConfiguration configuration, String blobName)
     {
         if (!configuration.NamingNormalizers.Any())
         {

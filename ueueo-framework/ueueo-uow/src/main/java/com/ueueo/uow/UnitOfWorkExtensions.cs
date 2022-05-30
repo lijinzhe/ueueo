@@ -7,17 +7,17 @@ namespace Volo.Abp.Uow;
 
 public static class UnitOfWorkExtensions
 {
-    public static bool IsReservedFor([NotNull] this IUnitOfWork unitOfWork, string reservationName)
+    public static boolean IsReservedFor(@Nonnull this IUnitOfWork unitOfWork, String reservationName)
     {
-        Check.NotNull(unitOfWork, nameof(unitOfWork));
+        Objects.requireNonNull(unitOfWork, nameof(unitOfWork));
 
         return unitOfWork.IsReserved && unitOfWork.ReservationName == reservationName;
     }
 
-    public static void AddItem<TValue>([NotNull] this IUnitOfWork unitOfWork, string key, TValue value)
+    public static void AddItem<TValue>(@Nonnull this IUnitOfWork unitOfWork, String key, TValue value)
         where TValue : class
     {
-        Check.NotNull(unitOfWork, nameof(unitOfWork));
+        Objects.requireNonNull(unitOfWork, nameof(unitOfWork));
 
         if (!unitOfWork.Items.ContainsKey(key))
         {
@@ -29,25 +29,25 @@ public static class UnitOfWorkExtensions
         }
     }
 
-    public static TValue GetItemOrDefault<TValue>([NotNull] this IUnitOfWork unitOfWork, string key)
+    public static TValue GetItemOrDefault<TValue>(@Nonnull this IUnitOfWork unitOfWork, String key)
         where TValue : class
     {
-        Check.NotNull(unitOfWork, nameof(unitOfWork));
+        Objects.requireNonNull(unitOfWork, nameof(unitOfWork));
 
         return unitOfWork.Items.FirstOrDefault(x => x.Key == key).Value.As<TValue>();
     }
 
-    public static TValue GetOrAddItem<TValue>([NotNull] this IUnitOfWork unitOfWork, string key, Func<string, TValue> factory)
+    public static TValue GetOrAddItem<TValue>(@Nonnull this IUnitOfWork unitOfWork, String key, Func<String, TValue> factory)
         where TValue : class
     {
-        Check.NotNull(unitOfWork, nameof(unitOfWork));
+        Objects.requireNonNull(unitOfWork, nameof(unitOfWork));
 
         return unitOfWork.Items.GetOrAdd(key, factory).As<TValue>();
     }
 
-    public static void RemoveItem([NotNull] this IUnitOfWork unitOfWork, string key)
+    public static void RemoveItem(@Nonnull this IUnitOfWork unitOfWork, String key)
     {
-        Check.NotNull(unitOfWork, nameof(unitOfWork));
+        Objects.requireNonNull(unitOfWork, nameof(unitOfWork));
 
         unitOfWork.Items.RemoveAll(x => x.Key == key);
     }

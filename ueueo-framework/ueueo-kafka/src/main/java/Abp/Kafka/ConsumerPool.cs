@@ -12,30 +12,30 @@ namespace Volo.Abp.Kafka;
 
 public class ConsumerPool : IConsumerPool, ISingletonDependency
 {
-    protected AbpKafkaOptions Options { get; }
+    protected AbpKafkaOptions Options;//  { get; }
 
-    protected ConcurrentDictionary<string, Lazy<IConsumer<string, byte[]>>> Consumers { get; }
+    protected ConcurrentDictionary<String, Lazy<IConsumer<String, byte[]>>> Consumers;//  { get; }
 
     protected TimeSpan TotalDisposeWaitDuration;// { get; set; } = TimeSpan.FromSeconds(10);
 
     public ILogger<ConsumerPool> Logger;// { get; set; }
 
-    private bool _isDisposed;
+    private boolean _isDisposed;
 
     public ConsumerPool(IOptions<AbpKafkaOptions> options)
     {
         Options = options.Value;
 
-        Consumers = new ConcurrentDictionary<string, Lazy<IConsumer<string, byte[]>>>();
+        Consumers = new ConcurrentDictionary<String, Lazy<IConsumer<String, byte[]>>>();
         Logger = new NullLogger<ConsumerPool>();
     }
 
-    public virtual IConsumer<string, byte[]> Get(string groupId, string connectionName = null)
+    public   IConsumer<String, byte[]> Get(String groupId, String connectionName = null)
     {
         connectionName ??= KafkaConnections.DefaultConnectionName;
 
         return Consumers.GetOrAdd(
-            connectionName, connection => new Lazy<IConsumer<string, byte[]>>(() =>
+            connectionName, connection => new Lazy<IConsumer<String, byte[]>>(() =>
             {
                 var config = new ConsumerConfig(Options.Connections.GetOrDefault(connection))
                 {
@@ -44,7 +44,7 @@ public class ConsumerPool : IConsumerPool, ISingletonDependency
                 };
 
                 Options.ConfigureConsumer?.Invoke(config);
-                return new ConsumerBuilder<string, byte[]>(config).Build();
+                return new ConsumerBuilder<String, byte[]>(config).Build();
             })
         ).Value;
     }
@@ -70,7 +70,7 @@ public class ConsumerPool : IConsumerPool, ISingletonDependency
 
         var remainingWaitDuration = TotalDisposeWaitDuration;
 
-        foreach (var consumer in Consumers.Values)
+        for (var consumer in Consumers.Values)
         {
             var poolItemDisposeStopwatch = Stopwatch.StartNew();
 

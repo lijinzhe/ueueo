@@ -17,7 +17,7 @@ public class DefaultProxyHttpClientFactory : IProxyHttpClientFactory, ITransient
         return _httpClientFactory.CreateClient();
     }
 
-    public HttpClient Create(string name)
+    public HttpClient Create(String name)
     {
         return _httpClientFactory.CreateClient(name);
     }

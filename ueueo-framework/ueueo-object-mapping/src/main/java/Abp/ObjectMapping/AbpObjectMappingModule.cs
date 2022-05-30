@@ -6,7 +6,8 @@ namespace Volo.Abp.ObjectMapping;
 
 public class AbpObjectMappingModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void PreConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.OnExposing(onServiceExposingContext =>
         {
@@ -20,7 +21,8 @@ public class AbpObjectMappingModule : AbpModule
         });
     }
 
-    public override void ConfigureServices(ServiceConfigurationContext context)
+    @Override
+    public void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddTransient(
             typeof(IObjectMapper<>),

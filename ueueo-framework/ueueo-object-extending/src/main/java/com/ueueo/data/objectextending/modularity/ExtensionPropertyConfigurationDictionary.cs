@@ -2,7 +2,7 @@
 
 namespace Volo.Abp.ObjectExtending.Modularity;
 
-public class ExtensionPropertyConfigurationDictionary : Dictionary<string, ExtensionPropertyConfiguration>
+public class ExtensionPropertyConfigurationDictionary : Dictionary<String, ExtensionPropertyConfiguration>
 {
 
 }

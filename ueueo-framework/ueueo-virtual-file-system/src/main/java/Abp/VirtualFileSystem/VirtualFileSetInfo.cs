@@ -5,10 +5,10 @@ namespace Volo.Abp.VirtualFileSystem;
 
 public class VirtualFileSetInfo
 {
-    public IFileProvider FileProvider { get; }
+    public IFileProvider FileProvider;//  { get; }
 
-    public VirtualFileSetInfo([NotNull] IFileProvider fileProvider)
+    public VirtualFileSetInfo(@Nonnull IFileProvider fileProvider)
     {
-        FileProvider = Check.NotNull(fileProvider, nameof(fileProvider));
+        FileProvider = Objects.requireNonNull(fileProvider, nameof(fileProvider));
     }
 }

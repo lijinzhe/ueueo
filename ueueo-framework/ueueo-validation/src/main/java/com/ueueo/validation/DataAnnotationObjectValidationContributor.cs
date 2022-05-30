@@ -16,8 +16,8 @@ public class DataAnnotationObjectValidationContributor : IObjectValidationContri
 {
     public const int MaxRecursiveParameterValidationDepth = 8;
 
-    protected IServiceProvider ServiceProvider { get; }
-    protected AbpValidationOptions Options { get; }
+    protected IServiceProvider ServiceProvider;//  { get; }
+    protected AbpValidationOptions Options;//  { get; }
 
     public DataAnnotationObjectValidationContributor(
         IOptions<AbpValidationOptions> options,
@@ -27,13 +27,13 @@ public class DataAnnotationObjectValidationContributor : IObjectValidationContri
         Options = options.Value;
     }
 
-    public Task AddErrorsAsync(ObjectValidationContext context)
+    public void AddErrorsAsync(ObjectValidationContext context)
     {
         ValidateObjectRecursively(context.Errors, context.ValidatingObject, currentDepth: 1);
         return Task.CompletedTask;
     }
 
-    protected virtual void ValidateObjectRecursively(List<ValidationResult> errors, object validatingObject, int currentDepth)
+    protected   void ValidateObjectRecursively(List<ValidationResult> errors, Object validatingObject, int currentDepth)
     {
         if (currentDepth > MaxRecursiveParameterValidationDepth)
         {
@@ -52,7 +52,7 @@ public class DataAnnotationObjectValidationContributor : IObjectValidationContri
         {
             if (!(enumerable is IQueryable))
             {
-                foreach (var item in enumerable)
+                for (var item in enumerable)
                 {
                     //Do not recursively validate for primitive objects
                     if (item == null || TypeHelper.IsPrimitiveExtended(item.GetType()))
@@ -81,7 +81,7 @@ public class DataAnnotationObjectValidationContributor : IObjectValidationContri
         }
 
         var properties = TypeDescriptor.GetProperties(validatingObject).Cast<PropertyDescriptor>();
-        foreach (var property in properties)
+        for (var property in properties)
         {
             if (property.Attributes.OfType<DisableValidationAttribute>().Any())
             {
@@ -92,11 +92,11 @@ public class DataAnnotationObjectValidationContributor : IObjectValidationContri
         }
     }
 
-    public void AddErrors(List<ValidationResult> errors, object validatingObject)
+    public void AddErrors(List<ValidationResult> errors, Object validatingObject)
     {
         var properties = TypeDescriptor.GetProperties(validatingObject).Cast<PropertyDescriptor>();
 
-        foreach (var property in properties)
+        for (var property in properties)
         {
             AddPropertyErrors(validatingObject, property, errors);
         }
@@ -109,7 +109,7 @@ public class DataAnnotationObjectValidationContributor : IObjectValidationContri
         }
     }
 
-    protected virtual void AddPropertyErrors(object validatingObject, PropertyDescriptor property, List<ValidationResult> errors)
+    protected   void AddPropertyErrors(Object validatingObject, PropertyDescriptor property, List<ValidationResult> errors)
     {
         var validationAttributes = property.Attributes.OfType<ValidationAttribute>().ToArray();
         if (validationAttributes.IsNullOrEmpty())
@@ -124,7 +124,7 @@ public class DataAnnotationObjectValidationContributor : IObjectValidationContri
         };
 
         var attributeValidationResultProvider = ServiceProvider.GetRequiredService<IAttributeValidationResultProvider>();
-        foreach (var attribute in validationAttributes)
+        for (var attribute in validationAttributes)
         {
             var result = attributeValidationResultProvider.GetOrDefault(attribute, property.GetValue(validatingObject), validationContext);
             if (result != null)

@@ -1,16 +1,16 @@
 namespace Volo.Abp.Domain.Entities.Events;
 
-/// <summary>
-/// Used to trigger entity change events.
-/// </summary>
+/**
+ * Used to trigger entity change events.
+*/
 public interface IEntityChangeEventHelper
 {
-    void PublishEntityCreatingEvent(object entity);
-    void PublishEntityCreatedEvent(object entity);
+    void PublishEntityCreatingEvent(Object entity);
+    void PublishEntityCreatedEvent(Object entity);
 
-    void PublishEntityUpdatingEvent(object entity);
-    void PublishEntityUpdatedEvent(object entity);
+    void PublishEntityUpdatingEvent(Object entity);
+    void PublishEntityUpdatedEvent(Object entity);
 
-    void PublishEntityDeletingEvent(object entity);
-    void PublishEntityDeletedEvent(object entity);
+    void PublishEntityDeletingEvent(Object entity);
+    void PublishEntityDeletedEvent(Object entity);
 }

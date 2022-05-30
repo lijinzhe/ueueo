@@ -19,7 +19,8 @@ public class AbpDateTimeConverter : JsonConverter<DateTime>, ITransientDependenc
         _options = abpJsonOptions.Value;
     }
 
-    public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    @Override
+    public DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (!_options.DefaultDateTimeFormat.IsNullOrWhiteSpace())
         {
@@ -45,7 +46,8 @@ public class AbpDateTimeConverter : JsonConverter<DateTime>, ITransientDependenc
         throw new JsonException("Can't get datetime from the reader!");
     }
 
-    public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+    @Override
+    public void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
     {
         if (_options.DefaultDateTimeFormat.IsNullOrWhiteSpace())
         {

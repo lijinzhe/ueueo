@@ -11,14 +11,14 @@ public static class AbpStringLocalizerExtensions
 {
     [NotNull]
     public static IStringLocalizer GetInternalLocalizer(
-        [NotNull] this IStringLocalizer stringLocalizer)
+        @Nonnull this IStringLocalizer StringLocalizer)
     {
-        Check.NotNull(stringLocalizer, nameof(stringLocalizer));
+        Objects.requireNonNull(StringLocalizer, nameof(StringLocalizer));
 
-        var localizerType = stringLocalizer.GetType();
+        var localizerType = StringLocalizer.GetType();
         if (!ReflectionHelper.IsAssignableToGenericType(localizerType, typeof(StringLocalizer<>)))
         {
-            return stringLocalizer;
+            return StringLocalizer;
         }
 
         var localizerField = localizerType
@@ -33,24 +33,24 @@ public static class AbpStringLocalizerExtensions
             throw new AbpException($"Could not find the _localizer field inside the {typeof(StringLocalizer<>).FullName} class. Probably its name has changed. Please report this issue to the ABP framework.");
         }
 
-        return localizerField.GetValue(stringLocalizer) as IStringLocalizer;
+        return localizerField.GetValue(StringLocalizer) as IStringLocalizer;
     }
 
     public static IEnumerable<LocalizedString> GetAllStrings(
-        this IStringLocalizer stringLocalizer,
-        bool includeParentCultures,
-        bool includeBaseLocalizers)
+        this IStringLocalizer StringLocalizer,
+        boolean includeParentCultures,
+        boolean includeBaseLocalizers)
     {
-        var internalLocalizer = (ProxyHelper.UnProxy(stringLocalizer) as IStringLocalizer).GetInternalLocalizer();
-        if (internalLocalizer is IStringLocalizerSupportsInheritance stringLocalizerSupportsInheritance)
+        var internalLocalizer = (ProxyHelper.UnProxy(StringLocalizer) as IStringLocalizer).GetInternalLocalizer();
+        if (internalLocalizer is IStringLocalizerSupportsInheritance StringLocalizerSupportsInheritance)
         {
-            return stringLocalizerSupportsInheritance.GetAllStrings(
+            return StringLocalizerSupportsInheritance.GetAllStrings(
                 includeParentCultures,
                 includeBaseLocalizers
             );
         }
 
-        return stringLocalizer.GetAllStrings(
+        return StringLocalizer.GetAllStrings(
             includeParentCultures
         );
     }

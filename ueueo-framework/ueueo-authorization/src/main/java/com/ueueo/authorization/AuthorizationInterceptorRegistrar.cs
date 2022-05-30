@@ -17,20 +17,20 @@ public static class AuthorizationInterceptorRegistrar
         }
     }
 
-    private static bool ShouldIntercept(Type type)
+    private static boolean ShouldIntercept(Type type)
     {
         return !DynamicProxyIgnoreTypes.Contains(type) &&
                (type.IsDefined(typeof(AuthorizeAttribute), true) || AnyMethodHasAuthorizeAttribute(type));
     }
 
-    private static bool AnyMethodHasAuthorizeAttribute(Type implementationType)
+    private static boolean AnyMethodHasAuthorizeAttribute(Type implementationType)
     {
         return implementationType
             .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
             .Any(HasAuthorizeAttribute);
     }
 
-    private static bool HasAuthorizeAttribute(MemberInfo methodInfo)
+    private static boolean HasAuthorizeAttribute(MemberInfo methodInfo)
     {
         return methodInfo.IsDefined(typeof(AuthorizeAttribute), true);
     }

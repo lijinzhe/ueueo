@@ -12,11 +12,11 @@ namespace Volo.Abp.RabbitMQ;
 
 public class ChannelPool : IChannelPool, ISingletonDependency
 {
-    protected IConnectionPool ConnectionPool { get; }
+    protected IConnectionPool ConnectionPool;//  { get; }
 
-    protected ConcurrentDictionary<string, ChannelPoolItem> Channels { get; }
+    protected ConcurrentDictionary<String, ChannelPoolItem> Channels;//  { get; }
 
-    protected bool IsDisposed ;// { get; private set; }
+    protected boolean IsDisposed ;// { get; private set; }
 
     protected TimeSpan TotalDisposeWaitDuration;// { get; set; } = TimeSpan.FromSeconds(10);
 
@@ -25,11 +25,11 @@ public class ChannelPool : IChannelPool, ISingletonDependency
     public ChannelPool(IConnectionPool connectionPool)
     {
         ConnectionPool = connectionPool;
-        Channels = new ConcurrentDictionary<string, ChannelPoolItem>();
+        Channels = new ConcurrentDictionary<String, ChannelPoolItem>();
         Logger = NullLogger<ChannelPool>.Instance;
     }
 
-    public virtual IChannelAccessor Acquire(string channelName = null, string connectionName = null)
+    public   IChannelAccessor Acquire(String channelName = null, String connectionName = null)
     {
         CheckDisposed();
 
@@ -49,7 +49,7 @@ public class ChannelPool : IChannelPool, ISingletonDependency
         );
     }
 
-    protected virtual IModel CreateChannel(string channelName, string connectionName)
+    protected   IModel CreateChannel(String channelName, String connectionName)
     {
         return ConnectionPool
             .Get(connectionName)
@@ -85,7 +85,7 @@ public class ChannelPool : IChannelPool, ISingletonDependency
 
         var remainingWaitDuration = TotalDisposeWaitDuration;
 
-        foreach (var poolItem in Channels.Values)
+        for (var poolItem in Channels.Values)
         {
             var poolItemDisposeStopwatch = Stopwatch.StartNew();
 
@@ -118,13 +118,13 @@ public class ChannelPool : IChannelPool, ISingletonDependency
 
     protected class ChannelPoolItem : IDisposable
     {
-        public IModel Channel { get; }
+        public IModel Channel;//  { get; }
 
-        public bool IsInUse {
+        public boolean IsInUse {
             get => _isInUse;
             private set => _isInUse = value;
         }
-        private volatile bool _isInUse;
+        private volatile boolean _isInUse;
 
         public ChannelPoolItem(IModel channel)
         {
@@ -174,13 +174,13 @@ public class ChannelPool : IChannelPool, ISingletonDependency
 
     protected class ChannelAccessor : IChannelAccessor
     {
-        public IModel Channel { get; }
+        public IModel Channel;//  { get; }
 
-        public string Name { get; }
+        public String Name;//  { get; }
 
         private readonly Action _disposeAction;
 
-        public ChannelAccessor(IModel channel, string name, Action disposeAction)
+        public ChannelAccessor(IModel channel, String name, Action disposeAction)
         {
             _disposeAction = disposeAction;
             Name = name;

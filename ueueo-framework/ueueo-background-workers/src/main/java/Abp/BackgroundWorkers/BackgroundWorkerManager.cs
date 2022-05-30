@@ -7,36 +7,36 @@ using Volo.Abp.Threading;
 
 namespace Volo.Abp.BackgroundWorkers;
 
-/// <summary>
-/// Implements <see cref="IBackgroundWorkerManager"/>.
-/// </summary>
+/**
+ * Implements <see cref="IBackgroundWorkerManager"/>.
+*/
 public class BackgroundWorkerManager : IBackgroundWorkerManager, ISingletonDependency, IDisposable
 {
-    protected bool IsRunning ;// { get; private set; }
+    protected boolean IsRunning ;// { get; private set; }
 
-    private bool _isDisposed;
+    private boolean _isDisposed;
 
     private readonly List<IBackgroundWorker> _backgroundWorkers;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="BackgroundWorkerManager"/> class.
-    /// </summary>
+    /**
+     * Initializes a new instance of the <see cref="BackgroundWorkerManager"/> class.
+    */
     public BackgroundWorkerManager()
     {
         _backgroundWorkers = new List<IBackgroundWorker>();
     }
 
-    public virtual void AddAsync(IBackgroundWorker worker)
+    public void AddAsync(IBackgroundWorker worker)
     {
         _backgroundWorkers.Add(worker);
 
         if (IsRunning)
         {
-            await worker.StartAsync();
+            worker.StartAsync();
         }
     }
 
-    public virtual void Dispose()
+    public void Dispose()
     {
         if (_isDisposed)
         {
@@ -48,23 +48,23 @@ public class BackgroundWorkerManager : IBackgroundWorkerManager, ISingletonDepen
         //TODO: ???
     }
 
-    public virtual void StartAsync(CancellationToken cancellationToken = default)
+    public void StartAsync(CancellationToken cancellationToken = default)
     {
         IsRunning = true;
 
-        foreach (var worker in _backgroundWorkers)
+        for (var worker in _backgroundWorkers)
         {
-            await worker.StartAsync(cancellationToken);
+            worker.StartAsync(cancellationToken);
         }
     }
 
-    public virtual void StopAsync(CancellationToken cancellationToken = default)
+    public void StopAsync(CancellationToken cancellationToken = default)
     {
         IsRunning = false;
 
-        foreach (var worker in _backgroundWorkers)
+        for (var worker in _backgroundWorkers)
         {
-            await worker.StopAsync(cancellationToken);
+            worker.StopAsync(cancellationToken);
         }
     }
 }

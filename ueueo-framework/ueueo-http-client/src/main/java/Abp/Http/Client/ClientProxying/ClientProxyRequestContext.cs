@@ -8,22 +8,22 @@ namespace Volo.Abp.Http.Client.ClientProxying;
 public class ClientProxyRequestContext
 {
     [NotNull]
-    public ActionApiDescriptionModel Action { get; }
+    public ActionApiDescriptionModel Action;//  { get; }
 
     [NotNull]
-    public IReadOnlyDictionary<string, object> Arguments { get; }
+    public IReadOnlyDictionary<String, Object> Arguments;//  { get; }
 
     [NotNull]
-    public Type ServiceType { get; }
+    public Type ServiceType;//  { get; }
 
     public ClientProxyRequestContext(
-        [NotNull] ActionApiDescriptionModel action,
-        [NotNull] IReadOnlyDictionary<string, object> arguments,
-        [NotNull] Type serviceType)
+        @Nonnull ActionApiDescriptionModel action,
+        @Nonnull IReadOnlyDictionary<String, Object> arguments,
+        @Nonnull Type serviceType)
     {
         ServiceType = serviceType;
-        Action = Check.NotNull(action, nameof(action));
-        Arguments = Check.NotNull(arguments, nameof(arguments));
-        ServiceType = Check.NotNull(serviceType, nameof(serviceType));
+        Action = Objects.requireNonNull(action, nameof(action));
+        Arguments = Objects.requireNonNull(arguments, nameof(arguments));
+        ServiceType = Objects.requireNonNull(serviceType, nameof(serviceType));
     }
 }

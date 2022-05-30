@@ -15,7 +15,7 @@ public static class UnitOfWorkInterceptorRegistrar
         }
     }
 
-    private static bool ShouldIntercept(Type type)
+    private static boolean ShouldIntercept(Type type)
     {
         return !DynamicProxyIgnoreTypes.Contains(type) && UnitOfWorkHelper.IsUnitOfWorkType(type.GetTypeInfo());
     }

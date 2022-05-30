@@ -27,7 +27,7 @@ public class MethodInvocationAuthorizationService : IMethodInvocationAuthorizati
             return;
         }
 
-        var authorizationPolicy = await AuthorizationPolicy.CombineAsync(
+        var authorizationPolicy = AuthorizationPolicy.CombineAsync(
             _abpAuthorizationPolicyProvider,
             GetAuthorizationDataAttributes(context.Method)
         );
@@ -37,15 +37,15 @@ public class MethodInvocationAuthorizationService : IMethodInvocationAuthorizati
             return;
         }
 
-        await _abpAuthorizationService.CheckAsync(authorizationPolicy);
+        _abpAuthorizationService.CheckAsync(authorizationPolicy);
     }
 
-    protected virtual bool AllowAnonymous(MethodInvocationAuthorizationContext context)
+    protected   boolean AllowAnonymous(MethodInvocationAuthorizationContext context)
     {
         return context.Method.GetCustomAttributes(true).OfType<IAllowAnonymous>().Any();
     }
 
-    protected virtual IEnumerable<IAuthorizeData> GetAuthorizationDataAttributes(MethodInfo methodInfo)
+    protected   IEnumerable<IAuthorizeData> GetAuthorizationDataAttributes(MethodInfo methodInfo)
     {
         var attributes = methodInfo
             .GetCustomAttributes(true)

@@ -9,14 +9,14 @@ internal class EnumerableDirectoryContents : IDirectoryContents
 {
     private readonly IEnumerable<IFileInfo> _entries;
 
-    public EnumerableDirectoryContents([NotNull] IEnumerable<IFileInfo> entries)
+    public EnumerableDirectoryContents(@Nonnull IEnumerable<IFileInfo> entries)
     {
-        Check.NotNull(entries, nameof(entries));
+        Objects.requireNonNull(entries, nameof(entries));
 
         _entries = entries;
     }
 
-    public bool Exists => true;
+    public boolean Exists => true;
 
     public IEnumerator<IFileInfo> GetEnumerator()
     {

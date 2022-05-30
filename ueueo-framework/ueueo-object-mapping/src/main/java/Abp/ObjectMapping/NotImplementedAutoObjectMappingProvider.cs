@@ -5,7 +5,7 @@ namespace Volo.Abp.ObjectMapping;
 
 public sealed class NotImplementedAutoObjectMappingProvider : IAutoObjectMappingProvider, ISingletonDependency
 {
-    public TDestination Map<TSource, TDestination>(object source)
+    public TDestination Map<TSource, TDestination>(Object source)
     {
         throw new NotImplementedException($"Can not map from given object ({source}) to {typeof(TDestination).AssemblyQualifiedName}.");
     }

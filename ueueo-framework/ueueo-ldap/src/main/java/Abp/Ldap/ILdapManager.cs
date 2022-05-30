@@ -4,5 +4,5 @@ namespace Volo.Abp.Ldap;
 
 public interface ILdapManager
 {
-    Task<bool> AuthenticateAsync(string username, string password);
+    Task<bool> AuthenticateAsync(String username, String password);
 }

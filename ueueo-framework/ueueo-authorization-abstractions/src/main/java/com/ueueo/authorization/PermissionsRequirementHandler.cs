@@ -18,7 +18,7 @@ public class PermissionsRequirementHandler : AuthorizationHandler<PermissionsReq
         AuthorizationHandlerContext context,
         PermissionsRequirement requirement)
     {
-        var multiplePermissionGrantResult = await _permissionChecker.IsGrantedAsync(context.User, requirement.PermissionNames);
+        var multiplePermissionGrantResult = _permissionChecker.IsGrantedAsync(context.User, requirement.PermissionNames);
 
         if (requirement.RequiresAll ?
             multiplePermissionGrantResult.AllGranted :

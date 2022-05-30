@@ -6,16 +6,16 @@ using Volo.Abp.Timing;
 
 namespace Volo.Abp.BackgroundJobs;
 
-/// <summary>
-/// Default implementation of <see cref="IBackgroundJobManager"/>.
-/// </summary>
+/**
+ * Default implementation of <see cref="IBackgroundJobManager"/>.
+*/
 [Dependency(ReplaceServices = true)]
 public class DefaultBackgroundJobManager : IBackgroundJobManager, ITransientDependency
 {
-    protected IClock Clock { get; }
-    protected IBackgroundJobSerializer Serializer { get; }
-    protected IGuidGenerator GuidGenerator { get; }
-    protected IBackgroundJobStore Store { get; }
+    protected IClock Clock;//  { get; }
+    protected IBackgroundJobSerializer Serializer;//  { get; }
+    protected IGuidGenerator GuidGenerator;//  { get; }
+    protected IBackgroundJobStore Store;//  { get; }
 
     public DefaultBackgroundJobManager(
         IClock clock,
@@ -29,14 +29,14 @@ public class DefaultBackgroundJobManager : IBackgroundJobManager, ITransientDepe
         Store = store;
     }
 
-    public virtual async Task<string> EnqueueAsync<TArgs>(TArgs args, BackgroundJobPriority priority = BackgroundJobPriority.Normal, TimeSpan? delay = null)
+    public    Task<String> EnqueueAsync<TArgs>(TArgs args, BackgroundJobPriority priority = BackgroundJobPriority.Normal, TimeSpan? delay = null)
     {
         var jobName = BackgroundJobNameAttribute.GetName<TArgs>();
-        var jobId = await EnqueueAsync(jobName, args, priority, delay);
+        var jobId = EnqueueAsync(jobName, args, priority, delay);
         return jobId.ToString();
     }
 
-    protected virtual async Task<Guid> EnqueueAsync(string jobName, object args, BackgroundJobPriority priority = BackgroundJobPriority.Normal, TimeSpan? delay = null)
+    protected    Task<Guid> EnqueueAsync(String jobName, Object args, BackgroundJobPriority priority = BackgroundJobPriority.Normal, TimeSpan? delay = null)
     {
         var jobInfo = new BackgroundJobInfo
         {
@@ -53,7 +53,7 @@ public class DefaultBackgroundJobManager : IBackgroundJobManager, ITransientDepe
             jobInfo.NextTryTime = Clock.Now.Add(delay.Value);
         }
 
-        await Store.InsertAsync(jobInfo);
+        Store.InsertAsync(jobInfo);
 
         return jobInfo.Id;
     }

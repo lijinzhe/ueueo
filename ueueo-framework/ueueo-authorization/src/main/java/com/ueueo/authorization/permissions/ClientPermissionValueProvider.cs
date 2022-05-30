@@ -8,11 +8,12 @@ namespace Volo.Abp.Authorization.Permissions;
 
 public class ClientPermissionValueProvider : PermissionValueProvider
 {
-    public const string ProviderName = "C";
+    public const String ProviderName = "C";
 
-    public override string Name => ProviderName;
+    @Override
+    public String Name => ProviderName;
 
-    protected ICurrentTenant CurrentTenant { get; }
+    protected ICurrentTenant CurrentTenant;//  { get; }
 
     public ClientPermissionValueProvider(IPermissionStore permissionStore, ICurrentTenant currentTenant)
         : base(permissionStore)
@@ -20,7 +21,8 @@ public class ClientPermissionValueProvider : PermissionValueProvider
         CurrentTenant = currentTenant;
     }
 
-    public override async Task<PermissionGrantResult> CheckAsync(PermissionValueCheckContext context)
+    @Override
+    public Task<PermissionGrantResult> CheckAsync(PermissionValueCheckContext context)
     {
         var clientId = context.Principal?.FindFirst(AbpClaimTypes.ClientId)?.Value;
 
@@ -31,13 +33,14 @@ public class ClientPermissionValueProvider : PermissionValueProvider
 
         using (CurrentTenant.Change(null))
         {
-            return await PermissionStore.IsGrantedAsync(context.Permission.Name, Name, clientId)
+            return PermissionStore.IsGrantedAsync(context.Permission.Name, Name, clientId)
                 ? PermissionGrantResult.Granted
                 : PermissionGrantResult.Undefined;
         }
     }
 
-    public override async Task<MultiplePermissionGrantResult> CheckAsync(PermissionValuesCheckContext context)
+    @Override
+    public Task<MultiplePermissionGrantResult> CheckAsync(PermissionValuesCheckContext context)
     {
         var permissionNames = context.Permissions.Select(x => x.Name).Distinct().ToArray();
         Check.NotNullOrEmpty(permissionNames, nameof(permissionNames));
@@ -50,7 +53,7 @@ public class ClientPermissionValueProvider : PermissionValueProvider
 
         using (CurrentTenant.Change(null))
         {
-            return await PermissionStore.IsGrantedAsync(permissionNames, Name, clientId);
+            return PermissionStore.IsGrantedAsync(permissionNames, Name, clientId);
         }
     }
 }

@@ -20,13 +20,13 @@ public interface IDistributedEventBus extends IEventBus {
      */
     <TEvent> IDisposable subscribe(Class<TEvent> eventType, IDistributedEventHandler<TEvent> handler);
 
-    <TEvent> void publish(Class<TEvent> eventType, TEvent eventData, Boolean onUnitOfWorkComplete, Boolean useOutbox);
+    /**
+     * @param eventType
+     * @param eventData
+     * @param onUnitOfWorkComplete true
+     * @param useOutbox            true
+     * @param <TEvent>
+     */
+    <TEvent> void publish(Class<TEvent> eventType, Object eventData, Boolean onUnitOfWorkComplete, Boolean useOutbox);
 
-    default <TEvent> void publish(Class<TEvent> eventType, TEvent eventData, Boolean onUnitOfWorkComplete) {
-        publish(eventType, eventData, onUnitOfWorkComplete, true);
-    }
-
-    default <TEvent> void publish(Class<TEvent> eventType, TEvent eventData) {
-        publish(eventType, eventData, true, true);
-    }
 }

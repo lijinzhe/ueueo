@@ -8,9 +8,9 @@ namespace Volo.Abp.BlobStoring.Aliyun;
 
 public class AliyunBlobProvider : BlobProviderBase, ITransientDependency
 {
-    protected IOssClientFactory OssClientFactory { get; }
-    protected IAliyunBlobNameCalculator AliyunBlobNameCalculator { get; }
-    protected IBlobNormalizeNamingService BlobNormalizeNamingService { get; }
+    protected IOssClientFactory OssClientFactory;//  { get; }
+    protected IAliyunBlobNameCalculator AliyunBlobNameCalculator;//  { get; }
+    protected IBlobNormalizeNamingService BlobNormalizeNamingService;//  { get; }
 
     public AliyunBlobProvider(
         IOssClientFactory ossClientFactory,
@@ -22,19 +22,20 @@ public class AliyunBlobProvider : BlobProviderBase, ITransientDependency
         BlobNormalizeNamingService = blobNormalizeNamingService;
     }
 
-    protected virtual IOss GetOssClient(BlobContainerConfiguration blobContainerConfiguration)
+    protected   IOss GetOssClient(BlobContainerConfiguration blobContainerConfiguration)
     {
         var aliyunConfig = blobContainerConfiguration.GetAliyunConfiguration();
         return OssClientFactory.Create(aliyunConfig);
     }
 
-    protected virtual IOss GetOssClient(AliyunBlobProviderConfiguration aliyunConfig)
+    protected   IOss GetOssClient(AliyunBlobProviderConfiguration aliyunConfig)
     {
         return OssClientFactory.Create(aliyunConfig);
     }
 
 
-    public override Task SaveAsync(BlobProviderSaveArgs args)
+    @Override
+    public void SaveAsync(BlobProviderSaveArgs args)
     {
         var containerName = GetContainerName(args);
         var blobName = AliyunBlobNameCalculator.Calculate(args);
@@ -55,7 +56,8 @@ public class AliyunBlobProvider : BlobProviderBase, ITransientDependency
         return Task.CompletedTask;
     }
 
-    public override Task<bool> DeleteAsync(BlobProviderDeleteArgs args)
+    @Override
+    public Task<bool> DeleteAsync(BlobProviderDeleteArgs args)
     {
         var containerName = GetContainerName(args);
         var blobName = AliyunBlobNameCalculator.Calculate(args);
@@ -68,7 +70,8 @@ public class AliyunBlobProvider : BlobProviderBase, ITransientDependency
         return Task.FromResult(true);
     }
 
-    public override Task<bool> ExistsAsync(BlobProviderExistsArgs args)
+    @Override
+    public Task<bool> ExistsAsync(BlobProviderExistsArgs args)
     {
         var containerName = GetContainerName(args);
         var blobName = AliyunBlobNameCalculator.Calculate(args);
@@ -76,7 +79,8 @@ public class AliyunBlobProvider : BlobProviderBase, ITransientDependency
         return Task.FromResult(BlobExists(ossClient, containerName, blobName));
     }
 
-    public override async Task<Stream> GetOrNullAsync(BlobProviderGetArgs args)
+    @Override
+    public  Task<Stream> GetOrNullAsync(BlobProviderGetArgs args)
     {
         var containerName = GetContainerName(args);
         var blobName = AliyunBlobNameCalculator.Calculate(args);
@@ -86,10 +90,10 @@ public class AliyunBlobProvider : BlobProviderBase, ITransientDependency
             return null;
         }
         var result = ossClient.GetObject(containerName, blobName);
-        return await TryCopyToMemoryStreamAsync(result.Content, args.CancellationToken);
+        return TryCopyToMemoryStreamAsync(result.Content, args.CancellationToken);
     }
 
-    protected virtual string GetContainerName(BlobProviderArgs args)
+    protected   String GetContainerName(BlobProviderArgs args)
     {
         var configuration = args.Configuration.GetAliyunConfiguration();
         return configuration.ContainerName.IsNullOrWhiteSpace()
@@ -97,7 +101,7 @@ public class AliyunBlobProvider : BlobProviderBase, ITransientDependency
             : BlobNormalizeNamingService.NormalizeContainerName(args.Configuration, configuration.ContainerName);
     }
 
-    protected virtual bool BlobExists(IOss ossClient, string containerName, string blobName)
+    protected   boolean BlobExists(IOss ossClient, String containerName, String blobName)
     {
         // Make sure Blob Container exists.
         return ossClient.DoesBucketExist(containerName) &&
