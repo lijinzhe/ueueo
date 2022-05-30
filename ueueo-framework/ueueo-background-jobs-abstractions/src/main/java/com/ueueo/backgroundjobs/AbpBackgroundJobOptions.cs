@@ -12,7 +12,7 @@ public class AbpBackgroundJobOptions
     /// <summary>
     /// Default: true.
     /// </summary>
-    public bool IsJobExecutionEnabled { get; set; } = true;
+    public bool IsJobExecutionEnabled;// { get; set; } = true;
 
     public AbpBackgroundJobOptions()
     {

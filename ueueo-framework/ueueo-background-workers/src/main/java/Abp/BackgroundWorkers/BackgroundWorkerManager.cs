@@ -26,7 +26,7 @@ public class BackgroundWorkerManager : IBackgroundWorkerManager, ISingletonDepen
         _backgroundWorkers = new List<IBackgroundWorker>();
     }
 
-    public virtual async Task AddAsync(IBackgroundWorker worker)
+    public virtual void AddAsync(IBackgroundWorker worker)
     {
         _backgroundWorkers.Add(worker);
 
@@ -48,7 +48,7 @@ public class BackgroundWorkerManager : IBackgroundWorkerManager, ISingletonDepen
         //TODO: ???
     }
 
-    public virtual async Task StartAsync(CancellationToken cancellationToken = default)
+    public virtual void StartAsync(CancellationToken cancellationToken = default)
     {
         IsRunning = true;
 
@@ -58,7 +58,7 @@ public class BackgroundWorkerManager : IBackgroundWorkerManager, ISingletonDepen
         }
     }
 
-    public virtual async Task StopAsync(CancellationToken cancellationToken = default)
+    public virtual void StopAsync(CancellationToken cancellationToken = default)
     {
         IsRunning = false;
 

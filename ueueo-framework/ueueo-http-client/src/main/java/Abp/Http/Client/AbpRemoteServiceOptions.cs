@@ -2,7 +2,7 @@
 
 public class AbpRemoteServiceOptions
 {
-    public RemoteServiceConfigurationDictionary RemoteServices { get; set; }
+    public RemoteServiceConfigurationDictionary RemoteServices;// { get; set; }
 
     public AbpRemoteServiceOptions()
     {

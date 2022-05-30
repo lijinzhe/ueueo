@@ -21,17 +21,17 @@ public class AbpAsyncTimer : ITransientDependency
     /// <summary>
     /// Task period of timer (as milliseconds).
     /// </summary>
-    public int Period { get; set; }
+    public int Period;// { get; set; }
 
     /// <summary>
     /// Indicates whether timer raises Elapsed event on Start method of Timer for once.
     /// Default: False.
     /// </summary>
-    public bool RunOnStart { get; set; }
+    public bool RunOnStart;// { get; set; }
 
-    public ILogger<AbpAsyncTimer> Logger { get; set; }
+    public ILogger<AbpAsyncTimer> Logger;// { get; set; }
 
-    public IExceptionNotifier ExceptionNotifier { get; set; }
+    public IExceptionNotifier ExceptionNotifier;// { get; set; }
 
     private readonly Timer _taskTimer;
     private volatile bool _performingTasks;
@@ -98,7 +98,7 @@ public class AbpAsyncTimer : ITransientDependency
         _ = Timer_Elapsed();
     }
 
-    private async Task Timer_Elapsed()
+    private void Timer_Elapsed()
     {
         try
         {

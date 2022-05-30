@@ -21,7 +21,7 @@ public class UnitOfWorkEventPublisher : IUnitOfWorkEventPublisher, ITransientDep
         _distributedEventBus = distributedEventBus;
     }
 
-    public async Task PublishLocalEventsAsync(IEnumerable<UnitOfWorkEventRecord> localEvents)
+    public void PublishLocalEventsAsync(IEnumerable<UnitOfWorkEventRecord> localEvents)
     {
         foreach (var localEvent in localEvents)
         {
@@ -33,7 +33,7 @@ public class UnitOfWorkEventPublisher : IUnitOfWorkEventPublisher, ITransientDep
         }
     }
 
-    public async Task PublishDistributedEventsAsync(IEnumerable<UnitOfWorkEventRecord> distributedEvents)
+    public void PublishDistributedEventsAsync(IEnumerable<UnitOfWorkEventRecord> distributedEvents)
     {
         foreach (var distributedEvent in distributedEvents)
         {

@@ -14,7 +14,7 @@ public class EntityEventReport
         DistributedEvents = new List<DomainEventEntry>();
     }
 
-    public override string ToString()
+    @Override public string toString()
     {
         return $"[{nameof(EntityEventReport)}] DomainEvents: {DomainEvents.Count}, DistributedEvents: {DistributedEvents.Count}";
     }

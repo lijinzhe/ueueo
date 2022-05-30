@@ -4,7 +4,7 @@ public class AbpDistributedEntityEventOptions
 {
     public IAutoEntityDistributedEventSelectorList AutoEventSelectors { get; }
 
-    public EtoMappingDictionary EtoMappings { get; set; }
+    public EtoMappingDictionary EtoMappings;// { get; set; }
 
     public AbpDistributedEntityEventOptions()
     {

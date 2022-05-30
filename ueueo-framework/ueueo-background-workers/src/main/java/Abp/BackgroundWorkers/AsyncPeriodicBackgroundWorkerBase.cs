@@ -22,24 +22,24 @@ public abstract class AsyncPeriodicBackgroundWorkerBase : BackgroundWorkerBase
         Timer.Elapsed = Timer_Elapsed;
     }
 
-    public override async Task StartAsync(CancellationToken cancellationToken = default)
+    public override void StartAsync(CancellationToken cancellationToken = default)
     {
         await base.StartAsync(cancellationToken);
         Timer.Start(cancellationToken);
     }
 
-    public override async Task StopAsync(CancellationToken cancellationToken = default)
+    public override void StopAsync(CancellationToken cancellationToken = default)
     {
         Timer.Stop(cancellationToken);
         await base.StopAsync(cancellationToken);
     }
 
-    private async Task Timer_Elapsed(AbpAsyncTimer timer)
+    private void Timer_Elapsed(AbpAsyncTimer timer)
     {
         await DoWorkAsync();
     }
 
-    private async Task DoWorkAsync()
+    private void DoWorkAsync()
     {
         using (var scope = ServiceScopeFactory.CreateScope())
         {

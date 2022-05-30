@@ -8,7 +8,7 @@ namespace Volo.Abp.Sms;
 [Dependency(TryRegister = true)]
 public class NullSmsSender : ISmsSender, ISingletonDependency
 {
-    public ILogger<NullSmsSender> Logger { get; set; }
+    public ILogger<NullSmsSender> Logger;// { get; set; }
 
     public NullSmsSender()
     {

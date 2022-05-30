@@ -9,7 +9,7 @@ namespace Volo.Abp.Threading;
 
 public class AmbientDataContextAmbientScopeProvider<T> : IAmbientScopeProvider<T>
 {
-    public ILogger<AmbientDataContextAmbientScopeProvider<T>> Logger { get; set; }
+    public ILogger<AmbientDataContextAmbientScopeProvider<T>> Logger;// { get; set; }
 
     private static readonly ConcurrentDictionary<string, ScopeItem> ScopeDictionary = new ConcurrentDictionary<string, ScopeItem>();
 

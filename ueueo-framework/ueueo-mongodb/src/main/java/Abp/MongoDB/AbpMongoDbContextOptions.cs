@@ -9,7 +9,7 @@ public class AbpMongoDbContextOptions
 {
     internal Dictionary<Type, Type> DbContextReplacements { get; }
 
-    public Action<MongoClientSettings> MongoClientSettingsConfigurer { get; set; }
+    public Action<MongoClientSettings> MongoClientSettingsConfigurer;// { get; set; }
 
     public AbpMongoDbContextOptions()
     {

@@ -24,7 +24,7 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
     protected IChannelAccessor ChannelAccessor { get; private set; }
     protected AsyncEventingBasicConsumer Consumer { get; private set; }
 
-    public ILogger<JobQueue<TArgs>> Logger { get; set; }
+    public ILogger<JobQueue<TArgs>> Logger;// { get; set; }
 
     protected AbpBackgroundJobOptions AbpBackgroundJobOptions { get; }
     protected AbpRabbitMqBackgroundJobOptions AbpRabbitMqBackgroundJobOptions { get; }
@@ -87,7 +87,7 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
         }
     }
 
-    public virtual async Task StartAsync(CancellationToken cancellationToken = default)
+    public virtual void StartAsync(CancellationToken cancellationToken = default)
     {
         CheckDisposed();
 
@@ -102,7 +102,7 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
         }
     }
 
-    public virtual Task StopAsync(CancellationToken cancellationToken = default)
+    public void StopAsync(CancellationToken cancellationToken = default)
     {
         Dispose();
         return Task.CompletedTask;
@@ -120,7 +120,7 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
         ChannelAccessor?.Dispose();
     }
 
-    protected virtual Task EnsureInitializedAsync()
+    protected void EnsureInitializedAsync()
     {
         if (ChannelAccessor != null)
         {
@@ -154,7 +154,7 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
         return Task.CompletedTask;
     }
 
-    protected virtual Task PublishAsync(
+    protected void PublishAsync(
         TArgs args,
         BackgroundJobPriority priority = BackgroundJobPriority.Normal,
         TimeSpan? delay = null)
@@ -187,7 +187,7 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
         return properties;
     }
 
-    protected virtual async Task MessageReceived(object sender, BasicDeliverEventArgs ea)
+    protected virtual void MessageReceived(object sender, BasicDeliverEventArgs ea)
     {
         using (var scope = ServiceScopeFactory.CreateScope())
         {

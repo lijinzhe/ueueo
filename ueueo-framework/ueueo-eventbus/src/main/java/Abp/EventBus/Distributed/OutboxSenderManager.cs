@@ -24,7 +24,7 @@ public class OutboxSenderManager : IBackgroundWorker
         Senders = new List<IOutboxSender>();
     }
 
-    public async Task StartAsync(CancellationToken cancellationToken = default)
+    public void StartAsync(CancellationToken cancellationToken = default)
     {
         foreach (var outboxConfig in Options.Outboxes.Values)
         {
@@ -37,7 +37,7 @@ public class OutboxSenderManager : IBackgroundWorker
         }
     }
 
-    public async Task StopAsync(CancellationToken cancellationToken = default)
+    public void StopAsync(CancellationToken cancellationToken = default)
     {
         foreach (var sender in Senders)
         {

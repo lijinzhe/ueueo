@@ -7,7 +7,7 @@ namespace Volo.Abp.BlobStoring;
 
 public static class BlobContainerExtensions
 {
-    public static async Task SaveAsync(
+    public static void SaveAsync(
         this IBlobContainer container,
         string name,
         byte[] bytes,

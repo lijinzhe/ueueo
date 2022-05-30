@@ -25,18 +25,18 @@ public class TemplateDefinition : IHasNameWithLocalizableDisplayName
     public bool IsLayout { get; }
 
     [CanBeNull]
-    public string Layout { get; set; }
+    public string Layout;// { get; set; }
 
     [CanBeNull]
-    public Type LocalizationResource { get; set; }
+    public Type LocalizationResource;// { get; set; }
 
-    public bool IsInlineLocalized { get; set; }
+    public bool IsInlineLocalized;// { get; set; }
 
     [CanBeNull]
     public string DefaultCultureName { get; }
 
     [CanBeNull]
-    public string RenderEngine { get; set; }
+    public string RenderEngine;// { get; set; }
 
     /// <summary>
     /// Gets/sets a key-value on the <see cref="Properties"/>.

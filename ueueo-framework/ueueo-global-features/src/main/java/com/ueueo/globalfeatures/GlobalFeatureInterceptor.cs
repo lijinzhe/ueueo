@@ -7,7 +7,7 @@ namespace Volo.Abp.GlobalFeatures;
 
 public class GlobalFeatureInterceptor : AbpInterceptor, ITransientDependency
 {
-    public override async Task InterceptAsync(IAbpMethodInvocation invocation)
+    public override void InterceptAsync(IAbpMethodInvocation invocation)
     {
         if (AbpCrossCuttingConcerns.IsApplied(invocation.TargetObject, AbpCrossCuttingConcerns.GlobalFeatureChecking))
         {

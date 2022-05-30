@@ -18,9 +18,9 @@ public class ChannelPool : IChannelPool, ISingletonDependency
 
     protected bool IsDisposed { get; private set; }
 
-    protected TimeSpan TotalDisposeWaitDuration { get; set; } = TimeSpan.FromSeconds(10);
+    protected TimeSpan TotalDisposeWaitDuration;// { get; set; } = TimeSpan.FromSeconds(10);
 
-    public ILogger<ChannelPool> Logger { get; set; }
+    public ILogger<ChannelPool> Logger;// { get; set; }
 
     public ChannelPool(IConnectionPool connectionPool)
     {

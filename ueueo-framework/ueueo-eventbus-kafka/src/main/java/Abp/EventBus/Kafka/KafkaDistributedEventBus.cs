@@ -70,7 +70,7 @@ public class KafkaDistributedEventBus : DistributedEventBusBase, ISingletonDepen
         SubscribeHandlers(AbpDistributedEventBusOptions.Handlers);
     }
 
-    private async Task ProcessEventAsync(Message<string, byte[]> message)
+    private void ProcessEventAsync(Message<string, byte[]> message)
     {
         var eventName = message.Key;
         var eventType = EventTypes.GetOrDefault(eventName);
@@ -203,7 +203,7 @@ public class KafkaDistributedEventBus : DistributedEventBusBase, ISingletonDepen
             foreach (var outgoingEvent in outgoingEventArray)
             {
                 var messageId = outgoingEvent.Id.ToString("N");
-                var headers = new Headers 
+                var headers = new Headers
                 {
                     { "messageId", System.Text.Encoding.UTF8.GetBytes(messageId)}
                 };
@@ -217,7 +217,7 @@ public class KafkaDistributedEventBus : DistributedEventBusBase, ISingletonDepen
                         Headers = headers
                     });
             }
-            
+
             producer.CommitTransaction();
         }
         catch (Exception e)
@@ -225,7 +225,7 @@ public class KafkaDistributedEventBus : DistributedEventBusBase, ISingletonDepen
             producer.AbortTransaction();
             throw;
         }
-        
+
         return Task.CompletedTask;
     }
 
@@ -253,7 +253,7 @@ public class KafkaDistributedEventBus : DistributedEventBusBase, ISingletonDepen
         return Serializer.Serialize(eventData);
     }
 
-    public virtual async Task PublishAsync(Type eventType, object eventData, Headers headers, Dictionary<string, object> headersArguments)
+    public virtual void PublishAsync(Type eventType, object eventData, Headers headers, Dictionary<string, object> headersArguments)
     {
         await PublishAsync(
             AbpKafkaEventBusOptions.TopicName,
@@ -273,9 +273,9 @@ public class KafkaDistributedEventBus : DistributedEventBusBase, ISingletonDepen
     }
 
     private Task<DeliveryResult<string, byte[]>> PublishAsync(
-        string topicName, 
+        string topicName,
         string eventName,
-        byte[] body, 
+        byte[] body,
         Headers headers,
         Dictionary<string, object> headersArguments)
     {

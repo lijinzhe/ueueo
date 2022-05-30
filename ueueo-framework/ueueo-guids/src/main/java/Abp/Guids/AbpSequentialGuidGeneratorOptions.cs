@@ -7,7 +7,7 @@ public class AbpSequentialGuidGeneratorOptions
     /// Use <see cref="GetDefaultSequentialGuidType"/> method
     /// to get the value on use, since it fall backs to a default value.
     /// </summary>
-    public SequentialGuidType? DefaultSequentialGuidType { get; set; }
+    public SequentialGuidType? DefaultSequentialGuidType;// { get; set; }
 
     /// <summary>
     /// Get the <see cref="DefaultSequentialGuidType"/> value

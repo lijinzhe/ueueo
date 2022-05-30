@@ -23,7 +23,7 @@ public class LocalEventBus : EventBusBase, ILocalEventBus, ISingletonDependency
     /// <summary>
     /// Reference to the Logger.
     /// </summary>
-    public ILogger<LocalEventBus> Logger { get; set; }
+    public ILogger<LocalEventBus> Logger;// { get; set; }
 
     protected AbpLocalEventBusOptions Options { get; }
 
@@ -120,7 +120,7 @@ public class LocalEventBus : EventBusBase, ILocalEventBus, ISingletonDependency
         GetOrCreateHandlerFactories(eventType).Locking(factories => factories.Clear());
     }
 
-    protected override async Task PublishToEventBusAsync(Type eventType, object eventData)
+    protected override void PublishToEventBusAsync(Type eventType, object eventData)
     {
         await PublishAsync(new LocalEventMessage(Guid.NewGuid(), eventData, eventType));
     }
@@ -130,7 +130,7 @@ public class LocalEventBus : EventBusBase, ILocalEventBus, ISingletonDependency
         unitOfWork.AddOrReplaceLocalEvent(eventRecord);
     }
 
-    public virtual async Task PublishAsync(LocalEventMessage localEventMessage)
+    public virtual void PublishAsync(LocalEventMessage localEventMessage)
     {
         await TriggerHandlersAsync(localEventMessage.EventType, localEventMessage.EventData);
     }

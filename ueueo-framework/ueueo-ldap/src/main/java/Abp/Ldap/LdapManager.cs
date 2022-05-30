@@ -10,7 +10,7 @@ namespace Volo.Abp.Ldap;
 
 public class LdapManager : ILdapManager, ITransientDependency
 {
-    public ILogger<LdapManager> Logger { get; set; }
+    public ILogger<LdapManager> Logger;// { get; set; }
     protected ILdapSettingProvider LdapSettingProvider { get; }
 
     public LdapManager(ILdapSettingProvider ldapSettingProvider)
@@ -44,17 +44,17 @@ public class LdapManager : ILdapManager, ITransientDependency
         return ldapConnection;
     }
 
-    protected virtual Task ConfigureLdapConnectionAsync(ILdapConnection ldapConnection)
+    protected void ConfigureLdapConnectionAsync(ILdapConnection ldapConnection)
     {
         return Task.CompletedTask;
     }
 
-    protected virtual async Task ConnectAsync(ILdapConnection ldapConnection)
+    protected virtual void ConnectAsync(ILdapConnection ldapConnection)
     {
         ldapConnection.Connect(await LdapSettingProvider.GetServerHostAsync(), await LdapSettingProvider.GetServerPortAsync());
     }
 
-    protected virtual async Task AuthenticateLdapConnectionAsync(ILdapConnection connection, string username, string password)
+    protected virtual void AuthenticateLdapConnectionAsync(ILdapConnection connection, string username, string password)
     {
         await connection.BindAsync(Native.LdapAuthType.Simple, new LdapCredential()
         {

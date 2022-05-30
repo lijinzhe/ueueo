@@ -18,7 +18,7 @@ namespace Volo.Abp.Http.Client.DynamicProxying;
 
 public class ApiDescriptionFinder : IApiDescriptionFinder, ITransientDependency
 {
-    public ICancellationTokenProvider CancellationTokenProvider { get; set; }
+    public ICancellationTokenProvider CancellationTokenProvider;// { get; set; }
     protected IApiDescriptionCache Cache { get; }
     protected AbpCorrelationIdOptions AbpCorrelationIdOptions { get; }
     protected ICorrelationIdProvider CorrelationIdProvider { get; }

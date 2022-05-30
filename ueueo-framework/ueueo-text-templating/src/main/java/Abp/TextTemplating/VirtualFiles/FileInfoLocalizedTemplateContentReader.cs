@@ -7,7 +7,7 @@ public class FileInfoLocalizedTemplateContentReader : ILocalizedTemplateContentR
 {
     private string _content;
 
-    public async Task ReadContentsAsync(IFileInfo fileInfo)
+    public void ReadContentsAsync(IFileInfo fileInfo)
     {
         _content = await fileInfo.ReadAsStringAsync();
     }

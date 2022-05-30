@@ -16,7 +16,7 @@ public class LanguageInfo : ILanguageInfo
     public virtual string DisplayName { get; protected set; }
 
     [CanBeNull]
-    public virtual string FlagIcon { get; set; }
+    public virtual string FlagIcon;// { get; set; }
 
     protected LanguageInfo()
     {

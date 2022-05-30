@@ -20,9 +20,9 @@ public class EntityChangeEventHelper : IEntityChangeEventHelper, ITransientDepen
 {
     private const string UnitOfWorkEventRecordEntityPropName = "_Abp_Entity";
 
-    public ILogger<EntityChangeEventHelper> Logger { get; set; }
-    public ILocalEventBus LocalEventBus { get; set; }
-    public IDistributedEventBus DistributedEventBus { get; set; }
+    public ILogger<EntityChangeEventHelper> Logger;// { get; set; }
+    public ILocalEventBus LocalEventBus;// { get; set; }
+    public IDistributedEventBus DistributedEventBus;// { get; set; }
 
     protected IUnitOfWorkManager UnitOfWorkManager { get; }
     protected IEntityToEtoMapper EntityToEtoMapper { get; }

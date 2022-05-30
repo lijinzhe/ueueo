@@ -54,7 +54,7 @@ public abstract class DistributedEventBusBase : EventBusBase, IDistributedEventB
         return PublishAsync(typeof(TEvent), eventData, onUnitOfWorkComplete, useOutbox);
     }
 
-    public async Task PublishAsync(
+    public void PublishAsync(
         Type eventType,
         object eventData,
         bool onUnitOfWorkComplete = true,

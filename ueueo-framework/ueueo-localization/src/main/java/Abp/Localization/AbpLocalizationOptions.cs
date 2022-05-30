@@ -11,7 +11,7 @@ public class AbpLocalizationOptions
     /// <summary>
     /// Used as the default resource when resource was not specified on a localization operation.
     /// </summary>
-    public Type DefaultResourceType { get; set; }
+    public Type DefaultResourceType;// { get; set; }
 
     public ITypeList<ILocalizationResourceContributor> GlobalContributors { get; }
 
@@ -21,9 +21,9 @@ public class AbpLocalizationOptions
 
     public Dictionary<string, List<NameValue>> LanguageFilesMap { get; }
 
-    public bool TryToGetFromBaseCulture { get; set; }
+    public bool TryToGetFromBaseCulture;// { get; set; }
 
-    public bool TryToGetFromDefaultCulture { get; set; }
+    public bool TryToGetFromDefaultCulture;// { get; set; }
 
     public AbpLocalizationOptions()
     {

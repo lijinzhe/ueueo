@@ -99,7 +99,7 @@ public abstract class EventBusBase : IEventBus
     }
 
     /// <inheritdoc/>
-    public virtual async Task PublishAsync(
+    public virtual void PublishAsync(
         Type eventType,
         object eventData,
         bool onUnitOfWorkComplete = true)
@@ -120,7 +120,7 @@ public abstract class EventBusBase : IEventBus
 
     protected abstract void AddToUnitOfWork(IUnitOfWork unitOfWork, UnitOfWorkEventRecord eventRecord);
 
-    public virtual async Task TriggerHandlersAsync(Type eventType, object eventData)
+    public virtual void TriggerHandlersAsync(Type eventType, object eventData)
     {
         var exceptions = new List<Exception>();
 
@@ -132,7 +132,7 @@ public abstract class EventBusBase : IEventBus
         }
     }
 
-    protected virtual async Task TriggerHandlersAsync(Type eventType, object eventData, List<Exception> exceptions, InboxConfig inboxConfig = null)
+    protected virtual void TriggerHandlersAsync(Type eventType, object eventData, List<Exception> exceptions, InboxConfig inboxConfig = null)
     {
         await new SynchronizationContextRemover();
 
@@ -197,7 +197,7 @@ public abstract class EventBusBase : IEventBus
 
     protected abstract IEnumerable<EventTypeWithEventHandlerFactories> GetHandlerFactories(Type eventType);
 
-    protected virtual async Task TriggerHandlerAsync(IEventHandlerFactory asyncHandlerFactory, Type eventType,
+    protected virtual void TriggerHandlerAsync(IEventHandlerFactory asyncHandlerFactory, Type eventType,
         object eventData, List<Exception> exceptions, InboxConfig inboxConfig = null)
     {
         using (var eventHandlerWrapper = asyncHandlerFactory.GetHandler())

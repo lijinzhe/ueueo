@@ -11,7 +11,7 @@ public class OutgoingEventRecord :
     IHasExtraProperties,
     IHasCreationTime
 {
-    public static int MaxEventNameLength { get; set; } = 256;
+    public static int MaxEventNameLength;// { get; set; } = 256;
 
     public ExtraPropertyDictionary ExtraProperties { get; private set; }
 

@@ -14,7 +14,7 @@ public class PermissionsRequirementHandler : AuthorizationHandler<PermissionsReq
         _permissionChecker = permissionChecker;
     }
 
-    protected override async Task HandleRequirementAsync(
+    protected override void HandleRequirementAsync(
         AuthorizationHandlerContext context,
         PermissionsRequirement requirement)
     {

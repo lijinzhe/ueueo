@@ -53,11 +53,11 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
 {
     public const string UowCacheName = "AbpDistributedCache";
 
-    public ILogger<DistributedCache<TCacheItem, TCacheKey>> Logger { get; set; }
+    public ILogger<DistributedCache<TCacheItem, TCacheKey>> Logger;// { get; set; }
 
-    protected string CacheName { get; set; }
+    protected string CacheName;// { get; set; }
 
-    protected bool IgnoreMultiTenancy { get; set; }
+    protected bool IgnoreMultiTenancy;// { get; set; }
 
     protected IDistributedCache Cache { get; }
 
@@ -792,7 +792,7 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
     /// <param name="considerUow">This will store the cache in the current unit of work until the end of the current unit of work does not really affect the cache.</param>
     /// <param name="token">The <see cref="T:System.Threading.CancellationToken" /> for the task.</param>
     /// <returns>The <see cref="T:System.Threading.Tasks.Task" /> indicating that the operation is asynchronous.</returns>
-    public virtual async Task SetAsync(
+    public virtual void SetAsync(
         TCacheKey key,
         TCacheItem value,
         DistributedCacheEntryOptions options = null,
@@ -800,7 +800,7 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
         bool considerUow = false,
         CancellationToken token = default)
     {
-        async Task SetRealCache()
+        void SetRealCache()
         {
             hideErrors = hideErrors ?? _distributedCacheOption.HideErrors;
 
@@ -952,7 +952,7 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
         }
     }
 
-    public virtual async Task SetManyAsync(
+    public virtual void SetManyAsync(
         IEnumerable<KeyValuePair<TCacheKey, TCacheItem>> items,
         DistributedCacheEntryOptions options = null,
         bool? hideErrors = null,
@@ -975,7 +975,7 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
             return;
         }
 
-        async Task SetRealCache()
+        void SetRealCache()
         {
             hideErrors = hideErrors ?? _distributedCacheOption.HideErrors;
 
@@ -1024,7 +1024,7 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
         }
     }
 
-    protected virtual async Task SetManyFallbackAsync(
+    protected virtual void SetManyFallbackAsync(
         KeyValuePair<TCacheKey, TCacheItem>[] items,
         DistributedCacheEntryOptions options = null,
         bool? hideErrors = null,
@@ -1093,7 +1093,7 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
     /// <param name="hideErrors">Indicates to throw or hide the exceptions for the distributed cache.</param>
     /// <param name="token">The <see cref="T:System.Threading.CancellationToken" /> for the task.</param>
     /// <returns>The <see cref="T:System.Threading.Tasks.Task" /> indicating that the operation is asynchronous.</returns>
-    public virtual async Task RefreshAsync(
+    public virtual void RefreshAsync(
         TCacheKey key,
         bool? hideErrors = null,
         CancellationToken token = default)
@@ -1148,7 +1148,7 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
         }
     }
 
-    public virtual async Task RefreshManyAsync(
+    public virtual void RefreshManyAsync(
         IEnumerable<TCacheKey> keys,
         bool? hideErrors = null,
         CancellationToken token = default)
@@ -1241,13 +1241,13 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
     /// <param name="considerUow">This will store the cache in the current unit of work until the end of the current unit of work does not really affect the cache.</param>
     /// <param name="token">The <see cref="T:System.Threading.CancellationToken" /> for the task.</param>
     /// <returns>The <see cref="T:System.Threading.Tasks.Task" /> indicating that the operation is asynchronous.</returns>
-    public virtual async Task RemoveAsync(
+    public virtual void RemoveAsync(
         TCacheKey key,
         bool? hideErrors = null,
         bool considerUow = false,
         CancellationToken token = default)
     {
-        async Task RemoveRealCache()
+        void RemoveRealCache()
         {
             hideErrors = hideErrors ?? _distributedCacheOption.HideErrors;
 
@@ -1348,7 +1348,7 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
         }
     }
 
-    public async Task RemoveManyAsync(
+    public void RemoveManyAsync(
         IEnumerable<TCacheKey> keys,
         bool? hideErrors = null,
         bool considerUow = false,
@@ -1358,7 +1358,7 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
 
         if (Cache is ICacheSupportsMultipleItems cacheSupportsMultipleItems)
         {
-            async Task RemoveRealCache()
+            void RemoveRealCache()
             {
                 hideErrors = hideErrors ?? _distributedCacheOption.HideErrors;
 
@@ -1413,7 +1413,7 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
         _ = HandleExceptionAsync(ex);
     }
 
-    protected virtual async Task HandleExceptionAsync(Exception ex)
+    protected virtual void HandleExceptionAsync(Exception ex)
     {
         Logger.LogException(ex, LogLevel.Warning);
 

@@ -24,7 +24,7 @@ namespace Volo.Abp.Http.Client.ClientProxying;
 
 public class ClientProxyBase<TService> : ITransientDependency
 {
-    public IAbpLazyServiceProvider LazyServiceProvider { get; set; }
+    public IAbpLazyServiceProvider LazyServiceProvider;// { get; set; }
 
     protected IClientProxyApiDescriptionFinder ClientProxyApiDescriptionFinder => LazyServiceProvider.LazyGetRequiredService<IClientProxyApiDescriptionFinder>();
     protected ICancellationTokenProvider CancellationTokenProvider => LazyServiceProvider.LazyGetRequiredService<ICancellationTokenProvider>();
@@ -40,7 +40,7 @@ public class ClientProxyBase<TService> : ITransientDependency
     protected ClientProxyUrlBuilder ClientProxyUrlBuilder => LazyServiceProvider.LazyGetRequiredService<ClientProxyUrlBuilder>();
     protected ICurrentApiVersionInfo CurrentApiVersionInfo => LazyServiceProvider.LazyGetRequiredService<ICurrentApiVersionInfo>();
 
-    protected virtual async Task RequestAsync(string methodName, ClientProxyRequestTypeValue arguments = null)
+    protected virtual void RequestAsync(string methodName, ClientProxyRequestTypeValue arguments = null)
     {
         await RequestAsync(BuildHttpProxyClientProxyContext(methodName, arguments));
     }
@@ -66,7 +66,7 @@ public class ClientProxyBase<TService> : ITransientDependency
 
         var actionArguments = action.Parameters.GroupBy(x => x.NameOnMethod).ToList();
         if (action.SupportedVersions.Any())
-        {   
+        {
             //TODO: make names configurable
             actionArguments.RemoveAll(x => x.Key == "api-version" || x.Key == "apiVersion");
         }
@@ -214,7 +214,7 @@ public class ClientProxyBase<TService> : ITransientDependency
             .GetConfigurationOrDefaultOrNullAsync(clientConfig.RemoteServiceName))?.Version;
     }
 
-    protected virtual async Task ThrowExceptionForResponseAsync(HttpResponseMessage response)
+    protected virtual void ThrowExceptionForResponseAsync(HttpResponseMessage response)
     {
         if (response.Headers.Contains(AbpHttpConsts.AbpErrorFormat))
         {

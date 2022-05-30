@@ -28,7 +28,7 @@ public class InMemoryBackgroundJobStore : IBackgroundJobStore, ISingletonDepende
         return Task.FromResult(_jobs.GetOrDefault(jobId));
     }
 
-    public virtual Task InsertAsync(BackgroundJobInfo jobInfo)
+    public void InsertAsync(BackgroundJobInfo jobInfo)
     {
         _jobs[jobInfo.Id] = jobInfo;
 
@@ -49,14 +49,14 @@ public class InMemoryBackgroundJobStore : IBackgroundJobStore, ISingletonDepende
     }
 
 
-    public virtual Task DeleteAsync(Guid jobId)
+    public void DeleteAsync(Guid jobId)
     {
         _jobs.TryRemove(jobId, out _);
 
         return Task.FromResult(0);
     }
 
-    public virtual Task UpdateAsync(BackgroundJobInfo jobInfo)
+    public void UpdateAsync(BackgroundJobInfo jobInfo)
     {
         if (jobInfo.IsAbandoned)
         {

@@ -24,7 +24,7 @@ public class ExtensionPropertyConfiguration : IHasNameWithLocalizableDisplayName
     public List<Action<ObjectExtensionPropertyValidationContext>> Validators { get; }
 
     [CanBeNull]
-    public ILocalizableString DisplayName { get; set; }
+    public ILocalizableString DisplayName;// { get; set; }
 
     [NotNull]
     public Dictionary<string, object> Configuration { get; }
@@ -35,7 +35,7 @@ public class ExtensionPropertyConfiguration : IHasNameWithLocalizableDisplayName
     /// properties are not used.
     /// Default: true.
     /// </summary>
-    public bool IsAvailableToClients { get; set; } = true;
+    public bool IsAvailableToClients;// { get; set; } = true;
 
     [NotNull]
     public ExtensionPropertyEntityConfiguration Entity { get; }
@@ -50,14 +50,14 @@ public class ExtensionPropertyConfiguration : IHasNameWithLocalizableDisplayName
     /// Uses as the default value if <see cref="DefaultValueFactory"/> was not set.
     /// </summary>
     [CanBeNull]
-    public object DefaultValue { get; set; }
+    public object DefaultValue;// { get; set; }
 
     /// <summary>
     /// Used with the first priority to create the default value for the property.
     /// Uses to the <see cref="DefaultValue"/> if this was not set.
     /// </summary>
     [CanBeNull]
-    public Func<object> DefaultValueFactory { get; set; }
+    public Func<object> DefaultValueFactory;// { get; set; }
 
     public ExtensionPropertyConfiguration(
         [NotNull] EntityExtensionConfiguration entityExtensionConfiguration,

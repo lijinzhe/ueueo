@@ -14,7 +14,7 @@ public class ExtensionPropertyUiConfiguration
     public ExtensionPropertyUiFormConfiguration OnEditForm { get; }
 
     [NotNull]
-    public ExtensionPropertyLookupConfiguration Lookup { get; set; }
+    public ExtensionPropertyLookupConfiguration Lookup;// { get; set; }
 
     public ExtensionPropertyUiConfiguration()
     {

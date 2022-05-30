@@ -10,10 +10,10 @@ namespace Volo.Abp.Application.Dtos;
 public abstract class AuditedEntityDto : CreationAuditedEntityDto, IAuditedObject
 {
     /// <inheritdoc />
-    public DateTime? LastModificationTime { get; set; }
+    public DateTime? LastModificationTime;// { get; set; }
 
     /// <inheritdoc />
-    public Guid? LastModifierId { get; set; }
+    public Guid? LastModifierId;// { get; set; }
 }
 
 /// <summary>
@@ -24,8 +24,8 @@ public abstract class AuditedEntityDto : CreationAuditedEntityDto, IAuditedObjec
 public abstract class AuditedEntityDto<TPrimaryKey> : CreationAuditedEntityDto<TPrimaryKey>, IAuditedObject
 {
     /// <inheritdoc />
-    public DateTime? LastModificationTime { get; set; }
+    public DateTime? LastModificationTime;// { get; set; }
 
     /// <inheritdoc />
-    public Guid? LastModifierId { get; set; }
+    public Guid? LastModifierId;// { get; set; }
 }

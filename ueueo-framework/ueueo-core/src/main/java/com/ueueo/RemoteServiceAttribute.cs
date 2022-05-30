@@ -10,19 +10,19 @@ public class RemoteServiceAttribute : Attribute //TODO: Can we move this to anot
     /// <summary>
     /// Default: true.
     /// </summary>
-    public bool IsEnabled { get; set; }
+    public bool IsEnabled;// { get; set; }
 
     /// <summary>
     /// Default: true.
     /// </summary>
-    public bool IsMetadataEnabled { get; set; }
+    public bool IsMetadataEnabled;// { get; set; }
 
     /// <summary>
     /// Group name of the remote service.
     /// Group names of all services of a module expected to be the same.
     /// This name is also used to distinguish the service endpoint of this group.
     /// </summary>
-    public string Name { get; set; }
+    public string Name;// { get; set; }
 
     public RemoteServiceAttribute(bool isEnabled = true)
     {

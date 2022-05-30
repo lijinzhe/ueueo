@@ -8,7 +8,7 @@ namespace Volo.Abp.Domain.Entities.Events.Distributed;
 [GenericEventName(Postfix = ".Deleted")]
 public class EntityDeletedEto<TEntityEto> : IEventDataMayHaveTenantId
 {
-    public TEntityEto Entity { get; set; }
+    public TEntityEto Entity;// { get; set; }
 
     public EntityDeletedEto(TEntityEto entity)
     {

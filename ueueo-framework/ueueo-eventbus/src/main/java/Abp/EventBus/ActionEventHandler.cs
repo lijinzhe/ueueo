@@ -30,7 +30,7 @@ public class ActionEventHandler<TEvent> :
     /// Handles the event.
     /// </summary>
     /// <param name="eventData"></param>
-    public async Task HandleEventAsync(TEvent eventData)
+    public void HandleEventAsync(TEvent eventData)
     {
         await Action(eventData);
     }

@@ -36,7 +36,7 @@ internal class AbpApplicationWithExternalServiceProvider : AbpApplicationBase, I
         SetServiceProvider(serviceProvider);
     }
 
-    public async Task InitializeAsync(IServiceProvider serviceProvider)
+    public void InitializeAsync(IServiceProvider serviceProvider)
     {
         Check.NotNull(serviceProvider, nameof(serviceProvider));
 

@@ -10,7 +10,7 @@ public class BlobContainerConfiguration
     /// <summary>
     /// The provider to be used to store BLOBs of this container.
     /// </summary>
-    public Type ProviderType { get; set; }
+    public Type ProviderType;// { get; set; }
 
     /// <summary>
     /// Indicates whether this container is multi-tenant or not.
@@ -22,7 +22,7 @@ public class BlobContainerConfiguration
     ///
     /// Default: true.
     /// </summary>
-    public bool IsMultiTenant { get; set; } = true;
+    public bool IsMultiTenant;// { get; set; } = true;
 
     public ITypeList<IBlobNamingNormalizer> NamingNormalizers { get; }
 

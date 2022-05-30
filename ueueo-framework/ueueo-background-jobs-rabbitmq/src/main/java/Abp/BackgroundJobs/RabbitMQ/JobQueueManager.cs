@@ -29,7 +29,7 @@ public class JobQueueManager : IJobQueueManager, ISingletonDependency
         SyncSemaphore = new SemaphoreSlim(1, 1);
     }
 
-    public async Task StartAsync(CancellationToken cancellationToken = default)
+    public void StartAsync(CancellationToken cancellationToken = default)
     {
         if (!Options.IsJobExecutionEnabled)
         {
@@ -44,7 +44,7 @@ public class JobQueueManager : IJobQueueManager, ISingletonDependency
         }
     }
 
-    public async Task StopAsync(CancellationToken cancellationToken = default)
+    public void StopAsync(CancellationToken cancellationToken = default)
     {
         foreach (var jobQueue in JobQueues.Values)
         {

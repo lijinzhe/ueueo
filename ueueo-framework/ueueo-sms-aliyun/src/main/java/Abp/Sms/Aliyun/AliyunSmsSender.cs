@@ -17,7 +17,7 @@ public class AliyunSmsSender : ISmsSender, ITransientDependency
         Options = options.CurrentValue;
     }
 
-    public async Task SendAsync(SmsMessage smsMessage)
+    public void SendAsync(SmsMessage smsMessage)
     {
         var client = CreateClient();
 

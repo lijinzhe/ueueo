@@ -16,9 +16,9 @@ public class ConsumerPool : IConsumerPool, ISingletonDependency
 
     protected ConcurrentDictionary<string, Lazy<IConsumer<string, byte[]>>> Consumers { get; }
 
-    protected TimeSpan TotalDisposeWaitDuration { get; set; } = TimeSpan.FromSeconds(10);
+    protected TimeSpan TotalDisposeWaitDuration;// { get; set; } = TimeSpan.FromSeconds(10);
 
-    public ILogger<ConsumerPool> Logger { get; set; }
+    public ILogger<ConsumerPool> Logger;// { get; set; }
 
     private bool _isDisposed;
 

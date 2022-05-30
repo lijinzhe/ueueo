@@ -15,7 +15,7 @@ public class EventHandlerInvoker : IEventHandlerInvoker, ISingletonDependency
         _cache = new ConcurrentDictionary<string, EventHandlerInvokerCacheItem>();
     }
 
-    public async Task InvokeAsync(IEventHandler eventHandler, object eventData, Type eventType)
+    public void InvokeAsync(IEventHandler eventHandler, object eventData, Type eventType)
     {
         var cacheItem = _cache.GetOrAdd($"{eventHandler.GetType().FullName}-{eventType.FullName}", _ =>
         {

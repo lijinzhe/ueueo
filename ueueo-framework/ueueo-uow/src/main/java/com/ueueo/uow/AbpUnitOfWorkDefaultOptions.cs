@@ -13,11 +13,11 @@ public class AbpUnitOfWorkDefaultOptions
     /// <summary>
     /// Default value: <see cref="UnitOfWorkTransactionBehavior.Auto"/>.
     /// </summary>
-    public UnitOfWorkTransactionBehavior TransactionBehavior { get; set; } = UnitOfWorkTransactionBehavior.Auto;
+    public UnitOfWorkTransactionBehavior TransactionBehavior;// { get; set; } = UnitOfWorkTransactionBehavior.Auto;
 
-    public IsolationLevel? IsolationLevel { get; set; }
+    public IsolationLevel? IsolationLevel;// { get; set; }
 
-    public int? Timeout { get; set; }
+    public int? Timeout;// { get; set; }
 
     internal AbpUnitOfWorkOptions Normalize(AbpUnitOfWorkOptions options)
     {

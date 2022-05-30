@@ -7,9 +7,9 @@ namespace Volo.Abp.BackgroundJobs.Quartz;
 
 public class AbpBackgroundJobQuartzOptions
 {
-    public int RetryCount { get; set; }
+    public int RetryCount;// { get; set; }
 
-    public int RetryIntervalMillisecond { get; set; }
+    public int RetryIntervalMillisecond;// { get; set; }
 
 
     [NotNull]
@@ -26,7 +26,7 @@ public class AbpBackgroundJobQuartzOptions
         _retryStrategy = DefaultRetryStrategy;
     }
 
-    private async Task DefaultRetryStrategy(int retryIndex, IJobExecutionContext executionContext, JobExecutionException exception)
+    private void DefaultRetryStrategy(int retryIndex, IJobExecutionContext executionContext, JobExecutionException exception)
     {
         exception.RefireImmediately = true;
 

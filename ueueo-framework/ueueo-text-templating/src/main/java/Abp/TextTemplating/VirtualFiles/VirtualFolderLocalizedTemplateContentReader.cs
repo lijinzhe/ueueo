@@ -16,7 +16,7 @@ public class VirtualFolderLocalizedTemplateContentReader : ILocalizedTemplateCon
         _fileExtension = fileExtension;
     }
 
-    public async Task ReadContentsAsync(
+    public void ReadContentsAsync(
         IVirtualFileProvider virtualFileProvider,
         string virtualPath)
     {

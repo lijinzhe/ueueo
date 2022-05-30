@@ -36,12 +36,12 @@ public abstract class ApplicationService :
     IGlobalFeatureCheckingEnabled,
     ITransientDependency
 {
-    public IAbpLazyServiceProvider LazyServiceProvider { get; set; }
+    public IAbpLazyServiceProvider LazyServiceProvider;// { get; set; }
 
     [Obsolete("Use LazyServiceProvider instead.")]
-    public IServiceProvider ServiceProvider { get; set; }
+    public IServiceProvider ServiceProvider;// { get; set; }
 
-    public static string[] CommonPostfixes { get; set; } = { "AppService", "ApplicationService", "Service" };
+    public static string[] CommonPostfixes;// { get; set; } = { "AppService", "ApplicationService", "Service" };
 
     public List<string> AppliedCrossCuttingConcerns { get; } = new List<string>();
 
@@ -49,7 +49,7 @@ public abstract class ApplicationService :
 
     protected IAsyncQueryableExecuter AsyncExecuter => LazyServiceProvider.LazyGetRequiredService<IAsyncQueryableExecuter>();
 
-    protected Type ObjectMapperContext { get; set; }
+    protected Type ObjectMapperContext;// { get; set; }
     protected IObjectMapper ObjectMapper => LazyServiceProvider.LazyGetService<IObjectMapper>(provider =>
         ObjectMapperContext == null
             ? provider.GetRequiredService<IObjectMapper>()
@@ -105,7 +105,7 @@ public abstract class ApplicationService :
     /// Throws <see cref="AbpAuthorizationException"/> if given policy has not been granted.
     /// </summary>
     /// <param name="policyName">The policy name. This method does nothing if given <paramref name="policyName"/> is null or empty.</param>
-    protected virtual async Task CheckPolicyAsync([CanBeNull] string policyName)
+    protected virtual void CheckPolicyAsync([CanBeNull] string policyName)
     {
         if (string.IsNullOrEmpty(policyName))
         {

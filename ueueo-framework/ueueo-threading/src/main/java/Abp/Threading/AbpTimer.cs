@@ -20,17 +20,17 @@ public class AbpTimer : ITransientDependency
     /// <summary>
     /// Task period of timer (as milliseconds).
     /// </summary>
-    public int Period { get; set; }
+    public int Period;// { get; set; }
 
     /// <summary>
     /// Indicates whether timer raises Elapsed event on Start method of Timer for once.
     /// Default: False.
     /// </summary>
-    public bool RunOnStart { get; set; }
+    public bool RunOnStart;// { get; set; }
 
-    public ILogger<AbpTimer> Logger { get; set; }
+    public ILogger<AbpTimer> Logger;// { get; set; }
 
-    public IExceptionNotifier ExceptionNotifier { get; set; }
+    public IExceptionNotifier ExceptionNotifier;// { get; set; }
 
     private readonly Timer _taskTimer;
     private volatile bool _performingTasks;

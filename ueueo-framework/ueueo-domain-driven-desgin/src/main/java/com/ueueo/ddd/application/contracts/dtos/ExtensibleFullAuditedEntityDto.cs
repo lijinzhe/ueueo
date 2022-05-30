@@ -13,13 +13,13 @@ namespace Volo.Abp.Application.Dtos;
 public abstract class ExtensibleFullAuditedEntityDto<TPrimaryKey> : ExtensibleAuditedEntityDto<TPrimaryKey>, IFullAuditedObject
 {
     /// <inheritdoc />
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted;// { get; set; }
 
     /// <inheritdoc />
-    public Guid? DeleterId { get; set; }
+    public Guid? DeleterId;// { get; set; }
 
     /// <inheritdoc />
-    public DateTime? DeletionTime { get; set; }
+    public DateTime? DeletionTime;// { get; set; }
 
     protected ExtensibleFullAuditedEntityDto()
         : this(true)
@@ -42,13 +42,13 @@ public abstract class ExtensibleFullAuditedEntityDto<TPrimaryKey> : ExtensibleAu
 public abstract class ExtensibleFullAuditedEntityDto : ExtensibleAuditedEntityDto, IFullAuditedObject
 {
     /// <inheritdoc />
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted;// { get; set; }
 
     /// <inheritdoc />
-    public Guid? DeleterId { get; set; }
+    public Guid? DeleterId;// { get; set; }
 
     /// <inheritdoc />
-    public DateTime? DeletionTime { get; set; }
+    public DateTime? DeletionTime;// { get; set; }
 
     protected ExtensibleFullAuditedEntityDto()
         : this(true)

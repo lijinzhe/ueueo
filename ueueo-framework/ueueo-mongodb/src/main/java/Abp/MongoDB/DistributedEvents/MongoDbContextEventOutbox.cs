@@ -21,7 +21,7 @@ public class MongoDbContextEventOutbox<TMongoDbContext> : IMongoDbContextEventOu
     }
 
     [UnitOfWork]
-    public virtual async Task EnqueueAsync(OutgoingEventInfo outgoingEvent)
+    public virtual void EnqueueAsync(OutgoingEventInfo outgoingEvent)
     {
         var dbContext = (IHasEventOutbox)await MongoDbContextProvider.GetDbContextAsync();
         if (dbContext.SessionHandle != null)
@@ -56,7 +56,7 @@ public class MongoDbContextEventOutbox<TMongoDbContext> : IMongoDbContextEventOu
     }
 
     [UnitOfWork]
-    public virtual async Task DeleteAsync(Guid id)
+    public virtual void DeleteAsync(Guid id)
     {
         var dbContext = (IHasEventOutbox)await MongoDbContextProvider.GetDbContextAsync();
         if (dbContext.SessionHandle != null)
@@ -70,7 +70,7 @@ public class MongoDbContextEventOutbox<TMongoDbContext> : IMongoDbContextEventOu
     }
 
     [UnitOfWork]
-    public virtual async Task DeleteManyAsync(IEnumerable<Guid> ids)
+    public virtual void DeleteManyAsync(IEnumerable<Guid> ids)
     {
         var dbContext = (IHasEventOutbox)await MongoDbContextProvider.GetDbContextAsync();
         if (dbContext.SessionHandle != null)

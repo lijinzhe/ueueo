@@ -9,7 +9,7 @@ namespace Volo.Abp.BackgroundJobs;
 [Dependency(TryRegister = true)]
 public class NullBackgroundJobManager : IBackgroundJobManager, ISingletonDependency
 {
-    public ILogger<NullBackgroundJobManager> Logger { get; set; }
+    public ILogger<NullBackgroundJobManager> Logger;// { get; set; }
 
     public NullBackgroundJobManager()
     {

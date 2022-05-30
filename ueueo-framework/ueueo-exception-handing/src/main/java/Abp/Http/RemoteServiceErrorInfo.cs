@@ -12,24 +12,24 @@ public class RemoteServiceErrorInfo
     /// <summary>
     /// Error code.
     /// </summary>
-    public string Code { get; set; }
+    public string Code;// { get; set; }
 
     /// <summary>
     /// Error message.
     /// </summary>
-    public string Message { get; set; }
+    public string Message;// { get; set; }
 
     /// <summary>
     /// Error details.
     /// </summary>
-    public string Details { get; set; }
+    public string Details;// { get; set; }
 
-    public IDictionary Data { get; set; }
+    public IDictionary Data;// { get; set; }
 
     /// <summary>
     /// Validation errors if exists.
     /// </summary>
-    public RemoteServiceValidationErrorInfo[] ValidationErrors { get; set; }
+    public RemoteServiceValidationErrorInfo[] ValidationErrors;// { get; set; }
 
     /// <summary>
     /// Creates a new instance of <see cref="RemoteServiceErrorInfo"/>.

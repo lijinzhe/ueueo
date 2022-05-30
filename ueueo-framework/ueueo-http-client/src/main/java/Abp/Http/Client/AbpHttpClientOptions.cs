@@ -7,7 +7,7 @@ namespace Volo.Abp.Http.Client;
 
 public class AbpHttpClientOptions
 {
-    public Dictionary<Type, HttpClientProxyConfig> HttpClientProxies { get; set; }
+    public Dictionary<Type, HttpClientProxyConfig> HttpClientProxies;// { get; set; }
 
     public AbpHttpClientOptions()
     {

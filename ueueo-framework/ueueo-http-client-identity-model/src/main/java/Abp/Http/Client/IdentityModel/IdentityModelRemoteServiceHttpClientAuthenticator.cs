@@ -16,7 +16,7 @@ public class IdentityModelRemoteServiceHttpClientAuthenticator : IRemoteServiceH
         IdentityModelAuthenticationService = identityModelAuthenticationService;
     }
 
-    public virtual async Task Authenticate(RemoteServiceHttpClientAuthenticateContext context)
+    public virtual void Authenticate(RemoteServiceHttpClientAuthenticateContext context)
     {
         await IdentityModelAuthenticationService.TryAuthenticateAsync(
             context.Client,

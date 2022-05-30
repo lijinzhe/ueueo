@@ -18,7 +18,7 @@ public class QuartzBackgroundWorkerManager : IBackgroundWorkerManager, ISingleto
         _scheduler = scheduler;
     }
 
-    public virtual async Task StartAsync(CancellationToken cancellationToken = default)
+    public virtual void StartAsync(CancellationToken cancellationToken = default)
     {
         if (_scheduler.IsStarted && _scheduler.InStandbyMode)
         {
@@ -26,7 +26,7 @@ public class QuartzBackgroundWorkerManager : IBackgroundWorkerManager, ISingleto
         }
     }
 
-    public virtual async Task StopAsync(CancellationToken cancellationToken = default)
+    public virtual void StopAsync(CancellationToken cancellationToken = default)
     {
         if (_scheduler.IsStarted && !_scheduler.InStandbyMode)
         {
@@ -34,12 +34,12 @@ public class QuartzBackgroundWorkerManager : IBackgroundWorkerManager, ISingleto
         }
     }
 
-    public virtual async Task AddAsync(IBackgroundWorker worker)
+    public virtual void AddAsync(IBackgroundWorker worker)
     {
         await ReScheduleJobAsync(worker);
     }
 
-    protected virtual async Task ReScheduleJobAsync(IBackgroundWorker worker)
+    protected virtual void ReScheduleJobAsync(IBackgroundWorker worker)
     {
         if (worker is IQuartzBackgroundWorker quartzWork)
         {
@@ -70,7 +70,7 @@ public class QuartzBackgroundWorkerManager : IBackgroundWorkerManager, ISingleto
         }
     }
 
-    protected virtual async Task DefaultScheduleJobAsync(IQuartzBackgroundWorker quartzWork)
+    protected virtual void DefaultScheduleJobAsync(IQuartzBackgroundWorker quartzWork)
     {
         if (await _scheduler.CheckExists(quartzWork.JobDetail.Key))
         {

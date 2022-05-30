@@ -15,7 +15,7 @@ public class ClientProxyApiDescriptionFinder : IClientProxyApiDescriptionFinder,
     protected IVirtualFileProvider VirtualFileProvider { get; }
     protected IJsonSerializer JsonSerializer { get; }
     protected Dictionary<string, ActionApiDescriptionModel> ActionApiDescriptionModels { get; }
-    protected ApplicationApiDescriptionModel ApplicationApiDescriptionModel { get; set; }
+    protected ApplicationApiDescriptionModel ApplicationApiDescriptionModel;// { get; set; }
 
     public ClientProxyApiDescriptionFinder(
         IVirtualFileProvider virtualFileProvider,

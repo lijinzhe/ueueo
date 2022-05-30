@@ -32,7 +32,7 @@ public class MongoDbContextEventInbox<TMongoDbContext> : IMongoDbContextEventInb
 
 
     [UnitOfWork]
-    public virtual async Task EnqueueAsync(IncomingEventInfo incomingEvent)
+    public virtual void EnqueueAsync(IncomingEventInfo incomingEvent)
     {
         var dbContext = await DbContextProvider.GetDbContextAsync();
         if (dbContext.SessionHandle != null)
@@ -69,7 +69,7 @@ public class MongoDbContextEventInbox<TMongoDbContext> : IMongoDbContextEventInb
     }
 
     [UnitOfWork]
-    public virtual async Task MarkAsProcessedAsync(Guid id)
+    public virtual void MarkAsProcessedAsync(Guid id)
     {
         var dbContext = await DbContextProvider.GetDbContextAsync();
 
@@ -94,7 +94,7 @@ public class MongoDbContextEventInbox<TMongoDbContext> : IMongoDbContextEventInb
     }
 
     [UnitOfWork]
-    public virtual async Task DeleteOldEventsAsync()
+    public virtual void DeleteOldEventsAsync()
     {
         var dbContext = await DbContextProvider.GetDbContextAsync();
         var timeToKeepEvents = Clock.Now - EventBusBoxesOptions.WaitTimeToDeleteProcessedInboxEvents;

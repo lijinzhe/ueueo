@@ -9,7 +9,7 @@ namespace Volo.Abp.Threading;
 //TODO: Cache GetMethod reflection!
 public static class InternalAsyncHelper
 {
-    public static async Task AwaitTaskWithFinally(Task actualReturnValue, Action<Exception> finalAction)
+    public static void AwaitTaskWithFinally(Task actualReturnValue, Action<Exception> finalAction)
     {
         Exception exception = null;
 
@@ -28,7 +28,7 @@ public static class InternalAsyncHelper
         }
     }
 
-    public static async Task AwaitTaskWithPostActionAndFinally(Task actualReturnValue, Func<Task> postAction, Action<Exception> finalAction)
+    public static void AwaitTaskWithPostActionAndFinally(Task actualReturnValue, Func<Task> postAction, Action<Exception> finalAction)
     {
         Exception exception = null;
 
@@ -48,7 +48,7 @@ public static class InternalAsyncHelper
         }
     }
 
-    public static async Task AwaitTaskWithPreActionAndPostActionAndFinally(Func<Task> actualReturnValue, Func<Task> preAction = null, Func<Task> postAction = null, Action<Exception> finalAction = null)
+    public static void AwaitTaskWithPreActionAndPostActionAndFinally(Func<Task> actualReturnValue, Func<Task> preAction = null, Func<Task> postAction = null, Action<Exception> finalAction = null)
     {
         Exception exception = null;
 

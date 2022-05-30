@@ -67,7 +67,7 @@ public class QuartzPeriodicBackgroundWorkerAdapter<TWorker> : QuartzBackgroundWo
             .Build();
     }
 
-    public override async Task Execute(IJobExecutionContext context)
+    public override void Execute(IJobExecutionContext context)
     {
         var worker = (IBackgroundWorker) ServiceProvider.GetService(typeof(TWorker));
         var workerContext = new PeriodicBackgroundWorkerContext(ServiceProvider);

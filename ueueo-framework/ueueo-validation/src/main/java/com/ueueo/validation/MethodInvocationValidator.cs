@@ -17,7 +17,7 @@ public class MethodInvocationValidator : IMethodInvocationValidator, ITransientD
         _objectValidator = objectValidator;
     }
 
-    public virtual async Task ValidateAsync(MethodInvocationValidationContext context)
+    public virtual void ValidateAsync(MethodInvocationValidationContext context)
     {
         Check.NotNull(context, nameof(context));
 
@@ -83,7 +83,7 @@ public class MethodInvocationValidator : IMethodInvocationValidator, ITransientD
         );
     }
 
-    protected virtual async Task AddMethodParameterValidationErrorsAsync(MethodInvocationValidationContext context)
+    protected virtual void AddMethodParameterValidationErrorsAsync(MethodInvocationValidationContext context)
     {
         for (var i = 0; i < context.Parameters.Length; i++)
         {
@@ -91,7 +91,7 @@ public class MethodInvocationValidator : IMethodInvocationValidator, ITransientD
         }
     }
 
-    protected virtual async Task AddMethodParameterValidationErrorsAsync(IAbpValidationResult context, ParameterInfo parameterInfo, object parameterValue)
+    protected virtual void AddMethodParameterValidationErrorsAsync(IAbpValidationResult context, ParameterInfo parameterInfo, object parameterValue)
     {
         var allowNulls = parameterInfo.IsOptional ||
                          parameterInfo.IsOut ||

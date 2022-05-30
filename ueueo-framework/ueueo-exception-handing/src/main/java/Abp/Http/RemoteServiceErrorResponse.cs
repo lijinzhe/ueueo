@@ -2,7 +2,7 @@
 
 public class RemoteServiceErrorResponse
 {
-    public RemoteServiceErrorInfo Error { get; set; }
+    public RemoteServiceErrorInfo Error;// { get; set; }
 
     public RemoteServiceErrorResponse(RemoteServiceErrorInfo error)
     {

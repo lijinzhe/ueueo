@@ -88,7 +88,7 @@ public class RabbitMqDistributedEventBus : DistributedEventBusBase, ISingletonDe
         SubscribeHandlers(AbpDistributedEventBusOptions.Handlers);
     }
 
-    private async Task ProcessEventAsync(IModel channel, BasicDeliverEventArgs ea)
+    private void ProcessEventAsync(IModel channel, BasicDeliverEventArgs ea)
     {
         var eventName = ea.RoutingKey;
         var eventType = EventTypes.GetOrDefault(eventName);
@@ -212,8 +212,8 @@ public class RabbitMqDistributedEventBus : DistributedEventBusBase, ISingletonDe
             {
                 await PublishAsync(
                     channel,
-                    outgoingEvent.EventName, 
-                    outgoingEvent.EventData,  
+                    outgoingEvent.EventName,
+                    outgoingEvent.EventData,
                     properties: null,
                     eventId: outgoingEvent.Id);
             }
@@ -248,7 +248,7 @@ public class RabbitMqDistributedEventBus : DistributedEventBusBase, ISingletonDe
 
     public Task PublishAsync(
         Type eventType,
-        object eventData, 
+        object eventData,
         IBasicProperties properties,
         Dictionary<string, object> headersArguments = null)
     {
@@ -258,7 +258,7 @@ public class RabbitMqDistributedEventBus : DistributedEventBusBase, ISingletonDe
         return PublishAsync(eventName, body, properties, headersArguments);
     }
 
-    protected virtual Task PublishAsync(
+    protected void PublishAsync(
         string eventName,
         byte[] body,
         IBasicProperties properties,
@@ -271,7 +271,7 @@ public class RabbitMqDistributedEventBus : DistributedEventBusBase, ISingletonDe
         }
     }
 
-    protected virtual Task PublishAsync(
+    protected void PublishAsync(
         IModel channel,
         string eventName,
         byte[] body,

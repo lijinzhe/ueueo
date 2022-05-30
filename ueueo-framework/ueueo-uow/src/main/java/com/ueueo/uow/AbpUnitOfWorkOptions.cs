@@ -8,14 +8,14 @@ public class AbpUnitOfWorkOptions : IAbpUnitOfWorkOptions
     /// <summary>
     /// Default: false.
     /// </summary>
-    public bool IsTransactional { get; set; }
+    public bool IsTransactional;// { get; set; }
 
-    public IsolationLevel? IsolationLevel { get; set; }
+    public IsolationLevel? IsolationLevel;// { get; set; }
 
     /// <summary>
     /// Milliseconds
     /// </summary>
-    public int? Timeout { get; set; }
+    public int? Timeout;// { get; set; }
 
     public AbpUnitOfWorkOptions()
     {

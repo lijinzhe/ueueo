@@ -24,7 +24,7 @@ public class InboxProcessManager : IBackgroundWorker
         Processors = new List<IInboxProcessor>();
     }
 
-    public async Task StartAsync(CancellationToken cancellationToken = default)
+    public void StartAsync(CancellationToken cancellationToken = default)
     {
         foreach (var inboxConfig in Options.Inboxes.Values)
         {
@@ -37,7 +37,7 @@ public class InboxProcessManager : IBackgroundWorker
         }
     }
 
-    public async Task StopAsync(CancellationToken cancellationToken = default)
+    public void StopAsync(CancellationToken cancellationToken = default)
     {
         foreach (var processor in Processors)
         {

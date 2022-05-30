@@ -13,12 +13,12 @@ public class AbpRabbitMqBackgroundJobOptions
     /// <summary>
     /// Default value: "AbpBackgroundJobs.".
     /// </summary>
-    public string DefaultQueueNamePrefix { get; set; }
+    public string DefaultQueueNamePrefix;// { get; set; }
 
     /// <summary>
     /// Default value: "AbpBackgroundJobsDelayed."
     /// </summary>
-    public string DefaultDelayedQueueNamePrefix { get; set; }
+    public string DefaultDelayedQueueNamePrefix;// { get; set; }
 
     public AbpRabbitMqBackgroundJobOptions()
     {

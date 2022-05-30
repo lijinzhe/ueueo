@@ -24,7 +24,7 @@ public abstract class EmailSenderBase : IEmailSender
         BackgroundJobManager = backgroundJobManager;
     }
 
-    public virtual async Task SendAsync(string to, string subject, string body, bool isBodyHtml = true)
+    public virtual void SendAsync(string to, string subject, string body, bool isBodyHtml = true)
     {
         await SendAsync(new MailMessage
         {
@@ -35,12 +35,12 @@ public abstract class EmailSenderBase : IEmailSender
         });
     }
 
-    public virtual async Task SendAsync(string from, string to, string subject, string body, bool isBodyHtml = true)
+    public virtual void SendAsync(string from, string to, string subject, string body, bool isBodyHtml = true)
     {
         await SendAsync(new MailMessage(from, to, subject, body) { IsBodyHtml = isBodyHtml });
     }
 
-    public virtual async Task SendAsync(MailMessage mail, bool normalize = true)
+    public virtual void SendAsync(MailMessage mail, bool normalize = true)
     {
         if (normalize)
         {
@@ -50,7 +50,7 @@ public abstract class EmailSenderBase : IEmailSender
         await SendEmailAsync(mail);
     }
 
-    public virtual async Task QueueAsync(string to, string subject, string body, bool isBodyHtml = true)
+    public virtual void QueueAsync(string to, string subject, string body, bool isBodyHtml = true)
     {
         if (!BackgroundJobManager.IsAvailable())
         {
@@ -69,7 +69,7 @@ public abstract class EmailSenderBase : IEmailSender
         );
     }
 
-    public virtual async Task QueueAsync(string from, string to, string subject, string body, bool isBodyHtml = true)
+    public virtual void QueueAsync(string from, string to, string subject, string body, bool isBodyHtml = true)
     {
         if (!BackgroundJobManager.IsAvailable())
         {
@@ -101,7 +101,7 @@ public abstract class EmailSenderBase : IEmailSender
     /// Sets encodings to UTF8 if they are not set before.
     /// </summary>
     /// <param name="mail">Mail to be normalized</param>
-    protected virtual async Task NormalizeMailAsync(MailMessage mail)
+    protected virtual void NormalizeMailAsync(MailMessage mail)
     {
         if (mail.From == null || mail.From.Address.IsNullOrEmpty())
         {

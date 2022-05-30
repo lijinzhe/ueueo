@@ -14,7 +14,7 @@ public class BackgroundEmailSendingJob : AsyncBackgroundJob<BackgroundEmailSendi
         EmailSender = emailSender;
     }
 
-    public override async Task ExecuteAsync(BackgroundEmailSendingJobArgs args)
+    public override void ExecuteAsync(BackgroundEmailSendingJobArgs args)
     {
         if (args.From.IsNullOrWhiteSpace())
         {

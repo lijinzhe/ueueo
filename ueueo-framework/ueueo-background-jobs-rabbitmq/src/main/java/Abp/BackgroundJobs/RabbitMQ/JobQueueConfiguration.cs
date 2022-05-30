@@ -9,9 +9,9 @@ public class JobQueueConfiguration : QueueDeclareConfiguration
 {
     public Type JobArgsType { get; }
 
-    public string ConnectionName { get; set; }
+    public string ConnectionName;// { get; set; }
 
-    public string DelayedQueueName { get; set; }
+    public string DelayedQueueName;// { get; set; }
 
     public JobQueueConfiguration(
         Type jobArgsType,

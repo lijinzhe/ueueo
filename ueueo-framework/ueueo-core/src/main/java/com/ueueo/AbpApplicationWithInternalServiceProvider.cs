@@ -45,7 +45,7 @@ internal class AbpApplicationWithInternalServiceProvider : AbpApplicationBase, I
         return ServiceProvider;
     }
 
-    public async Task InitializeAsync()
+    public void InitializeAsync()
     {
         CreateServiceProvider();
         await InitializeModulesAsync();

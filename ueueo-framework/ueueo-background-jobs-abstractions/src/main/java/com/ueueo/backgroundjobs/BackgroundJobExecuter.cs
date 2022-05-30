@@ -22,7 +22,7 @@ public class BackgroundJobExecuter : IBackgroundJobExecuter, ITransientDependenc
         Logger = NullLogger<BackgroundJobExecuter>.Instance;
     }
 
-    public virtual async Task ExecuteAsync(JobExecutionContext context)
+    public virtual void ExecuteAsync(JobExecutionContext context)
     {
         var job = context.ServiceProvider.GetService(context.JobType);
         if (job == null)

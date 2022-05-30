@@ -27,7 +27,7 @@ public class DynamicHttpProxyInterceptor<TService> : AbpInterceptor, ITransientD
             .First(m => m.Name == nameof(CallRequestAsync) && m.IsGenericMethodDefinition);
     }
 
-    public ILogger<DynamicHttpProxyInterceptor<TService>> Logger { get; set; }
+    public ILogger<DynamicHttpProxyInterceptor<TService>> Logger;// { get; set; }
     protected DynamicHttpProxyInterceptorClientProxy<TService> InterceptorClientProxy { get; }
     protected AbpHttpClientOptions ClientOptions { get; }
     protected IProxyHttpClientFactory HttpClientFactory { get; }
@@ -50,7 +50,7 @@ public class DynamicHttpProxyInterceptor<TService> : AbpInterceptor, ITransientD
         Logger = NullLogger<DynamicHttpProxyInterceptor<TService>>.Instance;
     }
 
-    public override async Task InterceptAsync(IAbpMethodInvocation invocation)
+    public override void InterceptAsync(IAbpMethodInvocation invocation)
     {
         var context = new ClientProxyRequestContext(
             await GetActionApiDescriptionModel(invocation),

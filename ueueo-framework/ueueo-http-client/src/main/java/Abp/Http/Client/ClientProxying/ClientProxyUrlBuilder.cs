@@ -59,7 +59,7 @@ public class ClientProxyUrlBuilder : ITransientDependency
         }
     }
 
-    protected virtual async Task ReplacePathVariablesAsync(StringBuilder urlBuilder, ActionApiDescriptionModel action, IReadOnlyDictionary<string, object> methodArguments, ApiVersionInfo apiVersion)
+    protected virtual void ReplacePathVariablesAsync(StringBuilder urlBuilder, ActionApiDescriptionModel action, IReadOnlyDictionary<string, object> methodArguments, ApiVersionInfo apiVersion)
     {
         var pathParameters = action.Parameters
             .Where(p => p.BindingSourceId == ParameterBindingSources.Path)
@@ -123,7 +123,7 @@ public class ClientProxyUrlBuilder : ITransientDependency
         }
     }
 
-    protected virtual async Task AddQueryStringParametersAsync(StringBuilder urlBuilder, ActionApiDescriptionModel action, IReadOnlyDictionary<string, object> methodArguments, ApiVersionInfo apiVersion)
+    protected virtual void AddQueryStringParametersAsync(StringBuilder urlBuilder, ActionApiDescriptionModel action, IReadOnlyDictionary<string, object> methodArguments, ApiVersionInfo apiVersion)
     {
         var queryStringParameters = action.Parameters
             .Where(p => p.BindingSourceId.IsIn(ParameterBindingSources.ModelBinding, ParameterBindingSources.Query))

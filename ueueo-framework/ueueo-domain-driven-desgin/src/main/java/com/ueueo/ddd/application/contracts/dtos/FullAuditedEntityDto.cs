@@ -10,13 +10,13 @@ namespace Volo.Abp.Application.Dtos;
 public abstract class FullAuditedEntityDto : AuditedEntityDto, IFullAuditedObject
 {
     /// <inheritdoc />
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted;// { get; set; }
 
     /// <inheritdoc />
-    public Guid? DeleterId { get; set; }
+    public Guid? DeleterId;// { get; set; }
 
     /// <inheritdoc />
-    public DateTime? DeletionTime { get; set; }
+    public DateTime? DeletionTime;// { get; set; }
 }
 
 /// <summary>
@@ -27,11 +27,11 @@ public abstract class FullAuditedEntityDto : AuditedEntityDto, IFullAuditedObjec
 public abstract class FullAuditedEntityDto<TPrimaryKey> : AuditedEntityDto<TPrimaryKey>, IFullAuditedObject
 {
     /// <inheritdoc />
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted;// { get; set; }
 
     /// <inheritdoc />
-    public Guid? DeleterId { get; set; }
+    public Guid? DeleterId;// { get; set; }
 
     /// <inheritdoc />
-    public DateTime? DeletionTime { get; set; }
+    public DateTime? DeletionTime;// { get; set; }
 }

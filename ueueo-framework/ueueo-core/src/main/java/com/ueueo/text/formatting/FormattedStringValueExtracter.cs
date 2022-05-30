@@ -113,7 +113,7 @@ public class FormattedStringValueExtracter
         /// <summary>
         /// Is fully matched.
         /// </summary>
-        public bool IsMatch { get; set; }
+        public bool IsMatch;// { get; set; }
 
         /// <summary>
         /// List of matched dynamic values.

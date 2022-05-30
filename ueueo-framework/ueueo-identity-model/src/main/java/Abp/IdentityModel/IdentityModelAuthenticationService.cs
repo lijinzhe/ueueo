@@ -21,7 +21,7 @@ namespace Volo.Abp.IdentityModel;
 public class IdentityModelAuthenticationService : IIdentityModelAuthenticationService, ITransientDependency
 {
     public const string HttpClientName = "IdentityModelAuthenticationServiceHttpClientName";
-    public ILogger<IdentityModelAuthenticationService> Logger { get; set; }
+    public ILogger<IdentityModelAuthenticationService> Logger;// { get; set; }
     protected AbpIdentityClientOptions ClientOptions { get; }
     protected ICancellationTokenProvider CancellationTokenProvider { get; }
     protected IHttpClientFactory HttpClientFactory { get; }
@@ -278,7 +278,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
     }
 
 
-    protected virtual Task AddParametersToRequestAsync(IdentityClientConfiguration configuration, ProtocolRequest request)
+    protected void AddParametersToRequestAsync(IdentityClientConfiguration configuration, ProtocolRequest request)
     {
         foreach (var pair in configuration.Where(p => p.Key.StartsWith("[o]", StringComparison.OrdinalIgnoreCase)))
         {

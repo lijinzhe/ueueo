@@ -8,7 +8,7 @@ public class AbpMongoDbOptions
     /// Serializer the datetime based on <see cref="AbpClockOptions.Kind"/> in MongoDb.
     /// Default: true.
     /// </summary>
-    public bool UseAbpClockHandleDateTime { get; set; }
+    public bool UseAbpClockHandleDateTime;// { get; set; }
 
     public AbpMongoDbOptions()
     {

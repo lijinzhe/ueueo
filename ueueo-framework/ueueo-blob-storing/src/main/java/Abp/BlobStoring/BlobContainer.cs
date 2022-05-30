@@ -106,7 +106,7 @@ public class BlobContainer : IBlobContainer
         ServiceProvider = serviceProvider;
     }
 
-    public virtual async Task SaveAsync(
+    public virtual void SaveAsync(
         string name,
         Stream stream,
         bool overrideExisting = false,

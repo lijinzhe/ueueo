@@ -11,7 +11,7 @@ namespace Volo.Abp.BackgroundJobs.Quartz;
 
 public class QuartzJobExecutionAdapter<TArgs> : IJob
 {
-    public ILogger<QuartzJobExecutionAdapter<TArgs>> Logger { get; set; }
+    public ILogger<QuartzJobExecutionAdapter<TArgs>> Logger;// { get; set; }
 
     protected AbpBackgroundJobOptions Options { get; }
     protected AbpBackgroundJobQuartzOptions BackgroundJobQuartzOptions { get; }
@@ -34,7 +34,7 @@ public class QuartzJobExecutionAdapter<TArgs> : IJob
         Logger = NullLogger<QuartzJobExecutionAdapter<TArgs>>.Instance;
     }
 
-    public async Task Execute(IJobExecutionContext context)
+    public void Execute(IJobExecutionContext context)
     {
         using (var scope = ServiceScopeFactory.CreateScope())
         {

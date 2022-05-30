@@ -13,13 +13,13 @@ public class AuthorizationInterceptor : AbpInterceptor, ITransientDependency
         _methodInvocationAuthorizationService = methodInvocationAuthorizationService;
     }
 
-    public override async Task InterceptAsync(IAbpMethodInvocation invocation)
+    public override void InterceptAsync(IAbpMethodInvocation invocation)
     {
         await AuthorizeAsync(invocation);
         await invocation.ProceedAsync();
     }
 
-    protected virtual async Task AuthorizeAsync(IAbpMethodInvocation invocation)
+    protected virtual void AuthorizeAsync(IAbpMethodInvocation invocation)
     {
         await _methodInvocationAuthorizationService.CheckAsync(
             new MethodInvocationAuthorizationContext(

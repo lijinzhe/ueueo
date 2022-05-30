@@ -587,7 +587,7 @@ public class MongoDbRepository<TMongoDbContext, TEntity>
       );
     }
 
-    protected virtual Task ApplyAbpConceptsForAddedEntityAsync(TEntity entity)
+    protected void ApplyAbpConceptsForAddedEntityAsync(TEntity entity)
     {
         CheckAndSetId(entity);
         SetCreationAuditProperties(entity);
@@ -730,7 +730,7 @@ public class MongoDbRepository<TMongoDbContext, TEntity, TKey>
     where TMongoDbContext : IAbpMongoDbContext
     where TEntity : class, IEntity<TKey>
 {
-    public IMongoDbRepositoryFilterer<TEntity, TKey> RepositoryFilterer { get; set; }
+    public IMongoDbRepositoryFilterer<TEntity, TKey> RepositoryFilterer;// { get; set; }
 
     public MongoDbRepository(IMongoDbContextProvider<TMongoDbContext> dbContextProvider)
         : base(dbContextProvider)
@@ -763,7 +763,7 @@ public class MongoDbRepository<TMongoDbContext, TEntity, TKey>
         return await ApplyDataFilters(await GetMongoQueryableAsync(cancellationToken)).Where(x => x.Id.Equals(id)).FirstOrDefaultAsync(cancellationToken);
     }
 
-    public virtual Task DeleteAsync(
+    public void DeleteAsync(
         TKey id,
         bool autoSave = false,
         CancellationToken cancellationToken = default)
@@ -771,7 +771,7 @@ public class MongoDbRepository<TMongoDbContext, TEntity, TKey>
         return DeleteAsync(x => x.Id.Equals(id), autoSave, cancellationToken);
     }
 
-    public virtual async Task DeleteManyAsync([NotNull] IEnumerable<TKey> ids, bool autoSave = false, CancellationToken cancellationToken = default)
+    public virtual void DeleteManyAsync([NotNull] IEnumerable<TKey> ids, bool autoSave = false, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
 

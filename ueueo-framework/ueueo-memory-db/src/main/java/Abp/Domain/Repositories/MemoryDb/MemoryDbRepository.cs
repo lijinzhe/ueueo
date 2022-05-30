@@ -198,7 +198,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
         return (await GetQueryableAsync()).Where(predicate).SingleOrDefault();
     }
 
-    public override async Task DeleteAsync(
+    public override void DeleteAsync(
         Expression<Func<TEntity, bool>> predicate,
         bool autoSave = false,
         CancellationToken cancellationToken = default)
@@ -244,7 +244,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
         return entity;
     }
 
-    public override async Task DeleteAsync(
+    public override void DeleteAsync(
         TEntity entity,
         bool autoSave = false,
         CancellationToken cancellationToken = default)
@@ -306,7 +306,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity, TKey> : MemoryDbRepos
         return await base.InsertAsync(entity, autoSave, cancellationToken);
     }
 
-    protected virtual async Task SetIdIfNeededAsync(TEntity entity)
+    protected virtual void SetIdIfNeededAsync(TEntity entity)
     {
         if (typeof(TKey) == typeof(int) ||
             typeof(TKey) == typeof(long) ||
@@ -337,12 +337,12 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity, TKey> : MemoryDbRepos
         return (await GetQueryableAsync()).FirstOrDefault(e => e.Id.Equals(id));
     }
 
-    public virtual async Task DeleteAsync(TKey id, bool autoSave = false, CancellationToken cancellationToken = default)
+    public virtual void DeleteAsync(TKey id, bool autoSave = false, CancellationToken cancellationToken = default)
     {
         await DeleteAsync(x => x.Id.Equals(id), autoSave, cancellationToken);
     }
 
-    public virtual async Task DeleteManyAsync(IEnumerable<TKey> ids, bool autoSave = false, CancellationToken cancellationToken = default)
+    public virtual void DeleteManyAsync(IEnumerable<TKey> ids, bool autoSave = false, CancellationToken cancellationToken = default)
     {
         var entities = await AsyncExecuter.ToListAsync((await GetQueryableAsync()).Where(x => ids.Contains(x.Id)), cancellationToken);
         await DeleteManyAsync(entities, autoSave, cancellationToken);

@@ -14,7 +14,7 @@ public abstract class AbpDynamicOptionsManager<T> : OptionsManager<T>
 
     public Task SetAsync() => SetAsync(Microsoft.Extensions.Options.Options.DefaultName);
 
-    public virtual Task SetAsync(string name)
+    public void SetAsync(string name)
     {
         return OverrideOptionsAsync(name, base.Get(name));
     }

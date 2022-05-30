@@ -40,9 +40,9 @@ public abstract class AbstractKeyReadOnlyAppService<TEntity, TGetOutputDto, TGet
 {
     protected IReadOnlyRepository<TEntity> ReadOnlyRepository { get; }
 
-    protected virtual string GetPolicyName { get; set; }
+    protected virtual string GetPolicyName;// { get; set; }
 
-    protected virtual string GetListPolicyName { get; set; }
+    protected virtual string GetListPolicyName;// { get; set; }
 
     protected AbstractKeyReadOnlyAppService(IReadOnlyRepository<TEntity> repository)
     {
@@ -80,12 +80,12 @@ public abstract class AbstractKeyReadOnlyAppService<TEntity, TGetOutputDto, TGet
 
     protected abstract Task<TEntity> GetEntityByIdAsync(TKey id);
 
-    protected virtual async Task CheckGetPolicyAsync()
+    protected virtual void CheckGetPolicyAsync()
     {
         await CheckPolicyAsync(GetPolicyName);
     }
 
-    protected virtual async Task CheckGetListPolicyAsync()
+    protected virtual void CheckGetListPolicyAsync()
     {
         await CheckPolicyAsync(GetListPolicyName);
     }

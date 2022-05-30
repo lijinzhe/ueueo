@@ -25,7 +25,7 @@ public class OutboxSender : IOutboxSender, ITransientDependency
     protected OutboxConfig OutboxConfig { get; private set; }
     protected AbpEventBusBoxesOptions EventBusBoxesOptions { get; }
     protected string DistributedLockName => "AbpOutbox_" + OutboxConfig.Name;
-    public ILogger<OutboxSender> Logger { get; set; }
+    public ILogger<OutboxSender> Logger;// { get; set; }
 
     protected CancellationTokenSource StoppingTokenSource { get; }
     protected CancellationToken StoppingToken { get; }
@@ -49,7 +49,7 @@ public class OutboxSender : IOutboxSender, ITransientDependency
         StoppingToken = StoppingTokenSource.Token;
     }
 
-    public virtual Task StartAsync(OutboxConfig outboxConfig, CancellationToken cancellationToken = default)
+    public void StartAsync(OutboxConfig outboxConfig, CancellationToken cancellationToken = default)
     {
         OutboxConfig = outboxConfig;
         Outbox = (IEventOutbox)ServiceProvider.GetRequiredService(outboxConfig.ImplementationType);
@@ -57,7 +57,7 @@ public class OutboxSender : IOutboxSender, ITransientDependency
         return Task.CompletedTask;
     }
 
-    public virtual Task StopAsync(CancellationToken cancellationToken = default)
+    public void StopAsync(CancellationToken cancellationToken = default)
     {
         StoppingTokenSource.Cancel();
         Timer.Stop(cancellationToken);
@@ -65,12 +65,12 @@ public class OutboxSender : IOutboxSender, ITransientDependency
         return Task.CompletedTask;
     }
 
-    private async Task TimerOnElapsed(AbpAsyncTimer arg)
+    private void TimerOnElapsed(AbpAsyncTimer arg)
     {
         await RunAsync();
     }
 
-    protected virtual async Task RunAsync()
+    protected virtual void RunAsync()
     {
         await using (var handle = await DistributedLock.TryAcquireAsync(DistributedLockName, cancellationToken: StoppingToken))
         {
@@ -85,7 +85,7 @@ public class OutboxSender : IOutboxSender, ITransientDependency
                     }
 
                     Logger.LogInformation($"Found {waitingEvents.Count} events in the outbox.");
-                    
+
                     if (EventBusBoxesOptions.BatchPublishOutboxEvents)
                     {
                         await PublishOutgoingMessagesInBatchAsync(waitingEvents);
@@ -108,7 +108,7 @@ public class OutboxSender : IOutboxSender, ITransientDependency
         }
     }
 
-    protected virtual async Task PublishOutgoingMessagesAsync(List<OutgoingEventInfo> waitingEvents)
+    protected virtual void PublishOutgoingMessagesAsync(List<OutgoingEventInfo> waitingEvents)
     {
         foreach (var waitingEvent in waitingEvents)
         {
@@ -120,19 +120,19 @@ public class OutboxSender : IOutboxSender, ITransientDependency
                 );
 
             await Outbox.DeleteAsync(waitingEvent.Id);
-            
+
             Logger.LogInformation($"Sent the event to the message broker with id = {waitingEvent.Id:N}");
         }
     }
 
-    protected virtual async Task PublishOutgoingMessagesInBatchAsync(List<OutgoingEventInfo> waitingEvents)
+    protected virtual void PublishOutgoingMessagesInBatchAsync(List<OutgoingEventInfo> waitingEvents)
     {
         await DistributedEventBus
             .AsSupportsEventBoxes()
             .PublishManyFromOutboxAsync(waitingEvents, OutboxConfig);
-                    
+
         await Outbox.DeleteManyAsync(waitingEvents.Select(x => x.Id).ToArray());
-        
+
         Logger.LogInformation($"Sent {waitingEvents.Count} events to message broker");
     }
 }

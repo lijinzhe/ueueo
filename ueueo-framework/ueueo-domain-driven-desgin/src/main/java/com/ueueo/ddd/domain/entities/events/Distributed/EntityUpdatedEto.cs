@@ -8,7 +8,7 @@ namespace Volo.Abp.Domain.Entities.Events.Distributed;
 [GenericEventName(Postfix = ".Updated")]
 public class EntityUpdatedEto<TEntityEto> : IEventDataMayHaveTenantId
 {
-    public TEntityEto Entity { get; set; }
+    public TEntityEto Entity;// { get; set; }
 
     public EntityUpdatedEto(TEntityEto entity)
     {

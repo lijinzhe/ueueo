@@ -18,7 +18,7 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
     where TMongoDbContext : IAbpMongoDbContext
 {
     private const string TransactionsNotSupportedErrorMessage = "Current database does not support transactions. Your database may remain in an inconsistent state in an error case.";
-    public ILogger<UnitOfWorkMongoDbContextProvider<TMongoDbContext>> Logger { get; set; }
+    public ILogger<UnitOfWorkMongoDbContextProvider<TMongoDbContext>> Logger;// { get; set; }
 
     private readonly IUnitOfWorkManager _unitOfWorkManager;
     private readonly IConnectionStringResolver _connectionStringResolver;

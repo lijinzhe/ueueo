@@ -17,7 +17,7 @@ public class PermissionsRequirement : IAuthorizationRequirement
         RequiresAll = requiresAll;
     }
 
-    public override string ToString()
+    @Override public string toString()
     {
         return $"PermissionsRequirement: {string.Join(", ", PermissionNames)}";
     }

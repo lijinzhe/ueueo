@@ -11,14 +11,14 @@ public class AbpQuartzOptions
     /// <summary>
     /// The quartz configuration. Available properties can be found within Quartz.Impl.StdSchedulerFactory.
     /// </summary>
-    public NameValueCollection Properties { get; set; }
+    public NameValueCollection Properties;// { get; set; }
 
-    public Action<IServiceCollectionQuartzConfigurator> Configurator { get; set; }
+    public Action<IServiceCollectionQuartzConfigurator> Configurator;// { get; set; }
 
     /// <summary>
     /// How long Quartz should wait before starting. Default: 0.
     /// </summary>
-    public TimeSpan StartDelay { get; set; }
+    public TimeSpan StartDelay;// { get; set; }
 
     [NotNull]
     public Func<IScheduler, Task> StartSchedulerFactory {
@@ -34,7 +34,7 @@ public class AbpQuartzOptions
         _startSchedulerFactory = StartSchedulerAsync;
     }
 
-    private async Task StartSchedulerAsync(IScheduler scheduler)
+    private void StartSchedulerAsync(IScheduler scheduler)
     {
         if (StartDelay.Ticks > 0)
         {

@@ -70,11 +70,11 @@ public abstract class AbstractKeyCrudAppService<TEntity, TGetOutputDto, TGetList
 {
     protected IRepository<TEntity> Repository { get; }
 
-    protected virtual string CreatePolicyName { get; set; }
+    protected virtual string CreatePolicyName;// { get; set; }
 
-    protected virtual string UpdatePolicyName { get; set; }
+    protected virtual string UpdatePolicyName;// { get; set; }
 
-    protected virtual string DeletePolicyName { get; set; }
+    protected virtual string DeletePolicyName;// { get; set; }
 
     protected AbstractKeyCrudAppService(IRepository<TEntity> repository)
         : base(repository)
@@ -107,7 +107,7 @@ public abstract class AbstractKeyCrudAppService<TEntity, TGetOutputDto, TGetList
         return await MapToGetOutputDtoAsync(entity);
     }
 
-    public virtual async Task DeleteAsync(TKey id)
+    public virtual void DeleteAsync(TKey id)
     {
         await CheckDeletePolicyAsync();
 
@@ -116,17 +116,17 @@ public abstract class AbstractKeyCrudAppService<TEntity, TGetOutputDto, TGetList
 
     protected abstract Task DeleteByIdAsync(TKey id);
 
-    protected virtual async Task CheckCreatePolicyAsync()
+    protected virtual void CheckCreatePolicyAsync()
     {
         await CheckPolicyAsync(CreatePolicyName);
     }
 
-    protected virtual async Task CheckUpdatePolicyAsync()
+    protected virtual void CheckUpdatePolicyAsync()
     {
         await CheckPolicyAsync(UpdatePolicyName);
     }
 
-    protected virtual async Task CheckDeletePolicyAsync()
+    protected virtual void CheckDeletePolicyAsync()
     {
         await CheckPolicyAsync(DeletePolicyName);
     }
@@ -176,7 +176,7 @@ public abstract class AbstractKeyCrudAppService<TEntity, TGetOutputDto, TGetList
     /// It can be overriden for custom mapping.
     /// Overriding this has higher priority than overriding the <see cref="MapToEntity(TUpdateInput, TEntity)"/>
     /// </summary>
-    protected virtual Task MapToEntityAsync(TUpdateInput updateInput, TEntity entity)
+    protected void MapToEntityAsync(TUpdateInput updateInput, TEntity entity)
     {
         MapToEntity(updateInput, entity);
         return Task.CompletedTask;

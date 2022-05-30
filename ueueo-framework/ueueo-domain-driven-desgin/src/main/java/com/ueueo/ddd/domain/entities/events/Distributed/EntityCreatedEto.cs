@@ -8,7 +8,7 @@ namespace Volo.Abp.Domain.Entities.Events.Distributed;
 [GenericEventName(Postfix = ".Created")]
 public class EntityCreatedEto<TEntityEto> : IEventDataMayHaveTenantId
 {
-    public TEntityEto Entity { get; set; }
+    public TEntityEto Entity;// { get; set; }
 
     public EntityCreatedEto(TEntityEto entity)
     {

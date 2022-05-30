@@ -67,7 +67,7 @@ public class SmtpEmailSender : EmailSenderBase, ISmtpEmailSender, ITransientDepe
         }
     }
 
-    protected override async Task SendEmailAsync(MailMessage mail)
+    protected override void SendEmailAsync(MailMessage mail)
     {
         using (var smtpClient = await BuildClientAsync())
         {

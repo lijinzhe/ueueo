@@ -8,9 +8,9 @@ public class ExchangeDeclareConfiguration
 
     public string Type { get; }
 
-    public bool Durable { get; set; }
+    public bool Durable;// { get; set; }
 
-    public bool AutoDelete { get; set; }
+    public bool AutoDelete;// { get; set; }
 
     public IDictionary<string, object> Arguments { get; }
 

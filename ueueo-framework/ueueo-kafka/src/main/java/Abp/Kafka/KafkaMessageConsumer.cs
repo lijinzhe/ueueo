@@ -17,7 +17,7 @@ namespace Volo.Abp.Kafka;
 
 public class KafkaMessageConsumer : IKafkaMessageConsumer, ITransientDependency, IDisposable
 {
-    public ILogger<KafkaMessageConsumer> Logger { get; set; }
+    public ILogger<KafkaMessageConsumer> Logger;// { get; set; }
 
     protected IConsumerPool ConsumerPool { get; }
 
@@ -78,7 +78,7 @@ public class KafkaMessageConsumer : IKafkaMessageConsumer, ITransientDependency,
         Callbacks.Add(callback);
     }
 
-    protected virtual async Task Timer_Elapsed(AbpAsyncTimer timer)
+    protected virtual void Timer_Elapsed(AbpAsyncTimer timer)
     {
         if (Consumer == null)
         {
@@ -87,7 +87,7 @@ public class KafkaMessageConsumer : IKafkaMessageConsumer, ITransientDependency,
         }
     }
 
-    protected virtual async Task CreateTopicAsync()
+    protected virtual void CreateTopicAsync()
     {
         using (var adminClient = new AdminClientBuilder(Options.Connections.GetOrDefault(ConnectionName)).Build())
         {
@@ -144,7 +144,7 @@ public class KafkaMessageConsumer : IKafkaMessageConsumer, ITransientDependency,
         }, TaskCreationOptions.LongRunning);
     }
 
-    protected virtual async Task HandleIncomingMessage(ConsumeResult<string, byte[]> consumeResult)
+    protected virtual void HandleIncomingMessage(ConsumeResult<string, byte[]> consumeResult)
     {
         try
         {

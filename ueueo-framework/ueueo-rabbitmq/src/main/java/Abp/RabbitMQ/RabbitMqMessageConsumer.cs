@@ -15,7 +15,7 @@ namespace Volo.Abp.RabbitMQ;
 
 public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDependency, IDisposable
 {
-    public ILogger<RabbitMqMessageConsumer> Logger { get; set; }
+    public ILogger<RabbitMqMessageConsumer> Logger;// { get; set; }
 
     protected IConnectionPool ConnectionPool { get; }
 
@@ -66,19 +66,19 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
         Timer.Start();
     }
 
-    public virtual async Task BindAsync(string routingKey)
+    public virtual void BindAsync(string routingKey)
     {
         QueueBindCommands.Enqueue(new QueueBindCommand(QueueBindType.Bind, routingKey));
         await TrySendQueueBindCommandsAsync();
     }
 
-    public virtual async Task UnbindAsync(string routingKey)
+    public virtual void UnbindAsync(string routingKey)
     {
         QueueBindCommands.Enqueue(new QueueBindCommand(QueueBindType.Unbind, routingKey));
         await TrySendQueueBindCommandsAsync();
     }
 
-    protected virtual async Task TrySendQueueBindCommandsAsync()
+    protected virtual void TrySendQueueBindCommandsAsync()
     {
         try
         {
@@ -130,7 +130,7 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
         Callbacks.Add(callback);
     }
 
-    protected virtual async Task Timer_Elapsed(AbpAsyncTimer timer)
+    protected virtual void Timer_Elapsed(AbpAsyncTimer timer)
     {
         if (Channel == null || Channel.IsOpen == false)
         {
@@ -139,7 +139,7 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
         }
     }
 
-    protected virtual async Task TryCreateChannelAsync()
+    protected virtual void TryCreateChannelAsync()
     {
         await DisposeChannelAsync();
 
@@ -181,7 +181,7 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
         }
     }
 
-    protected virtual async Task HandleIncomingMessageAsync(object sender, BasicDeliverEventArgs basicDeliverEventArgs)
+    protected virtual void HandleIncomingMessageAsync(object sender, BasicDeliverEventArgs basicDeliverEventArgs)
     {
         try
         {
@@ -210,7 +210,7 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
         }
     }
 
-    protected virtual async Task DisposeChannelAsync()
+    protected virtual void DisposeChannelAsync()
     {
         if (Channel == null)
         {

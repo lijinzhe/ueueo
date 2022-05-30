@@ -7,8 +7,8 @@ namespace Volo.Abp.MongoDB;
 
 public class AbpMongoDbDateTimeSerializer : DateTimeSerializer
 {
-    protected DateTimeKind DateTimeKind { get; set; }
-    protected bool DisableDateTimeNormalization { get; set; }
+    protected DateTimeKind DateTimeKind;// { get; set; }
+    protected bool DisableDateTimeNormalization;// { get; set; }
 
     public AbpMongoDbDateTimeSerializer(DateTimeKind dateTimeKind, bool disableDateTimeNormalization)
     {

@@ -25,13 +25,13 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
 
     public IUnitOfWork Outer { get; private set; }
 
-    public bool IsReserved { get; set; }
+    public bool IsReserved;// { get; set; }
 
     public bool IsDisposed { get; private set; }
 
     public bool IsCompleted { get; private set; }
 
-    public string ReservationName { get; set; }
+    public string ReservationName;// { get; set; }
 
     protected List<Func<Task>> CompletedHandlers { get; } = new List<Func<Task>>();
     protected List<UnitOfWorkEventRecord> DistributedEvents { get; } = new List<UnitOfWorkEventRecord>();
@@ -95,7 +95,7 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         Outer = outer;
     }
 
-    public virtual async Task SaveChangesAsync(CancellationToken cancellationToken = default)
+    public virtual void SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         if (_isRolledback)
         {
@@ -121,7 +121,7 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         return _transactionApis.Values.ToImmutableList();
     }
 
-    public virtual async Task CompleteAsync(CancellationToken cancellationToken = default)
+    public virtual void CompleteAsync(CancellationToken cancellationToken = default)
     {
         if (_isRolledback)
         {
@@ -169,7 +169,7 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         }
     }
 
-    public virtual async Task RollbackAsync(CancellationToken cancellationToken = default)
+    public virtual void RollbackAsync(CancellationToken cancellationToken = default)
     {
         if (_isRolledback)
         {
@@ -277,7 +277,7 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         }
     }
 
-    protected virtual async Task OnCompletedAsync()
+    protected virtual void OnCompletedAsync()
     {
         foreach (var handler in CompletedHandlers)
         {
@@ -336,7 +336,7 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         }
     }
 
-    protected virtual async Task RollbackAllAsync(CancellationToken cancellationToken)
+    protected virtual void RollbackAllAsync(CancellationToken cancellationToken)
     {
         foreach (var databaseApi in GetAllActiveDatabaseApis())
         {
@@ -363,7 +363,7 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         }
     }
 
-    protected virtual async Task CommitTransactionsAsync()
+    protected virtual void CommitTransactionsAsync()
     {
         foreach (var transaction in GetAllActiveTransactionApis())
         {
@@ -371,7 +371,7 @@ public class UnitOfWork : IUnitOfWork, ITransientDependency
         }
     }
 
-    public override string ToString()
+    @Override public string toString()
     {
         return $"[UnitOfWork {Id}]";
     }

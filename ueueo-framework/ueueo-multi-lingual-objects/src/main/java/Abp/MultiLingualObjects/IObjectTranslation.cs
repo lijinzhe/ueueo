@@ -2,5 +2,5 @@
 
 public interface IObjectTranslation
 {
-    string Language { get; set; }
+    string Language;// { get; set; }
 }

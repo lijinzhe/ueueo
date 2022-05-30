@@ -7,13 +7,13 @@ namespace Volo.Abp.Http.Client;
 [Serializable]
 public class AbpRemoteCallException : AbpException, IHasErrorCode, IHasErrorDetails, IHasHttpStatusCode
 {
-    public int HttpStatusCode { get; set; }
+    public int HttpStatusCode;// { get; set; }
 
     public string Code => Error?.Code;
 
     public string Details => Error?.Details;
 
-    public RemoteServiceErrorInfo Error { get; set; }
+    public RemoteServiceErrorInfo Error;// { get; set; }
 
     public AbpRemoteCallException()
     {

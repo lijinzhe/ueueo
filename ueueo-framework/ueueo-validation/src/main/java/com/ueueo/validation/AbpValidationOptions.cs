@@ -8,7 +8,7 @@ public class AbpValidationOptions
 {
     public List<Type> IgnoredTypes { get; }
 
-    public ITypeList<IObjectValidationContributor> ObjectValidationContributors { get; set; }
+    public ITypeList<IObjectValidationContributor> ObjectValidationContributors;// { get; set; }
 
     public AbpValidationOptions()
     {

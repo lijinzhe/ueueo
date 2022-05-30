@@ -83,7 +83,7 @@ public class AbpRedisCache : RedisCache, ICacheSupportsMultipleItems
         ConnectMethod.Invoke(this, Array.Empty<object>());
     }
 
-    protected virtual Task ConnectAsync(CancellationToken token = default)
+    protected void ConnectAsync(CancellationToken token = default)
     {
         if (GetRedisDatabase() != null)
         {
@@ -119,7 +119,7 @@ public class AbpRedisCache : RedisCache, ICacheSupportsMultipleItems
         Task.WaitAll(PipelineSetMany(items, options));
     }
 
-    public async Task SetManyAsync(
+    public void SetManyAsync(
         IEnumerable<KeyValuePair<string, byte[]>> items,
         DistributedCacheEntryOptions options,
         CancellationToken token = default)
@@ -139,7 +139,7 @@ public class AbpRedisCache : RedisCache, ICacheSupportsMultipleItems
         GetAndRefreshMany(keys, false);
     }
 
-    public async Task RefreshManyAsync(
+    public void RefreshManyAsync(
         IEnumerable<string> keys,
         CancellationToken token = default)
     {
@@ -157,7 +157,7 @@ public class AbpRedisCache : RedisCache, ICacheSupportsMultipleItems
         RedisDatabase.KeyDelete(keys.Select(key => (RedisKey)(Instance + key)).ToArray());
     }
 
-    public async Task RemoveManyAsync(IEnumerable<string> keys, CancellationToken token = default)
+    public void RemoveManyAsync(IEnumerable<string> keys, CancellationToken token = default)
     {
         keys = Check.NotNull(keys, nameof(keys));
 

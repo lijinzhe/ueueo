@@ -12,7 +12,7 @@ namespace Volo.Abp.Emailing;
 /// </summary>
 public class NullEmailSender : EmailSenderBase
 {
-    public ILogger<NullEmailSender> Logger { get; set; }
+    public ILogger<NullEmailSender> Logger;// { get; set; }
 
     /// <summary>
     /// Creates a new <see cref="NullEmailSender"/> object.

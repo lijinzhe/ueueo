@@ -14,9 +14,9 @@ public abstract class BackgroundWorkerBase : IBackgroundWorker
 {
     //TODO: Add UOW, Localization and other useful properties..?
 
-    public IAbpLazyServiceProvider LazyServiceProvider { get; set; }
+    public IAbpLazyServiceProvider LazyServiceProvider;// { get; set; }
 
-    public IServiceProvider ServiceProvider { get; set; }
+    public IServiceProvider ServiceProvider;// { get; set; }
 
     protected ILoggerFactory LoggerFactory => LazyServiceProvider.LazyGetRequiredService<ILoggerFactory>();
 
@@ -31,13 +31,13 @@ public abstract class BackgroundWorkerBase : IBackgroundWorker
         StoppingToken = StoppingTokenSource.Token;
     }
 
-    public virtual Task StartAsync(CancellationToken cancellationToken = default)
+    public void StartAsync(CancellationToken cancellationToken = default)
     {
         Logger.LogDebug("Started background worker: " + ToString());
         return Task.CompletedTask;
     }
 
-    public virtual Task StopAsync(CancellationToken cancellationToken = default)
+    public void StopAsync(CancellationToken cancellationToken = default)
     {
         Logger.LogDebug("Stopped background worker: " + ToString());
         StoppingTokenSource.Cancel();
@@ -45,7 +45,7 @@ public abstract class BackgroundWorkerBase : IBackgroundWorker
         return Task.CompletedTask;
     }
 
-    public override string ToString()
+    @Override public string toString()
     {
         return GetType().FullName;
     }

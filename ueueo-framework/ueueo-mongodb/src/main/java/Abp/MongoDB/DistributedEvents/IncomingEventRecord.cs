@@ -11,7 +11,7 @@ public class IncomingEventRecord :
     IHasExtraProperties,
     IHasCreationTime
 {
-    public static int MaxEventNameLength { get; set; } = 256;
+    public static int MaxEventNameLength;// { get; set; } = 256;
 
     public ExtraPropertyDictionary ExtraProperties { get; private set; }
 
@@ -23,9 +23,9 @@ public class IncomingEventRecord :
 
     public DateTime CreationTime { get; private set; }
 
-    public bool Processed { get; set; }
+    public bool Processed;// { get; set; }
 
-    public DateTime? ProcessedTime { get; set; }
+    public DateTime? ProcessedTime;// { get; set; }
 
     protected IncomingEventRecord()
     {

@@ -71,7 +71,7 @@ public class EmbeddedResourceFileInfo : IFileInfo
         return stream;
     }
 
-    public override string ToString()
+    @Override public string toString()
     {
         return $"[EmbeddedResourceFileInfo] {Name} ({this.VirtualPath})";
     }

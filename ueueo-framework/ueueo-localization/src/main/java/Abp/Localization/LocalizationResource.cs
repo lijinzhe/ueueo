@@ -14,7 +14,7 @@ public class LocalizationResource
     public string ResourceName => LocalizationResourceNameAttribute.GetName(ResourceType);
 
     [CanBeNull]
-    public string DefaultCultureName { get; set; }
+    public string DefaultCultureName;// { get; set; }
 
     [NotNull]
     public LocalizationResourceContributorList Contributors { get; }

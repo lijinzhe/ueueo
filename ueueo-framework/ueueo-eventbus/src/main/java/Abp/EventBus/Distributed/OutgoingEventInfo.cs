@@ -5,7 +5,7 @@ namespace Volo.Abp.EventBus.Distributed;
 
 public class OutgoingEventInfo : IHasExtraProperties
 {
-    public static int MaxEventNameLength { get; set; } = 256;
+    public static int MaxEventNameLength;// { get; set; } = 256;
 
     public ExtraPropertyDictionary ExtraProperties { get; protected set; }
 

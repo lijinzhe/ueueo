@@ -26,10 +26,10 @@ public class InboxProcessor : IInboxProcessor, ITransientDependency
     protected InboxConfig InboxConfig { get; private set; }
     protected AbpEventBusBoxesOptions EventBusBoxesOptions { get; }
 
-    protected DateTime? LastCleanTime { get; set; }
+    protected DateTime? LastCleanTime;// { get; set; }
 
     protected string DistributedLockName => "AbpInbox_" + InboxConfig.Name;
-    public ILogger<InboxProcessor> Logger { get; set; }
+    public ILogger<InboxProcessor> Logger;// { get; set; }
     protected CancellationTokenSource StoppingTokenSource { get; }
     protected CancellationToken StoppingToken { get; }
 
@@ -56,7 +56,7 @@ public class InboxProcessor : IInboxProcessor, ITransientDependency
         StoppingToken = StoppingTokenSource.Token;
     }
 
-    private async Task TimerOnElapsed(AbpAsyncTimer arg)
+    private void TimerOnElapsed(AbpAsyncTimer arg)
     {
         await RunAsync();
     }
@@ -77,7 +77,7 @@ public class InboxProcessor : IInboxProcessor, ITransientDependency
         return Task.CompletedTask;
     }
 
-    protected virtual async Task RunAsync()
+    protected virtual void RunAsync()
     {
         if (StoppingToken.IsCancellationRequested)
         {
@@ -129,7 +129,7 @@ public class InboxProcessor : IInboxProcessor, ITransientDependency
         }
     }
 
-    protected virtual async Task DeleteOldEventsAsync()
+    protected virtual void DeleteOldEventsAsync()
     {
         if (LastCleanTime != null && LastCleanTime + EventBusBoxesOptions.CleanOldEventTimeIntervalSpan > Clock.Now)
         {

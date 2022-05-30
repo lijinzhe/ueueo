@@ -21,7 +21,7 @@ public class MongoDbRepositoryFilterer<TEntity> : IMongoDbRepositoryFilterer<TEn
         CurrentTenant = currentTenant;
     }
 
-    public virtual Task AddGlobalFiltersAsync(List<FilterDefinition<TEntity>> filters)
+    public void AddGlobalFiltersAsync(List<FilterDefinition<TEntity>> filters)
     {
         if (typeof(ISoftDelete).IsAssignableFrom(typeof(TEntity)) && DataFilter.IsEnabled<ISoftDelete>())
         {
