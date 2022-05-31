@@ -20,12 +20,12 @@ public abstract class EmailSenderConfiguration : IEmailSenderConfiguration
         SettingProvider = settingProvider;
     }
 
-    public Task<String> GetDefaultFromAddressAsync()
+    public String> GetDefaultFromAddressAsync()
     {
         return GetNotEmptySettingValueAsync(EmailSettingNames.DefaultFromAddress);
     }
 
-    public Task<String> GetDefaultFromDisplayNameAsync()
+    public String> GetDefaultFromDisplayNameAsync()
     {
         return GetNotEmptySettingValueAsync(EmailSettingNames.DefaultFromDisplayName);
     }
@@ -36,7 +36,7 @@ public abstract class EmailSenderConfiguration : IEmailSenderConfiguration
      * <param name="name">Name of the setting</param>
      * <returns>Value of the setting</returns>
      */
-    protected  Task<String> GetNotEmptySettingValueAsync(String name)
+    protected  String> GetNotEmptySettingValueAsync(String name)
     {
         var value = SettingProvider.GetOrNullAsync(name);
 

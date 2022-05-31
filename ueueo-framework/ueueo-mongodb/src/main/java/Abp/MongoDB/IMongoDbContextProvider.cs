@@ -10,5 +10,5 @@ public interface IMongoDbContextProvider<TMongoDbContext>
     [Obsolete("Use CreateDbContextAsync")]
     TMongoDbContext GetDbContext();
 
-    Task<TMongoDbContext> GetDbContextAsync(CancellationToken cancellationToken = default);
+    TMongoDbContext> GetDbContextAsync(CancellationToken cancellationToken = default);
 }

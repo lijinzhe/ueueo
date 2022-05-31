@@ -32,7 +32,7 @@ public class RequireGlobalFeaturesSimpleStateChecker<TState> : ISimpleStateCheck
         _globalFeatureNames = globalFeatureNames.Select(GlobalFeatureNameAttribute.GetName).ToArray();
     }
 
-    public Task<bool> IsEnabledAsync(SimpleStateCheckerContext<TState> context)
+    public Boolean>  IsEnabledAsync(SimpleStateCheckerContext<TState> context)
     {
         var isEnabled = _requiresAll
             ? _globalFeatureNames.All(x => GlobalFeatureManager.Instance.IsEnabled(x))

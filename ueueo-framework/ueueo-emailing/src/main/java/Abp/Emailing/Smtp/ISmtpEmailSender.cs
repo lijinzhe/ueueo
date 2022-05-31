@@ -15,5 +15,5 @@ public interface ISmtpEmailSender : IEmailSender
      * An <see cref="SmtpClient"/> object that is ready to send emails.
      * </returns>
      */
-    Task<SmtpClient> BuildClientAsync();
+    SmtpClient> BuildClientAsync();
 }

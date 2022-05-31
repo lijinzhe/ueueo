@@ -73,7 +73,7 @@ public class DynamicHttpProxyInterceptor<TService> : AbpInterceptor, ITransientD
         }
     }
 
-    protected    Task<ActionApiDescriptionModel> GetActionApiDescriptionModel(IAbpMethodInvocation invocation)
+    protected    ActionApiDescriptionModel> GetActionApiDescriptionModel(IAbpMethodInvocation invocation)
     {
         var clientConfig = ClientOptions.HttpClientProxies.GetOrDefault(typeof(TService)) ??
                            throw new AbpException($"Could not get DynamicHttpClientProxyConfig for {typeof(TService).FullName}.");
@@ -88,17 +88,17 @@ public class DynamicHttpProxyInterceptor<TService> : AbpInterceptor, ITransientD
         );
     }
 
-    protected    Task<T> CallRequestAsync<T>(ClientProxyRequestContext context)
+    protected    T> CallRequestAsync<T>(ClientProxyRequestContext context)
     {
         return InterceptorClientProxy.CallRequestAsync<T>(context);
     }
 
-    protected    Task<Object> GetResultAsync(Task task, Type resultType)
+    protected    Object> GetResultAsync(Task task, Type resultType)
     {
         task;
-        var resultProperty = typeof(Task<>)
+        var resultProperty = typeof(>)
             .MakeGenericType(resultType)
-            .GetProperty(nameof(Task<Object>.Result), BindingFlags.Instance | BindingFlags.Public);
+            .GetProperty(nameof(Object>.Result), BindingFlags.Instance | BindingFlags.Public);
         Objects.requireNonNull(resultProperty, nameof(resultProperty));
         return resultProperty.GetValue(task);
     }

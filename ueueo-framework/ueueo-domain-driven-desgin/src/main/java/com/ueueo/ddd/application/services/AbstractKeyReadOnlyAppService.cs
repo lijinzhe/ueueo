@@ -49,7 +49,7 @@ public abstract class AbstractKeyReadOnlyAppService<TEntity, TGetOutputDto, TGet
         ReadOnlyRepository = repository;
     }
 
-    public    Task<TGetOutputDto> GetAsync(TKey id)
+    public    TGetOutputDto> GetAsync(TKey id)
     {
         CheckGetPolicyAsync();
 
@@ -58,7 +58,7 @@ public abstract class AbstractKeyReadOnlyAppService<TEntity, TGetOutputDto, TGet
         return MapToGetOutputDtoAsync(entity);
     }
 
-    public    Task<PagedResultDto<TGetListOutputDto>> GetListAsync(TGetListInput input)
+    public    PagedResultDto<TGetListOutputDto>> GetListAsync(TGetListInput input)
     {
         CheckGetListPolicyAsync();
 
@@ -78,7 +78,7 @@ public abstract class AbstractKeyReadOnlyAppService<TEntity, TGetOutputDto, TGet
         );
     }
 
-    protected abstract Task<TEntity> GetEntityByIdAsync(TKey id);
+    protected abstract TEntity> GetEntityByIdAsync(TKey id);
 
     protected   void CheckGetPolicyAsync()
     {
@@ -164,7 +164,7 @@ public abstract class AbstractKeyReadOnlyAppService<TEntity, TGetOutputDto, TGet
     *
      * <param name="input">The input.</param>
      */
-    protected    Task<IQueryable<TEntity>> CreateFilteredQueryAsync(TGetListInput input)
+    protected    IQueryable<TEntity>> CreateFilteredQueryAsync(TGetListInput input)
     {
         return ReadOnlyRepository.GetQueryableAsync();
     }
@@ -175,7 +175,7 @@ public abstract class AbstractKeyReadOnlyAppService<TEntity, TGetOutputDto, TGet
      * It can be overriden for custom mapping.
      * Overriding this has higher priority than overriding the <see cref="MapToGetOutputDto"/>
     */
-    protected   Task<TGetOutputDto> MapToGetOutputDtoAsync(TEntity entity)
+    protected   TGetOutputDto> MapToGetOutputDtoAsync(TEntity entity)
     {
         return Task.FromResult(MapToGetOutputDto(entity));
     }
@@ -194,7 +194,7 @@ public abstract class AbstractKeyReadOnlyAppService<TEntity, TGetOutputDto, TGet
      * Maps a list of <typeparamref name="TEntity"/> to <typeparamref name="TGetListOutputDto"/> objects.
      * It uses <see cref="MapToGetListOutputDtoAsync"/> method for each item in the list.
     */
-    protected    Task<List<TGetListOutputDto>> MapToGetListOutputDtosAsync(List<TEntity> entities)
+    protected    List<TGetListOutputDto>> MapToGetListOutputDtosAsync(List<TEntity> entities)
     {
         var dtos = new List<TGetListOutputDto>();
 
@@ -212,7 +212,7 @@ public abstract class AbstractKeyReadOnlyAppService<TEntity, TGetOutputDto, TGet
      * It can be overriden for custom mapping.
      * Overriding this has higher priority than overriding the <see cref="MapToGetListOutputDto"/>
     */
-    protected   Task<TGetListOutputDto> MapToGetListOutputDtoAsync(TEntity entity)
+    protected   TGetListOutputDto> MapToGetListOutputDtoAsync(TEntity entity)
     {
         return Task.FromResult(MapToGetListOutputDto(entity));
     }

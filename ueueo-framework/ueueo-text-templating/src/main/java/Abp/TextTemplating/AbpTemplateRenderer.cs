@@ -23,7 +23,7 @@ public class AbpTemplateRenderer : ITemplateRenderer, ITransientDependency
         Options = options.Value;
     }
 
-    public    Task<String> RenderAsync(
+    public    String> RenderAsync(
         String templateName,
         Object model = null,
         String cultureName = null,

@@ -15,7 +15,7 @@ public class OutgoingEventInfo : IHasExtraProperties
 
     public byte[] EventData;//  { get; }
 
-    public DateTime CreationTime;//  { get; }
+    public Date CreationTime;//  { get; }
 
     protected OutgoingEventInfo()
     {
@@ -27,7 +27,7 @@ public class OutgoingEventInfo : IHasExtraProperties
         ID id,
         String eventName,
         byte[] eventData,
-        DateTime creationTime)
+        Date creationTime)
     {
         Id = id;
         EventName = Check.NotNullOrWhiteSpace(eventName, nameof(eventName), MaxEventNameLength);

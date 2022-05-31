@@ -71,7 +71,7 @@ public class IdentityClientConfiguration : Dictionary<String, String>
      * Default: true.
     */
     public boolean RequireHttps {
-        get => this.GetOrDefault(nameof(RequireHttps))?.To<bool>() ?? true;
+        get => this.GetOrDefault(nameof(RequireHttps))?.To<Boolean> () ?? true;
         set => this[nameof(RequireHttps)] = value.ToString().ToLowerInvariant();
     }
 

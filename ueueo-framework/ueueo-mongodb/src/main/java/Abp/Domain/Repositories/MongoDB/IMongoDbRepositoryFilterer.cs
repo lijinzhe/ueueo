@@ -12,9 +12,9 @@ public interface IMongoDbRepositoryFilterer<TEntity> where TEntity : class, IEnt
 
 public interface IMongoDbRepositoryFilterer<TEntity, TKey> : IMongoDbRepositoryFilterer<TEntity> where TEntity : class, IEntity<TKey>
 {
-    Task<FilterDefinition<TEntity>> CreateEntityFilterAsync(TKey id, boolean applyFilters = false);
+    FilterDefinition<TEntity>> CreateEntityFilterAsync(TKey id, boolean applyFilters = false);
 
-    Task<FilterDefinition<TEntity>> CreateEntityFilterAsync(TEntity entity, boolean withConcurrencyStamp = false, String concurrencyStamp = null);
+    FilterDefinition<TEntity>> CreateEntityFilterAsync(TEntity entity, boolean withConcurrencyStamp = false, String concurrencyStamp = null);
 
     /**
      * Creates filter for given entities.
@@ -26,7 +26,7 @@ public interface IMongoDbRepositoryFilterer<TEntity, TKey> : IMongoDbRepositoryF
      * <param name="applyFilters">Set true to use GlobalFilters. Default is false.</param>
      * <returns>Created <see cref="FilterDefinition{TDocument}"/>.</returns>
      */
-    Task<FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TEntity> entities, boolean applyFilters = false);
+    FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TEntity> entities, boolean applyFilters = false);
 
     /**
      * Creates filter for given ids.
@@ -37,5 +37,5 @@ public interface IMongoDbRepositoryFilterer<TEntity, TKey> : IMongoDbRepositoryF
      * <param name="ids">Entity Ids to be filtered.</param>
      * <param name="applyFilters">Set true to use GlobalFilters. Default is false.</param>
      */
-    Task<FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TKey> ids, boolean applyFilters = false);
+    FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TKey> ids, boolean applyFilters = false);
 }

@@ -11,7 +11,7 @@ public interface ICacheSupportsMultipleItems
         IEnumerable<String> keys
     );
 
-    Task<byte[][]> GetManyAsync(
+    byte[][]> GetManyAsync(
         IEnumerable<String> keys,
         CancellationToken token = default
     );

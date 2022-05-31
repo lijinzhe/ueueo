@@ -15,7 +15,7 @@ public class VirtualFileTemplateContentContributor : ITemplateContentContributor
         _localizedTemplateContentReaderFactory = localizedTemplateContentReaderFactory;
     }
 
-    public    Task<String> GetOrNullAsync(TemplateContentContributorContext context)
+    public    String> GetOrNullAsync(TemplateContentContributorContext context)
     {
         var localizedReader = _localizedTemplateContentReaderFactory
             .CreateAsync(context.TemplateDefinition);

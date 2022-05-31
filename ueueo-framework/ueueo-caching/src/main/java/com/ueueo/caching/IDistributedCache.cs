@@ -73,7 +73,7 @@ public interface IDistributedCache<TCacheItem, TCacheKey>
      *  * <param name="token">The <see cref="T:System.Threading.CancellationToken" /> for the task.</param>
      * <returns>List of cache items.</returns>
      */
-    Task<KeyValuePair<TCacheKey, TCacheItem>[]> GetManyAsync(
+    KeyValuePair<TCacheKey, TCacheItem>[]> GetManyAsync(
         IEnumerable<TCacheKey> keys,
         boolean hideErrors = null,
         boolean considerUow = false,
@@ -89,7 +89,7 @@ public interface IDistributedCache<TCacheItem, TCacheKey>
      * <param name="token">The <see cref="T:System.Threading.CancellationToken" /> for the task.</param>
      * <returns>The cache item, or null.</returns>
      */
-    Task<TCacheItem> GetAsync(
+    TCacheItem> GetAsync(
         @Nonnull TCacheKey key,
         boolean hideErrors = null,
         boolean considerUow = false,
@@ -127,9 +127,9 @@ public interface IDistributedCache<TCacheItem, TCacheKey>
      * <param name="token">The <see cref="T:System.Threading.CancellationToken" /> for the task.</param>
      * <returns>The cache item.</returns>
      */
-    Task<TCacheItem> GetOrAddAsync(
+    TCacheItem> GetOrAddAsync(
         @Nonnull TCacheKey key,
-        Func<Task<TCacheItem>> factory,
+        Func<TCacheItem>> factory,
         Func<DistributedCacheEntryOptions> optionsFactory = null,
         boolean hideErrors = null,
         boolean considerUow = false,
@@ -167,9 +167,9 @@ public interface IDistributedCache<TCacheItem, TCacheKey>
      * <param name="token">The <see cref="T:System.Threading.CancellationToken" /> for the task.</param>
      * <returns>The cache items.</returns>
      */
-    Task<KeyValuePair<TCacheKey, TCacheItem>[]> GetOrAddManyAsync(
+    KeyValuePair<TCacheKey, TCacheItem>[]> GetOrAddManyAsync(
         IEnumerable<TCacheKey> keys,
-        Func<IEnumerable<TCacheKey>, Task<List<KeyValuePair<TCacheKey, TCacheItem>>>> factory,
+        Func<IEnumerable<TCacheKey>, List<KeyValuePair<TCacheKey, TCacheItem>>>> factory,
         Func<DistributedCacheEntryOptions> optionsFactory = null,
         boolean hideErrors = null,
         boolean considerUow = false,

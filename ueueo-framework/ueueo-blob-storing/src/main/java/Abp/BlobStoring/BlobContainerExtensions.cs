@@ -26,7 +26,7 @@ public static class BlobContainerExtensions
         }
     }
 
-    public static  Task<byte[]> GetAllBytesAsync(
+    public static  byte[] GetAllBytesAsync(
         this IBlobContainer container,
         String name,
         CancellationToken cancellationToken = default)
@@ -37,7 +37,7 @@ public static class BlobContainerExtensions
         }
     }
 
-    public static  Task<byte[]> GetAllBytesOrNullAsync(
+    public static  byte[] GetAllBytesOrNullAsync(
         this IBlobContainer container,
         String name,
         CancellationToken cancellationToken = default)

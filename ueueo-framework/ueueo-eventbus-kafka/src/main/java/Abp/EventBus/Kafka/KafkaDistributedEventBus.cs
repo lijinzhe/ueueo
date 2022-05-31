@@ -280,7 +280,7 @@ public class KafkaDistributedEventBus : DistributedEventBusBase, ISingletonDepen
         return PublishAsync(topicName, eventName, body, headers, headersArguments);
     }
 
-    private Task<DeliveryResult<String, byte[]>> PublishAsync(
+    private DeliveryResult<String, byte[]>> PublishAsync(
         String topicName,
         String eventName,
         byte[] body,
@@ -292,7 +292,7 @@ public class KafkaDistributedEventBus : DistributedEventBusBase, ISingletonDepen
         return PublishAsync(producer, topicName, eventName, body, headers, headersArguments);
     }
 
-    private Task<DeliveryResult<String, byte[]>> PublishAsync(
+    private DeliveryResult<String, byte[]>> PublishAsync(
         IProducer<String, byte[]> producer,
         String topicName,
         String eventName,

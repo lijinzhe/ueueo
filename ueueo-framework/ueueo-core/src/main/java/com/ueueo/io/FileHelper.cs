@@ -58,7 +58,7 @@ public static class FileHelper
      * <param name="path">The file to open for reading.</param>
      * <returns>A String containing all lines of the file.</returns>
      */
-    public static  Task<String> ReadAllTextAsync(String path)
+    public static  String> ReadAllTextAsync(String path)
     {
         using (var reader = File.OpenText(path))
         {
@@ -72,7 +72,7 @@ public static class FileHelper
      * <param name="path">The file to open for reading.</param>
      * <returns>A String containing all lines of the file.</returns>
      */
-    public static  Task<byte[]> ReadAllBytesAsync(String path)
+    public static  byte[]> ReadAllBytesAsync(String path)
     {
         using (var stream = File.Open(path, FileMode.Open))
         {
@@ -94,7 +94,7 @@ public static class FileHelper
      * <param name="fileOptions">Indicates FileStream options. Default is Asynchronous (The file is to be used for asynchronous reading.) and SequentialScan (The file is to be accessed sequentially from beginning to end.) </param>
      * <returns>A String containing all lines of the file.</returns>
      */
-    public static  Task<String[]> ReadAllLinesAsync(String path,
+    public static  String[]> ReadAllLinesAsync(String path,
         Encoding encoding = null,
         FileMode fileMode = FileMode.Open,
         FileAccess fileAccess = FileAccess.Read,
@@ -136,7 +136,7 @@ public static class FileHelper
      * <param name="path">The file to open for reading.</param>
      * <returns>A String containing all lines of the file.</returns>
      */
-    public static  Task<String> ReadFileWithoutBomAsync(String path)
+    public static  String> ReadFileWithoutBomAsync(String path)
     {
         var content = ReadAllBytesAsync(path);
 

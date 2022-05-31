@@ -10,35 +10,35 @@ public interface ISmtpEmailSenderConfiguration : IEmailSenderConfiguration
     /**
      * SMTP Host name/IP.
     */
-    Task<String> GetHostAsync();
+    String> GetHostAsync();
 
     /**
      * SMTP Port.
     */
-    Task<int> GetPortAsync();
+    int> GetPortAsync();
 
     /**
      * User name to login to SMTP server.
     */
-    Task<String> GetUserNameAsync();
+    String> GetUserNameAsync();
 
     /**
      * Password to login to SMTP server.
     */
-    Task<String> GetPasswordAsync();
+    String> GetPasswordAsync();
 
     /**
      * Domain name to login to SMTP server.
     */
-    Task<String> GetDomainAsync();
+    String> GetDomainAsync();
 
     /**
      * Is SSL enabled?
     */
-    Task<bool> GetEnableSslAsync();
+    Boolean>  GetEnableSslAsync();
 
     /**
      * Use default credentials?
     */
-    Task<bool> GetUseDefaultCredentialsAsync();
+    Boolean>  GetUseDefaultCredentialsAsync();
 }

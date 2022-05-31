@@ -25,7 +25,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
     [Obsolete("Use GetCollectionAsync method.")]
     public   IMemoryDatabaseCollection<TEntity> Collection => Database.Collection<TEntity>();
 
-    public  Task<IMemoryDatabaseCollection<TEntity>> GetCollectionAsync()
+    public  IMemoryDatabaseCollection<TEntity>> GetCollectionAsync()
     {
         return (GetDatabaseAsync()).Collection<TEntity>();
     }
@@ -33,7 +33,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
     [Obsolete("Use GetDatabaseAsync method.")]
     public   IMemoryDatabase Database => DatabaseProvider.GetDatabase();
 
-    public Task<IMemoryDatabase> GetDatabaseAsync()
+    public IMemoryDatabase> GetDatabaseAsync()
     {
         return DatabaseProvider.GetDatabaseAsync();
     }
@@ -62,7 +62,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
     }
 
     @Override
-    public  Task<IQueryable<TEntity>> GetQueryableAsync()
+    public  IQueryable<TEntity>> GetQueryableAsync()
     {
         return ApplyDataFilters((GetCollectionAsync()).AsQueryable());
     }
@@ -192,7 +192,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
     }
 
     @Override
-    public  Task<TEntity> FindAsync(
+    public  TEntity> FindAsync(
         Expression<Func<TEntity, bool>> predicate,
         boolean includeDetails = true,
         CancellationToken cancellationToken = default)
@@ -212,7 +212,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
     }
 
     @Override
-    public  Task<TEntity> InsertAsync(
+    public  TEntity> InsertAsync(
         TEntity entity,
         boolean autoSave = false,
         CancellationToken cancellationToken = default)
@@ -225,7 +225,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
     }
 
     @Override
-    public  Task<TEntity> UpdateAsync(
+    public  TEntity> UpdateAsync(
         TEntity entity,
         boolean autoSave = false,
         CancellationToken cancellationToken = default)
@@ -269,25 +269,25 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity> : RepositoryBase<TEnt
     }
 
     @Override
-    public  Task<List<TEntity>> GetListAsync(boolean includeDetails = false, CancellationToken cancellationToken = default)
+    public  List<TEntity>> GetListAsync(boolean includeDetails = false, CancellationToken cancellationToken = default)
     {
         return (GetQueryableAsync()).ToList();
     }
 
     @Override
-    public  Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate, boolean includeDetails = false, CancellationToken cancellationToken = default)
+    public  List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate, boolean includeDetails = false, CancellationToken cancellationToken = default)
     {
         return (GetQueryableAsync()).Where(predicate).ToList();
     }
 
     @Override
-    public  Task<long> GetCountAsync(CancellationToken cancellationToken = default)
+    public  long> GetCountAsync(CancellationToken cancellationToken = default)
     {
         return (GetQueryableAsync()).LongCount();
     }
 
     @Override
-    public  Task<List<TEntity>> GetPagedListAsync(
+    public  List<TEntity>> GetPagedListAsync(
         int skipCount,
         int maxResultCount,
         String sorting,
@@ -311,7 +311,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity, TKey> : MemoryDbRepos
     }
 
     @Override
-    public  Task<TEntity> InsertAsync(TEntity entity, boolean autoSave = false, CancellationToken cancellationToken = default)
+    public  TEntity> InsertAsync(TEntity entity, boolean autoSave = false, CancellationToken cancellationToken = default)
     {
         SetIdIfNeededAsync(entity);
         returnsuper.InsertAsync(entity, autoSave, cancellationToken);
@@ -331,7 +331,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity, TKey> : MemoryDbRepos
         }
     }
 
-    public    Task<TEntity> GetAsync(TKey id, boolean includeDetails = true, CancellationToken cancellationToken = default)
+    public    TEntity> GetAsync(TKey id, boolean includeDetails = true, CancellationToken cancellationToken = default)
     {
         var entity = FindAsync(id, includeDetails, cancellationToken);
 
@@ -343,7 +343,7 @@ public class MemoryDbRepository<TMemoryDbContext, TEntity, TKey> : MemoryDbRepos
         return entity;
     }
 
-    public    Task<TEntity> FindAsync(TKey id, boolean includeDetails = true, CancellationToken cancellationToken = default)
+    public    TEntity> FindAsync(TKey id, boolean includeDetails = true, CancellationToken cancellationToken = default)
     {
         return (GetQueryableAsync()).FirstOrDefault(e => e.Id.Equals(id));
     }

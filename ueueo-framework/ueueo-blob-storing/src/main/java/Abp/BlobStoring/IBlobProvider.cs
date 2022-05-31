@@ -7,9 +7,9 @@ public interface IBlobProvider
 {
     void SaveAsync(BlobProviderSaveArgs args);
 
-    Task<bool> DeleteAsync(BlobProviderDeleteArgs args);
+    Boolean  DeleteAsync(BlobProviderDeleteArgs args);
 
-    Task<bool> ExistsAsync(BlobProviderExistsArgs args);
+    Boolean  ExistsAsync(BlobProviderExistsArgs args);
 
-    Task<Stream> GetOrNullAsync(BlobProviderGetArgs args);
+    StreamGetOrNullAsync(BlobProviderGetArgs args);
 }

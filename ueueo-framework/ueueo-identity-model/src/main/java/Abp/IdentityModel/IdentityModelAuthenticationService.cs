@@ -49,7 +49,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         Logger = NullLogger<IdentityModelAuthenticationService>.Instance;
     }
 
-    public  Task<bool> TryAuthenticateAsync(
+    public  Boolean>  TryAuthenticateAsync(
         @Nonnull HttpClient client,
         String identityClientName = null)
     {
@@ -63,7 +63,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         return true;
     }
 
-    protected    Task<String> GetAccessTokenOrNullAsync(String identityClientName)
+    protected    String> GetAccessTokenOrNullAsync(String identityClientName)
     {
         var configuration = ClientOptions.GetClientConfiguration(CurrentTenant, identityClientName);
         if (configuration == null)
@@ -75,7 +75,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         return GetAccessTokenAsync(configuration);
     }
 
-    public    Task<String> GetAccessTokenAsync(IdentityClientConfiguration configuration)
+    public    String> GetAccessTokenAsync(IdentityClientConfiguration configuration)
     {
         var cacheKey = CalculateTokenCacheKey(configuration);
         var tokenCacheItem = TokenCache.GetAsync(cacheKey);
@@ -113,7 +113,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
     }
 
-    protected    Task<IdentityModelDiscoveryDocumentCacheItem> GetDiscoveryResponse(IdentityClientConfiguration configuration)
+    protected    IdentityModelDiscoveryDocumentCacheItem> GetDiscoveryResponse(IdentityClientConfiguration configuration)
     {
         var tokenEndpointUrlCacheKey = CalculateDiscoveryDocumentCacheKey(configuration);
         var discoveryDocumentCacheItem = DiscoveryDocumentCache.GetAsync(tokenEndpointUrlCacheKey);
@@ -151,7 +151,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         return discoveryDocumentCacheItem;
     }
 
-    protected    Task<TokenResponse> GetTokenResponse(IdentityClientConfiguration configuration)
+    protected    TokenResponse> GetTokenResponse(IdentityClientConfiguration configuration)
     {
         using (var httpClient = HttpClientFactory.CreateClient(HttpClientName))
         {
@@ -179,7 +179,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         }
     }
 
-    protected    Task<PasswordTokenRequest> CreatePasswordTokenRequestAsync(IdentityClientConfiguration configuration)
+    protected    PasswordTokenRequest> CreatePasswordTokenRequestAsync(IdentityClientConfiguration configuration)
     {
         var discoveryResponse = GetDiscoveryResponse(configuration);
         var request = new PasswordTokenRequest
@@ -199,7 +199,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         return request;
     }
 
-    protected    Task<ClientCredentialsTokenRequest> CreateClientCredentialsTokenRequestAsync(IdentityClientConfiguration configuration)
+    protected    ClientCredentialsTokenRequest> CreateClientCredentialsTokenRequestAsync(IdentityClientConfiguration configuration)
     {
         var discoveryResponse = GetDiscoveryResponse(configuration);
         var request = new ClientCredentialsTokenRequest
@@ -216,7 +216,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
         return request;
     }
 
-    protected    Task<TokenResponse> RequestDeviceAuthorizationAsync(HttpClient httpClient, IdentityClientConfiguration configuration)
+    protected    TokenResponse> RequestDeviceAuthorizationAsync(HttpClient httpClient, IdentityClientConfiguration configuration)
     {
         var discoveryResponse = GetDiscoveryResponse(configuration);
         var request = new DeviceAuthorizationRequest()

@@ -1,5 +1,6 @@
 package com.ueueo.data.objectextending;
 
+import com.ueueo.data.annotations.ValidationAttribute;
 import com.ueueo.data.objectextending.modularity.ExtensionPropertyLookupConfiguration;
 import com.ueueo.localization.IHasNameWithLocalizableDisplayName;
 import com.ueueo.localization.ILocalizableString;
@@ -13,6 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * TODO Description Of This JAVA Class.
@@ -27,6 +30,8 @@ public class ObjectExtensionPropertyInfo implements IHasNameWithLocalizableDispl
     private String name;
     private Type type;
 
+
+
     private List<Annotation> attributes;
     private List<Consumer<ObjectExtensionPropertyValidationContext>> validators;
 
@@ -39,7 +44,7 @@ public class ObjectExtensionPropertyInfo implements IHasNameWithLocalizableDispl
     @Setter
     private Object defaultValue;
     @Setter
-    private Consumer<Object> defaultValueFactory;
+    private Supplier<Object> defaultValueFactory;
 
     private ExtensionPropertyLookupConfiguration lookup;
 
@@ -52,6 +57,7 @@ public class ObjectExtensionPropertyInfo implements IHasNameWithLocalizableDispl
         this.attributes = new ArrayList<>();
         this.validators = new ArrayList<>();
 
+        //TODO 获取Attributes 注解
         //        Attributes.AddRange(ExtensionPropertyHelper.GetDefaultAttributes(Type));
         //        DefaultValue = TypeHelper.GetDefaultValue(Type);
         this.lookup = new ExtensionPropertyLookupConfiguration();
@@ -59,8 +65,19 @@ public class ObjectExtensionPropertyInfo implements IHasNameWithLocalizableDispl
 
     @Override
     public Object getDefaultValue() {
-        //        return ExtensionPropertyHelper.GetDefaultValue(Type, DefaultValueFactory, DefaultValue);
-        return null;
+        if (defaultValueFactory != null) {
+            return defaultValueFactory.get();
+        }
+        return defaultValue;
+    }
+    @Override
+    public void setDefaultValueFactory(Supplier<Object> defaultValueFactory) {
+        this.defaultValueFactory = defaultValueFactory;
     }
 
+    public List<ValidationAttribute> getValidationAttributes() {
+        return attributes.stream().filter(annotation -> annotation instanceof ValidationAttribute)
+                .map(annotation -> (ValidationAttribute) annotation)
+                .collect(Collectors.toList());
+    }
 }

@@ -14,7 +14,7 @@ public class RabbitMqBackgroundJobManager : IBackgroundJobManager, ITransientDep
         _jobQueueManager = jobQueueManager;
     }
 
-    public  Task<String> EnqueueAsync<TArgs>(
+    public  String EnqueueAsync<TArgs>(
         TArgs args,
         BackgroundJobPriority priority = BackgroundJobPriority.Normal,
         TimeSpan? delay = null)

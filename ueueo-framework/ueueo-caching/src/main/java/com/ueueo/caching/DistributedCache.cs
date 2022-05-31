@@ -268,7 +268,7 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
         }
     }
 
-    public    Task<KeyValuePair<TCacheKey, TCacheItem>[]> GetManyAsync(
+    public    KeyValuePair<TCacheKey, TCacheItem>[] GetManyAsync(
         IEnumerable<TCacheKey> keys,
         boolean hideErrors = null,
         boolean considerUow = false,
@@ -334,7 +334,7 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
         return cachedValues.Concat(ToCacheItems(cachedBytes, readKeys)).ToArray();
     }
 
-    protected    Task<KeyValuePair<TCacheKey, TCacheItem>[]> GetManyFallbackAsync(
+    protected    KeyValuePair<TCacheKey, TCacheItem>[] GetManyFallbackAsync(
         TCacheKey[] keys,
         boolean hideErrors = null,
         boolean considerUow = false,
@@ -377,7 +377,7 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
      * <param name="token">The <see cref="T:System.Threading.CancellationToken" /> for the task.</param>
      * <returns>The cache item, or null.</returns>
      */
-    public    Task<TCacheItem> GetAsync(
+    public    TCacheItem GetAsync(
         TCacheKey key,
         boolean hideErrors = null,
         boolean considerUow = false,
@@ -487,9 +487,9 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
      * <param name="token">The <see cref="T:System.Threading.CancellationToken" /> for the task.</param>
      * <returns>The cache item.</returns>
      */
-    public    Task<TCacheItem> GetOrAddAsync(
+    public    TCacheItem GetOrAddAsync(
         TCacheKey key,
-        Func<Task<TCacheItem>> factory,
+        Func<TCacheItem> factory,
         Func<DistributedCacheEntryOptions> optionsFactory = null,
         boolean hideErrors = null,
         boolean considerUow = false,
@@ -628,9 +628,9 @@ public class DistributedCache<TCacheItem, TCacheKey> : IDistributedCache<TCacheI
     }
 
 
-    public  Task<KeyValuePair<TCacheKey, TCacheItem>[]> GetOrAddManyAsync(
+    public  KeyValuePair<TCacheKey, TCacheItem>[]> GetOrAddManyAsync(
         IEnumerable<TCacheKey> keys,
-        Func<IEnumerable<TCacheKey>, Task<List<KeyValuePair<TCacheKey, TCacheItem>>>> factory,
+        Func<IEnumerable<TCacheKey>, List<KeyValuePair<TCacheKey, TCacheItem>>>> factory,
         Func<DistributedCacheEntryOptions> optionsFactory = null,
         boolean hideErrors = null,
         boolean considerUow = false,

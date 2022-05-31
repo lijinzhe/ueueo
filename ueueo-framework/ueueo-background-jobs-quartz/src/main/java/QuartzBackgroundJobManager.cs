@@ -26,13 +26,13 @@ public class QuartzBackgroundJobManager : IBackgroundJobManager, ITransientDepen
         Options = options.Value;
     }
 
-    public virtualTask<String> EnqueueAsync<TArgs>(TArgs args, BackgroundJobPriority priority = BackgroundJobPriority.Normal,
+    public  String EnqueueAsync<TArgs>(TArgs args, BackgroundJobPriority priority = BackgroundJobPriority.Normal,
         TimeSpan? delay = null)
     {
         return ReEnqueueAsync(args, Options.RetryCount, Options.RetryIntervalMillisecond, priority, delay);
     }
 
-    public virtualTask<String> ReEnqueueAsync<TArgs>(TArgs args, int retryCount, int retryIntervalMillisecond,
+    public  String ReEnqueueAsync<TArgs>(TArgs args, int retryCount, int retryIntervalMillisecond,
         BackgroundJobPriority priority = BackgroundJobPriority.Normal, TimeSpan? delay = null)
     {
         var jobDataMap = new JobDataMap

@@ -4,15 +4,15 @@ namespace Volo.Abp.Ldap;
 
 public interface ILdapSettingProvider
 {
-    public Task<String> GetServerHostAsync();
+    public String> GetServerHostAsync();
 
-    public Task<int> GetServerPortAsync();
+    public int> GetServerPortAsync();
 
-    public Task<String> GetBaseDcAsync();
+    public String> GetBaseDcAsync();
 
-    public Task<String> GetDomainAsync();
+    public String> GetDomainAsync();
 
-    public Task<String> GetUserNameAsync();
+    public String> GetUserNameAsync();
 
-    public Task<String> GetPasswordAsync();
+    public String> GetPasswordAsync();
 }

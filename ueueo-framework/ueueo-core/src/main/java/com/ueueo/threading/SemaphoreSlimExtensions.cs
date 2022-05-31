@@ -6,37 +6,37 @@ namespace Volo.Abp.Threading;
 
 public static class SemaphoreSlimExtensions
 {
-    public static  Task<IDisposable> LockAsync(this SemaphoreSlim semaphoreSlim)
+    public static  IDisposable> LockAsync(this SemaphoreSlim semaphoreSlim)
     {
         semaphoreSlim.WaitAsync();
         return GetDispose(semaphoreSlim);
     }
 
-    public static  Task<IDisposable> LockAsync(this SemaphoreSlim semaphoreSlim, CancellationToken cancellationToken)
+    public static  IDisposable> LockAsync(this SemaphoreSlim semaphoreSlim, CancellationToken cancellationToken)
     {
         semaphoreSlim.WaitAsync(cancellationToken);
         return GetDispose(semaphoreSlim);
     }
 
-    public static  Task<IDisposable> LockAsync(this SemaphoreSlim semaphoreSlim, int millisecondsTimeout)
+    public static  IDisposable> LockAsync(this SemaphoreSlim semaphoreSlim, int millisecondsTimeout)
     {
         semaphoreSlim.WaitAsync(millisecondsTimeout);
         return GetDispose(semaphoreSlim);
     }
 
-    public static  Task<IDisposable> LockAsync(this SemaphoreSlim semaphoreSlim, int millisecondsTimeout, CancellationToken cancellationToken)
+    public static  IDisposable> LockAsync(this SemaphoreSlim semaphoreSlim, int millisecondsTimeout, CancellationToken cancellationToken)
     {
         semaphoreSlim.WaitAsync(millisecondsTimeout, cancellationToken);
         return GetDispose(semaphoreSlim);
     }
 
-    public static  Task<IDisposable> LockAsync(this SemaphoreSlim semaphoreSlim, TimeSpan timeout)
+    public static  IDisposable> LockAsync(this SemaphoreSlim semaphoreSlim, TimeSpan timeout)
     {
         semaphoreSlim.WaitAsync(timeout);
         return GetDispose(semaphoreSlim);
     }
 
-    public static  Task<IDisposable> LockAsync(this SemaphoreSlim semaphoreSlim, TimeSpan timeout, CancellationToken cancellationToken)
+    public static  IDisposable> LockAsync(this SemaphoreSlim semaphoreSlim, TimeSpan timeout, CancellationToken cancellationToken)
     {
         semaphoreSlim.WaitAsync(timeout, cancellationToken);
         return GetDispose(semaphoreSlim);

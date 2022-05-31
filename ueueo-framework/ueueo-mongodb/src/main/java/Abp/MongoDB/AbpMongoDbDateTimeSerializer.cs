@@ -17,7 +17,7 @@ public class AbpMongoDbDateTimeSerializer : DateTimeSerializer
     }
 
     @Override
-    public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, DateTime value)
+    public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, Date value)
     {
         context.Writer.WriteDateTime(DisableDateTimeNormalization
             ? ToMillisecondsSinceEpoch(value)
@@ -25,9 +25,9 @@ public class AbpMongoDbDateTimeSerializer : DateTimeSerializer
     }
 
     @Override
-    public DateTime Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
+    public Date Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
     {
-        var dateTime = new BsonDateTime(context.Reader.ReadDateTime()).ToUniversalTime();
+        var Date = new BsonDateTime(context.Reader.ReadDateTime()).ToUniversalTime();
         return DateTime.SpecifyKind(dateTime, DisableDateTimeNormalization ? DateTimeKind.Unspecified : DateTimeKind);
     }
 

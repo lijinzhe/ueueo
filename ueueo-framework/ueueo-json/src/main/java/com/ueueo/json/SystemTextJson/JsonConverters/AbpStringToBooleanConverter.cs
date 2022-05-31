@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace Volo.Abp.Json.SystemTextJson.JsonConverters;
 
-public class AbpStringToBooleanConverter : JsonConverter<bool>
+public class AbpStringToBooleanConverter : JsonConverter<Boolean>
 {
     private JsonSerializerOptions _writeJsonSerializerOptions;
 
@@ -34,7 +34,7 @@ public class AbpStringToBooleanConverter : JsonConverter<bool>
     public void Write(Utf8JsonWriter writer, boolean value, JsonSerializerOptions options)
     {
         _writeJsonSerializerOptions ??= JsonSerializerOptionsHelper.Create(options, this);
-        var entityConverter = (JsonConverter<bool>)_writeJsonSerializerOptions.GetConverter(typeof(bool));
+        var entityConverter = (JsonConverter<Boolean> )_writeJsonSerializerOptions.GetConverter(typeof(bool));
 
         entityConverter.Write(writer, value, _writeJsonSerializerOptions);
     }

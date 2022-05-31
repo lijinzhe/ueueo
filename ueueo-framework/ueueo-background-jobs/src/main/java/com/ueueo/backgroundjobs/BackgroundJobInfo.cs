@@ -28,12 +28,12 @@ public class BackgroundJobInfo
     /**
      * Creation time of this job.
     */
-    public   DateTime CreationTime;// { get; set; }
+    public   Date CreationTime;// { get; set; }
 
     /**
      * Next try time of this job.
     */
-    public   DateTime NextTryTime;// { get; set; }
+    public   Date NextTryTime;// { get; set; }
 
     /**
      * Last try time of this job.

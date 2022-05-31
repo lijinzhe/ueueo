@@ -80,7 +80,7 @@ public static class InternalAsyncHelper
         }
     }
 
-    public static  Task<T> AwaitTaskWithFinallyAndGetResult<T>(Task<T> actualReturnValue, Action<Exception> finalAction)
+    public static  T> AwaitTaskWithFinallyAndGetResult<T>(T> actualReturnValue, Action<Exception> finalAction)
     {
         Exception exception = null;
 
@@ -108,7 +108,7 @@ public static class InternalAsyncHelper
             .Invoke(null, new Object[] { actualReturnValue, finalAction });
     }
 
-    public static  Task<T> AwaitTaskWithPostActionAndFinallyAndGetResult<T>(Task<T> actualReturnValue, Func<Task> postAction, Action<Exception> finalAction)
+    public static  T> AwaitTaskWithPostActionAndFinallyAndGetResult<T>(T> actualReturnValue, Func<Task> postAction, Action<Exception> finalAction)
     {
         Exception exception = null;
 
@@ -138,7 +138,7 @@ public static class InternalAsyncHelper
             .Invoke(null, new Object[] { actualReturnValue, action, finalAction });
     }
 
-    public static  Task<T> AwaitTaskWithPreActionAndPostActionAndFinallyAndGetResult<T>(Func<Task<T>> actualReturnValue, Func<Task> preAction = null, Func<Task> postAction = null, Action<Exception> finalAction = null)
+    public static  T> AwaitTaskWithPreActionAndPostActionAndFinallyAndGetResult<T>(Func<T>> actualReturnValue, Func<Task> preAction = null, Func<Task> postAction = null, Action<Exception> finalAction = null)
     {
         Exception exception = null;
 
@@ -185,8 +185,8 @@ public static class InternalAsyncHelper
     }
 
     [UsedImplicitly]
-    private static Func<Task<T>> ConvertFuncOfObjectToFuncOfTask<T>(Func<Object> actualReturnValue)
+    private static Func<T>> ConvertFuncOfObjectToFuncOfT>(Func<Object> actualReturnValue)
     {
-        return () => (Task<T>)actualReturnValue();
+        return () => (T>)actualReturnValue();
     }
 }

@@ -18,7 +18,7 @@ public class UserPermissionValueProvider : PermissionValueProvider
     }
 
     @Override
-    public Task<PermissionGrantResult> CheckAsync(PermissionValueCheckContext context)
+    public PermissionGrantResult CheckAsync(PermissionValueCheckContext context)
     {
         var userId = context.Principal?.FindFirst(AbpClaimTypes.UserId)?.Value;
 
@@ -33,7 +33,7 @@ public class UserPermissionValueProvider : PermissionValueProvider
     }
 
     @Override
-    public Task<MultiplePermissionGrantResult> CheckAsync(PermissionValuesCheckContext context)
+    public MultiplePermissionGrantResult CheckAsync(PermissionValuesCheckContext context)
     {
         var permissionNames = context.Permissions.Select(x => x.Name).Distinct().ToArray();
         Check.NotNullOrEmpty(permissionNames, nameof(permissionNames));

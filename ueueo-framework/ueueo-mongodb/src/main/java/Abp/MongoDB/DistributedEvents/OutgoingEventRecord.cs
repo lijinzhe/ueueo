@@ -19,7 +19,7 @@ public class OutgoingEventRecord :
 
     public byte[] EventData ;// { get; private set; }
 
-    public DateTime CreationTime ;// { get; private set; }
+    public Date CreationTime ;// { get; private set; }
 
     protected OutgoingEventRecord()
     {

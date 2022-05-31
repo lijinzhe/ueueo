@@ -15,7 +15,7 @@ public static class MemoryDbCoreRepositoryExtensions
         return repository.ToMemoryDbRepository().Database;
     }
 
-    public static Task<IMemoryDatabase> GetDatabaseAsync<TEntity, TKey>(this IBasicRepository<TEntity, TKey> repository)
+    public static IMemoryDatabase> GetDatabaseAsync<TEntity, TKey>(this IBasicRepository<TEntity, TKey> repository)
         where TEntity : class, IEntity<TKey>
     {
         return repository.ToMemoryDbRepository().GetDatabaseAsync();
@@ -28,7 +28,7 @@ public static class MemoryDbCoreRepositoryExtensions
         return repository.ToMemoryDbRepository().Collection;
     }
 
-    public static Task<IMemoryDatabaseCollection<TEntity>> GetCollectionAsync<TEntity, TKey>(this IBasicRepository<TEntity, TKey> repository)
+    public static IMemoryDatabaseCollection<TEntity>> GetCollectionAsync<TEntity, TKey>(this IBasicRepository<TEntity, TKey> repository)
         where TEntity : class, IEntity<TKey>
     {
         return repository.ToMemoryDbRepository().GetCollectionAsync();

@@ -5,7 +5,7 @@ namespace Volo.Abp.MongoDB;
 public class AbpMongoDbOptions
 {
     /**
-     * Serializer the datetime based on <see cref="AbpClockOptions.Kind"/> in MongoDb.
+     * Serializer the Date based on <see cref="AbpClockOptions.Kind"/> in MongoDb.
      * Default: true.
     */
     public boolean UseAbpClockHandleDateTime;// { get; set; }

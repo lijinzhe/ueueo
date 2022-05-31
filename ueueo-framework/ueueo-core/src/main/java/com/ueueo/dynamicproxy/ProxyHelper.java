@@ -25,7 +25,7 @@ public final class ProxyHelper {
      *
      * @throws Exception
      */
-    public static Object unProxy(Object proxy) throws Exception {
+    public static Object unProxy(Object proxy) throws RuntimeException {
         if (!AopUtils.isAopProxy(proxy)) {
             //不是代理对象，直接返回原对象
             return proxy;
@@ -44,10 +44,8 @@ public final class ProxyHelper {
      * @param proxy proxy 代理对象
      *
      * @return
-     *
-     * @throws Exception
      */
-    public static Class<?> getUnProxiedType(@NonNull Object proxy) throws Exception {
+    public static Class<?> getUnProxiedType(@NonNull Object proxy) {
         return AopUtils.getTargetClass(proxy);
     }
 
@@ -63,25 +61,33 @@ public final class ProxyHelper {
         return (T) AopContext.currentProxy();
     }
 
-    private static Object getCglibProxyTargetObject(Object proxy) throws Exception {
-        Field h = proxy.getClass().getDeclaredField("CGLIB$CALLBACK_0");
-        h.setAccessible(true);
-        Object dynamicAdvisedInterceptor = h.get(proxy);
+    private static Object getCglibProxyTargetObject(Object proxy) throws RuntimeException {
+        try {
+            Field h = proxy.getClass().getDeclaredField("CGLIB$CALLBACK_0");
+            h.setAccessible(true);
+            Object dynamicAdvisedInterceptor = h.get(proxy);
 
-        Field advised = dynamicAdvisedInterceptor.getClass().getDeclaredField("advised");
-        advised.setAccessible(true);
-        return ((AdvisedSupport) advised.get(dynamicAdvisedInterceptor)).getTargetSource().getTarget();
+            Field advised = dynamicAdvisedInterceptor.getClass().getDeclaredField("advised");
+            advised.setAccessible(true);
+            return ((AdvisedSupport) advised.get(dynamicAdvisedInterceptor)).getTargetSource().getTarget();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private static Object getJdkDynamicProxyTargetObject(Object proxy) throws Exception {
-        Field h = proxy.getClass().getSuperclass().getDeclaredField("h");
-        h.setAccessible(true);
-        AopProxy aopProxy = (AopProxy) h.get(proxy);
+    private static Object getJdkDynamicProxyTargetObject(Object proxy) throws RuntimeException {
+        try {
+            Field h = proxy.getClass().getSuperclass().getDeclaredField("h");
+            h.setAccessible(true);
+            AopProxy aopProxy = (AopProxy) h.get(proxy);
 
-        Field advised = aopProxy.getClass().getDeclaredField("advised");
-        advised.setAccessible(true);
+            Field advised = aopProxy.getClass().getDeclaredField("advised");
+            advised.setAccessible(true);
 
-        return ((AdvisedSupport) advised.get(aopProxy)).getTargetSource().getTarget();
+            return ((AdvisedSupport) advised.get(aopProxy)).getTargetSource().getTarget();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

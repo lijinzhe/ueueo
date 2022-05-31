@@ -7,7 +7,7 @@ namespace Volo.Abp.BackgroundWorkers;
 
 public static class BackgroundWorkersApplicationInitializationContextExtensions
 {
-    public  static Task<ApplicationInitializationContext> AddBackgroundWorkerAsync<TWorker>(@Nonnull this ApplicationInitializationContext context)
+    public  static ApplicationInitializationContext AddBackgroundWorkerAsync<TWorker>(@Nonnull this ApplicationInitializationContext context)
         //where TWorker : IBackgroundWorker
     {
         Objects.requireNonNull(context, nameof(context));
@@ -17,7 +17,7 @@ public static class BackgroundWorkersApplicationInitializationContextExtensions
         return context;
     }
 
-    public  static Task<ApplicationInitializationContext> AddBackgroundWorkerAsync(@Nonnull this ApplicationInitializationContext context, @Nonnull Type workerType)
+    public  static ApplicationInitializationContext> AddBackgroundWorkerAsync(@Nonnull this ApplicationInitializationContext context, @Nonnull Type workerType)
     {
         Objects.requireNonNull(context, nameof(context));
         Objects.requireNonNull(workerType, nameof(workerType));

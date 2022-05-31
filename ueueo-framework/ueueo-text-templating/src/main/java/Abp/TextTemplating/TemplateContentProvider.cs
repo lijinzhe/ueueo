@@ -26,7 +26,7 @@ public class TemplateContentProvider : ITemplateContentProvider, ITransientDepen
         _templateDefinitionManager = templateDefinitionManager;
     }
 
-    public   Task<String> GetContentOrNullAsync(
+    public   String> GetContentOrNullAsync(
         @Nonnull String templateName,
         @Nullable String cultureName = null,
         boolean tryDefaults = true,
@@ -36,7 +36,7 @@ public class TemplateContentProvider : ITemplateContentProvider, ITransientDepen
         return GetContentOrNullAsync(template, cultureName);
     }
 
-    public    Task<String> GetContentOrNullAsync(
+    public    String> GetContentOrNullAsync(
         @Nonnull TemplateDefinition templateDefinition,
         @Nullable String cultureName = null,
         boolean tryDefaults = true,
@@ -151,7 +151,7 @@ public class TemplateContentProvider : ITemplateContentProvider, ITransientDepen
             .ToArray();
     }
 
-    protected    Task<String> GetContentOrNullAsync(
+    protected    String> GetContentOrNullAsync(
         ITemplateContentContributor[] contributors,
         TemplateContentContributorContext context)
     {

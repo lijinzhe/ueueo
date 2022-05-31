@@ -4,7 +4,7 @@ namespace Volo.Abp.MultiLingualObjects;
 
 public interface IMultiLingualObjectManager
 {
-    Task<TTranslation> GetTranslationAsync<TMultiLingual, TTranslation>(
+    TTranslation> GetTranslationAsync<TMultiLingual, TTranslation>(
         TMultiLingual multiLingual,
         String culture = null,
         boolean fallbackToParentCultures = true)

@@ -8,7 +8,7 @@ namespace Volo.Abp;
 
 public static class AbpApplicationFactory
 {
-    public  static Task<IAbpApplicationWithInternalServiceProvider> CreateAsync<TStartupModule>(
+    public  static IAbpApplicationWithInternalServiceProvider> CreateAsync<TStartupModule>(
         @Nullable Action<AbpApplicationCreationOptions> optionsAction = null)
         //where TStartupModule : IAbpModule
     {
@@ -21,7 +21,7 @@ public static class AbpApplicationFactory
         return app;
     }
 
-    public  static Task<IAbpApplicationWithInternalServiceProvider> CreateAsync(
+    public  static IAbpApplicationWithInternalServiceProvider> CreateAsync(
         @Nonnull Type startupModuleType,
         @Nullable Action<AbpApplicationCreationOptions> optionsAction = null)
     {
@@ -34,7 +34,7 @@ public static class AbpApplicationFactory
         return app;
     }
 
-    public  static Task<IAbpApplicationWithExternalServiceProvider> CreateAsync<TStartupModule>(
+    public  static IAbpApplicationWithExternalServiceProvider> CreateAsync<TStartupModule>(
         @Nonnull IServiceCollection services,
         @Nullable Action<AbpApplicationCreationOptions> optionsAction = null)
         //where TStartupModule : IAbpModule
@@ -48,7 +48,7 @@ public static class AbpApplicationFactory
         return app;
     }
 
-    public  static Task<IAbpApplicationWithExternalServiceProvider> CreateAsync(
+    public  static IAbpApplicationWithExternalServiceProvider> CreateAsync(
         @Nonnull Type startupModuleType,
         @Nonnull IServiceCollection services,
         @Nullable Action<AbpApplicationCreationOptions> optionsAction = null)

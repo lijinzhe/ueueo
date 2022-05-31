@@ -7,7 +7,7 @@ namespace Volo.Abp.Emailing;
 */
 public interface IEmailSenderConfiguration
 {
-    Task<String> GetDefaultFromAddressAsync();
+    String> GetDefaultFromAddressAsync();
 
-    Task<String> GetDefaultFromDisplayNameAsync();
+    String> GetDefaultFromDisplayNameAsync();
 }

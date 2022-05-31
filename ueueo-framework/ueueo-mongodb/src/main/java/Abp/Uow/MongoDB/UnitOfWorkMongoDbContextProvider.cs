@@ -82,7 +82,7 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
         return (TMongoDbContext)((MongoDbDatabaseApi) databaseApi).DbContext;
     }
 
-    public  Task<TMongoDbContext> GetDbContextAsync(CancellationToken cancellationToken = default)
+    public  TMongoDbContext> GetDbContextAsync(CancellationToken cancellationToken = default)
     {
         var unitOfWork = _unitOfWorkManager.Current;
         if (unitOfWork == null)
@@ -139,7 +139,7 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
         return dbContext;
     }
 
-    private  Task<TMongoDbContext> CreateDbContextAsync(
+    private  TMongoDbContext> CreateDbContextAsync(
         IUnitOfWork unitOfWork,
         MongoUrl mongoUrl,
         String databaseName,
@@ -216,7 +216,7 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
         return dbContext;
     }
 
-    private  Task<TMongoDbContext> CreateDbContextWithTransactionAsync(
+    private  TMongoDbContext> CreateDbContextWithTransactionAsync(
         IUnitOfWork unitOfWork,
         MongoUrl url,
         MongoClient client,
@@ -267,7 +267,7 @@ public class UnitOfWorkMongoDbContextProvider<TMongoDbContext> : IMongoDbContext
         return dbContext;
     }
 
-    private  Task<String> ResolveConnectionStringAsync(Type dbContextType)
+    private  String> ResolveConnectionStringAsync(Type dbContextType)
     {
         // Multi-tenancy unaware contexts should always use the host connection string
         if (typeof(TMongoDbContext).IsDefined(typeof(IgnoreMultiTenancyAttribute), false))

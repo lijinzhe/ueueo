@@ -8,13 +8,13 @@ public abstract class BlobProviderBase : IBlobProvider
 {
     public abstract void SaveAsync(BlobProviderSaveArgs args);
 
-    public abstract Task<bool> DeleteAsync(BlobProviderDeleteArgs args);
+    public abstract Boolean  DeleteAsync(BlobProviderDeleteArgs args);
 
-    public abstract Task<bool> ExistsAsync(BlobProviderExistsArgs args);
+    public abstract Boolean  ExistsAsync(BlobProviderExistsArgs args);
 
-    public abstract Task<Stream> GetOrNullAsync(BlobProviderGetArgs args);
+    public abstract Stream GetOrNullAsync(BlobProviderGetArgs args);
 
-    protected    Task<Stream> TryCopyToMemoryStreamAsync(Stream stream, CancellationToken cancellationToken = default)
+    protected    Stream TryCopyToMemoryStreamAsync(Stream stream, CancellationToken cancellationToken = default)
     {
         if (stream == null)
         {

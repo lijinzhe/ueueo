@@ -10,7 +10,7 @@ public class LocalAbpDistributedLock : IAbpDistributedLock, ISingletonDependency
 {
     private readonly ConcurrentDictionary<String, SemaphoreSlim> _localSyncObjects = new();
 
-    public  Task<IAbpDistributedLockHandle> TryAcquireAsync(
+    public  IAbpDistributedLockHandle> TryAcquireAsync(
         String name,
         TimeSpan timeout = default,
         CancellationToken cancellationToken = default)

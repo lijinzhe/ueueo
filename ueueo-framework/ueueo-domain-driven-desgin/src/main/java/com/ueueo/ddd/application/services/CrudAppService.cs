@@ -55,7 +55,7 @@ public abstract class CrudAppService<TEntity, TEntityDto, TKey, TGetListInput, T
 
     }
 
-    protected override Task<TEntityDto> MapToGetListOutputDtoAsync(TEntity entity)
+    protected override TEntityDto> MapToGetListOutputDtoAsync(TEntity entity)
     {
         return MapToGetOutputDtoAsync(entity);
     }
@@ -85,7 +85,7 @@ public abstract class CrudAppService<TEntity, TGetOutputDto, TGetListOutputDto, 
         Repository.DeleteAsync(id);
     }
 
-    protected override  Task<TEntity> GetEntityByIdAsync(TKey id)
+    protected override  TEntity> GetEntityByIdAsync(TKey id)
     {
         return Repository.GetAsync(id);
     }

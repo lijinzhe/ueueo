@@ -8,7 +8,7 @@ namespace Volo.Abp.Uow;
 public class UnitOfWorkManager : IUnitOfWorkManager, ISingletonDependency
 {
     [Obsolete("This will be removed in next versions.")]
-    public static AsyncLocal<bool> DisableObsoleteDbContextCreationWarning;//  { get; } = new AsyncLocal<bool>();
+    public static AsyncLocal<Boolean>  DisableObsoleteDbContextCreationWarning;//  { get; } = new AsyncLocal<Boolean> ();
 
     public IUnitOfWork Current => _ambientUnitOfWork.GetCurrentByChecking();
 

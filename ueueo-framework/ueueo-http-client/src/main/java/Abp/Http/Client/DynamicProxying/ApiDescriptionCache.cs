@@ -22,9 +22,9 @@ public class ApiDescriptionCache : IApiDescriptionCache, ISingletonDependency
         _semaphore = new SemaphoreSlim(1, 1);
     }
 
-    public  Task<ApplicationApiDescriptionModel> GetAsync(
+    public  ApplicationApiDescriptionModel> GetAsync(
         String baseUrl,
-        Func<Task<ApplicationApiDescriptionModel>> factory)
+        Func<ApplicationApiDescriptionModel>> factory)
     {
         using (_semaphore.LockAsync(CancellationTokenProvider.Token))
         {

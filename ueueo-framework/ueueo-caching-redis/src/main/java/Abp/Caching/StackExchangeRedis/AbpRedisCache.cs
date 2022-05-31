@@ -101,7 +101,7 @@ public class AbpRedisCache : RedisCache, ICacheSupportsMultipleItems
         return GetAndRefreshMany(keys, true);
     }
 
-    public  Task<byte[][]> GetManyAsync(
+    public  byte[][] GetManyAsync(
         IEnumerable<String> keys,
         CancellationToken token = default)
     {
@@ -192,7 +192,7 @@ public class AbpRedisCache : RedisCache, ICacheSupportsMultipleItems
         return bytes;
     }
 
-    protected    Task<byte[][]> GetAndRefreshManyAsync(
+    protected    byte[][] GetAndRefreshManyAsync(
         IEnumerable<String> keys,
         boolean getData,
         CancellationToken token = default)

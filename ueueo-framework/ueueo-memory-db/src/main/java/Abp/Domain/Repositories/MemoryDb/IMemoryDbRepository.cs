@@ -13,9 +13,9 @@ public interface IMemoryDbRepository<TEntity> : IRepository<TEntity>
     [Obsolete("Use GetCollectionAsync() method.")]
     IMemoryDatabaseCollection<TEntity> Collection;//  { get; }
 
-    Task<IMemoryDatabase> GetDatabaseAsync();
+    IMemoryDatabase> GetDatabaseAsync();
 
-    Task<IMemoryDatabaseCollection<TEntity>> GetCollectionAsync();
+    IMemoryDatabaseCollection<TEntity>> GetCollectionAsync();
 }
 
 public interface IMemoryDbRepository<TEntity, TKey> : IMemoryDbRepository<TEntity>, IRepository<TEntity, TKey>

@@ -25,7 +25,7 @@ public class SmtpEmailSender : EmailSenderBase, ISmtpEmailSender, ITransientDepe
         SmtpConfiguration = smtpConfiguration;
     }
 
-    public  Task<SmtpClient> BuildClientAsync()
+    public  SmtpClient> BuildClientAsync()
     {
         var host = SmtpConfiguration.GetHostAsync();
         var port = SmtpConfiguration.GetPortAsync();

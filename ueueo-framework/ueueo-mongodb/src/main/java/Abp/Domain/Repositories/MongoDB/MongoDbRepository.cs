@@ -30,7 +30,7 @@ public class MongoDbRepository<TMongoDbContext, TEntity>
     [Obsolete("Use GetCollectionAsync method.")]
     public   IMongoCollection<TEntity> Collection => DbContext.Collection<TEntity>();
 
-    public  Task<IMongoCollection<TEntity>> GetCollectionAsync(CancellationToken cancellationToken = default)
+    public  IMongoCollection<TEntity>> GetCollectionAsync(CancellationToken cancellationToken = default)
     {
         return (GetDbContextAsync(GetCancellationToken(cancellationToken))).Collection<TEntity>();
     }
@@ -38,7 +38,7 @@ public class MongoDbRepository<TMongoDbContext, TEntity>
     [Obsolete("Use GetDatabaseAsync method.")]
     public   IMongoDatabase Database => DbContext.Database;
 
-    public  Task<IMongoDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default)
+    public  IMongoDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default)
     {
         return (GetDbContextAsync(GetCancellationToken(cancellationToken))).Database;
     }
@@ -46,7 +46,7 @@ public class MongoDbRepository<TMongoDbContext, TEntity>
     [Obsolete("Use GetSessionHandleAsync method.")]
     protected   IClientSessionHandle SessionHandle => DbContext.SessionHandle;
 
-    protected  Task<IClientSessionHandle> GetSessionHandleAsync(CancellationToken cancellationToken = default)
+    protected  IClientSessionHandle> GetSessionHandleAsync(CancellationToken cancellationToken = default)
     {
         return (GetDbContextAsync(GetCancellationToken(cancellationToken))).SessionHandle;
     }
@@ -69,7 +69,7 @@ public class MongoDbRepository<TMongoDbContext, TEntity>
         return DbContextProvider.GetDbContext();
     }
 
-    protected Task<TMongoDbContext> GetDbContextAsync(CancellationToken cancellationToken = default)
+    protected TMongoDbContext> GetDbContextAsync(CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
 
@@ -105,7 +105,7 @@ public class MongoDbRepository<TMongoDbContext, TEntity>
     }
 
     @Override
-    public Task<TEntity> InsertAsync(
+    public TEntity> InsertAsync(
         TEntity entity,
         boolean autoSave = false,
         CancellationToken cancellationToken = default)
@@ -173,7 +173,7 @@ public class MongoDbRepository<TMongoDbContext, TEntity>
     }
 
     @Override
-    public Task<TEntity> UpdateAsync(
+    public TEntity> UpdateAsync(
         TEntity entity,
         boolean autoSave = false,
         CancellationToken cancellationToken = default)
@@ -444,28 +444,28 @@ public class MongoDbRepository<TMongoDbContext, TEntity>
     }
 
     @Override
-    public Task<List<TEntity>> GetListAsync(boolean includeDetails = false, CancellationToken cancellationToken = default)
+    public List<TEntity>> GetListAsync(boolean includeDetails = false, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
         return (GetMongoQueryableAsync(cancellationToken)).ToListAsync(cancellationToken);
     }
 
     @Override
-    public Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate, boolean includeDetails = false, CancellationToken cancellationToken = default)
+    public List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate, boolean includeDetails = false, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
         return (GetMongoQueryableAsync(cancellationToken)).Where(predicate).ToListAsync(cancellationToken);
     }
 
     @Override
-    public Task<long> GetCountAsync(CancellationToken cancellationToken = default)
+    public long> GetCountAsync(CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
         return (GetMongoQueryableAsync(cancellationToken)).LongCountAsync(cancellationToken);
     }
 
     @Override
-    public Task<List<TEntity>> GetPagedListAsync(
+    public List<TEntity>> GetPagedListAsync(
         int skipCount,
         int maxResultCount,
         String sorting,
@@ -503,13 +503,13 @@ public class MongoDbRepository<TMongoDbContext, TEntity>
     }
 
     @Override
-    public Task<IQueryable<TEntity>> GetQueryableAsync()
+    public IQueryable<TEntity>> GetQueryableAsync()
     {
         return GetMongoQueryableAsync();
     }
 
     @Override
-    public Task<TEntity> FindAsync(
+    public TEntity> FindAsync(
         Expression<Func<TEntity, bool>> predicate,
         boolean includeDetails = true,
         CancellationToken cancellationToken = default)
@@ -531,12 +531,12 @@ public class MongoDbRepository<TMongoDbContext, TEntity>
         );
     }
 
-    public   Task<IMongoQueryable<TEntity>> GetMongoQueryableAsync(CancellationToken cancellationToken = default)
+    public   IMongoQueryable<TEntity>> GetMongoQueryableAsync(CancellationToken cancellationToken = default)
     {
         return GetMongoQueryableAsync<TEntity>(cancellationToken);
     }
 
-    protected    Task<IMongoQueryable<TOtherEntity>> GetMongoQueryableAsync<TOtherEntity>(CancellationToken cancellationToken = default)
+    protected    IMongoQueryable<TOtherEntity>> GetMongoQueryableAsync<TOtherEntity>(CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
 
@@ -550,7 +550,7 @@ public class MongoDbRepository<TMongoDbContext, TEntity>
         );
     }
 
-    public    Task<IAggregateFluent<TEntity>> GetAggregateAsync(CancellationToken cancellationToken = default)
+    public    IAggregateFluent<TEntity>> GetAggregateAsync(CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
 
@@ -586,14 +586,14 @@ public class MongoDbRepository<TMongoDbContext, TEntity>
         return hardDeletedEntities.Contains(entity);
     }
 
-    protected   Task<FilterDefinition<TEntity>> CreateEntityFilterAsync(TEntity entity, boolean withConcurrencyStamp = false, String concurrencyStamp = null)
+    protected   FilterDefinition<TEntity>> CreateEntityFilterAsync(TEntity entity, boolean withConcurrencyStamp = false, String concurrencyStamp = null)
     {
         throw new NotImplementedException(
             $"{nameof(CreateEntityFilterAsync)} is not implemented for MongoDB by default. It should be overriden and implemented by the deriving class!"
         );
     }
 
-    protected   Task<FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TEntity> entities, boolean withConcurrencyStamp = false)
+    protected   FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TEntity> entities, boolean withConcurrencyStamp = false)
     {
         throw new NotImplementedException(
           $"{nameof(CreateEntitiesFilterAsync)} is not implemented for MongoDB by default. It should be overriden and implemented by the deriving class!"
@@ -751,7 +751,7 @@ public class MongoDbRepository<TMongoDbContext, TEntity, TKey>
 
     }
 
-    public    Task<TEntity> GetAsync(
+    public    TEntity> GetAsync(
         TKey id,
         boolean includeDetails = true,
         CancellationToken cancellationToken = default)
@@ -766,7 +766,7 @@ public class MongoDbRepository<TMongoDbContext, TEntity, TKey>
         return entity;
     }
 
-    public    Task<TEntity> FindAsync(
+    public    TEntity> FindAsync(
         TKey id,
         boolean includeDetails = true,
         CancellationToken cancellationToken = default)
@@ -795,12 +795,12 @@ public class MongoDbRepository<TMongoDbContext, TEntity, TKey>
         DeleteManyAsync(entities, autoSave, cancellationToken);
     }
 
-    protected  override Task<FilterDefinition<TEntity>> CreateEntityFilterAsync(TEntity entity, boolean withConcurrencyStamp = false, String concurrencyStamp = null)
+    protected  override FilterDefinition<TEntity>> CreateEntityFilterAsync(TEntity entity, boolean withConcurrencyStamp = false, String concurrencyStamp = null)
     {
         return RepositoryFilterer.CreateEntityFilterAsync(entity, withConcurrencyStamp, concurrencyStamp);
     }
 
-    protected  override Task<FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TEntity> entities, boolean withConcurrencyStamp = false)
+    protected  override FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TEntity> entities, boolean withConcurrencyStamp = false)
     {
         return RepositoryFilterer.CreateEntitiesFilterAsync(entities, withConcurrencyStamp);
     }

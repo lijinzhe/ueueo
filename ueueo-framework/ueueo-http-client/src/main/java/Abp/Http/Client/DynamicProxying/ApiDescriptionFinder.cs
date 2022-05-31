@@ -37,7 +37,7 @@ public class ApiDescriptionFinder : IApiDescriptionFinder, ITransientDependency
         CancellationTokenProvider = NullCancellationTokenProvider.Instance;
     }
 
-    public  Task<ActionApiDescriptionModel> FindActionAsync(
+    public  ActionApiDescriptionModel> FindActionAsync(
         HttpClient client,
         String baseUrl,
         Type serviceType,
@@ -85,7 +85,7 @@ public class ApiDescriptionFinder : IApiDescriptionFinder, ITransientDependency
         throw new AbpException($"Could not found remote action for method: {method} on the URL: {baseUrl}");
     }
 
-    public    Task<ApplicationApiDescriptionModel> GetApiDescriptionAsync(HttpClient client, String baseUrl)
+    public    ApplicationApiDescriptionModel> GetApiDescriptionAsync(HttpClient client, String baseUrl)
     {
         return Cache.GetAsync(baseUrl, () => GetApiDescriptionFromServerAsync(client, baseUrl));
     }
@@ -95,7 +95,7 @@ public class ApiDescriptionFinder : IApiDescriptionFinder, ITransientDependency
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
     };
 
-    protected    Task<ApplicationApiDescriptionModel> GetApiDescriptionFromServerAsync(
+    protected    ApplicationApiDescriptionModel> GetApiDescriptionFromServerAsync(
         HttpClient client,
         String baseUrl)
     {

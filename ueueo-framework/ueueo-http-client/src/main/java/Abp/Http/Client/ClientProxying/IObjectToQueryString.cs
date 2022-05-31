@@ -5,5 +5,5 @@ namespace Volo.Abp.Http.Client.ClientProxying;
 
 public interface IObjectToQueryString<in TValue>
 {
-    Task<String> ConvertAsync(ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, TValue value);
+    String> ConvertAsync(ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, TValue value);
 }

@@ -10,10 +10,10 @@ public interface IMemoryDatabaseProvider<TMemoryDbContext>
     [Obsolete("Use GetDbContextAsync method.")]
     TMemoryDbContext DbContext;//  { get; }
 
-    Task<TMemoryDbContext> GetDbContextAsync();
+    TMemoryDbContext> GetDbContextAsync();
 
     [Obsolete("Use GetDatabaseAsync method.")]
     IMemoryDatabase GetDatabase();
 
-    Task<IMemoryDatabase> GetDatabaseAsync();
+    IMemoryDatabase> GetDatabaseAsync();
 }

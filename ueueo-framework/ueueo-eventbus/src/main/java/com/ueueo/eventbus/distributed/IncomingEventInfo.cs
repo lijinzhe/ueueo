@@ -17,7 +17,7 @@ public class IncomingEventInfo : IHasExtraProperties
 
     public byte[] EventData;//  { get; }
 
-    public DateTime CreationTime;//  { get; }
+    public Date CreationTime;//  { get; }
 
     protected IncomingEventInfo()
     {
@@ -30,7 +30,7 @@ public class IncomingEventInfo : IHasExtraProperties
         String messageId,
         String eventName,
         byte[] eventData,
-        DateTime creationTime)
+        Date creationTime)
     {
         Id = id;
         MessageId = messageId;

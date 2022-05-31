@@ -15,7 +15,7 @@ public class RequirePermissionsSimpleStateChecker<TState> : ISimpleStateChecker<
         _model = model;
     }
 
-    public Task<bool> IsEnabledAsync(SimpleStateCheckerContext<TState> context)
+    public Boolean  IsEnabledAsync(SimpleStateCheckerContext<TState> context)
     {
         var permissionChecker = context.ServiceProvider.GetRequiredService<IPermissionChecker>();
 

@@ -45,7 +45,7 @@ public class ClientProxyBase<TService> : ITransientDependency
         RequestAsync(BuildHttpProxyClientProxyContext(methodName, arguments));
     }
 
-    protected    Task<T> RequestAsync<T>(String methodName, ClientProxyRequestTypeValue arguments = null)
+    protected    T> RequestAsync<T>(String methodName, ClientProxyRequestTypeValue arguments = null)
     {
         return RequestAsync<T>(BuildHttpProxyClientProxyContext(methodName, arguments));
     }
@@ -79,7 +79,7 @@ public class ClientProxyBase<TService> : ITransientDependency
             typeof(TService));
     }
 
-    protected    Task<T> RequestAsync<T>(ClientProxyRequestContext requestContext)
+    protected    T> RequestAsync<T>(ClientProxyRequestContext requestContext)
     {
         var responseContent = RequestAsync(requestContext);
 
@@ -111,7 +111,7 @@ public class ClientProxyBase<TService> : ITransientDependency
         return JsonSerializer.Deserialize<T>(StringContent);
     }
 
-    protected    Task<HttpContent> RequestAsync(ClientProxyRequestContext requestContext)
+    protected    HttpContent> RequestAsync(ClientProxyRequestContext requestContext)
     {
         var clientConfig = ClientOptions.Value.HttpClientProxies.GetOrDefault(requestContext.ServiceType) ?? throw new AbpException($"Could not get HttpClientProxyConfig for {requestContext.ServiceType.FullName}.");
         var remoteServiceConfig = RemoteServiceConfigurationProvider.GetConfigurationOrDefaultAsync(clientConfig.RemoteServiceName);
@@ -162,7 +162,7 @@ public class ClientProxyBase<TService> : ITransientDependency
         return response.Content;
     }
 
-    protected    Task<ApiVersionInfo> GetApiVersionInfoAsync(ClientProxyRequestContext requestContext)
+    protected    ApiVersionInfo> GetApiVersionInfoAsync(ClientProxyRequestContext requestContext)
     {
         if (CurrentApiVersionInfo.ApiVersionInfo != null)
         {
@@ -178,17 +178,17 @@ public class ClientProxyBase<TService> : ITransientDependency
         return new ApiVersionInfo(versionParam?.BindingSourceId, apiVersion);
     }
 
-    protected    Task<String> GetUrlWithParametersAsync(ClientProxyRequestContext requestContext, ApiVersionInfo apiVersion)
+    protected    String> GetUrlWithParametersAsync(ClientProxyRequestContext requestContext, ApiVersionInfo apiVersion)
     {
         return ClientProxyUrlBuilder.GenerateUrlWithParametersAsync(requestContext.Action, requestContext.Arguments, apiVersion);
     }
 
-    protected    Task<HttpContent> GetHttpContentAsync(ClientProxyRequestContext requestContext, ApiVersionInfo apiVersion)
+    protected    HttpContent> GetHttpContentAsync(ClientProxyRequestContext requestContext, ApiVersionInfo apiVersion)
     {
         return ClientProxyRequestPayloadBuilder.BuildContentAsync(requestContext.Action, requestContext.Arguments, JsonSerializer, apiVersion);
     }
 
-    protected    Task<String> FindBestApiVersionAsync(ClientProxyRequestContext requestContext)
+    protected    String> FindBestApiVersionAsync(ClientProxyRequestContext requestContext)
     {
         var configuredVersion = GetConfiguredApiVersionAsync(requestContext);
 
@@ -205,7 +205,7 @@ public class ClientProxyBase<TService> : ITransientDependency
         return requestContext.Action.SupportedVersions.Last(); //TODO: Ensure to get the latest version!
     }
 
-    protected    Task<String> GetConfiguredApiVersionAsync(ClientProxyRequestContext requestContext)
+    protected    String> GetConfiguredApiVersionAsync(ClientProxyRequestContext requestContext)
     {
         var clientConfig = ClientOptions.Value.HttpClientProxies.GetOrDefault(requestContext.ServiceType)
                            ?? throw new AbpException($"Could not get DynamicHttpClientProxyConfig for {requestContext.ServiceType.FullName}.");

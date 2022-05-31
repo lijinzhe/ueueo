@@ -21,7 +21,7 @@ public class IncomingEventRecord :
 
     public byte[] EventData ;// { get; private set; }
 
-    public DateTime CreationTime ;// { get; private set; }
+    public Date CreationTime ;// { get; private set; }
 
     public boolean Processed;// { get; set; }
 

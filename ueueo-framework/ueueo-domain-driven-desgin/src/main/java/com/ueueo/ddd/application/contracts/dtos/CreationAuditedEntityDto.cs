@@ -10,7 +10,7 @@ namespace Volo.Abp.Application.Dtos;
 public abstract class CreationAuditedEntityDto : EntityDto, ICreationAuditedObject
 {
      * <inheritdoc />
-    public DateTime CreationTime;// { get; set; }
+    public Date CreationTime;// { get; set; }
 
      * <inheritdoc />
     public ID CreatorId;// { get; set; }
@@ -24,7 +24,7 @@ public abstract class CreationAuditedEntityDto : EntityDto, ICreationAuditedObje
 public abstract class CreationAuditedEntityDto<TPrimaryKey> : EntityDto<TPrimaryKey>, ICreationAuditedObject
 {
      * <inheritdoc />
-    public DateTime CreationTime;// { get; set; }
+    public Date CreationTime;// { get; set; }
 
      * <inheritdoc />
     public ID CreatorId;// { get; set; }

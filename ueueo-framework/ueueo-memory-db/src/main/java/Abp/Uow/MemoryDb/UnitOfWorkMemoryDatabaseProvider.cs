@@ -31,7 +31,7 @@ public class UnitOfWorkMemoryDatabaseProvider<TMemoryDbContext> : IMemoryDatabas
         _currentTenant = currentTenant;
     }
 
-    public Task<TMemoryDbContext> GetDbContextAsync()
+    public TMemoryDbContext> GetDbContextAsync()
     {
         return Task.FromResult(DbContext);
     }
@@ -57,7 +57,7 @@ public class UnitOfWorkMemoryDatabaseProvider<TMemoryDbContext> : IMemoryDatabas
         return ((MemoryDbDatabaseApi)databaseApi).Database;
     }
 
-    public  Task<IMemoryDatabase> GetDatabaseAsync()
+    public  IMemoryDatabase> GetDatabaseAsync()
     {
         var unitOfWork = _unitOfWorkManager.Current;
         if (unitOfWork == null)
@@ -77,7 +77,7 @@ public class UnitOfWorkMemoryDatabaseProvider<TMemoryDbContext> : IMemoryDatabas
         return ((MemoryDbDatabaseApi)databaseApi).Database;
     }
 
-    private  Task<String> ResolveConnectionStringAsync()
+    private  String> ResolveConnectionStringAsync()
     {
         // Multi-tenancy unaware contexts should always use the host connection string
         if (typeof(TMemoryDbContext).IsDefined(typeof(IgnoreMultiTenancyAttribute), false))

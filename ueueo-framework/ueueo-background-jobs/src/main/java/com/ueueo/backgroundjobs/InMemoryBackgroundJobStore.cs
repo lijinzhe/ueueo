@@ -23,7 +23,7 @@ public class InMemoryBackgroundJobStore : IBackgroundJobStore, ISingletonDepende
         _jobs = new ConcurrentDictionary<Guid, BackgroundJobInfo>();
     }
 
-    public   Task<BackgroundJobInfo> FindAsync(Guid jobId)
+    public   BackgroundJobInfo FindAsync(Guid jobId)
     {
         return Task.FromResult(_jobs.GetOrDefault(jobId));
     }
@@ -35,7 +35,7 @@ public class InMemoryBackgroundJobStore : IBackgroundJobStore, ISingletonDepende
         return Task.FromResult(0);
     }
 
-    public   Task<List<BackgroundJobInfo>> GetWaitingJobsAsync(int maxResultCount)
+    public   List<BackgroundJobInfo> GetWaitingJobsAsync(int maxResultCount)
     {
         var waitingJobs = _jobs.Values
             .Where(t => !t.IsAbandoned && t.NextTryTime <= Clock.Now)

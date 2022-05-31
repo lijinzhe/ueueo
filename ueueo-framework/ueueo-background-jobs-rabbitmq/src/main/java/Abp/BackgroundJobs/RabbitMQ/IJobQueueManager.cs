@@ -5,5 +5,5 @@ namespace Volo.Abp.BackgroundJobs.RabbitMQ;
 
 public interface IJobQueueManager : IRunnable
 {
-    Task<IJobQueue<TArgs>> GetAsync<TArgs>();
+    IJobQueue<TArgs> GetAsync<TArgs>();
 }

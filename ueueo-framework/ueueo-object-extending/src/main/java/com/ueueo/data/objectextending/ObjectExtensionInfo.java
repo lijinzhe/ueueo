@@ -2,16 +2,19 @@ package com.ueueo.data.objectextending;
 
 import lombok.Getter;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
- * TODO Description Of This JAVA Class.
  *
  * @author Lee
  * @date 2022-05-23 13:56
@@ -19,7 +22,7 @@ import java.util.function.Consumer;
 @Getter
 public class ObjectExtensionInfo {
     @NonNull
-    private Type type;
+    private Class<?> type;
 
     @NonNull
     protected ConcurrentHashMap<String, ObjectExtensionPropertyInfo> properties;
@@ -30,7 +33,7 @@ public class ObjectExtensionInfo {
     @NonNull
     public List<Consumer<ObjectExtensionValidationContext>> validators;
 
-    public ObjectExtensionInfo(Type type) {
+    public ObjectExtensionInfo(Class<?> type) {
         this.type = type;
         this.properties = new ConcurrentHashMap<>();
         this.configuration = new ConcurrentHashMap<>();
@@ -54,5 +57,31 @@ public class ObjectExtensionInfo {
             configureAction.accept(propertyInfo);
         }
         return this;
+    }
+
+    public ObjectExtensionInfo addOrUpdateProperty(
+            @NonNull Class<?> propertyType,
+            @NonNull String propertyName,
+            @Nullable Consumer<ObjectExtensionPropertyInfo> configureAction) {
+        Objects.requireNonNull(propertyType);
+        Objects.requireNonNull(propertyName);
+
+        ObjectExtensionPropertyInfo propertyInfo = properties.computeIfAbsent(propertyName,
+                s -> new ObjectExtensionPropertyInfo(this, propertyType, propertyName));
+
+        if (configureAction != null) {
+            configureAction.accept(propertyInfo);
+        }
+        return this;
+    }
+
+    public List<ObjectExtensionPropertyInfo> getProperties() {
+        return new ArrayList<>(properties.values()).stream().sorted(Comparator.comparing(ObjectExtensionPropertyInfo::getName))
+                .collect(Collectors.toList());
+    }
+
+    public ObjectExtensionPropertyInfo getPropertyOrNull(@NonNull String propertyName) {
+        Objects.requireNonNull(propertyName);
+        return properties.get(propertyName);
     }
 }

@@ -52,7 +52,7 @@ public abstract class AbstractKeyCrudAppService<TEntity, TEntityDto, TKey, TGetL
 
     }
 
-    protected override Task<TEntityDto> MapToGetListOutputDtoAsync(TEntity entity)
+    protected override TEntityDto> MapToGetListOutputDtoAsync(TEntity entity)
     {
         return MapToGetOutputDtoAsync(entity);
     }
@@ -82,7 +82,7 @@ public abstract class AbstractKeyCrudAppService<TEntity, TGetOutputDto, TGetList
         Repository = repository;
     }
 
-    public    Task<TGetOutputDto> CreateAsync(TCreateInput input)
+    public    TGetOutputDto> CreateAsync(TCreateInput input)
     {
         CheckCreatePolicyAsync();
 
@@ -95,7 +95,7 @@ public abstract class AbstractKeyCrudAppService<TEntity, TGetOutputDto, TGetList
         return MapToGetOutputDtoAsync(entity);
     }
 
-    public    Task<TGetOutputDto> UpdateAsync(TKey id, TUpdateInput input)
+    public    TGetOutputDto> UpdateAsync(TKey id, TUpdateInput input)
     {
         CheckUpdatePolicyAsync();
 
@@ -137,7 +137,7 @@ public abstract class AbstractKeyCrudAppService<TEntity, TGetOutputDto, TGetList
      * It can be overriden for custom mapping.
      * Overriding this has higher priority than overriding the <see cref="MapToEntity(TCreateInput)"/>
     */
-    protected   Task<TEntity> MapToEntityAsync(TCreateInput createInput)
+    protected   TEntity> MapToEntityAsync(TCreateInput createInput)
     {
         return Task.FromResult(MapToEntity(createInput));
     }

@@ -6,7 +6,7 @@ namespace Volo.Abp.BackgroundJobs.Quartz;
 
 public static class QuartzBackgroundJobManageExtensions
 {
-    public staticTask<String> EnqueueAsync<TArgs>(this IBackgroundJobManager backgroundJobManager,
+    public static String EnqueueAsync<TArgs>(this IBackgroundJobManager backgroundJobManager,
         TArgs args, int retryCount, int retryIntervalMillisecond,
         BackgroundJobPriority priority = BackgroundJobPriority.Normal, TimeSpan? delay = null)
     {

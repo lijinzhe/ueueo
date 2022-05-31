@@ -19,7 +19,7 @@ public class LdapManager : ILdapManager, ITransientDependency
         Logger = NullLogger<LdapManager>.Instance;
     }
 
-    public    Task<bool> AuthenticateAsync(String username, String password)
+    public    Boolean>  AuthenticateAsync(String username, String password)
     {
         try
         {
@@ -36,7 +36,7 @@ public class LdapManager : ILdapManager, ITransientDependency
         }
     }
 
-    protected    Task<ILdapConnection> CreateLdapConnectionAsync()
+    protected    ILdapConnection> CreateLdapConnectionAsync()
     {
         var ldapConnection = new LdapConnection();
         ConfigureLdapConnectionAsync(ldapConnection);

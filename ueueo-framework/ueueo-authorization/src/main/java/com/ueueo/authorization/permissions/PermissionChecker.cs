@@ -32,12 +32,12 @@ public class PermissionChecker : IPermissionChecker, ITransientDependency
         StateCheckerManager = stateCheckerManager;
     }
 
-    public virtualTask<bool> IsGrantedAsync(String name)
+    public Boolean  IsGrantedAsync(String name)
     {
         return IsGrantedAsync(PrincipalAccessor.Principal, name);
     }
 
-    public virtualTask<bool> IsGrantedAsync(
+    public  Boolean  IsGrantedAsync(
         ClaimsPrincipal claimsPrincipal,
         String name)
     {
@@ -88,12 +88,12 @@ public class PermissionChecker : IPermissionChecker, ITransientDependency
         return isGranted;
     }
 
-    public Task<MultiplePermissionGrantResult> IsGrantedAsync(String[] names)
+    public MultiplePermissionGrantResult IsGrantedAsync(String[] names)
     {
         return IsGrantedAsync(PrincipalAccessor.Principal, names);
     }
 
-    public Task<MultiplePermissionGrantResult> IsGrantedAsync(ClaimsPrincipal claimsPrincipal, String[] names)
+    public MultiplePermissionGrantResult IsGrantedAsync(ClaimsPrincipal claimsPrincipal, String[] names)
     {
         Objects.requireNonNull(names, nameof(names));
 

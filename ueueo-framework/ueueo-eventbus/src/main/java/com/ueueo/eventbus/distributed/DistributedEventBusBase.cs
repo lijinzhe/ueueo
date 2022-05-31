@@ -95,7 +95,7 @@ public abstract class DistributedEventBusBase : EventBusBase, IDistributedEventB
         IncomingEventInfo incomingEvent,
         InboxConfig inboxConfig);
 
-    private  Task<bool> AddToOutboxAsync(Type eventType, Object eventData)
+    private  Boolean>  AddToOutboxAsync(Type eventType, Object eventData)
     {
         var unitOfWork = UnitOfWorkManager.Current;
         if (unitOfWork == null)
@@ -125,7 +125,7 @@ public abstract class DistributedEventBusBase : EventBusBase, IDistributedEventB
         return false;
     }
 
-    protected  Task<bool> AddToInboxAsync(
+    protected  Boolean>  AddToInboxAsync(
         String messageId,
         String eventName,
         Type eventType,

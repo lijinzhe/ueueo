@@ -57,7 +57,7 @@ public class AliyunBlobProvider : BlobProviderBase, ITransientDependency
     }
 
     @Override
-    public Task<bool> DeleteAsync(BlobProviderDeleteArgs args)
+    public Boolean  DeleteAsync(BlobProviderDeleteArgs args)
     {
         var containerName = GetContainerName(args);
         var blobName = AliyunBlobNameCalculator.Calculate(args);
@@ -71,7 +71,7 @@ public class AliyunBlobProvider : BlobProviderBase, ITransientDependency
     }
 
     @Override
-    public Task<bool> ExistsAsync(BlobProviderExistsArgs args)
+    public Boolean  ExistsAsync(BlobProviderExistsArgs args)
     {
         var containerName = GetContainerName(args);
         var blobName = AliyunBlobNameCalculator.Calculate(args);
@@ -80,7 +80,7 @@ public class AliyunBlobProvider : BlobProviderBase, ITransientDependency
     }
 
     @Override
-    public  Task<Stream> GetOrNullAsync(BlobProviderGetArgs args)
+    public  Stream GetOrNullAsync(BlobProviderGetArgs args)
     {
         var containerName = GetContainerName(args);
         var blobName = AliyunBlobNameCalculator.Calculate(args);

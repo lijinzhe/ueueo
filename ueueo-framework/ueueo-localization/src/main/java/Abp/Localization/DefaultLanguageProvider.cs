@@ -14,7 +14,7 @@ public class DefaultLanguageProvider : ILanguageProvider, ITransientDependency
         Options = options.Value;
     }
 
-    public Task<IReadOnlyList<LanguageInfo>> GetLanguagesAsync()
+    public IReadOnlyList<LanguageInfo>> GetLanguagesAsync()
     {
         return Task.FromResult((IReadOnlyList<LanguageInfo>)Options.Languages);
     }

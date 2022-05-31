@@ -17,38 +17,38 @@ public class SmtpEmailSenderConfiguration : EmailSenderConfiguration, ISmtpEmail
 
     }
 
-    public Task<String> GetHostAsync()
+    public String> GetHostAsync()
     {
         return GetNotEmptySettingValueAsync(EmailSettingNames.Smtp.Host);
     }
 
-    public  Task<int> GetPortAsync()
+    public  int> GetPortAsync()
     {
         return (GetNotEmptySettingValueAsync(EmailSettingNames.Smtp.Port)).To<int>();
     }
 
-    public Task<String> GetUserNameAsync()
+    public String> GetUserNameAsync()
     {
         return GetNotEmptySettingValueAsync(EmailSettingNames.Smtp.UserName);
     }
 
-    public Task<String> GetPasswordAsync()
+    public String> GetPasswordAsync()
     {
         return GetNotEmptySettingValueAsync(EmailSettingNames.Smtp.Password);
     }
 
-    public Task<String> GetDomainAsync()
+    public String> GetDomainAsync()
     {
         return SettingProvider.GetOrNullAsync(EmailSettingNames.Smtp.Domain);
     }
 
-    public  Task<bool> GetEnableSslAsync()
+    public  Boolean>  GetEnableSslAsync()
     {
-        return (GetNotEmptySettingValueAsync(EmailSettingNames.Smtp.EnableSsl)).To<bool>();
+        return (GetNotEmptySettingValueAsync(EmailSettingNames.Smtp.EnableSsl)).To<Boolean> ();
     }
 
-    public  Task<bool> GetUseDefaultCredentialsAsync()
+    public  Boolean>  GetUseDefaultCredentialsAsync()
     {
-        return (GetNotEmptySettingValueAsync(EmailSettingNames.Smtp.UseDefaultCredentials)).To<bool>();
+        return (GetNotEmptySettingValueAsync(EmailSettingNames.Smtp.UseDefaultCredentials)).To<Boolean> ();
     }
 }

@@ -70,7 +70,7 @@ public class JobQueue<TArgs> : IJobQueue<TArgs>
                );
     }
 
-    public virtualTask<String> EnqueueAsync(
+    public  String EnqueueAsync(
         TArgs args,
         BackgroundJobPriority priority = BackgroundJobPriority.Normal,
         TimeSpan? delay = null)

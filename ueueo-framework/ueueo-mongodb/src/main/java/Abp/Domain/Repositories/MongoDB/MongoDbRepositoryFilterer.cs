@@ -47,7 +47,7 @@ public class MongoDbRepositoryFilterer<TEntity, TKey> : MongoDbRepositoryFiltere
     {
     }
 
-    public    Task<FilterDefinition<TEntity>> CreateEntityFilterAsync(TKey id, boolean applyFilters = false)
+    public    FilterDefinition<TEntity>> CreateEntityFilterAsync(TKey id, boolean applyFilters = false)
     {
         var filters = new List<FilterDefinition<TEntity>>
             {
@@ -62,7 +62,7 @@ public class MongoDbRepositoryFilterer<TEntity, TKey> : MongoDbRepositoryFiltere
         return Builders<TEntity>.Filter.And(filters);
     }
 
-    public   Task<FilterDefinition<TEntity>> CreateEntityFilterAsync(TEntity entity, boolean withConcurrencyStamp = false, String concurrencyStamp = null)
+    public   FilterDefinition<TEntity>> CreateEntityFilterAsync(TEntity entity, boolean withConcurrencyStamp = false, String concurrencyStamp = null)
     {
         if (!withConcurrencyStamp || !(entity is IHasConcurrencyStamp entityWithConcurrencyStamp))
         {
@@ -80,12 +80,12 @@ public class MongoDbRepositoryFilterer<TEntity, TKey> : MongoDbRepositoryFiltere
         ));
     }
 
-    public    Task<FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TEntity> entities, boolean applyFilters = false)
+    public    FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TEntity> entities, boolean applyFilters = false)
     {
         return CreateEntitiesFilterAsync(entities.Select(s => s.Id), applyFilters);
     }
 
-    public    Task<FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TKey> ids, boolean applyFilters = false)
+    public    FilterDefinition<TEntity>> CreateEntitiesFilterAsync(IEnumerable<TKey> ids, boolean applyFilters = false)
     {
         var filters = new List<FilterDefinition<TEntity>>()
             {

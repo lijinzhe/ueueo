@@ -43,7 +43,7 @@ public class ClientProxyUrlBuilder : ITransientDependency
         HttpClientProxyingOptions = httpClientProxyingOptions.Value;
     }
 
-    public  Task<String> GenerateUrlWithParametersAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<String, Object> methodArguments, ApiVersionInfo apiVersion)
+    public  String> GenerateUrlWithParametersAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<String, Object> methodArguments, ApiVersionInfo apiVersion)
     {
         // The ASP.NET Core route value provider and query string value provider:
         //  Treat values as invariant culture.
@@ -100,7 +100,7 @@ public class ClientProxyUrlBuilder : ITransientDependency
                 {
                     using (var scope = ServiceScopeFactory.CreateScope())
                     {
-                        var path = (Task<String>)CallObjectToPathAsyncMethod
+                        var path = (String>)CallObjectToPathAsyncMethod
                             .MakeGenericMethod(value.GetType())
                             .Invoke(this, new Object[]
                             {
@@ -143,7 +143,7 @@ public class ClientProxyUrlBuilder : ITransientDependency
             {
                 using (var scope = ServiceScopeFactory.CreateScope())
                 {
-                    var queryString = (Task<String>)CallObjectToQueryStringAsyncMethod
+                    var queryString = (String>)CallObjectToQueryStringAsyncMethod
                         .MakeGenericMethod(value.GetType())
                         .Invoke(this, new Object[]
                         {
@@ -175,17 +175,17 @@ public class ClientProxyUrlBuilder : ITransientDependency
         }
     }
 
-    protected    Task<String> ObjectToQueryStringAsync<T>(IObjectToQueryString<T> converter, ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, T value)
+    protected    String> ObjectToQueryStringAsync<T>(IObjectToQueryString<T> converter, ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, T value)
     {
         return converter.ConvertAsync(actionApiDescription, parameterApiDescription, value);
     }
 
-    protected    Task<String> ObjectToPathAsync<T>(IObjectToPath<T> converter, ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, T value)
+    protected    String> ObjectToPathAsync<T>(IObjectToPath<T> converter, ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, T value)
     {
         return converter.ConvertAsync(actionApiDescription, parameterApiDescription, value);
     }
 
-    protected    Task<bool> AddQueryStringParameterAsync(
+    protected    Boolean>  AddQueryStringParameterAsync(
         StringBuilder urlBuilder,
         boolean isFirstParam,
         String name,
@@ -218,9 +218,9 @@ public class ClientProxyUrlBuilder : ITransientDependency
         return true;
     }
 
-    protected   Task<String> ConvertValueToStringAsync(@Nullable Object value)
+    protected   String> ConvertValueToStringAsync(@Nullable Object value)
     {
-        if (value is DateTime dateTimeValue)
+        if (value is Date dateTimeValue)
         {
             return Task.FromResult(dateTimeValue.ToUniversalTime().ToString("O"));
         }

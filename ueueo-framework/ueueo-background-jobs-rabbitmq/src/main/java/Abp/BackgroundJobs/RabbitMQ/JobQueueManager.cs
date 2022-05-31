@@ -54,7 +54,7 @@ public class JobQueueManager : IJobQueueManager, ISingletonDependency
         JobQueues.Clear();
     }
 
-    public Task<IJobQueue<TArgs>> GetAsync<TArgs>()
+    public IJobQueue<TArgs> GetAsync<TArgs>()
     {
         var jobConfiguration = Options.GetJob(typeof(TArgs));
 

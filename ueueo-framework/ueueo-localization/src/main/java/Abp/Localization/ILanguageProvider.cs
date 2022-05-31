@@ -5,5 +5,5 @@ namespace Volo.Abp.Localization;
 
 public interface ILanguageProvider
 {
-    Task<IReadOnlyList<LanguageInfo>> GetLanguagesAsync();
+    IReadOnlyList<LanguageInfo>> GetLanguagesAsync();
 }

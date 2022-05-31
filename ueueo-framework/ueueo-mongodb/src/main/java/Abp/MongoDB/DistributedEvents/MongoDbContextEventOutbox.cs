@@ -40,7 +40,7 @@ public class MongoDbContextEventOutbox<TMongoDbContext> : IMongoDbContextEventOu
     }
 
     [UnitOfWork]
-    public    Task<List<OutgoingEventInfo>> GetWaitingEventsAsync(int maxCount, CancellationToken cancellationToken = default)
+    public    List<OutgoingEventInfo>> GetWaitingEventsAsync(int maxCount, CancellationToken cancellationToken = default)
     {
         var dbContext = (IHasEventOutbox)MongoDbContextProvider.GetDbContextAsync(cancellationToken);
 

@@ -16,7 +16,7 @@ public interface ITemplateRenderer
      * <param name="globalContext">A dictionary which can be used to import global objects to the template</param>
      * <returns></returns>
      */
-    Task<String> RenderAsync(
+    String> RenderAsync(
         @Nonnull String templateName,
         @Nullable Object model = null,
         @Nullable String cultureName = null,

@@ -41,7 +41,7 @@ public class ClientProxyRequestPayloadBuilder : ITransientDependency
     }
 
     [CanBeNull]
-    public    Task<HttpContent> BuildContentAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<String, Object> methodArguments, IJsonSerializer jsonSerializer, ApiVersionInfo apiVersion)
+    public    HttpContent> BuildContentAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<String, Object> methodArguments, IJsonSerializer jsonSerializer, ApiVersionInfo apiVersion)
     {
         var body = GenerateBodyAsync(action, methodArguments, jsonSerializer);
         if (body != null)
@@ -54,7 +54,7 @@ public class ClientProxyRequestPayloadBuilder : ITransientDependency
         return body;
     }
 
-    protected   Task<HttpContent> GenerateBodyAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<String, Object> methodArguments, IJsonSerializer jsonSerializer)
+    protected   HttpContent> GenerateBodyAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<String, Object> methodArguments, IJsonSerializer jsonSerializer)
     {
         var parameters = action
             .Parameters
@@ -82,7 +82,7 @@ public class ClientProxyRequestPayloadBuilder : ITransientDependency
         return Task.FromResult<HttpContent>(new StringContent(jsonSerializer.Serialize(value), Encoding.UTF8, MimeTypes.Application.Json));
     }
 
-    protected    Task<HttpContent> GenerateFormPostDataAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<String, Object> methodArguments)
+    protected    HttpContent> GenerateFormPostDataAsync(ActionApiDescriptionModel action, IReadOnlyDictionary<String, Object> methodArguments)
     {
         var parameters = action
             .Parameters
@@ -108,7 +108,7 @@ public class ClientProxyRequestPayloadBuilder : ITransientDependency
             {
                 using (var scope = ServiceScopeFactory.CreateScope())
                 {
-                    var formDataContents = (Task<List<KeyValuePair<String, HttpContent>>>)CallObjectToFormDataAsyncMethod
+                    var formDataContents = (List<KeyValuePair<String, HttpContent>>>)CallObjectToFormDataAsyncMethod
                         .MakeGenericMethod(value.GetType())
                         .Invoke(this, new Object[]
                         {
@@ -170,7 +170,7 @@ public class ClientProxyRequestPayloadBuilder : ITransientDependency
         return formData;
     }
 
-    protected    Task<List<KeyValuePair<String, HttpContent>>> ObjectToFormDataAsync<T>(IObjectToFormData<T> converter, ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, T value)
+    protected    List<KeyValuePair<String, HttpContent>>> ObjectToFormDataAsync<T>(IObjectToFormData<T> converter, ActionApiDescriptionModel actionApiDescription, ParameterApiDescriptionModel parameterApiDescription, T value)
     {
         return converter.ConvertAsync(actionApiDescription, parameterApiDescription, value);
     }

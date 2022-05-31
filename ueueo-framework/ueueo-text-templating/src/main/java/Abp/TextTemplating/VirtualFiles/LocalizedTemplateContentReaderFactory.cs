@@ -21,7 +21,7 @@ public class LocalizedTemplateContentReaderFactory : ILocalizedTemplateContentRe
         SyncObj = new SemaphoreSlim(1, 1);
     }
 
-    public    Task<ILocalizedTemplateContentReader> CreateAsync(TemplateDefinition templateDefinition)
+    public    ILocalizedTemplateContentReader> CreateAsync(TemplateDefinition templateDefinition)
     {
         if (ReaderCache.TryGetValue(templateDefinition.Name, out var reader))
         {
@@ -41,7 +41,7 @@ public class LocalizedTemplateContentReaderFactory : ILocalizedTemplateContentRe
         }
     }
 
-    protected    Task<ILocalizedTemplateContentReader> CreateInternalAsync(
+    protected    ILocalizedTemplateContentReader> CreateInternalAsync(
         TemplateDefinition templateDefinition)
     {
         var virtualPath = templateDefinition.GetVirtualFilePathOrNull();

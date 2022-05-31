@@ -40,7 +40,7 @@ public interface IBlobContainer
      * Returns false if the blob with the given <paramref name="name"/> was not exists.
      * </returns>
      */
-    Task<bool> DeleteAsync(
+    Boolean  DeleteAsync(
         String name,
         CancellationToken cancellationToken = default
     );
@@ -51,7 +51,7 @@ public interface IBlobContainer
      * <param name="name">The name of the blob</param>
      * <param name="cancellationToken">Cancellation token</param>
      */
-    Task<bool> ExistsAsync(
+    Boolean  ExistsAsync(
         String name,
         CancellationToken cancellationToken = default
     );
@@ -68,7 +68,7 @@ public interface IBlobContainer
      * A <see cref="Stream"/> to read the blob data.
      * </returns>
      */
-    Task<Stream> GetAsync(
+    Stream GetAsync(
         String name,
         CancellationToken cancellationToken = default
     );
@@ -83,7 +83,7 @@ public interface IBlobContainer
      * A <see cref="Stream"/> to read the blob data.
      * </returns>
      */
-    Task<Stream> GetOrNullAsync(
+    Stream GetOrNullAsync(
         String name,
         CancellationToken cancellationToken = default
     );

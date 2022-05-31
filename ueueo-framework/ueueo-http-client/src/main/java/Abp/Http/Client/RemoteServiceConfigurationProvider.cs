@@ -13,12 +13,12 @@ public class RemoteServiceConfigurationProvider : IRemoteServiceConfigurationPro
         Options = options.CurrentValue;
     }
 
-    public Task<RemoteServiceConfiguration> GetConfigurationOrDefaultAsync(String name)
+    public RemoteServiceConfiguration> GetConfigurationOrDefaultAsync(String name)
     {
         return Task.FromResult(Options.RemoteServices.GetConfigurationOrDefault(name));
     }
 
-    public Task<RemoteServiceConfiguration> GetConfigurationOrDefaultOrNullAsync(String name)
+    public RemoteServiceConfiguration> GetConfigurationOrDefaultOrNullAsync(String name)
     {
         return Task.FromResult(Options.RemoteServices.GetConfigurationOrDefaultOrNull(name));
     }

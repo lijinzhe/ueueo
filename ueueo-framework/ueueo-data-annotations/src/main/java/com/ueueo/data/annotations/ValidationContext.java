@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.validation.Validator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -14,6 +15,7 @@ import java.util.Objects;
  * @author Lee
  * @date 2022-05-25 15:38
  */
+@Getter
 public class ValidationContext {
     /**
      * The dictionary of key/value pairs associated with this context.

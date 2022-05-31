@@ -31,7 +31,7 @@ public class BlobContainer<TContainer> : IBlobContainer<TContainer>
         );
     }
 
-    public Task<bool> DeleteAsync(
+    public Boolean  DeleteAsync(
         String name,
         CancellationToken cancellationToken = default)
     {
@@ -41,7 +41,7 @@ public class BlobContainer<TContainer> : IBlobContainer<TContainer>
         );
     }
 
-    public Task<bool> ExistsAsync(
+    public Boolean  ExistsAsync(
         String name,
         CancellationToken cancellationToken = default)
     {
@@ -51,7 +51,7 @@ public class BlobContainer<TContainer> : IBlobContainer<TContainer>
         );
     }
 
-    public Task<Stream> GetAsync(
+    public Stream GetAsync(
         String name,
         CancellationToken cancellationToken = default)
     {
@@ -61,7 +61,7 @@ public class BlobContainer<TContainer> : IBlobContainer<TContainer>
         );
     }
 
-    public Task<Stream> GetOrNullAsync(
+    public Stream GetOrNullAsync(
         String name,
         CancellationToken cancellationToken = default)
     {
@@ -129,7 +129,7 @@ public class BlobContainer : IBlobContainer
         }
     }
 
-    public    Task<bool> DeleteAsync(
+    public    Boolean  DeleteAsync(
         String name,
         CancellationToken cancellationToken = default)
     {
@@ -149,7 +149,7 @@ public class BlobContainer : IBlobContainer
         }
     }
 
-    public    Task<bool> ExistsAsync(
+    public    Boolean  ExistsAsync(
         String name,
         CancellationToken cancellationToken = default)
     {
@@ -169,7 +169,7 @@ public class BlobContainer : IBlobContainer
         }
     }
 
-    public    Task<Stream> GetAsync(
+    public    Stream GetAsync(
         String name,
         CancellationToken cancellationToken = default)
     {
@@ -185,7 +185,7 @@ public class BlobContainer : IBlobContainer
         return stream;
     }
 
-    public    Task<Stream> GetOrNullAsync(
+    public    Stream GetOrNullAsync(
         String name,
         CancellationToken cancellationToken = default)
     {

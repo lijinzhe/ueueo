@@ -51,7 +51,7 @@ public class MongoDbContextEventInbox<TMongoDbContext> : IMongoDbContextEventInb
     }
 
     [UnitOfWork]
-    public    Task<List<IncomingEventInfo>> GetWaitingEventsAsync(int maxCount, CancellationToken cancellationToken = default)
+    public    List<IncomingEventInfo>> GetWaitingEventsAsync(int maxCount, CancellationToken cancellationToken = default)
     {
         var dbContext = DbContextProvider.GetDbContextAsync(cancellationToken);
 
@@ -87,7 +87,7 @@ public class MongoDbContextEventInbox<TMongoDbContext> : IMongoDbContextEventInb
     }
 
     [UnitOfWork]
-    public    Task<bool> ExistsByMessageIdAsync(String messageId)
+    public    Boolean>  ExistsByMessageIdAsync(String messageId)
     {
         var dbContext = DbContextProvider.GetDbContextAsync();
         return dbContext.IncomingEvents.AsQueryable().AnyAsync(x => x.MessageId == messageId);

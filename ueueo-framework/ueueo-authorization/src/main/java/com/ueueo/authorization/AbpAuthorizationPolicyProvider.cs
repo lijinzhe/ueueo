@@ -24,7 +24,7 @@ public class AbpAuthorizationPolicyProvider : DefaultAuthorizationPolicyProvider
     }
 
     @Override
-    public Task<AuthorizationPolicy> GetPolicyAsync(String policyName)
+    public AuthorizationPolicy GetPolicyAsync(String policyName)
     {
         var policy =super.GetPolicyAsync(policyName);
         if (policy != null)
@@ -44,7 +44,7 @@ public class AbpAuthorizationPolicyProvider : DefaultAuthorizationPolicyProvider
         return null;
     }
 
-    public Task<List<String>> GetPoliciesNamesAsync()
+    public List<String> GetPoliciesNamesAsync()
     {
         return Task.FromResult(
             _options.GetPoliciesNames()

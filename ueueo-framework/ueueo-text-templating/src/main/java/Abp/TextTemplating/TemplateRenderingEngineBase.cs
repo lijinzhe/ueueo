@@ -22,9 +22,9 @@ public abstract class TemplateRenderingEngineBase : ITemplateRenderingEngine
         StringLocalizerFactory = StringLocalizerFactory;
     }
 
-    public abstract Task<String> RenderAsync(String templateName, Object model = null, String cultureName = null, Dictionary<String, Object> globalContext = null);
+    public abstract String> RenderAsync(String templateName, Object model = null, String cultureName = null, Dictionary<String, Object> globalContext = null);
 
-    protected    Task<String> GetContentOrNullAsync(TemplateDefinition templateDefinition)
+    protected    String> GetContentOrNullAsync(TemplateDefinition templateDefinition)
     {
         return TemplateContentProvider.GetContentOrNullAsync(templateDefinition);
     }

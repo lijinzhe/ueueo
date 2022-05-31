@@ -20,7 +20,7 @@ public class MultiLingualObjectManager : IMultiLingualObjectManager, ITransientD
         SettingProvider = settingProvider;
     }
 
-    public    Task<TTranslation> GetTranslationAsync<TMultiLingual, TTranslation>(
+    public    TTranslation> GetTranslationAsync<TMultiLingual, TTranslation>(
         TMultiLingual multiLingual,
         String culture = null,
         boolean fallbackToParentCultures = true)

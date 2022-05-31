@@ -6,8 +6,8 @@ namespace Volo.Abp.Http.Client.DynamicProxying;
 
 public interface IApiDescriptionCache
 {
-    Task<ApplicationApiDescriptionModel> GetAsync(
+    ApplicationApiDescriptionModel> GetAsync(
         String baseUrl,
-        Func<Task<ApplicationApiDescriptionModel>> factory
+        Func<ApplicationApiDescriptionModel>> factory
     );
 }

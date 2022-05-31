@@ -25,12 +25,12 @@ public static class AsyncHelper
 
     public static boolean IsTaskOrTaskOfT(@Nonnull this Type type)
     {
-        return type == typeof(Task) || (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Task<>));
+        return type == typeof(Task) || (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(>));
     }
 
     public static boolean IsTaskOfT(@Nonnull this Type type)
     {
-        return type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Task<>);
+        return type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(>);
     }
 
     /**
@@ -62,7 +62,7 @@ public static class AsyncHelper
      * <typeparam name="TResult">Result type</typeparam>
      * <returns>Result of the  operation</returns>
      */
-    public static TResult RunSync<TResult>(Func<Task<TResult>> func)
+    public static TResult RunSync<TResult>(Func<TResult>> func)
     {
         return AsyncContext.Run(func);
     }

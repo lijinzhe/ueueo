@@ -42,7 +42,7 @@ public class RequirePermissionsSimpleBatchStateChecker<TState> : SimpleBatchStat
     }
 
     @Override
-    public Task<SimpleStateCheckerResult<TState>> IsEnabledAsync(SimpleBatchStateCheckerContext<TState> context)
+    public SimpleStateCheckerResult<TState> IsEnabledAsync(SimpleBatchStateCheckerContext<TState> context)
     {
         var permissionChecker = context.ServiceProvider.GetRequiredService<IPermissionChecker>();
 

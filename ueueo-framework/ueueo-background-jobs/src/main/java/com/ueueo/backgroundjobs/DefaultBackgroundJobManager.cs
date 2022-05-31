@@ -29,14 +29,14 @@ public class DefaultBackgroundJobManager : IBackgroundJobManager, ITransientDepe
         Store = store;
     }
 
-    public    Task<String> EnqueueAsync<TArgs>(TArgs args, BackgroundJobPriority priority = BackgroundJobPriority.Normal, TimeSpan? delay = null)
+    public    String EnqueueAsync<TArgs>(TArgs args, BackgroundJobPriority priority = BackgroundJobPriority.Normal, TimeSpan? delay = null)
     {
         var jobName = BackgroundJobNameAttribute.GetName<TArgs>();
         var jobId = EnqueueAsync(jobName, args, priority, delay);
         return jobId.ToString();
     }
 
-    protected    Task<Guid> EnqueueAsync(String jobName, Object args, BackgroundJobPriority priority = BackgroundJobPriority.Normal, TimeSpan? delay = null)
+    protected    Guid EnqueueAsync(String jobName, Object args, BackgroundJobPriority priority = BackgroundJobPriority.Normal, TimeSpan? delay = null)
     {
         var jobInfo = new BackgroundJobInfo
         {

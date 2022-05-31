@@ -32,7 +32,7 @@ public class ObjectValidator : IObjectValidator, ITransientDependency
         }
     }
 
-    public    Task<List<ValidationResult>> GetErrorsAsync(Object validatingObject, String name = null, boolean allowNull = false)
+    public    List<ValidationResult>> GetErrorsAsync(Object validatingObject, String name = null, boolean allowNull = false)
     {
         if (validatingObject == null)
         {
