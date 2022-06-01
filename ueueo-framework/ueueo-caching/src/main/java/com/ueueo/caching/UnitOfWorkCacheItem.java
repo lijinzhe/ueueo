@@ -7,7 +7,7 @@ import lombok.Data;
  * @date 2022-05-29 14:23
  */
 @Data
-public class UnitOfWorkCacheItem<TValue extends Class<?>> {
+public class UnitOfWorkCacheItem<TValue> {
     public boolean isRemoved;
 
     public TValue value;
@@ -25,15 +25,19 @@ public class UnitOfWorkCacheItem<TValue extends Class<?>> {
         this.isRemoved = isRemoved;
     }
 
-    public UnitOfWorkCacheItem<TValue> SetValue(TValue value) {
+    public UnitOfWorkCacheItem<TValue> setValue(TValue value) {
         this.value = value;
         this.isRemoved = false;
         return this;
     }
 
-    public UnitOfWorkCacheItem<TValue> RemoveValue() {
+    public UnitOfWorkCacheItem<TValue> removeValue() {
         this.value = null;
         this.isRemoved = true;
         return this;
+    }
+
+    public TValue getUnRemovedValueOrNull(){
+        return !isRemoved ? value : null;
     }
 }

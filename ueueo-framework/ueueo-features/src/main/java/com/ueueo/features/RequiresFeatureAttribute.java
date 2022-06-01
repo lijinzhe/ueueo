@@ -12,6 +12,7 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
+@Repeatable(RequiresFeatureAttribute.List.class)
 public @interface RequiresFeatureAttribute {
     /**
      * A list of features to be checked if they are enabled.
@@ -29,4 +30,10 @@ public @interface RequiresFeatureAttribute {
      */
     boolean requiresAll() default false;
 
+    @Target({ElementType.TYPE, ElementType.METHOD})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Inherited
+    @interface List {
+        RequiresFeatureAttribute[] value() default {};
+    }
 }

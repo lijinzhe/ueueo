@@ -46,7 +46,7 @@ public class TenantStore implements ITenantStore {
 
     protected TenantCacheItem getCacheItem(ID id, String name) {
         String cacheKey = calculateCacheKey(id, name);
-        TenantCacheItem cacheItem = cache.get(cacheKey);
+        TenantCacheItem cacheItem = cache.get(cacheKey,null,null);
         if (cacheItem != null) {
             return cacheItem;
         }
@@ -73,7 +73,7 @@ public class TenantStore implements ITenantStore {
         tenantConfiguration.setConnectionStrings(new ConnectionStrings(tenant.getConnectionStrings().stream().collect(Collectors.toMap(TenantConnectionString::getName, TenantConnectionString::getValue))));
 
         TenantCacheItem cacheItem = new TenantCacheItem(tenantConfiguration);
-        cache.set(cacheKey, cacheItem);
+        cache.set(cacheKey, cacheItem,null,null,null);
         return cacheItem;
     }
 

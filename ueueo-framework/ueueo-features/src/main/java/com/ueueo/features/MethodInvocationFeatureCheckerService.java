@@ -38,8 +38,8 @@ public class MethodInvocationFeatureCheckerService implements IMethodInvocationF
         if (requiresFeatureAnnotation != null) {
             requiresFeatures.add(requiresFeatureAnnotation);
         } else {
-            RequiresFeaturesAttribute requiresFeaturesAnnotation = method.getAnnotation(RequiresFeaturesAttribute.class);
-            requiresFeatures.addAll(Arrays.asList(requiresFeaturesAnnotation.requiresFeatures()));
+            RequiresFeatureAttribute.List requiresFeaturesAnnotation = method.getAnnotation(RequiresFeatureAttribute.List.class);
+            requiresFeatures.addAll(Arrays.asList(requiresFeaturesAnnotation.value()));
         }
         return requiresFeatures;
     }

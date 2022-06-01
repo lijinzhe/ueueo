@@ -5,6 +5,8 @@ package com.ueueo.threading;
  * @date 2022-05-29 15:39
  */
 public class CancellationToken {
+    public static final CancellationToken NONE = new CancellationToken() {{cancel();}};
+
     private volatile boolean canceled = false;
     private volatile boolean isCancellationRequested = false;
     private volatile boolean canBeCanceled = true;

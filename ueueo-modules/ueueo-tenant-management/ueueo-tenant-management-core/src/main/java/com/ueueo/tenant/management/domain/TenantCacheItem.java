@@ -2,7 +2,7 @@ package com.ueueo.tenant.management.domain;
 
 import com.ueueo.AbpException;
 import com.ueueo.ID;
-import com.ueueo.multitenancy.IgnoreMultiTenancy;
+import com.ueueo.multitenancy.IgnoreMultiTenancyAttribute;
 import com.ueueo.multitenancy.TenantConfiguration;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author Lee
  * @date 2022-05-19 23:03
  */
-@IgnoreMultiTenancy
+@IgnoreMultiTenancyAttribute
 @Data
 public class TenantCacheItem {
     private static final String CacheKeyFormat = "i:%s,n:%s}";

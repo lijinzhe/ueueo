@@ -6,6 +6,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 
 /**
  * TODO Description Of This JAVA Class.
@@ -19,9 +21,9 @@ public interface IUnitOfWork extends IDatabaseApiContainer, ITransactionApiConta
     Map<String,Object> getItems();
 
     //TODO: Switch to OnFailed (sync) and OnDisposed (sync) methods to be compatible with OnCompleted
-//    event EventHandler<UnitOfWorkFailedEventArgs> Failed;
+    BiConsumer<IUnitOfWork,UnitOfWorkFailedEventArgs> failed();
 
-//    event EventHandler<UnitOfWorkEventArgs> Disposed;
+    BiConsumer<IUnitOfWork,UnitOfWorkEventArgs> disposed();
 
     IAbpUnitOfWorkOptions getOptions();
 
@@ -47,15 +49,16 @@ public interface IUnitOfWork extends IDatabaseApiContainer, ITransactionApiConta
 
     void rollback( );
 
-//    void OnCompleted(Func<Task> handler);
+    void onCompleted(Runnable handler);
 
-//    void AddOrReplaceLocalEvent(
-//            UnitOfWorkEventRecord eventRecord,
-//            Predicate<UnitOfWorkEventRecord> replacementSelector = null
-//    );
 
-//    void AddOrReplaceDistributedEvent(
-//            UnitOfWorkEventRecord eventRecord,
-//            Predicate<UnitOfWorkEventRecord> replacementSelector = null
-//    );
+    void addOrReplaceLocalEvent(
+            UnitOfWorkEventRecord eventRecord,
+            Predicate<UnitOfWorkEventRecord> replacementSelector
+    );
+
+    void addOrReplaceDistributedEvent(
+            UnitOfWorkEventRecord eventRecord,
+            Predicate<UnitOfWorkEventRecord> replacementSelector
+    );
 }

@@ -19,7 +19,7 @@ public class TenantCacheItemInvalidator implements ILocalEventHandler<EntityChan
 
     @Override
     public void handleEvent(EntityChangedEventData<Tenant> eventData) {
-        cache.remove(TenantCacheItem.calculateCacheKey(eventData.getEntity().getId(), null));
-        cache.remove(TenantCacheItem.calculateCacheKey(null, eventData.getEntity().getName()));
+        cache.remove(TenantCacheItem.calculateCacheKey(eventData.getEntity().getId(), null), null, null);
+        cache.remove(TenantCacheItem.calculateCacheKey(null, eventData.getEntity().getName()), null, null);
     }
 }

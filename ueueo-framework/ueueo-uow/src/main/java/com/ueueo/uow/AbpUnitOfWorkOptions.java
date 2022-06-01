@@ -10,8 +10,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AbpUnitOfWorkOptions implements IAbpUnitOfWorkOptions {
-    private boolean isTransactional;
+    /**
+     * Default: false.
+     */
+    private boolean isTransactional = false;
     private IsolationLevel isolationLevel;
+    /**
+     * Milliseconds
+     */
     private Integer timeout;
 
     public AbpUnitOfWorkOptions() {}
