@@ -60,9 +60,9 @@ public class ExtensionPropertyConfiguration : IHasNameWithLocalizableDisplayName
     public Func<Object> DefaultValueFactory;// { get; set; }
 
     public ExtensionPropertyConfiguration(
-        @Nonnull EntityExtensionConfiguration entityExtensionConfiguration,
-        @Nonnull Type type,
-        @Nonnull String name)
+        @NonNull EntityExtensionConfiguration entityExtensionConfiguration,
+        @NonNull Type type,
+        @NonNull String name)
     {
         EntityExtensionConfiguration = Objects.requireNonNull(entityExtensionConfiguration, nameof(entityExtensionConfiguration));
         Type = Objects.requireNonNull(type, nameof(type));

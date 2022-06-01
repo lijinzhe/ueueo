@@ -5,15 +5,15 @@ namespace Volo.Abp.BlobStoring;
 public static class BlobContainerConfigurationExtensions
 {
     public static T GetConfiguration<T>(
-        @Nonnull this BlobContainerConfiguration containerConfiguration,
-        @Nonnull String name)
+        @NonNull this BlobContainerConfiguration containerConfiguration,
+        @NonNull String name)
     {
         return (T)containerConfiguration.GetConfiguration(name);
     }
 
     public static Object GetConfiguration(
-        @Nonnull this BlobContainerConfiguration containerConfiguration,
-        @Nonnull String name)
+        @NonNull this BlobContainerConfiguration containerConfiguration,
+        @NonNull String name)
     {
         var value = containerConfiguration.GetConfigurationOrNull(name);
         if (value == null)

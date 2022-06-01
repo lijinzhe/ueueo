@@ -12,7 +12,7 @@ namespace Volo.Abp.VirtualFileSystem;
 public static class VirtualFileSetListExtensions
 {
     public static void AddEmbedded<T>(
-        @Nonnull this VirtualFileSetList list,
+        @NonNull this VirtualFileSetList list,
         @Nullable String baseNamespace = null,
         @Nullable String baseFolder = null)
     {
@@ -29,8 +29,8 @@ public static class VirtualFileSetListExtensions
     }
 
     public static void AddPhysical(
-        @Nonnull this VirtualFileSetList list,
-        @Nonnull String root,
+        @NonNull this VirtualFileSetList list,
+        @NonNull String root,
         ExclusionFilters exclusionFilters = ExclusionFilters.Sensitive)
     {
         Objects.requireNonNull(list, nameof(list));
@@ -41,7 +41,7 @@ public static class VirtualFileSetListExtensions
     }
 
     private static IFileProvider CreateFileProvider(
-        @Nonnull Assembly assembly,
+        @NonNull Assembly assembly,
         @Nullable String baseNamespace = null,
         @Nullable String baseFolder = null)
     {
@@ -63,8 +63,8 @@ public static class VirtualFileSetListExtensions
     }
 
     public static void ReplaceEmbeddedByPhysical<T>(
-        @Nonnull this VirtualFileSetList fileSets,
-        @Nonnull String physicalPath)
+        @NonNull this VirtualFileSetList fileSets,
+        @NonNull String physicalPath)
     {
         Objects.requireNonNull(fileSets, nameof(fileSets));
         Check.NotNullOrWhiteSpace(physicalPath, nameof(physicalPath));

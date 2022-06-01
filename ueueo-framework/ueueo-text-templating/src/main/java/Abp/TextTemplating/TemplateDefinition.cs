@@ -60,7 +60,7 @@ public class TemplateDefinition : IHasNameWithLocalizableDisplayName
     public Dictionary<String, Object> Properties;//  { get; }
 
     public TemplateDefinition(
-        @Nonnull String name,
+        @NonNull String name,
         @Nullable Type localizationResource = null,
         @Nullable ILocalizableString displayName = null,
         boolean isLayout = false,

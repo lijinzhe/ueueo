@@ -32,8 +32,8 @@ public class DynamicRangeAttribute : RangeAttribute
      * <param name="maximumPropertyName">The name of the public static property for the <see cref="RangeAttribute.Maximum"/></param>
      */
     public DynamicRangeAttribute(
-        @Nonnull Type sourceType,
-        @Nonnull Type operandType,
+        @NonNull Type sourceType,
+        @NonNull Type operandType,
         @Nullable String minimumPropertyName,
         @Nullable String maximumPropertyName
     )

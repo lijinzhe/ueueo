@@ -7,7 +7,7 @@ public class VirtualFileSetInfo
 {
     public IFileProvider FileProvider;//  { get; }
 
-    public VirtualFileSetInfo(@Nonnull IFileProvider fileProvider)
+    public VirtualFileSetInfo(@NonNull IFileProvider fileProvider)
     {
         FileProvider = Objects.requireNonNull(fileProvider, nameof(fileProvider));
     }

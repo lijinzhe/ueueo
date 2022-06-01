@@ -10,7 +10,7 @@ internal class AbpApplicationWithInternalServiceProvider : AbpApplicationBase, I
     public IServiceScope ServiceScope ;// { get; private set; }
 
     public AbpApplicationWithInternalServiceProvider(
-        @Nonnull Type startupModuleType,
+        @NonNull Type startupModuleType,
         @Nullable Action<AbpApplicationCreationOptions> optionsAction
         ) : this(
         startupModuleType,
@@ -21,8 +21,8 @@ internal class AbpApplicationWithInternalServiceProvider : AbpApplicationBase, I
     }
 
     private AbpApplicationWithInternalServiceProvider(
-        @Nonnull Type startupModuleType,
-        @Nonnull IServiceCollection services,
+        @NonNull Type startupModuleType,
+        @NonNull IServiceCollection services,
         @Nullable Action<AbpApplicationCreationOptions> optionsAction
         ) : base(
             startupModuleType,

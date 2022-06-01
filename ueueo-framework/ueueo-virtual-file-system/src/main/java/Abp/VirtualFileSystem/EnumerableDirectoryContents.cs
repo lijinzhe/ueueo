@@ -9,7 +9,7 @@ internal class EnumerableDirectoryContents : IDirectoryContents
 {
     private readonly IEnumerable<IFileInfo> _entries;
 
-    public EnumerableDirectoryContents(@Nonnull IEnumerable<IFileInfo> entries)
+    public EnumerableDirectoryContents(@NonNull IEnumerable<IFileInfo> entries)
     {
         Objects.requireNonNull(entries, nameof(entries));
 

@@ -15,7 +15,7 @@ public class AmbientDataContextAmbientScopeProvider<T> : IAmbientScopeProvider<T
 
     private readonly IAmbientDataContext _dataContext;
 
-    public AmbientDataContextAmbientScopeProvider(@Nonnull IAmbientDataContext dataContext)
+    public AmbientDataContextAmbientScopeProvider(@NonNull IAmbientDataContext dataContext)
     {
         Objects.requireNonNull(dataContext, nameof(dataContext));
 

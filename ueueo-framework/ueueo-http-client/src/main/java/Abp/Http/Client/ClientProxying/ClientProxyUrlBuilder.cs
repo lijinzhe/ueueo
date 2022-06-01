@@ -189,7 +189,7 @@ public class ClientProxyUrlBuilder : ITransientDependency
         StringBuilder urlBuilder,
         boolean isFirstParam,
         String name,
-        @Nonnull Object value)
+        @NonNull Object value)
     {
         if (value.GetType().IsArray || (value.GetType().IsGenericType && value is IEnumerable))
         {

@@ -9,7 +9,7 @@ public class BlobContainerNameAttribute : Attribute
     [NotNull]
     public String Name;//  { get; }
 
-    public BlobContainerNameAttribute(@Nonnull String name)
+    public BlobContainerNameAttribute(@NonNull String name)
     {
         Check.NotNullOrWhiteSpace(name, nameof(name));
 

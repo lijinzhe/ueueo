@@ -24,7 +24,7 @@ public class UnitOfWorkFailedEventArgs : UnitOfWorkEventArgs
     /**
      * Creates a new <see cref="UnitOfWorkFailedEventArgs"/> object.
     */
-    public UnitOfWorkFailedEventArgs(@Nonnull IUnitOfWork unitOfWork, @Nullable Exception exception, boolean isRolledback)
+    public UnitOfWorkFailedEventArgs(@NonNull IUnitOfWork unitOfWork, @Nullable Exception exception, boolean isRolledback)
         : base(unitOfWork)
     {
         Exception = exception;

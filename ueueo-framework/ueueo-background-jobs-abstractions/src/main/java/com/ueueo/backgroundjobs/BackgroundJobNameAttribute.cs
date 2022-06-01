@@ -8,7 +8,7 @@ public class BackgroundJobNameAttribute : Attribute, IBackgroundJobNameProvider
 {
     public String Name;//  { get; }
 
-    public BackgroundJobNameAttribute(@Nonnull String name)
+    public BackgroundJobNameAttribute(@NonNull String name)
     {
         Name = Check.NotNullOrWhiteSpace(name, nameof(name));
     }
@@ -18,7 +18,7 @@ public class BackgroundJobNameAttribute : Attribute, IBackgroundJobNameProvider
         return GetName(typeof(TJobArgs));
     }
 
-    public static String GetName(@Nonnull Type jobArgsType)
+    public static String GetName(@NonNull Type jobArgsType)
     {
         Objects.requireNonNull(jobArgsType, nameof(jobArgsType));
 

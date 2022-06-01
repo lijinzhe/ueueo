@@ -31,9 +31,9 @@ public interface IUnitOfWork : IDatabaseApiContainer, ITransactionApiContainer, 
 
     void SetOuter(@Nullable IUnitOfWork outer);
 
-    void Initialize(@Nonnull AbpUnitOfWorkOptions options);
+    void Initialize(@NonNull AbpUnitOfWorkOptions options);
 
-    void Reserve(@Nonnull String reservationName);
+    void Reserve(@NonNull String reservationName);
 
     void SaveChangesAsync(CancellationToken cancellationToken = default);
 

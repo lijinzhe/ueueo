@@ -22,7 +22,7 @@ public class DefaultBlobProviderSelector : IBlobProviderSelector, ITransientDepe
     }
 
     [NotNull]
-    public   IBlobProvider Get(@Nonnull String containerName)
+    public   IBlobProvider Get(@NonNull String containerName)
     {
         Objects.requireNonNull(containerName, nameof(containerName));
 

@@ -10,7 +10,7 @@ public class UnitOfWorkEventArgs : EventArgs
     */
     public IUnitOfWork UnitOfWork;//  { get; }
 
-    public UnitOfWorkEventArgs(@Nonnull IUnitOfWork unitOfWork)
+    public UnitOfWorkEventArgs(@NonNull IUnitOfWork unitOfWork)
     {
         Objects.requireNonNull(unitOfWork, nameof(unitOfWork));
 

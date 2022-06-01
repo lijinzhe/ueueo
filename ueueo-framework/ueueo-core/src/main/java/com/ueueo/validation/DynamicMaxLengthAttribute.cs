@@ -20,7 +20,7 @@ public class DynamicMaxLengthAttribute : MaxLengthAttribute
     }
 
     public DynamicMaxLengthAttribute(
-        @Nonnull Type sourceType,
+        @NonNull Type sourceType,
         @Nullable String maximumLengthPropertyName)
     {
         Objects.requireNonNull(sourceType, nameof(sourceType));

@@ -13,8 +13,8 @@ public static class SpecificationExtensions
      * <param name="other">The specification instance with which the current specification is combined.</param>
      * <returns>The combined specification instance.</returns>
      */
-    public static ISpecification<T> And<T>(@Nonnull this ISpecification<T> specification,
-        @Nonnull ISpecification<T> other)
+    public static ISpecification<T> And<T>(@NonNull this ISpecification<T> specification,
+        @NonNull ISpecification<T> other)
     {
         Objects.requireNonNull(specification, nameof(specification));
         Objects.requireNonNull(other, nameof(other));
@@ -32,8 +32,8 @@ public static class SpecificationExtensions
      * is combined.</param>
      * <returns>The combined specification instance.</returns>
      */
-    public static ISpecification<T> Or<T>(@Nonnull this ISpecification<T> specification,
-        @Nonnull ISpecification<T> other)
+    public static ISpecification<T> Or<T>(@NonNull this ISpecification<T> specification,
+        @NonNull ISpecification<T> other)
     {
         Objects.requireNonNull(specification, nameof(specification));
         Objects.requireNonNull(other, nameof(other));
@@ -51,8 +51,8 @@ public static class SpecificationExtensions
      * is combined.</param>
      * <returns>The combined specification instance.</returns>
      */
-    public static ISpecification<T> AndNot<T>(@Nonnull this ISpecification<T> specification,
-        @Nonnull ISpecification<T> other)
+    public static ISpecification<T> AndNot<T>(@NonNull this ISpecification<T> specification,
+        @NonNull ISpecification<T> other)
     {
         Objects.requireNonNull(specification, nameof(specification));
         Objects.requireNonNull(other, nameof(other));
@@ -65,7 +65,7 @@ public static class SpecificationExtensions
      * the semantics opposite to the current specification.
     */
      * <returns>The reversed specification instance.</returns>
-    public static ISpecification<T> Not<T>(@Nonnull this ISpecification<T> specification)
+    public static ISpecification<T> Not<T>(@NonNull this ISpecification<T> specification)
     {
         Objects.requireNonNull(specification, nameof(specification));
 

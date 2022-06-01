@@ -17,9 +17,9 @@ public class ClientProxyRequestContext
     public Type ServiceType;//  { get; }
 
     public ClientProxyRequestContext(
-        @Nonnull ActionApiDescriptionModel action,
-        @Nonnull IReadOnlyDictionary<String, Object> arguments,
-        @Nonnull Type serviceType)
+        @NonNull ActionApiDescriptionModel action,
+        @NonNull IReadOnlyDictionary<String, Object> arguments,
+        @NonNull Type serviceType)
     {
         ServiceType = serviceType;
         Action = Objects.requireNonNull(action, nameof(action));

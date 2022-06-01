@@ -6,7 +6,7 @@ namespace Volo.Abp.RabbitMQ;
 
 public class QueueDeclareConfiguration
 {
-    @Nonnull public String QueueName;//  { get; }
+    @NonNull public String QueueName;//  { get; }
 
     public boolean Durable;// { get; set; }
 
@@ -17,7 +17,7 @@ public class QueueDeclareConfiguration
     public IDictionary<String, Object> Arguments;//  { get; }
 
     public QueueDeclareConfiguration(
-        @Nonnull String queueName,
+        @NonNull String queueName,
         boolean durable = true,
         boolean exclusive = false,
         boolean autoDelete = false)

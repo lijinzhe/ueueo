@@ -8,7 +8,7 @@ public interface IMongoModelBuilder
 {
     void Entity<TEntity>(Action<IMongoEntityModelBuilder<TEntity>> buildAction = null);
 
-    void Entity(@Nonnull Type entityType, Action<IMongoEntityModelBuilder> buildAction = null);
+    void Entity(@NonNull Type entityType, Action<IMongoEntityModelBuilder> buildAction = null);
 
     IReadOnlyList<IMongoEntityModel> GetEntities();
 }

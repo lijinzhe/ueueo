@@ -7,7 +7,7 @@ namespace Volo.Abp.GlobalFeatures;
 public static class GlobalFeatureSimpleStateCheckerExtensions
 {
     public static TState RequireGlobalFeatures<TState>(
-        @Nonnull this TState state,
+        @NonNull this TState state,
         params String[] globalFeatures)
         where TState : IHasSimpleStateCheckers<TState>
     {
@@ -15,7 +15,7 @@ public static class GlobalFeatureSimpleStateCheckerExtensions
     }
 
     public static TState RequireGlobalFeatures<TState>(
-        @Nonnull this TState state,
+        @NonNull this TState state,
         boolean requiresAll,
         params String[] globalFeatures)
         where TState : IHasSimpleStateCheckers<TState>
@@ -28,7 +28,7 @@ public static class GlobalFeatureSimpleStateCheckerExtensions
     }
 
     public static TState RequireGlobalFeatures<TState>(
-        @Nonnull this TState state,
+        @NonNull this TState state,
         params Type[] globalFeatures)
         where TState : IHasSimpleStateCheckers<TState>
     {
@@ -36,7 +36,7 @@ public static class GlobalFeatureSimpleStateCheckerExtensions
     }
 
     public static TState RequireGlobalFeatures<TState>(
-        @Nonnull this TState state,
+        @NonNull this TState state,
         boolean requiresAll,
         params Type[] globalFeatures)
         where TState : IHasSimpleStateCheckers<TState>

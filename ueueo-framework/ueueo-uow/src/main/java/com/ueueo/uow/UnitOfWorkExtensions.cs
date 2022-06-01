@@ -7,14 +7,14 @@ namespace Volo.Abp.Uow;
 
 public static class UnitOfWorkExtensions
 {
-    public static boolean IsReservedFor(@Nonnull this IUnitOfWork unitOfWork, String reservationName)
+    public static boolean IsReservedFor(@NonNull this IUnitOfWork unitOfWork, String reservationName)
     {
         Objects.requireNonNull(unitOfWork, nameof(unitOfWork));
 
         return unitOfWork.IsReserved && unitOfWork.ReservationName == reservationName;
     }
 
-    public static void AddItem<TValue>(@Nonnull this IUnitOfWork unitOfWork, String key, TValue value)
+    public static void AddItem<TValue>(@NonNull this IUnitOfWork unitOfWork, String key, TValue value)
         where TValue : class
     {
         Objects.requireNonNull(unitOfWork, nameof(unitOfWork));
@@ -29,7 +29,7 @@ public static class UnitOfWorkExtensions
         }
     }
 
-    public static TValue GetItemOrDefault<TValue>(@Nonnull this IUnitOfWork unitOfWork, String key)
+    public static TValue GetItemOrDefault<TValue>(@NonNull this IUnitOfWork unitOfWork, String key)
         where TValue : class
     {
         Objects.requireNonNull(unitOfWork, nameof(unitOfWork));
@@ -37,7 +37,7 @@ public static class UnitOfWorkExtensions
         return unitOfWork.Items.FirstOrDefault(x => x.Key == key).Value.As<TValue>();
     }
 
-    public static TValue GetOrAddItem<TValue>(@Nonnull this IUnitOfWork unitOfWork, String key, Func<String, TValue> factory)
+    public static TValue GetOrAddItem<TValue>(@NonNull this IUnitOfWork unitOfWork, String key, Func<String, TValue> factory)
         where TValue : class
     {
         Objects.requireNonNull(unitOfWork, nameof(unitOfWork));
@@ -45,7 +45,7 @@ public static class UnitOfWorkExtensions
         return unitOfWork.Items.GetOrAdd(key, factory).As<TValue>();
     }
 
-    public static void RemoveItem(@Nonnull this IUnitOfWork unitOfWork, String key)
+    public static void RemoveItem(@NonNull this IUnitOfWork unitOfWork, String key)
     {
         Objects.requireNonNull(unitOfWork, nameof(unitOfWork));
 

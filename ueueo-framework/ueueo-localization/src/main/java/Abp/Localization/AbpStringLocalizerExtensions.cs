@@ -11,7 +11,7 @@ public static class AbpStringLocalizerExtensions
 {
     [NotNull]
     public static IStringLocalizer GetInternalLocalizer(
-        @Nonnull this IStringLocalizer StringLocalizer)
+        @NonNull this IStringLocalizer StringLocalizer)
     {
         Objects.requireNonNull(StringLocalizer, nameof(StringLocalizer));
 

@@ -12,10 +12,10 @@ public class BlobProviderSaveArgs : BlobProviderArgs
     public boolean OverrideExisting;//  { get; }
 
     public BlobProviderSaveArgs(
-        @Nonnull String containerName,
-        @Nonnull BlobContainerConfiguration configuration,
-        @Nonnull String blobName,
-        @Nonnull Stream blobStream,
+        @NonNull String containerName,
+        @NonNull BlobContainerConfiguration configuration,
+        @NonNull String blobName,
+        @NonNull Stream blobStream,
         boolean overrideExisting = false,
         CancellationToken cancellationToken = default)
         : base(

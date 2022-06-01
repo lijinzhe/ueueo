@@ -9,7 +9,7 @@ public static class AutoEntityDistributedEventSelectorListExtensions
 {
     public const String AllEntitiesSelectorName = "All";
 
-    public static void AddNamespace(@Nonnull this IAutoEntityDistributedEventSelectorList selectors, @Nonnull String namespaceName)
+    public static void AddNamespace(@NonNull this IAutoEntityDistributedEventSelectorList selectors, @NonNull String namespaceName)
     {
         Objects.requireNonNull(selectors, nameof(selectors));
 
@@ -31,7 +31,7 @@ public static class AutoEntityDistributedEventSelectorListExtensions
      * Adds a specific entity type and the types derived from that entity type.
     */
      * <typeparam name="TEntity">Type of the entity</typeparam>
-    public static void Add<TEntity>(@Nonnull this IAutoEntityDistributedEventSelectorList selectors)
+    public static void Add<TEntity>(@NonNull this IAutoEntityDistributedEventSelectorList selectors)
         //where TEntity : IEntity
     {
         Objects.requireNonNull(selectors, nameof(selectors));
@@ -54,7 +54,7 @@ public static class AutoEntityDistributedEventSelectorListExtensions
      * Remove a specific entity type and the types derived from that entity type.
     */
      * <typeparam name="TEntity">Type of the entity</typeparam>
-    public static void Remove<TEntity>(@Nonnull this IAutoEntityDistributedEventSelectorList selectors)
+    public static void Remove<TEntity>(@NonNull this IAutoEntityDistributedEventSelectorList selectors)
         //where TEntity : IEntity
     {
         Objects.requireNonNull(selectors, nameof(selectors));
@@ -66,7 +66,7 @@ public static class AutoEntityDistributedEventSelectorListExtensions
     /**
      * Adds all entity types.
     */
-    public static void AddAll(@Nonnull this IAutoEntityDistributedEventSelectorList selectors)
+    public static void AddAll(@NonNull this IAutoEntityDistributedEventSelectorList selectors)
     {
         Objects.requireNonNull(selectors, nameof(selectors));
 
@@ -84,7 +84,7 @@ public static class AutoEntityDistributedEventSelectorListExtensions
     }
 
     public static void Add(
-        @Nonnull this IAutoEntityDistributedEventSelectorList selectors,
+        @NonNull this IAutoEntityDistributedEventSelectorList selectors,
         String selectorName,
         Func<Type, bool> predicate)
     {
@@ -104,15 +104,15 @@ public static class AutoEntityDistributedEventSelectorListExtensions
     }
 
     public static void Add(
-        @Nonnull this IAutoEntityDistributedEventSelectorList selectors,
+        @NonNull this IAutoEntityDistributedEventSelectorList selectors,
         Func<Type, bool> predicate)
     {
         selectors.Add(Guid.NewGuid().ToString("N"), predicate);
     }
 
     public static boolean RemoveByName(
-        @Nonnull this IAutoEntityDistributedEventSelectorList selectors,
-        @Nonnull String name)
+        @NonNull this IAutoEntityDistributedEventSelectorList selectors,
+        @NonNull String name)
     {
         Objects.requireNonNull(selectors, nameof(selectors));
         Objects.requireNonNull(name, nameof(name));
@@ -121,7 +121,7 @@ public static class AutoEntityDistributedEventSelectorListExtensions
     }
 
 
-    public static boolean IsMatch(@Nonnull this IAutoEntityDistributedEventSelectorList selectors, Type entityType)
+    public static boolean IsMatch(@NonNull this IAutoEntityDistributedEventSelectorList selectors, Type entityType)
     {
         Objects.requireNonNull(selectors, nameof(selectors));
         return selectors.Any(s => s.Predicate(entityType));

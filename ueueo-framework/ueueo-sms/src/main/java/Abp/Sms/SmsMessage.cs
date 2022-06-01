@@ -11,7 +11,7 @@ public class SmsMessage
 
     public IDictionary<String, Object> Properties;//  { get; }
 
-    public SmsMessage(@Nonnull String phoneNumber, @Nonnull String text)
+    public SmsMessage(@NonNull String phoneNumber, @NonNull String text)
     {
         PhoneNumber = Check.NotNullOrWhiteSpace(phoneNumber, nameof(phoneNumber));
         Text = Check.NotNullOrWhiteSpace(text, nameof(text));

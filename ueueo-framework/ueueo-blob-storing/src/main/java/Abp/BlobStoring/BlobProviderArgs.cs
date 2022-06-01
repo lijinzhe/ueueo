@@ -17,9 +17,9 @@ public abstract class BlobProviderArgs
     public CancellationToken CancellationToken;//  { get; }
 
     protected BlobProviderArgs(
-        @Nonnull String containerName,
-        @Nonnull BlobContainerConfiguration configuration,
-        @Nonnull String blobName,
+        @NonNull String containerName,
+        @NonNull BlobContainerConfiguration configuration,
+        @NonNull String blobName,
         CancellationToken cancellationToken = default)
     {
         ContainerName = Check.NotNullOrWhiteSpace(containerName, nameof(containerName));

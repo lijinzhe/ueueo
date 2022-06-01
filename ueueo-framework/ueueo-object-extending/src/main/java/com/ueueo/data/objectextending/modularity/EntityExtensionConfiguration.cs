@@ -25,7 +25,7 @@ public class EntityExtensionConfiguration
 
     [NotNull]
     public   EntityExtensionConfiguration AddOrUpdateProperty<TProperty>(
-        @Nonnull String propertyName,
+        @NonNull String propertyName,
         @Nullable Action<ExtensionPropertyConfiguration> configureAction = null)
     {
         return AddOrUpdateProperty(
@@ -37,8 +37,8 @@ public class EntityExtensionConfiguration
 
     [NotNull]
     public   EntityExtensionConfiguration AddOrUpdateProperty(
-        @Nonnull Type propertyType,
-        @Nonnull String propertyName,
+        @NonNull Type propertyType,
+        @NonNull String propertyName,
         @Nullable Action<ExtensionPropertyConfiguration> configureAction = null)
     {
         Objects.requireNonNull(propertyType, nameof(propertyType));

@@ -68,7 +68,7 @@ public static class RandomHelper
      * <typeparam name="T">Type of the objects</typeparam>
      * <param name="objs">List of object to select a random one</param>
      */
-    public static T GetRandomOf<T>(@Nonnull params T[] objs)
+    public static T GetRandomOf<T>(@NonNull params T[] objs)
     {
         Check.NotNullOrEmpty(objs, nameof(objs));
 
@@ -81,7 +81,7 @@ public static class RandomHelper
      * <typeparam name="T">Type of the objects</typeparam>
      * <param name="list">List of object to select a random one</param>
      */
-    public static T GetRandomOfList<T>(@Nonnull IList<T> list)
+    public static T GetRandomOfList<T>(@NonNull IList<T> list)
     {
         Check.NotNullOrEmpty(list, nameof(list));
 
@@ -94,7 +94,7 @@ public static class RandomHelper
      * <typeparam name="T">Type of items in the list</typeparam>
      * <param name="items">items</param>
      */
-    public static List<T> GenerateRandomizedList<T>(@Nonnull IEnumerable<T> items)
+    public static List<T> GenerateRandomizedList<T>(@NonNull IEnumerable<T> items)
     {
         Objects.requireNonNull(items, nameof(items));
 

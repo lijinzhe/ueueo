@@ -7,8 +7,8 @@ namespace Volo.Abp.TextTemplating;
 public static class TemplateDefinitionExtensions
 {
     public static TemplateDefinition WithVirtualFilePath(
-        @Nonnull this TemplateDefinition templateDefinition,
-        @Nonnull String virtualPath,
+        @NonNull this TemplateDefinition templateDefinition,
+        @NonNull String virtualPath,
         boolean isInlineLocalized)
     {
         Objects.requireNonNull(templateDefinition, nameof(templateDefinition));
@@ -22,7 +22,7 @@ public static class TemplateDefinitionExtensions
     }
 
     public static String GetVirtualFilePathOrNull(
-        @Nonnull this TemplateDefinition templateDefinition)
+        @NonNull this TemplateDefinition templateDefinition)
     {
         Objects.requireNonNull(templateDefinition, nameof(templateDefinition));
 

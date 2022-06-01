@@ -8,7 +8,7 @@ public class GlobalModuleFeaturesDictionary : Dictionary<String, GlobalModuleFea
     public GlobalFeatureManager FeatureManager;//  { get; }
 
     public GlobalModuleFeaturesDictionary(
-        @Nonnull GlobalFeatureManager featureManager)
+        @NonNull GlobalFeatureManager featureManager)
     {
         FeatureManager = Objects.requireNonNull(featureManager, nameof(featureManager));
     }

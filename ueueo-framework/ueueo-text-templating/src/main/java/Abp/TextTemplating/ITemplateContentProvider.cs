@@ -6,14 +6,14 @@ namespace Volo.Abp.TextTemplating;
 public interface ITemplateContentProvider
 {
     String> GetContentOrNullAsync(
-        @Nonnull String templateName,
+        @NonNull String templateName,
         @Nullable String cultureName = null,
         boolean tryDefaults = true,
         boolean useCurrentCultureIfCultureNameIsNull = true
     );
 
     String> GetContentOrNullAsync(
-        @Nonnull TemplateDefinition templateDefinition,
+        @NonNull TemplateDefinition templateDefinition,
         @Nullable String cultureName = null,
         boolean tryDefaults = true,
         boolean useCurrentCultureIfCultureNameIsNull = true

@@ -784,7 +784,7 @@ public class MongoDbRepository<TMongoDbContext, TEntity, TKey>
         return DeleteAsync(x => x.Id.Equals(id), autoSave, cancellationToken);
     }
 
-    public   void DeleteManyAsync(@Nonnull IEnumerable<TKey> ids, boolean autoSave = false, CancellationToken cancellationToken = default)
+    public   void DeleteManyAsync(@NonNull IEnumerable<TKey> ids, boolean autoSave = false, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
 

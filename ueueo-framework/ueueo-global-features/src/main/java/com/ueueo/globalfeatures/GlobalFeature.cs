@@ -18,7 +18,7 @@ public abstract class GlobalFeature
         set => SetEnabled(value);
     }
 
-    protected GlobalFeature(@Nonnull GlobalModuleFeatures module)
+    protected GlobalFeature(@NonNull GlobalModuleFeatures module)
     {
         Module = Objects.requireNonNull(module, nameof(module));
         FeatureManager = Module.FeatureManager;

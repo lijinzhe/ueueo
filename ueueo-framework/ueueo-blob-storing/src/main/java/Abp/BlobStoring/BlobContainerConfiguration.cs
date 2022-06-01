@@ -26,7 +26,7 @@ public class BlobContainerConfiguration
 
     public ITypeList<IBlobNamingNormalizer> NamingNormalizers;//  { get; }
 
-    @Nonnull private readonly Dictionary<String, Object> _properties;
+    @NonNull private readonly Dictionary<String, Object> _properties;
 
     @Nullable private readonly BlobContainerConfiguration _fallbackConfiguration;
 
@@ -52,7 +52,7 @@ public class BlobContainerConfiguration
     }
 
     [NotNull]
-    public BlobContainerConfiguration SetConfiguration(@Nonnull String name, @Nullable Object value)
+    public BlobContainerConfiguration SetConfiguration(@NonNull String name, @Nullable Object value)
     {
         Check.NotNullOrWhiteSpace(name, nameof(name));
         Objects.requireNonNull(value, nameof(value));
@@ -63,7 +63,7 @@ public class BlobContainerConfiguration
     }
 
     [NotNull]
-    public BlobContainerConfiguration ClearConfiguration(@Nonnull String name)
+    public BlobContainerConfiguration ClearConfiguration(@NonNull String name)
     {
         Check.NotNullOrWhiteSpace(name, nameof(name));
 

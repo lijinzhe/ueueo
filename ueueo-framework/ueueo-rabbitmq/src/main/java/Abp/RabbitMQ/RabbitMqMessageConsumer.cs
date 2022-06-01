@@ -56,8 +56,8 @@ public class RabbitMqMessageConsumer : IRabbitMqMessageConsumer, ITransientDepen
     }
 
     public void Initialize(
-        @Nonnull ExchangeDeclareConfiguration exchange,
-        @Nonnull QueueDeclareConfiguration queue,
+        @NonNull ExchangeDeclareConfiguration exchange,
+        @NonNull QueueDeclareConfiguration queue,
         String connectionName = null)
     {
         Exchange = Objects.requireNonNull(exchange, nameof(exchange));

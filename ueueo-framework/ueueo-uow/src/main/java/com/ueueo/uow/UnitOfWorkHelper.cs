@@ -23,7 +23,7 @@ public static class UnitOfWorkHelper
         return false;
     }
 
-    public static boolean IsUnitOfWorkMethod(@Nonnull MethodInfo methodInfo, @Nullable out UnitOfWorkAttribute unitOfWorkAttribute)
+    public static boolean IsUnitOfWorkMethod(@NonNull MethodInfo methodInfo, @Nullable out UnitOfWorkAttribute unitOfWorkAttribute)
     {
         Objects.requireNonNull(methodInfo, nameof(methodInfo));
 

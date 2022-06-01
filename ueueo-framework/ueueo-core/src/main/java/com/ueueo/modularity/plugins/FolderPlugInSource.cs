@@ -18,7 +18,7 @@ public class FolderPlugInSource : IPlugInSource
     public Func<String, bool> Filter;// { get; set; }
 
     public FolderPlugInSource(
-        @Nonnull String folder,
+        @NonNull String folder,
         SearchOption searchOption = SearchOption.TopDirectoryOnly)
     {
         Objects.requireNonNull(folder, nameof(folder));

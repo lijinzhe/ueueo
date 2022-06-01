@@ -5,7 +5,7 @@ namespace Volo.Abp.BlobStoring;
 public static class BlobProviderSelectorExtensions
 {
     public static IBlobProvider Get<TContainer>(
-        @Nonnull this IBlobProviderSelector selector)
+        @NonNull this IBlobProviderSelector selector)
     {
         Objects.requireNonNull(selector, nameof(selector));
 

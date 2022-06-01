@@ -41,7 +41,7 @@ public static class DirectoryHelper
         }
     }
 
-    public static boolean IsSubDirectoryOf(@Nonnull String parentDirectoryPath, @Nonnull String childDirectoryPath)
+    public static boolean IsSubDirectoryOf(@NonNull String parentDirectoryPath, @NonNull String childDirectoryPath)
     {
         Objects.requireNonNull(parentDirectoryPath, nameof(parentDirectoryPath));
         Objects.requireNonNull(childDirectoryPath, nameof(childDirectoryPath));
@@ -52,8 +52,8 @@ public static class DirectoryHelper
         );
     }
 
-    public static boolean IsSubDirectoryOf(@Nonnull DirectoryInfo parentDirectory,
-        @Nonnull DirectoryInfo childDirectory)
+    public static boolean IsSubDirectoryOf(@NonNull DirectoryInfo parentDirectory,
+        @NonNull DirectoryInfo childDirectory)
     {
         Objects.requireNonNull(parentDirectory, nameof(parentDirectory));
         Objects.requireNonNull(childDirectory, nameof(childDirectory));

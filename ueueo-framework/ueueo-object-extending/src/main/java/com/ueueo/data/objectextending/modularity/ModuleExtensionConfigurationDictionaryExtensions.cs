@@ -7,9 +7,9 @@ namespace Volo.Abp.ObjectExtending.Modularity;
 public static class ModuleExtensionConfigurationDictionaryExtensions
 {
     public static ModuleExtensionConfigurationDictionary ConfigureModule<T>(
-        @Nonnull this ModuleExtensionConfigurationDictionary configurationDictionary,
-        @Nonnull String moduleName,
-        @Nonnull Action<T> configureAction)
+        @NonNull this ModuleExtensionConfigurationDictionary configurationDictionary,
+        @NonNull String moduleName,
+        @NonNull Action<T> configureAction)
         where T : ModuleExtensionConfiguration, new()
     {
         Objects.requireNonNull(moduleName, nameof(moduleName));

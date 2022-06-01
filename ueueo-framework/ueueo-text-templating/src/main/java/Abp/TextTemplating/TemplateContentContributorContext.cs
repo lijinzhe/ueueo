@@ -15,8 +15,8 @@ public class TemplateContentContributorContext
     public String Culture;//  { get; }
 
     public TemplateContentContributorContext(
-        @Nonnull TemplateDefinition templateDefinition,
-        @Nonnull IServiceProvider serviceProvider,
+        @NonNull TemplateDefinition templateDefinition,
+        @NonNull IServiceProvider serviceProvider,
         @Nullable String culture)
     {
         TemplateDefinition = Objects.requireNonNull(templateDefinition, nameof(templateDefinition));

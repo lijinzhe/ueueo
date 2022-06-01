@@ -8,7 +8,7 @@ public static class UnitOfWorkManagerExtensions
 {
     [NotNull]
     public static IUnitOfWork Begin(
-        @Nonnull this IUnitOfWorkManager unitOfWorkManager,
+        @NonNull this IUnitOfWorkManager unitOfWorkManager,
         boolean requiresNew = false,
         boolean isTransactional = false,
         IsolationLevel? isolationLevel = null,
@@ -24,7 +24,7 @@ public static class UnitOfWorkManagerExtensions
         }, requiresNew);
     }
 
-    public static void BeginReserved(@Nonnull this IUnitOfWorkManager unitOfWorkManager, @Nonnull String reservationName)
+    public static void BeginReserved(@NonNull this IUnitOfWorkManager unitOfWorkManager, @NonNull String reservationName)
     {
         Objects.requireNonNull(unitOfWorkManager, nameof(unitOfWorkManager));
         Objects.requireNonNull(reservationName, nameof(reservationName));
@@ -32,7 +32,7 @@ public static class UnitOfWorkManagerExtensions
         unitOfWorkManager.BeginReserved(reservationName, new AbpUnitOfWorkOptions());
     }
 
-    public static void TryBeginReserved(@Nonnull this IUnitOfWorkManager unitOfWorkManager, @Nonnull String reservationName)
+    public static void TryBeginReserved(@NonNull this IUnitOfWorkManager unitOfWorkManager, @NonNull String reservationName)
     {
         Objects.requireNonNull(unitOfWorkManager, nameof(unitOfWorkManager));
         Objects.requireNonNull(reservationName, nameof(reservationName));

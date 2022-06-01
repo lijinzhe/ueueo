@@ -13,7 +13,7 @@ public abstract class GlobalModuleFeatures
     protected GlobalFeatureDictionary AllFeatures;//  { get; }
 
     protected GlobalModuleFeatures(
-        @Nonnull GlobalFeatureManager featureManager)
+        @NonNull GlobalFeatureManager featureManager)
     {
         FeatureManager = Objects.requireNonNull(featureManager, nameof(featureManager));
         AllFeatures = new GlobalFeatureDictionary();

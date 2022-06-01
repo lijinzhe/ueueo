@@ -39,7 +39,7 @@ public static class FileHelper
      * </returns>
      */
     [CanBeNull]
-    public static String GetExtension(@Nonnull String fileNameWithExtension)
+    public static String GetExtension(@NonNull String fileNameWithExtension)
     {
         Objects.requireNonNull(fileNameWithExtension, nameof(fileNameWithExtension));
 

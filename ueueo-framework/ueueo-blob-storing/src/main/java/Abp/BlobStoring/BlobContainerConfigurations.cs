@@ -29,8 +29,8 @@ public class BlobContainerConfigurations
     }
 
     public BlobContainerConfigurations Configure(
-        @Nonnull String name,
-        @Nonnull Action<BlobContainerConfiguration> configureAction)
+        @NonNull String name,
+        @NonNull Action<BlobContainerConfiguration> configureAction)
     {
         Check.NotNullOrWhiteSpace(name, nameof(name));
         Objects.requireNonNull(configureAction, nameof(configureAction));
@@ -68,7 +68,7 @@ public class BlobContainerConfigurations
     }
 
     [NotNull]
-    public BlobContainerConfiguration GetConfiguration(@Nonnull String name)
+    public BlobContainerConfiguration GetConfiguration(@NonNull String name)
     {
         Check.NotNullOrWhiteSpace(name, nameof(name));
 

@@ -10,7 +10,7 @@ public static class LocalizationSettingHelper
      * <param name="settingValue"></param>
      * <returns></returns>
      */
-    public static (String cultureName, String uiCultureName) ParseLanguageSetting(@Nonnull String settingValue)
+    public static (String cultureName, String uiCultureName) ParseLanguageSetting(@NonNull String settingValue)
     {
         Objects.requireNonNull(settingValue, nameof(settingValue));
 

@@ -31,7 +31,7 @@ internal class ChildUnitOfWork : IUnitOfWork
 
     private readonly IUnitOfWork _parent;
 
-    public ChildUnitOfWork(@Nonnull IUnitOfWork parent)
+    public ChildUnitOfWork(@NonNull IUnitOfWork parent)
     {
         Objects.requireNonNull(parent, nameof(parent));
 

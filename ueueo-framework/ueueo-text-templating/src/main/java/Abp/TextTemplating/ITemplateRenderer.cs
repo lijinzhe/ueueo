@@ -17,7 +17,7 @@ public interface ITemplateRenderer
      * <returns></returns>
      */
     String> RenderAsync(
-        @Nonnull String templateName,
+        @NonNull String templateName,
         @Nullable Object model = null,
         @Nullable String cultureName = null,
         @Nullable Dictionary<String, Object> globalContext = null

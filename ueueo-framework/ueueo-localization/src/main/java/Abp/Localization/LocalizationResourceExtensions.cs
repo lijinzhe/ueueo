@@ -8,8 +8,8 @@ namespace Volo.Abp.Localization;
 public static class LocalizationResourceExtensions
 {
     public static LocalizationResource AddVirtualJson(
-        @Nonnull this LocalizationResource localizationResource,
-        @Nonnull String virtualPath)
+        @NonNull this LocalizationResource localizationResource,
+        @NonNull String virtualPath)
     {
         Objects.requireNonNull(localizationResource, nameof(localizationResource));
         Objects.requireNonNull(virtualPath, nameof(virtualPath));
@@ -22,8 +22,8 @@ public static class LocalizationResourceExtensions
     }
 
     public static LocalizationResource AddBaseTypes(
-        @Nonnull this LocalizationResource localizationResource,
-        @Nonnull params Type[] types)
+        @NonNull this LocalizationResource localizationResource,
+        @NonNull params Type[] types)
     {
         Objects.requireNonNull(localizationResource, nameof(localizationResource));
         Objects.requireNonNull(types, nameof(types));

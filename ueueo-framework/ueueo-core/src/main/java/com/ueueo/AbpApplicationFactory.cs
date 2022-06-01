@@ -22,7 +22,7 @@ public static class AbpApplicationFactory
     }
 
     public  static IAbpApplicationWithInternalServiceProvider> CreateAsync(
-        @Nonnull Type startupModuleType,
+        @NonNull Type startupModuleType,
         @Nullable Action<AbpApplicationCreationOptions> optionsAction = null)
     {
         var app = new AbpApplicationWithInternalServiceProvider(startupModuleType, options =>
@@ -35,7 +35,7 @@ public static class AbpApplicationFactory
     }
 
     public  static IAbpApplicationWithExternalServiceProvider> CreateAsync<TStartupModule>(
-        @Nonnull IServiceCollection services,
+        @NonNull IServiceCollection services,
         @Nullable Action<AbpApplicationCreationOptions> optionsAction = null)
         //where TStartupModule : IAbpModule
     {
@@ -49,8 +49,8 @@ public static class AbpApplicationFactory
     }
 
     public  static IAbpApplicationWithExternalServiceProvider> CreateAsync(
-        @Nonnull Type startupModuleType,
-        @Nonnull IServiceCollection services,
+        @NonNull Type startupModuleType,
+        @NonNull IServiceCollection services,
         @Nullable Action<AbpApplicationCreationOptions> optionsAction = null)
     {
         var app = new AbpApplicationWithExternalServiceProvider(startupModuleType, services, options =>
@@ -70,14 +70,14 @@ public static class AbpApplicationFactory
     }
 
     public static IAbpApplicationWithInternalServiceProvider Create(
-        @Nonnull Type startupModuleType,
+        @NonNull Type startupModuleType,
         @Nullable Action<AbpApplicationCreationOptions> optionsAction = null)
     {
         return new AbpApplicationWithInternalServiceProvider(startupModuleType, optionsAction);
     }
 
     public static IAbpApplicationWithExternalServiceProvider Create<TStartupModule>(
-        @Nonnull IServiceCollection services,
+        @NonNull IServiceCollection services,
         @Nullable Action<AbpApplicationCreationOptions> optionsAction = null)
         //where TStartupModule : IAbpModule
     {
@@ -85,8 +85,8 @@ public static class AbpApplicationFactory
     }
 
     public static IAbpApplicationWithExternalServiceProvider Create(
-        @Nonnull Type startupModuleType,
-        @Nonnull IServiceCollection services,
+        @NonNull Type startupModuleType,
+        @NonNull IServiceCollection services,
         @Nullable Action<AbpApplicationCreationOptions> optionsAction = null)
     {
         return new AbpApplicationWithExternalServiceProvider(startupModuleType, services, optionsAction);

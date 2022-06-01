@@ -6,7 +6,7 @@ namespace Volo.Abp.Localization;
 
 public static class CultureHelper
 {
-    public static IDisposable Use(@Nonnull String culture, String uiCulture = null)
+    public static IDisposable Use(@NonNull String culture, String uiCulture = null)
     {
         Objects.requireNonNull(culture, nameof(culture));
 
@@ -18,7 +18,7 @@ public static class CultureHelper
         );
     }
 
-    public static IDisposable Use(@Nonnull CultureInfo culture, CultureInfo uiCulture = null)
+    public static IDisposable Use(@NonNull CultureInfo culture, CultureInfo uiCulture = null)
     {
         Objects.requireNonNull(culture, nameof(culture));
 

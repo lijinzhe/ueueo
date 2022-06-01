@@ -90,7 +90,7 @@ public interface IDistributedCache<TCacheItem, TCacheKey>
      * <returns>The cache item, or null.</returns>
      */
     TCacheItem> GetAsync(
-        @Nonnull TCacheKey key,
+        @NonNull TCacheKey key,
         boolean hideErrors = null,
         boolean considerUow = false,
         CancellationToken token = default
@@ -128,7 +128,7 @@ public interface IDistributedCache<TCacheItem, TCacheKey>
      * <returns>The cache item.</returns>
      */
     TCacheItem> GetOrAddAsync(
-        @Nonnull TCacheKey key,
+        @NonNull TCacheKey key,
         Func<TCacheItem>> factory,
         Func<DistributedCacheEntryOptions> optionsFactory = null,
         boolean hideErrors = null,
@@ -205,8 +205,8 @@ public interface IDistributedCache<TCacheItem, TCacheKey>
      * <returns>The <see cref="T:System.Threading.Tasks.Task" /> indicating that the operation is asynchronous.</returns>
      */
     void SetAsync(
-        @Nonnull TCacheKey key,
-        @Nonnull TCacheItem value,
+        @NonNull TCacheKey key,
+        @NonNull TCacheItem value,
         @Nullable DistributedCacheEntryOptions options = null,
         boolean hideErrors = null,
         boolean considerUow = false,

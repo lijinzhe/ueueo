@@ -16,19 +16,19 @@ public static class AsyncHelper
     *
      * <param name="method">A method to check</param>
      */
-    public static boolean IsAsync(@Nonnull this MethodInfo method)
+    public static boolean IsAsync(@NonNull this MethodInfo method)
     {
         Objects.requireNonNull(method, nameof(method));
 
         return method.ReturnType.IsTaskOrTaskOfT();
     }
 
-    public static boolean IsTaskOrTaskOfT(@Nonnull this Type type)
+    public static boolean IsTaskOrTaskOfT(@NonNull this Type type)
     {
         return type == typeof(Task) || (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(>));
     }
 
-    public static boolean IsTaskOfT(@Nonnull this Type type)
+    public static boolean IsTaskOfT(@NonNull this Type type)
     {
         return type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(>);
     }
@@ -38,7 +38,7 @@ public static class AsyncHelper
      * Return T, if given type is Task{T}.
      * Returns given type otherwise.
     */
-    public static Type UnwrapTask(@Nonnull Type type)
+    public static Type UnwrapTask(@NonNull Type type)
     {
         Objects.requireNonNull(type, nameof(type));
 

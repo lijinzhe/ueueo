@@ -20,7 +20,7 @@ public class AbpEmbeddedFileProvider : DictionaryBasedFileProvider
     private readonly Lazy<Dictionary<String, IFileInfo>> _files;
 
     public AbpEmbeddedFileProvider(
-        @Nonnull Assembly assembly,
+        @NonNull Assembly assembly,
         @Nullable String baseNamespace = null)
     {
         Objects.requireNonNull(assembly, nameof(assembly));

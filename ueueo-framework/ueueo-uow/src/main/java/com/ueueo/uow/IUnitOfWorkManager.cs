@@ -8,12 +8,12 @@ public interface IUnitOfWorkManager
     IUnitOfWork Current;//  { get; }
 
     [NotNull]
-    IUnitOfWork Begin(@Nonnull AbpUnitOfWorkOptions options, boolean requiresNew = false);
+    IUnitOfWork Begin(@NonNull AbpUnitOfWorkOptions options, boolean requiresNew = false);
 
     [NotNull]
-    IUnitOfWork Reserve(@Nonnull String reservationName, boolean requiresNew = false);
+    IUnitOfWork Reserve(@NonNull String reservationName, boolean requiresNew = false);
 
-    void BeginReserved(@Nonnull String reservationName, @Nonnull AbpUnitOfWorkOptions options);
+    void BeginReserved(@NonNull String reservationName, @NonNull AbpUnitOfWorkOptions options);
 
-    boolean TryBeginReserved(@Nonnull String reservationName, @Nonnull AbpUnitOfWorkOptions options);
+    boolean TryBeginReserved(@NonNull String reservationName, @NonNull AbpUnitOfWorkOptions options);
 }

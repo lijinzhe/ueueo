@@ -9,21 +9,21 @@ public static class RemoteServiceConfigurationExtensions
     public const String UseCurrentAccessTokenName = "UseCurrentAccessToken";
 
     [CanBeNull]
-    public static String GetIdentityClient(@Nonnull this RemoteServiceConfiguration configuration)
+    public static String GetIdentityClient(@NonNull this RemoteServiceConfiguration configuration)
     {
         Check.NotNullOrEmpty(configuration, nameof(configuration));
 
         return configuration.GetOrDefault(IdentityClientName);
     }
 
-    public static RemoteServiceConfiguration SetIdentityClient(@Nonnull this RemoteServiceConfiguration configuration, @Nullable String value)
+    public static RemoteServiceConfiguration SetIdentityClient(@NonNull this RemoteServiceConfiguration configuration, @Nullable String value)
     {
         configuration[IdentityClientName] = value;
         return configuration;
     }
 
     [CanBeNull]
-    public static boolean GetUseCurrentAccessToken(@Nonnull this RemoteServiceConfiguration configuration)
+    public static boolean GetUseCurrentAccessToken(@NonNull this RemoteServiceConfiguration configuration)
     {
         Check.NotNullOrEmpty(configuration, nameof(configuration));
 
@@ -36,7 +36,7 @@ public static class RemoteServiceConfigurationExtensions
         return bool.Parse(value);
     }
 
-    public static RemoteServiceConfiguration SetUseCurrentAccessToken(@Nonnull this RemoteServiceConfiguration configuration, @Nullable boolean value)
+    public static RemoteServiceConfiguration SetUseCurrentAccessToken(@NonNull this RemoteServiceConfiguration configuration, @Nullable boolean value)
     {
         if (value == null)
         {

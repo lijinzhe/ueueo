@@ -28,7 +28,7 @@ public class AbpHybridJsonSerializer : IJsonSerializer, ITransientDependency
         }
     }
 
-    public T Deserialize<T>(@Nonnull String jsonString, boolean camelCase = true)
+    public T Deserialize<T>(@NonNull String jsonString, boolean camelCase = true)
     {
         Objects.requireNonNull(jsonString, nameof(jsonString));
 
@@ -39,7 +39,7 @@ public class AbpHybridJsonSerializer : IJsonSerializer, ITransientDependency
         }
     }
 
-    public Object Deserialize(Type type, @Nonnull String jsonString, boolean camelCase = true)
+    public Object Deserialize(Type type, @NonNull String jsonString, boolean camelCase = true)
     {
         Objects.requireNonNull(jsonString, nameof(jsonString));
 

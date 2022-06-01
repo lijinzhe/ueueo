@@ -61,8 +61,8 @@ public class KafkaMessageConsumer : IKafkaMessageConsumer, ITransientDependency,
     }
 
     public   void Initialize(
-        @Nonnull String topicName,
-        @Nonnull String groupId,
+        @NonNull String topicName,
+        @NonNull String groupId,
         String connectionName = null)
     {
         Objects.requireNonNull(topicName, nameof(topicName));

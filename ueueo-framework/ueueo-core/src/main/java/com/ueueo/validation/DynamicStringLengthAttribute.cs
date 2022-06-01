@@ -28,7 +28,7 @@ public class DynamicStringLengthAttribute : StringLengthAttribute
      * <param name="minimumLengthPropertyName">The name of the public static property for the <see cref="StringLengthAttribute.MinimumLength"/></param>
      */
     public DynamicStringLengthAttribute(
-        @Nonnull Type sourceType,
+        @NonNull Type sourceType,
         @Nullable String maximumLengthPropertyName,
         @Nullable String minimumLengthPropertyName = null)
         : base(0)

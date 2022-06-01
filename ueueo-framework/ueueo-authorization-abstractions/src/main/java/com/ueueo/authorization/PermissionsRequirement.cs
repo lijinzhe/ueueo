@@ -9,7 +9,7 @@ public class PermissionsRequirement : IAuthorizationRequirement
 
     public boolean RequiresAll;//  { get; }
 
-    public PermissionsRequirement(@Nonnull String[] permissionNames, boolean requiresAll)
+    public PermissionsRequirement(@NonNull String[] permissionNames, boolean requiresAll)
     {
         Objects.requireNonNull(permissionNames, nameof(permissionNames));
 

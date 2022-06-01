@@ -182,7 +182,7 @@ public static class TypeHelper
         return null;
     }
 
-    public static String GetFullNameHandlingNullableAndGenerics(@Nonnull Type type)
+    public static String GetFullNameHandlingNullableAndGenerics(@NonNull Type type)
     {
         Objects.requireNonNull(type, nameof(type));
 
@@ -200,7 +200,7 @@ public static class TypeHelper
         return type.FullName ?? type.Name;
     }
 
-    public static String GetSimplifiedName(@Nonnull Type type)
+    public static String GetSimplifiedName(@NonNull Type type)
     {
         Objects.requireNonNull(type, nameof(type));
 

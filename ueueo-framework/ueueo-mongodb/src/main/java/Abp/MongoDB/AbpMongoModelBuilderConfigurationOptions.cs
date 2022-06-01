@@ -14,7 +14,7 @@ public class AbpMongoModelBuilderConfigurationOptions
     }
     private String _collectionPrefix;
 
-    public AbpMongoModelBuilderConfigurationOptions(@Nonnull String collectionPrefix = "")
+    public AbpMongoModelBuilderConfigurationOptions(@NonNull String collectionPrefix = "")
     {
         Objects.requireNonNull(collectionPrefix, nameof(collectionPrefix));
 

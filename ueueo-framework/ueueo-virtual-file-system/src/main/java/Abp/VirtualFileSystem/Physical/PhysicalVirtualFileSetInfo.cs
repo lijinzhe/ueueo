@@ -8,8 +8,8 @@ public class PhysicalVirtualFileSetInfo : VirtualFileSetInfo
     public String Root;//  { get; }
 
     public PhysicalVirtualFileSetInfo(
-        @Nonnull IFileProvider fileProvider,
-        @Nonnull String root
+        @NonNull IFileProvider fileProvider,
+        @NonNull String root
         )
         : base(fileProvider)
     {

@@ -11,7 +11,7 @@ public class GlobalFeatureNameAttribute : Attribute
     [NotNull]
     public String Name;//  { get; }
 
-    public GlobalFeatureNameAttribute(@Nonnull String name)
+    public GlobalFeatureNameAttribute(@NonNull String name)
     {
         Name = Check.NotNullOrWhiteSpace(name, nameof(name));
     }
@@ -22,7 +22,7 @@ public class GlobalFeatureNameAttribute : Attribute
     }
 
     [NotNull]
-    public static String GetName(@Nonnull Type type)
+    public static String GetName(@NonNull Type type)
     {
         Objects.requireNonNull(type, nameof(type));
 

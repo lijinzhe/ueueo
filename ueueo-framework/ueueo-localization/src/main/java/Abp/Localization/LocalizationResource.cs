@@ -23,7 +23,7 @@ public class LocalizationResource
     public List<Type> BaseResourceTypes;//  { get; }
 
     public LocalizationResource(
-        @Nonnull Type resourceType,
+        @NonNull Type resourceType,
         @Nullable String defaultCultureName = null,
         @Nullable ILocalizationResourceContributor initialContributor = null)
     {

@@ -8,8 +8,8 @@ namespace Volo.Abp;
 internal class AbpApplicationWithExternalServiceProvider : AbpApplicationBase, IAbpApplicationWithExternalServiceProvider
 {
     public AbpApplicationWithExternalServiceProvider(
-        @Nonnull Type startupModuleType,
-        @Nonnull IServiceCollection services,
+        @NonNull Type startupModuleType,
+        @NonNull IServiceCollection services,
         @Nullable Action<AbpApplicationCreationOptions> optionsAction
         ) : base(
             startupModuleType,
@@ -19,7 +19,7 @@ internal class AbpApplicationWithExternalServiceProvider : AbpApplicationBase, I
         services.AddSingleton<IAbpApplicationWithExternalServiceProvider>(this);
     }
 
-    void IAbpApplicationWithExternalServiceProvider.SetServiceProvider(@Nonnull IServiceProvider serviceProvider)
+    void IAbpApplicationWithExternalServiceProvider.SetServiceProvider(@NonNull IServiceProvider serviceProvider)
     {
         Objects.requireNonNull(serviceProvider, nameof(serviceProvider));
 
@@ -45,7 +45,7 @@ internal class AbpApplicationWithExternalServiceProvider : AbpApplicationBase, I
         InitializeModulesAsync();
     }
 
-    public void Initialize(@Nonnull IServiceProvider serviceProvider)
+    public void Initialize(@NonNull IServiceProvider serviceProvider)
     {
         Objects.requireNonNull(serviceProvider, nameof(serviceProvider));
 

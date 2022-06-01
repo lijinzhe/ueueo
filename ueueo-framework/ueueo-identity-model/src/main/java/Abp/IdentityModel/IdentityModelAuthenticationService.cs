@@ -50,7 +50,7 @@ public class IdentityModelAuthenticationService : IIdentityModelAuthenticationSe
     }
 
     public  Boolean>  TryAuthenticateAsync(
-        @Nonnull HttpClient client,
+        @NonNull HttpClient client,
         String identityClientName = null)
     {
         var accessToken = GetAccessTokenOrNullAsync(identityClientName);

@@ -30,7 +30,7 @@ public class GlobalFeatureManager
         return IsEnabled(typeof(TFeature));
     }
 
-    public   boolean IsEnabled(@Nonnull Type featureType)
+    public   boolean IsEnabled(@NonNull Type featureType)
     {
         return IsEnabled(GlobalFeatureNameAttribute.GetName(featureType));
     }
@@ -45,7 +45,7 @@ public class GlobalFeatureManager
         Enable(typeof(TFeature));
     }
 
-    public   void Enable(@Nonnull Type featureType)
+    public   void Enable(@NonNull Type featureType)
     {
         Enable(GlobalFeatureNameAttribute.GetName(featureType));
     }
@@ -60,7 +60,7 @@ public class GlobalFeatureManager
         Disable(typeof(TFeature));
     }
 
-    public   void Disable(@Nonnull Type featureType)
+    public   void Disable(@NonNull Type featureType)
     {
         Disable(GlobalFeatureNameAttribute.GetName(featureType));
     }
