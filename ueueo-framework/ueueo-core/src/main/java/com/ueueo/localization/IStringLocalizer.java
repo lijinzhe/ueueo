@@ -34,9 +34,7 @@ public interface IStringLocalizer {
     /**
      * Gets all string resources.
      *
-     * @param includeParentCultures A System.Boolean indicating whether to include strings from parent cultures.
-     *
      * @return The strings.
      */
-    List<LocalizedString> getAllStrings(boolean includeParentCultures);
+    List<LocalizedString> getAllStrings();
 }

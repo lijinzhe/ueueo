@@ -1,9 +1,9 @@
 ﻿package com.ueueo.multilingualobjects;
 
 public interface IMultiLingualObjectManager {
+
     <TTranslation extends IObjectTranslation> TTranslation getTranslation(
             IMultiLingualObject<TTranslation> multiLingual,
-            String culture,
-            Boolean fallbackToParentCultures
+            String culture
     );
 }

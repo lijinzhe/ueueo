@@ -1,9 +1,9 @@
 ﻿package com.ueueo.multilingualobjects;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface IMultiLingualObject<TTranslation> extends IObjectTranslation {
-    Collection<TTranslation> getTranslations();
+    List<TTranslation> getTranslations();
 
-    void setTranslations(Collection<TTranslation> translations);
+    void setTranslations(List<TTranslation> translations);
 }

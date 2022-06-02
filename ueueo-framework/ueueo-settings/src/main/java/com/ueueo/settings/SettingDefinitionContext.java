@@ -27,7 +27,7 @@ public class SettingDefinitionContext implements ISettingDefinitionContext {
     }
 
     @Override
-    public void add(List<SettingDefinition> definitions) {
+    public void add(SettingDefinition... definitions) {
         if (definitions != null) {
             for (SettingDefinition definition : definitions) {
                 settings.put(definition.getName(), definition);

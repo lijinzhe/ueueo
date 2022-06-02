@@ -12,6 +12,6 @@ public interface ISettingDefinitionContext {
 
     List<SettingDefinition> getAll();
 
-    void add(List<SettingDefinition> definitions);
+    void add(SettingDefinition... definitions);
 
 }

@@ -20,7 +20,7 @@ public interface IStringLocalizerFactory {
      *
      * @return The Microsoft.Extensions.Localization.IStringLocalizer.
      */
-    IStringLocalizer create(Type resourceSource);
+    IStringLocalizer create(Class<?> resourceSource);
 
     /**
      * Creates an Microsoft.Extensions.Localization.IStringLocalizer.
