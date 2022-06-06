@@ -1,5 +1,7 @@
 package com.ueueo;
 
+import com.ueueo.exceptionhandling.IHasData;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +11,7 @@ import java.util.Map;
  * @author Lee
  * @date 2021-08-18 21:08
  */
-public class AbpException extends RuntimeException {
+public class AbpException extends RuntimeException implements IHasData {
 
     protected final Map<String, Object> data = new HashMap<>();
 
@@ -28,5 +30,10 @@ public class AbpException extends RuntimeException {
     public AbpException withData(String name, Object value) {
         this.data.put(name, value);
         return this;
+    }
+
+    @Override
+    public Map<String, Object> getData() {
+        return data;
     }
 }

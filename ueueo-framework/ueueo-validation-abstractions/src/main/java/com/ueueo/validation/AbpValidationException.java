@@ -25,7 +25,7 @@ public class AbpValidationException extends AbpException implements IHasLogLevel
      * Detailed list of validation errors for this exception.
      */
     @Getter
-    public Collection<ValidationResult> ValidationErrors;
+    private Collection<ValidationResult> ValidationErrors;
 
     /**
      * Exception severity.

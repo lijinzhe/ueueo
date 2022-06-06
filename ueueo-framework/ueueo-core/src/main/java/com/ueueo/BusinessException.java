@@ -1,5 +1,6 @@
 package com.ueueo;
 
+import com.ueueo.exceptionhandling.IHasData;
 import com.ueueo.exceptionhandling.IHasErrorCode;
 import com.ueueo.exceptionhandling.IHasErrorDetails;
 import com.ueueo.logging.IHasLogLevel;
@@ -13,7 +14,7 @@ import java.util.Map;
  * @author Lee
  * @date 2022-05-14 09:47
  */
-public class BusinessException extends RuntimeException implements IBusinessException, IHasErrorCode, IHasErrorDetails, IHasLogLevel, Serializable {
+public class BusinessException extends RuntimeException implements IBusinessException, IHasErrorCode, IHasErrorDetails, IHasLogLevel, IHasData, Serializable {
 
     private String code;
     private String details;
@@ -51,6 +52,11 @@ public class BusinessException extends RuntimeException implements IBusinessExce
 
     public void withData(String name, Object value) {
         this.data.put(name, value);
+    }
+
+    @Override
+    public Map<String, Object> getData() {
+        return data;
     }
 }
 

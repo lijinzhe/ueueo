@@ -4,8 +4,6 @@ import com.ueueo.data.annotations.IValidatableObject;
 import com.ueueo.data.annotations.ValidationContext;
 import com.ueueo.data.annotations.ValidationResult;
 import com.ueueo.data.objectextending.ExtensibleObject;
-import com.ueueo.localization.IStringLocalizer;
-import com.ueueo.localization.LocalizedString;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -47,10 +45,10 @@ public class LimitedResultRequestDto extends ExtensibleObject implements ILimite
     public Collection<ValidationResult> validate(ValidationContext validationContext) {
         if (this.maxResultCount > MaxMaxResultCount) {
             //TODO 如何获取IStringLocalizer？
-            IStringLocalizer localizer = null;
-            LocalizedString message = localizer.get("MaxResultCountExceededExceptionMessage",
-                    "MaxResultCount", MaxMaxResultCount, "LimitedResultRequestDto", MaxMaxResultCount);
-            return Collections.singleton(new ValidationResult(message));
+//            IStringLocalizer localizer = null;
+//            LocalizedString message = localizer.get("MaxResultCountExceededExceptionMessage",
+//                    "MaxResultCount", MaxMaxResultCount, "LimitedResultRequestDto", MaxMaxResultCount);
+//            return Collections.singleton(new ValidationResult(message));
         }
         return Collections.emptyList();
     }
