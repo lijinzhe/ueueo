@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.Ldap;
+namespace Volo.Abp.Ldap;
 
 public static class LdapSettingNames
 {

@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.GlobalFeatures;
+namespace Volo.Abp.GlobalFeatures;
 
 public class AbpGlobalFeatureErrorCodes
 {

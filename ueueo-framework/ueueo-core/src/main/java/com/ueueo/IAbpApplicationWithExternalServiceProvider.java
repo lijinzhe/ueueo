@@ -3,6 +3,10 @@ package com.ueueo;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.lang.NonNull;
 
+/**
+ * @author Lee
+ * @date 2022-06-07 21:42
+ */
 public interface IAbpApplicationWithExternalServiceProvider extends IAbpApplication {
     /**
      * Sets the service provider, but not initializes the modules.

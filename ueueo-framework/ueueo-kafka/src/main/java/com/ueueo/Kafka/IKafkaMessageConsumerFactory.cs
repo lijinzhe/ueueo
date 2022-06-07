@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.Kafka;
+namespace Volo.Abp.Kafka;
 
 public interface IKafkaMessageConsumerFactory
 {

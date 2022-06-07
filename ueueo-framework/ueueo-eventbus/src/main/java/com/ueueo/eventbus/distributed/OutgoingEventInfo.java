@@ -1,38 +1,64 @@
 package com.ueueo.eventbus.distributed;
 
+import com.ueueo.ID;
+import com.ueueo.data.objectextending.ExtraPropertyDictionary;
 import com.ueueo.data.objectextending.IHasExtraProperties;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.Assert;
 
-public class OutgoingEventInfo implements IHasExtraProperties
-{
-    public static int MaxEventNameLength;// { get; set; } = 256;
+import java.util.Date;
 
-    public ExtraPropertyDictionary ExtraProperties { get; protected set; }
+public class OutgoingEventInfo implements IHasExtraProperties {
+    public static int MaxEventNameLength = 256;
 
-    public ID Id;//  { get; }
+    private ID id;
 
-    public String EventName;//  { get; }
+    private String eventName;
 
-    public byte[] EventData;//  { get; }
+    private byte[] eventData;
 
-    public Date CreationTime;//  { get; }
+    private Date creationTime;
 
-    protected OutgoingEventInfo()
-    {
-        ExtraProperties = new ExtraPropertyDictionary();
-        this.SetDefaultsForExtraProperties();
+    private ExtraPropertyDictionary extraProperties;
+
+    protected OutgoingEventInfo() {
+        extraProperties = new ExtraPropertyDictionary();
+        IHasExtraProperties.Extensions.setDefaultsForExtraProperties(this, null);
     }
 
-    public OutgoingEventInfo(
-        ID id,
-        String eventName,
-        byte[] eventData,
-        Date creationTime)
-    {
-        Id = id;
-        EventName = Check.NotNullOrWhiteSpace(eventName, nameof(eventName), MaxEventNameLength);
-        EventData = eventData;
-        CreationTime = creationTime;
-        ExtraProperties = new ExtraPropertyDictionary();
-        this.SetDefaultsForExtraProperties();
+    public OutgoingEventInfo(ID id, String eventName, byte[] eventData, Date creationTime) {
+        this.id = id;
+        Assert.isTrue(StringUtils.isNotBlank(eventName), "EventName must not empty!");
+        Assert.isTrue(eventName.length() <= MaxEventNameLength, "EventName must <= " + MaxEventNameLength);
+        this.eventName = eventName;
+        this.eventData = eventData;
+        this.creationTime = creationTime;
+        this.extraProperties = new ExtraPropertyDictionary();
+        IHasExtraProperties.Extensions.setDefaultsForExtraProperties(this, null);
+    }
+
+    @Override
+    public ExtraPropertyDictionary getExtraProperties() {
+        return extraProperties;
+    }
+
+    protected void setExtraProperties(ExtraPropertyDictionary extraProperties) {
+        this.extraProperties = extraProperties;
+    }
+
+    public ID getId() {
+        return id;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public byte[] getEventData() {
+        return eventData;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
     }
 }

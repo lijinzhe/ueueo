@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using Volo.Abp.DependencyInjection;
 
 namespace Volo.Abp.Validation;

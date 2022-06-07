@@ -1,4 +1,4 @@
-﻿using Volo.Abp.Timing;
+using Volo.Abp.Timing;
 
 namespace Volo.Abp.MongoDB;
 

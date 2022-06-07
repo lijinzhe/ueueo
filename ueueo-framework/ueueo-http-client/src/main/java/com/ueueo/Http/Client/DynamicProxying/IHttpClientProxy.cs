@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.Http.Client.DynamicProxying;
+namespace Volo.Abp.Http.Client.DynamicProxying;
 
 public interface IHttpClientProxy<out TRemoteService>
 {

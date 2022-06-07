@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.Specifications;
+namespace Volo.Abp.Specifications;
 
 /**
  * Represents the base class for composite specifications.

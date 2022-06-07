@@ -1,4 +1,4 @@
-﻿package com.ueueo.multilingualobjects;
+package com.ueueo.multilingualobjects;
 
 public interface IMultiLingualObjectManager {
 

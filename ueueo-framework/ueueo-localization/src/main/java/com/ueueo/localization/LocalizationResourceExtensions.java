@@ -1,4 +1,4 @@
-﻿package com.ueueo.localization;
+package com.ueueo.localization;
 
 import com.ueueo.localization.virtualfiles.json.JsonVirtualFileLocalizationResourceContributor;
 import org.springframework.lang.NonNull;

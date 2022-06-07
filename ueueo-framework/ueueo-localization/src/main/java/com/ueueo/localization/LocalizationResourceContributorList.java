@@ -1,4 +1,4 @@
-﻿package com.ueueo.localization;
+package com.ueueo.localization;
 
 import java.util.ArrayList;
 import java.util.Map;

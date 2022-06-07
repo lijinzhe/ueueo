@@ -1,4 +1,4 @@
-﻿package com.ueueo.uow;
+package com.ueueo.uow;
 
 public class AmbientUnitOfWork implements IAmbientUnitOfWork {
 

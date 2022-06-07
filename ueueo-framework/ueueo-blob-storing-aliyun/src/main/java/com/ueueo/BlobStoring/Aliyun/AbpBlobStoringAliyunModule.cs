@@ -1,4 +1,4 @@
-﻿using Volo.Abp.Caching;
+using Volo.Abp.Caching;
 using Volo.Abp.Modularity;
 
 namespace Volo.Abp.BlobStoring.Aliyun;

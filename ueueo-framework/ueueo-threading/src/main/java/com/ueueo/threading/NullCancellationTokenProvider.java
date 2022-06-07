@@ -1,4 +1,4 @@
-﻿package com.ueueo.threading;
+package com.ueueo.threading;
 
 public class NullCancellationTokenProvider extends CancellationTokenProviderBase {
     public static NullCancellationTokenProvider Instance = new NullCancellationTokenProvider();

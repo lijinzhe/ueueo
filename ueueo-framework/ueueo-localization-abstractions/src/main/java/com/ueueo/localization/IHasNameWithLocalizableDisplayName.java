@@ -15,23 +15,28 @@ public interface IHasNameWithLocalizableDisplayName {
     @Nullable
     ILocalizableString getDisplayName();
 
-    default String getLocalizedDisplayName(@NonNull IStringLocalizerFactory stringLocalizerFactory, @Nullable String localizationNamePrefix) {
-        if (getDisplayName() != null) {
-            return getDisplayName().localize(stringLocalizerFactory).getValue();
-        }
-        IStringLocalizer defaultStringLocalizer = null;
-        if (stringLocalizerFactory instanceof IAbpStringLocalizerFactoryWithDefaultResourceSupport) {
-            defaultStringLocalizer = ((IAbpStringLocalizerFactoryWithDefaultResourceSupport) stringLocalizerFactory).createDefaultOrNull();
-        }
-        if (defaultStringLocalizer == null) {
-            return getName();
-        }
+    class Extensions {
+        public static String getLocalizedDisplayName(IHasNameWithLocalizableDisplayName hasName,
+                                                     @NonNull IStringLocalizerFactory stringLocalizerFactory,
+                                                     @Nullable String localizationNamePrefix) {
+            if (hasName.getDisplayName() != null) {
+                return hasName.getDisplayName().localize(stringLocalizerFactory).getValue();
+            }
+            IStringLocalizer defaultStringLocalizer = null;
+            if (stringLocalizerFactory instanceof IAbpStringLocalizerFactoryWithDefaultResourceSupport) {
+                defaultStringLocalizer = ((IAbpStringLocalizerFactoryWithDefaultResourceSupport) stringLocalizerFactory).createDefaultOrNull();
+            }
+            if (defaultStringLocalizer == null) {
+                return hasName.getName();
+            }
 
-        LocalizedString localizedString = defaultStringLocalizer.get(String.format("%s%s", localizationNamePrefix, getName()));
-        if (!localizedString.isResourceNotFound() || StringUtils.isEmpty(localizationNamePrefix)) {
-            return localizedString.getValue();
-        }
+            LocalizedString localizedString = defaultStringLocalizer.get(String.format("%s%s", localizationNamePrefix, hasName.getName()));
+            if (!localizedString.isResourceNotFound() || StringUtils.isEmpty(localizationNamePrefix)) {
+                return localizedString.getValue();
+            }
 
-        return defaultStringLocalizer.get(getName()).getValue();
+            return defaultStringLocalizer.get(hasName.getName()).getValue();
+        }
     }
+
 }

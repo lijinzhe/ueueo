@@ -1,4 +1,4 @@
-﻿using JetBrains.Annotations;
+using JetBrains.Annotations;
 using Volo.Abp.ObjectExtending.Modularity;
 
 namespace Volo.Abp.ObjectExtending;

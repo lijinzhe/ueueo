@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.Emailing;
+namespace Volo.Abp.Emailing;
 
 /**
  * Declares names of the settings defined by <see cref="EmailSettingProvider"/>.

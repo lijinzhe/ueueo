@@ -1,4 +1,4 @@
-﻿using Volo.Abp.RabbitMQ;
+using Volo.Abp.RabbitMQ;
 
 namespace Volo.Abp.EventBus.RabbitMq;
 

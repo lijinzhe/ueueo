@@ -1,4 +1,4 @@
-﻿package com.ueueo.localization.json;
+package com.ueueo.localization.json;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-﻿using JetBrains.Annotations;
+using JetBrains.Annotations;
 using Volo.Abp.SimpleStateChecking;
 
 namespace Volo.Abp.Authorization.Permissions;

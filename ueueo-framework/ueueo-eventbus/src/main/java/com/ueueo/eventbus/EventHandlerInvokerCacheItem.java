@@ -1,4 +1,4 @@
-﻿package com.ueueo.eventbus;
+package com.ueueo.eventbus;
 
 public class EventHandlerInvokerCacheItem
 {

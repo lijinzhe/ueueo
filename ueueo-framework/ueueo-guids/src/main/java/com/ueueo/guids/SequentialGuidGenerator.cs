@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Security.Cryptography;
 using Microsoft.Extensions.Options;
 using Volo.Abp.DependencyInjection;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Volo.Abp.ExceptionHandling;
 
 namespace Volo.Abp.GlobalFeatures;

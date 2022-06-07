@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Volo.Abp.Http.Modeling;
 
 namespace Volo.Abp.Http.Client.ClientProxying;

@@ -1,6 +1,6 @@
-﻿package com.ueueo.multilingualobjects;
+package com.ueueo.multilingualobjects;
 
-import Abp.Localization.LocalizationSettingNames;
+import com.ueueo.localization.LocalizationSettingNames;
 import com.ueueo.settings.ISettingProvider;
 import lombok.Getter;
 import org.apache.commons.collections4.CollectionUtils;

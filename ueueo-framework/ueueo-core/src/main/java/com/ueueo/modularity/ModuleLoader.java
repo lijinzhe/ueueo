@@ -2,7 +2,6 @@ package com.ueueo.modularity;
 
 import com.ueueo.AbpException;
 import com.ueueo.collections.ListExtensions;
-import com.ueueo.modularity.plugins.PlugInSourceList;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 
@@ -18,38 +17,29 @@ import java.util.stream.Collectors;
 public class ModuleLoader implements IModuleLoader {
 
     @Override
-    public List<IAbpModuleDescriptor> loadModules(ApplicationContext applicationContext, Class<?> startupModuleType, PlugInSourceList plugInSources) {
+    public List<IAbpModuleDescriptor> loadModules(ApplicationContext applicationContext, Class<?> startupModuleType) {
         Objects.requireNonNull(applicationContext);
         Objects.requireNonNull(startupModuleType);
-        Objects.requireNonNull(plugInSources);
 
-        List<IAbpModuleDescriptor> modules = getDescriptors(applicationContext, startupModuleType, plugInSources);
+        List<IAbpModuleDescriptor> modules = getDescriptors(applicationContext, startupModuleType);
         modules = SortByDependency(modules, startupModuleType);
         return modules;
     }
 
-    private List<IAbpModuleDescriptor> getDescriptors(ApplicationContext applicationContext, Class<?> startupModuleType, PlugInSourceList plugInSources) {
+    private List<IAbpModuleDescriptor> getDescriptors(ApplicationContext applicationContext, Class<?> startupModuleType) {
         List<AbpModuleDescriptor> modules = new ArrayList<>();
 
-        fillModules(modules, applicationContext, startupModuleType, plugInSources);
+        fillModules(modules, applicationContext, startupModuleType);
         setDependencies(modules);
 
         return modules.stream().map(abpModuleDescriptor -> (IAbpModuleDescriptor) abpModuleDescriptor).collect(Collectors.toList());
     }
 
     protected void fillModules(List<AbpModuleDescriptor> modules, ApplicationContext applicationContext,
-                               Class<?> startupModuleType, PlugInSourceList plugInSources) {
+                               Class<?> startupModuleType) {
         //All modules starting from the startup module
         for (Class<?> moduleType : AbpModuleHelper.findAllModuleTypes(startupModuleType)) {
             modules.add(createModuleDescriptor(applicationContext, moduleType, false));
-        }
-
-        //Plugin modules
-        for (Class<?> moduleType : plugInSources.getAllModules()) {
-            if (modules.stream().anyMatch(m -> m.getType().equals(moduleType))) {
-                continue;
-            }
-            modules.add(createModuleDescriptor(applicationContext, moduleType, true));
         }
     }
 

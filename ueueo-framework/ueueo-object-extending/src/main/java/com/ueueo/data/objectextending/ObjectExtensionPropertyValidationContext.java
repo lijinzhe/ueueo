@@ -1,4 +1,4 @@
-﻿package com.ueueo.data.objectextending;
+package com.ueueo.data.objectextending;
 
 import com.ueueo.data.annotations.ValidationContext;
 import com.ueueo.data.annotations.ValidationResult;

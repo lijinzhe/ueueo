@@ -1,4 +1,4 @@
-﻿using Volo.Abp.DependencyInjection;
+using Volo.Abp.DependencyInjection;
 using Volo.Abp.MultiTenancy;
 
 namespace Volo.Abp.BlobStoring.Aliyun;

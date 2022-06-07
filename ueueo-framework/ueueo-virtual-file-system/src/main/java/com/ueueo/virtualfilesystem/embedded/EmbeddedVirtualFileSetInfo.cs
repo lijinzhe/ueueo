@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Microsoft.Extensions.FileProviders;
 
 namespace Volo.Abp.VirtualFileSystem.Embedded;

@@ -1,4 +1,4 @@
-﻿package com.ueueo.localization.virtualfiles.json;
+package com.ueueo.localization.virtualfiles.json;
 
 //TODO: Use composition over inheritance..?
 

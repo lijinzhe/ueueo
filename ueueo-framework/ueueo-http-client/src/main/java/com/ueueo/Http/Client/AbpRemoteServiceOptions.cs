@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.Http.Client;
+namespace Volo.Abp.Http.Client;
 
 public class AbpRemoteServiceOptions
 {

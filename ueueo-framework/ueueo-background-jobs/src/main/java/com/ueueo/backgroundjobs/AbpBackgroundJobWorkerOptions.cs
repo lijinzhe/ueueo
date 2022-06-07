@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.BackgroundJobs;
+namespace Volo.Abp.BackgroundJobs;
 
 public class AbpBackgroundJobWorkerOptions
 {

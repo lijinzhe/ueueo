@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.VirtualFileSystem;
+namespace Volo.Abp.VirtualFileSystem;
 
 public class AbpVirtualFileSystemOptions
 {

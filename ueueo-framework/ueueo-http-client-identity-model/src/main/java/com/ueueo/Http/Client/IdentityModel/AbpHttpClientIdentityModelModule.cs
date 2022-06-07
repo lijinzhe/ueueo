@@ -1,4 +1,4 @@
-﻿using Volo.Abp.IdentityModel;
+using Volo.Abp.IdentityModel;
 using Volo.Abp.Modularity;
 
 namespace Volo.Abp.Http.Client.IdentityModel;

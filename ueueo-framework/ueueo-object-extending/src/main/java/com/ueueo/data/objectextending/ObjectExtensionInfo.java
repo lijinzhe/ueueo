@@ -2,10 +2,8 @@ package com.ueueo.data.objectextending;
 
 import lombok.Getter;
 import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -15,7 +13,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author Lee
  * @date 2022-05-23 13:56
  */
@@ -44,8 +41,10 @@ public class ObjectExtensionInfo {
         return this.properties.containsKey(propertyName);
     }
 
-    public ObjectExtensionInfo addOrUpdateProperty(@NonNull Type propertyType, @NonNull String propertyName,
-                                                   Consumer<ObjectExtensionPropertyInfo> configureAction) {
+    public ObjectExtensionInfo addOrUpdateProperty(@NonNull Class<?> propertyType,
+                                                   @NonNull String propertyName,
+                                                   Consumer<ObjectExtensionPropertyInfo> configureAction
+    ) {
         Assert.notNull(propertyType, "propertyType must not null!");
         Assert.notNull(propertyName, "propertyName must not null!");
         ObjectExtensionPropertyInfo propertyInfo = this.properties.get(propertyName);
@@ -53,22 +52,6 @@ public class ObjectExtensionInfo {
             propertyInfo = new ObjectExtensionPropertyInfo(this, propertyType, propertyName);
             this.properties.put(propertyName, propertyInfo);
         }
-        if (configureAction != null) {
-            configureAction.accept(propertyInfo);
-        }
-        return this;
-    }
-
-    public ObjectExtensionInfo addOrUpdateProperty(
-            @NonNull Class<?> propertyType,
-            @NonNull String propertyName,
-            @Nullable Consumer<ObjectExtensionPropertyInfo> configureAction) {
-        Objects.requireNonNull(propertyType);
-        Objects.requireNonNull(propertyName);
-
-        ObjectExtensionPropertyInfo propertyInfo = properties.computeIfAbsent(propertyName,
-                s -> new ObjectExtensionPropertyInfo(this, propertyType, propertyName));
-
         if (configureAction != null) {
             configureAction.accept(propertyInfo);
         }

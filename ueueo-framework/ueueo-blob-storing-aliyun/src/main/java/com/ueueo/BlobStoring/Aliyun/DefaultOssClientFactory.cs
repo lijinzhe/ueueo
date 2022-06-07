@@ -1,4 +1,4 @@
-﻿using Aliyun.Acs.Core;
+using Aliyun.Acs.Core;
 using Aliyun.Acs.Core.Auth.Sts;
 using Aliyun.Acs.Core.Http;
 using Aliyun.Acs.Core.Profile;

@@ -1,4 +1,4 @@
-﻿package com.ueueo.uow;
+package com.ueueo.uow;
 
 import com.ueueo.AbpException;
 import lombok.Data;

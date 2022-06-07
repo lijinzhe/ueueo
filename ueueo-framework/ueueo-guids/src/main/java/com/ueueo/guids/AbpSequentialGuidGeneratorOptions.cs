@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.Guids;
+namespace Volo.Abp.Guids;
 
 public class AbpSequentialGuidGeneratorOptions
 {

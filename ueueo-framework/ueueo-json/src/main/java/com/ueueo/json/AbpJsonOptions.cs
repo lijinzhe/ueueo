@@ -1,4 +1,4 @@
-﻿using Volo.Abp.Collections;
+using Volo.Abp.Collections;
 using Volo.Abp.Json.SystemTextJson;
 
 namespace Volo.Abp.Json;

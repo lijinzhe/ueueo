@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text.Json;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;

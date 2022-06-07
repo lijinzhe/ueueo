@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.EventBus.Kafka;
+namespace Volo.Abp.EventBus.Kafka;
 
 public class AbpKafkaEventBusOptions
 {

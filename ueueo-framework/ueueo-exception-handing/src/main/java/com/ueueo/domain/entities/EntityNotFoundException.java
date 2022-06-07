@@ -1,4 +1,4 @@
-﻿package com.ueueo.domain.entities;
+package com.ueueo.domain.entities;
 
 import com.ueueo.AbpException;
 import com.ueueo.ID;

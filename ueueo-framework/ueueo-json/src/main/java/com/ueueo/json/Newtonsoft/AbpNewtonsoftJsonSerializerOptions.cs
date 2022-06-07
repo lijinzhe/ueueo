@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Volo.Abp.Collections;
 
 namespace Volo.Abp.Json.Newtonsoft;

@@ -86,7 +86,7 @@ public abstract class AbpApplicationBase implements IAbpApplication {
     }
 
     protected List<IAbpModuleDescriptor> loadModules(ApplicationContext applicationContext, AbpApplicationCreationOptions options) {
-        return applicationContext.getBean(IModuleLoader.class).loadModules(applicationContext, StartupModuleType, options.getPlugInSources());
+        return applicationContext.getBean(IModuleLoader.class).loadModules(applicationContext, StartupModuleType);
     }
 
     //TODO: We can extract a new class for this

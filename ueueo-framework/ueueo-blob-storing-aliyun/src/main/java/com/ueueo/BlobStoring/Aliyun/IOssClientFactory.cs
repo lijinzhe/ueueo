@@ -1,4 +1,4 @@
-﻿using Aliyun.OSS;
+using Aliyun.OSS;
 
 namespace Volo.Abp.BlobStoring.Aliyun;
 

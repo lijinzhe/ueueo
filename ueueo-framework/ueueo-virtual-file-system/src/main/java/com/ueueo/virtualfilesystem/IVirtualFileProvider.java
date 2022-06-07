@@ -1,4 +1,4 @@
-﻿package com.ueueo.virtualfilesystem;
+package com.ueueo.virtualfilesystem;
 
 import org.apache.commons.io.monitor.FileAlterationObserver;
 

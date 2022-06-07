@@ -1,4 +1,4 @@
-﻿package com.ueueo.exceptionhandling.localization;
+package com.ueueo.exceptionhandling.localization;
 
 import com.ueueo.localization.LocalizationResourceNameAttribute;
 

@@ -1,4 +1,4 @@
-﻿using Volo.Abp.DynamicProxy;
+using Volo.Abp.DynamicProxy;
 
 namespace Volo.Abp.BackgroundJobs;
 

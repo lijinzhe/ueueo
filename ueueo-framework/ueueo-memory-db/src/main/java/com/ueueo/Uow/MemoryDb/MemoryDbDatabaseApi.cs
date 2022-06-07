@@ -1,4 +1,4 @@
-﻿using Volo.Abp.Domain.Repositories.MemoryDb;
+using Volo.Abp.Domain.Repositories.MemoryDb;
 
 namespace Volo.Abp.Uow.MemoryDb;
 

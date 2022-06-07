@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.TextTemplating;
+namespace Volo.Abp.TextTemplating;
 
 public interface ITemplateDefinitionProvider
 {

@@ -1,7 +1,6 @@
 package com.ueueo.data.objectextending;
 
 import com.ueueo.data.annotations.Required;
-import com.ueueo.reflection.TypeHelper;
 
 import java.lang.annotation.Annotation;
 import java.util.Collection;

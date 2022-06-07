@@ -1,4 +1,4 @@
-﻿package com.ueueo.data.objectextending;
+package com.ueueo.data.objectextending;
 
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;

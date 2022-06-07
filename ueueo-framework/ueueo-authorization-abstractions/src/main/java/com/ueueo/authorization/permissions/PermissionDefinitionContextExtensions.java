@@ -31,7 +31,7 @@ public class PermissionDefinitionContextExtensions {
             return false;
         }
 
-        permission.setEnabled(false);
+        permission.setIsEnabled(false);
         return true;
     }
 }

@@ -1,4 +1,4 @@
-﻿package com.ueueo.threading;
+package com.ueueo.threading;
 
 import com.ueueo.IDisposable;
 import lombok.Getter;

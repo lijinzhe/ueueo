@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Volo.Abp.Reflection;
 
 namespace Volo.Abp.GlobalFeatures;

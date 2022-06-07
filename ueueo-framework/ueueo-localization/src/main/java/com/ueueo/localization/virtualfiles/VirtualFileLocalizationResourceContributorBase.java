@@ -1,4 +1,4 @@
-﻿package com.ueueo.localization.virtualfiles;
+package com.ueueo.localization.virtualfiles;
 
 import com.ueueo.AbpException;
 import com.ueueo.localization.ILocalizationDictionary;

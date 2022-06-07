@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Medallion.Threading;
 
 namespace Volo.Abp.DistributedLocking;

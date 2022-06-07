@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using Volo.Abp.DependencyInjection;
 
 namespace Volo.Abp.Http.Client.Proxying;

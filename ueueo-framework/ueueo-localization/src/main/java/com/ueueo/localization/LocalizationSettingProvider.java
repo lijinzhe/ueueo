@@ -1,4 +1,4 @@
-﻿package com.ueueo.localization;
+package com.ueueo.localization;
 
 import com.ueueo.localization.resources.AbpLocalization.AbpLocalizationResource;
 import com.ueueo.settings.ISettingDefinitionContext;

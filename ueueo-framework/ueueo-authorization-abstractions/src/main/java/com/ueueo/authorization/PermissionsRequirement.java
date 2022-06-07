@@ -1,4 +1,4 @@
-﻿package com.ueueo.authorization;
+package com.ueueo.authorization;
 
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;

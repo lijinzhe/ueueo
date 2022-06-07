@@ -1,4 +1,4 @@
-﻿package com.ueueo.authorization.localization;
+package com.ueueo.authorization.localization;
 
 import com.ueueo.localization.LocalizationResourceNameAttribute;
 

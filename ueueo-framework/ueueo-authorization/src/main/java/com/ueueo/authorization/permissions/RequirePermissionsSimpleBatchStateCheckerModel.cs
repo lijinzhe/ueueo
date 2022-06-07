@@ -1,4 +1,4 @@
-﻿using Volo.Abp.SimpleStateChecking;
+using Volo.Abp.SimpleStateChecking;
 
 namespace Volo.Abp.Authorization.Permissions;
 

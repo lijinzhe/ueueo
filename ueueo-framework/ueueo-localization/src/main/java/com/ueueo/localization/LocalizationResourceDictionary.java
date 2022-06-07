@@ -1,4 +1,4 @@
-﻿package com.ueueo.localization;
+package com.ueueo.localization;
 
 import com.ueueo.AbpException;
 import org.springframework.lang.Nullable;

@@ -1,4 +1,4 @@
-﻿package com.ueueo.uow;
+package com.ueueo.uow;
 
 import lombok.Data;
 import org.springframework.lang.NonNull;

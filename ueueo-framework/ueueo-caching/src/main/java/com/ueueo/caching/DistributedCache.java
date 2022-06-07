@@ -1,4 +1,4 @@
-﻿package com.ueueo.caching;
+package com.ueueo.caching;
 
 /**
  * Represents a distributed cache of <typeparamref name="TCacheItem" /> type.

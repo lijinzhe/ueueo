@@ -1,4 +1,4 @@
-﻿package com.ueueo.ddd.application.contracts.dtos;
+package com.ueueo.ddd.application.contracts.dtos;
 
 import com.ueueo.ID;
 import com.ueueo.data.objectextending.ExtensibleObject;

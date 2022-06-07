@@ -1,4 +1,4 @@
-﻿package com.ueueo.exceptionhandling;
+package com.ueueo.exceptionhandling;
 
 import lombok.Data;
 

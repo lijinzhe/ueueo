@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Volo.Abp.Localization;
 
 namespace Volo.Abp.ObjectExtending.Modularity;

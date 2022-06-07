@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.TextTemplating.VirtualFiles;
+namespace Volo.Abp.TextTemplating.VirtualFiles;
 
 public class NullLocalizedTemplateContentReader : ILocalizedTemplateContentReader
 {

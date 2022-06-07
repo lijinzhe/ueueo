@@ -5,6 +5,7 @@ import com.ueueo.localization.ILocalizableString;
 import com.ueueo.multitenancy.MultiTenancySides;
 import com.ueueo.simplestatechecking.IHasSimpleStateCheckers;
 import com.ueueo.simplestatechecking.ISimpleStateChecker;
+import lombok.Data;
 import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 
@@ -17,6 +18,7 @@ import java.util.Map;
  * @author Lee
  * @date 2021-08-26 15:12
  */
+@Data
 public class PermissionDefinition implements IHasSimpleStateCheckers<PermissionDefinition> {
 
     /** Unique name of the permission. */
@@ -112,7 +114,7 @@ public class PermissionDefinition implements IHasSimpleStateCheckers<PermissionD
      *
      * @return
      */
-    public PermissionDefinition WithProperty(String key, Object value) {
+    public PermissionDefinition withProperty(String key, Object value) {
         this.properties.put(key, value);
         return this;
     }
@@ -125,63 +127,10 @@ public class PermissionDefinition implements IHasSimpleStateCheckers<PermissionD
      *
      * @return
      */
-    public PermissionDefinition WithProviders(List<String> providers) {
+    public PermissionDefinition withProviders(List<String> providers) {
         if (providers != null && !providers.isEmpty()) {
             this.allowedProviders.addAll(providers);
         }
         return this;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public PermissionDefinition getParent() {
-        return parent;
-    }
-
-    public void setParent(PermissionDefinition parent) {
-        this.parent = parent;
-    }
-
-    public List<PermissionDefinition> getChildren() {
-        return children;
-    }
-
-    public MultiTenancySides getMultiTenancySide() {
-        return multiTenancySide;
-    }
-
-    public void setMultiTenancySide(MultiTenancySides multiTenancySide) {
-        this.multiTenancySide = multiTenancySide;
-    }
-
-    public List<String> getAllowedProviders() {
-        return allowedProviders;
-    }
-
-    @Override
-    public List<ISimpleStateChecker<PermissionDefinition>> getStateCheckers() {
-        return stateCheckers;
-    }
-
-    public ILocalizableString getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(ILocalizableString displayName) {
-        this.displayName = displayName;
-    }
-
-    public Map<String, Object> getProperties() {
-        return properties;
-    }
-
-    public Boolean getEnabled() {
-        return isEnabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        isEnabled = enabled;
     }
 }

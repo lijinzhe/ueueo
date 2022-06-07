@@ -1,4 +1,4 @@
-﻿package com.ueueo.data.objectextending;
+package com.ueueo.data.objectextending;
 
 public enum MappingPropertyDefinitionChecksEnum {
     /** No check. Copy all extra properties from the source to the destination. */

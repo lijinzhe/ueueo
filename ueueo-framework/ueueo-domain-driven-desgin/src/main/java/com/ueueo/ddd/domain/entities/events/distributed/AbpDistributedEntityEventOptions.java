@@ -1,4 +1,4 @@
-﻿package com.ueueo.ddd.domain.entities.events.distributed;
+package com.ueueo.ddd.domain.entities.events.distributed;
 
 import lombok.Data;
 

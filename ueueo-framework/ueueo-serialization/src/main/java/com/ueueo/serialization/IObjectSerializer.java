@@ -1,4 +1,4 @@
-﻿package com.ueueo.serialization;
+package com.ueueo.serialization;
 
 public interface IObjectSerializer<T> {
     byte[] serialize(T obj);

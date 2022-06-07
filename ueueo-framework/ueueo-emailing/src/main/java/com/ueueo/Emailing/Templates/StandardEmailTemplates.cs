@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.Emailing.Templates;
+namespace Volo.Abp.Emailing.Templates;
 
 public static class StandardEmailTemplates
 {

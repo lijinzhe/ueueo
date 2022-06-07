@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.EventBus;
+namespace Volo.Abp.EventBus;
 
 public class EventHandlerInvokerCacheItem
 {

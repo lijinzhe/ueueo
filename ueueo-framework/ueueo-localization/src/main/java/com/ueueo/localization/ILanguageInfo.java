@@ -1,9 +1,7 @@
-﻿package com.ueueo.localization;
+package com.ueueo.localization;
 
 public interface ILanguageInfo {
-    String getCultureName();
-
-    String getUiCultureName();
+    String getName();
 
     String getDisplayName();
 

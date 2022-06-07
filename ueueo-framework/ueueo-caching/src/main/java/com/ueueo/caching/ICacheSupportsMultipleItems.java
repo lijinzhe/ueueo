@@ -1,4 +1,4 @@
-﻿package com.ueueo.caching;
+package com.ueueo.caching;
 
 import com.ueueo.KeyValuePair;
 

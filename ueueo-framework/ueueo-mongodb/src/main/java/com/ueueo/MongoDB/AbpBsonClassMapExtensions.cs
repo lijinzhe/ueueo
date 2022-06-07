@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using MongoDB.Bson.Serialization;
 using Volo.Abp.Data;

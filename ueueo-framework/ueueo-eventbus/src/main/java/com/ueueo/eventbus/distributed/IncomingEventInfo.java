@@ -3,55 +3,69 @@ package com.ueueo.eventbus.distributed;
 import com.ueueo.ID;
 import com.ueueo.data.objectextending.ExtraPropertyDictionary;
 import com.ueueo.data.objectextending.IHasExtraProperties;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
 import java.util.Date;
 
-@Getter
-public class IncomingEventInfo implements IHasExtraProperties
-{
-    @Setter
-    @Getter
-    public static int MaxEventNameLength = 256;// { get; set; } = 256;
+public class IncomingEventInfo implements IHasExtraProperties {
+    public static int MaxEventNameLength = 256;
 
-    @Setter(AccessLevel.PROTECTED)
-    public ExtraPropertyDictionary ExtraProperties ;//{ get; protected set; }
+    private ID id;
 
-    public ID Id;//  { get; }
+    private String messageId;
 
-    public String MessageId;//  { get; }
+    private String eventName;
 
-    public String EventName;//  { get; }
+    private byte[] eventData;
 
-    public byte[] EventData;//  { get; }
+    private Date creationTime;
 
-    public Date CreationTime;//  { get; }
+    private ExtraPropertyDictionary extraProperties;
 
-    protected IncomingEventInfo()
-    {
-        ExtraProperties = new ExtraPropertyDictionary();
-        this.SetDefaultsForExtraProperties();
+    protected IncomingEventInfo() {
+        extraProperties = new ExtraPropertyDictionary();
+        IHasExtraProperties.Extensions.setDefaultsForExtraProperties(this, null);
     }
 
-    public IncomingEventInfo(
-        ID id,
-        String messageId,
-        String eventName,
-        byte[] eventData,
-        Date creationTime)
-    {
-        Id = id;
-        MessageId = messageId;
-        Assert.notNull(eventName,"eventName must not null!");
-        Assert.isTrue(!eventName.isEmpty(),"eventName must not empty!");
-        Assert.isTrue(eventName.length()<=MaxEventNameLength,"eventName length must <= "+MaxEventNameLength);
-        EventName = eventName;
-        EventData = eventData;
-        CreationTime = creationTime;
-        ExtraProperties = new ExtraPropertyDictionary();
-        this.SetDefaultsForExtraProperties();
+    public IncomingEventInfo(ID id, String messageId, String eventName, byte[] eventData, Date creationTime) {
+        this.id = id;
+        this.messageId = messageId;
+        Assert.isTrue(StringUtils.isNotBlank(eventName), "EventName must not empty!");
+        Assert.isTrue(eventName.length() <= MaxEventNameLength, "EventName must <= " + MaxEventNameLength);
+        this.eventName = eventName;
+        this.eventData = eventData;
+        this.creationTime = creationTime;
+        this.extraProperties = new ExtraPropertyDictionary();
+        IHasExtraProperties.Extensions.setDefaultsForExtraProperties(this, null);
+    }
+
+    @Override
+    public ExtraPropertyDictionary getExtraProperties() {
+        return extraProperties;
+    }
+
+    protected void setExtraProperties(ExtraPropertyDictionary extraProperties) {
+        this.extraProperties = extraProperties;
+    }
+
+    public ID getId() {
+        return id;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public byte[] getEventData() {
+        return eventData;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public String getMessageId() {
+        return messageId;
     }
 }

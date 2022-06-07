@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.ObjectExtending.Modularity;
+namespace Volo.Abp.ObjectExtending.Modularity;
 
 public class ExtensionPropertyEntityConfiguration
 {

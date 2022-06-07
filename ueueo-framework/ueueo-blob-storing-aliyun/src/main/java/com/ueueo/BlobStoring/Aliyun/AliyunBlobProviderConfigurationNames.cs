@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.BlobStoring.Aliyun;
+namespace Volo.Abp.BlobStoring.Aliyun;
 
 public class AliyunBlobProviderConfigurationNames
 {

@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using JetBrains.Annotations;
 
 namespace Volo.Abp.BlobStoring;

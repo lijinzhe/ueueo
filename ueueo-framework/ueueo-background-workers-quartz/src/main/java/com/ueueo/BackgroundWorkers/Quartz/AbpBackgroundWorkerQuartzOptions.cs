@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.BackgroundWorkers.Quartz;
+namespace Volo.Abp.BackgroundWorkers.Quartz;
 
 public class AbpBackgroundWorkerQuartzOptions
 {

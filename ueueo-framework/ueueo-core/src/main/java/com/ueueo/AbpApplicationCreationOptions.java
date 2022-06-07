@@ -1,6 +1,5 @@
 package com.ueueo;
 
-import com.ueueo.modularity.plugins.PlugInSourceList;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationContext;
@@ -19,13 +18,9 @@ public class AbpApplicationCreationOptions {
     @Getter
     private ApplicationContext applicationContext;
 
-    @NonNull
-    @Getter
-    private PlugInSourceList plugInSources;
-
-//    /**
-//     * The options in this property only take effect when IConfiguration not registered.
-//     */
+    //    /**
+    //     * The options in this property only take effect when IConfiguration not registered.
+    //     */
     //    @NonNull
     //    @Getter
     //    public AbpConfigurationBuilderOptions configuration;
@@ -36,7 +31,6 @@ public class AbpApplicationCreationOptions {
     public AbpApplicationCreationOptions(@NonNull ApplicationContext applicationContext) {
         Objects.requireNonNull(applicationContext);
         this.applicationContext = applicationContext;
-        this.plugInSources = new PlugInSourceList();
         //        this.configuration = new AbpConfigurationBuilderOptions();
     }
 }

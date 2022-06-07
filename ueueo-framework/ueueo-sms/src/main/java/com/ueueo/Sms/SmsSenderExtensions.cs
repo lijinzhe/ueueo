@@ -1,4 +1,4 @@
-﻿using JetBrains.Annotations;
+using JetBrains.Annotations;
 using System.Threading.Tasks;
 
 namespace Volo.Abp.Sms;

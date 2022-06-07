@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Json;
 

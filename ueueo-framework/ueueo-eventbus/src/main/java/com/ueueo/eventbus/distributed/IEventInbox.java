@@ -1,4 +1,4 @@
-﻿package com.ueueo.eventbus.distributed;
+package com.ueueo.eventbus.distributed;
 
 import com.ueueo.ID;
 import com.ueueo.threading.CancellationToken;

@@ -1,4 +1,4 @@
-﻿package com.ueueo.http.client;
+package com.ueueo.http.client;
 
 import com.ueueo.http.RemoteServiceErrorInfo;
 import com.ueueo.AbpException;

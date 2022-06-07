@@ -1,4 +1,4 @@
-﻿using Volo.Abp.BackgroundJobs;
+using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Emailing.Localization;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;

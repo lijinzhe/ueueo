@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.Specifications;
+namespace Volo.Abp.Specifications;
 
 /**
  * Represents that the implemented classes are specification parsers that

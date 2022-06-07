@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Volo.Abp.Domain;
 using Volo.Abp.Domain.Repositories.MemoryDb;
 using Volo.Abp.Modularity;

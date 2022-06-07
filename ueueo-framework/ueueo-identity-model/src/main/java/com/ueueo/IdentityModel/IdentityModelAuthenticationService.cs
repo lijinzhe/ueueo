@@ -1,4 +1,4 @@
-﻿using IdentityModel;
+using IdentityModel;
 using IdentityModel.Client;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;

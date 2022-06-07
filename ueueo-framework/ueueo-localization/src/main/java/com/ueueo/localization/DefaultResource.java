@@ -1,4 +1,4 @@
-﻿package com.ueueo.localization;
+package com.ueueo.localization;
 
 @LocalizationResourceNameAttribute(name = "Default")
 public class DefaultResource {

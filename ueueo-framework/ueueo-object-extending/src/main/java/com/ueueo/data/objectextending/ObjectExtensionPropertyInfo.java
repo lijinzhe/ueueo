@@ -4,11 +4,8 @@ import com.ueueo.data.annotations.ValidationAttribute;
 import com.ueueo.data.objectextending.modularity.ExtensionPropertyLookupConfiguration;
 import com.ueueo.localization.IHasNameWithLocalizableDisplayName;
 import com.ueueo.localization.ILocalizableString;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,15 +20,11 @@ import java.util.stream.Collectors;
  * @author Lee
  * @date 2022-05-23 14:08
  */
-@Getter
 public class ObjectExtensionPropertyInfo implements IHasNameWithLocalizableDisplayName, IBasicObjectExtensionPropertyInfo {
 
     private ObjectExtensionInfo objectExtension;
     private String name;
-    private Type type;
-
-
-
+    private Class<?> type;
     private List<Annotation> attributes;
     private List<Consumer<ObjectExtensionPropertyValidationContext>> validators;
 
@@ -41,14 +34,13 @@ public class ObjectExtensionPropertyInfo implements IHasNameWithLocalizableDispl
 
     private Map<Object, Object> configuration;
 
-    @Setter
     private Object defaultValue;
-    @Setter
+
     private Supplier<Object> defaultValueFactory;
 
     private ExtensionPropertyLookupConfiguration lookup;
 
-    public ObjectExtensionPropertyInfo(ObjectExtensionInfo objectExtension, Type type, String name) {
+    public ObjectExtensionPropertyInfo(ObjectExtensionInfo objectExtension, Class<?> type, String name) {
         this.objectExtension = objectExtension;
         this.name = name;
         this.type = type;
@@ -70,14 +62,66 @@ public class ObjectExtensionPropertyInfo implements IHasNameWithLocalizableDispl
         }
         return defaultValue;
     }
+
     @Override
     public void setDefaultValueFactory(Supplier<Object> defaultValueFactory) {
         this.defaultValueFactory = defaultValueFactory;
+    }
+
+    @Override
+    public void setDefaultValue(Object defaultValue) {
+        this.defaultValue = defaultValue;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public Class<?> getType() {
+        return type;
+    }
+
+    @Override
+    public List<Annotation> getAttributes() {
+        return attributes;
+    }
+
+    @Override
+    public List<Consumer<ObjectExtensionPropertyValidationContext>> getValidators() {
+        return validators;
+    }
+
+    @Override
+    public Supplier<Object> getDefaultValueFactory() {
+        return defaultValueFactory;
+    }
+
+    @Override
+    public ILocalizableString getDisplayName() {
+        return displayName;
     }
 
     public List<ValidationAttribute> getValidationAttributes() {
         return attributes.stream().filter(annotation -> annotation instanceof ValidationAttribute)
                 .map(annotation -> (ValidationAttribute) annotation)
                 .collect(Collectors.toList());
+    }
+
+    public ObjectExtensionInfo getObjectExtension() {
+        return objectExtension;
+    }
+
+    public Boolean getCheckPairDefinitionOnMapping() {
+        return checkPairDefinitionOnMapping;
+    }
+
+    public Map<Object, Object> getConfiguration() {
+        return configuration;
+    }
+
+    public ExtensionPropertyLookupConfiguration getLookup() {
+        return lookup;
     }
 }

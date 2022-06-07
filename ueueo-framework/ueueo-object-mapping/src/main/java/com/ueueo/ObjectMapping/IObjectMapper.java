@@ -1,4 +1,4 @@
-﻿package com.ueueo.ObjectMapping;
+package com.ueueo.ObjectMapping;
 
 /**
  * Defines a simple interface to automatically map objects.

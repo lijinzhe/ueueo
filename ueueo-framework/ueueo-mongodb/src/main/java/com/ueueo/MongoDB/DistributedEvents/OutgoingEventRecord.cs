@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Volo.Abp.Auditing;
 using Volo.Abp.Data;
 using Volo.Abp.Domain.Entities;

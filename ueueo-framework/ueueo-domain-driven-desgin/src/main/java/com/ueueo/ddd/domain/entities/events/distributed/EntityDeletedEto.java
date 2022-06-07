@@ -1,4 +1,4 @@
-﻿package com.ueueo.ddd.domain.entities.events.distributed;
+package com.ueueo.ddd.domain.entities.events.distributed;
 
 import com.ueueo.ID;
 import com.ueueo.eventbus.GenericEventNameAttribute;

@@ -1,4 +1,4 @@
-﻿package com.ueueo.localization;
+package com.ueueo.localization;
 
 import lombok.Data;
 import org.apache.commons.lang3.ArrayUtils;

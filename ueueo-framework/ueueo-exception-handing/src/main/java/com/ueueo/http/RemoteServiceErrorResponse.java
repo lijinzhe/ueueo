@@ -1,4 +1,4 @@
-﻿package com.ueueo.http;
+package com.ueueo.http;
 
 import lombok.Data;
 

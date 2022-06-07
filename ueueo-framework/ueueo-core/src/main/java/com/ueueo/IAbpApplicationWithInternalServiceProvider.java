@@ -1,7 +1,11 @@
-﻿package com.ueueo;
+package com.ueueo;
 
 import org.springframework.beans.factory.BeanFactory;
 
+/**
+ * @author Lee
+ * @date 2022-06-07 21:43
+ */
 public interface IAbpApplicationWithInternalServiceProvider extends IAbpApplication {
     /**
      * Creates the service provider, but not initializes the modules.
@@ -16,3 +20,4 @@ public interface IAbpApplicationWithInternalServiceProvider extends IAbpApplicat
      */
     void initialize();
 }
+

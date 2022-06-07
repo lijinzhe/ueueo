@@ -1,4 +1,4 @@
-﻿package com.ueueo.ObjectMapping;
+package com.ueueo.ObjectMapping;
 
 public interface IMapTo<TDestination>
 {

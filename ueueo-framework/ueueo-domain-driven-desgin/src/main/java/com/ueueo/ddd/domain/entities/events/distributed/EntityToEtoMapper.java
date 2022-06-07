@@ -1,4 +1,4 @@
-﻿package com.ueueo.ddd.domain.entities.events.distributed;
+package com.ueueo.ddd.domain.entities.events.distributed;
 
 import com.ueueo.ObjectMapping.IObjectMapper;
 import com.ueueo.ddd.domain.entities.IEntity;
@@ -29,9 +29,9 @@ public class EntityToEtoMapper implements IEntityToEtoMapper {
             return new EntityEto(entityType.getName(), keys);
         }
 
-        Class<? extends IObjectMapper> objectMapperType = etoMappingItem.getObjectMappingContextType();
+        Class<?> objectMapperType = etoMappingItem.getObjectMappingContextType();
         if (objectMapperType != null) {
-            IObjectMapper objectMapper = Mappers.getMapper(objectMapperType);
+            IObjectMapper objectMapper = (IObjectMapper)Mappers.getMapper(objectMapperType);
             if (objectMapper != null) {
                 return objectMapper.map(entity);
             }
