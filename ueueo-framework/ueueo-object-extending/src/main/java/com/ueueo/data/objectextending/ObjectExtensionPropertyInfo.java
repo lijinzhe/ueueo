@@ -93,6 +93,10 @@ public class ObjectExtensionPropertyInfo implements IHasNameWithLocalizableDispl
         return validators;
     }
 
+    public void setLookup(ExtensionPropertyLookupConfiguration lookup) {
+        this.lookup = lookup;
+    }
+
     @Override
     public Supplier<Object> getDefaultValueFactory() {
         return defaultValueFactory;
@@ -101,6 +105,10 @@ public class ObjectExtensionPropertyInfo implements IHasNameWithLocalizableDispl
     @Override
     public ILocalizableString getDisplayName() {
         return displayName;
+    }
+
+    public void setDisplayName(ILocalizableString displayName) {
+        this.displayName = displayName;
     }
 
     public List<ValidationAttribute> getValidationAttributes() {

@@ -55,6 +55,12 @@
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-distributed-locking</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-eventbus-abstractions</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <optional>true</optional>
@@ -116,6 +122,11 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>

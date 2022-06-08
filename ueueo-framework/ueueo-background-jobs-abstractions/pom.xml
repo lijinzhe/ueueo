@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-json</artifactId>
+            <artifactId>ueueo-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

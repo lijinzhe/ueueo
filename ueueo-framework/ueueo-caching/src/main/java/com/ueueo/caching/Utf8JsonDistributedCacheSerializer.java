@@ -1,8 +1,7 @@
 package com.ueueo.caching;
 
-import com.ueueo.json.IJsonSerializer;
-
-import java.nio.charset.StandardCharsets;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * @author Lee
@@ -10,19 +9,16 @@ import java.nio.charset.StandardCharsets;
  */
 public class Utf8JsonDistributedCacheSerializer implements IDistributedCacheSerializer {
 
-    protected IJsonSerializer jsonSerializer;
-
-    public Utf8JsonDistributedCacheSerializer(IJsonSerializer jsonSerializer) {
-        this.jsonSerializer = jsonSerializer;
+    public Utf8JsonDistributedCacheSerializer() {
     }
 
     @Override
     public byte[] serialize(Object obj) {
-        return jsonSerializer.serialize(obj, true, false).getBytes(StandardCharsets.UTF_8);
+        return JSONObject.toJSONBytes(obj);
     }
 
     @Override
     public <T> T deserialize(Class<T> type, byte[] bytes) {
-        return jsonSerializer.deserialize(type, new String(bytes, StandardCharsets.UTF_8), true);
+        return JSON.parseObject(bytes, type);
     }
 }

@@ -12,7 +12,7 @@ import java.util.function.Supplier;
  * @author Lee
  * @date 2022-05-23 14:28
  */
- final class ExtensionPropertyHelper {
+public final class ExtensionPropertyHelper {
 
 // public static Collection<Annotation> GetDefaultAttributes(Class<?> type)
 // {

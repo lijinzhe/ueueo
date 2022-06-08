@@ -3,7 +3,6 @@ package com.ueueo.tenantmanagement.domain;
 import com.ueueo.ID;
 import com.ueueo.data.ConnectionStrings;
 import com.ueueo.ddd.domain.entities.auditing.FullAuditedAggregateRoot;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.FieldNameConstants;
 import org.apache.commons.lang3.StringUtils;
@@ -19,7 +18,6 @@ import java.util.List;
  * @date 2022-05-18 15:15
  */
 @EqualsAndHashCode(callSuper = true)
-@Data
 @FieldNameConstants
 public class Tenant extends FullAuditedAggregateRoot {
 
@@ -79,4 +77,11 @@ public class Tenant extends FullAuditedAggregateRoot {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public List<TenantConnectionString> getConnectionStrings() {
+        return connectionStrings;
+    }
 }

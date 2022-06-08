@@ -1,11 +1,16 @@
 package com.ueueo.ObjectMapping;
 
-import org.springframework.beans.BeanUtils;
-
 /**
  * Defines a simple interface to automatically map objects.
+ *
+ * @author Lee
+ * @date 2022-06-08 11:43
  */
-public interface IObjectMapper<TSource, TDestination> {
+public interface IAutoObjectMapper {
+    /**
+     * Gets the underlying <see cref="IAutoObjectMappingProvider"/> object that is used for auto object mapping.
+     */
+    IAutoObjectMappingProvider getAutoObjectMappingProvider();
 
     /**
      * Converts an object to another. Creates a new object of <see cref="TDestination"/>.
@@ -14,7 +19,7 @@ public interface IObjectMapper<TSource, TDestination> {
      * <typeparam name="TSource">Type of the source object</typeparam>
      * <param name="source">Source object</param>
      */
-    TDestination map(TSource source);
+    <TSource, TDestination> TDestination map(TSource source, Class<? extends TDestination> destinationType);
 
     /**
      * Execute a mapping from the source object to the existing destination object
@@ -23,11 +28,5 @@ public interface IObjectMapper<TSource, TDestination> {
      * <param name="destination">Destination object</param>
      * <returns>Returns the same <see cref="destination"/> object after mapping operation</returns>
      */
-    default TDestination map(TSource source, TDestination destination) {
-        TDestination dest = map(source);
-        BeanUtils.copyProperties(dest, destination);
-        return destination;
-    }
-
+    <TSource, TDestination> TDestination map(TSource source, TDestination destination);
 }
-

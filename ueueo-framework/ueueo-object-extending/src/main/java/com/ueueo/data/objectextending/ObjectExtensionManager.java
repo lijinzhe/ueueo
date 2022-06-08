@@ -1,5 +1,6 @@
 package com.ueueo.data.objectextending;
 
+import com.ueueo.data.objectextending.modularity.ModuleExtensionConfiguration;
 import lombok.Getter;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -18,8 +19,11 @@ import java.util.function.Consumer;
 @Getter
 public class ObjectExtensionManager {
     public static ObjectExtensionManager Instance = new ObjectExtensionManager();
+
+    private final String ObjectExtensionManagerConfigurationKey = "_Modules";
+
     private ConcurrentHashMap<Object, Object> configuration;
-    private ConcurrentHashMap<Type, ObjectExtensionInfo> objectsExtensions;
+    private ConcurrentHashMap<Class<?>, ObjectExtensionInfo> objectsExtensions;
 
     protected ObjectExtensionManager() {
         this.objectsExtensions = new ConcurrentHashMap<>();
@@ -106,4 +110,10 @@ public class ObjectExtensionManager {
         return extensionInfo.getProperties();
     }
 
+    public Map<String, ModuleExtensionConfiguration> getModules() {
+        return (Map<String, ModuleExtensionConfiguration>) configuration.computeIfAbsent(
+                ObjectExtensionManagerConfigurationKey,
+                s -> new HashMap<String, ModuleExtensionConfiguration>()
+        );
+    }
 }
