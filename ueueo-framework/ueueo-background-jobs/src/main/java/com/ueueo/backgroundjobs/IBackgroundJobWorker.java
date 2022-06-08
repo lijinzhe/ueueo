@@ -1,6 +1,6 @@
 package com.ueueo.backgroundjobs;
 
-import Abp.BackgroundWorkers.IBackgroundWorker;
+import com.ueueo.backgroundworkers.IBackgroundWorker;
 
 /**
  * @author Lee

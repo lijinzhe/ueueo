@@ -1,5 +1,7 @@
 package com.ueueo.backgroundjobs;
 
+import com.ueueo.dynamicproxy.ProxyHelper;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -22,4 +24,17 @@ public interface IBackgroundJobManager<TArgs> {
      * @return
      */
     String enqueue(TArgs args, BackgroundJobPriority priority, Integer delay, TimeUnit delayTimeUnit);
+
+    class Extensions {
+        /**
+         * Checks if background job system has a real implementation.
+         * It returns false if the current implementation is <see cref="NullBackgroundJobManager"/>.
+         *
+         * <param name="backgroundJobManager"></param>
+         * <returns></returns>
+         */
+        public static boolean isAvailable(IBackgroundJobManager backgroundJobManager) {
+            return !(ProxyHelper.unProxy(backgroundJobManager) instanceof NullBackgroundJobManager);
+        }
+    }
 }

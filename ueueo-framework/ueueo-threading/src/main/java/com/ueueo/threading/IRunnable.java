@@ -7,10 +7,10 @@ public interface IRunnable {
     /**
      * Starts the service.
      */
-    void startAsync(CancellationToken cancellationToken);
+    void start();
 
     /**
      * Stops the service.
      */
-    void stopAsync(CancellationToken cancellationToken);
+    void stop();
 }

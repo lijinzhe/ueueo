@@ -1,4 +1,4 @@
-package Abp.BackgroundWorkers;
+package com.ueueo.backgroundworkers;
 
 import lombok.Data;
 

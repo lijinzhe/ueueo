@@ -1,4 +1,6 @@
-package Abp.BackgroundWorkers;
+package com.ueueo.backgroundworkers;
+
+import com.ueueo.threading.IRunnable;
 
 /**
  * Used to manage background workers.
@@ -6,7 +8,7 @@ package Abp.BackgroundWorkers;
  * @author Lee
  * @date 2022-05-29 18:10
  */
-public interface IBackgroundWorkerManager extends Runnable {
+public interface IBackgroundWorkerManager extends IRunnable {
 
     /**
      * Adds a new worker. Starts the worker immediately if <see cref="IBackgroundWorkerManager"/> has started.
