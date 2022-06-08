@@ -1,17 +1,10 @@
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
+package com.ueueo.blobstoring;
 
-namespace Volo.Abp.BlobStoring;
+import com.ueueo.threading.CancellationToken;
 
-public interface IBlobContainer<TContainer> : IBlobContainer
-    //where TContainer : class
-{
+import java.io.InputStream;
 
-}
-
-public interface IBlobContainer
-{
+public interface IBlobContainer {
     /**
      * Saves a blob <see cref="Stream"/> to the container.
      *
@@ -23,16 +16,16 @@ public interface IBlobContainer
      * </param>
      * <param name="cancellationToken">Cancellation token</param>
      */
-    void SaveAsync(
-        String name,
-        Stream stream,
-        boolean overrideExisting = false,
-        CancellationToken cancellationToken = default
+    void save(
+            String name,
+            InputStream stream,
+            boolean overrideExisting,
+            CancellationToken cancellationToken
     );
 
     /**
      * Deletes a blob from the container.
-    *
+     *
      * <param name="name">The name of the blob</param>
      * <param name="cancellationToken">Cancellation token</param>
      * <returns>
@@ -40,9 +33,9 @@ public interface IBlobContainer
      * Returns false if the blob with the given <paramref name="name"/> was not exists.
      * </returns>
      */
-    Boolean  DeleteAsync(
-        String name,
-        CancellationToken cancellationToken = default
+    Boolean delete(
+            String name,
+            CancellationToken cancellationToken
     );
 
     /**
@@ -51,9 +44,9 @@ public interface IBlobContainer
      * <param name="name">The name of the blob</param>
      * <param name="cancellationToken">Cancellation token</param>
      */
-    Boolean  ExistsAsync(
-        String name,
-        CancellationToken cancellationToken = default
+    Boolean exists(
+            String name,
+            CancellationToken cancellationToken
     );
 
     /**
@@ -68,25 +61,9 @@ public interface IBlobContainer
      * A <see cref="Stream"/> to read the blob data.
      * </returns>
      */
-    Stream GetAsync(
-        String name,
-        CancellationToken cancellationToken = default
+    InputStream get(
+            String name,
+            CancellationToken cancellationToken
     );
 
-    /**
-     * Gets a blob from the container, or returns null if there is no blob with the given <paramref name="name"/>.
-     * It actually gets a <see cref="Stream"/> to read the blob data.
-    *
-     * <param name="name">The name of the blob</param>
-     * <param name="cancellationToken">Cancellation token</param>
-     * <returns>
-     * A <see cref="Stream"/> to read the blob data.
-     * </returns>
-     */
-    Stream GetOrNullAsync(
-        String name,
-        CancellationToken cancellationToken = default
-    );
-
-    //TODO: Create shortcut extension methods: GetAsArraryAsync, GetAsStringAsync(encoding) (and null versions)
 }
