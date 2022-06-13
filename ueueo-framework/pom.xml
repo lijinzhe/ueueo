@@ -10,7 +10,7 @@
 
     <modules>
         <module>ueueo-auditing</module>
-        <module>ueueo-auditing-contracts</module>
+        <module>ueueo-auditing-abstractions</module>
         <module>ueueo-authorization-abstractions</module>
         <module>ueueo-blob-storing</module>
         <module>ueueo-blob-storing-aliyun</module>

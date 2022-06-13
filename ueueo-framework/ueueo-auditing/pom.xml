@@ -19,7 +19,7 @@
         <!-- UEUEO 框架依赖 -->
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-auditing-contracts</artifactId>
+            <artifactId>ueueo-auditing-abstractions</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

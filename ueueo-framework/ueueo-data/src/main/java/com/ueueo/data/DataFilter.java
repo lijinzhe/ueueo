@@ -39,7 +39,7 @@ public class DataFilter<TFilter> implements IDataFilter<TFilter> {
     }
 
     private IDataFilter<?> getFilter(Class<TFilter> type) {
-        return (IDataFilter<?>) _filters.get(type);
+        return (IDataFilter<?>) _filters.computeIfAbsent(type,filterType -> beanFactory.getBean(filterType));
     }
 
 }

@@ -15,7 +15,7 @@ public class AbpMultiTenancyOptions {
     private boolean isEnabled;
     /**
      * Database style for tenants.
-     * Default: {@link MultiTenancyDatabaseStyle.Hybrid}
+     * Default: {@link MultiTenancyDatabaseStyle#Hybrid}
      */
     private MultiTenancyDatabaseStyle databaseStyle = MultiTenancyDatabaseStyle.Hybrid;
 }
