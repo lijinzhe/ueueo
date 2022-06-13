@@ -11,20 +11,19 @@
     </parent>
 
     <groupId>com.ueueo.framework</groupId>
-    <artifactId>ueueo-data</artifactId>
+    <artifactId>ueueo-data-seeder</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-eventbus-abstractions</artifactId>
+            <artifactId>ueueo-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-object-extending</artifactId>
+            <artifactId>ueueo-uow</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
     </dependencies>
 </project>

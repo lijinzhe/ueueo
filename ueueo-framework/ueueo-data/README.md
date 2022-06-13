@@ -1,3 +1,11 @@
+# Data Access
+
+ABP framework was designed as database agnostic. It can work any type of data source by the help of the [repository](Repositories.md) and [unit of work](Unit-Of-Work.md) abstractions. Currently, the following providers are implemented as official:
+
+* [Entity Framework Core](Entity-Framework-Core.md) (works with [various DBMS and providers](https://docs.microsoft.com/en-us/ef/core/providers/).)
+* [MongoDB](MongoDB.md)
+* [Dapper](Dapper.md)
+
 # Connection Strings
 
 ABP Framework is designed to be [modular](Module-Development-Basics.md), [microservice compatible](Microservice-Architecture.md) and [multi-tenancy](Multi-Tenancy.md) aware. Connection string management is also designed to support these scenarios;

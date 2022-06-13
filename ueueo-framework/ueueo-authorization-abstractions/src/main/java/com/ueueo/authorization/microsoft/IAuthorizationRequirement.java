@@ -1,4 +1,4 @@
-package com.ueueo.authorization;
+package com.ueueo.authorization.microsoft;
 
 /**
  * Microsoft.AspNetCore.Authorization.IAuthorizationRequirement;

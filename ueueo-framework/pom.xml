@@ -67,6 +67,8 @@
         <module>ueueo-multi-lingual-objects</module>
         <module>ueueo-identity-model</module>
         <module>ueueo-http-client-identity-model</module>
+        <module>ueueo-data-filter</module>
+        <module>ueueo-data-seeder</module>
     </modules>
 
 </project>

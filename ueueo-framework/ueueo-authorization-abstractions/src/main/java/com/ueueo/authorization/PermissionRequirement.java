@@ -1,5 +1,6 @@
 package com.ueueo.authorization;
 
+import com.ueueo.authorization.microsoft.IAuthorizationRequirement;
 import lombok.Data;
 
 /**
@@ -7,7 +8,7 @@ import lombok.Data;
  * @date 2022-05-29 14:15
  */
 @Data
-public class PermissionRequirement {
+public class PermissionRequirement implements IAuthorizationRequirement {
     private String permissionName;
 
     public PermissionRequirement(String permissionName) {

@@ -2,6 +2,7 @@ package com.ueueo.multitenancy;
 
 import com.ueueo.ID;
 import com.ueueo.claims.ClaimsIdentity;
+import com.ueueo.data.objectextending.MappingPropertyDefinitionChecksEnum;
 import com.ueueo.principal.ClaimsPrincipal;
 import org.springframework.lang.NonNull;
 
@@ -41,5 +42,9 @@ public enum MultiTenancySides {
         return tenantId != null
                 ? MultiTenancySides.Tenant
                 : MultiTenancySides.Host;
+    }
+
+    public boolean hasFlag(MultiTenancySides tenancySides) {
+        return (this.flag & tenancySides.flag) > 0;
     }
 }

@@ -25,4 +25,8 @@ public class PermissionValuesCheckContext {
     public List<PermissionDefinition> getPermissions() {
         return permissions;
     }
+
+    public ClaimsPrincipal getPrincipal() {
+        return principal;
+    }
 }
