@@ -2,6 +2,7 @@ package com.ueueo.distributedlocking;
 
 import org.springframework.lang.NonNull;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -18,13 +19,11 @@ public interface IDistributedLock {
      *
      * @param name              The name of the lock
      * @param timeout           Timeout value
-     * @param timeUnit
      *
      * @return
      */
     IDistributedLockHandle tryAcquire(
             @NonNull String name,
-            Integer timeout,
-            TimeUnit timeUnit
+            Duration timeout
     );
 }

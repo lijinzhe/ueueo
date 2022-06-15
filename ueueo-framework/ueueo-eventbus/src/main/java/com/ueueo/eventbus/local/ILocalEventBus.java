@@ -14,5 +14,5 @@ public interface ILocalEventBus extends IEventBus {
      * <typeparam name="TEvent">Event type</typeparam>
      * <param name="handler">Object to handle the event</param>
      */
-    <TEvent> IDisposable subscribe(ILocalEventHandler<TEvent> handler);
+    IDisposable subscribe(Class<?> eventType, ILocalEventHandler handler);
 }

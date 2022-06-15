@@ -9,7 +9,7 @@ public interface IEventInbox {
 
     void enqueue(IncomingEventInfo incomingEvent);
 
-    List<IncomingEventInfo> getWaitingEventsAsyn(int maxCount, CancellationToken cancellationToken);
+    List<IncomingEventInfo> getWaitingEvents(int maxCount, CancellationToken cancellationToken);
 
     void markAsProcessed(ID id);
 

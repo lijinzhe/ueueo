@@ -31,12 +31,11 @@ public interface IEventBus {
      * Registers to an event.
      * Given action is called for all event occurrences.
      *
-     * @param action   Action to handle events
-     * @param <TEvent> Event type
+     * @param action Action to handle events
      *
      * @return
      */
-    <TEvent> IDisposable subscribe(Class<TEvent> eventType, Consumer<TEvent> action);
+    IDisposable subscribe(Class<?> eventType, Consumer<Object> action);
 
     /**
      * Registers to an event.
@@ -47,7 +46,7 @@ public interface IEventBus {
      *
      * @return
      */
-    <TEvent> IDisposable subscribe(Class<TEvent> eventType, IEventHandler handler);
+    IDisposable subscribe(Class<?> eventType, IEventHandler handler);
 
     /**
      * Registers to an event.
@@ -56,33 +55,33 @@ public interface IEventBus {
      * <typeparam name="TEvent">Event type</typeparam>
      * <param name="factory">A factory to create/release handlers</param>
      */
-    <TEvent> IDisposable subscribe(Class<TEvent> eventType, IEventHandlerFactory factory);
+    IDisposable subscribe(Class<?> eventType, IEventHandlerFactory factory);
 
     /**
      * Unregisters from an event.
      *
      * @param eventType Event type
      * @param action
-     * @param <TEvent>
+     * @param
      */
-    <TEvent> void unsubscribe(Class<TEvent> eventType, Consumer<TEvent> action);
+    void unsubscribe(Class<?> eventType, Consumer<Object> action);
 
     /**
      * @param eventType
      * @param handler   Handler object that is registered before
-     * @param <TEvent>
+     * @param
      */
-    <TEvent> void unsubscribe(Class<TEvent> eventType, IEventHandler handler);
+    void unsubscribe(Class<?> eventType, IEventHandler handler);
 
-    <TEvent> void unsubscribe(Class<TEvent> eventType, ILocalEventHandler<TEvent> handler);
+    void unsubscribe(Class<?> eventType, ILocalEventHandler handler);
 
-    <TEvent> void unsubscribe(Class<TEvent> eventType, IEventHandlerFactory factory);
+    void unsubscribe(Class<?> eventType, IEventHandlerFactory factory);
 
     /**
      * Unregisters all event handlers of given event type.
      *
      * @param eventType
-     * @param <TEvent>
+     * @param
      */
-    <TEvent> void unsubscribeAll(Class<TEvent> eventType);
+    void unsubscribeAll(Class<?> eventType);
 }

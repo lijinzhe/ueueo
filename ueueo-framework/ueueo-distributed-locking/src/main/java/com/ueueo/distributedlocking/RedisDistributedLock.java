@@ -4,6 +4,7 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.lang.NonNull;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -19,10 +20,10 @@ public class RedisDistributedLock implements IDistributedLock {
     }
 
     @Override
-    public IDistributedLockHandle tryAcquire(@NonNull String name, Integer timeout, TimeUnit timeUnit) {
+    public IDistributedLockHandle tryAcquire(@NonNull String name, Duration duration) {
         RLock lock = redissonClient.getLock(name);
         try {
-            if (lock.tryLock(0, timeout, timeUnit)) {
+            if (lock.tryLock(0, duration.getSeconds(), TimeUnit.SECONDS)) {
                 return new RedisDistributedLockHandle(lock);
             }
         } catch (InterruptedException e) {

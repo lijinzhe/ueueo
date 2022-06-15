@@ -1,8 +1,11 @@
 package com.ueueo.eventbus;
 
-public class EventHandlerInvokerCacheItem
-{
-    public IEventHandlerMethodExecutor Local;// { get; set; }
+import lombok.Data;
 
-    public IEventHandlerMethodExecutor Distributed;// { get; set; }
+@Data
+public class EventHandlerInvokerCacheItem {
+
+    private IEventHandlerMethodExecutor local;
+
+    private IEventHandlerMethodExecutor distributed;
 }

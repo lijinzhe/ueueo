@@ -60,7 +60,6 @@
         <module>ueueo-text-templating</module>
         <module>ueueo-caching-redis</module>
         <module>ueueo-specifications</module>
-        <module>ueueo-linq</module>
         <module>ueueo-domain-driven-desgin</module>
         <module>ueueo-validation-abstractions</module>
         <module>ueueo-virtual-file-system</module>

@@ -1,11 +1,11 @@
 package com.ueueo.multitenancy;
 
 import com.ueueo.ID;
+import com.ueueo.IDisposable;
 
 import java.util.Optional;
 
 /**
- *
  * @author Lee
  * @date 2022-05-13 20:53
  */
@@ -37,7 +37,9 @@ public class CurrentTenant implements ICurrentTenant {
     }
 
     @Override
-    public void change(ID tenantId, String name) {
+    public IDisposable change(ID tenantId, String name) {
+        BasicTenantInfo preCurrent = currentTenantAccessor.getCurrent();
         currentTenantAccessor.setCurrent(new BasicTenantInfo(tenantId, name));
+        return () -> currentTenantAccessor.setCurrent(preCurrent);
     }
 }

@@ -6,7 +6,7 @@ import com.ueueo.eventbus.IEventHandler;
  * @author Lee
  * @date 2022-05-16 10:46
  */
-public interface IDistributedEventHandler<TEvent> extends IEventHandler {
+public interface IDistributedEventHandler extends IEventHandler {
     /**
      * Handler handles the event by implementing this method.
      *
@@ -14,5 +14,5 @@ public interface IDistributedEventHandler<TEvent> extends IEventHandler {
      *
      * @return
      */
-    void handleEvent(TEvent eventData);
+    void handleEvent(Object eventData);
 }

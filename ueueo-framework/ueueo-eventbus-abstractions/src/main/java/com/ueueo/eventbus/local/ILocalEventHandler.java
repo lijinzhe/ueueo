@@ -8,7 +8,7 @@ import java.util.concurrent.Future;
  * @author Lee
  * @date 2022-05-16 10:45
  */
-public interface ILocalEventHandler<TEvent> extends IEventHandler {
+public interface ILocalEventHandler extends IEventHandler {
     /**
      * Handler handles the event by implementing this method.
      *
@@ -16,5 +16,5 @@ public interface ILocalEventHandler<TEvent> extends IEventHandler {
      *
      * @return
      */
-    void handleEvent(TEvent eventData);
+    void handleEvent(Object eventData);
 }

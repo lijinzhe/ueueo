@@ -9,17 +9,17 @@ import java.util.function.Function;
 @Data
 public class OutboxConfig {
     @NonNull
-    public String name;
+    private String name;
 
-    public Class<?> implementationType;
+    private Class<?> implementationType;
 
-    public Function<Class<?>, Boolean> selector;
+    private Function<Class<?>, Boolean> selector;
 
     /**
      * Used to enable/disable sending events from outbox to the message broker.
      * Default: true.
      */
-    public boolean isSendingEnabled = true;
+    private boolean isSendingEnabled = true;
 
     public OutboxConfig(@NonNull String name) {
         Objects.requireNonNull(name);
