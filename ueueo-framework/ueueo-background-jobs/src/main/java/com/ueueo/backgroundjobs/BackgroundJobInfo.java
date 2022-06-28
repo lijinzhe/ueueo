@@ -26,7 +26,7 @@ public class BackgroundJobInfo {
      * Try count of this job.
      * A job is re-tried if it fails.
      */
-    private short tryCount;
+    private int tryCount;
 
     /**
      * Creation time of this job.

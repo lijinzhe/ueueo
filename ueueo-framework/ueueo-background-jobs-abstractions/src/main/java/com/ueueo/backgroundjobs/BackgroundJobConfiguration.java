@@ -1,7 +1,6 @@
 package com.ueueo.backgroundjobs;
 
 public class BackgroundJobConfiguration {
-    private Class<?> argsType;
 
     private Class<?> jobType;
 
@@ -9,15 +8,8 @@ public class BackgroundJobConfiguration {
 
     public BackgroundJobConfiguration(Class<?> jobType) {
         this.jobType = jobType;
-        this.argsType = BackgroundJobArgsHelper.getJobArgsType(jobType);
-        if (this.argsType != null) {
-            BackgroundJobNameAttribute attribute = this.argsType.getAnnotation(BackgroundJobNameAttribute.class);
-            this.jobName = attribute != null ? attribute.name() : "";
-        }
-    }
-
-    public Class<?> getArgsType() {
-        return argsType;
+        BackgroundJobNameAttribute attribute = this.jobType.getAnnotation(BackgroundJobNameAttribute.class);
+        this.jobName = attribute != null ? attribute.name() : this.jobType.getName();
     }
 
     public Class<?> getJobType() {

@@ -1,5 +1,6 @@
 package com.ueueo.backgroundjobs;
 
+import com.ueueo.ID;
 import com.ueueo.dynamicproxy.ProxyHelper;
 
 import java.util.concurrent.TimeUnit;
@@ -7,12 +8,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * Defines interface of a job manager.
  *
- * @param <TArgs> Type of the arguments of job.
- *
  * @author Lee
  * @date 2022-05-29 18:15
  */
-public interface IBackgroundJobManager<TArgs> {
+public interface IBackgroundJobManager {
     /**
      * Enqueues a job to be executed.
      *
@@ -23,7 +22,7 @@ public interface IBackgroundJobManager<TArgs> {
      *
      * @return
      */
-    String enqueue(TArgs args, BackgroundJobPriority priority, Integer delay, TimeUnit delayTimeUnit);
+    ID enqueue(String jobName, Object args, BackgroundJobPriority priority, Integer delay, TimeUnit delayTimeUnit);
 
     class Extensions {
         /**

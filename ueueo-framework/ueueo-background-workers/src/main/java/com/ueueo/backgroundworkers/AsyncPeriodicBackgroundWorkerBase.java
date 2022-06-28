@@ -66,5 +66,4 @@ public abstract class AsyncPeriodicBackgroundWorkerBase extends BackgroundWorker
      */
     protected abstract void doWork(PeriodicBackgroundWorkerContext workerContext, CancellationToken cancellationToken);
 
-    protected abstract void DoWorkAsync(PeriodicBackgroundWorkerContext workerContext);
 }
