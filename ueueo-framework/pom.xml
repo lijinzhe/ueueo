@@ -68,7 +68,17 @@
         <module>ueueo-http-client-identity-model</module>
         <module>ueueo-data-filter</module>
         <module>ueueo-data-seeder</module>
-        <module>ueueo-navigation</module>
+        <module>ueueo-ui-navigation</module>
+        <module>ueueo-web</module>
+        <module>ueueo-api-versioning-abstractions</module>
+        <module>ueueo-web-authentication-jwt</module>
+        <module>ueueo-web-authentication-oauth</module>
+        <module>ueueo-web-multi-tenancy</module>
+        <module>ueueo-web-mvc</module>
+        <module>ueueo-web-mvc-client</module>
+        <module>ueueo-web-mvc-client-common</module>
+        <module>ueueo-web-mvc-contracts</module>
+        <module>ueueo-ui</module>
     </modules>
 
 </project>

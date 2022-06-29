@@ -1,9 +1,7 @@
 package com.ueueo.boot.autoconfigure.multitenancy;
 
-import com.ueueo.multitenancy.AsyncLocalCurrentTenantAccessor;
-import com.ueueo.multitenancy.CurrentTenant;
-import com.ueueo.multitenancy.ICurrentTenant;
-import com.ueueo.multitenancy.ICurrentTenantAccessor;
+import com.ueueo.multitenancy.*;
+import com.ueueo.multitenancy.store.InMemoryTenantStore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +18,7 @@ public class MultiTenancyAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(ICurrentTenantAccessor.class)
     public ICurrentTenantAccessor currentTenantAccessor() {
-        return new AsyncLocalCurrentTenantAccessor();
+        return AsyncLocalCurrentTenantAccessor.INSTANCE;
     }
 
     @Bean
@@ -29,4 +27,9 @@ public class MultiTenancyAutoConfiguration {
         return new CurrentTenant(currentTenantAccessor);
     }
 
+    @Bean
+    @ConditionalOnMissingBean(InMemoryTenantStore.class)
+    public ITenantStore tenantStore() {
+        return new InMemoryTenantStore();
+    }
 }

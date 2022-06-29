@@ -7,9 +7,9 @@ import java.util.function.Consumer;
  * @date 2022-05-14 17:28
  */
 public class ActionTenantResolveContributor extends TenantResolveContributorBase {
-    public static final String ContributorName = "Action";
+    public static final String CONTRIBUTOR_NAME = "Action";
 
-    private Consumer<ITenantResolveContext> resolveAction;
+    private final Consumer<ITenantResolveContext> resolveAction;
 
     public ActionTenantResolveContributor(Consumer<ITenantResolveContext> resolveAction) {
         this.resolveAction = resolveAction;
@@ -17,7 +17,7 @@ public class ActionTenantResolveContributor extends TenantResolveContributorBase
 
     @Override
     public String getName() {
-        return ContributorName;
+        return CONTRIBUTOR_NAME;
     }
 
     @Override

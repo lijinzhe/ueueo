@@ -21,7 +21,7 @@ public final class EntityHelper {
     public static void trySetTenantId(IEntity entity) {
         if (entity instanceof IMultiTenant) {
             IMultiTenant multiTenantEntity = (IMultiTenant) entity;
-            ID tenantId = Optional.ofNullable(AsyncLocalCurrentTenantAccessor.Instance.getCurrent())
+            ID tenantId = Optional.ofNullable(AsyncLocalCurrentTenantAccessor.INSTANCE.getCurrent())
                     .map(BasicTenantInfo::getTenantId).orElse(null);
             if (!multiTenantEntity.getTenantId().equals(tenantId)) {
                 try {

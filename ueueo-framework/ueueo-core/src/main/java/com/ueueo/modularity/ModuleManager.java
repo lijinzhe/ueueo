@@ -5,6 +5,9 @@ import com.ueueo.AbpShutdownException;
 import com.ueueo.ApplicationInitializationContext;
 import com.ueueo.ApplicationShutdownContext;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +17,8 @@ import java.util.stream.Collectors;
  * @author Lee
  * @date 2021-08-24 14:42
  */
+@Service
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class ModuleManager implements IModuleManager {
 
     private final IModuleContainer moduleContainer;

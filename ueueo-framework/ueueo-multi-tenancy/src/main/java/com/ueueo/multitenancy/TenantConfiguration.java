@@ -1,10 +1,10 @@
 package com.ueueo.multitenancy;
 
+import com.ueueo.Check;
 import com.ueueo.ID;
 import com.ueueo.data.ConnectionStrings;
 import lombok.Data;
 import org.springframework.lang.NonNull;
-import org.springframework.util.Assert;
 
 /**
  * @author Lee
@@ -24,9 +24,9 @@ public class TenantConfiguration {
     }
 
     public TenantConfiguration(ID id, @NonNull String name) {
-        Assert.notNull(name, "name 不能为空");
+        this();
         this.id = id;
-        this.name = name;
+        this.name = Check.notNullOrEmpty(name, "name");
         this.connectionStrings = new ConnectionStrings();
     }
 }

@@ -6,9 +6,9 @@ package com.ueueo.multitenancy;
  */
 public class AsyncLocalCurrentTenantAccessor implements ICurrentTenantAccessor {
 
-    public final static AsyncLocalCurrentTenantAccessor Instance = new AsyncLocalCurrentTenantAccessor();
+    public final static AsyncLocalCurrentTenantAccessor INSTANCE = new AsyncLocalCurrentTenantAccessor();
 
-    private ThreadLocal<BasicTenantInfo> currentScope;
+    private final ThreadLocal<BasicTenantInfo> currentScope;
 
     public AsyncLocalCurrentTenantAccessor() {
         this.currentScope = new InheritableThreadLocal<>();
