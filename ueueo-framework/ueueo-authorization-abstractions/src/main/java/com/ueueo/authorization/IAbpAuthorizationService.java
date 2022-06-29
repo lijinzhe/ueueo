@@ -11,4 +11,7 @@ import com.ueueo.principal.ClaimsPrincipal;
 public interface IAbpAuthorizationService {
 
     ClaimsPrincipal getCurrentPrincipal();
+
+
+     boolean isGranted(String policyName);
 }

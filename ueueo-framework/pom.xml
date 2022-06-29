@@ -68,6 +68,7 @@
         <module>ueueo-http-client-identity-model</module>
         <module>ueueo-data-filter</module>
         <module>ueueo-data-seeder</module>
+        <module>ueueo-navigation</module>
     </modules>
 
 </project>
