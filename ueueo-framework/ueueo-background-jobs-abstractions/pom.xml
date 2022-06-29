@@ -14,6 +14,7 @@
     <groupId>com.ueueo.framework</groupId>
     <artifactId>ueueo-background-jobs-abstractions</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <description>后台作业抽象层</description>
 
     <dependencies>
         <dependency>
