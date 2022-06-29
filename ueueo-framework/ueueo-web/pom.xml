@@ -17,6 +17,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-auditing</artifactId>
             <version>0.0.1-SNAPSHOT</version>
