@@ -1,4 +1,4 @@
-package com.ueueo;
+package com.ueueo.remote;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

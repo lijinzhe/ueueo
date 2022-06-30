@@ -1,7 +1,7 @@
 package com.ueueo.ui.navigation;
 
-import com.ueueo.SystemException;
-import com.ueueo.Check;
+import com.ueueo.exception.SystemException;
+import com.ueueo.util.Check;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;

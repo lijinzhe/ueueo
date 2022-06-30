@@ -1,4 +1,4 @@
-package com.ueueo;
+package com.ueueo.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.NonNull;

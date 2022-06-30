@@ -1,7 +1,7 @@
 package com.ueueo.exceptionhandling;
 
-import com.ueueo.BusinessException;
-import com.ueueo.IUserFriendlyException;
+import com.ueueo.exception.BusinessException;
+import com.ueueo.exception.IUserFriendlyException;
 import com.ueueo.authorization.AuthorizationException;
 import com.ueueo.data.DbConcurrencyException;
 import com.ueueo.data.annotations.ValidationResult;

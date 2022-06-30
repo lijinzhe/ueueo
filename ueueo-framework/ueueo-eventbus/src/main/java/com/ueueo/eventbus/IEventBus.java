@@ -1,6 +1,6 @@
 package com.ueueo.eventbus;
 
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.IDisposable;
 import com.ueueo.eventbus.local.ILocalEventHandler;
 
 import java.util.function.Consumer;

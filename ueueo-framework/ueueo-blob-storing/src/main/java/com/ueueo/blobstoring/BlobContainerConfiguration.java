@@ -1,6 +1,6 @@
 package com.ueueo.blobstoring;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;

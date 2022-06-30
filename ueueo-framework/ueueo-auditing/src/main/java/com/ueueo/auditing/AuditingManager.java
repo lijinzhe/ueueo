@@ -1,6 +1,6 @@
 package com.ueueo.auditing;
 
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.IDisposable;
 import com.ueueo.threading.IAmbientScopeProvider;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
 package com.ueueo.threading;
 
-import com.ueueo.DisposeAction;
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.DisposeAction;
+import com.ueueo.disposable.IDisposable;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;

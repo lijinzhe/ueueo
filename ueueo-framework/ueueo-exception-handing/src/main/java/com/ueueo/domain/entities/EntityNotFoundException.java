@@ -1,6 +1,6 @@
 package com.ueueo.domain.entities;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.ID;
 import lombok.Data;
 

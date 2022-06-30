@@ -1,6 +1,6 @@
 package com.ueueo.web.multitenancy;
 
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.IDisposable;
 import com.ueueo.localization.LocalizationSettingNames;
 import com.ueueo.multitenancy.ICurrentTenant;
 import com.ueueo.multitenancy.ITenantConfigurationProvider;

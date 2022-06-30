@@ -1,7 +1,7 @@
 package com.ueueo.uow;
 
 import com.ueueo.ID;
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.IDisposable;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 

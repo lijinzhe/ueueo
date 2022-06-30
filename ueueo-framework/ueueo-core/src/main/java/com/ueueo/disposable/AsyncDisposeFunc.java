@@ -1,4 +1,4 @@
-package com.ueueo;
+package com.ueueo.disposable;
 
 import com.ueueo.threading.IAsyncDisposable;
 

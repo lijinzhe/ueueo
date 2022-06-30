@@ -1,6 +1,6 @@
 package com.ueueo.ui.navigation;
 
-import com.ueueo.Check;
+import com.ueueo.util.Check;
 import com.ueueo.simplestatechecking.IHasSimpleStateCheckers;
 import com.ueueo.simplestatechecking.ISimpleStateChecker;
 import lombok.EqualsAndHashCode;

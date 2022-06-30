@@ -1,6 +1,6 @@
 package com.ueueo.settings;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import lombok.Getter;
 import org.springframework.lang.NonNull;
 

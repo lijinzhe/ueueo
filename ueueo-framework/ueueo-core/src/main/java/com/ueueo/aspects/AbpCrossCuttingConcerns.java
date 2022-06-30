@@ -1,7 +1,7 @@
 package com.ueueo.aspects;
 
-import com.ueueo.DisposeAction;
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.DisposeAction;
+import com.ueueo.disposable.IDisposable;
 import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 

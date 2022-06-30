@@ -1,6 +1,6 @@
 package com.ueueo.data;
 
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.IDisposable;
 import org.springframework.beans.factory.BeanFactory;
 
 import java.util.concurrent.ConcurrentHashMap;

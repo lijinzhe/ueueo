@@ -1,6 +1,6 @@
 package com.ueueo.eventbus;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.eventbus.distributed.IDistributedEventHandler;
 import com.ueueo.eventbus.local.ILocalEventHandler;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;

@@ -1,6 +1,6 @@
 package com.ueueo.blobstoring;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.threading.CancellationToken;
 import com.ueueo.threading.ICancellationTokenProvider;
 

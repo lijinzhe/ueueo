@@ -1,6 +1,6 @@
 package com.ueueo.uow;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import lombok.Data;
 
 //TODO: Implement default options!

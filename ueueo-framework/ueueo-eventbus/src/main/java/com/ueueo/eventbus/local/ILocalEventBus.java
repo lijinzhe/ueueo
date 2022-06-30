@@ -1,6 +1,6 @@
 package com.ueueo.eventbus.local;
 
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.IDisposable;
 import com.ueueo.eventbus.IEventBus;
 
 /**

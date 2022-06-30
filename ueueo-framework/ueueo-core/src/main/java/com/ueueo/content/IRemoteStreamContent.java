@@ -1,6 +1,6 @@
 package com.ueueo.content;
 
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.IDisposable;
 
 import java.io.InputStream;
 

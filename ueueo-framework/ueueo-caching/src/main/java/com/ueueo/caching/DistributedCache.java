@@ -6,7 +6,7 @@ package com.ueueo.caching;
  * <typeparam name="TCacheItem">The type of cache item being cached.</typeparam>
  */
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.KeyValuePair;
 import com.ueueo.exceptionhandling.ExceptionNotificationContext;
 import com.ueueo.exceptionhandling.IExceptionNotifier;

@@ -1,6 +1,6 @@
 package com.ueueo.multitenancy;
 
-import com.ueueo.Check;
+import com.ueueo.util.Check;
 import com.ueueo.ID;
 import com.ueueo.data.ConnectionStrings;
 import lombok.Data;

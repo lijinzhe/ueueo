@@ -1,4 +1,4 @@
-package com.ueueo;
+package com.ueueo.disposable;
 
 import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;

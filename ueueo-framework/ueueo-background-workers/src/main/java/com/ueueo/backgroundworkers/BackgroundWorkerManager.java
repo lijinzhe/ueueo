@@ -1,6 +1,6 @@
 package com.ueueo.backgroundworkers;
 
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.IDisposable;
 
 import java.util.ArrayList;
 import java.util.List;

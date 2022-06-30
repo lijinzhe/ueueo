@@ -1,6 +1,6 @@
 package com.ueueo.features;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.localization.ILocalizableString;
 import lombok.Getter;
 import org.springframework.util.Assert;

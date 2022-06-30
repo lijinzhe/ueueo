@@ -1,6 +1,6 @@
 package com.ueueo.settings;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import org.springframework.util.Assert;
 
 import java.util.*;

@@ -1,6 +1,6 @@
 package com.ueueo.localization;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import org.springframework.lang.Nullable;
 
 import java.util.HashMap;

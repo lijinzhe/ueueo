@@ -1,7 +1,7 @@
 package com.ueueo.multitenancy;
 
 import com.ueueo.ID;
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.IDisposable;
 
 import java.util.Optional;
 

@@ -1,6 +1,6 @@
 package com.ueueo.blobstoring;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.dynamicproxy.ProxyHelper;
 import org.springframework.lang.NonNull;
 

@@ -1,6 +1,6 @@
 package com.ueueo.backgroundjobs;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.exceptionhandling.ExceptionNotificationContext;
 import com.ueueo.exceptionhandling.IExceptionNotifier;
 import org.springframework.beans.BeansException;

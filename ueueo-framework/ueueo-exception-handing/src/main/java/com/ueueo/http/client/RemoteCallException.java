@@ -1,6 +1,6 @@
 package com.ueueo.http.client;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.exceptionhandling.IHasErrorCode;
 import com.ueueo.exceptionhandling.IHasErrorDetails;
 import com.ueueo.exceptionhandling.IHasHttpStatusCode;

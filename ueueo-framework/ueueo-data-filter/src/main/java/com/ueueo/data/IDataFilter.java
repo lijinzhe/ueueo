@@ -1,6 +1,6 @@
 package com.ueueo.data;
 
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.IDisposable;
 
 /**
  * TODO Description Of This JAVA Class.

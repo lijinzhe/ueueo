@@ -1,6 +1,6 @@
 package com.ueueo.authorization.permissions;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.localization.ILocalizableString;
 import com.ueueo.multitenancy.MultiTenancySides;
 import org.springframework.lang.NonNull;

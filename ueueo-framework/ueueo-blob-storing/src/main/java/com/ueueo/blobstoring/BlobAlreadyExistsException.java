@@ -1,6 +1,6 @@
 package com.ueueo.blobstoring;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 
 public class BlobAlreadyExistsException extends SystemException {
     public BlobAlreadyExistsException() {

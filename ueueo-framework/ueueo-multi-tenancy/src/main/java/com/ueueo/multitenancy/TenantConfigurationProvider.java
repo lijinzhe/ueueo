@@ -1,6 +1,6 @@
 package com.ueueo.multitenancy;
 
-import com.ueueo.BusinessException;
+import com.ueueo.exception.BusinessException;
 import com.ueueo.ID;
 import org.slf4j.event.Level;
 

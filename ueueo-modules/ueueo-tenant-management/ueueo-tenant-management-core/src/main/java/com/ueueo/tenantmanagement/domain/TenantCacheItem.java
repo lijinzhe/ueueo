@@ -1,6 +1,6 @@
 package com.ueueo.tenantmanagement.domain;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.ID;
 import com.ueueo.multitenancy.IgnoreMultiTenancyAttribute;
 import com.ueueo.multitenancy.TenantConfiguration;

@@ -1,6 +1,6 @@
 package com.ueueo.authorization.permissions;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import org.springframework.beans.factory.BeanFactory;
 
 import java.util.*;

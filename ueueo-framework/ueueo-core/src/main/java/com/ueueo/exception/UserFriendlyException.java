@@ -1,4 +1,4 @@
-package com.ueueo;
+package com.ueueo.exception;
 
 import org.slf4j.event.Level;
 

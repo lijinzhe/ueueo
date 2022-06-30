@@ -1,7 +1,7 @@
 package com.ueueo.eventbus.local;
 
 import com.ueueo.ID;
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.IDisposable;
 import com.ueueo.eventbus.*;
 import com.ueueo.multitenancy.ICurrentTenant;
 import com.ueueo.uow.IUnitOfWork;

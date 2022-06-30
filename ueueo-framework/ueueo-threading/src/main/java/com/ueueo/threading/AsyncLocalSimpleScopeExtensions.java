@@ -1,7 +1,7 @@
 package com.ueueo.threading;
 
-import com.ueueo.DisposeAction;
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.DisposeAction;
+import com.ueueo.disposable.IDisposable;
 
 public class AsyncLocalSimpleScopeExtensions {
 

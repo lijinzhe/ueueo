@@ -1,7 +1,7 @@
 package com.ueueo.eventbus.distributed;
 
-import com.ueueo.SystemException;
-import com.ueueo.IDisposable;
+import com.ueueo.exception.SystemException;
+import com.ueueo.disposable.IDisposable;
 import com.ueueo.eventbus.IEventBus;
 
 /**

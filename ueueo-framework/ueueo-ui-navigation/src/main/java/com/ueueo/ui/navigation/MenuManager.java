@@ -1,6 +1,6 @@
 package com.ueueo.ui.navigation;
 
-import com.ueueo.Check;
+import com.ueueo.util.Check;
 import com.ueueo.authorization.IAbpAuthorizationService;
 import com.ueueo.authorization.permissions.PermissionSimpleStateCheckerExtensions;
 import com.ueueo.localization.IStringLocalizer;

@@ -1,6 +1,6 @@
 package com.ueueo.ui.navigation.urls;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.multitenancy.ICurrentTenant;
 import com.ueueo.multitenancy.ITenantStore;
 import com.ueueo.multitenancy.TenantConfiguration;

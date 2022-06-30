@@ -1,4 +1,4 @@
-package com.ueueo;
+package com.ueueo.exception;
 
 /**
  * @author Lee

@@ -1,6 +1,6 @@
 package com.ueueo.data;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package com.ueueo.auditing;
 
-import com.ueueo.IDisposable;
+import com.ueueo.disposable.IDisposable;
 
 /**
  * @author Lee

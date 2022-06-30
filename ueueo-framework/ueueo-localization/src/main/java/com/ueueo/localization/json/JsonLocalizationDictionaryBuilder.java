@@ -1,7 +1,7 @@
 package com.ueueo.localization.json;
 
 import com.alibaba.fastjson.JSON;
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.localization.ILocalizationDictionary;
 import com.ueueo.localization.LocalizedString;
 import com.ueueo.localization.StaticLocalizationDictionary;

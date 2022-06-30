@@ -1,6 +1,6 @@
 package com.ueueo.ObjectMapping;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 
 public class NotImplementedAutoObjectMappingProvider implements IAutoObjectMappingProvider {
 

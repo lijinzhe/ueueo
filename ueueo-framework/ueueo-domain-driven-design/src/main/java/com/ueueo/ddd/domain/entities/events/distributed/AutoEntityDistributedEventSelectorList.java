@@ -1,6 +1,6 @@
 package com.ueueo.ddd.domain.entities.events.distributed;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.NamedTypeSelector;
 import com.ueueo.ddd.domain.entities.IEntity;
 import org.springframework.lang.NonNull;

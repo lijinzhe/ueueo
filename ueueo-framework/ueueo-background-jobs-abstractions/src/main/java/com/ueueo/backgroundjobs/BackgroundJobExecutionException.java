@@ -1,6 +1,6 @@
 package com.ueueo.backgroundjobs;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import lombok.Data;
 
 @Data

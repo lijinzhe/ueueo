@@ -1,6 +1,6 @@
 package com.ueueo.authorization;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.exceptionhandling.IHasErrorCode;
 import com.ueueo.logging.IHasLogLevel;
 import org.slf4j.event.Level;

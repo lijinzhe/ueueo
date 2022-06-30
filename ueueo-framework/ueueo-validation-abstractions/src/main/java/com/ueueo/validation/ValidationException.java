@@ -1,6 +1,6 @@
 package com.ueueo.validation;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.data.annotations.ValidationResult;
 import com.ueueo.logging.IExceptionWithSelfLogging;
 import com.ueueo.logging.IHasLogLevel;

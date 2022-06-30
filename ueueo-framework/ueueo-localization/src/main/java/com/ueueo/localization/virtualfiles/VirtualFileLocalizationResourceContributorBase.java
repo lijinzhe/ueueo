@@ -1,6 +1,6 @@
 package com.ueueo.localization.virtualfiles;
 
-import com.ueueo.SystemException;
+import com.ueueo.exception.SystemException;
 import com.ueueo.localization.ILocalizationDictionary;
 import com.ueueo.localization.ILocalizationResourceContributor;
 import com.ueueo.localization.LocalizationResourceInitializationContext;

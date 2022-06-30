@@ -1,4 +1,4 @@
-package com.ueueo;
+package com.ueueo.remote;
 
 /**
  * TODO Can we move this to another package?
