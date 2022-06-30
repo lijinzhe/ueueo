@@ -4,8 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.lang.Nullable;
 
-import java.util.Locale;
-
 public class ResourceBundleStringLocalizer extends ResourceBundleMessageSource implements IStringLocalizer {
 
     public ResourceBundleStringLocalizer(String... basenames) {

@@ -2,8 +2,6 @@ package com.ueueo.localization;
 
 import org.springframework.lang.Nullable;
 
-import java.util.Locale;
-
 /**
  * C# Microsoft.Extensions.Localization
  *

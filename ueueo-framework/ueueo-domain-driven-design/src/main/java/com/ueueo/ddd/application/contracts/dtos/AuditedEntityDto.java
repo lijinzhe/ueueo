@@ -2,7 +2,6 @@ package com.ueueo.ddd.application.contracts.dtos;
 
 import com.ueueo.ID;
 import com.ueueo.auditing.IAuditedObject;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.Date;

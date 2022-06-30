@@ -1,7 +1,5 @@
 package com.ueueo.multitenancy;
 
-import org.springframework.beans.factory.Aware;
-
 import java.util.ArrayList;
 import java.util.List;
 

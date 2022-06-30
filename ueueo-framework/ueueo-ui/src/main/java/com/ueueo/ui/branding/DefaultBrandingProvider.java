@@ -1,4 +1,4 @@
-﻿package com.ueueo.ui.branding;
+package com.ueueo.ui.branding;
 
 public class DefaultBrandingProvider implements IBrandingProvider {
 

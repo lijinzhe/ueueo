@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Volo.Abp.Users;
 
 namespace Volo.Abp.AspNetCore.Mvc.Client;

@@ -2,8 +2,6 @@ package com.ueueo.ddd.domain.repositories;
 
 import com.ueueo.ddd.domain.entities.IEntity;
 
-import java.util.function.Predicate;
-
 /**
  * TODO Description Of This JAVA Class.
  *

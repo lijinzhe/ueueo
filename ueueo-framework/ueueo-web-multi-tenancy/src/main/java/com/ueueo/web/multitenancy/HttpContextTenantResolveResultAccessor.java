@@ -1,4 +1,4 @@
-﻿package com.ueueo.web.multitenancy;
+package com.ueueo.web.multitenancy;
 
 import com.ueueo.multitenancy.ITenantResolveResultAccessor;
 import com.ueueo.multitenancy.TenantResolveResult;

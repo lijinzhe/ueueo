@@ -1,4 +1,4 @@
-﻿package com.ueueo.web.multitenancy;
+package com.ueueo.web.multitenancy;
 
 import com.ueueo.multitenancy.ITenantResolveContext;
 import lombok.extern.slf4j.Slf4j;

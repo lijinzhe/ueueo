@@ -1,7 +1,5 @@
 package com.ueueo.authorization.permissions;
 
-import com.ueueo.DisposeAction;
-import com.ueueo.IDisposable;
 import com.ueueo.simplestatechecking.IHasSimpleStateCheckers;
 import com.ueueo.simplestatechecking.SimpleBatchStateCheckerBase;
 import com.ueueo.simplestatechecking.SimpleBatchStateCheckerContext;

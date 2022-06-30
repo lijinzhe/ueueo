@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Volo.Abp.AspNetCore.Mvc.ApiExploring;

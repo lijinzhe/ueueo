@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.AspNetCore.ExceptionHandling;
+namespace Volo.Abp.AspNetCore.ExceptionHandling;
 
 public class AbpAuthorizationExceptionHandlerOptions
 {

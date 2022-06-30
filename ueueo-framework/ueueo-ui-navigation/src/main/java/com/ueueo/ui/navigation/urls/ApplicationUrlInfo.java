@@ -1,4 +1,4 @@
-﻿package com.ueueo.ui.navigation.urls;
+package com.ueueo.ui.navigation.urls;
 
 import java.util.HashMap;
 import java.util.Map;

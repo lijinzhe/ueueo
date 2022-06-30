@@ -5,7 +5,6 @@ import com.ueueo.tenantmanagement.application.TenantDto;
 import com.ueueo.tenantmanagement.domain.Tenant;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.BeanUtils;
 
 /**
  * TODO Description Of This JAVA Class.

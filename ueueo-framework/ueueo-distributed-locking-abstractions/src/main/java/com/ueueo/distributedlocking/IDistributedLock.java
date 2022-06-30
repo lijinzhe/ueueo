@@ -3,7 +3,6 @@ package com.ueueo.distributedlocking;
 import org.springframework.lang.NonNull;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Lee

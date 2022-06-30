@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.AspNetCore.WebClientInfo;
+namespace Volo.Abp.AspNetCore.WebClientInfo;
 
 public interface IWebClientInfoProvider
 {

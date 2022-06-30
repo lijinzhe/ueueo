@@ -1,4 +1,4 @@
-﻿using Volo.Abp.EventBus;
+using Volo.Abp.EventBus;
 using Volo.Abp.Modularity;
 
 namespace Volo.Abp.AspNetCore.Mvc.Client;

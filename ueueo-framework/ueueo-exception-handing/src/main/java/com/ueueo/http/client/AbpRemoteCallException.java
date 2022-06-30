@@ -1,10 +1,10 @@
 package com.ueueo.http.client;
 
-import com.ueueo.http.RemoteServiceErrorInfo;
 import com.ueueo.AbpException;
 import com.ueueo.exceptionhandling.IHasErrorCode;
 import com.ueueo.exceptionhandling.IHasErrorDetails;
 import com.ueueo.exceptionhandling.IHasHttpStatusCode;
+import com.ueueo.http.RemoteServiceErrorInfo;
 import lombok.Data;
 
 @Data

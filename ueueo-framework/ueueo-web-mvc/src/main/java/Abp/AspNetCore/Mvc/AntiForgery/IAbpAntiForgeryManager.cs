@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.AspNetCore.Mvc.AntiForgery;
+namespace Volo.Abp.AspNetCore.Mvc.AntiForgery;
 
 public interface IAbpAntiForgeryManager
 {

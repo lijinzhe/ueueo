@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Microsoft.AspNetCore.Cors;
 

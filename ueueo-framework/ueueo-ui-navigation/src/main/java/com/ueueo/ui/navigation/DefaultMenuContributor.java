@@ -1,4 +1,4 @@
-﻿package com.ueueo.ui.navigation;
+package com.ueueo.ui.navigation;
 
 public class DefaultMenuContributor implements IMenuContributor {
 

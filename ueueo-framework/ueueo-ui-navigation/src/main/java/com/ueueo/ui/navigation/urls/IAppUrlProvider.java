@@ -1,4 +1,4 @@
-﻿package com.ueueo.ui.navigation.urls;
+package com.ueueo.ui.navigation.urls;
 
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;

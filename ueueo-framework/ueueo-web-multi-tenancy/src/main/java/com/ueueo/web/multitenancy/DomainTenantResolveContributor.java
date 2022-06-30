@@ -1,4 +1,4 @@
-﻿package com.ueueo.web.multitenancy;
+package com.ueueo.web.multitenancy;
 
 //TODO: Create a better domain format. We can accept regex for example.
 

@@ -1,4 +1,4 @@
-﻿using JetBrains.Annotations;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace Volo.Abp.AspNetCore.Mvc.Conventions;

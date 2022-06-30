@@ -1,4 +1,4 @@
-﻿package com.ueueo.apiversioning;
+package com.ueueo.apiversioning;
 
 public class NullRequestedApiVersion implements IRequestedApiVersion {
 

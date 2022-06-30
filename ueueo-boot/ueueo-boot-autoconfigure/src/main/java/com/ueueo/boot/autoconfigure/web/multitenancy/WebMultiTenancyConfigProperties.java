@@ -1,4 +1,4 @@
-﻿package com.ueueo.boot.autoconfigure.web.multitenancy;
+package com.ueueo.boot.autoconfigure.web.multitenancy;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

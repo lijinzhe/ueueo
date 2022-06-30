@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Microsoft.Extensions.Primitives;
 
 namespace Volo.Abp.AspNetCore.VirtualFileSystem;

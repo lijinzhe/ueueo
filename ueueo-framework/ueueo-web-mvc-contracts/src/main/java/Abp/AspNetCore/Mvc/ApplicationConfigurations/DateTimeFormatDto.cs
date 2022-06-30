@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations;
+namespace Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations;
 
 public class DateTimeFormatDto
 {

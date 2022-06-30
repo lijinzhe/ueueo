@@ -1,4 +1,4 @@
-﻿package com.ueueo.ui.navigation.urls;
+package com.ueueo.ui.navigation.urls;
 
 import com.ueueo.AbpException;
 import com.ueueo.multitenancy.ICurrentTenant;

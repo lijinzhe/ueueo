@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using Microsoft.AspNetCore.Http;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Threading;

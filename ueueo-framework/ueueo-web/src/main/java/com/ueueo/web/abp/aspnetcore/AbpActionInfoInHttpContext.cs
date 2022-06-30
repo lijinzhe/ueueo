@@ -1,4 +1,4 @@
-﻿namespace Volo.Abp.AspNetCore.Mvc;
+namespace Volo.Abp.AspNetCore.Mvc;
 
 public class AbpActionInfoInHttpContext //Rename?
 {

@@ -1,4 +1,4 @@
-﻿package com.ueueo.ui.navigation;
+package com.ueueo.ui.navigation;
 
 import org.apache.commons.lang3.StringUtils;
 

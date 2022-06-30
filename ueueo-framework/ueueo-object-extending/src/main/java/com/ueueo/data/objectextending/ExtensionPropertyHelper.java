@@ -1,9 +1,5 @@
 package com.ueueo.data.objectextending;
 
-import com.ueueo.data.annotations.Required;
-
-import java.lang.annotation.Annotation;
-import java.util.Collection;
 import java.util.function.Supplier;
 
 /**

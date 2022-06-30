@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using JetBrains.Annotations;
 using Microsoft.Net.Http.Headers;
 using Volo.Abp;

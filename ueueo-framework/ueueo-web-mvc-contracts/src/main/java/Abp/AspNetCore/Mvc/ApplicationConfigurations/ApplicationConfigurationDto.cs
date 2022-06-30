@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.ObjectExtending;
 using Volo.Abp.AspNetCore.Mvc.MultiTenancy;
 

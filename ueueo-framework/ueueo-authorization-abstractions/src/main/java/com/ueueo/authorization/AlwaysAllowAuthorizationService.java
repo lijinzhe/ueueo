@@ -23,4 +23,8 @@ public class AlwaysAllowAuthorizationService implements IAbpAuthorizationService
         return currentPrincipal;
     }
 
+    @Override
+    public boolean isGranted(String policyName) {
+        return true;
+    }
 }
