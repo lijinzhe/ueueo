@@ -79,6 +79,7 @@
         <module>ueueo-web-mvc-client</module>
         <module>ueueo-web-mvc-client-common</module>
         <module>ueueo-web-mvc-contracts</module>
+        <module>ueueo-distributed-locking-redis</module>
     </modules>
 
 </project>

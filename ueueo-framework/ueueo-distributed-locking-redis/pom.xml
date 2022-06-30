@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>com.ueueo.framework</groupId>
-    <artifactId>ueueo-distributed-locking</artifactId>
+    <artifactId>ueueo-distributed-locking-redis</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
@@ -20,6 +20,10 @@
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-distributed-locking-abstractions</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
         </dependency>
     </dependencies>
 </project>
