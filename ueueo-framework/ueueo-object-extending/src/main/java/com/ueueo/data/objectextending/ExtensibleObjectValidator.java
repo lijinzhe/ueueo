@@ -4,7 +4,7 @@ import com.ueueo.data.annotations.ValidationAttribute;
 import com.ueueo.data.annotations.ValidationContext;
 import com.ueueo.data.annotations.ValidationResult;
 import com.ueueo.dynamicproxy.ProxyHelper;
-import com.ueueo.validation.AbpValidationException;
+import com.ueueo.validation.ValidationException;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -28,7 +28,7 @@ public class ExtensibleObjectValidator {
                                   @Nullable Object value) {
         List<ValidationResult> validationErrors = getValidationErrors(extensibleObject, propertyName, value, null);
         if (!validationErrors.isEmpty()) {
-            throw new AbpValidationException(validationErrors);
+            throw new ValidationException(validationErrors);
         }
     }
 

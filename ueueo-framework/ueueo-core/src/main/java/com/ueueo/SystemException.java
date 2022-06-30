@@ -11,23 +11,23 @@ import java.util.Map;
  * @author Lee
  * @date 2021-08-18 21:08
  */
-public class AbpException extends RuntimeException implements IHasData {
+public class SystemException extends RuntimeException implements IHasData {
 
     protected final Map<String, Object> data = new HashMap<>();
 
-    public AbpException() {
+    public SystemException() {
         super();
     }
 
-    public AbpException(String message) {
+    public SystemException(String message) {
         super(message);
     }
 
-    public AbpException(String message, Throwable cause) {
+    public SystemException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public AbpException withData(String name, Object value) {
+    public SystemException withData(String name, Object value) {
         this.data.put(name, value);
         return this;
     }

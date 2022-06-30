@@ -1,6 +1,6 @@
 package com.ueueo.eventbus.distributed;
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import com.ueueo.IDisposable;
 import com.ueueo.eventbus.IEventBus;
 
@@ -30,7 +30,7 @@ public interface IDistributedEventBus extends IEventBus {
 
     default ISupportsEventBoxes asSupportsEventBoxes() {
         if (!(this instanceof ISupportsEventBoxes)) {
-            throw new AbpException("Given type ({eventBus.GetType().AssemblyQualifiedName}) should implement {nameof(ISupportsEventBoxes)}!");
+            throw new SystemException("Given type ({eventBus.GetType().AssemblyQualifiedName}) should implement {nameof(ISupportsEventBoxes)}!");
         }
         return (ISupportsEventBoxes) this;
     }

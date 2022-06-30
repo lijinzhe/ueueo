@@ -1,6 +1,6 @@
 package com.ueueo.features;
 
-import com.ueueo.authorization.AbpAuthorizationException;
+import com.ueueo.authorization.AuthorizationException;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -17,7 +17,7 @@ public class FeatureCheckerExtensions {
         if (requiresAll) {
             for (String featureName : featureNames) {
                 if (!featureChecker.isEnabled(featureName)) {
-                    throw new AbpAuthorizationException(AbpFeatureErrorCodes.AllOfTheseFeaturesMustBeEnabled)
+                    throw new AuthorizationException(AbpFeatureErrorCodes.AllOfTheseFeaturesMustBeEnabled)
                             .withData("FeatureNames", StringUtils.join(featureNames));
                 }
             }
@@ -27,7 +27,7 @@ public class FeatureCheckerExtensions {
                     return;
                 }
             }
-            throw new AbpAuthorizationException(AbpFeatureErrorCodes.AtLeastOneOfTheseFeaturesMustBeEnabled)
+            throw new AuthorizationException(AbpFeatureErrorCodes.AtLeastOneOfTheseFeaturesMustBeEnabled)
                     .withData("FeatureNames", StringUtils.join(featureNames));
         }
     }

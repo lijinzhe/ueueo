@@ -6,7 +6,7 @@ package com.ueueo.caching;
  * <typeparam name="TCacheItem">The type of cache item being cached.</typeparam>
  */
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import com.ueueo.KeyValuePair;
 import com.ueueo.exceptionhandling.ExceptionNotificationContext;
 import com.ueueo.exceptionhandling.IExceptionNotifier;
@@ -661,7 +661,7 @@ public class DistributedCache<TCacheItem> implements IDistributedCache<TCacheIte
 
     protected List<KeyValuePair<String, TCacheItem>> toCacheItems(byte[][] itemBytes, List<String> itemKeys) {
         if (itemBytes.length != itemKeys.size()) {
-            throw new AbpException("count of the item bytes should be same with the count of the given keys");
+            throw new SystemException("count of the item bytes should be same with the count of the given keys");
         }
 
         List<KeyValuePair<String, TCacheItem>> result = new ArrayList<>();
@@ -708,7 +708,7 @@ public class DistributedCache<TCacheItem> implements IDistributedCache<TCacheIte
 
     protected Map<String, UnitOfWorkCacheItem<TCacheItem>> GetUnitOfWorkCache() {
         if (unitOfWorkManager.getCurrent() == null) {
-            throw new AbpException("There is no active UOW.");
+            throw new SystemException("There is no active UOW.");
         }
         return UnitOfWorkExtensions.getOrAddItem(
                 unitOfWorkManager.getCurrent(),

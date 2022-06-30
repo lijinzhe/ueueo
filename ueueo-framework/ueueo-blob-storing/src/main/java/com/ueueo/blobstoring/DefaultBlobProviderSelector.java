@@ -1,6 +1,6 @@
 package com.ueueo.blobstoring;
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import com.ueueo.dynamicproxy.ProxyHelper;
 import org.springframework.lang.NonNull;
 
@@ -28,11 +28,11 @@ public class DefaultBlobProviderSelector implements IBlobProviderSelector {
         BlobContainerConfiguration configuration = configurationProvider.get(containerName);
 
         if (blobProviders.isEmpty()) {
-            throw new AbpException("No BLOB Storage provider was registered! At least one provider must be registered to be able to use the BLOB Storing System.");
+            throw new SystemException("No BLOB Storage provider was registered! At least one provider must be registered to be able to use the BLOB Storing System.");
         }
 
         if (configuration.getProviderType() == null) {
-            throw new AbpException("No BLOB Storage provider was used! At least one provider must be configured to be able to use the BLOB Storing System.");
+            throw new SystemException("No BLOB Storage provider was used! At least one provider must be configured to be able to use the BLOB Storing System.");
         }
 
         for (IBlobProvider provider : blobProviders) {
@@ -41,7 +41,7 @@ public class DefaultBlobProviderSelector implements IBlobProviderSelector {
             }
         }
 
-        throw new AbpException(
+        throw new SystemException(
                 String.format("Could not find the BLOB Storage provider with the type (%s) configured for the container %s and no default provider was set.",
                         configuration.getProviderType().getName(), containerName)
         );

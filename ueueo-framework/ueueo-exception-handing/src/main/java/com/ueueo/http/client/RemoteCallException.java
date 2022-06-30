@@ -1,6 +1,6 @@
 package com.ueueo.http.client;
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import com.ueueo.exceptionhandling.IHasErrorCode;
 import com.ueueo.exceptionhandling.IHasErrorDetails;
 import com.ueueo.exceptionhandling.IHasHttpStatusCode;
@@ -8,7 +8,7 @@ import com.ueueo.http.RemoteServiceErrorInfo;
 import lombok.Data;
 
 @Data
-public class AbpRemoteCallException extends AbpException implements IHasErrorCode, IHasErrorDetails, IHasHttpStatusCode {
+public class RemoteCallException extends SystemException implements IHasErrorCode, IHasErrorDetails, IHasHttpStatusCode {
 
     private int httpStatusCode;
 
@@ -24,15 +24,15 @@ public class AbpRemoteCallException extends AbpException implements IHasErrorCod
         return error != null ? error.getDetails() : null;
     }
 
-    public AbpRemoteCallException() {
+    public RemoteCallException() {
 
     }
 
-    public AbpRemoteCallException(String message, Exception innerException) {
+    public RemoteCallException(String message, Exception innerException) {
         super(message, innerException);
     }
 
-    public AbpRemoteCallException(RemoteServiceErrorInfo error, Exception innerException) {
+    public RemoteCallException(RemoteServiceErrorInfo error, Exception innerException) {
         super(error.getMessage(), innerException);
         this.error = error;
         if (error.getData() != null) {

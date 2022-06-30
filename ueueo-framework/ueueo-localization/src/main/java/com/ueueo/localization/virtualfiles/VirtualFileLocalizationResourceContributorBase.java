@@ -1,6 +1,6 @@
 package com.ueueo.localization.virtualfiles;
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import com.ueueo.localization.ILocalizationDictionary;
 import com.ueueo.localization.ILocalizationResourceContributor;
 import com.ueueo.localization.LocalizationResourceInitializationContext;
@@ -84,7 +84,7 @@ public abstract class VirtualFileLocalizationResourceContributorBase implements 
             for (File file : directory.listFiles()) {
                 ILocalizationDictionary dictionary = createDictionaryFromFile(file);
                 if (dictionaries.containsKey(dictionary.getCultureName())) {
-                    throw new AbpException(String.format("file.GetVirtualOrPhysicalPathOrNull() dictionary has a culture name '%s' which is already defined!", dictionary.getCultureName()));
+                    throw new SystemException(String.format("file.GetVirtualOrPhysicalPathOrNull() dictionary has a culture name '%s' which is already defined!", dictionary.getCultureName()));
                 }
                 dictionaries.put(dictionary.getCultureName(), dictionary);
             }

@@ -1,7 +1,7 @@
 package com.ueueo.localization.json;
 
 import com.alibaba.fastjson.JSON;
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import com.ueueo.localization.ILocalizationDictionary;
 import com.ueueo.localization.LocalizedString;
 import com.ueueo.localization.StaticLocalizationDictionary;
@@ -25,7 +25,7 @@ public class JsonLocalizationDictionaryBuilder {
         try {
             return buildFromJsonString(FileUtils.readFileToString(new File(filePath), StandardCharsets.UTF_8));
         } catch (Exception ex) {
-            throw new AbpException("Invalid localization file format: " + filePath, ex);
+            throw new SystemException("Invalid localization file format: " + filePath, ex);
         }
     }
 
@@ -39,19 +39,19 @@ public class JsonLocalizationDictionaryBuilder {
         try {
             jsonFile = JSON.parseObject(jsonString, JsonLocalizationFile.class);
         } catch (Exception e) {
-            throw new AbpException("Can not parse json string. " + e.getMessage());
+            throw new SystemException("Can not parse json string. " + e.getMessage());
         }
 
         String cultureCode = jsonFile.getCulture();
         if (StringUtils.isBlank(cultureCode)) {
-            throw new AbpException("Culture is empty in language json file.");
+            throw new SystemException("Culture is empty in language json file.");
         }
 
         Map<String, LocalizedString> dictionary = new HashMap<>();
         List<String> dublicateNames = new ArrayList<>();
         for (Map.Entry<String, String> item : jsonFile.getTexts().entrySet()) {
             if (StringUtils.isBlank(item.getKey())) {
-                throw new AbpException("The key is empty in given json string.");
+                throw new SystemException("The key is empty in given json string.");
             }
 
             if (dictionary.get(item.getKey()) != null) {
@@ -61,7 +61,7 @@ public class JsonLocalizationDictionaryBuilder {
         }
 
         if (dublicateNames.size() > 0) {
-            throw new AbpException(
+            throw new SystemException(
                     "A dictionary can not contain same key twice. There are some duplicated names: " +
                             StringUtils.join(dublicateNames, ", "));
         }

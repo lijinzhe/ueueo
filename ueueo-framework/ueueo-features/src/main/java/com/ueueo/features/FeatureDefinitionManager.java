@@ -1,6 +1,6 @@
 package com.ueueo.features;
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import lombok.Getter;
 import org.springframework.util.Assert;
 
@@ -34,7 +34,7 @@ public class FeatureDefinitionManager implements IFeatureDefinitionManager {
         Assert.notNull(name, "name must not null.");
         FeatureDefinition feature = getOrNull(name);
         if (feature == null) {
-            throw new AbpException("Undefined feature: " + name);
+            throw new SystemException("Undefined feature: " + name);
         }
         return feature;
     }
@@ -66,7 +66,7 @@ public class FeatureDefinitionManager implements IFeatureDefinitionManager {
 
     protected void addFeatureToDictionaryRecursively(Map<String, FeatureDefinition> features, FeatureDefinition feature) {
         if (features.containsKey(feature.getName())) {
-            throw new AbpException("Duplicate feature name: " + feature.getName());
+            throw new SystemException("Duplicate feature name: " + feature.getName());
         }
         features.put(feature.getName(), feature);
         for (FeatureDefinition child : feature.getChildren()) {

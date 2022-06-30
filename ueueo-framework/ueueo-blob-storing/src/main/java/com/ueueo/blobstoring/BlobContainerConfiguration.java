@@ -1,6 +1,6 @@
 package com.ueueo.blobstoring;
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
@@ -66,7 +66,7 @@ public class BlobContainerConfiguration {
     public Object getConfiguration(@NonNull String name) {
         Object value = getConfigurationOrNull(name, null);
         if (value == null) {
-            throw new AbpException(String.format("Could not find the configuration value for '%s'!", name));
+            throw new SystemException(String.format("Could not find the configuration value for '%s'!", name));
         }
 
         return value;

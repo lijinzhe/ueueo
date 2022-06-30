@@ -1,10 +1,10 @@
 package com.ueueo.backgroundjobs;
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import lombok.Data;
 
 @Data
-public class BackgroundJobExecutionException extends AbpException {
+public class BackgroundJobExecutionException extends SystemException {
 
     private String jobType;
 

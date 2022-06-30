@@ -1,6 +1,6 @@
 package com.ueueo.settings;
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import org.springframework.util.Assert;
 
 import java.util.*;
@@ -77,7 +77,7 @@ public class SettingProvider implements ISettingProvider {
     }
 
     @Override
-    public List<SettingValue> getAll() throws AbpException {
+    public List<SettingValue> getAll() throws SystemException {
         List<SettingValue> settingValues = new ArrayList<>();
         List<SettingDefinition> settingDefinitions = settingDefinitionManager.getAll();
         for (SettingDefinition setting : settingDefinitions) {

@@ -1,6 +1,6 @@
 package com.ueueo.settings;
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import lombok.Getter;
 import org.springframework.lang.NonNull;
 
@@ -27,7 +27,7 @@ public class SettingDefinitionManager implements ISettingDefinitionManager {
         Objects.requireNonNull(name, "name must not null.");
         SettingDefinition setting = getOrNull(name);
         if (setting == null) {
-            throw new AbpException("Undefined setting: " + name);
+            throw new SystemException("Undefined setting: " + name);
         }
         return setting;
     }

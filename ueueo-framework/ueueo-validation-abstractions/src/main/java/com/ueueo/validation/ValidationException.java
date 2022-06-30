@@ -1,6 +1,6 @@
 package com.ueueo.validation;
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import com.ueueo.data.annotations.ValidationResult;
 import com.ueueo.logging.IExceptionWithSelfLogging;
 import com.ueueo.logging.IHasLogLevel;
@@ -20,7 +20,7 @@ import java.util.Collection;
  * @author Lee
  * @date 2022-05-25 22:11
  */
-public class AbpValidationException extends AbpException implements IHasLogLevel, IHasValidationErrors, IExceptionWithSelfLogging {
+public class ValidationException extends SystemException implements IHasLogLevel, IHasValidationErrors, IExceptionWithSelfLogging {
     /**
      * Detailed list of validation errors for this exception.
      */
@@ -35,29 +35,29 @@ public class AbpValidationException extends AbpException implements IHasLogLevel
     @Setter
     public Level LogLevel;
 
-    public AbpValidationException() {
+    public ValidationException() {
         ValidationErrors = new ArrayList<>();
         LogLevel = Level.WARN;
     }
 
-    public AbpValidationException(String message) {
+    public ValidationException(String message) {
         super(message);
         ValidationErrors = new ArrayList<>();
         LogLevel = Level.WARN;
     }
 
-    public AbpValidationException(Collection<ValidationResult> validationErrors) {
+    public ValidationException(Collection<ValidationResult> validationErrors) {
         ValidationErrors = validationErrors;
         LogLevel = Level.WARN;
     }
 
-    public AbpValidationException(String message, Collection<ValidationResult> validationErrors) {
+    public ValidationException(String message, Collection<ValidationResult> validationErrors) {
         super(message);
         ValidationErrors = validationErrors;
         LogLevel = Level.WARN;
     }
 
-    public AbpValidationException(String message, Exception innerException) {
+    public ValidationException(String message, Exception innerException) {
         super(message, innerException);
         ValidationErrors = new ArrayList<>();
         LogLevel = Level.WARN;

@@ -1,6 +1,6 @@
 package com.ueueo.domain.entities;
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import com.ueueo.ID;
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import lombok.Data;
  * This exception is thrown if an entity excepted to be found but not found.
  */
 @Data
-public class EntityNotFoundException extends AbpException {
+public class EntityNotFoundException extends SystemException {
     /**
      * Type of the entity.
      */

@@ -1,6 +1,6 @@
 package com.ueueo.tenantmanagement.domain;
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import com.ueueo.ID;
 import com.ueueo.multitenancy.IgnoreMultiTenancyAttribute;
 import com.ueueo.multitenancy.TenantConfiguration;
@@ -27,7 +27,7 @@ public class TenantCacheItem {
 
     public static String calculateCacheKey(ID id, String name) {
         if (id == null && StringUtils.isBlank(name)) {
-            throw new AbpException("Both id and name can't be invalid.");
+            throw new SystemException("Both id and name can't be invalid.");
         }
         return String.format(CacheKeyFormat, id != null ? id.toString() : "null", StringUtils.isBlank(name) ? "null" : name);
     }

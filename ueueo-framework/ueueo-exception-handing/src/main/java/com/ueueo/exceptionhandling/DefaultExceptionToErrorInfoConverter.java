@@ -2,16 +2,16 @@ package com.ueueo.exceptionhandling;
 
 import com.ueueo.BusinessException;
 import com.ueueo.IUserFriendlyException;
-import com.ueueo.authorization.AbpAuthorizationException;
-import com.ueueo.data.AbpDbConcurrencyException;
+import com.ueueo.authorization.AuthorizationException;
+import com.ueueo.data.DbConcurrencyException;
 import com.ueueo.data.annotations.ValidationResult;
 import com.ueueo.domain.entities.EntityNotFoundException;
 import com.ueueo.http.RemoteServiceErrorInfo;
 import com.ueueo.http.RemoteServiceValidationErrorInfo;
-import com.ueueo.http.client.AbpRemoteCallException;
+import com.ueueo.http.client.RemoteCallException;
 import com.ueueo.localization.ICurrentLocale;
 import com.ueueo.localization.exceptionhandling.AbpExceptionLocalizationOptions;
-import com.ueueo.validation.AbpValidationException;
+import com.ueueo.validation.ValidationException;
 import com.ueueo.validation.IHasValidationErrors;
 import lombok.Data;
 import org.apache.commons.lang3.ArrayUtils;
@@ -71,10 +71,10 @@ public class DefaultExceptionToErrorInfoConverter implements IExceptionToErrorIn
 
         exception = tryToGetActualException(exception);
 
-        if (exception instanceof AbpRemoteCallException && ((AbpRemoteCallException) exception).getError() != null) {
-            return ((AbpRemoteCallException) exception).getError();
+        if (exception instanceof RemoteCallException && ((RemoteCallException) exception).getError() != null) {
+            return ((RemoteCallException) exception).getError();
         }
-        if (exception instanceof AbpDbConcurrencyException) {
+        if (exception instanceof DbConcurrencyException) {
             return new RemoteServiceErrorInfo(messageSourceAccessor.getMessage("AbpDbConcurrencyErrorMessage"), null, null);
         }
         if (exception instanceof EntityNotFoundException) {
@@ -82,7 +82,7 @@ public class DefaultExceptionToErrorInfoConverter implements IExceptionToErrorIn
         }
 
         RemoteServiceErrorInfo errorInfo = new RemoteServiceErrorInfo();
-        if (exception instanceof IUserFriendlyException || exception instanceof AbpRemoteCallException) {
+        if (exception instanceof IUserFriendlyException || exception instanceof RemoteCallException) {
             errorInfo.setMessage(exception.getMessage());
             if (exception instanceof IHasErrorDetails) {
                 errorInfo.setDetails(((IHasErrorDetails) exception).getDetails());
@@ -151,8 +151,8 @@ public class DefaultExceptionToErrorInfoConverter implements IExceptionToErrorIn
     protected Exception tryToGetActualException(Exception exception) {
         if (exception.getCause() != null) {
             Throwable innerException = exception.getCause();
-            if (innerException instanceof AbpValidationException
-                    || innerException instanceof AbpAuthorizationException
+            if (innerException instanceof ValidationException
+                    || innerException instanceof AuthorizationException
                     || innerException instanceof EntityNotFoundException
                     || innerException instanceof BusinessException) {
                 return (Exception) innerException;
@@ -168,8 +168,8 @@ public class DefaultExceptionToErrorInfoConverter implements IExceptionToErrorIn
 
         RemoteServiceErrorInfo errorInfo = new RemoteServiceErrorInfo(exception.getMessage(), detailBuilder.toString(), null);
 
-        if (exception instanceof AbpValidationException) {
-            errorInfo.setValidationErrors(getValidationErrorInfos((AbpValidationException) exception));
+        if (exception instanceof ValidationException) {
+            errorInfo.setValidationErrors(getValidationErrorInfos((ValidationException) exception));
         }
 
         return errorInfo;
@@ -188,8 +188,8 @@ public class DefaultExceptionToErrorInfoConverter implements IExceptionToErrorIn
         }
 
         //Additional info for AbpValidationException
-        if (exception instanceof AbpValidationException) {
-            AbpValidationException validationException = (AbpValidationException) exception;
+        if (exception instanceof ValidationException) {
+            ValidationException validationException = (ValidationException) exception;
             if (validationException.getValidationErrors().size() > 0) {
                 detailBuilder.append(getValidationErrorNarrative(validationException)).append(StringUtils.CR);
             }

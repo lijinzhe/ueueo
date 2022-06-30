@@ -1,6 +1,6 @@
 package com.ueueo.tenantmanagement.domain;
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import com.ueueo.ID;
 import com.ueueo.caching.IDistributedCache;
 import com.ueueo.data.ConnectionStrings;
@@ -62,7 +62,7 @@ public class TenantStore implements ITenantStore {
             Tenant tenant = tenantRepository.findByName(name, false);
             return setCache(cacheKey, tenant);
         }
-        throw new AbpException("Both id and name can't be invalid.");
+        throw new SystemException("Both id and name can't be invalid.");
     }
 
     protected TenantCacheItem setCache(String cacheKey, @Nullable Tenant tenant) {

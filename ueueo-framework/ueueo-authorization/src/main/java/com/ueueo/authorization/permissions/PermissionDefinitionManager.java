@@ -1,6 +1,6 @@
 package com.ueueo.authorization.permissions;
 
-import com.ueueo.AbpException;
+import com.ueueo.SystemException;
 import org.springframework.beans.factory.BeanFactory;
 
 import java.util.*;
@@ -31,7 +31,7 @@ public class PermissionDefinitionManager implements IPermissionDefinitionManager
         PermissionDefinition permission = getOrNull(name);
 
         if (permission == null) {
-            throw new AbpException("Undefined permission: " + name);
+            throw new SystemException("Undefined permission: " + name);
         }
 
         return permission;
@@ -70,7 +70,7 @@ public class PermissionDefinitionManager implements IPermissionDefinitionManager
             Map<String, PermissionDefinition> permissions,
             PermissionDefinition permission) {
         if (permissions.containsKey(permission.getName())) {
-            throw new AbpException("Duplicate permission name: " + permission.getName());
+            throw new SystemException("Duplicate permission name: " + permission.getName());
         }
         permissions.put(permission.getName(), permission);
 
