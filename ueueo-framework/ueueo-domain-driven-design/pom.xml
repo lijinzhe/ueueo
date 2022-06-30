@@ -3,137 +3,120 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.ueueo.boot</groupId>
         <artifactId>ueueo-boot-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../ueueo-boot-parent</relativePath>
+        <relativePath>../../ueueo-boot/ueueo-boot-parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>ueueo-boot-autoconfigure</artifactId>
+    <groupId>com.ueueo.framework</groupId>
+    <artifactId>ueueo-domain-driven-design</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-        </dependency>
-        <!-- optional dependency -->
-        <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-authorization-abstractions</artifactId>
+            <artifactId>ueueo-auditing</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-caching</artifactId>
+            <artifactId>ueueo-authorization</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-data</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-domain-driven-design</artifactId>
+            <artifactId>ueueo-eventbus</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-distributed-locking</artifactId>
+            <artifactId>ueueo-exception-handing</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-eventbus-abstractions</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-features</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-global-features</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-guids</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-localization</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-localization-abstractions</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-multi-tenancy</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-object-mapping</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-security</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-settings</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-specifications</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-threading</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-uow</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-validation</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-web-multi-tenancy</artifactId>
+            <artifactId>ueueo-data-annotations</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-auditing</artifactId>
+            <artifactId>ueueo-localization</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <optional>true</optional>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.ueueo.framework</groupId>-->
+<!--            <artifactId>ueueo-object-extending</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
+
+
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson</artifactId>
-            <optional>true</optional>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
         </dependency>
     </dependencies>
 </project>

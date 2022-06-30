@@ -16,13 +16,13 @@ import org.springframework.context.annotation.Configuration;
  * @date 2022-05-27 17:57
  */
 @Configuration
-@EnableConfigurationProperties(RedisDistributedLockOptions.class)
+@EnableConfigurationProperties(RedisDistributedLockProperties.class)
 public class DistributedLockingAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(RedissonClient.class)
     @ConditionalOnClass(RedissonClient.class)
-    public RedissonClient redissonClient(RedisDistributedLockOptions options) {
+    public RedissonClient redissonClient(RedisDistributedLockProperties options) {
         Config config = new Config();
         if (RedisServerType.Sentinel.equals(options.getServerType())) {
             SentinelServersConfig serverConfig = config.useSentinelServers()

@@ -60,7 +60,7 @@
         <module>ueueo-text-templating</module>
         <module>ueueo-caching-redis</module>
         <module>ueueo-specifications</module>
-        <module>ueueo-domain-driven-desgin</module>
+        <module>ueueo-domain-driven-design</module>
         <module>ueueo-validation-abstractions</module>
         <module>ueueo-virtual-file-system</module>
         <module>ueueo-multi-lingual-objects</module>
@@ -68,6 +68,7 @@
         <module>ueueo-http-client-identity-model</module>
         <module>ueueo-data-filter</module>
         <module>ueueo-data-seeder</module>
+        <module>ueueo-ui</module>
         <module>ueueo-ui-navigation</module>
         <module>ueueo-web</module>
         <module>ueueo-api-versioning-abstractions</module>
@@ -78,7 +79,6 @@
         <module>ueueo-web-mvc-client</module>
         <module>ueueo-web-mvc-client-common</module>
         <module>ueueo-web-mvc-contracts</module>
-        <module>ueueo-ui</module>
     </modules>
 
 </project>

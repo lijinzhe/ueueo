@@ -30,7 +30,7 @@
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-domain-driven-desgin</artifactId>
+            <artifactId>ueueo-domain-driven-design</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
