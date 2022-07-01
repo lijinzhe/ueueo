@@ -12,9 +12,10 @@
     </parent>
 
     <groupId>com.ueueo</groupId>
-    <artifactId>ueueo-identity</artifactId>
+    <artifactId>ueueo-identity-management</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <description>身份管理模块</description>
 
     <modules>
 

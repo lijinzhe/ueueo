@@ -13,7 +13,7 @@
         <module>ueueo-audit-logging</module>
         <module>ueueo-blob-storing-database</module>
         <module>ueueo-feature-management</module>
-        <module>ueueo-identity</module>
+        <module>ueueo-identity-management</module>
         <module>ueueo-identity-server</module>
         <module>ueueo-permission-management</module>
         <module>ueueo-setting-management</module>
