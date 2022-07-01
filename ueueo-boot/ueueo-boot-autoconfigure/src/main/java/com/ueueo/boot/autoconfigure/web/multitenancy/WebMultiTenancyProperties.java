@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
 @ConfigurationProperties(prefix = "ueueo.web.multi-tenancy")
-public class WebMultiTenancyConfigProperties {
+public class WebMultiTenancyProperties {
 
     /**
      * Default DefaultTenantField

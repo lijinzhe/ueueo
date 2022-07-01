@@ -2,7 +2,7 @@ package com.ueueo.authorization.permissions;
 
 import com.ueueo.multitenancy.ICurrentTenant;
 import com.ueueo.multitenancy.MultiTenancySides;
-import com.ueueo.principal.ClaimsPrincipal;
+import com.ueueo.security.principal.ClaimsPrincipal;
 import com.ueueo.security.claims.ICurrentPrincipalAccessor;
 import com.ueueo.simplestatechecking.ISimpleStateCheckerManager;
 import org.apache.commons.collections4.CollectionUtils;
@@ -36,7 +36,7 @@ public class PermissionChecker implements IPermissionChecker {
 
     @Override
     public Boolean isGranted(String name) {
-        return isGranted(principalAccessor.getPrincipal(), name);
+        return isGranted(principalAccessor.getCurrentPrincipal(), name);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class PermissionChecker implements IPermissionChecker {
 
     @Override
     public MultiplePermissionGrantResult isGranted(List<String> names) {
-        return isGranted(principalAccessor.getPrincipal(), names);
+        return isGranted(principalAccessor.getCurrentPrincipal(), names);
     }
 
     @Override

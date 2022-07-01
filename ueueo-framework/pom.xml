@@ -53,7 +53,6 @@
         <module>ueueo-object-mapping</module>
         <module>ueueo-quartz</module>
         <module>ueueo-rabbitmq</module>
-        <module>ueueo-serialization</module>
         <module>ueueo-sms</module>
         <module>ueueo-sms-aliyun</module>
         <module>ueueo-threading</module>

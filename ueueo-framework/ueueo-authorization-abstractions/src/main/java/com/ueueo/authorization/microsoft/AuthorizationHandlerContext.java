@@ -1,6 +1,6 @@
 package com.ueueo.authorization.microsoft;
 
-import com.ueueo.principal.ClaimsPrincipal;
+import com.ueueo.security.principal.ClaimsPrincipal;
 
 import java.util.ArrayList;
 import java.util.Collection;

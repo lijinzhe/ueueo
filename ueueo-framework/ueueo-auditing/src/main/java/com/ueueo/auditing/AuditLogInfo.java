@@ -40,7 +40,7 @@ public class AuditLogInfo implements IHasExtraProperties, Serializable {
 
     private long executionDuration;
 
-    private String clientId;
+    private ID clientId;
 
     private String correlationId;
 

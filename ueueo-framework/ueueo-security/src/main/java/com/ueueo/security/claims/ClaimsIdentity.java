@@ -1,8 +1,7 @@
-package com.ueueo.claims;
+package com.ueueo.security.claims;
 
 import com.ueueo.ID;
-import com.ueueo.principal.IIdentity;
-import com.ueueo.security.claims.AbpClaimTypes;
+import com.ueueo.security.principal.IIdentity;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
@@ -22,9 +21,9 @@ import java.util.stream.Collectors;
  * @date 2022-05-16 20:48
  */
 public class ClaimsIdentity implements IIdentity {
-    public static final String DefaultIssuer = "LOCAL AUTHORITY";
-    public static final String DefaultNameClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
-    public static final String DefaultRoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
+    //    public static final String DefaultIssuer = "LOCAL AUTHORITY";
+    //    public static final String DefaultNameClaimType = "name";
+    //    public static final String DefaultRoleClaimType = "role";
 
     @Getter
     private String authenticationType;
@@ -171,27 +170,27 @@ public class ClaimsIdentity implements IIdentity {
     }
 
     public ID findUserId() {
-        return findClaimIDValue(AbpClaimTypes.UserId);
+        return findClaimIDValue(ClaimTypes.UserId);
     }
 
     public ID findTenantId() {
-        return findClaimIDValue(AbpClaimTypes.TenantId);
+        return findClaimIDValue(ClaimTypes.TenantId);
     }
 
     public String findClientId() {
-        return findClaimValue(AbpClaimTypes.ClientId);
+        return findClaimValue(ClaimTypes.ClientId);
     }
 
     public ID findEditionId() {
-        return findClaimIDValue(AbpClaimTypes.EditionId);
+        return findClaimIDValue(ClaimTypes.EditionId);
     }
 
     public ID findImpersonatorTenantId() {
-        return findClaimIDValue(AbpClaimTypes.ImpersonatorTenantId);
+        return findClaimIDValue(ClaimTypes.ImpersonatorTenantId);
     }
 
     public ID findImpersonatorUserId() {
-        return findClaimIDValue(AbpClaimTypes.ImpersonatorUserId);
+        return findClaimIDValue(ClaimTypes.ImpersonatorUserId);
     }
 
     private String findClaimValue(String claimType) {

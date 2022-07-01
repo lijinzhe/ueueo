@@ -124,7 +124,7 @@ public class AuditingHelper implements IAuditingHelper {
         auditInfo.setImpersonatorUserId(CurrentUserExtensions.findImpersonatorUserId(currentUser));
         auditInfo.setImpersonatorTenantId(CurrentUserExtensions.findImpersonatorTenantId(currentUser));
         auditInfo.setImpersonatorUserName(CurrentUserExtensions.findImpersonatorUserName(currentUser));
-        auditInfo.setImpersonatorTenantName(CurrentUserExtensions.findImpersonatorTenantName(currentUser));
+        auditInfo.setImpersonatorTenantName(CurrentUserExtensions.findImpersonatorTenantKey(currentUser));
         auditInfo.setExecutionTime(new Date());
         auditInfo.setClientId(currentClient.getId());
         auditInfo.setCorrelationId(correlationIdProvider.get());

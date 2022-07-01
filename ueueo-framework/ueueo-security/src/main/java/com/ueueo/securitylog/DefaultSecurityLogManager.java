@@ -10,19 +10,26 @@ import java.util.function.Consumer;
  */
 public class DefaultSecurityLogManager implements ISecurityLogManager {
 
-    @Getter
-    protected AbpSecurityLogOptions securityLogOptions;
+    /**
+     * Default: true.
+     */
+    private boolean isEnable = true;
+    /**
+     * The name of the application or service writing security log.
+     * Default: null.
+     */
+    private String applicationName;
+
     @Getter
     protected ISecurityLogStore securityLogStore;
 
-    public DefaultSecurityLogManager(AbpSecurityLogOptions securityLogOptions, ISecurityLogStore securityLogStore) {
-        this.securityLogOptions = securityLogOptions;
+    public DefaultSecurityLogManager(ISecurityLogStore securityLogStore) {
         this.securityLogStore = securityLogStore;
     }
 
     @Override
     public void save(Consumer<SecurityLogInfo> saveAction) {
-        if (securityLogOptions.isEnable()) {
+        if (isEnable) {
             SecurityLogInfo securityLogInfo = create();
             saveAction.accept(securityLogInfo);
             securityLogStore.save(securityLogInfo);
@@ -31,7 +38,16 @@ public class DefaultSecurityLogManager implements ISecurityLogManager {
 
     protected SecurityLogInfo create() {
         SecurityLogInfo securityLogInfo = new SecurityLogInfo();
-        securityLogInfo.setApplicationName(securityLogOptions.getApplicationName());
+        securityLogInfo.setApplicationName(applicationName);
         return securityLogInfo;
     }
+
+    public void setEnable(boolean enable) {
+        isEnable = enable;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
+
 }

@@ -1,8 +1,8 @@
 package com.ueueo.multitenancy;
 
 import com.ueueo.ID;
-import com.ueueo.claims.ClaimsIdentity;
-import com.ueueo.principal.ClaimsPrincipal;
+import com.ueueo.security.claims.ClaimsIdentity;
+import com.ueueo.security.principal.ClaimsPrincipal;
 import org.springframework.lang.NonNull;
 
 /**

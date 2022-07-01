@@ -23,11 +23,6 @@
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-serialization</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ueueo.framework</groupId>
             <artifactId>ueueo-threading</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

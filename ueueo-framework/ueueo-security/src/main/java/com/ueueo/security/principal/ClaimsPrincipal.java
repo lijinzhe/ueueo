@@ -1,9 +1,9 @@
-package com.ueueo.principal;
+package com.ueueo.security.principal;
 
 import com.ueueo.ID;
-import com.ueueo.claims.Claim;
-import com.ueueo.claims.ClaimsIdentity;
-import com.ueueo.security.claims.AbpClaimTypes;
+import com.ueueo.security.claims.Claim;
+import com.ueueo.security.claims.ClaimsIdentity;
+import com.ueueo.security.claims.ClaimTypes;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
@@ -76,11 +76,11 @@ public class ClaimsPrincipal implements IPrincipal {
         return this;
     }
 
-    @Override
-    public ClaimsPrincipal clone() {
-        //TODO 实现克隆方法
-        return null;
-    }
+    //    @Override
+    //    public ClaimsPrincipal clone() {
+    //        //TODO 实现克隆方法
+    //        return null;
+    //    }
 
     public List<Claim> findAll(Predicate<Claim> match) {
         return claims.stream().filter(match).collect(Collectors.toList());
@@ -115,27 +115,27 @@ public class ClaimsPrincipal implements IPrincipal {
     }
 
     public ID findUserId() {
-        return findClaimIDValue(AbpClaimTypes.UserId);
+        return findClaimIDValue(ClaimTypes.UserId);
     }
 
     public ID findTenantId() {
-        return findClaimIDValue(AbpClaimTypes.TenantId);
+        return findClaimIDValue(ClaimTypes.TenantId);
     }
 
-    public String findClientId() {
-        return findClaimValue(AbpClaimTypes.ClientId);
+    public ID findClientId() {
+        return findClaimIDValue(ClaimTypes.ClientId);
     }
 
     public ID findEditionId() {
-        return findClaimIDValue(AbpClaimTypes.EditionId);
+        return findClaimIDValue(ClaimTypes.EditionId);
     }
 
     public ID findImpersonatorTenantId() {
-        return findClaimIDValue(AbpClaimTypes.ImpersonatorTenantId);
+        return findClaimIDValue(ClaimTypes.ImpersonatorTenantId);
     }
 
     public ID findImpersonatorUserId() {
-        return findClaimIDValue(AbpClaimTypes.ImpersonatorUserId);
+        return findClaimIDValue(ClaimTypes.ImpersonatorUserId);
     }
 
     private String findClaimValue(String claimType) {

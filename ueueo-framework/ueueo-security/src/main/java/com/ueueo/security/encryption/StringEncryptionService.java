@@ -1,112 +1,75 @@
 package com.ueueo.security.encryption;
 
-import lombok.Getter;
+import com.ueueo.util.Check;
 import org.apache.commons.lang3.StringUtils;
-
-import java.nio.charset.StandardCharsets;
+import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.security.crypto.encrypt.TextEncryptor;
 
 /**
- * TODO ABP代码
- *
  * @author Lee
  * @date 2021-08-26 21:00
  */
 public class StringEncryptionService implements IStringEncryptionService {
-    //TODO by Lee on 2021-08-26 21:01 未实现
 
-    @Getter
-    protected final AbpStringEncryptionOptions options;
+    /**
+     * Default password to encrypt/decrypt texts.
+     * It's recommended to set to another value for security.
+     * Default value: "MaI1sje0ZG4L1l28"
+     */
+    private String defaultPassword = "MaI1sje0ZG4L1l28";
 
-    public StringEncryptionService(AbpStringEncryptionOptions options) {
-        this.options = options;
+    /**
+     * Default value: i9o_n2q2
+     */
+    private String defaultSalt = "i9o_n2q2a!2";
+
+    public StringEncryptionService() {
+    }
+
+    public StringEncryptionService(String password, String salt) {
+        Check.notNullOrEmpty(password, "password", 20, 10);
+        Check.notNullOrEmpty(salt, "salt", 20, 10);
+        this.defaultPassword = password;
+        this.defaultSalt = salt;
     }
 
     @Override
-    public String encrypt(String plainText, String passPhrase, byte[] salt) {
+    public String encrypt(String plainText, String password, String salt) {
         if (plainText == null) {
             return null;
         }
-        if (passPhrase == null) {
-            passPhrase = options.getDefaultPassPhrase();
+        if (StringUtils.isBlank(password)) {
+            password = defaultPassword;
         }
-        if (salt == null) {
-            salt = options.getDefaultSalt();
+        if (StringUtils.isBlank(salt)) {
+            salt = defaultSalt;
         }
-        byte[] plainTextBytes = plainText.getBytes(StandardCharsets.UTF_8);
-        //        using (var password = new Rfc2898DeriveBytes(passPhrase, salt))
-        //        {
-        //            var keyBytes = password.GetBytes(options.getKeySize() / 8);
-        //            using (var symmetricKey = Aes.Create())
-        //            {
-        //                symmetricKey.Mode = CipherMode.CBC;
-        //                using (var encryptor = symmetricKey.CreateEncryptor(keyBytes, Options.InitVectorBytes))
-        //                {
-        //                    using (var memoryStream = new MemoryStream())
-        //                    {
-        //                        using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
-        //                        {
-        //                            cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
-        //                            cryptoStream.FlushFinalBlock();
-        //                            var cipherTextBytes = memoryStream.ToArray();
-        //                            return Convert.ToBase64String(cipherTextBytes);
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        return null;
+        TextEncryptor encryptor = Encryptors.text(password, salt);
+        return encryptor.encrypt(plainText);
     }
 
     @Override
-    public String decrypt(String cipherText, String passPhrase, byte[] salt) {
-        if (StringUtils.isBlank(cipherText)) {
+    public String decrypt(String encryptedText, String password, String salt) {
+        if (StringUtils.isBlank(encryptedText)) {
             return null;
         }
-        if (passPhrase == null) {
-            passPhrase = options.getDefaultPassPhrase();
+        if (StringUtils.isBlank(password)) {
+            password = defaultPassword;
         }
-        if (salt == null) {
-            salt = options.getDefaultSalt();
+        if (StringUtils.isBlank(salt)) {
+            salt = defaultSalt;
         }
-        //
-        //        var cipherTextBytes = Convert.FromBase64String(cipherText);
-        //        using (var password = new Rfc2898DeriveBytes(passPhrase, salt))
-        //        {
-        //            var keyBytes = password.GetBytes(Options.Keysize / 8);
-        //            using (var symmetricKey = Aes.Create())
-        //            {
-        //                symmetricKey.Mode = CipherMode.CBC;
-        //                using (var decryptor = symmetricKey.CreateDecryptor(keyBytes, Options.InitVectorBytes))
-        //                {
-        //                    using (var memoryStream = new MemoryStream(cipherTextBytes))
-        //                    {
-        //                        using (var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
-        //                        {
-        //                            var plainTextBytes = new byte[cipherTextBytes.Length];
-        //                            var totalReadCount = 0;
-        //                            while (totalReadCount < cipherTextBytes.Length)
-        //                            {
-        //                                var buffer = new byte[cipherTextBytes.Length];
-        //                                var readCount = cryptoStream.Read(buffer, 0, buffer.Length);
-        //                                if (readCount == 0)
-        //                                {
-        //                                    break;
-        //                                }
-        //
-        //                                for (var i = 0; i < readCount; i++)
-        //                                {
-        //                                    plainTextBytes[i + totalReadCount] = buffer[i];
-        //                                }
-        //
-        //                                totalReadCount += readCount;
-        //                            }
-        //
-        //                            return Encoding.UTF8.GetString(plainTextBytes, 0, totalReadCount);
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        return null;
+        TextEncryptor encryptor = Encryptors.text(password, salt);
+        return encryptor.decrypt(encryptedText);
+    }
+
+    @Override
+    public String encrypt(String plainText) {
+        return encrypt(plainText, defaultPassword, defaultSalt);
+    }
+
+    @Override
+    public String decrypt(String encryptedText) {
+        return decrypt(encryptedText, defaultPassword, defaultSalt);
     }
 }

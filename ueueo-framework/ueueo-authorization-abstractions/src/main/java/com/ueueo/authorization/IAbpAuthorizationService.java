@@ -1,6 +1,6 @@
 package com.ueueo.authorization;
 
-import com.ueueo.principal.ClaimsPrincipal;
+import com.ueueo.security.principal.ClaimsPrincipal;
 
 /**
  * Checks policy based permissions for a user

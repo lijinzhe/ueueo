@@ -1,4 +1,4 @@
-package com.ueueo.principal;
+package com.ueueo.security.principal;
 
 /**
  * TODO Description Of This JAVA Class.

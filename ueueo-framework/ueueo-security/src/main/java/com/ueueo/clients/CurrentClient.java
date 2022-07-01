@@ -1,6 +1,7 @@
 package com.ueueo.clients;
 
-import com.ueueo.principal.ClaimsPrincipal;
+import com.ueueo.ID;
+import com.ueueo.security.principal.ClaimsPrincipal;
 import com.ueueo.security.claims.ICurrentPrincipalAccessor;
 
 import java.util.Optional;
@@ -18,8 +19,8 @@ public class CurrentClient implements ICurrentClient {
     }
 
     @Override
-    public String getId() {
-        return Optional.ofNullable(principalAccessor.getPrincipal())
+    public ID getId() {
+        return Optional.ofNullable(principalAccessor.getCurrentPrincipal())
                 .map(ClaimsPrincipal::findClientId)
                 .orElse(null);
     }

@@ -1,7 +1,7 @@
 package com.ueueo.authorization.permissions;
 
-import com.ueueo.claims.Claim;
-import com.ueueo.security.claims.AbpClaimTypes;
+import com.ueueo.security.claims.Claim;
+import com.ueueo.security.claims.ClaimTypes;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.util.Assert;
 
@@ -24,7 +24,7 @@ public class RolePermissionValueProvider extends PermissionValueProvider {
 
     @Override
     public PermissionGrantResult check(PermissionValueCheckContext context) {
-        List<String> roles = context.getPrincipal().findAll(AbpClaimTypes.Role).stream()
+        List<String> roles = context.getPrincipal().findAll(ClaimTypes.Role).stream()
                 .map(Claim::getValue).distinct()
                 .collect(Collectors.toList());
 
@@ -48,7 +48,7 @@ public class RolePermissionValueProvider extends PermissionValueProvider {
 
         MultiplePermissionGrantResult result = new MultiplePermissionGrantResult(permissionNames);
 
-        List<String> roles = context.getPrincipal().findAll(AbpClaimTypes.Role).stream()
+        List<String> roles = context.getPrincipal().findAll(ClaimTypes.Role).stream()
                 .map(Claim::getValue).distinct()
                 .collect(Collectors.toList());
         if (CollectionUtils.isEmpty(roles)) {

@@ -1,15 +1,13 @@
 package com.ueueo.users;
 
 import com.ueueo.ID;
-import com.ueueo.claims.Claim;
+import com.ueueo.security.claims.Claim;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import java.util.List;
 
 /**
- * TODO Description Of This JAVA Class.
- *
  * @author Lee
  * @date 2021-08-19 21:53
  */
@@ -27,7 +25,7 @@ public interface ICurrentUser {
     String getName();
 
     @Nullable
-    String getSurName();
+    String getSurname();
 
     @Nullable
     String getPhoneNumber();

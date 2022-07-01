@@ -1,8 +1,8 @@
 package com.ueueo.users;
 
 import com.ueueo.ID;
-import com.ueueo.claims.Claim;
-import com.ueueo.security.claims.AbpClaimTypes;
+import com.ueueo.security.claims.Claim;
+import com.ueueo.security.claims.ClaimTypes;
 import com.ueueo.security.claims.ICurrentPrincipalAccessor;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
@@ -33,58 +33,58 @@ public class CurrentUser implements ICurrentUser {
 
     @Override
     public ID getId() {
-        if (principalAccessor.getPrincipal() != null) {
-            return principalAccessor.getPrincipal().findUserId();
+        if (principalAccessor.getCurrentPrincipal() != null) {
+            return principalAccessor.getCurrentPrincipal().findUserId();
         }
         return null;
     }
 
     @Override
     public String getUserName() {
-        return CurrentUserExtensions.findClaimValue(this, AbpClaimTypes.UserName);
+        return CurrentUserExtensions.findClaimValue(this, ClaimTypes.UserName);
     }
 
     @Override
     public String getName() {
-        return CurrentUserExtensions.findClaimValue(this, AbpClaimTypes.Name);
+        return CurrentUserExtensions.findClaimValue(this, ClaimTypes.Name);
     }
 
     @Override
-    public String getSurName() {
-        return CurrentUserExtensions.findClaimValue(this, AbpClaimTypes.SurName);
+    public String getSurname() {
+        return CurrentUserExtensions.findClaimValue(this, ClaimTypes.Surname);
     }
 
     @Override
     public String getPhoneNumber() {
-        return CurrentUserExtensions.findClaimValue(this, AbpClaimTypes.PhoneNumber);
+        return CurrentUserExtensions.findClaimValue(this, ClaimTypes.PhoneNumber);
     }
 
     @Override
     public boolean getPhoneNumberVerified() {
-        return "true".equalsIgnoreCase(CurrentUserExtensions.findClaimValue(this, AbpClaimTypes.PhoneNumberVerified));
+        return "true".equalsIgnoreCase(CurrentUserExtensions.findClaimValue(this, ClaimTypes.PhoneNumberVerified));
     }
 
     @Override
     public String getEmail() {
-        return CurrentUserExtensions.findClaimValue(this, AbpClaimTypes.Email);
+        return CurrentUserExtensions.findClaimValue(this, ClaimTypes.Email);
     }
 
     @Override
     public boolean getEmailVerified() {
-        return "true".equalsIgnoreCase(CurrentUserExtensions.findClaimValue(this, AbpClaimTypes.EmailVerified));
+        return "true".equalsIgnoreCase(CurrentUserExtensions.findClaimValue(this, ClaimTypes.EmailVerified));
     }
 
     @Override
     public ID getTenantId() {
-        if (principalAccessor.getPrincipal() != null) {
-            return principalAccessor.getPrincipal().findTenantId();
+        if (principalAccessor.getCurrentPrincipal() != null) {
+            return principalAccessor.getCurrentPrincipal().findTenantId();
         }
         return null;
     }
 
     @Override
     public List<String> getRoles() {
-        return findClaims(AbpClaimTypes.Role).stream()
+        return findClaims(ClaimTypes.Role).stream()
                 .map(Claim::getValue)
                 .distinct()
                 .collect(Collectors.toList());
@@ -106,8 +106,8 @@ public class CurrentUser implements ICurrentUser {
 
     @Override
     public List<Claim> getAllClaims() {
-        if (principalAccessor.getPrincipal() != null) {
-            return principalAccessor.getPrincipal().getClaims();
+        if (principalAccessor.getCurrentPrincipal() != null) {
+            return principalAccessor.getCurrentPrincipal().getClaims();
         } else {
             return Collections.emptyList();
         }
@@ -115,7 +115,7 @@ public class CurrentUser implements ICurrentUser {
 
     @Override
     public boolean isInRole(String roleName) {
-        return findClaims(AbpClaimTypes.Role).stream().anyMatch(claim -> claim.getValue().equals(roleName));
+        return findClaims(ClaimTypes.Role).stream().anyMatch(claim -> claim.getValue().equals(roleName));
     }
 
 }

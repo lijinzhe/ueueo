@@ -1,13 +1,15 @@
-package com.ueueo.securitylog;
+package com.ueueo.boot.autoconfigure.security;
 
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author Lee
  * @date 2022-05-17 10:43
  */
 @Data
-public class AbpSecurityLogOptions {
+@ConfigurationProperties(prefix = "ueueo.security.log")
+public class SecurityLogProperties {
     /**
      * Default: true.
      */

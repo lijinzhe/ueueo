@@ -1,5 +1,6 @@
 package com.ueueo.authorization.permissions;
 
+import com.ueueo.ID;
 import com.ueueo.multitenancy.ICurrentTenant;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.util.Assert;
@@ -25,13 +26,13 @@ public class ClientPermissionValueProvider extends PermissionValueProvider {
 
     @Override
     public PermissionGrantResult check(PermissionValueCheckContext context) {
-        String clientId = context.getPrincipal().findClientId();
+        ID clientId = context.getPrincipal().findClientId();
 
         if (clientId == null) {
             return PermissionGrantResult.Undefined;
         }
 
-        return permissionStore.isGranted(context.getPermission().getName(), getName(), clientId)
+        return permissionStore.isGranted(context.getPermission().getName(), getName(), clientId.getStringValue())
                 ? PermissionGrantResult.Granted
                 : PermissionGrantResult.Undefined;
     }
@@ -41,12 +42,12 @@ public class ClientPermissionValueProvider extends PermissionValueProvider {
         List<String> permissionNames = context.getPermissions().stream().map(PermissionDefinition::getName).distinct().collect(Collectors.toList());
         Assert.isTrue(CollectionUtils.isNotEmpty(permissionNames), "PermissionNames must not empty!");
 
-        String clientId = context.getPrincipal().findClientId();
+        ID clientId = context.getPrincipal().findClientId();
         if (clientId == null) {
             return new MultiplePermissionGrantResult(permissionNames);
         }
 
-        return permissionStore.isGranted(permissionNames, getName(), clientId);
+        return permissionStore.isGranted(permissionNames, getName(), clientId.getStringValue());
     }
 
     public ICurrentTenant getCurrentTenant() {

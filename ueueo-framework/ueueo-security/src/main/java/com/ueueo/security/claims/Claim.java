@@ -1,4 +1,4 @@
-package com.ueueo.claims;
+package com.ueueo.security.claims;
 
 import lombok.Getter;
 

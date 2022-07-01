@@ -1,6 +1,6 @@
 package com.ueueo.security.claims;
 
-import com.ueueo.principal.ClaimsPrincipal;
+import com.ueueo.security.principal.ClaimsPrincipal;
 import lombok.Getter;
 
 /**
@@ -9,11 +9,11 @@ import lombok.Getter;
  * @author Lee
  * @date 2021-08-26 21:01
  */
-public class AbpClaimsPrincipalContributorContext {
+public class ClaimsPrincipalContributorContext {
     @Getter
     private final ClaimsPrincipal claimsPrincipal;
 
-    public AbpClaimsPrincipalContributorContext(ClaimsPrincipal claimsPrincipal) {
+    public ClaimsPrincipalContributorContext(ClaimsPrincipal claimsPrincipal) {
         this.claimsPrincipal = claimsPrincipal;
     }
 }

@@ -24,7 +24,7 @@ public class EditionFeatureValueProvider extends FeatureValueProvider {
 
     @Override
     public String getOrNull(FeatureDefinition feature) {
-        ID editionId = principalAccessor.getPrincipal().findEditionId();
+        ID editionId = principalAccessor.getCurrentPrincipal().findEditionId();
         if (editionId == null) {
             return null;
         }

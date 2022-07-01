@@ -1,8 +1,8 @@
 package com.ueueo.users;
 
 import com.ueueo.ID;
-import com.ueueo.claims.Claim;
-import com.ueueo.security.claims.AbpClaimTypes;
+import com.ueueo.security.claims.Claim;
+import com.ueueo.security.claims.ClaimTypes;
 import org.springframework.lang.Nullable;
 
 import java.util.Optional;
@@ -13,19 +13,19 @@ import java.util.Optional;
  */
 public class CurrentUserExtensions {
     public static ID findImpersonatorTenantId(ICurrentUser currentUser) {
-        return findClaimIDValue(currentUser, AbpClaimTypes.ImpersonatorTenantId);
+        return findClaimIDValue(currentUser, ClaimTypes.ImpersonatorTenantId);
     }
 
     public static ID findImpersonatorUserId(ICurrentUser currentUser) {
-        return findClaimIDValue(currentUser, AbpClaimTypes.ImpersonatorUserId);
+        return findClaimIDValue(currentUser, ClaimTypes.ImpersonatorUserId);
     }
 
-    public static String findImpersonatorTenantName(ICurrentUser currentUser) {
-        return findClaimValue(currentUser, AbpClaimTypes.ImpersonatorTenantName);
+    public static String findImpersonatorTenantKey(ICurrentUser currentUser) {
+        return findClaimValue(currentUser, ClaimTypes.ImpersonatorTenantKey);
     }
 
     public static String findImpersonatorUserName(ICurrentUser currentUser) {
-        return findClaimValue(currentUser, AbpClaimTypes.ImpersonatorUserName);
+        return findClaimValue(currentUser, ClaimTypes.ImpersonatorUserName);
     }
 
     @Nullable

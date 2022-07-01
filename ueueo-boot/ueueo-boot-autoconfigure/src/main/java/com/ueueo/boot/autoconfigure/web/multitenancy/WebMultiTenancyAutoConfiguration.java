@@ -12,13 +12,13 @@ import org.springframework.context.annotation.Configuration;
  * @date 2022-05-18 14:42
  */
 @Configuration
-@EnableConfigurationProperties(WebMultiTenancyConfigProperties.class)
+@EnableConfigurationProperties(WebMultiTenancyProperties.class)
 @ConditionalOnClass(HttpTenantResolveContributorBase.class)
 public class WebMultiTenancyAutoConfiguration implements AbpTenantResolveOptionsAware {
 
-    private final WebMultiTenancyConfigProperties properties;
+    private final WebMultiTenancyProperties properties;
 
-    public WebMultiTenancyAutoConfiguration(WebMultiTenancyConfigProperties properties) {
+    public WebMultiTenancyAutoConfiguration(WebMultiTenancyProperties properties) {
         this.properties = properties;
     }
 
@@ -26,7 +26,6 @@ public class WebMultiTenancyAutoConfiguration implements AbpTenantResolveOptions
     public void setOptions(AbpTenantResolveOptions tenantResolveOptions) {
         tenantResolveOptions.getTenantResolvers().add(new DomainTenantResolveContributor(properties.getDomainRegex()));
         tenantResolveOptions.getTenantResolvers().add(new QueryStringTenantResolveContributor(properties.getTenantField()));
-        //        options.getTenantResolvers().add(new FormTenantResolveContributor());
         tenantResolveOptions.getTenantResolvers().add(new RouteTenantResolveContributor(properties.getTenantField()));
         tenantResolveOptions.getTenantResolvers().add(new HeaderTenantResolveContributor(properties.getTenantField()));
         tenantResolveOptions.getTenantResolvers().add(new CookieTenantResolveContributor(properties.getTenantField()));

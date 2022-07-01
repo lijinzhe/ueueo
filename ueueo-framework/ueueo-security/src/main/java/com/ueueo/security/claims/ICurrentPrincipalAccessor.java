@@ -1,8 +1,7 @@
 package com.ueueo.security.claims;
 
-import com.ueueo.claims.Claim;
-import com.ueueo.claims.ClaimsIdentity;
-import com.ueueo.principal.ClaimsPrincipal;
+import com.ueueo.disposable.IDisposable;
+import com.ueueo.security.principal.ClaimsPrincipal;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,9 +11,9 @@ import java.util.List;
  * @date 2021-08-26 21:06
  */
 public interface ICurrentPrincipalAccessor {
-    ClaimsPrincipal getPrincipal();
+    ClaimsPrincipal getCurrentPrincipal();
 
-    void change(ClaimsPrincipal principal);
+    IDisposable change(ClaimsPrincipal principal);
 
     default void change(Claim claim) {
         change(Collections.singletonList(claim));

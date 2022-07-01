@@ -1,6 +1,6 @@
 package com.ueueo.authorization;
 
-import com.ueueo.principal.ClaimsPrincipal;
+import com.ueueo.security.principal.ClaimsPrincipal;
 import com.ueueo.security.claims.ICurrentPrincipalAccessor;
 
 /**
@@ -15,7 +15,7 @@ public class AlwaysAllowAuthorizationService implements IAbpAuthorizationService
 
     public AlwaysAllowAuthorizationService(ICurrentPrincipalAccessor currentPrincipalAccessor) {
         this.currentPrincipalAccessor = currentPrincipalAccessor;
-        this.currentPrincipal = currentPrincipalAccessor.getPrincipal();
+        this.currentPrincipal = currentPrincipalAccessor.getCurrentPrincipal();
     }
 
     @Override

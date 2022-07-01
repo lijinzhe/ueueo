@@ -13,22 +13,40 @@ public interface IStringEncryptionService {
     /**
      * Encrypts a text.
      *
-     * @param plainText  The text in plain format
-     * @param passPhrase A phrase to use as the encryption key (optional, uses default if not provided)
-     * @param salt       Salt value (optional, uses default if not provided)
+     * @param plainText The text in plain format
+     * @param password  A phrase to use as the encryption key (optional, uses default if not provided)
+     * @param salt      Salt value (optional, uses default if not provided)
      *
-     * @return
+     * @return The text in encrypted format
      */
-    String encrypt(String plainText, String passPhrase, byte[] salt);
+    String encrypt(String plainText, String password, String salt);
+
+    /**
+     * Encrypts a text with default password and salt.
+     *
+     * @param plainText The text in plain format
+     *
+     * @return The text in encrypted format
+     */
+    String encrypt(String plainText);
 
     /**
      * Decrypts a text that is encrypted by the <see cref="Encrypt"/> method.
      *
-     * @param cipherText The text in encrypted format
-     * @param passPhrase A phrase to use as the encryption key (optional, uses default if not provided)
-     * @param salt       Salt value (optional, uses default if not provided)
+     * @param encryptedText The text in encrypted format
+     * @param password      A phrase to use as the encryption key (optional, uses default if not provided)
+     * @param salt          Salt value (optional, uses default if not provided)
      *
-     * @return
+     * @return The text in plain format
      */
-    String decrypt(String cipherText, String passPhrase, byte[] salt);
+    String decrypt(String encryptedText, String password, String salt);
+
+    /**
+     * Decrypts a text with default password and salt.
+     *
+     * @param encryptedText The text in encrypted format
+     *
+     * @return The text in plain format
+     */
+    String decrypt(String encryptedText);
 }

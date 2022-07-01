@@ -1,6 +1,8 @@
 package com.ueueo.security.claims;
 
-import com.ueueo.principal.ClaimsPrincipal;
+import com.ueueo.disposable.DisposeAction;
+import com.ueueo.disposable.IDisposable;
+import com.ueueo.security.principal.ClaimsPrincipal;
 
 /**
  * @author Lee
@@ -8,13 +10,13 @@ import com.ueueo.principal.ClaimsPrincipal;
  */
 public abstract class CurrentPrincipalAccessorBase implements ICurrentPrincipalAccessor {
 
-    private ThreadLocal<ClaimsPrincipal> currentPrincipal = new InheritableThreadLocal<>();
+    private final ThreadLocal<ClaimsPrincipal> currentPrincipal = new InheritableThreadLocal<>();
 
     protected abstract ClaimsPrincipal getClaimsPrincipal();
 
     @Override
-    public ClaimsPrincipal getPrincipal() {
-        ClaimsPrincipal principal = currentPrincipal.get();
+    public ClaimsPrincipal getCurrentPrincipal() {
+        ClaimsPrincipal principal = this.currentPrincipal.get();
         if (principal == null) {
             principal = getClaimsPrincipal();
             setCurrent(principal);
@@ -23,11 +25,13 @@ public abstract class CurrentPrincipalAccessorBase implements ICurrentPrincipalA
     }
 
     @Override
-    public void change(ClaimsPrincipal principal) {
-        setCurrent(principal);
+    public IDisposable change(ClaimsPrincipal principal) {
+        return setCurrent(principal);
     }
 
-    private void setCurrent(ClaimsPrincipal principal) {
-        currentPrincipal.set(principal);
+    private IDisposable setCurrent(ClaimsPrincipal principal) {
+        ClaimsPrincipal parent = currentPrincipal.get() != null ? currentPrincipal.get() : getClaimsPrincipal();
+        this.currentPrincipal.set(principal);
+        return new DisposeAction(() -> this.currentPrincipal.set(parent));
     }
 }
