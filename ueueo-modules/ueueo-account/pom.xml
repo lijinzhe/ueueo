@@ -17,7 +17,10 @@
     <packaging>pom</packaging>
 
     <modules>
-
+        <module>ueueo-account-application</module>
+        <module>ueueo-account-application-contracts</module>
+        <module>ueueo-account-http-api</module>
+        <module>ueueo-account-http-client</module>
     </modules>
 
 </project>

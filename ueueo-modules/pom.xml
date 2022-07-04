@@ -24,7 +24,7 @@
         <module>ueueo-payment</module>
         <module>ueueo-saas</module>
         <module>ueueo-text-template-management</module>
-        <module>ueueo-background-jobs-management</module>
+        <module>ueueo-users</module>
     </modules>
 
 </project>

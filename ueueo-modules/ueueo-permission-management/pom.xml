@@ -18,5 +18,12 @@
 
     <modules>
 
+        <module>ueueo-permission-management-application</module>
+        <module>ueueo-permission-management-application-contracts</module>
+        <module>ueueo-permission-management-domain</module>
+        <module>ueueo-permission-management-domain-shared</module>
+        <module>ueueo-permission-management-persistent</module>
+        <module>ueueo-permission-management-http-api</module>
+        <module>ueueo-permission-management-http-client</module>
     </modules>
 </project>

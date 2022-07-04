@@ -17,6 +17,12 @@
     <packaging>pom</packaging>
 
     <modules>
-
+        <module>ueueo-setting-management-application</module>
+        <module>ueueo-setting-management-application-contracts</module>
+        <module>ueueo-setting-management-domain</module>
+        <module>ueueo-setting-management-domain-shared</module>
+        <module>ueueo-setting-management-persistent</module>
+        <module>ueueo-setting-management-http-api</module>
+        <module>ueueo-setting-management-http-client</module>
     </modules>
 </project>

@@ -18,5 +18,8 @@
 
     <modules>
 
+        <module>ueueo-audit-logging-domain</module>
+        <module>ueueo-audit-logging-domain-shared</module>
+        <module>ueueo-audit-logging-persistent</module>
     </modules>
 </project>

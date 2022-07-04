@@ -3,7 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>com.ueueo.boot</groupId>
         <artifactId>ueueo-boot-parent</artifactId>
@@ -11,12 +10,16 @@
         <relativePath>../../ueueo-boot/ueueo-boot-parent/pom.xml</relativePath>
     </parent>
 
+    <artifactId>ueueo-users</artifactId>
     <groupId>com.ueueo</groupId>
-    <artifactId>ueueo-background-jobs-management</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-
+        <module>ueueo-users-abstractions</module>
+        <module>ueueo-users-domain</module>
+        <module>ueueo-users-domain-shared</module>
+        <module>ueueo-users-persistent</module>
     </modules>
+
 </project>

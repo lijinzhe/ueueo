@@ -23,6 +23,11 @@
         <module>ueueo-tenant-management-http-api</module>
         <module>ueueo-tenant-management-http-client</module>
         <module>ueueo-tenant-management-server</module>
+        <module>ueueo-tenant-management-application</module>
+        <module>ueueo-tenant-management-application-contracts</module>
+        <module>ueueo-tenant-management-domain</module>
+        <module>ueueo-tenant-management-domain-shared</module>
+        <module>ueueo-tenant-management-persistent</module>
     </modules>
 
 </project>

@@ -18,6 +18,14 @@
     <description>身份管理模块</description>
 
     <modules>
-
+        <module>ueueo-identity-application</module>
+        <module>ueueo-identity-application-contracts</module>
+        <module>ueueo-identity-domain</module>
+        <module>ueueo-identity-web</module>
+        <module>ueueo-identity-domain-shared</module>
+        <module>ueueo-identity-persistent</module>
+        <module>ueueo-identity-http-api</module>
+        <module>ueueo-identity-http-client</module>
+        <module>ueueo-permission-management-domain-identity</module>
     </modules>
 </project>

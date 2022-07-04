@@ -11,4 +11,17 @@
     </parent>
 
     <artifactId>ueueo-tenant-management-http-client</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ueueo</groupId>
+            <artifactId>ueueo-tenant-management-application-contracts</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-http-client</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -17,6 +17,9 @@
     <packaging>pom</packaging>
 
     <modules>
-
+        <module>ueueo-identity-server-domain</module>
+        <module>ueueo-identity-server-domain-shared</module>
+        <module>ueueo-identity-server-persistent</module>
+        <module>ueueo-permission-management-domain-identity-server</module>
     </modules>
 </project>

@@ -18,5 +18,12 @@
 
     <modules>
 
+        <module>ueueo-feature-management-application</module>
+        <module>ueueo-feature-management-application-contracts</module>
+        <module>ueueo-feature-management-domain</module>
+        <module>ueueo-feature-management-domain-shared</module>
+        <module>ueueo-feature-management-persistent</module>
+        <module>ueueo-feature-management-http-api</module>
+        <module>ueueo-feature-management-http-client</module>
     </modules>
 </project>
