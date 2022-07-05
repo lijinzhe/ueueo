@@ -10,6 +10,7 @@ public class UnitOfWorkEventRecord {
     private Object eventData;
 
     private Class<?> eventType;
+    private Class<?> genericArgumentType;
 
     private long eventOrder;
 
@@ -22,11 +23,13 @@ public class UnitOfWorkEventRecord {
 
     public UnitOfWorkEventRecord(
             Class<?> eventType,
+            Class<?> genericArgumentType,
             Object eventData,
             long eventOrder,
             Boolean useOutbox)
     {
         this.eventType = eventType;
+        this.genericArgumentType = genericArgumentType;
         this.eventData = eventData;
         this.eventOrder = eventOrder;
         this.useOutbox = useOutbox != null ? useOutbox : true;

@@ -1,6 +1,6 @@
 package com.ueueo.authorization.permissions;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.localization.ILocalizableString;
 import com.ueueo.multitenancy.MultiTenancySides;
 import org.springframework.lang.NonNull;
@@ -25,7 +25,7 @@ public class PermissionDefinitionContext implements IPermissionDefinitionContext
     public PermissionGroupDefinition getGroup(@NonNull String name) {
         PermissionGroupDefinition group = getGroupOrNull(name);
         if (group == null) {
-            throw new SystemException(String.format("Could not find a permission definition group with the given name: %s", name));
+            throw new BaseException(String.format("Could not find a permission definition group with the given name: %s", name));
         }
 
         return group;
@@ -42,7 +42,7 @@ public class PermissionDefinitionContext implements IPermissionDefinitionContext
     public PermissionGroupDefinition addGroup(@NonNull String name, ILocalizableString displayName, MultiTenancySides multiTenancySide) {
         Objects.requireNonNull(name);
         if (groups.containsKey(name)) {
-            throw new SystemException("There is already an existing permission group with name: " + name);
+            throw new BaseException("There is already an existing permission group with name: " + name);
         }
         PermissionGroupDefinition definition = new PermissionGroupDefinition(name, displayName, multiTenancySide);
         groups.put(name, definition);
@@ -54,7 +54,7 @@ public class PermissionDefinitionContext implements IPermissionDefinitionContext
         Objects.requireNonNull(name);
         PermissionGroupDefinition removed = groups.remove(name);
         if (removed == null) {
-            throw new SystemException(String.format("Not found permission group with name: %s", name));
+            throw new BaseException(String.format("Not found permission group with name: %s", name));
         }
     }
 

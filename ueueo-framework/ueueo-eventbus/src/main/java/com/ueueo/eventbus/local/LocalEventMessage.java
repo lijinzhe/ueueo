@@ -11,9 +11,12 @@ public class LocalEventMessage {
 
     private Class<?> eventType;
 
-    public LocalEventMessage(ID messageId, Object eventData, Class<?> eventType) {
+    private Class<?> genericArgumentType;
+
+    public LocalEventMessage(ID messageId, Object eventData, Class<?> eventType,Class<?> genericArgumentType) {
         this.messageId = messageId;
         this.eventData = eventData;
         this.eventType = eventType;
+        this.genericArgumentType = genericArgumentType;
     }
 }

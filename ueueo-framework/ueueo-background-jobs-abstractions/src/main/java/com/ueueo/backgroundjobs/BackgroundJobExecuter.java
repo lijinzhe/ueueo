@@ -1,6 +1,6 @@
 package com.ueueo.backgroundjobs;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.exceptionhandling.ExceptionNotificationContext;
 import com.ueueo.exceptionhandling.IExceptionNotifier;
 import org.springframework.beans.BeansException;
@@ -22,7 +22,7 @@ public class BackgroundJobExecuter implements IBackgroundJobExecuter {
         try {
             job = context.getBeanFactory().getBean(context.getJobType());
         } catch (BeansException e) {
-            throw new SystemException("The job type is not registered to DI: " + context.getJobType());
+            throw new BaseException("The job type is not registered to DI: " + context.getJobType());
         }
         Method jobExecuteMethod = null;
         try {
@@ -32,7 +32,7 @@ public class BackgroundJobExecuter implements IBackgroundJobExecuter {
         }
 
         if (jobExecuteMethod == null) {
-            throw new SystemException("Given job type does not implement IBackgroundJob or IAsyncBackgroundJob. " +
+            throw new BaseException("Given job type does not implement IBackgroundJob or IAsyncBackgroundJob. " +
                     "The job type was: " + context.getJobType().getName());
         }
 

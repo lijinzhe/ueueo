@@ -1,6 +1,6 @@
 package com.ueueo.domain.entities;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.ID;
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import lombok.Data;
  * This exception is thrown if an entity excepted to be found but not found.
  */
 @Data
-public class EntityNotFoundException extends SystemException {
+public class EntityNotFoundException extends BaseException {
     /**
      * Type of the entity.
      */

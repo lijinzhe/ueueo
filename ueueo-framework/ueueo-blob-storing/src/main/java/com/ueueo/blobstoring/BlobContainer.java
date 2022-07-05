@@ -1,6 +1,6 @@
 package com.ueueo.blobstoring;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.threading.CancellationToken;
 import com.ueueo.threading.ICancellationTokenProvider;
 
@@ -82,7 +82,7 @@ public class BlobContainer implements IBlobContainer {
 
         if (stream == null) {
             //TODO: Consider to throw some type of "not found" exception and handle on the HTTP status side
-            throw new SystemException(
+            throw new BaseException(
                     String.format("Could not found the requested BLOB '%s' in the container '%s'!", name, containerName));
         }
 

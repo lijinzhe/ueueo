@@ -18,5 +18,5 @@ public interface IEventDataWithInheritableGenericArgument {
      *
      * @return Constructor arguments
      */
-    Object[] getConstructorArgs();
+    Class<?> getGenericArgumentType();
 }

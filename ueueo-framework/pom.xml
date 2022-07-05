@@ -28,7 +28,6 @@
         <module>ueueo-validation</module>
         <module>ueueo-uow</module>
         <module>ueueo-eventbus</module>
-        <module>ueueo-data-annotations</module>
         <module>ueueo-object-extending</module>
         <module>ueueo-authorization</module>
         <module>ueueo-background-jobs</module>

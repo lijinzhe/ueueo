@@ -1,8 +1,8 @@
 package com.ueueo.tenantmanagement.application;
 
-import com.ueueo.data.annotations.Display;
-import com.ueueo.data.annotations.MaxLength;
-import com.ueueo.data.annotations.Required;
+import com.ueueo.validation.annotations.Display;
+import com.ueueo.validation.annotations.MaxLength;
+import com.ueueo.validation.annotations.Required;
 import com.ueueo.data.objectextending.ExtensibleObject;
 import com.ueueo.tenantmanagement.domain.TenantConsts;
 import lombok.Data;

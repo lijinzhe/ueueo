@@ -1,6 +1,6 @@
 package com.ueueo.eventbus.distributed;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.disposable.IDisposable;
 import com.ueueo.eventbus.IEventBus;
 
@@ -18,7 +18,7 @@ public interface IDistributedEventBus extends IEventBus {
      *
      * @return
      */
-    IDisposable subscribe(Class<?> eventType, IDistributedEventHandler handler);
+    IDisposable subscribe(Class<?> eventType,Class<?> genericArgumentType, IDistributedEventHandler handler);
 
     /**
      * @param eventType
@@ -26,11 +26,11 @@ public interface IDistributedEventBus extends IEventBus {
      * @param onUnitOfWorkComplete true
      * @param useOutbox            true
      */
-    void publish(Class<?> eventType, Object eventData, Boolean onUnitOfWorkComplete, Boolean useOutbox);
+    void publish(Class<?> eventType, Class<?> genericArgumentType,Object eventData, Boolean onUnitOfWorkComplete, Boolean useOutbox);
 
     default ISupportsEventBoxes asSupportsEventBoxes() {
         if (!(this instanceof ISupportsEventBoxes)) {
-            throw new SystemException("Given type ({eventBus.GetType().AssemblyQualifiedName}) should implement {nameof(ISupportsEventBoxes)}!");
+            throw new BaseException("Given type ({eventBus.GetType().AssemblyQualifiedName}) should implement {nameof(ISupportsEventBoxes)}!");
         }
         return (ISupportsEventBoxes) this;
     }

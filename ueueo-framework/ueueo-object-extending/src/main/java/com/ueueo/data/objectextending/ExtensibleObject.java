@@ -1,8 +1,8 @@
 package com.ueueo.data.objectextending;
 
-import com.ueueo.data.annotations.IValidatableObject;
-import com.ueueo.data.annotations.ValidationContext;
-import com.ueueo.data.annotations.ValidationResult;
+import com.ueueo.validation.IValidatableObject;
+import com.ueueo.validation.ValidationContext;
+import com.ueueo.validation.ValidationResult;
 import com.ueueo.dynamicproxy.ProxyHelper;
 import lombok.AccessLevel;
 import lombok.Getter;

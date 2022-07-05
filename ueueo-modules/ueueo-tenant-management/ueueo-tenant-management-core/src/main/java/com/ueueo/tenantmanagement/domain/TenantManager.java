@@ -1,6 +1,6 @@
 package com.ueueo.tenantmanagement.domain;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.ID;
 import com.ueueo.ddd.domain.services.DomainService;
 import com.ueueo.guids.IGuidGenerator;
@@ -43,7 +43,7 @@ public class TenantManager extends DomainService implements ITenantManager {
         Tenant tenant = tenantRepository.findByName(name, false);
         if (tenant != null && !tenant.getId().equals(expectedId)) {
             //TODO: A domain exception would be better..?
-            throw new SystemException("Duplicate tenancy name: " + name);
+            throw new BaseException("Duplicate tenancy name: " + name);
         }
     }
 }

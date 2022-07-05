@@ -1,8 +1,8 @@
 package com.ueueo.data.objectextending;
 
-import com.ueueo.data.annotations.ValidationAttribute;
-import com.ueueo.data.annotations.ValidationContext;
-import com.ueueo.data.annotations.ValidationResult;
+import com.ueueo.validation.annotations.ValidationAttribute;
+import com.ueueo.validation.ValidationContext;
+import com.ueueo.validation.ValidationResult;
 import com.ueueo.dynamicproxy.ProxyHelper;
 import com.ueueo.validation.ValidationException;
 import org.apache.commons.collections4.CollectionUtils;

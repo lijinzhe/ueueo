@@ -95,8 +95,33 @@ public class LocalEventBus extends EventBusBase implements ILocalEventBus {
     }
 
     @Override
-    protected void publishToEventBus(Class<?> eventType, Object eventData) {
-        PublishAsync(new LocalEventMessage(ID.valueOf(UUID.randomUUID().toString()), eventData, eventType));
+    public IDisposable subscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandlerFactory factory) {
+        return null;
+    }
+
+    @Override
+    public void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, Consumer<Object> action) {
+
+    }
+
+    @Override
+    public void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandler handler) {
+
+    }
+
+    @Override
+    public void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandlerFactory factory) {
+
+    }
+
+    @Override
+    public void unsubscribeAll(Class<?> eventType, Class<?> genericArgumentType) {
+
+    }
+
+    @Override
+    protected void publishToEventBus(Class<?> eventType,Class<?> genericArgumentType,  Object eventData) {
+        publish(new LocalEventMessage(ID.valueOf(UUID.randomUUID().toString()), eventData, eventType,genericArgumentType));
     }
 
     @Override
@@ -104,12 +129,29 @@ public class LocalEventBus extends EventBusBase implements ILocalEventBus {
         unitOfWork.addOrReplaceLocalEvent(eventRecord, null);
     }
 
-    public void PublishAsync(LocalEventMessage localEventMessage) {
-        triggerHandler(null, localEventMessage.getEventType(), localEventMessage.getEventData(), null, null);
+    public void publish(LocalEventMessage localEventMessage) {
+        triggerHandlers( localEventMessage.getEventType(),localEventMessage.getGenericArgumentType(), localEventMessage.getEventData());
+    }
+
+
+    @Override
+    public IDisposable subscribe(Class<?> eventType, Class<?> genericArgumentType, Consumer<Object> action) {
+        return null;
     }
 
     @Override
-    protected List<EventTypeWithEventHandlerFactories> getHandlerFactories(Class<?> eventType) {
+    public IDisposable subscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandler handler) {
+        return null;
+    }
+
+    @Override
+    public void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, ILocalEventHandler handler) {
+
+    }
+
+    @Override
+    protected List<EventTypeWithEventHandlerFactories> getHandlerFactories(Class<?> eventType, Class<?> genericArgumentType) {
+        //TODO by Lee on 2022-07-05 16:22 genericArgumentType还没有处理
         List<EventTypeWithEventHandlerFactories> handlerFactoryList = new ArrayList<>();
 
         for (Map.Entry<Class<?>, List<IEventHandlerFactory>> handlerFactory : handlerFactories.entrySet().stream().filter(hf -> ShouldTriggerEventForHandler(eventType, hf.getKey())).collect(Collectors.toList())) {
@@ -136,4 +178,6 @@ public class LocalEventBus extends EventBusBase implements ILocalEventBus {
 
         return false;
     }
+
+
 }

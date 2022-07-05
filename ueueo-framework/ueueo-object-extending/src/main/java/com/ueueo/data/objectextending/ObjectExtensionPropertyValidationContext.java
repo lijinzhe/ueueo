@@ -1,7 +1,7 @@
 package com.ueueo.data.objectextending;
 
-import com.ueueo.data.annotations.ValidationContext;
-import com.ueueo.data.annotations.ValidationResult;
+import com.ueueo.validation.ValidationContext;
+import com.ueueo.validation.ValidationResult;
 import lombok.Data;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.lang.NonNull;

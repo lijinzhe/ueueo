@@ -1,6 +1,6 @@
 package com.ueueo.ddd.domain.entities.events.distributed;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.NamedTypeSelector;
 import com.ueueo.ddd.domain.entities.IEntity;
 import org.springframework.lang.NonNull;
@@ -66,7 +66,7 @@ public class AutoEntityDistributedEventSelectorList extends ArrayList<NamedTypeS
 
     public void add(String selectorName, Function<Class<?>, Boolean> predicate) {
         if (stream().anyMatch(s -> s.getName().equals(selectorName))) {
-            throw new SystemException(String.format("There is already a selector added before with the same name: %s", selectorName));
+            throw new BaseException(String.format("There is already a selector added before with the same name: %s", selectorName));
         }
         add(new NamedTypeSelector(selectorName, predicate));
     }

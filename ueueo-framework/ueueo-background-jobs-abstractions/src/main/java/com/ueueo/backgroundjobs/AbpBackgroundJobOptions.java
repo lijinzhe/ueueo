@@ -1,6 +1,6 @@
 package com.ueueo.backgroundjobs;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class AbpBackgroundJobOptions {
         BackgroundJobConfiguration jobConfiguration = jobConfigurationsByName.get(name);
 
         if (jobConfiguration == null) {
-            throw new SystemException("Undefined background job for the job name: " + name);
+            throw new BaseException("Undefined background job for the job name: " + name);
         }
 
         return jobConfiguration;

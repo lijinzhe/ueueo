@@ -1,7 +1,7 @@
 package com.ueueo.data.objectextending;
 
 import com.alibaba.fastjson.util.TypeUtils;
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import java.util.Arrays;
@@ -36,7 +36,7 @@ public interface IHasExtraProperties {
                 try {
                     return TypeUtils.castToJavaBean(value, propertyType);
                 } catch (Exception e) {
-                    throw new SystemException("GetProperty<TProperty> does not support non-primitive types. Use non-generic GetProperty method and handle type casting manually.");
+                    throw new BaseException("GetProperty<TProperty> does not support non-primitive types. Use non-generic GetProperty method and handle type casting manually.");
                 }
             }
         }

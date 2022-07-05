@@ -21,8 +21,8 @@ public class EntityEventData<TEntity> implements IEventDataWithInheritableGeneri
     }
 
     @Override
-    public Object[] getConstructorArgs() {
-        return new Object[]{entity};
+    public Class<?> getGenericArgumentType() {
+        return entity.getClass();
     }
 
     @Override

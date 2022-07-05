@@ -1,31 +1,28 @@
 package com.ueueo.exception;
 
-import com.ueueo.exceptionhandling.IHasData;
 import com.ueueo.exceptionhandling.IHasErrorCode;
 import com.ueueo.exceptionhandling.IHasErrorDetails;
 import com.ueueo.logging.IHasLogLevel;
 import org.slf4j.event.Level;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author Lee
  * @date 2022-05-14 09:47
  */
-public class BusinessException extends RuntimeException implements IBusinessException, IHasErrorCode, IHasErrorDetails, IHasLogLevel, IHasData, Serializable {
+public class BusinessException extends BaseException implements IBusinessException, IHasErrorCode, IHasErrorDetails, IHasLogLevel, Serializable {
 
     /** Error code. */
     private String code;
+
     private String details;
     /**
      * Severity of the exception.
      * Default: INFO.
      */
     private Level logLevel;
-
-    private Map<String, Object> data;
 
     public BusinessException() {
         this(null);
@@ -52,7 +49,6 @@ public class BusinessException extends RuntimeException implements IBusinessExce
         this.code = code;
         this.details = details;
         this.logLevel = logLevel != null ? logLevel : Level.INFO;
-        this.data = new HashMap<>();
     }
 
     @Override
@@ -73,11 +69,6 @@ public class BusinessException extends RuntimeException implements IBusinessExce
     @Override
     public void setLogLevel(Level logLevel) {
         this.logLevel = logLevel;
-    }
-
-    public BusinessException withData(String name, Object value) {
-        this.data.put(name, value);
-        return this;
     }
 
     @Override

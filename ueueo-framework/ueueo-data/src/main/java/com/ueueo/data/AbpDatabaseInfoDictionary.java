@@ -1,6 +1,6 @@
 package com.ueueo.data;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +36,7 @@ public class AbpDatabaseInfoDictionary extends HashMap<String, AbpDatabaseInfo> 
         for (AbpDatabaseInfo databaseInfo : values()) {
             for (String mappedConnection : databaseInfo.getMappedConnections()) {
                 if (connectionIndex.containsKey(mappedConnection)) {
-                    throw new SystemException(String.format("A connection name can not map to multiple databases: %s.", mappedConnection));
+                    throw new BaseException(String.format("A connection name can not map to multiple databases: %s.", mappedConnection));
                 }
                 connectionIndex.put(mappedConnection, databaseInfo);
             }

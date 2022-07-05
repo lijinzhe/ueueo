@@ -1,8 +1,6 @@
 package com.ueueo.validation;
 
-import com.ueueo.data.annotations.ValidationAttribute;
-import com.ueueo.data.annotations.ValidationContext;
-import com.ueueo.data.annotations.ValidationResult;
+import com.ueueo.validation.annotations.ValidationAttribute;
 
 /**
  * @author Lee

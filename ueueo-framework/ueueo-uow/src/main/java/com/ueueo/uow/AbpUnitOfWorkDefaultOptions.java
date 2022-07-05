@@ -1,6 +1,6 @@
 package com.ueueo.uow;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import lombok.Data;
 
 //TODO: Implement default options!
@@ -39,7 +39,7 @@ public class AbpUnitOfWorkDefaultOptions {
         } else if (UnitOfWorkTransactionBehaviorEnum.Auto.equals(transactionBehavior)) {
             return autoValue;
         } else {
-            throw new SystemException("Not implemented TransactionBehavior value: " + transactionBehavior);
+            throw new BaseException("Not implemented TransactionBehavior value: " + transactionBehavior);
         }
     }
 }

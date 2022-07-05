@@ -60,18 +60,13 @@ public class LocalDistributedEventBus implements IDistributedEventBus {
     }
 
     @Override
-    public void publish(Class<?> eventType, Object eventData, Boolean onUnitOfWorkComplete) {
-        _localEventBus.publish(eventType, eventData, onUnitOfWorkComplete);
+    public void publish(Class<?> eventType, Class<?> genericArgumentType, Object eventData, Boolean onUnitOfWorkComplete) {
+        _localEventBus.publish(eventType, genericArgumentType, eventData, onUnitOfWorkComplete);
     }
 
     @Override
-    public void publish(Class<?> eventType, Object eventData, Boolean onUnitOfWorkComplete, Boolean useOutbox) {
+    public void publish(Class<?> eventType, Class<?> genericArgumentType, Object eventData, Boolean onUnitOfWorkComplete, Boolean useOutbox) {
         _localEventBus.publish(eventData, onUnitOfWorkComplete);
-    }
-
-    @Override
-    public IDisposable subscribe(Class<?> eventType, IDistributedEventHandler handler) {
-        return _localEventBus.subscribe(eventType, handler);
     }
 
     @Override
@@ -118,4 +113,48 @@ public class LocalDistributedEventBus implements IDistributedEventBus {
         _localEventBus.unsubscribeAll(eventType);
     }
 
+    @Override
+    public IDisposable subscribe(Class<?> eventType, Class<?> genericArgumentType, IDistributedEventHandler handler) {
+        return null;
+    }
+
+    @Override
+    public IDisposable subscribe(Class<?> eventType, Class<?> genericArgumentType, Consumer<Object> action) {
+        return _localEventBus.subscribe(eventType, action);
+    }
+
+    @Override
+    public IDisposable subscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandler handler) {
+        return null;
+    }
+
+    @Override
+    public IDisposable subscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandlerFactory factory) {
+        return null;
+    }
+
+    @Override
+    public void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, Consumer<Object> action) {
+
+    }
+
+    @Override
+    public void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandler handler) {
+
+    }
+
+    @Override
+    public void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, ILocalEventHandler handler) {
+
+    }
+
+    @Override
+    public void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandlerFactory factory) {
+
+    }
+
+    @Override
+    public void unsubscribeAll(Class<?> eventType, Class<?> genericArgumentType) {
+
+    }
 }

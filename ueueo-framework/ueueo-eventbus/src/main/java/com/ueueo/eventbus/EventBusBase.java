@@ -4,6 +4,7 @@ import com.ueueo.ID;
 import com.ueueo.disposable.IDisposable;
 import com.ueueo.eventbus.distributed.InboxConfig;
 import com.ueueo.eventbus.local.ILocalEventHandler;
+import com.ueueo.exception.BaseException;
 import com.ueueo.multitenancy.ICurrentTenant;
 import com.ueueo.multitenancy.IMultiTenant;
 import com.ueueo.uow.EventOrderGenerator;
@@ -17,13 +18,14 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public abstract class EventBusBase implements IEventBus {
+
     protected BeanFactory beanFactory;
 
-    protected ICurrentTenant CurrentTenant;
+    protected ICurrentTenant currentTenant;
 
-    protected IUnitOfWorkManager UnitOfWorkManager;
+    protected IUnitOfWorkManager unitOfWorkManager;
 
-    protected IEventHandlerInvoker EventHandlerInvoker;
+    protected IEventHandlerInvoker eventHandlerInvoker;
 
     protected EventBusBase(
             BeanFactory beanFactory,
@@ -31,9 +33,9 @@ public abstract class EventBusBase implements IEventBus {
             IUnitOfWorkManager unitOfWorkManager,
             IEventHandlerInvoker eventHandlerInvoker) {
         this.beanFactory = beanFactory;
-        CurrentTenant = currentTenant;
-        UnitOfWorkManager = unitOfWorkManager;
-        EventHandlerInvoker = eventHandlerInvoker;
+        this.currentTenant = currentTenant;
+        this.unitOfWorkManager = unitOfWorkManager;
+        this.eventHandlerInvoker = eventHandlerInvoker;
     }
 
     @Override
@@ -51,13 +53,13 @@ public abstract class EventBusBase implements IEventBus {
     }
 
     @Override
-    public abstract IDisposable subscribe(Class<?> eventType, IEventHandlerFactory factory);
+    public abstract IDisposable subscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandlerFactory factory);
 
     @Override
-    public abstract void unsubscribe(Class<?> eventType, Consumer<Object> action);
+    public abstract void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, Consumer<Object> action);
 
     @Override
-    public abstract void unsubscribe(Class<?> eventType, IEventHandler handler);
+    public abstract void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandler handler);
 
     @Override
     public void unsubscribe(Class<?> eventType, ILocalEventHandler handler) {
@@ -65,101 +67,82 @@ public abstract class EventBusBase implements IEventBus {
     }
 
     @Override
-    public abstract void unsubscribe(Class<?> eventType, IEventHandlerFactory factory);
+    public abstract void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandlerFactory factory);
 
     @Override
-    public abstract void unsubscribeAll(Class<?> eventType);
+    public abstract void unsubscribeAll(Class<?> eventType, Class<?> genericArgumentType);
 
     @Override
-    public void publish(Object eventData, Boolean onUnitOfWorkComplete) {
-        publish(eventData.getClass(), eventData, onUnitOfWorkComplete);
-    }
-
-    @Override
-    public void publish(Class<?> eventType, Object eventData, Boolean onUnitOfWorkComplete) {
-        if (onUnitOfWorkComplete && UnitOfWorkManager.getCurrent() != null) {
+    public void publish(Class<?> eventType, Class<?> genericArgumentType, Object eventData, Boolean onUnitOfWorkComplete) {
+        if (onUnitOfWorkComplete && unitOfWorkManager.getCurrent() != null) {
             addToUnitOfWork(
-                    UnitOfWorkManager.getCurrent(),
-                    new UnitOfWorkEventRecord(eventType, eventData, EventOrderGenerator.getNext(), null)
+                    unitOfWorkManager.getCurrent(),
+                    new UnitOfWorkEventRecord(eventType, genericArgumentType, eventData, EventOrderGenerator.getNext(), null)
             );
             return;
         }
 
-        publishToEventBus(eventType, eventData);
+        publishToEventBus(eventType, genericArgumentType, eventData);
     }
 
-    protected abstract void publishToEventBus(Class<?> eventType, Object eventData);
+    protected abstract void publishToEventBus(Class<?> eventType, Class<?> genericArgumentType, Object eventData);
 
     protected abstract void addToUnitOfWork(IUnitOfWork unitOfWork, UnitOfWorkEventRecord eventRecord);
 
-    public void triggerHandlers(Class<?> eventType, Object eventData) throws Exception {
+    public void triggerHandlers(Class<?> eventType, Class<?> genericArgumentType, Object eventData) {
         List<Exception> exceptions = new ArrayList<>();
 
-        triggerHandlers(eventType, eventData, exceptions, null);
+        triggerHandlers(eventType, genericArgumentType, eventData, exceptions, null);
 
         if (!exceptions.isEmpty()) {
-            throwOriginalExceptions(eventType, exceptions);
+            throwOriginalExceptions(eventType, genericArgumentType, exceptions);
         }
     }
 
-    protected void triggerHandlers(Class<?> eventType, Object eventData, List<Exception> exceptions, InboxConfig inboxConfig) {
+    protected void triggerHandlers(Class<?> eventType, Class<?> genericArgumentType, Object eventData, List<Exception> exceptions, InboxConfig inboxConfig) {
 
-        for (EventTypeWithEventHandlerFactories handlerFactories : getHandlerFactories(eventType)) {
+        for (EventTypeWithEventHandlerFactories handlerFactories : getHandlerFactories(eventType, genericArgumentType)) {
             for (IEventHandlerFactory handlerFactory : handlerFactories.eventHandlerFactories) {
                 triggerHandler(handlerFactory, handlerFactories.eventType, eventData, exceptions, inboxConfig);
             }
         }
 
         //Implements generic argument inheritance. See IEventDataWithInheritableGenericArgument
-        //TODO 注释掉了泛型的解析
-        //        if (eventType.GetTypeInfo().IsGenericType &&
-        //            eventType.GetGenericArguments().Length == 1 &&
-        //                IEventDataWithInheritableGenericArgument.class.isAssignableFrom(eventType))
-        //        {
-        //            var genericArg = eventType.GetGenericArguments()[0];
-        //            var baseArg = genericArg.GetTypeInfo().BaseType;
-        //            if (baseArg != null)
-        //            {
-        //                Class<?> baseEventType = eventType.GetGenericTypeDefinition().MakeGenericType(baseArg);
-        //                Object[] constructorArgs = ((IEventDataWithInheritableGenericArgument)eventData).getConstructorArgs();
-        //                Object baseEventData = Activator.CreateInstance(baseEventType, constructorArgs);
-        //                PublishToEventBusAsync(baseEventType, baseEventData);
-        //            }
-        //        }
+        if (genericArgumentType != null && genericArgumentType.getSuperclass() != null) {
+            publishToEventBus(eventType, genericArgumentType.getSuperclass(), eventData);
+        }
     }
 
-    protected void throwOriginalExceptions(Class<?> eventType, List<Exception> exceptions) throws Exception {
+    protected void throwOriginalExceptions(Class<?> eventType, Class<?> genericArgumentType, List<Exception> exceptions) throws BaseException {
         if (exceptions.size() == 1) {
-            throw exceptions.get(0);
+            throw new BaseException(exceptions.get(0));
         }
 
-        throw new Exception(
-                "More than one error has occurred while triggering the event: " + eventType
-                //            exceptions
-        );
+        throw new BaseException(String.format("More than one error has occurred while triggering the event: %s:[%s]", eventType, genericArgumentType));
     }
 
     protected void subscribeHandlers(List<? extends Class<? extends IEventHandler>> handlers) {
         for (Class<? extends IEventHandler> handler : handlers) {
             //TODO 需要替换java 实现
-            //                var interfaces = handler.GetInterfaces();
-            //                for (var @interface in interfaces)
-            //                {
-            //                    if (!typeof(IEventHandler).GetTypeInfo().IsAssignableFrom(@interface))
-            //                    {
-            //                        continue;
-            //                    }
-            //
-            //                    var genericArgs = @interface.GetGenericArguments();
-            //                    if (genericArgs.Length == 1)
-            //                    {
-            //                        subscribe(genericArgs[0], new IocEventHandlerFactory(beanFactory, handler));
-            //                    }
-            //                }
+            Class<?>[]  interfaces =  handler.getInterfaces();
+
+//                            for (Class<?> _interface : interfaces)
+//                            {
+//                                if (!IEventHandler.class.isAssignableFrom(_interface))
+//                                {
+//                                    continue;
+//                                }
+//
+//                                var genericArgs = _interface.GetGenericArguments();
+//                                if (genericArgs.Length == 1)
+//                                {
+//                                    subscribe(genericArgs[0], new SpringBeanEventHandlerFactory(beanFactory, handler));
+//                                }
+//                            }
         }
     }
 
-    protected abstract List<EventTypeWithEventHandlerFactories> getHandlerFactories(Class<?> eventType);
+    protected abstract List<EventTypeWithEventHandlerFactories> getHandlerFactories(Class<?> eventType, Class<?> genericArgumentType);
 
     protected void triggerHandler(IEventHandlerFactory asyncHandlerFactory, Class<?> eventType,
                                   Object eventData, List<Exception> exceptions, InboxConfig inboxConfig) {
@@ -170,8 +153,8 @@ public abstract class EventBusBase implements IEventBus {
                     !inboxConfig.getHandlerSelector().apply(handlerType)) {
                 return;
             }
-            IDisposable disposable = CurrentTenant.change(getEventDataTenantId(eventData), null);
-            EventHandlerInvoker.invoke(eventHandlerWrapper.getEventHandler(), eventData, eventType);
+            IDisposable disposable = currentTenant.change(getEventDataTenantId(eventData), null);
+            eventHandlerInvoker.invoke(eventHandlerWrapper.getEventHandler(), eventData, eventType);
             disposable.dispose();
         } catch (Exception ex) {
             exceptions.add(ex);
@@ -185,7 +168,7 @@ public abstract class EventBusBase implements IEventBus {
         } else if (eventData instanceof IEventDataMayHaveTenantId && ((IEventDataMayHaveTenantId) eventData).isMultiTenant()) {
             return ((IEventDataMayHaveTenantId) eventData).getTenantId();
         } else {
-            return CurrentTenant.getId();
+            return currentTenant.getId();
         }
     }
 

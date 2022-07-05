@@ -1,6 +1,6 @@
 package com.ueueo.authorization;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.exceptionhandling.IHasErrorCode;
 import com.ueueo.logging.IHasLogLevel;
 import org.slf4j.event.Level;
@@ -11,7 +11,7 @@ import org.slf4j.event.Level;
  * @author Lee
  * @date 2021-08-26 20:27
  */
-public class AuthorizationException extends SystemException implements IHasLogLevel, IHasErrorCode {
+public class AuthorizationException extends BaseException implements IHasLogLevel, IHasErrorCode {
 
     /**
      * Severity of the exception.

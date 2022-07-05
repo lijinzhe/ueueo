@@ -1,7 +1,6 @@
 package com.ueueo.validation;
 
-import com.ueueo.exception.SystemException;
-import com.ueueo.data.annotations.ValidationResult;
+import com.ueueo.exception.BaseException;
 import com.ueueo.logging.IExceptionWithSelfLogging;
 import com.ueueo.logging.IHasLogLevel;
 import com.ueueo.logging.LoggerExtensions;
@@ -20,7 +19,7 @@ import java.util.Collection;
  * @author Lee
  * @date 2022-05-25 22:11
  */
-public class ValidationException extends SystemException implements IHasLogLevel, IHasValidationErrors, IExceptionWithSelfLogging {
+public class ValidationException extends BaseException implements IHasLogLevel, IHasValidationErrors, IExceptionWithSelfLogging {
     /**
      * Detailed list of validation errors for this exception.
      */

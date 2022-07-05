@@ -1,6 +1,5 @@
 package com.ueueo.validation;
 
-import com.ueueo.data.annotations.ValidationResult;
 import lombok.Getter;
 
 import java.util.ArrayList;

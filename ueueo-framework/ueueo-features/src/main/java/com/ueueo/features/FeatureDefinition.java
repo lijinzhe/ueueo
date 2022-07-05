@@ -1,6 +1,6 @@
 package com.ueueo.features;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.localization.FixedLocalizableString;
 import com.ueueo.localization.ILocalizableString;
 import com.ueueo.validation.stringvalues.IStringValueType;
@@ -173,7 +173,7 @@ public class FeatureDefinition {
     public void removeChild(String name) {
         FeatureDefinition featureToRemove = children.stream().filter(f -> StringUtils.equals(f.getName(), name)).findFirst().orElse(null);
         if (featureToRemove == null) {
-            throw new SystemException(String.format("Could not find a feature named '{%s}' in the Children of this feature '{%s}'.", name, getName()));
+            throw new BaseException(String.format("Could not find a feature named '{%s}' in the Children of this feature '{%s}'.", name, getName()));
         }
         featureToRemove.parent = null;
         children.remove(featureToRemove);

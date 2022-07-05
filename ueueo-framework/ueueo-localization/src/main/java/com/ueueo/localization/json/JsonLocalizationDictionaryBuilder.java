@@ -1,7 +1,7 @@
 package com.ueueo.localization.json;
 
 import com.alibaba.fastjson.JSON;
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.localization.ILocalizationDictionary;
 import com.ueueo.localization.LocalizedString;
 import com.ueueo.localization.StaticLocalizationDictionary;
@@ -25,7 +25,7 @@ public class JsonLocalizationDictionaryBuilder {
         try {
             return buildFromJsonString(FileUtils.readFileToString(new File(filePath), StandardCharsets.UTF_8));
         } catch (Exception ex) {
-            throw new SystemException("Invalid localization file format: " + filePath, ex);
+            throw new BaseException("Invalid localization file format: " + filePath, ex);
         }
     }
 
@@ -39,19 +39,19 @@ public class JsonLocalizationDictionaryBuilder {
         try {
             jsonFile = JSON.parseObject(jsonString, JsonLocalizationFile.class);
         } catch (Exception e) {
-            throw new SystemException("Can not parse json string. " + e.getMessage());
+            throw new BaseException("Can not parse json string. " + e.getMessage());
         }
 
         String cultureCode = jsonFile.getCulture();
         if (StringUtils.isBlank(cultureCode)) {
-            throw new SystemException("Culture is empty in language json file.");
+            throw new BaseException("Culture is empty in language json file.");
         }
 
         Map<String, LocalizedString> dictionary = new HashMap<>();
         List<String> dublicateNames = new ArrayList<>();
         for (Map.Entry<String, String> item : jsonFile.getTexts().entrySet()) {
             if (StringUtils.isBlank(item.getKey())) {
-                throw new SystemException("The key is empty in given json string.");
+                throw new BaseException("The key is empty in given json string.");
             }
 
             if (dictionary.get(item.getKey()) != null) {
@@ -61,7 +61,7 @@ public class JsonLocalizationDictionaryBuilder {
         }
 
         if (dublicateNames.size() > 0) {
-            throw new SystemException(
+            throw new BaseException(
                     "A dictionary can not contain same key twice. There are some duplicated names: " +
                             StringUtils.join(dublicateNames, ", "));
         }

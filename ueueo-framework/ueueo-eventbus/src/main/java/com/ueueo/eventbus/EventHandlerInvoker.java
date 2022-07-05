@@ -1,6 +1,6 @@
 package com.ueueo.eventbus;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.eventbus.distributed.IDistributedEventHandler;
 import com.ueueo.eventbus.local.ILocalEventHandler;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -43,7 +43,7 @@ public class EventHandlerInvoker implements IEventHandlerInvoker {
         }
 
         if (cacheItem.getLocal() == null && cacheItem.getDistributed() == null) {
-            throw new SystemException("The object instance is not an event handler. Object type: " + eventHandler.getClass().getName());
+            throw new BaseException("The object instance is not an event handler. Object type: " + eventHandler.getClass().getName());
         }
     }
 }

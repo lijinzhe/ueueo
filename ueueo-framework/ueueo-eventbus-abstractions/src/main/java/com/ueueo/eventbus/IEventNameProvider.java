@@ -7,3 +7,4 @@ package com.ueueo.eventbus;
 public interface IEventNameProvider {
     String getName(Class<?> eventType);
 }
+

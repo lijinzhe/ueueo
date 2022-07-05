@@ -23,6 +23,7 @@ public class UnitOfWorkEventPublisher implements IUnitOfWorkEventPublisher {
         for (UnitOfWorkEventRecord localEvent : localEvents) {
             localEventBus.publish(
                     localEvent.getEventType(),
+                    localEvent.getGenericArgumentType(),
                     localEvent.getEventData(),
                     false
             );
@@ -34,6 +35,7 @@ public class UnitOfWorkEventPublisher implements IUnitOfWorkEventPublisher {
         for (UnitOfWorkEventRecord distributedEvent : distributedEvents) {
             distributedEventBus.publish(
                     distributedEvent.getEventType(),
+                    distributedEvent.getGenericArgumentType(),
                     distributedEvent.getEventData(),
                     false
             );

@@ -1,7 +1,5 @@
 package com.ueueo.validation;
 
-import com.ueueo.data.annotations.ValidationResult;
-
 import java.util.Collection;
 
 /**

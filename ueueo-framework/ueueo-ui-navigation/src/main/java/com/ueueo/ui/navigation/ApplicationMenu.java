@@ -1,6 +1,6 @@
 package com.ueueo.ui.navigation;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.util.Check;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.NonNull;
@@ -93,7 +93,7 @@ public class ApplicationMenu implements IHasMenuItems {
             String menuItemName) {
         ApplicationMenuItem menuItem = getMenuItemOrNull(menuItemName);
         if (menuItem == null) {
-            throw new SystemException("Could not find a menu item with given name: " + menuItemName);
+            throw new BaseException("Could not find a menu item with given name: " + menuItemName);
         }
 
         return menuItem;

@@ -1,9 +1,9 @@
 package com.ueueo.tenantmanagement.application;
 
 import com.ueueo.auditing.DisableAuditing;
-import com.ueueo.data.annotations.EmailAddress;
-import com.ueueo.data.annotations.MaxLength;
-import com.ueueo.data.annotations.Required;
+import com.ueueo.validation.annotations.EmailAddress;
+import com.ueueo.validation.annotations.MaxLength;
+import com.ueueo.validation.annotations.Required;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -16,7 +16,13 @@ public interface IEventBus {
      * @param eventData            Related data for the event
      * @param onUnitOfWorkComplete True, to publish the event at the end of the current unit of work, if available
      */
-    void publish(Object eventData, Boolean onUnitOfWorkComplete);
+    default void publish(Object eventData, Boolean onUnitOfWorkComplete) {
+        if (eventData instanceof IEventDataWithInheritableGenericArgument) {
+            publish(eventData.getClass(), ((IEventDataWithInheritableGenericArgument) eventData).getGenericArgumentType(), eventData, onUnitOfWorkComplete);
+        } else {
+            publish(eventData.getClass(), null, eventData, onUnitOfWorkComplete);
+        }
+    }
 
     /**
      * Triggers an event.
@@ -25,7 +31,7 @@ public interface IEventBus {
      * @param eventData            Related data for the event
      * @param onUnitOfWorkComplete
      */
-    void publish(Class<?> eventType, Object eventData, Boolean onUnitOfWorkComplete);
+    void publish(Class<?> eventType, Class<?> genericArgumentType, Object eventData, Boolean onUnitOfWorkComplete);
 
     /**
      * Registers to an event.
@@ -35,7 +41,11 @@ public interface IEventBus {
      *
      * @return
      */
-    IDisposable subscribe(Class<?> eventType, Consumer<Object> action);
+    default IDisposable subscribe(Class<?> eventType, Consumer<Object> action) {
+        return subscribe(eventType, null, action);
+    }
+
+    IDisposable subscribe(Class<?> eventType, Class<?> genericArgumentType, Consumer<Object> action);
 
     /**
      * Registers to an event.
@@ -48,6 +58,8 @@ public interface IEventBus {
      */
     IDisposable subscribe(Class<?> eventType, IEventHandler handler);
 
+    IDisposable subscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandler handler);
+
     /**
      * Registers to an event.
      * Given factory is used to create/release handlers
@@ -56,6 +68,8 @@ public interface IEventBus {
      * <param name="factory">A factory to create/release handlers</param>
      */
     IDisposable subscribe(Class<?> eventType, IEventHandlerFactory factory);
+
+    IDisposable subscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandlerFactory factory);
 
     /**
      * Unregisters from an event.
@@ -66,6 +80,8 @@ public interface IEventBus {
      */
     void unsubscribe(Class<?> eventType, Consumer<Object> action);
 
+    void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, Consumer<Object> action);
+
     /**
      * @param eventType
      * @param handler   Handler object that is registered before
@@ -73,9 +89,15 @@ public interface IEventBus {
      */
     void unsubscribe(Class<?> eventType, IEventHandler handler);
 
+    void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandler handler);
+
     void unsubscribe(Class<?> eventType, ILocalEventHandler handler);
 
+    void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, ILocalEventHandler handler);
+
     void unsubscribe(Class<?> eventType, IEventHandlerFactory factory);
+
+    void unsubscribe(Class<?> eventType, Class<?> genericArgumentType, IEventHandlerFactory factory);
 
     /**
      * Unregisters all event handlers of given event type.
@@ -84,4 +106,6 @@ public interface IEventBus {
      * @param
      */
     void unsubscribeAll(Class<?> eventType);
+
+    void unsubscribeAll(Class<?> eventType, Class<?> genericArgumentType);
 }

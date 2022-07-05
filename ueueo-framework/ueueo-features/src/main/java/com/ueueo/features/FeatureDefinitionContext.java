@@ -1,6 +1,6 @@
 package com.ueueo.features;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.localization.ILocalizableString;
 import lombok.Getter;
 import org.springframework.util.Assert;
@@ -24,7 +24,7 @@ public class FeatureDefinitionContext implements IFeatureDefinitionContext {
     public FeatureGroupDefinition addGroup(String name, ILocalizableString displayName) {
         Assert.notNull(name, "name must not null.");
         if (groups.containsKey(name)) {
-            throw new SystemException(String.format("There is already an existing feature group with name: %s", name));
+            throw new BaseException(String.format("There is already an existing feature group with name: %s", name));
         }
         FeatureGroupDefinition definition = new FeatureGroupDefinition(name, displayName);
         groups.put(name, definition);
@@ -43,7 +43,7 @@ public class FeatureDefinitionContext implements IFeatureDefinitionContext {
         if (groups.containsKey(name)) {
             groups.remove(name);
         } else {
-            throw new SystemException(String.format("Undefined feature group: '%s'.", name));
+            throw new BaseException(String.format("Undefined feature group: '%s'.", name));
         }
     }
 }

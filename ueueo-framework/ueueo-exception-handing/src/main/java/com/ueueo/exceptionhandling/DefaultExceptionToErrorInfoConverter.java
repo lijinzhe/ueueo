@@ -4,7 +4,7 @@ import com.ueueo.exception.BusinessException;
 import com.ueueo.exception.IUserFriendlyException;
 import com.ueueo.authorization.AuthorizationException;
 import com.ueueo.data.DbConcurrencyException;
-import com.ueueo.data.annotations.ValidationResult;
+import com.ueueo.validation.ValidationResult;
 import com.ueueo.domain.entities.EntityNotFoundException;
 import com.ueueo.http.RemoteServiceErrorInfo;
 import com.ueueo.http.RemoteServiceValidationErrorInfo;

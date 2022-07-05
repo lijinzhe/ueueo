@@ -1,6 +1,6 @@
 package com.ueueo.http.client;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.exceptionhandling.IHasErrorCode;
 import com.ueueo.exceptionhandling.IHasErrorDetails;
 import com.ueueo.exceptionhandling.IHasHttpStatusCode;
@@ -8,7 +8,7 @@ import com.ueueo.http.RemoteServiceErrorInfo;
 import lombok.Data;
 
 @Data
-public class RemoteCallException extends SystemException implements IHasErrorCode, IHasErrorDetails, IHasHttpStatusCode {
+public class RemoteCallException extends BaseException implements IHasErrorCode, IHasErrorDetails, IHasHttpStatusCode {
 
     private int httpStatusCode;
 

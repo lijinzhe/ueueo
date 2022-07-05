@@ -1,6 +1,6 @@
 package com.ueueo.features;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 
 /**
  * @author Lee
@@ -17,7 +17,7 @@ public abstract class FeatureCheckerBase implements IFeatureChecker {
         try {
             return Boolean.parseBoolean(value);
         } catch (Exception e) {
-            throw new SystemException(String.format("The value '%s' for the feature '%s' should be a boolean, but was not!", value, name), e);
+            throw new BaseException(String.format("The value '%s' for the feature '%s' should be a boolean, but was not!", value, name), e);
         }
     }
 }

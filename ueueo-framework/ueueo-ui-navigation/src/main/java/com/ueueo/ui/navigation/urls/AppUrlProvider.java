@@ -1,6 +1,6 @@
 package com.ueueo.ui.navigation.urls;
 
-import com.ueueo.exception.SystemException;
+import com.ueueo.exception.BaseException;
 import com.ueueo.multitenancy.ICurrentTenant;
 import com.ueueo.multitenancy.ITenantStore;
 import com.ueueo.multitenancy.TenantConfiguration;
@@ -48,11 +48,11 @@ public class AppUrlProvider implements IAppUrlProvider {
         }
 
         if (StringUtils.isNotBlank(urlName)) {
-            throw new SystemException(
+            throw new BaseException(
                     String.format("Url, named '%s', for the application '%s' was not configured. Use AppUrlOptions to configure it!", urlName, appName));
         }
 
-        throw new SystemException(
+        throw new BaseException(
                 String.format("RootUrl for the application '%s' was not configured. Use AppUrlOptions to configure it!", appName)
         );
     }
