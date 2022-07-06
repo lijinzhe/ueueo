@@ -32,4 +32,10 @@ public class MultiTenancyAutoConfiguration {
     public ITenantStore tenantStore() {
         return new InMemoryTenantStore();
     }
+
+    @Bean
+    @ConditionalOnMissingBean(ITenantResolver.class)
+    public ITenantResolver tenantResolver() {
+        return new TenantResolver();
+    }
 }

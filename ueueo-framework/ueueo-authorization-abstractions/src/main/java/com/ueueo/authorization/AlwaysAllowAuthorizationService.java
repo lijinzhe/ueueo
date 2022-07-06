@@ -7,7 +7,7 @@ import com.ueueo.security.claims.ICurrentPrincipalAccessor;
  * @author Lee
  * @date 2021-08-26 20:01
  */
-public class AlwaysAllowAuthorizationService implements IAbpAuthorizationService {
+public class AlwaysAllowAuthorizationService implements IAuthorizationService {
 
     public ClaimsPrincipal currentPrincipal;
 

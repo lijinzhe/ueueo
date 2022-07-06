@@ -1,7 +1,7 @@
 package com.ueueo.ui.navigation;
 
 import com.ueueo.util.Check;
-import com.ueueo.authorization.IAbpAuthorizationService;
+import com.ueueo.authorization.IAuthorizationService;
 import com.ueueo.authorization.permissions.PermissionSimpleStateCheckerExtensions;
 import com.ueueo.localization.IStringLocalizer;
 import com.ueueo.simplestatechecking.ISimpleStateCheckerManager;
@@ -19,13 +19,13 @@ public class MenuManager implements IMenuManager {
     protected AbpNavigationOptions options;
     protected ISimpleStateCheckerManager<ApplicationMenuItem> simpleStateCheckerManager;
     private IStringLocalizer stringLocalizer;
-    private IAbpAuthorizationService authorizationService;
+    private IAuthorizationService authorizationService;
 
     public MenuManager(
             AbpNavigationOptions options,
             ISimpleStateCheckerManager<ApplicationMenuItem> simpleStateCheckerManager,
             IStringLocalizer stringLocalizer,
-            IAbpAuthorizationService authorizationService) {
+            IAuthorizationService authorizationService) {
         this.options = options;
         this.simpleStateCheckerManager = simpleStateCheckerManager;
         this.stringLocalizer = stringLocalizer;

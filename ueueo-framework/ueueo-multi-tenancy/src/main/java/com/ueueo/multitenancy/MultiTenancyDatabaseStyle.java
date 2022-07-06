@@ -9,7 +9,7 @@ package com.ueueo.multitenancy;
 public enum MultiTenancyDatabaseStyle {
     /** 共享数据库模式 */
     Shared(1),
-    /** 每个组糊独立数据库模式 */
+    /** 每个租户独立数据库模式 */
     PerTenant(2),
     /** 混合模式 */
     Hybrid(1 | 2);

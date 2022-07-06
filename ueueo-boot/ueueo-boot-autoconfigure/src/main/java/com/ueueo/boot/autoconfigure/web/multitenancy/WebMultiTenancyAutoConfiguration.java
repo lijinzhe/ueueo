@@ -1,11 +1,14 @@
 package com.ueueo.boot.autoconfigure.web.multitenancy;
 
-import com.ueueo.multitenancy.AbpTenantResolveOptions;
-import com.ueueo.multitenancy.AbpTenantResolveOptionsAware;
+import com.ueueo.multitenancy.TenantResolver;
 import com.ueueo.web.multitenancy.*;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Optional;
 
 /**
  * @author Lee
@@ -14,20 +17,23 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties(WebMultiTenancyProperties.class)
 @ConditionalOnClass(HttpTenantResolveContributorBase.class)
-public class WebMultiTenancyAutoConfiguration implements AbpTenantResolveOptionsAware {
+@ConditionalOnBean(TenantResolver.class)
+public class WebMultiTenancyAutoConfiguration {
 
     private final WebMultiTenancyProperties properties;
 
-    public WebMultiTenancyAutoConfiguration(WebMultiTenancyProperties properties) {
+    public WebMultiTenancyAutoConfiguration(
+            WebMultiTenancyProperties properties,
+            ObjectProvider<TenantResolver> tenantResolver) {
         this.properties = properties;
+        Optional.ofNullable(tenantResolver.getIfAvailable()).ifPresent(this::configureTenantResolver);
     }
 
-    @Override
-    public void setOptions(AbpTenantResolveOptions tenantResolveOptions) {
-        tenantResolveOptions.getTenantResolvers().add(new DomainTenantResolveContributor(properties.getDomainRegex()));
-        tenantResolveOptions.getTenantResolvers().add(new QueryStringTenantResolveContributor(properties.getTenantField()));
-        tenantResolveOptions.getTenantResolvers().add(new RouteTenantResolveContributor(properties.getTenantField()));
-        tenantResolveOptions.getTenantResolvers().add(new HeaderTenantResolveContributor(properties.getTenantField()));
-        tenantResolveOptions.getTenantResolvers().add(new CookieTenantResolveContributor(properties.getTenantField()));
+    private void configureTenantResolver(TenantResolver tenantResolver) {
+        tenantResolver.getContributors().add(new DomainTenantResolveContributor(properties.getDomainRegex()));
+        tenantResolver.getContributors().add(new QueryStringTenantResolveContributor(properties.getTenantField()));
+        tenantResolver.getContributors().add(new RouteTenantResolveContributor(properties.getTenantField()));
+        tenantResolver.getContributors().add(new HeaderTenantResolveContributor(properties.getTenantField()));
+        tenantResolver.getContributors().add(new CookieTenantResolveContributor(properties.getTenantField()));
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
  * @author Lee
  * @date 2021-08-26 16:24
  */
-public interface IPermissionDefinitionManager {
+public interface IPermissionDefinitionManager extends IPermissionDefinitionProviderManager{
     @NonNull
     PermissionDefinition get(@NonNull String name);
 

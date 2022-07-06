@@ -8,7 +8,7 @@ import com.ueueo.security.principal.ClaimsPrincipal;
  * @author Lee
  * @date 2021-08-26 20:01
  */
-public interface IAbpAuthorizationService {
+public interface IAuthorizationService {
 
     ClaimsPrincipal getCurrentPrincipal();
 

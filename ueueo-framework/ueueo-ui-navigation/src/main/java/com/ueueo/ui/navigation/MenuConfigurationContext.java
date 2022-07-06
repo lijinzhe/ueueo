@@ -1,19 +1,19 @@
 package com.ueueo.ui.navigation;
 
-import com.ueueo.authorization.IAbpAuthorizationService;
+import com.ueueo.authorization.IAuthorizationService;
 import com.ueueo.localization.IStringLocalizer;
 
 public class MenuConfigurationContext implements IMenuConfigurationContext {
 
     private final IStringLocalizer stringLocalizer;
 
-    private final IAbpAuthorizationService authorizationService;
+    private final IAuthorizationService authorizationService;
 
     private final ApplicationMenu menu;
 
     public MenuConfigurationContext(ApplicationMenu menu,
                                     IStringLocalizer stringLocalizer,
-                                    IAbpAuthorizationService authorizationService) {
+                                    IAuthorizationService authorizationService) {
         this.menu = menu;
         this.stringLocalizer = stringLocalizer;
         this.authorizationService = authorizationService;
@@ -29,7 +29,7 @@ public class MenuConfigurationContext implements IMenuConfigurationContext {
     }
 
     @Override
-    public IAbpAuthorizationService getAuthorizationService() {
+    public IAuthorizationService getAuthorizationService() {
         return authorizationService;
     }
 

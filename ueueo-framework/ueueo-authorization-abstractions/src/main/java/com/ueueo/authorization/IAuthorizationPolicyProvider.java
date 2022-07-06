@@ -6,6 +6,6 @@ import java.util.List;
  * @author Lee
  * @date 2022-05-29 13:44
  */
-public interface IAbpAuthorizationPolicyProvider {
+public interface IAuthorizationPolicyProvider {
     List<String> getPoliciesNames();
 }

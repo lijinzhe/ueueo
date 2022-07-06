@@ -1,25 +1,19 @@
 package com.ueueo.authorization.permissions;
 
 import com.ueueo.exception.BaseException;
-import org.springframework.beans.factory.BeanFactory;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class PermissionDefinitionManager implements IPermissionDefinitionManager {
+
     protected Map<String, PermissionGroupDefinition> permissionGroupDefinitions;
 
     protected Map<String, PermissionDefinition> permissionDefinitions;
 
-    protected AbpPermissionOptions options;
+    protected List<IPermissionDefinitionProvider> providers;
 
-    private BeanFactory beanFactory;
-
-    public PermissionDefinitionManager(
-            AbpPermissionOptions options,
-            BeanFactory beanFactory) {
-        this.beanFactory = beanFactory;
-        this.options = options;
+    public PermissionDefinitionManager() {
+        this.providers = new ArrayList<>();
         this.permissionDefinitions = new HashMap<>();
         this.permissionDefinitions.putAll(createPermissionDefinitions());
         this.permissionGroupDefinitions = new HashMap<>();
@@ -83,24 +77,24 @@ public class PermissionDefinitionManager implements IPermissionDefinitionManager
 
         PermissionDefinitionContext context = new PermissionDefinitionContext();
 
-        List<IPermissionDefinitionProvider> providers = options
-                .getDefinitionProviders()
-                .stream().map(beanFactory::getBean)
-                .collect(Collectors.toList());
-
-        for (IPermissionDefinitionProvider provider : providers) {
+        for (IPermissionDefinitionProvider provider : getDefinitionProvider()) {
             provider.preDefine(context);
         }
 
-        for (IPermissionDefinitionProvider provider : providers) {
+        for (IPermissionDefinitionProvider provider : getDefinitionProvider()) {
             provider.define(context);
         }
 
-        for (IPermissionDefinitionProvider provider : providers) {
+        for (IPermissionDefinitionProvider provider : getDefinitionProvider()) {
             provider.postDefine(context);
         }
 
         return context.getGroups();
 
+    }
+
+    @Override
+    public List<IPermissionDefinitionProvider> getDefinitionProvider() {
+        return providers;
     }
 }
