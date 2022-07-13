@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Base exception type for those are thrown by Abp system for Abp specific exceptions.
+ * Base exception type for those are thrown by system for specific exceptions.
  *
  * @author Lee
  * @date 2021-08-18 21:08

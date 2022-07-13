@@ -10,11 +10,10 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>abp-frameworks</module>
-        <module>abp-modules</module>
         <module>ueueo-boot</module>
         <module>ueueo-cloud</module>
         <module>ueueo-frameworks</module>
+        <module>ueueo-modules</module>
     </modules>
 
 </project>
