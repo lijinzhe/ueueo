@@ -5,10 +5,11 @@ import java.util.stream.Collectors;
 
 /**
  * @author Lee
- * @date 2021-08-19 22:02
+ * @date 2022-07-14 17:38
  */
 public class GlobalDataModelMetaProvider extends DataModelMetaProvider {
-    public static final String PROVIDER_NAME = "GLOBAL";
+
+    public static final String PROVIDER_NAME = "Global";
 
     public GlobalDataModelMetaProvider(IDataModelStore dataModelStore) {
         super(dataModelStore);

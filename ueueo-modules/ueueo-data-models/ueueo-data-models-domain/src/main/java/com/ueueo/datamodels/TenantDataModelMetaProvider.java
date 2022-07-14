@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 
 /**
  * @author Lee
- * @date 2021-08-19 21:42
+ * @date 2022-07-14 17:38
  */
 public class TenantDataModelMetaProvider extends DataModelMetaProvider {
 
-    public static final String PROVIDER_NAME = "TENANT";
+    public static final String PROVIDER_NAME = "Tenant";
 
     protected ICurrentTenant currentTenant;
 
