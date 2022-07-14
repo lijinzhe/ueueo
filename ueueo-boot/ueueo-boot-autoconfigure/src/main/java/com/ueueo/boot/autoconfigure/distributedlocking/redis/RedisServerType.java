@@ -1,4 +1,4 @@
-package com.ueueo.boot.autoconfigure.distributedlocking;
+package com.ueueo.boot.autoconfigure.distributedlocking.redis;
 
 /**
  * Redis服务部署模式

@@ -16,13 +16,10 @@ public interface IDistributedLock {
      * It is suggested to use this method within a using block.
      * Returns null if the lock could not be handled.
      *
-     * @param name              The name of the lock
-     * @param timeout           Timeout value
+     * @param name    The name of the lock
+     * @param timeout Timeout value
      *
      * @return
      */
-    IDistributedLockHandle tryAcquire(
-            @NonNull String name,
-            Duration timeout
-    );
+    IDistributedLockHandle tryAcquire(@NonNull String name, Duration timeout);
 }

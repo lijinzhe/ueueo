@@ -1,5 +1,8 @@
-package com.ueueo.distributedlocking;
+package com.ueueo.distributedlocking.redis;
 
+import com.ueueo.distributedlocking.IDistributedLock;
+import com.ueueo.distributedlocking.IDistributedLockHandle;
+import com.ueueo.util.Check;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.lang.NonNull;
@@ -13,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class RedisDistributedLock implements IDistributedLock {
 
-    private RedissonClient redissonClient;
+    private final RedissonClient redissonClient;
 
     public RedisDistributedLock(RedissonClient redissonClient) {
         this.redissonClient = redissonClient;
@@ -21,6 +24,7 @@ public class RedisDistributedLock implements IDistributedLock {
 
     @Override
     public IDistributedLockHandle tryAcquire(@NonNull String name, Duration duration) {
+        Check.notNullOrEmpty(name, "name");
         RLock lock = redissonClient.getLock(name);
         try {
             if (lock.tryLock(0, duration.getSeconds(), TimeUnit.SECONDS)) {

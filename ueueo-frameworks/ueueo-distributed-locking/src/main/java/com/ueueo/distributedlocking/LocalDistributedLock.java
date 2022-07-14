@@ -1,5 +1,8 @@
 package com.ueueo.distributedlocking;
 
+import com.ueueo.util.Check;
+import org.springframework.lang.NonNull;
+
 import java.time.Duration;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,8 +18,8 @@ public class LocalDistributedLock implements IDistributedLock {
     private final ConcurrentHashMap<String, ReentrantLock> localSyncObjects = new ConcurrentHashMap<>();
 
     @Override
-    public IDistributedLockHandle tryAcquire(String name, Duration duration) {
-        Objects.requireNonNull(name);
+    public IDistributedLockHandle tryAcquire(@NonNull String name, Duration duration) {
+        Check.notNullOrEmpty(name,"name");
         ReentrantLock lock = localSyncObjects.computeIfAbsent(name, s -> new ReentrantLock(true));
         try {
             if (lock.tryLock(duration.getSeconds(),TimeUnit.SECONDS)) {

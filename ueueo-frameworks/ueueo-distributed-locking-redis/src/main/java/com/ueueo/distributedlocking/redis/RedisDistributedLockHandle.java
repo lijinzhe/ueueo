@@ -1,5 +1,6 @@
-package com.ueueo.distributedlocking;
+package com.ueueo.distributedlocking.redis;
 
+import com.ueueo.distributedlocking.IDistributedLockHandle;
 import org.redisson.api.RLock;
 
 public class RedisDistributedLockHandle implements IDistributedLockHandle {

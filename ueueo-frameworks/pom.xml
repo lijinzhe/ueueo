@@ -37,7 +37,6 @@
         <module>ueueo-background-workers-quartz</module>
         <module>ueueo-blob-storing-qiniu</module>
         <module>ueueo-distributed-locking</module>
-        <module>ueueo-distributed-locking-abstractions</module>
         <module>ueueo-emailing</module>
         <module>ueueo-eventbus-rabbitmq</module>
         <module>ueueo-exception-handing</module>

@@ -23,6 +23,7 @@ com.ueueo.boot.autoconfigure.security.SecurityAutoConfiguration,\
 com.ueueo.boot.autoconfigure.authorization.AuthorizationAutoConfiguration,\
 com.ueueo.boot.autoconfigure.multitenancy.MultiTenancyAutoConfiguration,\
 com.ueueo.boot.autoconfigure.web.multitenancy.WebMultiTenancyAutoConfiguration,\
+com.ueueo.boot.autoconfigure.distributedlocking.DistributedLockingAutoConfiguration,\
 org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration,\
 org.springframework.boot.autoconfigure.aop.AopAutoConfiguration,\
 org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration,\

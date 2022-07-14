@@ -126,6 +126,12 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>com.ueueo.framework</groupId>
+            <artifactId>ueueo-distributed-locking-redis</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
             <optional>true</optional>
