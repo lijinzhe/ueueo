@@ -12,13 +12,7 @@ import java.util.List;
  * @author Lee
  * @date 2022-05-18 10:46
  */
-public class AbpCrossCuttingConcerns {
-    //TODO: Move these constants to their own assemblies!
-
-    public static final String Auditing = "AbpAuditing";
-    public static final String UnitOfWork = "AbpUnitOfWork";
-    public static final String FeatureChecking = "AbpFeatureChecking";
-    public static final String GlobalFeatureChecking = "AbpGlobalFeatureChecking";
+public class CrossCuttingConcerns {
 
     public static void addApplied(Object obj, List<String> concerns) {
         Assert.notEmpty(concerns, "concerns should be provided!");

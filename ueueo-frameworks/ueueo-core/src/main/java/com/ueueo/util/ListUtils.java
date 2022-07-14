@@ -1,4 +1,4 @@
-package com.ueueo.collections;
+package com.ueueo.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.function.Predicate;
  * @author Lee
  * @date 2022-05-27 11:41
  */
-public class ListExtensions {
+public class ListUtils {
 
     public static <T> void moveItem(List<T> source, Predicate<T> selector, int targetIndex) {
         if (targetIndex < 0 || targetIndex > source.size() - 1) {

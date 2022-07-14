@@ -1,6 +1,6 @@
 package com.ueueo.features;
 
-import com.ueueo.aspects.AbpCrossCuttingConcerns;
+import com.ueueo.aspects.CrossCuttingConcerns;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
@@ -9,6 +9,8 @@ import org.aopalliance.intercept.MethodInvocation;
  * @date 2022-05-17 16:54
  */
 public class FeatureInterceptor implements MethodInterceptor {
+
+    public static final String FEATURE_CHECKING = "FeatureChecking";
 
     private final IMethodInvocationFeatureCheckerService checkerService;
 
@@ -19,11 +21,11 @@ public class FeatureInterceptor implements MethodInterceptor {
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
         Object targetObject = invocation.getThis();
-        if (targetObject != null && AbpCrossCuttingConcerns.isApplied(targetObject, AbpCrossCuttingConcerns.FeatureChecking)) {
-           return invocation.proceed();
+        if (targetObject != null && CrossCuttingConcerns.isApplied(targetObject, FEATURE_CHECKING)) {
+            return invocation.proceed();
         }
         checkFeatures(invocation);
-        return  invocation.proceed();
+        return invocation.proceed();
     }
 
     protected void checkFeatures(MethodInvocation invocation) {

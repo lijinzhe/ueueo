@@ -1,5 +1,7 @@
 package com.ueueo.tracing;
 
+import org.springframework.lang.NonNull;
+
 import java.util.UUID;
 
 /**
@@ -8,6 +10,7 @@ import java.util.UUID;
  */
 public class DefaultCorrelationIdProvider implements ICorrelationIdProvider {
 
+    @NonNull
     @Override
     public String get() {
         return UUID.randomUUID().toString();

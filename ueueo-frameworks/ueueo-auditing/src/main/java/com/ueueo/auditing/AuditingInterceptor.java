@@ -1,6 +1,6 @@
 package com.ueueo.auditing;
 
-import com.ueueo.aspects.AbpCrossCuttingConcerns;
+import com.ueueo.aspects.CrossCuttingConcerns;
 import com.ueueo.uow.IUnitOfWorkManager;
 import com.ueueo.users.ICurrentUser;
 import org.aopalliance.intercept.MethodInterceptor;
@@ -16,6 +16,8 @@ import java.util.function.Function;
  * @date 2022-05-26 17:37
  */
 public class AuditingInterceptor implements MethodInterceptor {
+
+    public static final String AUDITING = "AbpAuditing";
 
     private final IAuditingHelper auditingHelper;
     private final IAuditingManager auditingManager;
@@ -54,7 +56,7 @@ public class AuditingInterceptor implements MethodInterceptor {
             return false;
         }
         Object targetObject = invocation.getThis();
-        if (targetObject != null && AbpCrossCuttingConcerns.isApplied(targetObject, AbpCrossCuttingConcerns.Auditing)) {
+        if (targetObject != null && CrossCuttingConcerns.isApplied(targetObject, AUDITING)) {
             return false;
         }
         return auditingHelper.shouldSaveAudit(invocation.getMethod(), false);

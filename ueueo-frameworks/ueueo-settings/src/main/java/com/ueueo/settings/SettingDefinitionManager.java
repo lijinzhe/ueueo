@@ -1,10 +1,14 @@
 package com.ueueo.settings;
 
 import com.ueueo.exception.BaseException;
+import com.ueueo.util.Check;
 import lombok.Getter;
 import org.springframework.lang.NonNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Lee
@@ -13,18 +17,19 @@ import java.util.*;
 @Getter
 public class SettingDefinitionManager implements ISettingDefinitionManager {
 
-    protected Map<String, SettingDefinition> settingDefinitions;
+    protected final Map<String, SettingDefinition> settingDefinitions;
 
-    protected AbpSettingOptions options;
+    private final List<ISettingDefinitionProvider> definitionProviders;
 
-    public SettingDefinitionManager(AbpSettingOptions options) {
-        this.options = options;
+    public SettingDefinitionManager(List<ISettingDefinitionProvider> definitionProviders) {
+        this.definitionProviders = definitionProviders;
         this.settingDefinitions = new HashMap<>(createSettingDefinitions());
     }
 
+    @NonNull
     @Override
     public SettingDefinition get(@NonNull String name) {
-        Objects.requireNonNull(name, "name must not null.");
+        Check.notNullOrEmpty(name, "name");
         SettingDefinition setting = getOrNull(name);
         if (setting == null) {
             throw new BaseException("Undefined setting: " + name);
@@ -44,7 +49,7 @@ public class SettingDefinitionManager implements ISettingDefinitionManager {
 
     protected Map<String, SettingDefinition> createSettingDefinitions() {
         Map<String, SettingDefinition> settings = new HashMap<>();
-        for (ISettingDefinitionProvider provider : options.getDefinitionProviders()) {
+        for (ISettingDefinitionProvider provider : definitionProviders) {
             provider.define(new SettingDefinitionContext(settings));
         }
         return settings;
