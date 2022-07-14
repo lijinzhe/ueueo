@@ -1,7 +1,6 @@
 package com.ueueo.web.multitenancy;
 
 import com.ueueo.disposable.IDisposable;
-import com.ueueo.localization.LocalizationSettingNames;
 import com.ueueo.multitenancy.ICurrentTenant;
 import com.ueueo.multitenancy.ITenantConfigurationProvider;
 import com.ueueo.multitenancy.ITenantResolveResultAccessor;
@@ -19,6 +18,9 @@ import java.util.Locale;
 
 public class MultiTenancyMiddleware implements HandlerInterceptor
 {
+
+    public static final String SETTING_DEFAULT_LANGUAGE = "Localization.DefaultLanguage";
+
     private ITenantConfigurationProvider tenantConfigurationProvider;
     private ICurrentTenant currentTenant;
     private  String tenantField;
@@ -104,7 +106,7 @@ public class MultiTenancyMiddleware implements HandlerInterceptor
 //        }
 
 //        var settingProvider = httpContext.RequestServices.GetRequiredService<ISettingProvider>();
-        String defaultLanguage =  settingProvider.getOrNull(LocalizationSettingNames.DEFAULT_LANGUAGE);
+        String defaultLanguage =  settingProvider.getOrNull(SETTING_DEFAULT_LANGUAGE);
         if (StringUtils.isBlank(defaultLanguage))
         {
             return null;

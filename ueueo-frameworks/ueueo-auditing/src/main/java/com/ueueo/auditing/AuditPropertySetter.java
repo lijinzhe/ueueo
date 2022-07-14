@@ -8,7 +8,6 @@ import lombok.Getter;
 import java.util.Date;
 
 /**
- *
  * @author Lee
  * @date 2022-05-26 14:28
  */
@@ -58,16 +57,11 @@ public class AuditPropertySetter implements IAuditPropertySetter {
                 return;
             }
         }
-        if (targetObject instanceof IMayHaveCreator) {
-            if (((IMayHaveCreator) targetObject).getCreatorId() != null) {
+        if (targetObject instanceof ICreationAuditedObject) {
+            if (((ICreationAuditedObject) targetObject).getCreatorId() != null) {
                 return;
             }
-            ((IMayHaveCreator) targetObject).setCreatorId(currentUser.getId());
-        } else if (targetObject instanceof IMustHaveCreator) {
-            if (((IMustHaveCreator) targetObject).getCreatorId() != null) {
-                return;
-            }
-            ((IMustHaveCreator) targetObject).setCreatorId(currentUser.getId());
+            ((ICreationAuditedObject) targetObject).setCreatorId(currentUser.getId());
         }
     }
 

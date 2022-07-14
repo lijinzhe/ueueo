@@ -1,4 +1,4 @@
-package com.ueueo;
+package com.ueueo.datamodel;
 
 /**
  * Used to standardize soft deleting entities.

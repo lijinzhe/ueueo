@@ -6,4 +6,4 @@
  * @author Lee
  * @date 2022-05-23 11:16
  */
-package com.ueueo.validation.annotations;
+package com.ueueo.datamodel;

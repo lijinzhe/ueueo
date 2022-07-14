@@ -1,6 +1,7 @@
 package com.ueueo.auditing;
 
-import com.ueueo.ISoftDelete;
+
+import com.ueueo.datamodel.ISoftDelete;
 
 import java.util.Date;
 

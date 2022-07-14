@@ -1,9 +1,9 @@
 package com.ueueo.data.objectextending;
 
-import com.ueueo.validation.annotations.ValidationAttribute;
 import com.ueueo.data.objectextending.modularity.ExtensionPropertyLookupConfiguration;
 import com.ueueo.localization.IHasNameWithLocalizableDisplayName;
 import com.ueueo.localization.ILocalizableString;
+import com.ueueo.validation.annotations.ValidationAttribute;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;

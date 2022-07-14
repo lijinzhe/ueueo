@@ -1,7 +1,7 @@
 package com.ueueo.tenantmanagement.application;
 
 import com.ueueo.auditing.DisableAuditing;
-import com.ueueo.validation.annotations.EmailAddress;
+import com.ueueo.validation.annotations.Email;
 import com.ueueo.validation.annotations.MaxLength;
 import com.ueueo.validation.annotations.Required;
 import lombok.Data;
@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
 public class TenantCreateDto extends TenantCreateOrUpdateDtoBase {
 
     @Required
-    @EmailAddress
+    @Email
     @MaxLength(256)
     private String adminEmailAddress;
 

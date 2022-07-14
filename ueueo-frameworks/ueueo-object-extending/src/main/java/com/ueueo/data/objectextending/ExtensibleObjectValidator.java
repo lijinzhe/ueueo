@@ -1,10 +1,10 @@
 package com.ueueo.data.objectextending;
 
-import com.ueueo.validation.annotations.ValidationAttribute;
 import com.ueueo.validation.ValidationContext;
 import com.ueueo.validation.ValidationResult;
 import com.ueueo.dynamicproxy.ProxyHelper;
 import com.ueueo.validation.ValidationException;
+import com.ueueo.validation.annotations.ValidationAttribute;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;

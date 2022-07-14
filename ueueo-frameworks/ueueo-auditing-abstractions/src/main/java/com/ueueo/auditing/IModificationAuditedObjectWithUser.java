@@ -17,7 +17,7 @@ public interface IModificationAuditedObjectWithUser<TUser> {
      */
     ID getLastModifierId();
 
-    void setLastModifierId(ID lastModifierIdser);
+    void setLastModifierId(ID lastModifierId);
 
     /**
      * Reference to the last modifier user of this entity.
