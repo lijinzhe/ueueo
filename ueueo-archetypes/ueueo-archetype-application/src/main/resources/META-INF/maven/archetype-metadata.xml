@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor xsi:schemaLocation="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 http://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd" name="ueueo-archetype-module"
+    xmlns="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <fileSets>
+    <fileSet encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>README.md</include>
+        <include>.gitignore</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+  <modules>
+    <module id="ueueo-archetype-${rootArtifactId}-application" dir="ueueo-archetype-__rootArtifactId__-application" name="ueueo-archetype-${rootArtifactId}-application">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.yml</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="ueueo-archetype-${rootArtifactId}-application-contracts" dir="ueueo-archetype-__rootArtifactId__-application-contracts" name="ueueo-archetype-${rootArtifactId}-application-contracts">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.yml</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="ueueo-archetype-${rootArtifactId}-domain" dir="ueueo-archetype-__rootArtifactId__-domain" name="ueueo-archetype-${rootArtifactId}-domain">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.yml</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="ueueo-archetype-${rootArtifactId}-domain-shared" dir="ueueo-archetype-__rootArtifactId__-domain-shared" name="ueueo-archetype-${rootArtifactId}-domain-shared">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.yml</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="ueueo-archetype-${rootArtifactId}-http-api" dir="ueueo-archetype-__rootArtifactId__-http-api" name="ueueo-archetype-${rootArtifactId}-http-api">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.yml</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="ueueo-archetype-${rootArtifactId}-http-client" dir="ueueo-archetype-__rootArtifactId__-http-client" name="ueueo-archetype-${rootArtifactId}-http-client">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.yml</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="ueueo-archetype-${rootArtifactId}-infrastructure" dir="ueueo-archetype-__rootArtifactId__-infrastructure" name="ueueo-archetype-${rootArtifactId}-infrastructure">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.yml</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="ueueo-archetype-${rootArtifactId}-autoconfigure" dir="ueueo-archetype-__rootArtifactId__-autoconfigure" name="ueueo-archetype-${rootArtifactId}-autoconfigure">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/java</directory>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.factories</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="ueueo-archetype-${rootArtifactId}-server" dir="ueueo-archetype-__rootArtifactId__-server" name="ueueo-archetype-${rootArtifactId}-server">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/java</directory>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.yml</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+  </modules>
+</archetype-descriptor>

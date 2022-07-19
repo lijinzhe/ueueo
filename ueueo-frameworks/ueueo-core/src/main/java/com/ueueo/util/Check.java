@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 
+import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Map;
 
@@ -70,6 +71,8 @@ public class Check {
             Assert.notEmpty((Collection<?>) value, parameterName + " can not be null or empty!");
         } else if (value instanceof Map) {
             Assert.notEmpty((Map<?, ?>) value, parameterName + " can not be null or empty!");
+        }else if (value instanceof Object[]) {
+            Assert.notEmpty((Object[]) value, parameterName + " can not be null or empty!");
         }
         return value;
     }

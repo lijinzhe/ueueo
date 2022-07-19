@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.ueueo.boot</groupId>
+        <artifactId>ueueo-boot-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../../ueueo-boot/ueueo-boot-parent/pom.xml</relativePath>
+    </parent>
+
+    <groupId>com.ueueo</groupId>
+    <artifactId>ueueo-data-model</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>ueueo-data-model-http-api</module>
+        <module>ueueo-data-model-application-contracts</module>
+        <module>ueueo-data-model-application</module>
+        <module>ueueo-data-model-domain-shared</module>
+        <module>ueueo-data-model-domain</module>
+        <module>ueueo-data-model-infrastructure</module>
+        <module>ueueo-data-model-server</module>
+        <module>ueueo-data-model-autoconfigure</module>
+    </modules>
+</project>

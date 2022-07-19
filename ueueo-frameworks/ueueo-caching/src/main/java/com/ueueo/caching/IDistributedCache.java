@@ -1,6 +1,7 @@
 package com.ueueo.caching;
 
 import com.ueueo.KeyValuePair;
+import org.springframework.cache.Cache;
 
 import java.util.List;
 import java.util.function.Function;

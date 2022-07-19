@@ -25,7 +25,7 @@
         <module>ueueo-saas</module>
         <module>ueueo-text-template-management</module>
         <module>ueueo-users</module>
-        <module>ueueo-data-models</module>
+        <module>ueueo-data-model</module>
     </modules>
 
 </project>

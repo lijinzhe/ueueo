@@ -22,6 +22,9 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
+        <ueueo-boot.version>0.0.1-SNAPSHOT</ueueo-boot.version>
+        <ueueo-framework-core.version>0.0.1-SNAPSHOT</ueueo-framework-core.version>
+
         <!-- spring versions -->
         <spring-boot.version>2.6.6</spring-boot.version>
         <spring-shell.version>2.0.0.RELEASE</spring-shell.version>
@@ -84,16 +87,19 @@
         <x-pack-transport.version>6.8.0</x-pack-transport.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
     <dependencyManagement>
         <!-- 当添加依赖版本管理时，首先看 spring-boot-dependencies 中是否存在对应库的版本控制，如果有尽量不要增加，否则会导致与Spring Boot冲突-->
         <dependencies>
+            <dependency>
+                <groupId>com.ueueo.boot</groupId>
+                <artifactId>ueueo-boot-starter</artifactId>
+                <version>${ueueo-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ueueo.framework</groupId>
+                <artifactId>ueueo-core</artifactId>
+                <version>${ueueo-framework-core.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.shell</groupId>
                 <artifactId>spring-shell-starter</artifactId>

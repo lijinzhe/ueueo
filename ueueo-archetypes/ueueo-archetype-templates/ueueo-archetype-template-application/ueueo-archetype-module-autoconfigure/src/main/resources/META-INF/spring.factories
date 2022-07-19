@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.ueueo.arthetype.autoconfigure.UeueoArchetypeModuleAutoconfigureAutoConfiguration

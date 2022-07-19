@@ -1,0 +1,5 @@
+spring:
+  cloud:
+    config:
+      profile: ${spring.profiles.active}
+      uri: http://config-server.inf:8888

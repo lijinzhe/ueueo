@@ -14,6 +14,7 @@
         <module>ueueo-cloud</module>
         <module>ueueo-frameworks</module>
         <module>ueueo-modules</module>
+        <module>ueueo-archetypes</module>
     </modules>
 
 </project>
