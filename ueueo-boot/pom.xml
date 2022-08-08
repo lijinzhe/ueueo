@@ -11,8 +11,9 @@
 
     <modules>
         <module>ueueo-boot-parent</module>
-        <module>ueueo-boot-starters</module>
+        <module>ueueo-boot-starter</module>
         <module>ueueo-boot-autoconfigure</module>
+        <module>ueueo-boot-dependencies</module>
     </modules>
 
 </project>

@@ -4,19 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.ueueo.boot</groupId>
-        <artifactId>ueueo-boot-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../ueueo-boot-parent</relativePath>
-    </parent>
-
+    <groupId>com.ueueo.boot</groupId>
     <artifactId>ueueo-boot-starters</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>ueueo-boot-starter</module>
-    </modules>
 
 </project>

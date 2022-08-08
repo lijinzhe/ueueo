@@ -1,6 +1,7 @@
 package com.ueueo.exceptionhandling;
 
 import com.ueueo.logging.IHasLogLevel;
+import com.ueueo.util.Check;
 import lombok.Getter;
 import org.slf4j.event.Level;
 import org.springframework.lang.NonNull;
@@ -21,7 +22,7 @@ public class ExceptionNotificationContext {
     private boolean handled;
 
     public ExceptionNotificationContext(@NonNull Exception exception, Level logLevel, boolean handled) {
-        Assert.notNull(exception, "exception 不能为空");
+        Check.notNull(exception, "exception");
         this.exception = exception;
         if (logLevel != null) {
             this.logLevel = logLevel;
