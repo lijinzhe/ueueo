@@ -57,7 +57,6 @@
         <module>ueueo-text-templating</module>
         <module>ueueo-caching-redis</module>
         <module>ueueo-specifications</module>
-        <module>ueueo-domain-driven-design</module>
         <module>ueueo-identity-model</module>
         <module>ueueo-http-client-identity-model</module>
         <module>ueueo-data-filter</module>
@@ -74,6 +73,8 @@
         <module>ueueo-web-mvc-client-common</module>
         <module>ueueo-web-mvc-contracts</module>
         <module>ueueo-distributed-locking-redis</module>
+        <module>ueueo-ddd-domain</module>
+        <module>ueueo-ddd-application</module>
     </modules>
 
 </project>

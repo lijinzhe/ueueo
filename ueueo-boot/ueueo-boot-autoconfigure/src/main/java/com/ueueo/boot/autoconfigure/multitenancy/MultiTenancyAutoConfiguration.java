@@ -1,7 +1,7 @@
 package com.ueueo.boot.autoconfigure.multitenancy;
 
 import com.ueueo.multitenancy.*;
-import com.ueueo.multitenancy.store.InMemoryTenantStore;
+import com.ueueo.multitenancy.InMemoryTenantStore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;

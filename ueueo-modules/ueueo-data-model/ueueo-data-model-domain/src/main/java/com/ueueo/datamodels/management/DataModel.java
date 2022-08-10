@@ -13,7 +13,7 @@ import lombok.Data;
  * @date 2022-07-14 17:52
  */
 @Data
-public class DataModel extends Entity implements IAggregateRoot {
+public class DataModel extends Entity<ID> implements IAggregateRoot<ID> {
 
     public DataModel(ID id, String name, DataModelMeta meta, String providerName, String providerKey) {
         super(id);

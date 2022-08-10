@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>com.ueueo.framework</groupId>
-            <artifactId>ueueo-domain-driven-design</artifactId>
+            <artifactId>ueueo-ddd-domain</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
